@@ -7,6 +7,7 @@
 #include "SDL2/SDL_net.h"
 #include "SDL2/SDL_ttf.h"
 
+#include "../GameMaps/GameMaps.h"
 
 class Engine
 {
@@ -34,6 +35,8 @@ private:
 
     SDL_Window *ptr_window;
 
+
+    GameMaps *gameMap;
 
 };
 

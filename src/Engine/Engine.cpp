@@ -9,7 +9,7 @@ SDL_Renderer *Engine::s_renderer = nullptr;
 
 Engine::Engine()
 {
-
+    gameMap = new GameMaps();
 }
 
 Engine *Engine::instance()

@@ -7,15 +7,4 @@
 
 #define FPS 30
 
-
-typedef struct Tile
-{
-} Tile;
-
-
-typedef struct TileSet
-{
-} TileSet;
-
-
 #endif // DEFINES_H

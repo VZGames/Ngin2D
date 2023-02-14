@@ -1,0 +1,94 @@
+{
+    "Map/SizeTest": {
+        "height": 4300,
+        "width": 2
+    },
+    "activeFile": "",
+    "expandedProjectPaths": [
+        "."
+    ],
+    "fileStates": {
+        "": {
+            "scaleInDock": 1
+        },
+        "Grass.tsx": {
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        },
+        "Hill.tsx": {
+            "scaleInDock": 1.5,
+            "scaleInEditor": 1
+        },
+        "Map1.tmx": {
+            "expandedGroupLayers": [
+                3
+            ],
+            "scale": 1,
+            "selectedLayer": 1,
+            "viewCenter": {
+                "x": 155.5,
+                "y": 142
+            }
+        },
+        "Map1.tmx#Grass": {
+            "scaleInDock": 1
+        },
+        "Map1.tmx#Hill": {
+            "scaleInDock": 1
+        },
+        "Map1.tmx#Water": {
+            "scaleInDock": 1
+        },
+        "Map2.tmx": {
+            "expandedGroupLayers": [
+                2
+            ],
+            "scale": 1.5,
+            "selectedLayer": 2,
+            "viewCenter": {
+                "x": 263,
+                "y": 356.66666666666663
+            }
+        },
+        "Map2.tmx#Grass": {
+            "scaleInDock": 1
+        },
+        "Map2.tmx#Grass hill tiles v.2": {
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        },
+        "Map2.tmx#Hill": {
+            "scaleInDock": 2
+        },
+        "Map2.tmx#Water": {
+            "scaleInDock": 1
+        },
+        "Water.tsx": {
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        }
+    },
+    "last.imagePath": "D:/Projects/O/SDL2_project/XYZ/assets/Tilesets/ground tiles/old tiles",
+    "map.height": 30,
+    "map.lastUsedFormat": "tmx",
+    "map.orientation": null,
+    "map.tileHeight": 16,
+    "map.tileWidth": 16,
+    "map.width": 45,
+    "openFiles": [
+    ],
+    "project": "MapProject.tiled-project",
+    "recentFiles": [
+        "Map1.tmx",
+        "Map2.tmx",
+        "Grass.tsx",
+        "Hill.tsx",
+        "Water.tsx"
+    ],
+    "tileset.embedInMap": true,
+    "tileset.lastUsedFormat": "tsx",
+    "tileset.tileSize": {
+        "height": 16,
+        "width": 16
+    }
+}
