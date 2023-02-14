@@ -53,7 +53,7 @@ void TextureManager::draw_tile(const char *tileID, int tileSize, Vector2I pos, i
     SDL_RenderCopyEx(Engine::s_renderer, textureDict[tileID], &srcRect, &destRect, 0, NULL, flip);
 }
 
-void TextureManager::drawFrame(const char *textureID, Vector2I pos, int width, int height, int row, int col, SDL_RendererFlip flip, double angle)
+void TextureManager::draw_frame(const char *textureID, Vector2I pos, int width, int height, int row, int col, SDL_RendererFlip flip, double angle)
 {
     int frameX = width * col;
     int frameY = height * row;
