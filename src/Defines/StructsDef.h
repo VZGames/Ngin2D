@@ -15,6 +15,13 @@ typedef struct Layer
     int width, height;
 } Layer;
 
+typedef struct GroupLayer
+{
+    int id;
+    const char* name;
+    std::vector<Layer> layers;
+} GroupLayer;
+
 typedef struct Image
 {
     const char* src;

@@ -106,13 +106,6 @@ void GameMaps::parse_tmx()
 
         }
 
-
-
-
     }
-
-
-
-
 
 }
