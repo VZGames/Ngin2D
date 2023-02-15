@@ -3,6 +3,7 @@
 #include <cstdlib>
 #include <string>
 #include <vector>
+#include <sstream>
 
 #include "../Defines/StructsDef.h"
 
@@ -119,5 +120,17 @@ void GameMaps::parse_layer(TiXmlElement *e)
 
 
     dataEle = e->FirstChildElement("data");
-    dataEle->GetText();
+    const char* data = dataEle->Value();
+    std::string s(data);
+    std::istringstream iss(s);
+    std::string line;
+    while (std::getline(iss, line))
+    {
+        std::istringstream iss(line);
+        int value;
+        while (iss >> value)
+        {
+            std::cout << value << std::endl;
+        }
+    }
 }
