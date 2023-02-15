@@ -3,12 +3,26 @@
         "height": 4300,
         "width": 2
     },
-    "activeFile": "",
+    "activeFile": "D:/Projects/O/SDL2_project/build-XYZ-Desktop_MinGW_64_bit-Debug/assets/Map1.tmx",
     "expandedProjectPaths": [
         "."
     ],
     "fileStates": {
         "": {
+            "scaleInDock": 1
+        },
+        "D:/Projects/O/SDL2_project/build-XYZ-Desktop_MinGW_64_bit-Debug/assets/Grass.tsx": {
+            "scaleInDock": 1
+        },
+        "D:/Projects/O/SDL2_project/build-XYZ-Desktop_MinGW_64_bit-Debug/assets/Map1.tmx": {
+            "scale": 1.4421527777777776,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 360.2253575384023,
+                "y": 240.61251023258058
+            }
+        },
+        "D:/Projects/O/SDL2_project/build-XYZ-Desktop_MinGW_64_bit-Debug/assets/Water.tsx": {
             "scaleInDock": 1
         },
         "Grass.tsx": {
@@ -26,8 +40,8 @@
             "scale": 1,
             "selectedLayer": 1,
             "viewCenter": {
-                "x": 155.5,
-                "y": 142
+                "x": 360,
+                "y": 239.5
             }
         },
         "Map1.tmx#Grass": {
@@ -76,10 +90,13 @@
     "map.tileWidth": 16,
     "map.width": 45,
     "openFiles": [
+        "Map1.tmx",
+        "D:/Projects/O/SDL2_project/build-XYZ-Desktop_MinGW_64_bit-Debug/assets/Map1.tmx"
     ],
     "project": "MapProject.tiled-project",
     "recentFiles": [
         "Map1.tmx",
+        "D:/Projects/O/SDL2_project/build-XYZ-Desktop_MinGW_64_bit-Debug/assets/Map1.tmx",
         "Map2.tmx",
         "Grass.tsx",
         "Hill.tsx",

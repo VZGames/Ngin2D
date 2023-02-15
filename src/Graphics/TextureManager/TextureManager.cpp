@@ -10,7 +10,8 @@ TextureManager *TextureManager::instance()
 
 TextureManager::TextureManager()
 {
-
+    delete s_instance;
+    s_instance = NULL;
 }
 
 TextureManager::~TextureManager()

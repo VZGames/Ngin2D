@@ -17,12 +17,12 @@ private:
 
 private:
     std::map<const char*, const char*> maps = {
-        {"start", "../../assets/Map1.tmx"},
-        {"xxx", "../../assets/Map2.tmx"}
+        {"start", "./assets/Map1.tmx"},
+        {"xxx", "./assets/Map2.tmx"}
     };
 
-    TiXmlDocument *ptr_doc;
-    TiXmlElement *ptr_rootElement;
+    TiXmlDocument* ptr_doc;
+    TiXmlElement* ptr_rootElement;
 };
 
 #endif // GAMEMAPS_H

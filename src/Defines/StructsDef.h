@@ -8,6 +8,18 @@ typedef struct Size
     int width, height;
 } Size;
 
+typedef struct Layer
+{
+    int id;
+    const char* name;
+    int width, height;
+} Layer;
+
+typedef struct Image
+{
+    const char* src;
+    int width, height;
+} Image;
 
 typedef struct Tile
 {
@@ -19,6 +31,11 @@ typedef struct Tile
 
 typedef struct TileSet
 {
+    int firstgid;
+    const char* name;
+    int width, height;
+    int count, columns;
+    Image image;
 } TileSet;
 
 
