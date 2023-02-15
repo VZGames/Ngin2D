@@ -13,7 +13,8 @@ public:
 private:
     bool load_tmx(const char *mapId);
     void parse_tmx();
-
+    void parse_tileset(TiXmlElement* e);
+    void parse_layer(TiXmlElement* e);
 
 private:
     std::map<const char*, const char*> maps = {
