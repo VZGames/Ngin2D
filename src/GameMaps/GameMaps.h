@@ -1,29 +1,19 @@
 #ifndef GAMEMAPS_H
 #define GAMEMAPS_H
 
-#include <map>
-#include "../Utils/TinyXML/tinyxml.h"
+#include "../Objects/IObject.h"
 
-
-class GameMaps
+class GameMaps: public IObject
 {
 public:
     GameMaps();
 
-private:
-    bool load_tmx(const char *mapId);
-    void parse_tmx();
-    void parse_tileset(TiXmlElement* e);
-    void parse_layer(TiXmlElement* e);
 
-private:
-    std::map<const char*, const char*> maps = {
-        {"start", "./assets/Map1.tmx"},
-        {"xxx", "./assets/Map2.tmx"}
-    };
-
-    TiXmlDocument* ptr_doc;
-    TiXmlElement* ptr_rootElement;
+    // IObject interface
+public:
+    virtual void draw() override;
+    virtual void update() override;
+    virtual void clean() override;
 };
 
 #endif // GAMEMAPS_H

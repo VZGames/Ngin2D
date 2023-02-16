@@ -7,10 +7,6 @@
 class IObject
 {
 public:
-    // properties
-    Point2D position;
-    Size size;
-
     // behavior
     virtual void draw() = 0;
     virtual void update() = 0;

@@ -93,18 +93,22 @@ void Engine::loop_game()
 
 void Engine::update_game()
 {
+    gameMap->update();
 }
 
 void Engine::render_game()
 {
     SDL_RenderClear(s_renderer);
     // render objects
+    gameMap->draw();
+
     SDL_RenderPresent(s_renderer);
 }
 
 void Engine::release_resource()
 {
     printf("Engine Release Resource\n");
+    gameMap->clean();
     // Close and destroy the window and the renderer
     SDL_DestroyWindow(ptr_window);
     SDL_DestroyRenderer(s_renderer);

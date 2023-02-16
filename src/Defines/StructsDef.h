@@ -13,6 +13,7 @@ typedef struct Layer
     int id;
     const char* name;
     int width, height;
+    int *data;
 } Layer;
 
 typedef struct GroupLayer
