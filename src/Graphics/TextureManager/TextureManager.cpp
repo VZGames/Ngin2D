@@ -40,27 +40,27 @@ bool TextureManager::load(const char *textureID, const char *filePath)
     return 1;
 }
 
-void TextureManager::draw(const char *textureID, Vector2I pos, int width, int height, SDL_RendererFlip flip)
+void TextureManager::draw(const char *textureID, Point2D pos, int width, int height, SDL_RendererFlip flip)
 {
     SDL_Rect srcRect = {0, 0, width, height};
-    SDL_Rect dstRect = {pos.x, pos.y, width, height};
+    SDL_Rect dstRect = {pos.getX(), pos.getY(), width, height};
     SDL_RenderCopyEx(Engine::s_renderer, textureDict[textureID], &srcRect, &dstRect, 0, NULL, flip);
 }
 
-void TextureManager::draw_tile(const char *tileID, int tileSize, Vector2I pos, int row, int col, SDL_RendererFlip flip)
+void TextureManager::draw_tile(const char *tileID, int tileSize, Point2D pos, int row, int col, SDL_RendererFlip flip)
 {
-    SDL_Rect srcRect = {pos.x, pos.y, tileSize, tileSize};
+    SDL_Rect srcRect = {pos.getX(), pos.getY(), tileSize, tileSize};
     SDL_Rect destRect = {tileSize * col, tileSize * row, tileSize, tileSize};
     SDL_RenderCopyEx(Engine::s_renderer, textureDict[tileID], &srcRect, &destRect, 0, NULL, flip);
 }
 
-void TextureManager::draw_frame(const char *textureID, Vector2I pos, int width, int height, int row, int col, SDL_RendererFlip flip, double angle)
+void TextureManager::draw_frame(const char *textureID, Point2D pos, int width, int height, int row, int col, SDL_RendererFlip flip, double angle)
 {
     int frameX = width * col;
     int frameY = height * row;
 
     SDL_Rect srcRect = {frameX, frameY, width, height};
-    SDL_Rect dstRect = {pos.x, pos.y, width, height};
+    SDL_Rect dstRect = {pos.getX(), pos.getY(), width, height};
     SDL_RenderCopyEx(Engine::s_renderer, textureDict[textureID], &srcRect, &dstRect, 0, NULL, flip);
 }
 

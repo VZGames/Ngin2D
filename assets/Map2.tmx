@@ -4,10 +4,10 @@
   <image source="Tilesets/Water.png" width="64" height="16"/>
  </tileset>
  <tileset firstgid="5" name="Hill" tilewidth="16" tileheight="16" tilecount="77" columns="11">
-  <image source="Tilesets/ground tiles/new tiles/Grass hill tiles v.2.png" width="176" height="112"/>
+  <image source="Tilesets/ground_tiles/new_tiles/Grass_hill_tiles_v2.png" width="176" height="112"/>
  </tileset>
  <tileset firstgid="82" name="Grass" tilewidth="16" tileheight="16" tilecount="80" columns="10">
-  <image source="Tilesets/ground tiles/old tiles/Grass.png" width="160" height="128"/>
+  <image source="Tilesets/ground_tiles/old_tiles/Grass.png" width="160" height="128"/>
  </tileset>
  <layer id="1" name="Water" width="45" height="30">
   <data encoding="csv">

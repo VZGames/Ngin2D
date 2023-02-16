@@ -10,9 +10,14 @@ LayerManager::LayerManager()
     std::vector<TileSet> tilesets   = MapParser::instance()->getTilesets();
     for(auto tileset: tilesets)
     {
-        std::string assetsFolder = "./assets/";
-        std::string filePath = assetsFolder + tileset.image.src;
-        TextureManager::instance()->load(tileset.name, filePath.c_str());
+        std::string assetsFolder    = "./assets/";
+        std::string filePath        = assetsFolder + tileset.image.src;
+        bool loadOK = TextureManager::instance()->load(tileset.name, filePath.c_str());
+        if(!loadOK)
+        {
+            std::cerr << "ERROR\n";
+            return;
+        }
     }
 }
 
@@ -42,6 +47,8 @@ void LayerManager::draw()
 
         for (int i = start; i < end; i++) {
             tileID = data[i];
+            TextureManager::instance()->draw_tile("Water", 16, Point2D(100,200), 0, 0);
+            break;
         }
     };
 
