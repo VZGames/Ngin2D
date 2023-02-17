@@ -3,15 +3,12 @@ if(WIN32)
     set(LIBRARY_DIR "${CMAKE_SOURCE_DIR}/libs")
 
     # use bundled version to save ourselves a lot of trouble
-    set(LINKER_LIBRARY "-lmingw32 -lSDL2main -lSDL2 -lSDL2_image -lSDL2_ttf -lSDL2_mixer -lSDL2_net")
+    set(LINKER_LIBRARY "-lmingw32 -lSDL2main -lSDL2 -lSDL2_image")
 
     # copy dynamic libraries
     file(COPY
         "${CMAKE_SOURCE_DIR}/bin/SDL2.dll"
         "${CMAKE_SOURCE_DIR}/bin/SDL2_image.dll"
-        "${CMAKE_SOURCE_DIR}/bin/SDL2_net.dll"
-        "${CMAKE_SOURCE_DIR}/bin/SDL2_ttf.dll"
-        "${CMAKE_SOURCE_DIR}/bin/SDL2_mixer.dll"
         DESTINATION ${CMAKE_BINARY_DIR})
 else()
     # let FindSDL2.cmake figure out where it is on Mac/Linux

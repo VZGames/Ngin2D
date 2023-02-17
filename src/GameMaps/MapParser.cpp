@@ -59,7 +59,7 @@ void MapParser::parse_tmx()
 
     }
 
-    printf("Layers: %d, Tilesets: %d, Groups: %d\n", layers.size(), tilesets.size(), groups.size());
+    printf("Layers: %zd, Tilesets: %zd, Groups: %zd\n", layers.size(), tilesets.size(), groups.size());
 
 }
 

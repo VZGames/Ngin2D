@@ -1,15 +1,15 @@
 #include "Engine.h"
 #include "../Defines/Defines.h"
-#include "stdio.h"
+#include "../GameMaps/GameMaps.h"
+#include "../Graphics/Graphics.h"
 
-Engine *Engine::s_instance = nullptr;
-bool Engine::s_gameRunning = false;
-SDL_Renderer *Engine::s_renderer = nullptr;
+bool Engine::s_gameRunning          = false;
+Engine *Engine::s_instance          = nullptr;
+SDL_Renderer *Engine::s_renderer    = nullptr;
 
 
-Engine::Engine()
+Engine::Engine(): ptr_window(nullptr)
 {
-    gameMap = new GameMaps();
 }
 
 Engine *Engine::instance()
@@ -19,41 +19,53 @@ Engine *Engine::instance()
 
 Engine::~Engine()
 {
-    release_resource();
-    quit_game();
 }
 
 bool Engine::init_game(const char *title)
 {
     printf("Engine Init\n");
-    // [1] init SDL and create the Game Window
-    if (SDL_Init(SDL_INIT_VIDEO) != 0)
+    if (SDL_Init(SDL_INIT_EVERYTHING) != 0)
     {
         printf("Unable to initialize SDL: %s\n", SDL_GetError());
         return 0;
     }
 
-    ptr_window = SDL_CreateWindow(title, SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, WINDOW_WIDTH, WINDOW_HEIGHT, 0);
+    if (!(IMG_Init(IMG_INIT_PNG | IMG_INIT_JPG)))
+    {
+        printf("Unable to initialize SDL Image: %s\n", SDL_GetError());
+        return 0;
+    }
+
+    // [1] init SDL and create the Game Window
+    SDL_WindowFlags window_flags = (SDL_WindowFlags)(SDL_WINDOW_RESIZABLE | SDL_WINDOW_ALLOW_HIGHDPI);
+    ptr_window = SDL_CreateWindow(title, SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, WINDOW_WIDTH, WINDOW_HEIGHT, window_flags);
 
 
     if (ptr_window == nullptr)
     {
         // In the case that the window could not be made...
         printf("Could not create window: %s\n\n", SDL_GetError());
+        return 0;
     }
 
-
+    // [2] init renderer
     s_renderer = SDL_CreateRenderer(ptr_window, -1, SDL_RENDERER_ACCELERATED);
 
 
-    if (s_renderer)
+    if (s_renderer == nullptr)
     {
-        // Select the color for drawing.
-        SDL_SetRenderDrawColor(s_renderer, 0, 0, 0, 255);
+        return 0;
     }
+
+    tex = TextureManager::instance()->texture_by_id("Water");
+    SDL_QueryTexture(tex, NULL, NULL, &destRec.w, &destRec.h);
+
+    // [3] Select the color for drawing.
+    SDL_SetRenderDrawColor(s_renderer, 255, 255, 255, 255);
 
 
     s_gameRunning = true;
+
     return 1;
 }
 
@@ -78,29 +90,29 @@ void Engine::loop_game()
         // update lastTime
         lastTime = currentTime;
 
+        handle_events();
+        update_game();
+        render_game();
 
         if (deltaTime < frameDelay)
         {
             SDL_Delay(frameDelay - deltaTime);
         }
-
-        handle_events();
-        update_game();
-        render_game();
-        SDL_GL_SwapWindow(ptr_window);
     }
 }
 
 void Engine::update_game()
 {
-    gameMap->update();
+    GameMaps::instance()->update();
 }
 
 void Engine::render_game()
 {
     SDL_RenderClear(s_renderer);
     // render objects
-    gameMap->draw();
+    GameMaps::instance()->draw();
+    SDL_RenderCopy(s_renderer, tex, NULL, &destRec);
+//    TextureManager::instance()->draw("Water", Point2D(200, 200), 16, 16);
 
     SDL_RenderPresent(s_renderer);
 }
@@ -108,7 +120,8 @@ void Engine::render_game()
 void Engine::release_resource()
 {
     printf("Engine Release Resource\n");
-    gameMap->clean();
+    GameMaps::instance()->clean();
+    TextureManager::instance()->clean();
     // Close and destroy the window and the renderer
     SDL_DestroyWindow(ptr_window);
     SDL_DestroyRenderer(s_renderer);
@@ -118,6 +131,7 @@ void Engine::quit_game()
 {
     printf("Engine Quit\n");
     SDL_Quit();
+    IMG_Quit();
 }
 
 

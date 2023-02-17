@@ -10,14 +10,9 @@ LayerManager::LayerManager()
     std::vector<TileSet> tilesets   = MapParser::instance()->getTilesets();
     for(auto tileset: tilesets)
     {
-        std::string assetsFolder    = "./assets/";
-        std::string filePath        = assetsFolder + tileset.image.src;
-        bool loadOK = TextureManager::instance()->load(tileset.name, filePath.c_str());
-        if(!loadOK)
-        {
-            std::cerr << "ERROR\n";
-            return;
-        }
+        std::string imgSrc    = tileset.image.src;
+        std::string filePath        = "./assets/" + imgSrc;
+        TextureManager::instance()->load_texture(tileset.name, filePath.c_str());
     }
 }
 
@@ -28,7 +23,7 @@ LayerManager *LayerManager::instance()
 
 void LayerManager::draw()
 {
-    std::vector<Layer> layers       = MapParser::instance()->getLayers();
+    std::vector<Layer> layers = MapParser::instance()->getLayers();
 
     auto worker = [&](int core, Layer layer) {
         // [1] init segment size
@@ -42,12 +37,12 @@ void LayerManager::draw()
 
         if(core == CORES - 1)
         {
-            end     = layer.width * layer.height;
+            end = layer.width * layer.height;
         }
 
         for (int i = start; i < end; i++) {
             tileID = data[i];
-            TextureManager::instance()->draw_tile("Water", 16, Point2D(100,200), 0, 0);
+//            TextureManager::instance()->draw_tile("Water", 16, Point2D(200,200), 0, 1);
             break;
         }
     };
@@ -57,15 +52,14 @@ void LayerManager::draw()
         for (int i = 0; i < CORES; i++) {
             threads.push_back(std::thread(worker, i, layer));
         }
+
+        for(auto &thread:threads)
+        {
+            thread.join();
+        }
+
+        threads.clear();
     }
-
-    for(auto &thread:threads)
-    {
-        thread.join();
-    }
-
-    threads.clear();
-
 }
 
 void LayerManager::update()

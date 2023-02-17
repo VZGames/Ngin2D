@@ -9,7 +9,6 @@
 #include <sstream>
 
 #include "../Utils/TinyXML/tinyxml.h"
-#include "../Graphics/TextureManager/TextureManager.h"
 #include "../Defines/StructsDef.h"
 
 

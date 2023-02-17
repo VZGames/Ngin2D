@@ -1,0 +1,10 @@
+^D:\PROJECTS\O\SDL2_PROJECT\XYZ\SRC\CMAKELISTS.TXT
+setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -SD:/Projects/O/SDL2_project/XYZ -BD:/Projects/O/SDL2_project/XYZ --check-stamp-file D:/Projects/O/SDL2_project/XYZ/src/CMakeFiles/generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd

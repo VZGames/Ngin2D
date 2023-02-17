@@ -3,7 +3,7 @@
         "height": 4300,
         "width": 2
     },
-    "activeFile": "D:/Projects/O/SDL2_project/build-XYZ-Desktop_MinGW_64_bit-Debug/assets/Map1.tmx",
+    "activeFile": "Map1.tmx",
     "expandedProjectPaths": [
         "."
     ],
@@ -18,8 +18,8 @@
             "scale": 1.4421527777777776,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 360.22535753840225,
-                "y": 240.61251023258055
+                "x": 359.53194972793375,
+                "y": 240.26580632734627
             }
         },
         "D:/Projects/O/SDL2_project/build-XYZ-Desktop_MinGW_64_bit-Debug/assets/Map1.tmx#Grass": {
@@ -46,11 +46,11 @@
             "expandedGroupLayers": [
                 3
             ],
-            "scale": 1,
+            "scale": 0.5,
             "selectedLayer": 1,
             "viewCenter": {
-                "x": 728.5,
-                "y": 394
+                "x": 271,
+                "y": 616
             }
         },
         "Map1.tmx#Grass": {
@@ -104,8 +104,8 @@
     ],
     "project": "MapProject.tiled-project",
     "recentFiles": [
-        "Map1.tmx",
         "D:/Projects/O/SDL2_project/build-XYZ-Desktop_MinGW_64_bit-Debug/assets/Map1.tmx",
+        "Map1.tmx",
         "Map2.tmx",
         "Grass.tsx",
         "Hill.tsx",

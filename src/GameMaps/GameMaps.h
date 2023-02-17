@@ -5,15 +5,17 @@
 
 class GameMaps: public IObject
 {
-public:
-    GameMaps();
-
-
     // IObject interface
 public:
+    static GameMaps *instance();
     virtual void draw() override;
     virtual void update() override;
     virtual void clean() override;
+
+private:
+    GameMaps();
+    static GameMaps *s_instance;
+
 };
 
 #endif // GAMEMAPS_H

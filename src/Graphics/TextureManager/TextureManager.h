@@ -11,11 +11,11 @@ class TextureManager
 
 public:
     static TextureManager *instance();
-    ~TextureManager();
 
-    bool load(const char *textureID, const char *filePath);
+    SDL_Texture *texture_by_id(const char *textureID);
+    bool load_texture(const char *textureID, const char *filePath);
     void draw(const char *textureID, Point2D pos, int width, int height, SDL_RendererFlip flip = SDL_FLIP_NONE);
-    void draw_tile(const char *tileID, int tileSize, Point2D pos, int row, int col, SDL_RendererFlip flip = SDL_FLIP_NONE);
+    void draw_tile(const char *textureID, int tileSize, Point2D pos, int row, int col, SDL_RendererFlip flip = SDL_FLIP_NONE);
     void draw_frame(const char *textureID, Point2D pos, int width, int height, int row, int col, SDL_RendererFlip flip = SDL_FLIP_NONE, double p_Angle = 0);
     void drop(const char *textureID);
     void clean();
