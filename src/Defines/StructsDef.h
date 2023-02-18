@@ -41,7 +41,7 @@ typedef struct TileSet
 {
     int firstgid;
     const char* name;
-    int width, height;
+    int tileWidth, tileHeight;
     int count, columns;
     Image image;
 } TileSet;

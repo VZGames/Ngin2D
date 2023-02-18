@@ -11,12 +11,16 @@ public:
     static Engine *instance();
     ~Engine();
 
-    bool init_game(const char *title);
-    void loop_game();
-    void release_resource();
-    void quit_game();
+    bool InitGame(const char *title);
+    void Loop();
+    void Clean();
+    void Quit();
 
-    static SDL_Renderer *s_renderer;
+    SDL_Renderer *getRenderer()
+    {
+        return ptr_renderer;
+    }
+
     static bool s_gameRunning;
 
 
@@ -27,10 +31,8 @@ private:
     void render_game();
     void handle_events();
 
+    SDL_Renderer *ptr_renderer;
     SDL_Window *ptr_window;
-
-    SDL_Texture *tex;
-    SDL_Rect srcRec,destRec;
 };
 
 #endif // ENGINE_H

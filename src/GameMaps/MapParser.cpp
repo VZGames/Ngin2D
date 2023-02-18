@@ -10,13 +10,13 @@ MapParser *MapParser::instance()
 MapParser::MapParser()
 {
     ptr_doc = new TiXmlDocument();
-    if(load_tmx("start"))
+    if(loadTmx("start"))
     {
-        parse_tmx();
+        parseTmx();
     }
 }
 
-bool MapParser::load_tmx(const char *mapId)
+bool MapParser::loadTmx(const char *mapId)
 {
 
     bool loadOk = ptr_doc->LoadFile(maps[mapId]);
@@ -27,7 +27,7 @@ bool MapParser::load_tmx(const char *mapId)
     return 1;
 }
 
-void MapParser::parse_tmx()
+void MapParser::parseTmx()
 {
     ptr_rootElement = ptr_doc->RootElement();
     if(ptr_rootElement)
@@ -45,15 +45,15 @@ void MapParser::parse_tmx()
         {
             if(e->Value() == std::string("tileset"))
             {
-                parse_tileset(e);
+                parseTileset(e);
             }
             else if(e->Value() == std::string("layer"))
             {
-                parse_layer(e);
+                parseLayer(e);
             }
             else if(e->Value() == std::string("group"))
             {
-                parse_group(e);
+                parseGroup(e);
             }
         }
 
@@ -63,7 +63,7 @@ void MapParser::parse_tmx()
 
 }
 
-void MapParser::parse_tileset(TiXmlElement *e)
+void MapParser::parseTileset(TiXmlElement *e)
 {
     // read tilesets element
     TiXmlElement* imageEle;
@@ -97,7 +97,7 @@ void MapParser::parse_tileset(TiXmlElement *e)
 
 }
 
-void MapParser::parse_layer(TiXmlElement *e)
+void MapParser::parseLayer(TiXmlElement *e)
 {
 
     // read layers element
@@ -145,7 +145,7 @@ void MapParser::parse_layer(TiXmlElement *e)
 
 }
 
-void MapParser::parse_group(TiXmlElement *e)
+void MapParser::parseGroup(TiXmlElement *e)
 {
     int id              = std::atoi(e->Attribute("id"));
     const char* name    = e->Attribute("name");
@@ -160,13 +160,24 @@ void MapParser::parse_group(TiXmlElement *e)
     {
         if(groupEle->Value() == std::string("layer"))
         {
-            parse_layer(groupEle);
+            parseLayer(groupEle);
         }
         else if(groupEle->Value() == std::string("group"))
         {
-            parse_group(groupEle);
+            parseGroup(groupEle);
         }
     }
+}
+
+TileSet MapParser::findById(int tileId) const
+{
+    for (auto tileset: tilesets) {
+        if(tileId >= tileset.firstgid && tileId < tileset.firstgid + tileset.count)
+        {
+            return tileset;
+        }
+    }
+    return TileSet();
 }
 
 const std::vector<Layer> &MapParser::getLayers() const

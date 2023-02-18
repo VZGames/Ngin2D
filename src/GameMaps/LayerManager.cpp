@@ -12,7 +12,7 @@ LayerManager::LayerManager()
     {
         std::string imgSrc    = tileset.image.src;
         std::string filePath        = "./assets/" + imgSrc;
-        TextureManager::instance()->load_texture(tileset.name, filePath.c_str());
+        TextureManager::instance()->loadTexture(tileset.name, filePath.c_str());
     }
 }
 
@@ -26,6 +26,8 @@ void LayerManager::draw()
     std::vector<Layer> layers = MapParser::instance()->getLayers();
 
     auto worker = [&](int core, Layer layer) {
+        fflush(stdout);
+
         // [1] init segment size
         int segmentSize = (layer.width * layer.height) / CORES;
         // [2] init (start, end)
@@ -40,10 +42,39 @@ void LayerManager::draw()
             end = layer.width * layer.height;
         }
 
-        for (int i = start; i < end; i++) {
+        int posX = start % layer.width; // [0, 337] [337, 7XX]
+        int posY = start / layer.width;
+
+
+        printf("Layer Name: %s, Width: %d, Height: %d, Start: %d, End: %d, X: %d, Y: %d\n",
+               layer.name, layer.width, layer.height, start, end, posX, posY);
+        for (int i = start; i < end; i++)
+        {
             tileID = data[i];
-//            TextureManager::instance()->draw_tile("Water", 16, Point2D(200,200), 0, 1);
-            break;
+            TileSet tileset = MapParser::instance()->findById(tileID);
+            if(posX > layer.width)
+            {
+                posX  = 0;
+                posY++;
+            }
+            if(posY > layer.height)
+            {
+                posY = layer.height;
+            }
+
+            int frameX, frameY;
+            frameX = (tileID - ((tileset.columns + tileset.firstgid) - 1)) * (-1); // [0, 1, 2, ..., N]
+            frameY = 0;
+
+            TextureManager::instance()->drawTile(
+                        tileset.name,
+                        tileset.tileWidth,
+                        tileset.tileHeight,
+                        Point2D(posX * tileset.tileWidth, posY * tileset.tileHeight),
+                        frameX,
+                        0);
+            posX++;
+
         }
     };
 
@@ -59,6 +90,7 @@ void LayerManager::draw()
         }
 
         threads.clear();
+        break;
     }
 }
 

@@ -4,11 +4,11 @@
 
 int main(int argc, char *argv[])
 {
-    if(Engine::instance()->init_game("HaTNK"))
+    if(Engine::instance()->InitGame("Học Đánh Vần"))
     {
-        Engine::instance()->loop_game();
-        Engine::instance()->release_resource();
-        Engine::instance()->quit_game();
+        Engine::instance()->Loop();
+        Engine::instance()->Clean();
+        Engine::instance()->Quit();
     }
     else
     {

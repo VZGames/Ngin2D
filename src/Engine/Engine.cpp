@@ -5,10 +5,9 @@
 
 bool Engine::s_gameRunning          = false;
 Engine *Engine::s_instance          = nullptr;
-SDL_Renderer *Engine::s_renderer    = nullptr;
 
 
-Engine::Engine(): ptr_window(nullptr)
+Engine::Engine(): ptr_window(nullptr), ptr_renderer(nullptr)
 {
 }
 
@@ -21,7 +20,7 @@ Engine::~Engine()
 {
 }
 
-bool Engine::init_game(const char *title)
+bool Engine::InitGame(const char *title)
 {
     printf("Engine Init\n");
     if (SDL_Init(SDL_INIT_EVERYTHING) != 0)
@@ -38,7 +37,7 @@ bool Engine::init_game(const char *title)
 
     // [1] init SDL and create the Game Window
     SDL_WindowFlags window_flags = (SDL_WindowFlags)(SDL_WINDOW_RESIZABLE | SDL_WINDOW_ALLOW_HIGHDPI);
-    ptr_window = SDL_CreateWindow(title, SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, WINDOW_WIDTH, WINDOW_HEIGHT, window_flags);
+    ptr_window = SDL_CreateWindow(title, SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, WINDOW_WIDTH, WINDOW_HEIGHT, 0);
 
 
     if (ptr_window == nullptr)
@@ -49,27 +48,23 @@ bool Engine::init_game(const char *title)
     }
 
     // [2] init renderer
-    s_renderer = SDL_CreateRenderer(ptr_window, -1, SDL_RENDERER_ACCELERATED);
-
-
-    if (s_renderer == nullptr)
+    ptr_renderer = SDL_CreateRenderer(ptr_window, -1, SDL_RENDERER_ACCELERATED);
+    if (ptr_renderer == nullptr)
     {
+        printf("Could not create renderer: %s\n\n", SDL_GetError());
         return 0;
     }
 
-    tex = TextureManager::instance()->texture_by_id("Water");
-    SDL_QueryTexture(tex, NULL, NULL, &destRec.w, &destRec.h);
-
     // [3] Select the color for drawing.
-    SDL_SetRenderDrawColor(s_renderer, 255, 255, 255, 255);
+    SDL_SetRenderDrawColor(ptr_renderer, 255, 255, 255, 255);
 
-
+//    GameMaps::instance()->draw();
     s_gameRunning = true;
 
     return 1;
 }
 
-void Engine::loop_game()
+void Engine::Loop()
 {
     const int frameDelay = 1000 / FPS;
 
@@ -108,26 +103,24 @@ void Engine::update_game()
 
 void Engine::render_game()
 {
-    SDL_RenderClear(s_renderer);
+    SDL_RenderClear(ptr_renderer);
     // render objects
     GameMaps::instance()->draw();
-    SDL_RenderCopy(s_renderer, tex, NULL, &destRec);
-//    TextureManager::instance()->draw("Water", Point2D(200, 200), 16, 16);
 
-    SDL_RenderPresent(s_renderer);
+    SDL_RenderPresent(ptr_renderer);
 }
 
-void Engine::release_resource()
+void Engine::Clean()
 {
     printf("Engine Release Resource\n");
     GameMaps::instance()->clean();
     TextureManager::instance()->clean();
     // Close and destroy the window and the renderer
     SDL_DestroyWindow(ptr_window);
-    SDL_DestroyRenderer(s_renderer);
+    SDL_DestroyRenderer(ptr_renderer);
 }
 
-void Engine::quit_game()
+void Engine::Quit()
 {
     printf("Engine Quit\n");
     SDL_Quit();

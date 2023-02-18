@@ -17,16 +17,19 @@ class MapParser
 public:
     static MapParser *instance();
 
+    TileSet findById(int tileId) const;
+
     const std::vector<Layer> &getLayers() const;
     const std::vector<TileSet> &getTilesets() const;
 
 private:
     MapParser();
-    bool load_tmx(const char *mapId);
-    void parse_tmx();
-    void parse_tileset(TiXmlElement* e);
-    void parse_layer(TiXmlElement* e);
-    void parse_group(TiXmlElement* e);
+    bool loadTmx(const char *mapId);
+    void parseTmx();
+    void parseTileset(TiXmlElement* e);
+    void parseLayer(TiXmlElement* e);
+    void parseGroup(TiXmlElement* e);
+
 
 private:
 

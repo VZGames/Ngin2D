@@ -18,8 +18,8 @@
             "scale": 1.4421527777777776,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 359.53194972793375,
-                "y": 240.26580632734627
+                "x": 359.878653633168,
+                "y": 239.57239851687774
             }
         },
         "D:/Projects/O/SDL2_project/build-XYZ-Desktop_MinGW_64_bit-Debug/assets/Map1.tmx#Grass": {
@@ -46,21 +46,21 @@
             "expandedGroupLayers": [
                 3
             ],
-            "scale": 0.5,
-            "selectedLayer": 1,
+            "scale": 8,
+            "selectedLayer": 0,
             "viewCenter": {
-                "x": 271,
-                "y": 616
+                "x": 640.8125,
+                "y": 418.625
             }
         },
         "Map1.tmx#Grass": {
-            "scaleInDock": 1
+            "scaleInDock": 5.5
         },
         "Map1.tmx#Hill": {
-            "scaleInDock": 1
+            "scaleInDock": 2
         },
         "Map1.tmx#Water": {
-            "scaleInDock": 1
+            "scaleInDock": 4
         },
         "Map2.tmx": {
             "expandedGroupLayers": [
