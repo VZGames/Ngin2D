@@ -3,7 +3,7 @@
         "height": 4300,
         "width": 2
     },
-    "activeFile": "",
+    "activeFile": "Map1.tmx",
     "expandedProjectPaths": [
         "."
     ],
@@ -46,11 +46,11 @@
             "expandedGroupLayers": [
                 3
             ],
-            "scale": 0.33,
+            "scale": 0.75,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 1181.8181818181818,
-                "y": 593.9393939393939
+                "x": 417.33333333333326,
+                "y": 274.66666666666663
             }
         },
         "Map1.tmx#BasicGrassBiomthings": {
@@ -116,11 +116,13 @@
     "map.tileWidth": 16,
     "map.width": 45,
     "openFiles": [
+        "Map2.tmx",
+        "Map1.tmx"
     ],
     "project": "MapProject.tiled-project",
     "recentFiles": [
-        "Map1.tmx",
         "Map2.tmx",
+        "Map1.tmx",
         "D:/Projects/O/SDL2_project/build-XYZ-Desktop_MinGW_64_bit-Debug/assets/Map1.tmx",
         "Grass.tsx",
         "Hill.tsx",

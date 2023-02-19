@@ -1,10 +1,6 @@
 #ifndef LAYERMANAGER_H
 #define LAYERMANAGER_H
 
-
-#include <thread>
-#include <mutex>
-#include <vector>
 #include "MapParser.h"
 
 class LayerManager

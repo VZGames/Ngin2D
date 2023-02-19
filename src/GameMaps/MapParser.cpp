@@ -1,4 +1,5 @@
 #include "MapParser.h"
+#include "../Math/math2D.h"
 
 MapParser *MapParser::s_instance = nullptr;
 

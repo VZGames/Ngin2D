@@ -14,6 +14,7 @@ typedef struct Layer
     const char* name;
     int width, height;
     int *data;
+    // Matrix2D<int> data;
 } Layer;
 
 typedef struct GroupLayer

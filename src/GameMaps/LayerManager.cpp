@@ -1,8 +1,9 @@
 #include "LayerManager.h"
 #include <string>
-#include <cmath>
 #include <time.h>
-#include "../Defines/Defines.h"
+#include <thread>
+#include <mutex>
+#include "../Math/math2D.h"
 #include "../Graphics/TextureManager/TextureManager.h"
 
 LayerManager *LayerManager::s_instance = nullptr;
@@ -25,8 +26,8 @@ LayerManager *LayerManager::instance()
 
 void LayerManager::draw()
 {
-    std::clock_t t;
-    t = clock();
+    //    std::clock_t t;
+    //    t = clock();
 
     std::vector<Layer> layers = MapParser::instance()->getLayers();
     for(auto layer: layers)
@@ -62,6 +63,12 @@ void LayerManager::draw()
             }
         }
     }
+
+
+
+    /**
+     * Draw with multi threads
+     */
 
     //    auto worker = [&](int i, int j, Layer layer, int *data) {
     //        for (; i < j; i++)
@@ -136,8 +143,8 @@ void LayerManager::draw()
 
     //    threads.clear();
 
-    t = clock() - t;
-    std::cout << "Render Map - It took time " << ((float)t) / CLOCKS_PER_SEC << std::endl;
+    //    t = clock() - t;
+    //    std::cout << "Render Map - It took time " << ((float)t) / CLOCKS_PER_SEC << std::endl;
 }
 
 void LayerManager::update()

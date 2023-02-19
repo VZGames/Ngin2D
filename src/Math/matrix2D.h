@@ -5,17 +5,22 @@ template<typename T>
 class Matrix2D
 {
 public:
-    Matrix2D(int row, int col) : row(row),col(col)
+    Matrix2D(int height, int width) : height(height),width(width)
     {
-        matrix = new T[row * col];
+        this->matrix = new T[height * width];
     }
 
     Matrix2D(Matrix2D<T> &copy) {
-        matrix = copy;
+        this->matrix = copy.matrix;
+    }
+
+    T &at(int y, int x)
+    {
+        return this->matrix[(y * width) + x];
     }
 
 private:
-    int row, col;
+    int height, width;
     T *matrix;
 };
 
