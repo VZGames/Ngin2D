@@ -177,7 +177,7 @@ void MapParser::parseGroup(TiXmlElement *e)
 void MapParser::findById(int tileId, TileSet &result) const
 {
     for (auto tileset: tilesets) {
-        if(tileId >= tileset.firstgid && tileId < tileset.firstgid + (tileset.count - 1))
+        if(tileId >= tileset.firstgid && tileId < tileset.firstgid + (tileset.count))
         {
             result = tileset;
             return;
