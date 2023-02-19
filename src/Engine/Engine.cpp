@@ -57,8 +57,8 @@ bool Engine::InitGame(const char *title)
 
     // [3] Select the color for drawing.
     SDL_SetRenderDrawColor(ptr_renderer, 255, 255, 255, 255);
-
 //    GameMaps::instance()->draw();
+
     s_gameRunning = true;
 
     return 1;
@@ -105,8 +105,7 @@ void Engine::render_game()
 {
     SDL_RenderClear(ptr_renderer);
     // render objects
-    GameMaps::instance()->draw();
-
+        GameMaps::instance()->draw();
     SDL_RenderPresent(ptr_renderer);
 }
 

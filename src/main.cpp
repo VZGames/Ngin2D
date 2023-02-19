@@ -4,7 +4,7 @@
 
 int main(int argc, char *argv[])
 {
-    if(Engine::instance()->InitGame("Học Đánh Vần"))
+    if(Engine::instance()->InitGame("8888"))
     {
         Engine::instance()->Loop();
         Engine::instance()->Clean();

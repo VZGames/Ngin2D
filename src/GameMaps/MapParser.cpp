@@ -10,7 +10,7 @@ MapParser *MapParser::instance()
 MapParser::MapParser()
 {
     ptr_doc = new TiXmlDocument();
-    if(loadTmx("start"))
+    if(loadTmx("xxx"))
     {
         parseTmx();
     }
@@ -74,6 +74,7 @@ void MapParser::parseTileset(TiXmlElement *e)
     int tileHeight          = std::atoi(e->Attribute("tileheight"));
     int tileCount           = std::atoi(e->Attribute("tilecount"));
     int columns             = std::atoi(e->Attribute("columns"));
+    int rows                = tileCount / columns;
 
     imageEle = e->FirstChildElement("image");
     if(imageEle)
@@ -89,6 +90,7 @@ void MapParser::parseTileset(TiXmlElement *e)
             tileHeight,
             tileCount,
             columns,
+            rows,
             image
         };
         tilesets.push_back(tileSet);
@@ -123,11 +125,14 @@ void MapParser::parseLayer(TiXmlElement *e)
 
         for (int row = 0; row < height; row++) {
             // read line
-            std::getline(iss, line, ',');
-            std::istringstream iss(line);
             for (int col = 0; col < width; col++) {
+
+                std::getline(iss, line, ',');
+                std::istringstream iss(line);
+
                 int value;
                 iss >> value;
+
                 matrix[row * width + col] = value;
             }
         }
@@ -169,16 +174,23 @@ void MapParser::parseGroup(TiXmlElement *e)
     }
 }
 
-TileSet MapParser::findById(int tileId) const
+void MapParser::findById(int tileId, TileSet &result) const
 {
     for (auto tileset: tilesets) {
-        if(tileId >= tileset.firstgid && tileId < tileset.firstgid + tileset.count)
+        if(tileId >= tileset.firstgid && tileId < tileset.firstgid + (tileset.count - 1))
         {
-            return tileset;
+            result = tileset;
+            return;
         }
     }
-    return TileSet();
+    return;
 }
+
+const std::vector<GroupLayer> &MapParser::getGroups() const
+{
+    return groups;
+}
+
 
 const std::vector<Layer> &MapParser::getLayers() const
 {

@@ -17,10 +17,11 @@ class MapParser
 public:
     static MapParser *instance();
 
-    TileSet findById(int tileId) const;
+    void findById(int tileId, TileSet &tileset) const;
 
     const std::vector<Layer> &getLayers() const;
     const std::vector<TileSet> &getTilesets() const;
+    const std::vector<GroupLayer> &getGroups() const;
 
 private:
     MapParser();
@@ -34,7 +35,7 @@ private:
 private:
 
     static MapParser *s_instance;
-    std::map<const char*, const char*> maps = {
+    std::map<std::string, const char*> maps = {
         {"start", "./assets/Map1.tmx"},
         {"xxx", "./assets/Map2.tmx"}
     };

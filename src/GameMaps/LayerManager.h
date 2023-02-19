@@ -18,9 +18,6 @@ private:
     LayerManager();
     static LayerManager *s_instance;
 
-    std::vector<std::thread> threads;
-    std::mutex mux;
-
 };
 
 #endif // LAYERMANAGER_H
