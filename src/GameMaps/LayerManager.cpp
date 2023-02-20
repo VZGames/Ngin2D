@@ -27,15 +27,14 @@ LayerManager *LayerManager::instance()
 
 void LayerManager::draw()
 {
+    fflush(stdout);
     std::clock_t t;
     t = clock();
-
-    std::vector<Layer> layers = MapParser::instance()->getLayers();
 
     /**
      * Draw with multi threads
      */
-
+    std::vector<Layer> layers = MapParser::instance()->getLayers();
     std::mutex m;
     auto worker = [&](int i, int j, Layer layer, Matrix2D<int>data) {
         m.lock();
@@ -48,6 +47,8 @@ void LayerManager::draw()
 
 
             int tileID = data.at(i);
+
+            // tileID = 0 (not tile)
             if(tileID == 0)
             {
                 continue;
@@ -88,17 +89,12 @@ void LayerManager::draw()
             int end     = start + segmentSize;
 
             // [3]
-//            int *data   = layer.data;
             Matrix2D<int> data(layer.data);
 
-            if(i >= CORES - 1)
+            if(i == CORES - 1)
             {
                 end = (layer.width * layer.height);
             }
-
-            //            fflush(stdout);
-            //            printf("Layer Name: %s, Width: %d, Height: %d, Start: %d, End: %d\n",
-            //                   layer.name, layer.width, layer.height, start, end);
 
             threads.push_back(std::thread(worker, start, end, layer, data));
         }
@@ -113,7 +109,7 @@ void LayerManager::draw()
 
 
     t = clock() - t;
-    std::cout << "Render Map - It took time " << ((float)t) / CLOCKS_PER_SEC << std::endl;
+    //    printf("Render Map took time: %f\n", ((float)t) / CLOCKS_PER_SEC);
 }
 
 void LayerManager::update()

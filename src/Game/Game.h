@@ -1,15 +1,15 @@
-#ifndef ENGINE_H
-#define ENGINE_H
+#ifndef GAME_H
+#define GAME_H
 #include <stdio.h>
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_image.h>
 
-class Engine
+class Game
 {
 
 public:
-    static Engine *instance();
-    ~Engine();
+    static Game *instance();
+    ~Game();
 
     bool InitGame(const char *title);
     void Loop();
@@ -25,8 +25,8 @@ public:
 
 
 private:
-    Engine();
-    static Engine *s_instance;
+    Game();
+    static Game *s_instance;
     void update_game();
     void render_game();
     void handle_events();
@@ -35,4 +35,4 @@ private:
     SDL_Window *ptr_window;
 };
 
-#endif // ENGINE_H
+#endif // GAME_H

@@ -3,7 +3,7 @@
         "height": 4300,
         "width": 2
     },
-    "activeFile": "Map1.tmx",
+    "activeFile": "Map2.tmx",
     "expandedProjectPaths": [
         "."
     ],
@@ -70,14 +70,13 @@
         },
         "Map2.tmx": {
             "expandedGroupLayers": [
-                2,
-                6
+                2
             ],
-            "scale": 0.33,
-            "selectedLayer": 4,
+            "scale": 2,
+            "selectedLayer": 6,
             "viewCenter": {
-                "x": 360.6060606060606,
-                "y": 240.90909090909088
+                "x": 426.5,
+                "y": 154.5
             }
         },
         "Map2.tmx#Grass": {
@@ -104,14 +103,20 @@
             "scaleInDock": 1
         },
         "Map3.tmx": {
-            "scale": 0.75,
+            "scale": 0.125,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 178.66666666666663,
-                "y": -189.33333333333337
+                "x": 8664,
+                "y": 5696
             }
         },
         "Map3.tmx#Grass": {
+            "scaleInDock": 1
+        },
+        "Map3.tmx#Grass_tiles_v2": {
+            "scaleInDock": 3
+        },
+        "Map3.tmx#Water": {
             "scaleInDock": 1
         },
         "Water.tsx": {
@@ -119,23 +124,22 @@
             "scaleInEditor": 1
         }
     },
-    "last.imagePath": "D:/Projects/O/SDL2_project/XYZ/assets/Tilesets/ground_tiles/old_tiles",
-    "map.fixedSize": false,
-    "map.height": 30,
+    "last.imagePath": "D:/Projects/O/SDL2_project/XYZ/assets/Tilesets/ground_tiles/new_tiles",
+    "map.fixedSize": true,
+    "map.height": 480,
     "map.lastUsedFormat": "tmx",
     "map.orientation": null,
     "map.tileHeight": 16,
     "map.tileWidth": 16,
-    "map.width": 45,
+    "map.width": 720,
     "openFiles": [
-        "Map2.tmx",
-        "Map1.tmx"
+        "Map2.tmx"
     ],
     "project": "MapProject.tiled-project",
     "recentFiles": [
-        "Map3.tmx",
         "Map2.tmx",
         "Map1.tmx",
+        "Map3.tmx",
         "D:/Projects/O/SDL2_project/build-XYZ-Desktop_MinGW_64_bit-Debug/assets/Map1.tmx",
         "Grass.tsx",
         "Hill.tsx",

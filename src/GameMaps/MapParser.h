@@ -36,8 +36,9 @@ private:
 
     static MapParser *s_instance;
     std::map<std::string, const char*> maps = {
-        {"start", "./assets/Map1.tmx"},
-        {"xxx", "./assets/Map2.tmx"}
+        {"1", "./assets/Map1.tmx"},
+        {"2", "./assets/Map2.tmx"},
+        {"3", "./assets/Map3.tmx"},
     };
 
     Size mapSize, tileSize;

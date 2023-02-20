@@ -1,18 +1,18 @@
 #include <iostream>
-#include "Engine/Engine.h"
+#include "Game/Game.h"
 
 
 int main(int argc, char *argv[])
 {
-    if(Engine::instance()->InitGame("8888"))
+    if(Game::instance()->InitGame("8888"))
     {
-        Engine::instance()->Loop();
-        Engine::instance()->Clean();
-        Engine::instance()->Quit();
+        Game::instance()->Loop();
+        Game::instance()->Clean();
+        Game::instance()->Quit();
     }
     else
     {
-        std::cout << "Can't initialize Game Engine\n";
+        std::cout << "Can't initialize Game Game\n";
     }
     return 0;
 }

@@ -1,5 +1,5 @@
 #include "TextureManager.h"
-#include "../../Engine/Engine.h"
+#include "../../Game/Game.h"
 
 TextureManager *TextureManager::s_instance = nullptr;
 
@@ -24,7 +24,7 @@ bool TextureManager::loadTexture(const char*  textureID, const char *filePath)
     SDL_Texture *texture = NULL;
     SDL_Surface *surface = IMG_Load(filePath);
     if (surface) {
-        texture = SDL_CreateTextureFromSurface(Engine::instance()->getRenderer(), surface);
+        texture = SDL_CreateTextureFromSurface(Game::instance()->getRenderer(), surface);
         SDL_FreeSurface(surface);
     }
 
@@ -36,7 +36,7 @@ void TextureManager::draw(const char*  textureID, Point2D pos, int width, int he
 {
     SDL_Rect srcRect = {0, 0, width, height};
     SDL_Rect destRect = {pos.getX(), pos.getY(), width, height};
-    SDL_RenderCopy(Engine::instance()->getRenderer(), textureDict[textureID], &srcRect, &destRect);
+    SDL_RenderCopy(Game::instance()->getRenderer(), textureDict[textureID], &srcRect, &destRect);
 }
 
 void TextureManager::drawTile(const char*  textureID, int tileWidth, int tileHeight, Point2D pos, int row, int col, SDL_RendererFlip flip)
@@ -46,7 +46,7 @@ void TextureManager::drawTile(const char*  textureID, int tileWidth, int tileHei
 
     SDL_Rect srcRect = {frameX, frameY, tileWidth, tileHeight};
     SDL_Rect destRect = {pos.getX(), pos.getY(), tileWidth, tileHeight};
-    SDL_RenderCopyEx(Engine::instance()->getRenderer(), textureDict[textureID], &srcRect, &destRect, 0, NULL, flip);
+    SDL_RenderCopyEx(Game::instance()->getRenderer(), textureDict[textureID], &srcRect, &destRect, 0, NULL, flip);
 }
 
 void TextureManager::drawFrame(const char*  textureID, Point2D pos, int width, int height, int row, int col, SDL_RendererFlip flip, double angle)
@@ -56,7 +56,7 @@ void TextureManager::drawFrame(const char*  textureID, Point2D pos, int width, i
 
     SDL_Rect srcRect = {frameX, frameY, width, height};
     SDL_Rect destRect = {pos.getX(), pos.getY(), width, height};
-    SDL_RenderCopyEx(Engine::instance()->getRenderer(), textureDict[textureID], &srcRect, &destRect, 0, NULL, flip);
+    SDL_RenderCopyEx(Game::instance()->getRenderer(), textureDict[textureID], &srcRect, &destRect, 0, NULL, flip);
 }
 
 void TextureManager::drop(const char*  textureID)

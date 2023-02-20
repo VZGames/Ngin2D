@@ -1,28 +1,28 @@
-#include "Engine.h"
+#include "Game.h"
 #include "../Defines/Defines.h"
 #include "../GameMaps/GameMaps.h"
 #include "../Graphics/Graphics.h"
 
-bool Engine::s_gameRunning          = false;
-Engine *Engine::s_instance          = nullptr;
+bool Game::s_gameRunning          = false;
+Game *Game::s_instance          = nullptr;
 
 
-Engine::Engine(): ptr_window(nullptr), ptr_renderer(nullptr)
+Game::Game(): ptr_window(nullptr), ptr_renderer(nullptr)
 {
 }
 
-Engine *Engine::instance()
+Game *Game::instance()
 {
-    return s_instance = (s_instance == nullptr)? new Engine(): s_instance;
+    return s_instance = (s_instance == nullptr)? new Game(): s_instance;
 }
 
-Engine::~Engine()
+Game::~Game()
 {
 }
 
-bool Engine::InitGame(const char *title)
+bool Game::InitGame(const char *title)
 {
-    printf("Engine Init\n");
+    printf("Game Init\n");
     if (SDL_Init(SDL_INIT_EVERYTHING) != 0)
     {
         printf("Unable to initialize SDL: %s\n", SDL_GetError());
@@ -64,7 +64,7 @@ bool Engine::InitGame(const char *title)
     return 1;
 }
 
-void Engine::Loop()
+void Game::Loop()
 {
     const int frameDelay = 1000 / FPS;
 
@@ -96,12 +96,12 @@ void Engine::Loop()
     }
 }
 
-void Engine::update_game()
+void Game::update_game()
 {
     GameMaps::instance()->update();
 }
 
-void Engine::render_game()
+void Game::render_game()
 {
     SDL_RenderClear(ptr_renderer);
     // render objects
@@ -109,9 +109,9 @@ void Engine::render_game()
     SDL_RenderPresent(ptr_renderer);
 }
 
-void Engine::Clean()
+void Game::Clean()
 {
-    printf("Engine Release Resource\n");
+    printf("Game Release Resource\n");
     GameMaps::instance()->clean();
     TextureManager::instance()->clean();
     // Close and destroy the window and the renderer
@@ -119,15 +119,15 @@ void Engine::Clean()
     SDL_DestroyRenderer(ptr_renderer);
 }
 
-void Engine::Quit()
+void Game::Quit()
 {
-    printf("Engine Quit\n");
+    printf("Game Quit\n");
     SDL_Quit();
     IMG_Quit();
 }
 
 
-void Engine::handle_events()
+void Game::handle_events()
 {
     SDL_Event event;
     while (SDL_PollEvent(&event))

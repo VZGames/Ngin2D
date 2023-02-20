@@ -8,12 +8,13 @@ typedef struct Size
     int width, height;
 } Size;
 
+
+// tile map objects
 typedef struct Layer
 {
     int id;
     const char* name;
     int width, height;
-    //    int *data;
     Matrix2D<int> data;
 } Layer;
 
