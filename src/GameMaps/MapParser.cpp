@@ -116,7 +116,7 @@ void MapParser::parseLayer(TiXmlElement *e)
     if(dataEle)
     {
         // allocate matrix 2D
-        int *matrix = new int[width * height];
+        Matrix2D<int> matrix(height, width);
 
         const char* data = dataEle->GetText();
         std::string matrixStr(data);
@@ -134,7 +134,7 @@ void MapParser::parseLayer(TiXmlElement *e)
                 int value;
                 iss >> value;
 
-                matrix[row * width + col] = value;
+                matrix.at(row, col) = value;
             }
         }
 

@@ -7,5 +7,5 @@
 
 #define FPS 30
 
-#define CORES 4
+#define CORES 2
 #endif // DEFINES_H

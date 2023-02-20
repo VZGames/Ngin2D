@@ -70,14 +70,14 @@
         },
         "Map2.tmx": {
             "expandedGroupLayers": [
-                6,
-                2
+                2,
+                6
             ],
             "scale": 0.33,
             "selectedLayer": 4,
             "viewCenter": {
-                "x": 557.5757575757577,
-                "y": 912.121212121212
+                "x": 360.6060606060606,
+                "y": 240.90909090909088
             }
         },
         "Map2.tmx#Grass": {
@@ -103,12 +103,24 @@
         "Map2.tmx#Wood_Bridge": {
             "scaleInDock": 1
         },
+        "Map3.tmx": {
+            "scale": 0.75,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 178.66666666666663,
+                "y": -189.33333333333337
+            }
+        },
+        "Map3.tmx#Grass": {
+            "scaleInDock": 1
+        },
         "Water.tsx": {
             "scaleInDock": 1,
             "scaleInEditor": 1
         }
     },
     "last.imagePath": "D:/Projects/O/SDL2_project/XYZ/assets/Tilesets/ground_tiles/old_tiles",
+    "map.fixedSize": false,
     "map.height": 30,
     "map.lastUsedFormat": "tmx",
     "map.orientation": null,
@@ -121,6 +133,7 @@
     ],
     "project": "MapProject.tiled-project",
     "recentFiles": [
+        "Map3.tmx",
         "Map2.tmx",
         "Map1.tmx",
         "D:/Projects/O/SDL2_project/build-XYZ-Desktop_MinGW_64_bit-Debug/assets/Map1.tmx",

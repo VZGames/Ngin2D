@@ -13,8 +13,8 @@ typedef struct Layer
     int id;
     const char* name;
     int width, height;
-    int *data;
-    // Matrix2D<int> data;
+    //    int *data;
+    Matrix2D<int> data;
 } Layer;
 
 typedef struct GroupLayer

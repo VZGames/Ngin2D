@@ -37,7 +37,7 @@ void LayerManager::draw()
      */
 
     std::mutex m;
-    auto worker = [&](int i, int j, Layer layer, int *data) {
+    auto worker = [&](int i, int j, Layer layer, Matrix2D<int>data) {
         m.lock();
         for (; i < j; i++)
         {
@@ -47,7 +47,7 @@ void LayerManager::draw()
             y = (i / layer.width);
 
 
-            int tileID = data[i];
+            int tileID = data.at(i);
             if(tileID == 0)
             {
                 continue;
@@ -83,12 +83,13 @@ void LayerManager::draw()
             // [1] init segment size
             int segmentSize = (layer.width * layer.height) / CORES;
 
-            // [2] init (start, end)
+            // [2] init start, end
             int start   = i * segmentSize;
             int end     = start + segmentSize;
 
             // [3]
-            int *data   = layer.data;
+//            int *data   = layer.data;
+            Matrix2D<int> data(layer.data);
 
             if(i >= CORES - 1)
             {
