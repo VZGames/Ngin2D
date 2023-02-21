@@ -24,6 +24,15 @@ public:
         return this->matrix[pos];
     }
 
+    int getHeight() const
+    {
+        return height;
+    }
+    int getWidth() const
+    {
+        return width;
+    }
+
 private:
     int height, width;
     T *matrix;
