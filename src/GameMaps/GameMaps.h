@@ -1,16 +1,15 @@
 #ifndef GAMEMAPS_H
 #define GAMEMAPS_H
 
-#include "../Objects/IObject.h"
 
-class GameMaps: public IObject
+class GameMaps
 {
     // IObject interface
 public:
     static GameMaps *instance();
-    virtual void draw() override;
-    virtual void update() override;
-    virtual void clean() override;
+    void draw();
+    void update();
+    void clean();
 
 private:
     GameMaps();
