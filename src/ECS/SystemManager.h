@@ -1,6 +1,8 @@
 #ifndef SYSTEMMANAGER_H
 #define SYSTEMMANAGER_H
 
+#include "Systems/Systems.h"
+
 namespace nginvz
 {
 class SystemManager
