@@ -38,4 +38,9 @@ private:
     T *matrix;
 };
 
+using Matrix2DI = Matrix2D<int>;
+using Matrix2U = Matrix2D<unsigned int>;
+using Matrix2F = Matrix2D<float>;
+using Matrix2LF = Matrix2D<double>;
+
 #endif // MATRIX2D_H
