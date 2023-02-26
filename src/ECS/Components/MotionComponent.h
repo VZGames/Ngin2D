@@ -1,11 +1,11 @@
 #ifndef MOTIONCOMPONENT_H
 #define MOTIONCOMPONENT_H
 
-
-class MotionComponent
+namespace nginvz
 {
-public:
-    MotionComponent();
+struct MotionComponent
+{
 };
+}
 
 #endif // MOTIONCOMPONENT_H

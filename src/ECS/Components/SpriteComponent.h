@@ -1,11 +1,11 @@
 #ifndef SPRITECOMPONENT_H
 #define SPRITECOMPONENT_H
 
-
-class SpriteComponent
+namespace nginvz
 {
-public:
-    SpriteComponent();
+struct SpriteComponent
+{
 };
+}
 
 #endif // SPRITECOMPONENT_H

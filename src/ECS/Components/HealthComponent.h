@@ -1,11 +1,11 @@
 #ifndef HEALTHCOMPONENT_H
 #define HEALTHCOMPONENT_H
 
-
-class HealthComponent
+namespace nginvz
 {
-public:
-    HealthComponent();
+struct HealthComponent
+{
 };
+}
 
 #endif // HEALTHCOMPONENT_H

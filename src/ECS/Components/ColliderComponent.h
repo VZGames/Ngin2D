@@ -1,11 +1,10 @@
 #ifndef COLLIDERCOMPONENT_H
 #define COLLIDERCOMPONENT_H
 
-
-class ColliderComponent
+namespace nginvz
 {
-public:
-    ColliderComponent();
+struct ColliderComponent
+{
 };
-
+}
 #endif // COLLIDERCOMPONENT_H

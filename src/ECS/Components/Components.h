@@ -1,10 +1,9 @@
 #ifndef COMPONENTS_H
 #define COMPONENTS_H
 
-#include "MotionComponent/MotionComponent.h"
-#include "HealthComponent/HealthComponent.h"
-#include "SpriteComponent/SpriteComponent.h"
-#include "ColliderComponent/ColliderComponent.h"
-#include "TileComponent/TileComponent.h"
+#include "ColliderComponent.h"
+#include "MotionComponent.h"
+#include "HealthComponent.h"
+#include "SpriteComponent.h"
 
 #endif // COMPONENTS_H
