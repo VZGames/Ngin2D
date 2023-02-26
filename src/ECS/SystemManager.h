@@ -9,7 +9,11 @@ class SystemManager
 {
 public:
     SystemManager();
+
+    virtual void init(){};
+    virtual void update(float deltaTime){};
+    virtual void render(){};
 };
-};
+}
 
 #endif // SYSTEMMANAGER_H

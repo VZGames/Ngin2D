@@ -15,9 +15,8 @@ Entity EntityManager::createEntity()
     return {lastEntity};
 }
 
-void EntityManager::destroyEntity(Entity entity)
+void EntityManager::destroyEntity(Entity &entity)
 {
-
 }
 }
 

@@ -11,7 +11,7 @@ class EntityManager
 public:
     static EntityManager *instance();
     Entity createEntity();
-    void destroyEntity(Entity entity);
+    void destroyEntity(Entity &entity);
 
 
 private:
@@ -19,7 +19,7 @@ private:
     static EntityManager *s_instance;
     EntityID lastEntity = 0;
 };
-};
+}
 
 
 #endif // ENTITYMANAGER_H
