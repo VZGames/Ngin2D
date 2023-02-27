@@ -2,8 +2,9 @@
 #include "../Defines/Defines.h"
 #include "../GameMaps/GameMaps.h"
 #include "../Graphics/Graphics.h"
+#include "../ECS/ECS.h"
 
-
+using namespace ngin2D;
 bool Game::s_gameRunning          = false;
 Game *Game::s_instance          = nullptr;
 
@@ -60,18 +61,18 @@ bool Game::InitGame(const char *title)
     SDL_SetRenderDrawColor(ptr_renderer, 255, 255, 255, 255);
 
     // init entity
-    Entity player   = EntityManager::instance()->createEntity();
-    Entity enemy    = EntityManager::instance()->createEntity();
+    std::vector<Entity> players;
+    std::vector<Entity> enemies;
+    for (int i = 0; i < MAX_ENTITIES; i++) {
+        Entity player   = EntityManager::instance()->createEntity();
 
-    player.addComponent<ColliderComponent>();
-    player.addComponent<MotionComponent>(Vector2I(10, 5), Vector2I(3, 3));
-    player.addComponent<HealthComponent>();
-    player.addComponent<TransformComponent>();
-
-    enemy.addComponent<ColliderComponent>();
-    enemy.addComponent<TransformComponent>();
-    enemy.addComponent<MotionComponent>(Vector2I(20, 5), Vector2I(3, 3));
-
+        player.addComponent<ColliderComponent>();
+        player.addComponent<MotionComponent>(Vector2I(10, 5), Vector2I(3, 3));
+        player.addComponent<HealthComponent>();
+        player.addComponent<TransformComponent>();
+        player.addComponent<SpriteComponent>();
+        players.push_back(player);
+    }
 
     SystemManager::instance();
 

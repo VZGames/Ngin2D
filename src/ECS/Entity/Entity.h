@@ -18,7 +18,7 @@ struct Entity
     {
         T* c(new T(std::forward<TArgs>(mArgs)...));
         components[c->id] = true;
-        printf("Component Type %s with id: %d\n", typeid(T).name(), c->id);
+//        printf("Component Type %s with id: %d\n", typeid(T).name(), c->id);
         return *c;
     }
 };
