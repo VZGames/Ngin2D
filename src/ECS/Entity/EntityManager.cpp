@@ -13,7 +13,6 @@ Entity EntityManager::createEntity()
     Entity entity = availableIDs.front();
     availableIDs.pop();
     entityCount++;
-    printf("Entity %d created, total entities: %d\n", entity.id, entityCount);
     return entity;
 }
 
