@@ -4,7 +4,6 @@
 #include <bitset>
 #include <memory>
 #include <stdio.h>
-#include "../../Defines/Defines.h"
 #include "../Components/ComponentBase.h"
 
 namespace ngin2D {
@@ -18,7 +17,6 @@ struct Entity
     {
         T* c(new T(std::forward<TArgs>(mArgs)...));
         components[c->id] = true;
-//        printf("Component Type %s with id: %d\n", typeid(T).name(), c->id);
         return *c;
     }
 };
