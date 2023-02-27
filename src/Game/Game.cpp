@@ -2,7 +2,7 @@
 #include "../Defines/Defines.h"
 #include "../GameMaps/GameMaps.h"
 #include "../Graphics/Graphics.h"
-#include "../ECS/Components/Components.h"
+
 
 bool Game::s_gameRunning          = false;
 Game *Game::s_instance          = nullptr;
@@ -72,6 +72,8 @@ bool Game::InitGame(const char *title)
     enemy.addComponent<TransformComponent>();
     enemy.addComponent<MotionComponent>(Vector2I(20, 5), Vector2I(3, 3));
 
+
+    SystemManager::instance();
 
     s_gameRunning = true;
 
