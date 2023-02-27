@@ -33,8 +33,8 @@ private:
     ComponentManager();
 
     static ComponentManager *s_instance;
-    std::queue<ComponentID> availableIDs;
     uint32_t componentCount = 0;
+    std::queue<ComponentID> availableIDs;
     std::map<const char*, ComponentID> componentData;
 };
 }

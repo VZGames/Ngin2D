@@ -4,5 +4,7 @@
 #include "ColliderComponent.h"
 #include "MotionComponent.h"
 #include "TransformComponent.h"
+#include "HealthComponent.h"
+#include "SpriteComponent.h"
 
 #endif // COMPONENTS_H

@@ -2,7 +2,6 @@
 #define COMPONENTBASE_H
 
 #include "ComponentManager.h"
-#include "../../Defines/Defines.h"
 
 namespace ngin2D {
 template<class T>

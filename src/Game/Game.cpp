@@ -65,10 +65,13 @@ bool Game::InitGame(const char *title)
 
     player.addComponent<ColliderComponent>();
     player.addComponent<MotionComponent>(Vector2I(10, 5), Vector2I(3, 3));
+    player.addComponent<HealthComponent>();
     player.addComponent<TransformComponent>();
 
     enemy.addComponent<ColliderComponent>();
     enemy.addComponent<TransformComponent>();
+    enemy.addComponent<MotionComponent>(Vector2I(20, 5), Vector2I(3, 3));
+
 
     s_gameRunning = true;
 
