@@ -2,6 +2,7 @@
 #include "../Defines/Defines.h"
 #include "../GameMaps/GameMaps.h"
 #include "../Graphics/Graphics.h"
+#include "../ECS/Components/Components.h"
 
 bool Game::s_gameRunning          = false;
 Game *Game::s_instance          = nullptr;
@@ -57,7 +58,17 @@ bool Game::InitGame(const char *title)
 
     // [3] Select the color for drawing.
     SDL_SetRenderDrawColor(ptr_renderer, 255, 255, 255, 255);
-//    GameMaps::instance()->draw();
+
+    // init entity
+    Entity player   = EntityManager::instance()->createEntity();
+    Entity enemy    = EntityManager::instance()->createEntity();
+
+    player.addComponent<ColliderComponent>();
+    player.addComponent<MotionComponent>(Vector2I(10, 5), Vector2I(3, 3));
+    player.addComponent<TransformComponent>();
+
+    enemy.addComponent<ColliderComponent>();
+    enemy.addComponent<TransformComponent>();
 
     s_gameRunning = true;
 
@@ -105,7 +116,7 @@ void Game::render_game()
 {
     SDL_RenderClear(ptr_renderer);
     // render objects
-        GameMaps::instance()->draw();
+    GameMaps::instance()->draw();
     SDL_RenderPresent(ptr_renderer);
 }
 

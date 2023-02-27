@@ -29,7 +29,7 @@ include_directories(${INCLUDE_DIR})
 link_directories(${LIBRARY_DIR})
 
 # load user source and header files
-file(GLOB_RECURSE SOURCE_FILES "*.h" "*.cpp")
+file(GLOB_RECURSE SOURCE_FILES "*.h" "*.cpp" "*.webp" "*.jpg" "*.png" "*.gif", "*.txt")
 
 add_executable(${PROJECT_NAME} main.cpp ${SOURCE_FILES})
 

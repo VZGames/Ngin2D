@@ -1,23 +1,23 @@
 #ifndef ENTITYMANAGER_H
 #define ENTITYMANAGER_H
 
-#include "../Defines/Alias.h"
-#include "Entity/Entity.h"
+#include <queue>
+#include "Entity.h"
+#include "../../Defines/Defines.h"
 
-namespace nginvz
-{
+namespace ngin2D {
 class EntityManager
 {
 public:
     static EntityManager *instance();
     Entity createEntity();
-    void destroyEntity(Entity &entity);
-
 
 private:
     EntityManager();
     static EntityManager *s_instance;
-    EntityID lastEntity = 0;
+
+    uint32_t entityCount = 0;
+    std::queue<Entity> availableIDs;
 };
 }
 

@@ -4,6 +4,9 @@
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_image.h>
 
+#include "../ECS/Entity/EntityManager.h"
+
+using namespace ngin2D;
 class Game
 {
 

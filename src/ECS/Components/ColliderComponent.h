@@ -1,10 +1,12 @@
 #ifndef COLLIDERCOMPONENT_H
 #define COLLIDERCOMPONENT_H
 
-namespace nginvz
+#include "ComponentBase.h"
+
+namespace ngin2D {
+struct ColliderComponent: public ComponentBase<ColliderComponent>
 {
-struct ColliderComponent
-{
+    ColliderComponent(){}
 };
 }
 #endif // COLLIDERCOMPONENT_H

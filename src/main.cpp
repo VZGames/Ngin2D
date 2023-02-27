@@ -1,7 +1,6 @@
 #include <iostream>
 #include "Game/Game.h"
 
-
 int main(int argc, char *argv[])
 {
     if(Game::instance()->InitGame("8888"))

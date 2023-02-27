@@ -3,7 +3,6 @@
 
 #include "ColliderComponent.h"
 #include "MotionComponent.h"
-#include "HealthComponent.h"
-#include "SpriteComponent.h"
+#include "TransformComponent.h"
 
 #endif // COMPONENTS_H
