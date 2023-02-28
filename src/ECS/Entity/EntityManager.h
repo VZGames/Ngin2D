@@ -9,15 +9,22 @@ namespace ngin2D {
 class EntityManager
 {
 public:
+    ~EntityManager();
     static EntityManager *instance();
-    Entity createEntity();
+    Entity &createEntity();
+    bool destroyEntity(Entity &entity);
+
+    Entity *getEntities() const;
+
+    uint32_t getEntityCount() const;
 
 private:
     EntityManager();
     static EntityManager *s_instance;
 
     uint32_t entityCount = 0;
-    std::queue<Entity> availableIDs;
+    std::queue<EntityID> availableIDs;
+    Entity *entities;
 };
 }
 

@@ -7,6 +7,7 @@
 #include "../Defines/Defines.h"
 #include "../Graphics/TextureManager/TextureManager.h"
 
+namespace ngin2D {
 LayerManager *LayerManager::s_instance = nullptr;
 
 LayerManager::LayerManager()
@@ -114,5 +115,7 @@ void LayerManager::draw()
 
 void LayerManager::update()
 {
+
+}
 
 }

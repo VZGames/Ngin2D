@@ -1,6 +1,8 @@
 #include <iostream>
 #include "Game/Game.h"
 
+using namespace ngin2D;
+
 int main(int argc, char *argv[])
 {
     if(Game::instance()->InitGame("8888"))

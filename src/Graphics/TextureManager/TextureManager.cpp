@@ -1,6 +1,7 @@
 #include "TextureManager.h"
 #include "../../Game/Game.h"
 
+namespace ngin2D {
 TextureManager *TextureManager::s_instance = nullptr;
 
 TextureManager::TextureManager()
@@ -74,5 +75,4 @@ void TextureManager::clean()
     textureDict.clear();
     printf("Textures cleaned\n");
 }
-
-
+}

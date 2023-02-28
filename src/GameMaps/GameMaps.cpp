@@ -1,6 +1,7 @@
 #include "GameMaps.h"
 #include "LayerManager.h"
 
+namespace ngin2D {
 GameMaps *GameMaps::s_instance = nullptr;
 
 GameMaps::GameMaps()
@@ -24,5 +25,7 @@ void GameMaps::update()
 
 void GameMaps::clean()
 {
+
+}
 
 }

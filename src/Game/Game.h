@@ -4,6 +4,7 @@
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_image.h>
 
+namespace ngin2D {
 class Game
 {
 
@@ -34,5 +35,7 @@ private:
     SDL_Renderer *ptr_renderer;
     SDL_Window *ptr_window;
 };
+}
+
 
 #endif // GAME_H

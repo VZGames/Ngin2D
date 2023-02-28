@@ -1,7 +1,7 @@
 #ifndef GAMEMAPS_H
 #define GAMEMAPS_H
 
-
+namespace ngin2D {
 class GameMaps
 {
     // IObject interface
@@ -16,5 +16,7 @@ private:
     static GameMaps *s_instance;
 
 };
+}
+
 
 #endif // GAMEMAPS_H

@@ -7,6 +7,7 @@
 #include <SDL2/SDL_image.h>
 #include "../../Math/math2D.h"
 
+namespace ngin2D {
 class TextureManager
 {
 
@@ -27,5 +28,7 @@ private:
 
     std::map<const char*, SDL_Texture*> textureDict;
 };
+}
+
 
 #endif // TEXTUREMANAGER_H

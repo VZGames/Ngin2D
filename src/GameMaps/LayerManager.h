@@ -3,6 +3,7 @@
 
 #include "MapParser.h"
 
+namespace ngin2D {
 class LayerManager
 {
 public:
@@ -15,5 +16,7 @@ private:
     static LayerManager *s_instance;
 
 };
+}
+
 
 #endif // LAYERMANAGER_H
