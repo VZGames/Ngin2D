@@ -61,19 +61,25 @@ bool Game::InitGame(const char *title)
     SDL_SetRenderDrawColor(ptr_renderer, 255, 255, 255, 255);
 
     // init entity
-    Entity *player  = &EntityManager::instance()->createEntity();
-    Entity *enemy   = &EntityManager::instance()->createEntity();
+    Entity &player  = EntityManager::instance()->createEntity();
+    player.addComponent<ColliderComponent>();
+    player.addComponent<MotionComponent>(Vector2I(0, 0), Vector2I(3, 3));
+    player.addComponent<HealthComponent>(100);
+    player.addComponent<TransformComponent>();
+    player.addComponent<SpriteComponent>();
 
-    player->addComponent<ColliderComponent>();
-    player->addComponent<MotionComponent>(Vector2I(10, 5), Vector2I(3, 3));
-    player->addComponent<HealthComponent>();
-    player->addComponent<TransformComponent>();
-    player->addComponent<SpriteComponent>();
+    Entity &enemy   = EntityManager::instance()->createEntity();
+    enemy.addComponent<ColliderComponent>();
+    enemy.addComponent<MotionComponent>(Vector2I(0, 0), Vector2I(3, 3));
+    enemy.addComponent<HealthComponent>(25);
+    enemy.addComponent<SpriteComponent>();
 
-    enemy->addComponent<ColliderComponent>();
-    enemy->addComponent<MotionComponent>(Vector2I(10, 5), Vector2I(3, 3));
-    enemy->addComponent<HealthComponent>();
+    Entity &tree    = EntityManager::instance()->createEntity();
+    tree.addComponent<ColliderComponent>();
+    tree.addComponent<HealthComponent>(85);
+    tree.addComponent<TransformComponent>();
 
+    EntityManager::instance()->destroyEntity(enemy);
 
     s_gameRunning = true;
 

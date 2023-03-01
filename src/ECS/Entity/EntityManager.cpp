@@ -1,13 +1,11 @@
 #include "EntityManager.h"
-#include "stdio.h"
+#include <stdio.h>
+#include <algorithm>
 
 namespace ngin2D {
 EntityManager *EntityManager::s_instance = nullptr;
 EntityManager::~EntityManager()
-{
-    delete entities;
-    entities = NULL;
-}
+{}
 
 EntityManager *EntityManager::instance()
 {
@@ -17,23 +15,39 @@ EntityManager *EntityManager::instance()
 Entity &EntityManager::createEntity()
 {
     EntityID id = availableIDs.front();
-    entities[id] = Entity{id};
     availableIDs.pop();
+    entities.push_back(Entity{id});
     entityCount++;
-    return entities[id];
+    return entities.back();
 }
 
 bool EntityManager::destroyEntity(Entity &entity)
 {
-    Entity *_ptr = &entity;
-    _ptr = NULL;
-    return true;
+    auto it = std::find(entities.begin(), entities.end(), entity);
+    if(it != entities.end())
+    {
+        entities.erase(it);
+        entityCount--;
+        return true;
+    }
+    return false;
+}
+
+Entity *EntityManager::getEntityByID(EntityID id)
+{
+    Entity entity = {id};
+    auto it = std::find(entities.begin(), entities.end(), entity);
+    if(it != entities.end())
+    {
+        printf("Entity ID %d, Components: %s\n", it->id, it->components.to_string().c_str());
+        return &(*it);
+    }
+
+    return nullptr;
 }
 
 EntityManager::EntityManager()
 {
-    entities = new Entity[MAX_ENTITIES];
-
     for (EntityID i = 0; i < MAX_ENTITIES; i++) {
         availableIDs.push(i);
     }
@@ -44,7 +58,7 @@ uint32_t EntityManager::getEntityCount() const
     return entityCount;
 }
 
-Entity *EntityManager::getEntities() const
+const std::vector<Entity> &EntityManager::getEntities() const
 {
     return entities;
 }

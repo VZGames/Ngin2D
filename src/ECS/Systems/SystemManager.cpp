@@ -21,17 +21,19 @@ void SystemManager::update(float dt)
 {
     for (int i = 0; i < EntityManager::instance()->getEntityCount(); i++)
     {
-        EntityID id              = EntityManager::instance()->getEntities()[i].id;
-        ComponentSet components  = EntityManager::instance()->getEntities()[i].components;
+        const Entity &entity     = EntityManager::instance()->getEntities().at(i);
+        EntityID id              = entity.id;
+        ComponentSet components  = entity.components;
         for (ComponentID j = 0; j < MAX_COMPONENTS; j++)
         {
             bool bit = components[j]; // 0 or 1
             // ignore bit = 0
             if(!bit)
             {
-                break;
+                continue;
             }
-            printf("EntityID: %d, Components: %d\n", id, j);
+            // printf("EntityID: %d, Components: %d\n", id, j);
+
 
         }
     }

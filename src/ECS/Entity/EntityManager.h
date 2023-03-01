@@ -2,6 +2,7 @@
 #define ENTITYMANAGER_H
 
 #include <queue>
+#include <vector>
 #include "Entity.h"
 #include "../../Defines/Defines.h"
 
@@ -14,7 +15,9 @@ public:
     Entity &createEntity();
     bool destroyEntity(Entity &entity);
 
-    Entity *getEntities() const;
+    Entity *getEntityByID(EntityID id);
+
+    const std::vector<Entity> &getEntities() const;
 
     uint32_t getEntityCount() const;
 
@@ -24,7 +27,7 @@ private:
 
     uint32_t entityCount = 0;
     std::queue<EntityID> availableIDs;
-    Entity *entities;
+    std::vector<Entity> entities;
 };
 }
 

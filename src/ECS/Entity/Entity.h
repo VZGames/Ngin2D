@@ -20,6 +20,11 @@ struct Entity
         components[c->id] = 1;
         return *c;
     }
+
+    bool operator==(const Entity &right)
+    {
+        return id == right.id;
+    }
 };
 }
 

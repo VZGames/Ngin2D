@@ -8,15 +8,22 @@ class SystemManager: public ISystem
 {
 public:
     static SystemManager *instance();
-private:
-    SystemManager();
-    static SystemManager *s_instance;
+    template<class T>
+    void registerSystem(T &system)
+    {
 
+    }
     // ISystem interface
 public:
     virtual void init() override;
     virtual void update(float dt) override;
     virtual void render() override;
+
+private:
+    SystemManager();
+    static SystemManager *s_instance;
+
+
 };
 }
 
