@@ -27,9 +27,9 @@ private:
     MapParser();
     bool loadTmx(const char *mapId);
     void parseTmx();
-    void parseTileset(TiXmlElement* e);
-    void parseLayer(TiXmlElement* e);
-    void parseGroup(TiXmlElement* e);
+    void parseTileset(TiXmlElement *e);
+    void parseLayer(TiXmlElement *e);
+    void parseGroup(TiXmlElement *e);
 
 
 private:
@@ -46,8 +46,8 @@ private:
     std::vector<GroupLayer> groups;
     std::vector<TileSet> tilesets;
 
-    TiXmlDocument* ptr_doc;
-    TiXmlElement* ptr_rootElement;
+    TiXmlDocument *ptr_doc;
+    TiXmlElement *ptr_rootElement;
 };
 
 #endif // MAPPARSER_H

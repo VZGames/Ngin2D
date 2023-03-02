@@ -10,14 +10,6 @@ SystemManager *SystemManager::instance()
     return s_instance = (s_instance == nullptr)? new SystemManager():s_instance;
 }
 
-void SystemManager::start()
-{
-    for(auto sys: systems)
-    {
-        sys.second->update(0.1);
-    }
-}
-
 SystemManager::SystemManager()
 {}
 }

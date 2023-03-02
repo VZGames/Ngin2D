@@ -67,10 +67,10 @@ void MapParser::parseTmx()
 void MapParser::parseTileset(TiXmlElement *e)
 {
     // read tilesets element
-    TiXmlElement* imageEle;
+    TiXmlElement *imageEle;
 
     int firstgid            = std::atoi(e->Attribute("firstgid"));
-    const char* name        = e->Attribute("name");
+    const char *name        = e->Attribute("name");
     int tileWidth           = std::atoi(e->Attribute("tilewidth"));
     int tileHeight          = std::atoi(e->Attribute("tileheight"));
     int tileCount           = std::atoi(e->Attribute("tilecount"));
@@ -80,7 +80,7 @@ void MapParser::parseTileset(TiXmlElement *e)
     imageEle = e->FirstChildElement("image");
     if(imageEle)
     {
-        const char* src         = imageEle->Attribute("source");
+        const char *src         = imageEle->Attribute("source");
         int imgWidth            = std::atoi(imageEle->Attribute("width"));
         int imgHeight           = std::atoi(imageEle->Attribute("height"));
         Image image = {src, imgWidth, imgHeight};
@@ -104,9 +104,9 @@ void MapParser::parseLayer(TiXmlElement *e)
 {
 
     // read layers element
-    TiXmlElement* dataEle;
+    TiXmlElement *dataEle;
     int id              = std::atoi(e->Attribute("id"));
-    const char* name    = e->Attribute("name");
+    const char *name    = e->Attribute("name");
     int width           = std::atoi(e->Attribute("width"));
     int height          = std::atoi(e->Attribute("height"));
 
@@ -118,7 +118,7 @@ void MapParser::parseLayer(TiXmlElement *e)
         // allocate matrix 2D
         Matrix2D<int> matrix(height, width);
 
-        const char* data = dataEle->GetText();
+        const char *data = dataEle->GetText();
         std::string matrixStr(data);
         std::istringstream iss(matrixStr);
         std::string line;
@@ -154,7 +154,7 @@ void MapParser::parseLayer(TiXmlElement *e)
 void MapParser::parseGroup(TiXmlElement *e)
 {
     int id              = std::atoi(e->Attribute("id"));
-    const char* name    = e->Attribute("name");
+    const char *name    = e->Attribute("name");
 
     GroupLayer group {
         id, name

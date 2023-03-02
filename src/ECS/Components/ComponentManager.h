@@ -17,7 +17,7 @@ public:
     template<class T>
     ComponentID nextID()
     {
-        const char* typeName = typeid(T).name();
+        const char *typeName = typeid(T).name();
 
         std::map<const char*, ComponentID>::iterator it;
         it = componentData.find(typeName);
@@ -34,7 +34,7 @@ public:
     template<class T>
     bool hasComponentType(ComponentSet &components)
     {
-        const char* typeName = typeid(T).name();
+        const char *typeName = typeid(T).name();
         if(components[componentData[typeName]] == 1)
         {
             return true;

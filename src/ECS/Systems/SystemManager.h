@@ -13,9 +13,9 @@ class SystemManager
 public:
     static SystemManager *instance();
     template<class T>
-    T* addSystem()
+    T *addSystem()
     {
-        const char* typeName = typeid(T).name();
+        const char *typeName = typeid(T).name();
 
         assert(systems.find(typeName) == systems.end() && "Adding system more than once.");
 
@@ -24,7 +24,6 @@ public:
         return system;
     }
 
-    void start();
 private:
     SystemManager();
     static SystemManager *s_instance;

@@ -13,12 +13,12 @@ TextureManager *TextureManager::instance()
     return s_instance = (s_instance == nullptr)? new TextureManager(): s_instance;
 }
 
-SDL_Texture *TextureManager::textureById(const char*  textureID)
+SDL_Texture *TextureManager::textureById(const char * textureID)
 {
     return textureDict[textureID];
 }
 
-bool TextureManager::loadTexture(const char*  textureID, const char *filePath)
+bool TextureManager::loadTexture(const char * textureID, const char *filePath)
 {
     printf("TextureID: %s, Texture Path: %s \n", textureID, filePath);
 
@@ -33,34 +33,34 @@ bool TextureManager::loadTexture(const char*  textureID, const char *filePath)
     return 1;
 }
 
-void TextureManager::draw(const char*  textureID, Point2D pos, int width, int height, SDL_RendererFlip flip)
+void TextureManager::draw(const char * textureID, Point2D pos, int width, int height, SDL_RendererFlip flip)
 {
     SDL_Rect srcRect = {0, 0, width, height};
     SDL_Rect destRect = {pos.getX(), pos.getY(), width, height};
     SDL_RenderCopy(Game::instance()->getRenderer(), textureDict[textureID], &srcRect, &destRect);
 }
 
-void TextureManager::drawTile(const char*  textureID, int tileWidth, int tileHeight, Point2D pos, int row, int col, SDL_RendererFlip flip)
+void TextureManager::drawTile(const char * textureID, int tileWidth, int tileHeight, Point2D pos, int row, int col, SDL_RendererFlip flip)
 {
-    int frameX = tileWidth * col;
-    int frameY = tileHeight * row;
+    int frameX = tileWidth  *col;
+    int frameY = tileHeight  *row;
 
     SDL_Rect srcRect = {frameX, frameY, tileWidth, tileHeight};
     SDL_Rect destRect = {pos.getX(), pos.getY(), tileWidth, tileHeight};
     SDL_RenderCopyEx(Game::instance()->getRenderer(), textureDict[textureID], &srcRect, &destRect, 0, NULL, flip);
 }
 
-void TextureManager::drawFrame(const char*  textureID, Point2D pos, int width, int height, int row, int col, SDL_RendererFlip flip, double angle)
+void TextureManager::drawFrame(const char * textureID, Point2D pos, int width, int height, int row, int col, SDL_RendererFlip flip, double angle)
 {
-    int frameX = width * col;
-    int frameY = height * row;
+    int frameX = width  *col;
+    int frameY = height  *row;
 
     SDL_Rect srcRect = {frameX, frameY, width, height};
     SDL_Rect destRect = {pos.getX(), pos.getY(), width, height};
     SDL_RenderCopyEx(Game::instance()->getRenderer(), textureDict[textureID], &srcRect, &destRect, 0, NULL, flip);
 }
 
-void TextureManager::drop(const char*  textureID)
+void TextureManager::drop(const char * textureID)
 {
     SDL_DestroyTexture(textureDict[textureID]);
     textureDict.erase(textureID);

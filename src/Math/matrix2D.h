@@ -7,7 +7,7 @@ class Matrix2D
 public:
     explicit Matrix2D(int height, int width) : height(height),width(width)
     {
-        this->matrix = new T[height * width];
+        this->matrix = new T[height  *width];
     }
 
     Matrix2D(const Matrix2D<T> &copy) {
@@ -16,7 +16,7 @@ public:
 
     T &at(int y, int x)
     {
-        return this->matrix[(y * width) + x];
+        return this->matrix[(y  *width) + x];
     }
 
     T &at(int pos)

@@ -33,7 +33,7 @@ void LayerManager::draw()
     t = clock();
 
     /**
-     * Draw with multi threads
+      *Draw with multi threads
      */
     std::vector<Layer> layers = MapParser::instance()->getLayers();
     std::mutex m;
@@ -69,7 +69,7 @@ void LayerManager::draw()
                         tileset.name,
                         tileset.tileWidth,
                         tileset.tileHeight,
-                        Point2D(x * tileset.tileWidth, y * tileset.tileHeight),
+                        Point2D(x  *tileset.tileWidth, y  *tileset.tileHeight),
                         tileY,
                         tileX);
 
@@ -83,10 +83,10 @@ void LayerManager::draw()
         for (int i = 0; i < CORES; i++) {
 
             // [1] init segment size
-            int segmentSize = (layer.width * layer.height) / CORES;
+            int segmentSize = (layer.width  *layer.height) / CORES;
 
             // [2] init start, end
-            int start   = i * segmentSize;
+            int start   = i  *segmentSize;
             int end     = start + segmentSize;
 
             // [3]
@@ -94,7 +94,7 @@ void LayerManager::draw()
 
             if(i == CORES - 1)
             {
-                end = (layer.width * layer.height);
+                end = (layer.width  *layer.height);
             }
 
             threads.push_back(std::thread(worker, start, end, layer, data));

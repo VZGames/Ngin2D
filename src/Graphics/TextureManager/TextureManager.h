@@ -14,12 +14,12 @@ class TextureManager
 public:
     static TextureManager *instance();
 
-    SDL_Texture *textureById(const char*  textureID);
-    bool loadTexture(const char*  textureID, const char *filePath);
-    void draw(const char*  textureID, Point2D pos, int width, int height, SDL_RendererFlip flip = SDL_FLIP_NONE);
-    void drawTile(const char*  textureID,int tileWidth, int tileHeight, Point2D pos, int row, int col, SDL_RendererFlip flip = SDL_FLIP_NONE);
-    void drawFrame(const char*  textureID, Point2D pos, int width, int height, int row, int col, SDL_RendererFlip flip = SDL_FLIP_NONE, double p_Angle = 0);
-    void drop(const char*  textureID);
+    SDL_Texture *textureById(const char * textureID);
+    bool loadTexture(const char * textureID, const char *filePath);
+    void draw(const char * textureID, Point2D pos, int width, int height, SDL_RendererFlip flip = SDL_FLIP_NONE);
+    void drawTile(const char * textureID,int tileWidth, int tileHeight, Point2D pos, int row, int col, SDL_RendererFlip flip = SDL_FLIP_NONE);
+    void drawFrame(const char * textureID, Point2D pos, int width, int height, int row, int col, SDL_RendererFlip flip = SDL_FLIP_NONE, double p_Angle = 0);
+    void drop(const char * textureID);
     void clean();
 
 private:

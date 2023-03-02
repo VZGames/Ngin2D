@@ -8,15 +8,14 @@ class Scene
 {
 public:
     static Scene *instance();
-    void registerEntity(Entity *entity)
-    {
-        this->entities.push_back(entity);
-    }
 
-    void registerSystem(ISystem* system)
-    {
-       this->systems.push_back(system);
-    }
+    void registerEntity(Entity *entity);
+
+    void deRegisterEntity(Entity *entity);
+
+    void registerSystem(ISystem *system);
+
+    void deRegisterSystem(ISystem *system);
 
 private:
     Scene();

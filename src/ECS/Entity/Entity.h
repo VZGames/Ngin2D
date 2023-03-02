@@ -16,7 +16,7 @@ struct Entity
     template <typename T, typename... TArgs>
     T &addComponent(TArgs&&... mArgs)
     {
-        T* c(new T(std::forward<TArgs>(mArgs)...));
+        T *c(new T(std::forward<TArgs>(mArgs)...));
         components[c->id] = 1;
         return *c;
     }
@@ -24,6 +24,11 @@ struct Entity
     bool operator==(const Entity &right)
     {
         return id == right.id;
+    }
+
+    bool operator==(const Entity *right)
+    {
+        return this->id == right->id;
     }
 };
 }
