@@ -5,6 +5,7 @@
 #include <queue>
 #include <map>
 #include <stdio.h>
+#include <cassert>
 #include "../../Defines/Defines.h"
 
 namespace ngin2D {
@@ -17,6 +18,7 @@ public:
     ComponentID nextID()
     {
         const char* typeName = typeid(T).name();
+
         std::map<const char*, ComponentID>::iterator it;
         it = componentData.find(typeName);
         if(it == componentData.end())

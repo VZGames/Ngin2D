@@ -90,8 +90,6 @@ bool Game::InitGame(const char *title)
     Scene::instance()->registerEntity(enemy);
     Scene::instance()->registerEntity(tree);
 
-    SystemManager::instance()->start();
-
     s_gameRunning = true;
 
     return 1;
