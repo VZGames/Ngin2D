@@ -6,7 +6,8 @@
 namespace ngin2D {
 struct SpriteComponent: public ComponentBase<SpriteComponent>
 {
-    SpriteComponent(){}
+    SpriteComponent(const char* source): source(source){}
+    const char* source;
 };
 }
 

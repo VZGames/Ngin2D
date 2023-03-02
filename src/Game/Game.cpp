@@ -2,7 +2,7 @@
 #include "../Defines/Defines.h"
 #include "../GameMaps/GameMaps.h"
 #include "../Graphics/Graphics.h"
-#include "../ECS/ECS.h"
+#include "../Scene/Scene.h"
 
 namespace ngin2D {
 bool Game::s_gameRunning          = false;
@@ -61,25 +61,36 @@ bool Game::InitGame(const char *title)
     SDL_SetRenderDrawColor(ptr_renderer, 255, 255, 255, 255);
 
     // init entity
-    Entity &player  = EntityManager::instance()->createEntity();
-    player.addComponent<ColliderComponent>();
-    player.addComponent<MotionComponent>(Vector2I(0, 0), Vector2I(3, 3));
-    player.addComponent<HealthComponent>(100);
-    player.addComponent<TransformComponent>();
-    player.addComponent<SpriteComponent>();
+    Entity *player  = EntityManager::instance()->createEntity();
+    player->addComponent<ColliderComponent>();
+    player->addComponent<MotionComponent>(Vector2I(0, 0), Vector2I(3, 3));
+    player->addComponent<HealthComponent>(100);
+    player->addComponent<TransformComponent>();
+    player->addComponent<SpriteComponent>("xxx");
 
-    Entity &enemy   = EntityManager::instance()->createEntity();
-    enemy.addComponent<ColliderComponent>();
-    enemy.addComponent<MotionComponent>(Vector2I(0, 0), Vector2I(3, 3));
-    enemy.addComponent<HealthComponent>(25);
-    enemy.addComponent<SpriteComponent>();
+    Entity *enemy   = EntityManager::instance()->createEntity();
+    enemy->addComponent<ColliderComponent>();
+    enemy->addComponent<MotionComponent>(Vector2I(0, 0), Vector2I(3, 3));
+    enemy->addComponent<HealthComponent>(25);
+    enemy->addComponent<SpriteComponent>("xx");
 
-    Entity &tree    = EntityManager::instance()->createEntity();
-    tree.addComponent<ColliderComponent>();
-    tree.addComponent<HealthComponent>(85);
-    tree.addComponent<TransformComponent>();
+    Entity *tree    = EntityManager::instance()->createEntity();
+    tree->addComponent<ColliderComponent>();
+    tree->addComponent<HealthComponent>(85);
+    tree->addComponent<TransformComponent>();
 
-    EntityManager::instance()->destroyEntity(enemy);
+    auto moveSys    = SystemManager::instance()->addSystem<MovementSystem>();
+    auto renderSys  = SystemManager::instance()->addSystem<RenderSystem>();
+
+
+    Scene::instance()->registerSystem(moveSys);
+    Scene::instance()->registerSystem(renderSys);
+
+    Scene::instance()->registerEntity(player);
+    Scene::instance()->registerEntity(enemy);
+    Scene::instance()->registerEntity(tree);
+
+    SystemManager::instance()->start();
 
     s_gameRunning = true;
 
@@ -121,7 +132,6 @@ void Game::Loop()
 void Game::update_game()
 {
     GameMaps::instance()->update();
-    SystemManager::instance()->update(1.0);
 }
 
 void Game::render_game()

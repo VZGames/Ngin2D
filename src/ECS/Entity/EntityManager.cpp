@@ -4,21 +4,19 @@
 
 namespace ngin2D {
 EntityManager *EntityManager::s_instance = nullptr;
-EntityManager::~EntityManager()
-{}
 
 EntityManager *EntityManager::instance()
 {
     return s_instance = (s_instance == nullptr)? new EntityManager(): s_instance;
 }
 
-Entity &EntityManager::createEntity()
+Entity *EntityManager::createEntity()
 {
     EntityID id = availableIDs.front();
     availableIDs.pop();
     entities.push_back(Entity{id});
     entityCount++;
-    return entities.back();
+    return &entities.back();
 }
 
 bool EntityManager::destroyEntity(Entity &entity)

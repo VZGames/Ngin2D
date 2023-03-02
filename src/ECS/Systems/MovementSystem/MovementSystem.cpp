@@ -1,12 +1,9 @@
 #include "MovementSystem.h"
+#include "../../Entity/EntityManager.h"
+#include "../../Components/Components.h"
+#include "../../Components/ComponentManager.h"
 
 namespace ngin2D {
-MovementSystem *MovementSystem::s_instance = nullptr;
-MovementSystem *MovementSystem::instance()
-{
-    return s_instance = (s_instance == nullptr)? new MovementSystem(): s_instance;
-}
-
 MovementSystem::MovementSystem()
 {
 
@@ -14,8 +11,9 @@ MovementSystem::MovementSystem()
 
 void MovementSystem::update(float dt)
 {
-
+    for(Entity entity: EntityManager::instance()->getEntities())
+    {
+       std::cout << entity.id <<  " " <<  ComponentManager::instance()->hasComponentType<MotionComponent>(entity.components) << std::endl;
+    }
 }
-
-
 }

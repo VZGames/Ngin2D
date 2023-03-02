@@ -16,18 +16,32 @@ public:
     template<class T>
     ComponentID nextID()
     {
-        const char* componentType = typeid(T).name();
+        const char* typeName = typeid(T).name();
         std::map<const char*, ComponentID>::iterator it;
-        it = componentData.find(componentType);
+        it = componentData.find(typeName);
         if(it == componentData.end())
         {
             ComponentID id = availableIDs.front();
-            componentData[componentType] = id;
+            componentData[typeName] = id;
             availableIDs.pop();
             componentCount++;
         }
-        return componentData[componentType];
+        return componentData[typeName];
     }
+
+    template<class T>
+    bool hasComponentType(ComponentSet &components)
+    {
+        const char* typeName = typeid(T).name();
+        if(components[componentData[typeName]] == 1)
+        {
+            return true;
+        }
+        return false;
+    }
+
+
+    const std::map<const char *, ComponentID> &getComponentData() const;
 
 private:
     ComponentManager();

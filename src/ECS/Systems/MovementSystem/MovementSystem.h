@@ -7,14 +7,10 @@ namespace ngin2D {
 class MovementSystem: public ISystem
 {
 public:
-    static MovementSystem *instance();
+    MovementSystem();
     // ISystem interface
 public:
     virtual void update(float dt) override;
-
-private:
-    MovementSystem();
-    static MovementSystem *s_instance;
 };
 
 }

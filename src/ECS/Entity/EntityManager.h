@@ -12,7 +12,7 @@ class EntityManager
 public:
     ~EntityManager();
     static EntityManager *instance();
-    Entity &createEntity();
+    Entity *createEntity();
     bool destroyEntity(Entity &entity);
 
     Entity *getEntityByID(EntityID id);

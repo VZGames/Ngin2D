@@ -4,43 +4,20 @@
 
 namespace ngin2D {
 SystemManager *SystemManager::s_instance = nullptr;
+
 SystemManager *SystemManager::instance()
 {
     return s_instance = (s_instance == nullptr)? new SystemManager():s_instance;
 }
 
-SystemManager::SystemManager()
-{}
-
-void SystemManager::init()
+void SystemManager::start()
 {
-
-}
-
-void SystemManager::update(float dt)
-{
-    for (int i = 0; i < EntityManager::instance()->getEntityCount(); i++)
+    for(auto sys: systems)
     {
-        const Entity &entity     = EntityManager::instance()->getEntities().at(i);
-        EntityID id              = entity.id;
-        ComponentSet components  = entity.components;
-        for (ComponentID j = 0; j < MAX_COMPONENTS; j++)
-        {
-            bool bit = components[j]; // 0 or 1
-            // ignore bit = 0
-            if(!bit)
-            {
-                continue;
-            }
-            // printf("EntityID: %d, Components: %d\n", id, j);
-
-
-        }
+        sys.second->update(0.1);
     }
 }
 
-void SystemManager::render()
-{
-
-}
+SystemManager::SystemManager()
+{}
 }
