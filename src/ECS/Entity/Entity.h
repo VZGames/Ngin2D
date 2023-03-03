@@ -13,12 +13,16 @@ struct Entity
 {
     EntityID id;
     ComponentSet componentBitset;
+    std::map<const char*, IComponent*> components;
+
 
     template<typename T, typename... TArgs>
     T &addComponent(TArgs&&... mArgs)
     {
+        const char *typeName = typeid(T).name();
         T *c(new T(std::forward<TArgs>(mArgs)...));
         componentBitset[c->id] = 1;
+        components[typeName] = std::move(c);
         return *c;
     }
 
@@ -26,8 +30,9 @@ struct Entity
     T *getComponent() const
     {
         const char *typeName = typeid(T).name();
-
-        return nullptr;
+        if(components.find(typeName) == components.end())
+            return nullptr;
+        return (T*)components.at(typeName);
     }
 
     bool operator==(const Entity &right)

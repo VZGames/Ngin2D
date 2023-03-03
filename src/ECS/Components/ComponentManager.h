@@ -18,7 +18,6 @@ public:
     ComponentID nextID()
     {
         const char *typeName = typeid(T).name();
-
         std::map<const char*, ComponentID>::iterator it;
         it = componentData.find(typeName);
         if(it == componentData.end())

@@ -63,14 +63,14 @@ bool Game::InitGame(const char *title)
     // init entity
     Entity *player  = EntityManager::instance()->createEntity();
     player->addComponent<ColliderComponent>();
-    player->addComponent<MotionComponent>(Vector2I(0, 0), Vector2I(3, 3));
+    player->addComponent<MotionComponent>(Vector2I(2, 1), Vector2I(3, 3));
     player->addComponent<HealthComponent>(100);
     player->addComponent<TransformComponent>();
     player->addComponent<SpriteComponent>("xxx");
 
     Entity *enemy   = EntityManager::instance()->createEntity();
     enemy->addComponent<ColliderComponent>();
-    enemy->addComponent<MotionComponent>(Vector2I(0, 0), Vector2I(3, 3));
+    enemy->addComponent<MotionComponent>(Vector2I(4, 8), Vector2I(3, 3));
     enemy->addComponent<HealthComponent>(25);
     enemy->addComponent<SpriteComponent>("xx");
 
