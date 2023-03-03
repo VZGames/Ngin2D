@@ -16,7 +16,6 @@ public:
     T *addSystem()
     {
         const char *typeName = typeid(T).name();
-
         assert(systems.find(typeName) == systems.end() && "Adding system more than once.");
 
         auto system = new T();

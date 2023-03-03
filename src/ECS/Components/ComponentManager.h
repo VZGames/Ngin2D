@@ -6,6 +6,7 @@
 #include <map>
 #include <stdio.h>
 #include <cassert>
+#include "IComponent.h"
 #include "../../Defines/Defines.h"
 
 namespace ngin2D {
@@ -42,8 +43,11 @@ public:
         return false;
     }
 
+    void appendReference(IComponent *ref);
 
     const std::map<const char *, ComponentID> &getComponentData() const;
+
+    const std::vector<IComponent *> &getComponentPtrs() const;
 
 private:
     ComponentManager();
@@ -51,7 +55,9 @@ private:
     static ComponentManager *s_instance;
     uint32_t componentCount = 0;
     std::queue<ComponentID> availableIDs;
+
     std::map<const char*, ComponentID> componentData;
+    std::vector<IComponent*> componentPtrs;
 };
 }
 

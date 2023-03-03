@@ -14,11 +14,8 @@ public:
     static EntityManager *instance();
     Entity *createEntity();
     bool destroyEntity(Entity &entity);
-
     Entity *getEntityByID(EntityID id);
-
     const std::vector<Entity> &getEntities() const;
-
     uint32_t getEntityCount() const;
 
 private:

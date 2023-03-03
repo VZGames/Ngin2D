@@ -13,12 +13,19 @@ struct Entity
     EntityID id;
     ComponentSet components;
 
-    template <typename T, typename... TArgs>
+    template<typename T, typename... TArgs>
     T &addComponent(TArgs&&... mArgs)
     {
         T *c(new T(std::forward<TArgs>(mArgs)...));
         components[c->id] = 1;
+        ComponentManager::instance()->appendReference(c);
         return *c;
+    }
+
+    template<class T>
+    T *getComponent() const
+    {
+        return nullptr;
     }
 
     bool operator==(const Entity &right)
