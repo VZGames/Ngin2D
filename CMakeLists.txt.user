@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE QtCreatorProject>
-<!-- Written by QtCreator 8.0.2, 2023-03-03T01:25:08. -->
+<!-- Written by QtCreator 8.0.2, 2023-03-03T21:26:40. -->
 <qtcreator>
  <data>
   <variable>EnvironmentId</variable>
@@ -339,9 +339,9 @@
     <valuelist type="QVariantList" key="CustomOutputParsers"/>
     <value type="int" key="PE.EnvironmentAspect.Base">2</value>
     <valuelist type="QVariantList" key="PE.EnvironmentAspect.Changes"/>
-    <value type="QString" key="ProjectExplorer.ProjectConfiguration.DisplayName">XYZ</value>
-    <value type="QString" key="ProjectExplorer.ProjectConfiguration.Id">CMakeProjectManager.CMakeRunConfiguration.XYZ</value>
-    <value type="QString" key="ProjectExplorer.RunConfiguration.BuildKey">XYZ</value>
+    <value type="QString" key="ProjectExplorer.ProjectConfiguration.DisplayName">Ngin2D</value>
+    <value type="QString" key="ProjectExplorer.ProjectConfiguration.Id">CMakeProjectManager.CMakeRunConfiguration.Ngin2D</value>
+    <value type="QString" key="ProjectExplorer.RunConfiguration.BuildKey">Ngin2D</value>
     <value type="bool" key="RunConfiguration.UseCppDebugger">false</value>
     <value type="bool" key="RunConfiguration.UseCppDebuggerAuto">true</value>
     <value type="bool" key="RunConfiguration.UseLibrarySearchPath">true</value>

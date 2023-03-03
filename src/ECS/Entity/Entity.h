@@ -22,7 +22,7 @@ struct Entity
         return *c;
     }
 
-    template<class T>
+    template<typename T>
     T *getComponent() const
     {
         const char *typeName = typeid(T).name();

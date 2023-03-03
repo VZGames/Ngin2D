@@ -1,6 +1,6 @@
 set(CMAKE_VERBOSE_MAKEFILE ON)
 cmake_minimum_required(VERSION 3.2.0)
-project(XYZ VERSION 0.1.0 DESCRIPTION "Not yet!" LANGUAGES CXX)
+project(Ngin2D VERSION 0.1.0 DESCRIPTION "Not yet!" LANGUAGES CXX)
 
 # specify the C++ standard
 set(CMAKE_CXX_STANDARD 14)

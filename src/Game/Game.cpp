@@ -79,19 +79,8 @@ bool Game::InitGame(const char *title)
     tree->addComponent<HealthComponent>(85);
     tree->addComponent<TransformComponent>();
 
-
-//    player->getComponent<ColliderComponent>();
-
-    auto moveSys    = SystemManager::instance()->addSystem<MovementSystem>();
-    auto renderSys  = SystemManager::instance()->addSystem<RenderSystem>();
-
-
-    Scene::instance()->registerSystem(moveSys);
-    Scene::instance()->registerSystem(renderSys);
-
-    Scene::instance()->registerEntity(player);
-    Scene::instance()->registerEntity(enemy);
-    Scene::instance()->registerEntity(tree);
+    SystemManager::instance()->addSystem<MovementSystem>();
+    SystemManager::instance()->addSystem<RenderSystem>();
 
     SystemManager::instance()->init();
 

@@ -16,6 +16,7 @@ void MovementSystem::update(float dt)
        bool hasComponent = ComponentManager::instance()->hasComponentType<MotionComponent>(entity.componentBitset);
        if(hasComponent)
        {
+//           entity.getComponent()
        }
     }
 }
