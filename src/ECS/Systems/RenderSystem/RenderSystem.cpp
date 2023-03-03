@@ -11,7 +11,11 @@ void RenderSystem::update(float dt)
 {
     for(Entity entity: EntityManager::instance()->getEntities())
     {
-       std::cout << entity.id <<  " " <<  ComponentManager::instance()->hasComponentType<SpriteComponent>(entity.components) << std::endl;
+        bool hasComponent = ComponentManager::instance()->hasComponentType<SpriteComponent>(entity.componentBitset);
+        hasComponent &= ComponentManager::instance()->hasComponentType<HealthComponent>(entity.componentBitset);
+        if(hasComponent)
+        {
+        }
     }
 }
 

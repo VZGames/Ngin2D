@@ -1,12 +1,11 @@
 #ifndef COMPONENTBASE_H
 #define COMPONENTBASE_H
 
-#include "IComponent.h"
 #include "ComponentManager.h"
 
 namespace ngin2D {
 template<class T>
-struct ComponentBase: public IComponent
+struct ComponentBase
 {
     ComponentID id = ComponentManager::instance()->nextID<T>();
 };

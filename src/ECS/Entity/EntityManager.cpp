@@ -37,7 +37,7 @@ Entity *EntityManager::getEntityByID(EntityID id)
     auto it = std::find(entities.begin(), entities.end(), entity);
     if(it != entities.end())
     {
-        printf("Entity ID %d, Components: %s\n", it->id, it->components.to_string().c_str());
+        printf("Entity ID %d, Components: %s\n", it->id, it->componentBitset.to_string().c_str());
         return &(*it);
     }
 

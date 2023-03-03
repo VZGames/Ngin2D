@@ -80,7 +80,7 @@ bool Game::InitGame(const char *title)
     tree->addComponent<TransformComponent>();
 
 
-    player->getComponent<ColliderComponent>();
+//    player->getComponent<ColliderComponent>();
 
     auto moveSys    = SystemManager::instance()->addSystem<MovementSystem>();
     auto renderSys  = SystemManager::instance()->addSystem<RenderSystem>();
@@ -92,6 +92,8 @@ bool Game::InitGame(const char *title)
     Scene::instance()->registerEntity(player);
     Scene::instance()->registerEntity(enemy);
     Scene::instance()->registerEntity(tree);
+
+    SystemManager::instance()->init();
 
     s_gameRunning = true;
 
@@ -133,6 +135,7 @@ void Game::Loop()
 void Game::update_game()
 {
     GameMaps::instance()->update();
+    SystemManager::instance()->update(0.1);
 }
 
 void Game::render_game()
@@ -140,6 +143,8 @@ void Game::render_game()
     SDL_RenderClear(ptr_renderer);
     // render objects
     GameMaps::instance()->draw();
+    SystemManager::instance()->render();
+
     SDL_RenderPresent(ptr_renderer);
 }
 

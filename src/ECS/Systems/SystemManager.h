@@ -8,7 +8,7 @@
 #include "Systems.h"
 
 namespace ngin2D {
-class SystemManager
+class SystemManager: public ISystem
 {
 public:
     static SystemManager *instance();
@@ -23,11 +23,16 @@ public:
         return system;
     }
 
+    // ISystem interface
+public:
+    virtual void init() override;
+    virtual void update(float dt) override;
+    virtual void render() override;
+
 private:
     SystemManager();
     static SystemManager *s_instance;
     std::map<const char*, ISystem*> systems;
-
 };
 }
 

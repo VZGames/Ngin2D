@@ -1,5 +1,5 @@
-#ifndef MOTIONCOMPONENT_H
-#define MOTIONCOMPONENT_H
+#ifndef MotionComponent_H
+#define MotionComponent_H
 
 #include "ComponentBase.h"
 
@@ -12,4 +12,4 @@ struct MotionComponent: public ComponentBase<MotionComponent>
     Vector2I acceleration;
 };
 }
-#endif // MOTIONCOMPONENT_H
+#endif // MotionComponent_H
