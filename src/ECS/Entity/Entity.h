@@ -20,6 +20,8 @@ struct Entity
     T &addComponent(TArgs&&... mArgs)
     {
         const char *typeName = typeid(T).name();
+        assert(components.find(typeName) == components.end() && "Adding component more than once.");
+
         T *c(new T(std::forward<TArgs>(mArgs)...));
         componentBitset[c->id] = 1;
         components[typeName] = std::move(c);
