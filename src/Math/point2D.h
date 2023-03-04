@@ -8,6 +8,11 @@ public:
 
     Point2D(): x(0), y(0){}
 
+    Point2D(const Point2D &copy)
+    {
+        this->x = copy.x;
+        this->y = copy.y;
+    }
 
     int getX() const
     {

@@ -17,7 +17,6 @@ void MovementSystem::update(float dt)
        if(hasComponent)
        {
            auto motion = entity.getComponent<MotionComponent>();
-           std::cout << motion->velocity;
        }
     }
 }
