@@ -6,8 +6,7 @@
 
 namespace ngin2D {
 bool Game::s_gameRunning          = false;
-Game *Game::s_instance          = nullptr;
-
+Game *Game::s_instance            = nullptr;
 
 Game::Game(): ptr_window(nullptr), ptr_renderer(nullptr)
 {
@@ -62,10 +61,11 @@ bool Game::InitGame(const char *title)
 
     // init entity
     Entity *player  = EntityManager::instance()->createEntity();
+    player->addComponent<PlayerComponent>();
     player->addComponent<ColliderComponent>();
     player->addComponent<PositionComponent>(Point2D(350, 150));
     player->addComponent<SpriteComponent>("Lover", "./assets/Characters/BasicCharakterSpritesheet.png", 48, 48, 2);
-    player->addComponent<MotionComponent>(Vector2I(2, 0), Vector2I(3, 8));
+    player->addComponent<MotionComponent>(Vector2I(), Vector2I());
     player->addComponent<HealthComponent>(100);
     player->addComponent<TransformComponent>();
 
@@ -73,7 +73,7 @@ bool Game::InitGame(const char *title)
     enemy->addComponent<ColliderComponent>();
     enemy->addComponent<PositionComponent>(Point2D(350, 250));
     enemy->addComponent<SpriteComponent>("MyGirl", "./assets/Characters/BasicCharakterActions.png", 48, 48, 2);
-    enemy->addComponent<MotionComponent>(Vector2I(3, 0), Vector2I(3, 3));
+    enemy->addComponent<MotionComponent>(Vector2I(), Vector2I());
     enemy->addComponent<HealthComponent>(25);
 
 
@@ -84,6 +84,7 @@ bool Game::InitGame(const char *title)
 
     SystemManager::instance()->addSystem<MovementSystem>();
     SystemManager::instance()->addSystem<RenderSystem>();
+    SystemManager::instance()->addSystem<EventInputSystem>();
 
 
     SystemManager::instance()->init();
@@ -161,7 +162,6 @@ void Game::Quit()
 
 void Game::handle_events()
 {
-    SDL_Event event;
     while (SDL_PollEvent(&event))
     {
         if (event.type == SDL_QUIT || event.key.keysym.sym == SDLK_ESCAPE)

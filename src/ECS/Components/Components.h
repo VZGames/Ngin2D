@@ -7,5 +7,6 @@
 #include "HealthComponent.h"
 #include "PositionComponent.h"
 #include "SpriteComponent.h"
+#include "PlayerComponent.h"
 
 #endif // COMPONENTS_H
