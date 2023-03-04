@@ -64,7 +64,7 @@ bool Game::InitGame(const char *title)
     Entity *player  = EntityManager::instance()->createEntity();
     player->addComponent<ColliderComponent>();
     player->addComponent<PositionComponent>(Point2D(350, 150));
-    player->addComponent<SpriteComponent>("Lover", "./assets/Characters/BasicCharakterSpritesheet.png", 48, 48);
+    player->addComponent<SpriteComponent>("Lover", "./assets/Characters/BasicCharakterSpritesheet.png", 48, 48, 2);
     player->addComponent<MotionComponent>(Vector2I(2, 0), Vector2I(3, 8));
     player->addComponent<HealthComponent>(100);
     player->addComponent<TransformComponent>();
@@ -72,7 +72,7 @@ bool Game::InitGame(const char *title)
     Entity *enemy   = EntityManager::instance()->createEntity();
     enemy->addComponent<ColliderComponent>();
     enemy->addComponent<PositionComponent>(Point2D(350, 250));
-    enemy->addComponent<SpriteComponent>("MyGirl", "./assets/Characters/BasicCharakterActions.png", 48, 48);
+    enemy->addComponent<SpriteComponent>("MyGirl", "./assets/Characters/BasicCharakterActions.png", 48, 48, 2);
     enemy->addComponent<MotionComponent>(Vector2I(3, 0), Vector2I(3, 3));
     enemy->addComponent<HealthComponent>(25);
 
@@ -84,7 +84,6 @@ bool Game::InitGame(const char *title)
 
     SystemManager::instance()->addSystem<MovementSystem>();
     SystemManager::instance()->addSystem<RenderSystem>();
-    SystemManager::instance()->addSystem<AnimationSystem>();
 
 
     SystemManager::instance()->init();

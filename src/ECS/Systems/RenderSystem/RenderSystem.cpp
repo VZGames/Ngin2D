@@ -1,4 +1,5 @@
 #include "RenderSystem.h"
+#include "SDL2/SDL.h"
 #include "../../Entity/EntityManager.h"
 #include "../../Components/Components.h"
 #include "../../Components/ComponentManager.h"
@@ -29,6 +30,8 @@ void RenderSystem::update(float dt)
         hasComponent &= ComponentManager::instance()->hasComponentType<HealthComponent>(entity.componentBitset);
         if(hasComponent)
         {
+           auto sprite = entity.getComponent<SpriteComponent>();
+           sprite->col = (SDL_GetTicks() / sprite->frameSpeed) % sprite->frameCount;
         }
     }
 }
@@ -43,7 +46,7 @@ void RenderSystem::render()
         {
             auto sprite = entity.getComponent<SpriteComponent>();
             auto position = entity.getComponent<PositionComponent>();
-            TextureManager::instance()->drawFrame(sprite->textureId, position->pos, 48, 48, sprite->col, sprite->row);
+            TextureManager::instance()->drawFrame(sprite->textureId, position->pos, sprite->frameWidth, sprite->frameHeight, sprite->row, sprite->col);
         }
     }
 }

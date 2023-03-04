@@ -19,8 +19,8 @@ void MovementSystem::update(float dt)
        {
            auto motion = entity.getComponent<MotionComponent>();
            auto position = entity.getComponent<PositionComponent>();
-           position->pos = Point2D(position->pos.getX() + motion->velocity.x * motion->direction,
-                                   position->pos.getY() + motion->velocity.y * motion->direction);
+//           position->pos = Point2D(position->pos.getX() + motion->velocity.x * motion->direction,
+//                                   position->pos.getY() + motion->velocity.y * motion->direction);
 
        }
     }

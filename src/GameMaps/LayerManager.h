@@ -14,7 +14,6 @@ public:
 private:
     LayerManager();
     static LayerManager *s_instance;
-
 };
 }
 

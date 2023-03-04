@@ -3,6 +3,5 @@
 
 #include "MovementSystem/MovementSystem.h"
 #include "RenderSystem/RenderSystem.h"
-#include "AnimationSystem/AnimationSystem.h"
 
 #endif // SYSTEMS_H
