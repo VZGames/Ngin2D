@@ -28,7 +28,7 @@ public:
 private:
     Game();
     static Game *s_instance;
-    void update_game();
+    void update_game(float dt);
     void render_game();
     void handle_events();
 

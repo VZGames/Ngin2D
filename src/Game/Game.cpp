@@ -64,16 +64,16 @@ bool Game::InitGame(const char *title)
     Entity *player  = EntityManager::instance()->createEntity();
     player->addComponent<ColliderComponent>();
     player->addComponent<PositionComponent>(Point2D(350, 150));
-    player->addComponent<SpriteComponent>("Lover", "./assets/Characters/BasicCharakterSpritesheet.png", 48, 48, 0, 0);
-    player->addComponent<MotionComponent>(Vector2I(2, 1), Vector2I(3, 8));
+    player->addComponent<SpriteComponent>("Lover", "./assets/Characters/BasicCharakterSpritesheet.png", 48, 48);
+    player->addComponent<MotionComponent>(Vector2I(2, 0), Vector2I(3, 8));
     player->addComponent<HealthComponent>(100);
     player->addComponent<TransformComponent>();
 
     Entity *enemy   = EntityManager::instance()->createEntity();
     enemy->addComponent<ColliderComponent>();
     enemy->addComponent<PositionComponent>(Point2D(350, 250));
-    enemy->addComponent<SpriteComponent>("MyGirl", "./assets/Characters/BasicCharakterActions.png", 48, 48, 0, 0);
-    enemy->addComponent<MotionComponent>(Vector2I(4, 8), Vector2I(3, 3));
+    enemy->addComponent<SpriteComponent>("MyGirl", "./assets/Characters/BasicCharakterActions.png", 48, 48);
+    enemy->addComponent<MotionComponent>(Vector2I(3, 0), Vector2I(3, 3));
     enemy->addComponent<HealthComponent>(25);
 
 
@@ -84,6 +84,8 @@ bool Game::InitGame(const char *title)
 
     SystemManager::instance()->addSystem<MovementSystem>();
     SystemManager::instance()->addSystem<RenderSystem>();
+    SystemManager::instance()->addSystem<AnimationSystem>();
+
 
     SystemManager::instance()->init();
 
@@ -114,7 +116,7 @@ void Game::Loop()
         lastTime = currentTime;
 
         handle_events();
-        update_game();
+        update_game(deltaTime);
         render_game();
 
         if (deltaTime < frameDelay)
@@ -124,10 +126,10 @@ void Game::Loop()
     }
 }
 
-void Game::update_game()
+void Game::update_game(float dt)
 {
     GameMaps::instance()->update();
-    SystemManager::instance()->update(0.1);
+    SystemManager::instance()->update(dt);
 }
 
 void Game::render_game()

@@ -6,17 +6,16 @@
 namespace ngin2D {
 struct SpriteComponent: public ComponentBase<SpriteComponent>
 {
-    SpriteComponent(const char *textureId, const char *source, int width, int height, int col, int row): textureId(textureId),
+    SpriteComponent(const char *textureId, const char *source, int width, int height): textureId(textureId),
         source(source),
         frameWidth(width),
-        frameHeight(height),
-        col(col),
-        row(row)
+        frameHeight(height)
     {}
     const char *textureId;
     const char *source;
     int frameWidth, frameHeight;
-    int col, row;
+    int col = 0;
+    int row = 0;
 };
 }
 

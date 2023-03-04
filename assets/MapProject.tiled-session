@@ -76,7 +76,7 @@
             "selectedLayer": 6,
             "viewCenter": {
                 "x": 426.5,
-                "y": 154.5
+                "y": 286.5
             }
         },
         "Map2.tmx#Grass": {
@@ -124,7 +124,7 @@
             "scaleInEditor": 1
         }
     },
-    "last.imagePath": "D:/Projects/O/SDL2_project/XYZ/assets/Tilesets/ground_tiles/new_tiles",
+    "last.imagePath": "D:/Projects/O/SDL2_project/Ngin2D/assets/Characters",
     "map.fixedSize": true,
     "map.height": 480,
     "map.lastUsedFormat": "tmx",
@@ -148,7 +148,7 @@
     "tileset.embedInMap": true,
     "tileset.lastUsedFormat": "tsx",
     "tileset.tileSize": {
-        "height": 16,
-        "width": 16
+        "height": 48,
+        "width": 48
     }
 }
