@@ -21,7 +21,8 @@ Player *Player::instance()
 
 void Player::handleKeyEvent()
 {
-    bool hasComponent = ComponentManager::instance()->hasComponentType<MotionComponent>(entity->componentBitset);
+    bool hasComponent = ComponentManager::instance()->hasComponentType<PlayerComponent>(entity->componentBitset);
+    hasComponent &= ComponentManager::instance()->hasComponentType<MotionComponent>(entity->componentBitset);
     hasComponent &= ComponentManager::instance()->hasComponentType<SpriteComponent>(entity->componentBitset);
 
     auto motion = entity->getComponent<MotionComponent>();
@@ -29,8 +30,10 @@ void Player::handleKeyEvent()
 
     if(hasComponent)
     {
-        KeyEvent::instance()->listen();
+        bool released = KeyEvent::instance()->isReleased();
         motion->velocity = Vector2I(0, 0);
+
+        sprite->frameCount = released? 2:4;
 
         if(KeyEvent::instance()->sendEvent(SDL_SCANCODE_A))
         {

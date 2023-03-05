@@ -21,7 +21,7 @@ private:
     KeyEvent();
     static KeyEvent *s_instance;
     const Uint8 *keyBoardState;
-    bool released = 0;
+    bool released = 1;
     SDL_Event event;
 };
 

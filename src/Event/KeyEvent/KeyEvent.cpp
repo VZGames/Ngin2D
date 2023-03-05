@@ -19,10 +19,10 @@ void KeyEvent::listen()
             Game::s_gameRunning = false;
             break;
         case SDL_KEYDOWN:
-            released = 1;
+            released = 0;
             break;
         case SDL_KEYUP:
-            released = 0;
+            released = 1;
             break;
         }
     }

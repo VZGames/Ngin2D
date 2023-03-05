@@ -1,5 +1,6 @@
 #include "Scene.h"
 #include <algorithm>
+#include "../Event/Events.h"
 
 namespace ngin2D {
 Scene *Scene::s_instance = nullptr;
@@ -33,6 +34,7 @@ void Scene::render()
 
 void Scene::handleEvents()
 {
+    KeyEvent::instance()->listen();
     Player::instance()->handleKeyEvent();
     Player::instance()->handleMouseEvent();
 }

@@ -46,7 +46,6 @@ void RenderSystem::render()
         {
             auto sprite = entity.getComponent<SpriteComponent>();
             auto position = entity.getComponent<PositionComponent>();
-
             TextureManager::instance()->drawFrame(sprite->textureId, Point2D(position->x, position->y), sprite->frameWidth, sprite->frameHeight, sprite->row, sprite->col);
         }
     }
