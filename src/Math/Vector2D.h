@@ -2,6 +2,8 @@
 #define VECTOR2D_H
 
 #include <iostream>
+#include <cmath>
+
 template <typename T>
 class Vector2D
 {
@@ -91,18 +93,32 @@ public:
         return this->Divide(p_B);
     }
 
-    Vector2D<T> &operator*(T i)
+    Vector2D<T> &operator*(T &i)
     {
         this->x *= i;
         this->y *= i;
         return *this;
     }
+
+    Vector2D<T> &operator*=(T &i)
+    {
+        this->x *= i;
+        this->y *= i;
+        return *this;
+    }
+
     Vector2D<T> &operator=(const Vector2D<T> &p_B)
     {
         this->x = p_B.x;
         this->y = p_B.y;
         return *this;
     }
+
+    float scalar() const
+    {
+        return (float)std::sqrt(std::pow(x,2) + std::pow(y,2));
+    }
+
     void print()
     {
         std::cout << x << ", " << y << std::endl;

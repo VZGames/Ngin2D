@@ -19,10 +19,10 @@ void KeyEvent::listen()
             Game::s_gameRunning = false;
             break;
         case SDL_KEYDOWN:
-            keyDown = 1;
+            released = 1;
             break;
         case SDL_KEYUP:
-            keyDown = 0;
+            released = 0;
             break;
         }
     }
@@ -43,9 +43,9 @@ KeyEvent::KeyEvent()
     keyBoardState = SDL_GetKeyboardState(nullptr);
 }
 
-bool KeyEvent::getKeyDown() const
+bool KeyEvent::isReleased() const
 {
-    return keyDown;
+    return released;
 }
 
 const SDL_Event &KeyEvent::getEvent() const

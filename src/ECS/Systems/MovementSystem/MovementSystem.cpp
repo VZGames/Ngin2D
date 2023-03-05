@@ -17,11 +17,10 @@ void MovementSystem::update(float dt)
         hasComponent &= ComponentManager::instance()->hasComponentType<PositionComponent>(entity.componentBitset);
         if(hasComponent)
         {
-//            auto motion = entity.getComponent<MotionComponent>();
-//            auto position = entity.getComponent<PositionComponent>();
-//            position->x += (motion->velocity.x * motion->direction);
-//            position->y += (motion->velocity.y * motion->direction);
-
+            auto motion = entity.getComponent<MotionComponent>();
+            auto position = entity.getComponent<PositionComponent>();
+            position->x += (motion->velocity.x);
+            position->y += (motion->velocity.y);
         }
     }
 }

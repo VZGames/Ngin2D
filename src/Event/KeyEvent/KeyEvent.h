@@ -15,13 +15,13 @@ public:
 
     const SDL_Event &getEvent() const;
 
-    bool getKeyDown() const;
+    bool isReleased() const;
 
 private:
     KeyEvent();
     static KeyEvent *s_instance;
     const Uint8 *keyBoardState;
-    bool keyDown = 0;
+    bool released = 0;
     SDL_Event event;
 };
 

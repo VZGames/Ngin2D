@@ -2,7 +2,7 @@
 #include "../Defines/Defines.h"
 #include "../GameMaps/GameMaps.h"
 #include "../Graphics/Graphics.h"
-#include "../Listener/Events.h"
+#include "../Event/Events.h"
 #include "../Scene/Scene.h"
 
 namespace ngin2D {
@@ -61,35 +61,7 @@ bool Game::InitGame(const char *title)
     // [3] Select the color for drawing.
     SDL_SetRenderDrawColor(ptr_renderer, 255, 255, 255, 255);
 
-    // init entity
-    Entity *player  = EntityManager::instance()->createEntity();
-    player->addComponent<PlayerComponent>();
-    player->addComponent<ColliderComponent>();
-    player->addComponent<PositionComponent>(350, 150);
-    player->addComponent<SpriteComponent>("Lover", "./assets/Characters/BasicCharakterSpritesheet.png", 48, 48, 2);
-    player->addComponent<MotionComponent>(Vector2I(), Vector2I());
-    player->addComponent<HealthComponent>(100);
-    player->addComponent<TransformComponent>();
-
-    Entity *enemy   = EntityManager::instance()->createEntity();
-    enemy->addComponent<ColliderComponent>();
-    enemy->addComponent<PositionComponent>(350, 250);
-    enemy->addComponent<SpriteComponent>("MyGirl", "./assets/Characters/BasicCharakterActions.png", 48, 48, 2);
-    enemy->addComponent<MotionComponent>(Vector2I(), Vector2I());
-    enemy->addComponent<HealthComponent>(25);
-
-
-    Entity *tree    = EntityManager::instance()->createEntity();
-    tree->addComponent<ColliderComponent>();
-    tree->addComponent<HealthComponent>(85);
-    tree->addComponent<TransformComponent>();
-
-    SystemManager::instance()->addSystem<MovementSystem>();
-    SystemManager::instance()->addSystem<RenderSystem>();
-    SystemManager::instance()->addSystem<EventInputSystem>();
-
-
-    SystemManager::instance()->init();
+    Scene::instance()->init();
 
     s_gameRunning = true;
 
@@ -131,7 +103,7 @@ void Game::Loop()
 void Game::update_game(float dt)
 {
     GameMaps::instance()->update();
-    SystemManager::instance()->update(dt);
+    Scene::instance()->update(dt);
 }
 
 void Game::render_game()
@@ -139,7 +111,7 @@ void Game::render_game()
     SDL_RenderClear(ptr_renderer);
     // render objects
     GameMaps::instance()->draw();
-    SystemManager::instance()->render();
+    Scene::instance()->render();
 
     SDL_RenderPresent(ptr_renderer);
 }
@@ -164,7 +136,8 @@ void Game::Quit()
 
 void Game::handle_events()
 {
-//    KeyEvent::instance()->listen();
+    KeyEvent::instance()->listen();
+    Scene::instance()->handleEvents();
 }
 }
 

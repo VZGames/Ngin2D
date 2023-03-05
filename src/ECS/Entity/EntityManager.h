@@ -4,6 +4,7 @@
 #include <queue>
 #include <vector>
 #include "Entity.h"
+#include "Entities.h"
 #include "../../Defines/Defines.h"
 
 namespace ngin2D {

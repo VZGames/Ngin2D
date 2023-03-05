@@ -2,6 +2,7 @@
 #define SCENE_H
 
 #include "../ECS/ECS.h"
+#include "../ECS/Entity/Dynamic/Player/Player.h"
 
 namespace ngin2D {
 class Scene
@@ -9,19 +10,15 @@ class Scene
 public:
     static Scene *instance();
 
-    void registerEntity(Entity *entity);
+    void init();
+    void update(float dt);
+    void render();
+    void handleEvents();
 
-    void deRegisterEntity(Entity *entity);
-
-    void registerSystem(ISystem *system);
-
-    void deRegisterSystem(ISystem *system);
 
 private:
     Scene();
     static Scene *s_instance;
-    std::vector<Entity*> entities;
-    std::vector<ISystem*> systems;
 };
 }
 

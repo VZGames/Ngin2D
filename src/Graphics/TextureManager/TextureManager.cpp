@@ -55,9 +55,8 @@ void TextureManager::drawTile(const char * textureID, int tileWidth, int tileHei
 
 void TextureManager::drawFrame(const char * textureID, Point2D pos, int width, int height, int row, int col, SDL_RendererFlip flip, double angle)
 {
-    int frameX = width  *col;
-    int frameY = height  *row;
-
+    int frameX = width * col;
+    int frameY = height * row;
     SDL_Rect srcRect = {frameX, frameY, width, height};
     SDL_Rect destRect = {pos.getX(), pos.getY(), width, height};
     SDL_RenderCopyEx(Game::instance()->getRenderer(), textureDict[textureID], &srcRect, &destRect, 0, NULL, flip);

@@ -8,32 +8,32 @@ Scene *Scene::instance()
     return s_instance = (s_instance == nullptr)? new Scene(): s_instance;
 }
 
-void Scene::registerEntity(Entity *entity)
-{
-    this->entities.push_back(entity);
-}
-
-void Scene::deRegisterEntity(Entity *entity)
-{
-    std::vector<Entity*>::iterator it;
-    it = std::find(entities.begin(), entities.end(), entity);
-    this->entities.erase(it);
-}
-
-void Scene::registerSystem(ISystem *system)
-{
-    this->systems.push_back(system);
-}
-
-void Scene::deRegisterSystem(ISystem *system)
-{
-    std::vector<ISystem*>::iterator it;
-    it = std::find_if(systems.begin(), systems.end(), [&](ISystem* sys)->bool{
-        return sys == system;
-    });
-    this->systems.erase(it);
-}
-
 Scene::Scene()
-{}
+{
+}
+
+void Scene::init()
+{
+    Player::instance();
+
+    SystemManager::instance()->addSystem<MovementSystem>();
+    SystemManager::instance()->addSystem<RenderSystem>();
+    SystemManager::instance()->init();
+}
+
+void Scene::update(float dt)
+{
+    SystemManager::instance()->update(dt);
+}
+
+void Scene::render()
+{
+    SystemManager::instance()->render();
+}
+
+void Scene::handleEvents()
+{
+    Player::instance()->handleKeyEvent();
+    Player::instance()->handleMouseEvent();
+}
 }

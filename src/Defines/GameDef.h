@@ -9,4 +9,10 @@
 
 #define CORES 4
 
+// direction
+#define RIGHT 1
+#define LEFT -1
+#define UP -1
+#define DOWN 1
+
 #endif // GAMEDEF_H
