@@ -36,6 +36,7 @@ void Player::handleKeyEvent()
 
         sprite->frameCount = released? 2:4;
 
+        sprite->source =  "./assets/Characters/BasicCharakterSpritesheet.png";
         if(KeyEvent::instance()->sendEvent(SDL_SCANCODE_A))
         {
             motion->velocity.x += 1 * LEFT;
@@ -63,6 +64,15 @@ void Player::handleKeyEvent()
             sprite->row = 0;
             sprite->col = 2;
         }
+
+        if(KeyEvent::instance()->sendEvent(SDL_SCANCODE_E))
+        {
+            sprite->source = "./assets/Characters/BasicCharakterActions.png";
+            sprite->frameCount = 2;
+            sprite->row = 0;
+            sprite->col = 0;
+        }
+
     }
 }
 

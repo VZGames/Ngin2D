@@ -11,15 +11,6 @@ RenderSystem::RenderSystem()
 
 void RenderSystem::init()
 {
-    for(Entity entity: EntityManager::instance()->getEntities())
-    {
-        bool hasComponent = ComponentManager::instance()->hasComponentType<SpriteComponent>(entity.componentBitset);
-        if(hasComponent)
-        {
-            auto sprite = entity.getComponent<SpriteComponent>();
-            TextureManager::instance()->loadTexture(sprite->textureId, sprite->source);
-        }
-    }
 }
 
 void RenderSystem::update(float dt)
@@ -46,6 +37,7 @@ void RenderSystem::render()
         {
             auto sprite = entity.getComponent<SpriteComponent>();
             auto position = entity.getComponent<PositionComponent>();
+            TextureManager::instance()->loadTexture(sprite->textureId, sprite->source);
             TextureManager::instance()->drawFrame(sprite->textureId, Point2D(position->x, position->y), sprite->frameWidth, sprite->frameHeight, sprite->row, sprite->col);
         }
     }

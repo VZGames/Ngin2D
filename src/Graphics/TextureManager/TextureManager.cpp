@@ -21,9 +21,8 @@ SDL_Texture *TextureManager::textureById(const char * textureID)
 
 bool TextureManager::loadTexture(const char * textureID, const char *filePath)
 {
-    if(textureDict.find(textureID) != textureDict.end()) return 1;
-
-    printf("TextureID: %s, Texture Path: %s \n", textureID, filePath);
+//    if(textureDict.find(textureID) != textureDict.end()) return 1;
+//    printf("TextureID: %s, Texture Path: %s \n", textureID, filePath);
 
     SDL_Texture *texture = NULL;
     SDL_Surface *surface = IMG_Load(filePath);
