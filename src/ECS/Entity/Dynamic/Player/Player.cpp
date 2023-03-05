@@ -6,6 +6,7 @@ Player::Player()
 {
     entity  = EntityManager::instance()->createEntity();
     entity->addComponent<PlayerComponent>();
+    entity->addComponent<CameraComponent>();
     entity->addComponent<ColliderComponent>();
     entity->addComponent<PositionComponent>(350, 150);
     entity->addComponent<SpriteComponent>("Lover", "./assets/Characters/BasicCharakterSpritesheet.png", 48, 48, 2);
