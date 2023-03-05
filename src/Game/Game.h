@@ -23,6 +23,7 @@ public:
     }
 
     static bool s_gameRunning;
+    static SDL_Event s_event;
 
 
 private:
@@ -34,7 +35,6 @@ private:
 
     SDL_Renderer *ptr_renderer;
     SDL_Window *ptr_window;
-    SDL_Event event;
 };
 }
 

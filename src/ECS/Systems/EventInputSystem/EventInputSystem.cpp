@@ -3,13 +3,14 @@
 #include "../../Components/Components.h"
 #include "../../Entity/EntityManager.h"
 #include "../../Components/ComponentManager.h"
+#include "../../../Listener/Events.h"
 #include "../../../Game/Game.h"
 
 namespace ngin2D
 {
 EventInputSystem::EventInputSystem()
 {
-    keyBoardState = SDL_GetKeyboardState(nullptr);
+
 }
 
 void EventInputSystem::update(float dt)
@@ -18,28 +19,52 @@ void EventInputSystem::update(float dt)
     for(Entity entity: EntityManager::instance()->getEntities())
     {
         bool isPlayer = ComponentManager::instance()->hasComponentType<PlayerComponent>(entity.componentBitset);
-        if(isPlayer)
+        bool hasComponent = ComponentManager::instance()->hasComponentType<MotionComponent>(entity.componentBitset);
+        hasComponent &= ComponentManager::instance()->hasComponentType<SpriteComponent>(entity.componentBitset);
+        hasComponent &= ComponentManager::instance()->hasComponentType<PositionComponent>(entity.componentBitset);
+
+
+        if(isPlayer && hasComponent)
         {
-            bool isKeyDown = (event.type == SDL_KEYDOWN);
-            std::cout << isKeyDown << std::endl;
+            KeyEvent::instance()->listen();
             auto motion = entity.getComponent<MotionComponent>();
-            if(keyBoardState[SDL_SCANCODE_A])
+            auto sprite = entity.getComponent<SpriteComponent>();
+            auto position = entity.getComponent<PositionComponent>();
+            if(KeyEvent::instance()->getKeyDown() == false)
             {
-                motion->velocity.x = 3 * (int)isKeyDown;
+                motion->velocity = Vector2I();
+            }
+            if(KeyEvent::instance()->sendEvent(SDL_SCANCODE_A))
+            {
+                motion->velocity.x = 1;
                 motion->direction  = -1;
+                position->x +=  motion->velocity.x * motion->direction;
+                sprite->row = 2;
+                sprite->col = 2;
             }
-            if(keyBoardState[SDL_SCANCODE_W])
+            if(KeyEvent::instance()->sendEvent(SDL_SCANCODE_D))
             {
-
-            }
-            if(keyBoardState[SDL_SCANCODE_S])
-            {
-
-            }
-            if(keyBoardState[SDL_SCANCODE_D])
-            {
-                motion->velocity.x = 3 * (int)isKeyDown;
+                motion->velocity.x = 1;
                 motion->direction  = 1;
+                position->x += motion->velocity.x * motion->direction;
+                sprite->row = 3;
+                sprite->col = 2;
+            }
+            if(KeyEvent::instance()->sendEvent(SDL_SCANCODE_W))
+            {
+                motion->velocity.y = 1;
+                motion->direction  = -1;
+                position->y += motion->velocity.y * motion->direction;
+                sprite->row = 1;
+                sprite->col = 2;
+            }
+            if(KeyEvent::instance()->sendEvent(SDL_SCANCODE_S))
+            {
+                motion->velocity.y = 1;
+                motion->direction  = 1;
+                position->y += motion->velocity.y * motion->direction;
+                sprite->row = 0;
+                sprite->col = 2;
             }
             break;
         }

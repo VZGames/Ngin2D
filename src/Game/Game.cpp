@@ -2,11 +2,13 @@
 #include "../Defines/Defines.h"
 #include "../GameMaps/GameMaps.h"
 #include "../Graphics/Graphics.h"
+#include "../Listener/Events.h"
 #include "../Scene/Scene.h"
 
 namespace ngin2D {
 bool Game::s_gameRunning          = false;
 Game *Game::s_instance            = nullptr;
+SDL_Event Game::s_event;
 
 Game::Game(): ptr_window(nullptr), ptr_renderer(nullptr)
 {
@@ -63,7 +65,7 @@ bool Game::InitGame(const char *title)
     Entity *player  = EntityManager::instance()->createEntity();
     player->addComponent<PlayerComponent>();
     player->addComponent<ColliderComponent>();
-    player->addComponent<PositionComponent>(Point2D(350, 150));
+    player->addComponent<PositionComponent>(350, 150);
     player->addComponent<SpriteComponent>("Lover", "./assets/Characters/BasicCharakterSpritesheet.png", 48, 48, 2);
     player->addComponent<MotionComponent>(Vector2I(), Vector2I());
     player->addComponent<HealthComponent>(100);
@@ -71,7 +73,7 @@ bool Game::InitGame(const char *title)
 
     Entity *enemy   = EntityManager::instance()->createEntity();
     enemy->addComponent<ColliderComponent>();
-    enemy->addComponent<PositionComponent>(Point2D(350, 250));
+    enemy->addComponent<PositionComponent>(350, 250);
     enemy->addComponent<SpriteComponent>("MyGirl", "./assets/Characters/BasicCharakterActions.png", 48, 48, 2);
     enemy->addComponent<MotionComponent>(Vector2I(), Vector2I());
     enemy->addComponent<HealthComponent>(25);
@@ -162,13 +164,7 @@ void Game::Quit()
 
 void Game::handle_events()
 {
-    while (SDL_PollEvent(&event))
-    {
-        if (event.type == SDL_QUIT || event.key.keysym.sym == SDLK_ESCAPE)
-        {
-            s_gameRunning = false;
-        }
-    }
+//    KeyEvent::instance()->listen();
 }
 }
 

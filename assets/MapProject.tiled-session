@@ -70,13 +70,14 @@
         },
         "Map2.tmx": {
             "expandedGroupLayers": [
+                10,
                 2
             ],
             "scale": 2,
-            "selectedLayer": 6,
+            "selectedLayer": 7,
             "viewCenter": {
-                "x": 426.5,
-                "y": 286.5
+                "x": 426,
+                "y": 154
             }
         },
         "Map2.tmx#Grass": {
