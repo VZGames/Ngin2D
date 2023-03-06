@@ -19,6 +19,7 @@ public:
 
     void findById(int tileId, TileSet &tileset) const;
 
+    const Size getMapSize() const;
     const std::vector<Layer> &getLayers() const;
     const std::vector<TileSet> &getTilesets() const;
     const std::vector<GroupLayer> &getGroups() const;

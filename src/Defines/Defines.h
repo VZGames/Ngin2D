@@ -6,5 +6,6 @@
 #include "PhysicsDef.h"
 #include "StructsDef.h"
 #include "EnumDef.h"
+#include "SpritesDef.h"
 
 #endif // DEFINES_H

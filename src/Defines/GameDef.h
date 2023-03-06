@@ -2,8 +2,8 @@
 #define GAMEDEF_H
 
 // window size
-#define WINDOW_WIDTH 720
-#define WINDOW_HEIGHT 480
+#define WINDOW_WIDTH 980
+#define WINDOW_HEIGHT 640
 
 #define FPS 30
 

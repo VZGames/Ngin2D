@@ -1,4 +1,5 @@
 #include "Player.h"
+#include "../../../../Defines/Defines.h"
 #include "../../EntityManager.h"
 #include "../../../../Event/KeyEvent/KeyEvent.h"
 Player *Player::s_instance = nullptr;
@@ -6,10 +7,10 @@ Player::Player()
 {
     entity  = EntityManager::instance()->createEntity();
     entity->addComponent<PlayerComponent>();
-    entity->addComponent<CameraComponent>();
+    entity->addComponent<CameraComponent>(Size{WINDOW_WIDTH, WINDOW_HEIGHT});
     entity->addComponent<ColliderComponent>();
     entity->addComponent<PositionComponent>(350, 150);
-    entity->addComponent<SpriteComponent>("Lover", "./assets/Characters/BasicCharakterSpritesheet.png", 48, 48, 2);
+    entity->addComponent<SpriteComponent>("Lover", PLAYER_MOTION, 48, 48, 2);
     entity->addComponent<MotionComponent>(Vector2I(), Vector2I());
     entity->addComponent<HealthComponent>(100);
     entity->addComponent<TransformComponent>();
@@ -34,45 +35,47 @@ void Player::handleKeyEvent()
         bool released = KeyEvent::instance()->isReleased();
         motion->velocity = Vector2I(0, 0);
 
-        sprite->frameCount = released? 2:4;
-
-        sprite->source =  "./assets/Characters/BasicCharakterSpritesheet.png";
+        sprite->frameCount = 2;
+        sprite->source =  PLAYER_MOTION;
         if(KeyEvent::instance()->sendEvent(SDL_SCANCODE_A))
         {
-            motion->velocity.x += 1 * LEFT;
+            motion->velocity.x += 3 * LEFT;
+            sprite->frameCount = 4;
             sprite->row = 2;
             sprite->col = 2;
         }
 
         if(KeyEvent::instance()->sendEvent(SDL_SCANCODE_D))
         {
-            motion->velocity.x += 1 * RIGHT;
+            motion->velocity.x += 3 * RIGHT;
+            sprite->frameCount = 4;
             sprite->row = 3;
             sprite->col = 2;
         }
 
         if(KeyEvent::instance()->sendEvent(SDL_SCANCODE_W))
         {
-            motion->velocity.y += 1 * UP;
+            motion->velocity.y += 3 * UP;
+            sprite->frameCount = 4;
             sprite->row = 1;
             sprite->col = 2;
         }
 
         if(KeyEvent::instance()->sendEvent(SDL_SCANCODE_S))
         {
-            motion->velocity.y += 1 * DOWN;
+            motion->velocity.y += 3 * DOWN;
+            sprite->frameCount = 4;
             sprite->row = 0;
             sprite->col = 2;
         }
 
         if(KeyEvent::instance()->sendEvent(SDL_SCANCODE_E))
         {
-            sprite->source = "./assets/Characters/BasicCharakterActions.png";
-            sprite->frameCount = 2;
+            sprite->source = PLAYER_ACTION;
+            sprite->frameCount = 3;
             sprite->row = 0;
             sprite->col = 0;
         }
-
     }
 }
 

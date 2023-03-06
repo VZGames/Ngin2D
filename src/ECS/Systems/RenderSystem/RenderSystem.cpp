@@ -1,5 +1,4 @@
 #include "RenderSystem.h"
-#include "SDL2/SDL.h"
 #include "../../Entity/EntityManager.h"
 #include "../../Components/Components.h"
 #include "../../Components/ComponentManager.h"

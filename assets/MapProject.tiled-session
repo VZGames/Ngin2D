@@ -70,18 +70,19 @@
         },
         "Map2.tmx": {
             "expandedGroupLayers": [
-                10,
-                2
+                2,
+                10
             ],
-            "scale": 2,
-            "selectedLayer": 7,
+            "scale": 0.33,
+            "selectedLayer": 1,
             "viewCenter": {
-                "x": 426,
-                "y": 154
+                "x": 251.51515151515162,
+                "y": 1175.7575757575758
             }
         },
         "Map2.tmx#Grass": {
-            "scaleInDock": 1
+            "scaleInDock": 1,
+            "scaleInEditor": 1
         },
         "Map2.tmx#Grass hill tiles v.2": {
             "scaleInDock": 1,
@@ -91,7 +92,7 @@
             "scaleInDock": 2
         },
         "Map2.tmx#Hill2": {
-            "scaleInDock": 4
+            "scaleInDock": 2
         },
         "Map2.tmx#Paths": {
             "scaleInDock": 1
@@ -134,18 +135,20 @@
     "map.tileWidth": 16,
     "map.width": 720,
     "openFiles": [
-        "Map2.tmx"
+        "Map2.tmx",
+        "Map1.tmx"
     ],
     "project": "MapProject.tiled-project",
     "recentFiles": [
-        "Map2.tmx",
         "Map1.tmx",
+        "Map2.tmx",
         "Map3.tmx",
         "D:/Projects/O/SDL2_project/build-XYZ-Desktop_MinGW_64_bit-Debug/assets/Map1.tmx",
         "Grass.tsx",
         "Hill.tsx",
         "Water.tsx"
     ],
+    "resizeMap.removeObjects": true,
     "tileset.embedInMap": true,
     "tileset.lastUsedFormat": "tsx",
     "tileset.tileSize": {

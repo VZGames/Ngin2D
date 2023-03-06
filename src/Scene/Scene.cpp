@@ -19,6 +19,7 @@ void Scene::init()
 
     SystemManager::instance()->addSystem<MovementSystem>();
     SystemManager::instance()->addSystem<RenderSystem>();
+    SystemManager::instance()->addSystem<CameraSystem>();
     SystemManager::instance()->init();
 }
 

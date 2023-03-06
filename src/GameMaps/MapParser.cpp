@@ -39,8 +39,8 @@ void MapParser::parseTmx()
         int tileWidth  = std::atoi(ptr_rootElement->Attribute("tilewidth"));
         int tileHeight = std::atoi(ptr_rootElement->Attribute("tileheight"));
 
-        mapSize = {width, height};
         tileSize = {tileWidth, tileHeight};
+        mapSize = {width * tileWidth, height * tileHeight};
 
         for(TiXmlElement *e = ptr_rootElement->FirstChildElement(); e != NULL; e = e->NextSiblingElement())
         {
@@ -185,6 +185,11 @@ void MapParser::findById(int tileId, TileSet &result) const
         }
     }
     return;
+}
+
+const Size MapParser::getMapSize() const
+{
+    return mapSize;
 }
 
 const std::vector<GroupLayer> &MapParser::getGroups() const
