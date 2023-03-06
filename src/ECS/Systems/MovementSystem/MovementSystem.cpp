@@ -2,6 +2,7 @@
 #include "../../Components/Components.h"
 #include "../../Entity/EntityManager.h"
 #include "../../Components/ComponentManager.h"
+#include "../../../Game/Game.h"
 
 namespace ngin2D {
 MovementSystem::MovementSystem()
@@ -24,6 +25,12 @@ void MovementSystem::update(float dt)
             if(hasCamera)
             {
                 auto camera = entity.getComponent<CameraComponent>();
+                Game::s_camera = {
+                    camera->position.getX(),
+                    camera->position.getY(),
+                    camera->size.width,
+                    camera->size.height
+                };
             }
             position->x += (motion->velocity.x);
             position->y += (motion->velocity.y);

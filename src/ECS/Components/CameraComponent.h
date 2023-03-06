@@ -9,6 +9,7 @@ struct CameraComponent: public ComponentBase<CameraComponent>
     CameraComponent(Size size): size(size){}
     Size size;
     Point2D position;
+    int zoom = 5;
 };
 }
 

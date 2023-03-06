@@ -6,6 +6,7 @@
 #include "../Math/math2D.h"
 #include "../Defines/Defines.h"
 #include "../Graphics/TextureManager/TextureManager.h"
+#include "../Game/Game.h"
 
 namespace ngin2D {
 LayerManager *LayerManager::s_instance = nullptr;
@@ -43,8 +44,8 @@ void LayerManager::draw()
         {
             // position next tile (x,y)
             int x, y;
-            x = (i % layer.width);
-            y = (i / layer.width);
+            x = (i % layer.width) - Game::s_camera.x/16;
+            y = (i / layer.width) - Game::s_camera.y/16;
 
 
             int tileID = data.at(i);

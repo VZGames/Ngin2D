@@ -2,6 +2,7 @@
 #include "../../../../Defines/Defines.h"
 #include "../../EntityManager.h"
 #include "../../../../Event/KeyEvent/KeyEvent.h"
+
 Player *Player::s_instance = nullptr;
 Player::Player()
 {
@@ -36,7 +37,6 @@ void Player::handleKeyEvent()
         motion->velocity = Vector2I(0, 0);
 
         sprite->frameCount = 2;
-        sprite->source =  PLAYER_MOTION;
         if(KeyEvent::instance()->sendEvent(SDL_SCANCODE_A))
         {
             motion->velocity.x += 3 * LEFT;
@@ -67,14 +67,6 @@ void Player::handleKeyEvent()
             sprite->frameCount = 4;
             sprite->row = 0;
             sprite->col = 2;
-        }
-
-        if(KeyEvent::instance()->sendEvent(SDL_SCANCODE_E))
-        {
-            sprite->source = PLAYER_ACTION;
-            sprite->frameCount = 3;
-            sprite->row = 0;
-            sprite->col = 0;
         }
     }
 }

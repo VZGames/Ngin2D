@@ -29,6 +29,18 @@ struct Entity
     }
 
     template<typename T>
+    bool destroyComponent()
+    {
+        const char *typeName = typeid(T).name();
+        auto it = components.find(typeName);
+        if(it == components.end())
+            return 0;
+        components.erase(it);
+        return 1;
+
+    }
+
+    template<typename T>
     T *getComponent() const
     {
         const char *typeName = typeid(T).name();

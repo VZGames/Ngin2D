@@ -21,15 +21,19 @@ SDL_Texture *TextureManager::textureById(const char * textureID)
 
 bool TextureManager::loadTexture(const char * textureID, const char *filePath)
 {
-//    if(textureDict.find(textureID) != textureDict.end()) return 1;
-//    printf("TextureID: %s, Texture Path: %s \n", textureID, filePath);
+    if(textureDict.find(textureID) != textureDict.end())
+    {
+        return 1;
+    }
+    printf("TextureID: %s, Texture Path: %s \n", textureID, filePath);
 
     SDL_Texture *texture = NULL;
     SDL_Surface *surface = IMG_Load(filePath);
-    if (surface) {
-        texture = SDL_CreateTextureFromSurface(Game::instance()->getRenderer(), surface);
-        SDL_FreeSurface(surface);
+    if (!surface) {
+        return 0;
     }
+    texture = SDL_CreateTextureFromSurface(Game::instance()->getRenderer(), surface);
+    SDL_FreeSurface(surface);
 
     textureDict[textureID] = texture;
     return 1;
