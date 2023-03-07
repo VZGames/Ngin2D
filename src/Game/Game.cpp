@@ -41,7 +41,7 @@ bool Game::InitGame(const char *title)
 
     // [1] init SDL and create the Game Window
     SDL_WindowFlags window_flags = (SDL_WindowFlags)(SDL_WINDOW_RESIZABLE | SDL_WINDOW_ALLOW_HIGHDPI);
-    ptr_window = SDL_CreateWindow(title, SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, WINDOW_WIDTH, WINDOW_HEIGHT, 0);
+    ptr_window = SDL_CreateWindow(title, SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, WINDOW_WIDTH, WINDOW_HEIGHT, window_flags);
 
 
     if (ptr_window == nullptr)
@@ -53,6 +53,7 @@ bool Game::InitGame(const char *title)
 
     // [2] init renderer
     ptr_renderer = SDL_CreateRenderer(ptr_window, -1, SDL_RENDERER_ACCELERATED);
+    SDL_RenderSetScale(ptr_renderer, ZOOM_FACTOR, ZOOM_FACTOR);
     if (ptr_renderer == nullptr)
     {
         printf("Could not create renderer: %s\n\n", SDL_GetError());

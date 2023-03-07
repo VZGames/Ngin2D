@@ -8,10 +8,10 @@ Player::Player()
 {
     entity  = EntityManager::instance()->createEntity();
     entity->addComponent<PlayerComponent>();
-    entity->addComponent<CameraComponent>(Size{WINDOW_WIDTH, WINDOW_HEIGHT});
+    entity->addComponent<CameraComponent>(Size{200, 200});
     entity->addComponent<ColliderComponent>();
     entity->addComponent<PositionComponent>(350, 150);
-    entity->addComponent<SpriteComponent>("Lover", PLAYER_MOTION, 48, 48, 2);
+    entity->addComponent<SpriteComponent>("Lover", PLAYER_MOTION, 48, 48, 2, 200);
     entity->addComponent<MotionComponent>(Vector2I(), Vector2I());
     entity->addComponent<HealthComponent>(100);
     entity->addComponent<TransformComponent>();

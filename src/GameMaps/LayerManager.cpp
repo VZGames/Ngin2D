@@ -29,7 +29,6 @@ LayerManager *LayerManager::instance()
 
 void LayerManager::draw()
 {
-    fflush(stdout);
     std::clock_t t;
     t = clock();
 
@@ -44,8 +43,8 @@ void LayerManager::draw()
         {
             // position next tile (x,y)
             int x, y;
-            x = (i % layer.width) - Game::s_camera.x/16;
-            y = (i / layer.width) - Game::s_camera.y/16;
+            x = (i % layer.width);
+            y = (i / layer.width);
 
 
             int tileID = data.at(i);
@@ -70,10 +69,10 @@ void LayerManager::draw()
                         tileset.name,
                         tileset.tileWidth,
                         tileset.tileHeight,
-                        Point2D(x  *tileset.tileWidth, y  *tileset.tileHeight),
+                        Point2D(x * tileset.tileWidth - Game::s_camera.x,
+                                y * tileset.tileHeight - Game::s_camera.y),
                         tileY,
                         tileX);
-
         }
         m.unlock();
     };
