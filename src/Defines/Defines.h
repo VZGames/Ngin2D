@@ -7,5 +7,6 @@
 #include "StructsDef.h"
 #include "EnumDef.h"
 #include "SpritesDef.h"
+#include "GlobalDef.h"
 
 #endif // DEFINES_H

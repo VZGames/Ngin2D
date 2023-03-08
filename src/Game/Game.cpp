@@ -5,6 +5,7 @@
 #include "../Event/Events.h"
 #include "../Scene/Scene.h"
 
+int g_width, g_height;
 namespace ngin2D {
 bool Game::s_gameRunning          = false;
 Game *Game::s_instance            = nullptr;
@@ -22,6 +23,8 @@ Game *Game::instance()
 
 Game::~Game()
 {
+    SDL_free(ptr_window);
+    SDL_free(ptr_renderer);
 }
 
 bool Game::InitGame(const char *title)
@@ -51,9 +54,11 @@ bool Game::InitGame(const char *title)
         return 0;
     }
 
+    SDL_GetWindowSize(ptr_window, &g_width, &g_height);
+
+
     // [2] init renderer
     ptr_renderer = SDL_CreateRenderer(ptr_window, -1, SDL_RENDERER_ACCELERATED);
-    SDL_RenderSetScale(ptr_renderer, ZOOM_FACTOR, ZOOM_FACTOR);
     if (ptr_renderer == nullptr)
     {
         printf("Could not create renderer: %s\n\n", SDL_GetError());
@@ -62,6 +67,8 @@ bool Game::InitGame(const char *title)
 
     // [3] Select the color for drawing.
     SDL_SetRenderDrawColor(ptr_renderer, 255, 255, 255, 255);
+
+    SDL_RenderSetScale(ptr_renderer, ZOOM_FACTOR, ZOOM_FACTOR);
 
     Scene::instance()->init();
 

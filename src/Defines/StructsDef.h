@@ -34,7 +34,7 @@ typedef struct Image
 typedef struct Tile
 {
     char *src;
-    Point2D position;
+    Point2DI position;
     int width, height;
 } Tile;
 

@@ -17,9 +17,9 @@ void Scene::init()
 {
     Player::instance();
 
+    SystemManager::instance()->addSystem<CameraSystem>();
     SystemManager::instance()->addSystem<MovementSystem>();
     SystemManager::instance()->addSystem<RenderSystem>();
-    SystemManager::instance()->addSystem<CameraSystem>();
     SystemManager::instance()->init();
 }
 
@@ -35,7 +35,6 @@ void Scene::render()
 
 void Scene::handleEvents()
 {
-    KeyEvent::instance()->listen();
     Player::instance()->handleKeyEvent();
     Player::instance()->handleMouseEvent();
 }

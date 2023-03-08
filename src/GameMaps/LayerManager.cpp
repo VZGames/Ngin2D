@@ -69,7 +69,7 @@ void LayerManager::draw()
                         tileset.name,
                         tileset.tileWidth,
                         tileset.tileHeight,
-                        Point2D(x * tileset.tileWidth - Game::s_camera.x,
+                        Point2DI(x * tileset.tileWidth - Game::s_camera.x,
                                 y * tileset.tileHeight - Game::s_camera.y),
                         tileY,
                         tileX);

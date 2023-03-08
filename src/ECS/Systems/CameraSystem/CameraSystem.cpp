@@ -25,8 +25,8 @@ void CameraSystem::update(float dt)
             auto cam      = entity.getComponent<CameraComponent>();
             auto sprite   = entity.getComponent<SpriteComponent>();
             auto position = entity.getComponent<PositionComponent>();
-            cam->position.setX((position->x + sprite->frameWidth/2) - cam->size.width/2);
-            cam->position.setY((position->y + sprite->frameHeight/2) - cam->size.height/2);
+            cam->position.setX((position->x + sprite->frameWidth)/ZOOM_FACTOR - cam->size.width/2);
+            cam->position.setY((position->y + sprite->frameHeight)/ZOOM_FACTOR - cam->size.height/2);
 
             int cameraX, cameraY;
             int mapWidth, mapHeight;
@@ -34,30 +34,38 @@ void CameraSystem::update(float dt)
             mapWidth  = MapParser::instance()->getMapSize().width;
             mapHeight = MapParser::instance()->getMapSize().height;
 
-            if (cam->position.getX() <= 0) {
+
+
+            if (cam->position.getX() < 0) {
                 cam->position.setX(0);
             }
-            if (cam->position.getY() <= 0) {
+            if (cam->position.getY() < 0) {
                 cam->position.setY(0);
             }
-            if (cam->position.getX() > mapWidth - cam->size.width) {
-                cam->position.setX(mapWidth - cam->size.width);
+            if (cam->position.getX() > (mapWidth/ZOOM_FACTOR - cam->size.width)) {
+                std::cout << "XXXXXX" << std::endl;
+                cam->position.setX((mapWidth/ZOOM_FACTOR - cam->size.width));
             }
-            if (cam->position.getY() > mapHeight - cam->size.height) {
-                cam->position.setY(mapHeight - cam->size.height);
+            if (cam->position.getY() > mapHeight/ZOOM_FACTOR - cam->size.height) {
+                cam->position.setY(mapHeight/ZOOM_FACTOR - cam->size.height);
             }
 
             cameraX = cam->position.getX();
             cameraY = cam->position.getY();
 
-//            position->x = cameraX + cam->size.width/2;
-//            position->y = cameraY + cam->size.height/2;
+            Game::s_camera = {
+                position->x - cameraX,
+                position->y - cameraY,
+                cam->size.width,
+                cam->size.height
+            };
 
-
-
-            printf("Camera X %d, Y %d, Map size W %d, H %d\n", cameraX, cameraY, mapWidth, mapHeight);
-
-            Game::s_camera = {position->x - cameraX, position->y - cameraY, cam->size.width, cam->size.height};
+//            printf("X %d Y %d, W %d H %d\n",
+//                   Game::s_camera.x,
+//                   Game::s_camera.y,
+//                   Game::s_camera.w,
+//                   Game::s_camera.h
+//                   );
         }
     }
 }

@@ -7,7 +7,7 @@ namespace ngin2D {
 struct MouseAreaComponent: public ComponentBase<MouseAreaComponent>
 {
     MouseAreaComponent();
-    Point2D position;
+    Point2DI position;
 };
 }
 

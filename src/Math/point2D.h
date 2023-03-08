@@ -1,10 +1,11 @@
 #ifndef POINT2D_H
 #define POINT2D_H
 
+template<typename T>
 class Point2D
 {
 public:
-    Point2D(int x, int y): x(x),y(y){}
+    Point2D(T x, T y): x(x),y(y){}
 
     Point2D(): x(0), y(0){}
 
@@ -14,30 +15,33 @@ public:
         this->y = copy.y;
     }
 
-    int getX() const
+    T getX() const
     {
         return x;
     }
 
-    void setX(int newX)
+    void setX(T newX)
     {
         x = newX;
     }
 
-    int getY() const
+    T getY() const
     {
         return y;
     }
 
-    void setY(int newY)
+    void setY(T newY)
     {
         y = newY;
     }
 
 private:
-    int x,y;
+    T x,y;
 };
 
+using Point2DI = Point2D<int>;
+using Point2DF = Point2D<float>;
+using Point2DLF = Point2D<double>;
 
 #endif // POINT2D_H
 
