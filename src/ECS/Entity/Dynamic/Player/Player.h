@@ -17,6 +17,7 @@ public:
 
 private:
     Player();
+    ~Player();
     static Player *s_instance;
     Entity *entity;
 };

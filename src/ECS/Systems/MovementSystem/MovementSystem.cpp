@@ -30,17 +30,17 @@ void MovementSystem::update(float dt)
             {
                 position->x = 0;
             }
-            if(position->x > (g_width - sprite->frameWidth * ZOOM_FACTOR)/ZOOM_FACTOR)
+            if(position->x > (g_width - sprite->frameWidth))
             {
-                position->x = g_width/ZOOM_FACTOR - sprite->frameWidth;
+                position->x = (g_width - sprite->frameWidth);
             }
             if(position->y < 0)
             {
                 position->y = 0;
             }
-            if(position->y > (g_height - sprite->frameHeight * ZOOM_FACTOR)/ZOOM_FACTOR)
+            if(position->y > (g_height - sprite->frameHeight))
             {
-                position->y = g_height/ZOOM_FACTOR - sprite->frameHeight;
+                position->y = (g_height - sprite->frameHeight);
             }
         }
     }

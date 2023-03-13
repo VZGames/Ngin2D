@@ -25,8 +25,8 @@ void CameraSystem::update(float dt)
             auto cam      = entity.getComponent<CameraComponent>();
             auto sprite   = entity.getComponent<SpriteComponent>();
             auto position = entity.getComponent<PositionComponent>();
-            cam->position.setX((position->x + sprite->frameWidth)/ZOOM_FACTOR - cam->size.width/2);
-            cam->position.setY((position->y + sprite->frameHeight)/ZOOM_FACTOR - cam->size.height/2);
+            cam->position.setX(position->x - cam->size.width/2);
+            cam->position.setY(position->y - cam->size.height/2);
 
             int cameraX, cameraY;
             int mapWidth, mapHeight;
@@ -42,12 +42,11 @@ void CameraSystem::update(float dt)
             if (cam->position.getY() < 0) {
                 cam->position.setY(0);
             }
-            if (cam->position.getX() > (mapWidth/ZOOM_FACTOR - cam->size.width)) {
-                std::cout << "XXXXXX" << std::endl;
-                cam->position.setX((mapWidth/ZOOM_FACTOR - cam->size.width));
+            if (cam->position.getX() > (mapWidth - cam->size.width)) {
+                cam->position.setX((mapWidth - cam->size.width));
             }
-            if (cam->position.getY() > mapHeight/ZOOM_FACTOR - cam->size.height) {
-                cam->position.setY(mapHeight/ZOOM_FACTOR - cam->size.height);
+            if (cam->position.getY() > mapHeight - cam->size.height) {
+                cam->position.setY(mapHeight - cam->size.height);
             }
 
             cameraX = cam->position.getX();

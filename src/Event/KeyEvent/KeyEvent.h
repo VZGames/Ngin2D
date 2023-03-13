@@ -19,6 +19,7 @@ public:
 
 private:
     KeyEvent();
+    ~KeyEvent();
     static KeyEvent *s_instance;
     const Uint8 *keyBoardState;
     bool released = 1;

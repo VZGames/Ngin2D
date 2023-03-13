@@ -43,6 +43,12 @@ KeyEvent::KeyEvent()
     keyBoardState = SDL_GetKeyboardState(nullptr);
 }
 
+KeyEvent::~KeyEvent()
+{
+    delete keyBoardState;
+    keyBoardState = NULL;
+}
+
 bool KeyEvent::isReleased() const
 {
     return released;

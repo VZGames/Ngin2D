@@ -3,13 +3,17 @@
         "height": 4300,
         "width": 2
     },
-    "activeFile": "Map2.tmx",
+    "activeFile": "Characters/BasicCharakterSpritesheet.tsx",
     "expandedProjectPaths": [
         "."
     ],
     "fileStates": {
         "": {
             "scaleInDock": 1
+        },
+        "Characters/BasicCharakterSpritesheet.tsx": {
+            "scaleInDock": 1,
+            "scaleInEditor": 1
         },
         "D:/Projects/O/SDL2_project/build-XYZ-Desktop_MinGW_64_bit-Debug/assets/Grass.tsx": {
             "scaleInDock": 1
@@ -49,8 +53,8 @@
             "scale": 0.75,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 417.33333333333326,
-                "y": 274.66666666666663
+                "x": 360,
+                "y": 240.66666666666666
             }
         },
         "Map1.tmx#BasicGrassBiomthings": {
@@ -76,7 +80,7 @@
             "scale": 0.33,
             "selectedLayer": 1,
             "viewCenter": {
-                "x": 251.51515151515162,
+                "x": 254.54545454545462,
                 "y": 1175.7575757575758
             }
         },
@@ -136,12 +140,14 @@
     "map.width": 720,
     "openFiles": [
         "Map2.tmx",
-        "Map1.tmx"
+        "Map1.tmx",
+        "Characters/BasicCharakterSpritesheet.tsx"
     ],
     "project": "MapProject.tiled-project",
     "recentFiles": [
-        "Map1.tmx",
         "Map2.tmx",
+        "Map1.tmx",
+        "Characters/BasicCharakterSpritesheet.tsx",
         "Map3.tmx",
         "D:/Projects/O/SDL2_project/build-XYZ-Desktop_MinGW_64_bit-Debug/assets/Map1.tmx",
         "Grass.tsx",
@@ -149,10 +155,10 @@
         "Water.tsx"
     ],
     "resizeMap.removeObjects": true,
-    "tileset.embedInMap": true,
+    "tileset.embedInMap": false,
     "tileset.lastUsedFormat": "tsx",
     "tileset.tileSize": {
-        "height": 48,
-        "width": 48
+        "height": 16,
+        "width": 16
     }
 }
