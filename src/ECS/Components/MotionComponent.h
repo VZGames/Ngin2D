@@ -6,10 +6,11 @@
 namespace ngin2D {
 struct MotionComponent: public ComponentBase<MotionComponent>
 {
-    MotionComponent(Vector2I velocity, Vector2I acceleration): velocity(velocity), acceleration(acceleration)
+    MotionComponent(double speed, Vector2LF velocity, Vector2LF acceleration): speed(speed), velocity(velocity), acceleration(acceleration)
     {}
-    Vector2I velocity;
-    Vector2I acceleration;
+    double speed;
+    Vector2LF velocity;
+    Vector2LF acceleration;
 };
 }
 #endif // MotionComponent_H

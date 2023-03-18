@@ -66,9 +66,9 @@ bool Game::InitGame(const char *title)
     }
 
     // [3] Select the color for drawing.
+    SDL_RenderSetScale(ptr_renderer, ZOOM_FACTOR, ZOOM_FACTOR);
     SDL_SetRenderDrawColor(ptr_renderer, 255, 255, 255, 255);
 
-    SDL_RenderSetScale(ptr_renderer, ZOOM_FACTOR, ZOOM_FACTOR);
 
     Scene::instance()->init();
 

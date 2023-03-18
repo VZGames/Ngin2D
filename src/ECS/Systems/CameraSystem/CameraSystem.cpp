@@ -22,43 +22,49 @@ void CameraSystem::update(float dt)
 
         if(hasComponent)
         {
-            auto cam      = entity.getComponent<CameraComponent>();
+            auto camera      = entity.getComponent<CameraComponent>();
             auto sprite   = entity.getComponent<SpriteComponent>();
             auto position = entity.getComponent<PositionComponent>();
-            cam->position.setX(position->x - cam->size.width/2);
-            cam->position.setY(position->y - cam->size.height/2);
 
             int cameraX, cameraY;
-            int mapWidth, mapHeight;
 
+            cameraX = position->x * ZOOM_FACTOR - (position->x + sprite->frameWidth)- camera->size.width/2;
+            cameraY = position->y * ZOOM_FACTOR - (position->y + sprite->frameHeight) - camera->size.height/2;
+
+            int mapWidth, mapHeight;
             mapWidth  = MapParser::instance()->getMapSize().width;
             mapHeight = MapParser::instance()->getMapSize().height;
 
 
+            if (cameraX < 0)
+            {
+                cameraX = 0;
+            }
+            if (cameraY < 0)
+            {
+                cameraY = 0;
+            }
+            if (cameraX > (mapWidth - camera->size.width) * ZOOM_FACTOR)
+            {
+                cameraX = (mapWidth - camera->size.width) * ZOOM_FACTOR;
+            }
+            if (cameraY > (mapHeight - camera->size.height) * ZOOM_FACTOR)
+            {
+                cameraY = (mapHeight - camera->size.height) * ZOOM_FACTOR;
+            }
 
-            if (cam->position.getX() < 0) {
-                cam->position.setX(0);
-            }
-            if (cam->position.getY() < 0) {
-                cam->position.setY(0);
-            }
-            if (cam->position.getX() > (mapWidth - cam->size.width)) {
-                cam->position.setX((mapWidth - cam->size.width));
-            }
-            if (cam->position.getY() > mapHeight - cam->size.height) {
-                cam->position.setY(mapHeight - cam->size.height);
-            }
 
-            cameraX = cam->position.getX();
-            cameraY = cam->position.getY();
+            Point2DI newPos(cameraX, cameraY);
+            camera->position = newPos;
+
 
             Game::s_camera = {
-                position->x - cameraX,
-                position->y - cameraY,
-                cam->size.width,
-                cam->size.height
+                camera->position.getX(),
+                camera->position.getY(),
+                camera->size.width,
+                camera->size.height
             };
-
+//            std::cout << "Camera Position\t" << camera->position;
 //            printf("X %d Y %d, W %d H %d\n",
 //                   Game::s_camera.x,
 //                   Game::s_camera.y,

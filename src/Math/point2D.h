@@ -1,6 +1,7 @@
 #ifndef POINT2D_H
 #define POINT2D_H
 
+#include <iostream>
 template<typename T>
 class Point2D
 {
@@ -13,6 +14,19 @@ public:
     {
         this->x = copy.x;
         this->y = copy.y;
+    }
+
+    void operator=(Point2D<T> &right)
+    {
+        this->x = right.x;
+        this->y = right.y;
+    }
+
+    T &operator-=(Point2D<T> &right)
+    {
+        this->x -= right.x;
+        this->y -= right.y;
+        return this;
     }
 
     T getX() const
@@ -33,6 +47,13 @@ public:
     void setY(T newY)
     {
         y = newY;
+    }
+
+    // log
+    friend std::ostream &operator<<(std::ostream &out, Point2D<T> &val)
+    {
+        out << " (" << val.x << ", " << val.y << ") \n";
+        return out;
     }
 
 private:
