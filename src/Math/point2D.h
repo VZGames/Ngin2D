@@ -16,10 +16,11 @@ public:
         this->y = copy.y;
     }
 
-    void operator=(Point2D<T> &other)
+    Point2D<T> &operator=(const Point2D<T> &other)
     {
         this->x = other.x;
         this->y = other.y;
+        return *this;
     }
 
     Point2D<T> &operator-=(const Point2D<T> &other)

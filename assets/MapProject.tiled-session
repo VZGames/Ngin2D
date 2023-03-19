@@ -3,7 +3,7 @@
         "height": 4300,
         "width": 2
     },
-    "activeFile": "Characters/BasicCharakterSpritesheet.tsx",
+    "activeFile": "Map2.tmx",
     "expandedProjectPaths": [
         "."
     ],
@@ -53,8 +53,8 @@
             "scale": 0.75,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 360,
-                "y": 240.66666666666666
+                "x": 359.99999999999994,
+                "y": 241.33333333333331
             }
         },
         "Map1.tmx#BasicGrassBiomthings": {
@@ -74,14 +74,14 @@
         },
         "Map2.tmx": {
             "expandedGroupLayers": [
-                2,
-                10
+                10,
+                2
             ],
             "scale": 0.33,
             "selectedLayer": 1,
             "viewCenter": {
-                "x": 254.54545454545462,
-                "y": 1175.7575757575758
+                "x": 812.1212121212122,
+                "y": 2375.757575757576
             }
         },
         "Map2.tmx#Grass": {
@@ -109,11 +109,11 @@
             "scaleInDock": 1
         },
         "Map3.tmx": {
-            "scale": 0.125,
+            "scale": 0.0625,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 8664,
-                "y": 5696
+                "x": 5760,
+                "y": 3832
             }
         },
         "Map3.tmx#Grass": {
@@ -139,16 +139,15 @@
     "map.tileWidth": 16,
     "map.width": 720,
     "openFiles": [
-        "Map2.tmx",
-        "Map1.tmx",
-        "Characters/BasicCharakterSpritesheet.tsx"
+        "Map3.tmx",
+        "Map2.tmx"
     ],
     "project": "MapProject.tiled-project",
     "recentFiles": [
+        "Map3.tmx",
         "Map2.tmx",
         "Map1.tmx",
         "Characters/BasicCharakterSpritesheet.tsx",
-        "Map3.tmx",
         "D:/Projects/O/SDL2_project/build-XYZ-Desktop_MinGW_64_bit-Debug/assets/Map1.tmx",
         "Grass.tsx",
         "Hill.tsx",

@@ -8,12 +8,13 @@ Player::Player()
 {
     entity  = EntityManager::instance()->createEntity();
     entity->addComponent<PlayerComponent>();
-    entity->addComponent<CameraComponent>(Size{g_width, g_height});
+    entity->addComponent<CameraComponent>(Size{100, 100});
     entity->addComponent<ColliderComponent>();
     entity->addComponent<PositionComponent>(((g_width - 8)/2) / ZOOM_FACTOR, ((g_height - 8)/2) / ZOOM_FACTOR);
     entity->addComponent<SpriteComponent>("Lover", PLAYER_MOTION, 16, 16, 2, 200);
-    entity->addComponent<MotionComponent>(5, Vector2LF(), Vector2LF());
+    entity->addComponent<MotionComponent>(2.5, Vector2LF(), Vector2LF());
     entity->addComponent<HealthComponent>(100);
+    entity->addComponent<SpawnComponent>(Point2DI(350, 150));
     entity->addComponent<TransformComponent>();
 }
 
@@ -34,6 +35,7 @@ void Player::handleKeyEvent()
     hasComponent &= ComponentManager::instance()->hasComponentType<MotionComponent>(entity->componentBitset);
     hasComponent &= ComponentManager::instance()->hasComponentType<SpriteComponent>(entity->componentBitset);
     hasComponent &= ComponentManager::instance()->hasComponentType<CameraComponent>(entity->componentBitset);
+    hasComponent &= ComponentManager::instance()->hasComponentType<SpawnComponent>(entity->componentBitset);
 
     if(hasComponent)
     {
@@ -41,14 +43,16 @@ void Player::handleKeyEvent()
         auto sprite = entity->getComponent<SpriteComponent>();
         auto position = entity->getComponent<PositionComponent>();
         auto camera = entity->getComponent<CameraComponent>();
+        auto spawn = entity->getComponent<SpawnComponent>();
+
 
 
         int mapWidth, mapHeight;
         mapWidth  = MapParser::instance()->getMapSize().width;
         mapHeight = MapParser::instance()->getMapSize().height;
 
-        int _x = 0;
-        int _y = 0;
+        int _x = camera->position.getX();
+        int _y = camera->position.getY();
 
         sprite->frameCount = 2;
         if(KeyEvent::instance()->sendEvent(SDL_SCANCODE_A))

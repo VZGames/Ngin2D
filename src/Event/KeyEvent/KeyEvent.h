@@ -16,6 +16,7 @@ public:
     const SDL_Event &getEvent() const;
 
     bool isReleased() const;
+    bool isPressed() const;
 
 private:
     KeyEvent();

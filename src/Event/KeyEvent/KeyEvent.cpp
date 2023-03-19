@@ -24,6 +24,18 @@ void KeyEvent::listen()
         case SDL_KEYUP:
             released = 1;
             break;
+        case SDL_WINDOWEVENT:
+            switch (event.window.event) {
+            case SDL_WINDOWEVENT_RESIZED:
+                break;
+            case SDL_WINDOWEVENT_CLOSE:
+                break;
+            case SDL_WINDOWEVENT_MINIMIZED:
+                break;
+            case SDL_WINDOWEVENT_MAXIMIZED:
+                break;
+            }
+            break;
         }
     }
 }
@@ -52,6 +64,11 @@ KeyEvent::~KeyEvent()
 bool KeyEvent::isReleased() const
 {
     return released;
+}
+
+bool KeyEvent::isPressed() const
+{
+    return !released;
 }
 
 const SDL_Event &KeyEvent::getEvent() const

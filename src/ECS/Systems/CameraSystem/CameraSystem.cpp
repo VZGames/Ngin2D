@@ -17,14 +17,10 @@ void CameraSystem::update(float dt)
     for(Entity entity: EntityManager::instance()->getEntities())
     {
         bool hasComponent = ComponentManager::instance()->hasComponentType<CameraSystem>(entity.componentBitset);
-        hasComponent &= ComponentManager::instance()->hasComponentType<PositionComponent>(entity.componentBitset);
-        hasComponent &= ComponentManager::instance()->hasComponentType<SpriteComponent>(entity.componentBitset);
 
         if(hasComponent)
         {
-            auto camera      = entity.getComponent<CameraComponent>();
-            auto sprite   = entity.getComponent<SpriteComponent>();
-            auto position = entity.getComponent<PositionComponent>();
+            auto camera   = entity.getComponent<CameraComponent>();
 
             int cameraX, cameraY;
 
@@ -54,8 +50,7 @@ void CameraSystem::update(float dt)
             }
 
 
-            Point2DI newPos(cameraX, cameraY);
-            camera->position = newPos;
+            camera->position = Point2DI(cameraX, cameraY);
 
 
             Game::s_camera = {

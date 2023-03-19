@@ -10,7 +10,7 @@ namespace ngin2D {
 bool Game::s_gameRunning          = false;
 Game *Game::s_instance            = nullptr;
 SDL_Event Game::s_event;
-SDL_Rect Game::s_camera = {0, 0, g_width, g_height};
+SDL_Rect Game::s_camera;
 
 Game::Game(): ptr_window(nullptr), ptr_renderer(nullptr)
 {
