@@ -9,7 +9,7 @@ SpawnSystem::SpawnSystem()
 
 }
 
-void SpawnSystem::update(float dt)
+void SpawnSystem::init()
 {
     for(Entity entity: EntityManager::instance()->getEntities())
     {
@@ -24,5 +24,15 @@ void SpawnSystem::update(float dt)
             camera->position = Point2DI(spawn->position.getX(), spawn->position.getY());
         }
     }
+}
+
+void SpawnSystem::update(float dt)
+{
+
+}
+
+void SpawnSystem::render()
+{
+
 }
 }

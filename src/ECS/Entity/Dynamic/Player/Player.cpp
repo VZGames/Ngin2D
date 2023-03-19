@@ -51,8 +51,8 @@ void Player::handleKeyEvent()
         mapWidth  = MapParser::instance()->getMapSize().width;
         mapHeight = MapParser::instance()->getMapSize().height;
 
-        int _x = camera->position.getX();
-        int _y = camera->position.getY();
+        int _x = 0;
+        int _y = 0;
 
         sprite->frameCount = 2;
         if(KeyEvent::instance()->sendEvent(SDL_SCANCODE_A))
@@ -88,7 +88,6 @@ void Player::handleKeyEvent()
         }
 
         camera->position += Point2DI(_x, _y);
-        std::cout << camera->position;
     }
 }
 
