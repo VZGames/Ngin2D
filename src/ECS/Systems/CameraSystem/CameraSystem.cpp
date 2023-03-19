@@ -28,8 +28,8 @@ void CameraSystem::update(float dt)
 
             int cameraX, cameraY;
 
-            cameraX = position->x * ZOOM_FACTOR - (position->x + sprite->frameWidth)- camera->size.width/2;
-            cameraY = position->y * ZOOM_FACTOR - (position->y + sprite->frameHeight) - camera->size.height/2;
+            cameraX = camera->position.getX();
+            cameraY = camera->position.getY();
 
             int mapWidth, mapHeight;
             mapWidth  = MapParser::instance()->getMapSize().width;

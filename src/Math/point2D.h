@@ -16,17 +16,24 @@ public:
         this->y = copy.y;
     }
 
-    void operator=(Point2D<T> &right)
+    void operator=(Point2D<T> &other)
     {
-        this->x = right.x;
-        this->y = right.y;
+        this->x = other.x;
+        this->y = other.y;
     }
 
-    T &operator-=(Point2D<T> &right)
+    Point2D<T> &operator-=(const Point2D<T> &other)
     {
-        this->x -= right.x;
-        this->y -= right.y;
-        return this;
+        this->x -= other.x;
+        this->y -= other.y;
+        return *this;
+    }
+
+    Point2D<T> &operator+=(const Point2D<T> &other)
+    {
+        this->x += other.x;
+        this->y += other.y;
+        return *this;
     }
 
     T getX() const
