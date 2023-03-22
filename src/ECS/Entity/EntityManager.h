@@ -5,7 +5,7 @@
 #include <vector>
 #include "Entity.h"
 #include "Entities.h"
-#include "../../Defines/Defines.h"
+#include "Defines/Defines.h"
 
 namespace ngin2D {
 class EntityManager

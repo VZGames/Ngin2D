@@ -1,8 +1,10 @@
 #ifndef SYSTEM_H
 #define SYSTEM_H
 
+#include "Core/BObject/BObject.h"
+
 namespace ngin2D {
-class ISystem
+class ISystem: public BObject
 {
 public:
     virtual void init(){};

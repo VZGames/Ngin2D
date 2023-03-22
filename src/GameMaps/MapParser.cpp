@@ -1,5 +1,5 @@
 #include "MapParser.h"
-#include "../Math/math2D.h"
+#include "Math/math2D.h"
 
 MapParser *MapParser::s_instance = nullptr;
 
@@ -11,7 +11,7 @@ MapParser *MapParser::instance()
 MapParser::MapParser()
 {
     ptr_doc = new TiXmlDocument();
-    if(loadTmx("2"))
+    if(loadTmx("1"))
     {
         parseTmx();
     }

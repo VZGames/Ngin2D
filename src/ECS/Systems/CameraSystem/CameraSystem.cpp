@@ -1,9 +1,8 @@
 #include "CameraSystem.h"
-#include "../../Components/Components.h"
-#include "../../Entity/EntityManager.h"
-#include "../../Components/ComponentManager.h"
-#include "../../../GameMaps/MapParser.h"
-#include "../../../Game/Game.h"
+#include "ECS/Entity/EntityManager.h"
+#include "ECS/Components/Components.h"
+#include "GameMaps/MapParser.h"
+#include "Game/Game.h"
 
 namespace ngin2D {
 
@@ -23,7 +22,6 @@ void CameraSystem::update(float dt)
             auto camera   = entity.getComponent<CameraComponent>();
 
             int cameraX, cameraY;
-
             cameraX = camera->position.getX();
             cameraY = camera->position.getY();
 
@@ -40,18 +38,17 @@ void CameraSystem::update(float dt)
             {
                 cameraY = 0;
             }
-            if (cameraX > (mapWidth - camera->size.width) * ZOOM_FACTOR)
+            if (cameraX > (mapWidth - camera->size.width))
             {
-                cameraX = (mapWidth - camera->size.width) * ZOOM_FACTOR;
+                cameraX = (mapWidth - camera->size.width);
             }
-            if (cameraY > (mapHeight - camera->size.height) * ZOOM_FACTOR)
+            if (cameraY > (mapHeight - camera->size.height))
             {
-                cameraY = (mapHeight - camera->size.height) * ZOOM_FACTOR;
+                cameraY = (mapHeight - camera->size.height);
             }
 
 
             camera->position = Point2DI(cameraX, cameraY);
-
 
             Game::s_camera = {
                 camera->position.getX(),
@@ -59,7 +56,8 @@ void CameraSystem::update(float dt)
                 camera->size.width,
                 camera->size.height
             };
-//            std::cout << "Camera Position\t" << camera->position;
+
+
 //            printf("X %d Y %d, W %d H %d\n",
 //                   Game::s_camera.x,
 //                   Game::s_camera.y,

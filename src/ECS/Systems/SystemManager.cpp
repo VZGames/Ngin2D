@@ -1,6 +1,6 @@
 #include "SystemManager.h"
-#include "../Entity/EntityManager.h"
-#include "../Components/ComponentManager.h"
+#include "ECS/Entity/EntityManager.h"
+#include "ECS/Components/ComponentManager.h"
 
 namespace ngin2D {
 SystemManager *SystemManager::s_instance = nullptr;

@@ -1,7 +1,7 @@
 #ifndef STRUCTSDEF_H
 #define STRUCTSDEF_H
 
-#include "../Math/math2D.h"
+#include "Math/math2D.h"
 
 typedef struct Size
 {

@@ -1,7 +1,6 @@
 #include "SpawnSystem.h"
-#include "../../Components/Components.h"
-#include "../../Entity/EntityManager.h"
-#include "../../Components/ComponentManager.h"
+#include "ECS/Components/Components.h"
+#include "ECS/Entity/EntityManager.h"
 
 namespace ngin2D {
 SpawnSystem::SpawnSystem()

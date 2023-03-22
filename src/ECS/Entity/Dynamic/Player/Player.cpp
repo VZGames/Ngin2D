@@ -1,20 +1,20 @@
 #include "Player.h"
-#include "../../EntityManager.h"
-#include "../../../../Event/KeyEvent/KeyEvent.h"
-#include "../../../../GameMaps/MapParser.h"
+#include "ECS/Entity/EntityManager.h"
+#include "Event/KeyEvent/KeyEvent.h"
+#include "GameMaps/MapParser.h"
 
 Player *Player::s_instance = nullptr;
 Player::Player()
 {
     entity  = EntityManager::instance()->createEntity();
     entity->addComponent<PlayerComponent>();
-    entity->addComponent<CameraComponent>(Size{100, 100});
+    entity->addComponent<CameraComponent>(Size{g_width/(int)ZOOM_FACTOR, g_height/(int)ZOOM_FACTOR});
     entity->addComponent<ColliderComponent>();
     entity->addComponent<PositionComponent>(((g_width - 8)/2) / ZOOM_FACTOR, ((g_height - 8)/2) / ZOOM_FACTOR);
-    entity->addComponent<SpriteComponent>("Lover", PLAYER_MOTION, 16, 16, 2, 200);
-    entity->addComponent<MotionComponent>(2.5, Vector2LF(), Vector2LF());
-    entity->addComponent<HealthComponent>(100);
     entity->addComponent<SpawnComponent>(Point2DI(350, 150));
+    entity->addComponent<SpriteComponent>("Lover", PLAYER_MOTION, 16, 16, 2, 200);
+    entity->addComponent<MotionComponent>(3, Vector2LF(), Vector2LF());
+    entity->addComponent<HealthComponent>(100);
     entity->addComponent<TransformComponent>();
 }
 
@@ -43,13 +43,8 @@ void Player::handleKeyEvent()
         auto sprite = entity->getComponent<SpriteComponent>();
         auto position = entity->getComponent<PositionComponent>();
         auto camera = entity->getComponent<CameraComponent>();
-        auto spawn = entity->getComponent<SpawnComponent>();
 
 
-
-        int mapWidth, mapHeight;
-        mapWidth  = MapParser::instance()->getMapSize().width;
-        mapHeight = MapParser::instance()->getMapSize().height;
 
         int _x = 0;
         int _y = 0;
@@ -88,6 +83,7 @@ void Player::handleKeyEvent()
         }
 
         camera->position += Point2DI(_x, _y);
+
     }
 }
 

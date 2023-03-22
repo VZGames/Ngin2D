@@ -1,7 +1,7 @@
 #ifndef RENDERSYSTEM_H
 #define RENDERSYSTEM_H
 
-#include "../ISystem.h"
+#include "ECS/Systems/ISystem.h"
 
 namespace ngin2D {
 class RenderSystem: public ISystem

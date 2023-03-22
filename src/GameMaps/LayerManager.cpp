@@ -3,10 +3,10 @@
 #include <time.h>
 #include <thread>
 #include <mutex>
-#include "../Math/math2D.h"
-#include "../Defines/Defines.h"
-#include "../Graphics/TextureManager/TextureManager.h"
-#include "../Game/Game.h"
+#include "Math/math2D.h"
+#include "Defines/Defines.h"
+#include "Graphics/TextureManager/TextureManager.h"
+#include "Game/Game.h"
 
 namespace ngin2D {
 LayerManager *LayerManager::s_instance = nullptr;
@@ -65,12 +65,14 @@ void LayerManager::draw()
             tileX = (tileID % tileset.columns);
             tileY = (tileID / tileset.columns);
 
+
+            int frameX = x * tileset.tileWidth - Game::s_camera.x;
+            int frameY = y * tileset.tileHeight - Game::s_camera.y;
             TextureManager::instance()->drawTile(
                         tileset.name,
                         tileset.tileWidth,
                         tileset.tileHeight,
-                        Point2DI(x * tileset.tileWidth - Game::s_camera.x,
-                                 y * tileset.tileHeight - Game::s_camera.y),
+                        Point2DI(frameX, frameY),
                         tileY,
                         tileX);
         }
@@ -94,7 +96,7 @@ void LayerManager::draw()
 
             if(i == CORES - 1)
             {
-                end = (layer.width  *layer.height);
+                end = (layer.width * layer.height);
             }
 
             threads.push_back(std::thread(worker, start, end, layer, data));

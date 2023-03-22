@@ -4,8 +4,7 @@
 #include <map>
 #include <memory>
 #include <cassert>
-#include "ISystem.h"
-#include "Systems.h"
+#include "ECS/Systems/Systems.h"
 
 namespace ngin2D {
 class SystemManager: public ISystem

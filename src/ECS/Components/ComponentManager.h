@@ -6,8 +6,8 @@
 #include <map>
 #include <stdio.h>
 #include <cassert>
-#include "../../Defines/Defines.h"
-#include "../../Math/math2D.h"
+#include "Defines/Defines.h"
+#include "Math/math2D.h"
 
 namespace ngin2D {
 

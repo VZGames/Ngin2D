@@ -1,6 +1,6 @@
 #include "Scene.h"
 #include <algorithm>
-#include "../Event/Events.h"
+#include "Event/Events.h"
 
 namespace ngin2D {
 Scene *Scene::s_instance = nullptr;

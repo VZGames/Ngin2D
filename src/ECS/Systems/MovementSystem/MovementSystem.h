@@ -1,7 +1,7 @@
 #ifndef MOVEMENTSYSTEM_H
 #define MOVEMENTSYSTEM_H
 
-#include "../ISystem.h"
+#include "ECS/Systems/ISystem.h"
 
 namespace ngin2D {
 class MovementSystem: public ISystem

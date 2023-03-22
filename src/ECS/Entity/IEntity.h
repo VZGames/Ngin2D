@@ -1,7 +1,7 @@
 #ifndef IENTITY_H
 #define IENTITY_H
 
-#include "../Components/Components.h"
+#include "ECS/Components/Components.h"
 
 namespace ngin2D {
 class IEntity

@@ -1,5 +1,5 @@
 #include "TextureManager.h"
-#include "../../Game/Game.h"
+#include "Game/Game.h"
 #include <cassert>
 
 namespace ngin2D {

@@ -2,6 +2,8 @@
 #define POINT2D_H
 
 #include <iostream>
+#include <math.h>
+
 template<typename T>
 class Point2D
 {
@@ -35,6 +37,11 @@ public:
         this->x += other.x;
         this->y += other.y;
         return *this;
+    }
+
+    double distance(const Point2D<T> &other)
+    {
+        return std::sqrt(std::pow(other.x - this->x, 2) + std::pow(other.y - this->y, 2));
     }
 
     T getX() const

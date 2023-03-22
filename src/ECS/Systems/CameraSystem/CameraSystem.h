@@ -2,7 +2,7 @@
 #define CAMERASYSTEM_H
 
 #include "SDL2/SDL.h"
-#include "../ISystem.h"
+#include "ECS/Systems/ISystem.h"
 
 namespace ngin2D {
 class CameraSystem: public ISystem

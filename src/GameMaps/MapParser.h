@@ -8,8 +8,8 @@
 #include <vector>
 #include <sstream>
 
-#include "../Utils/TinyXML/tinyxml.h"
-#include "../Defines/Defines.h"
+#include "Utils/TinyXML/tinyxml.h"
+#include "Defines/Defines.h"
 
 
 class MapParser

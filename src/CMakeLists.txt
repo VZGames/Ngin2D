@@ -1,5 +1,6 @@
 if(WIN32)
-    set(INCLUDE_DIR "${CMAKE_SOURCE_DIR}/include")
+    set(INCLUDE_DIR "${CMAKE_SOURCE_DIR}/include"
+                    "${CMAKE_SOURCE_DIR}/src")
     set(LIBRARY_DIR "${CMAKE_SOURCE_DIR}/libs")
 
     # use bundled version to save ourselves a lot of trouble

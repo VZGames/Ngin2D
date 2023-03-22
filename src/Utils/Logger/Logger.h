@@ -3,7 +3,7 @@
 
 #include <stdio.h>
 #include <iostream>
-#include "../../Defines/EnumDef.h"
+#include "Defines/EnumDef.h"
 
 /** @brief Indicates if warning level logging is enabled. */
 #define LOG_WARN_ENABLED 1

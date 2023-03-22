@@ -1,8 +1,8 @@
 #ifndef PLAYER_H
 #define PLAYER_H
 
-#include "../../IEntity.h"
-#include "../../Entity.h"
+#include "ECS/Entity/IEntity.h"
+#include "ECS/Entity/Entity.h"
 
 using namespace ngin2D;
 class Player: public IEntity

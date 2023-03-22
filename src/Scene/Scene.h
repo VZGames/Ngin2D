@@ -1,8 +1,8 @@
 #ifndef SCENE_H
 #define SCENE_H
 
-#include "../ECS/ECS.h"
-#include "../ECS/Entity/Dynamic/Player/Player.h"
+#include "ECS/ECS.h"
+#include "ECS/Entity/Dynamic/Player/Player.h"
 
 namespace ngin2D {
 class Scene

@@ -6,7 +6,7 @@
 #include <vector>
 #include <stdio.h>
 #include <iostream>
-#include "../Components/ComponentBase.h"
+#include "ECS/Components/ComponentBase.h"
 
 namespace ngin2D {
 struct Entity

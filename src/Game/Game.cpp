@@ -1,9 +1,9 @@
 #include "Game.h"
-#include "../Defines/Defines.h"
-#include "../GameMaps/GameMaps.h"
-#include "../Graphics/Graphics.h"
-#include "../Event/Events.h"
-#include "../Scene/Scene.h"
+#include "Defines/Defines.h"
+#include "GameMaps/GameMaps.h"
+#include "Graphics/Graphics.h"
+#include "Event/Events.h"
+#include "Scene/Scene.h"
 
 int g_width, g_height;
 namespace ngin2D {
@@ -56,7 +56,6 @@ bool Game::InitGame(const char *title)
 
     SDL_GetWindowSize(ptr_window, &g_width, &g_height);
 
-
     // [2] init renderer
     ptr_renderer = SDL_CreateRenderer(ptr_window, -1, SDL_RENDERER_ACCELERATED);
     if (ptr_renderer == nullptr)
@@ -68,7 +67,6 @@ bool Game::InitGame(const char *title)
     // [3] Select the color for drawing.
     SDL_RenderSetScale(ptr_renderer, ZOOM_FACTOR, ZOOM_FACTOR);
     SDL_SetRenderDrawColor(ptr_renderer, 255, 255, 255, 255);
-
 
     Scene::instance()->init();
 
@@ -121,6 +119,7 @@ void Game::render_game()
     // render objects
     GameMaps::instance()->draw();
     Scene::instance()->render();
+    SDL_RenderDrawRect(ptr_renderer, &s_camera);
 
     SDL_RenderPresent(ptr_renderer);
 }
