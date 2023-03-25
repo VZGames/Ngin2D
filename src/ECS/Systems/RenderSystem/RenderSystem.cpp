@@ -2,6 +2,7 @@
 #include "ECS/Entity/EntityManager.h"
 #include "ECS/Components/Components.h"
 #include "Graphics/TextureManager/TextureManager.h"
+#include "Scene/Camera/Camera.h"
 
 namespace ngin2D {
 RenderSystem::RenderSystem()
@@ -31,12 +32,32 @@ void RenderSystem::render()
     {
         bool hasComponent = ComponentManager::instance()->hasComponentType<SpriteComponent>(entity.componentBitset);
         hasComponent &= ComponentManager::instance()->hasComponentType<PositionComponent>(entity.componentBitset);
+
         if(hasComponent)
         {
             auto sprite = entity.getComponent<SpriteComponent>();
             auto position = entity.getComponent<PositionComponent>();
+
             TextureManager::instance()->loadTexture(sprite->textureId, sprite->source);
-            TextureManager::instance()->drawFrame(sprite->textureId, Point2DI(position->x, position->y), sprite->frameWidth, sprite->frameHeight, sprite->row, sprite->col);
+
+            bool hasCamera = ComponentManager::instance()->hasComponentType<CameraComponent>(entity.componentBitset);
+            int cameraX = 0;
+            int cameraY = 0;
+            if(hasCamera)
+            {
+                auto viewPort = Camera::instance()->viewport();
+                cameraX = viewPort.x;
+                cameraY = viewPort.y;
+            }
+
+            TextureManager::instance()->drawFrame(
+                        sprite->textureId,
+                        Point2DI(position->x - cameraX,
+                                 position->y - cameraY),
+                        sprite->frameWidth,
+                        sprite->frameHeight,
+                        sprite->row,
+                        sprite->col);
         }
     }
 }

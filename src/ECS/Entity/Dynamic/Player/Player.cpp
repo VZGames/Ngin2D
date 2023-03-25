@@ -1,12 +1,15 @@
 #include "Player.h"
 #include "ECS/Entity/EntityManager.h"
 #include "Event/KeyEvent/KeyEvent.h"
+#include "Scene/Camera/Camera.h"
+
 
 Player *Player::s_instance = nullptr;
 Player::Player()
 {
     ptr_entity = EntityManager::instance()->createEntity();
     ptr_entity->addComponent<PlayerComponent>();
+    ptr_entity->addComponent<CameraComponent>();
     ptr_entity->addComponent<ColliderComponent>();
     ptr_entity->addComponent<PositionComponent>(((g_width - 8)/2) / ZOOM_FACTOR, ((g_height - 8)/2) / ZOOM_FACTOR);
     ptr_entity->addComponent<SpawnComponent>(Point2DI(350, 150));
@@ -88,15 +91,17 @@ void Player::handleKeyEvent()
             pos->y = 0;
         }
 
-        if(pos->x > (g_width - sprite->frameWidth))
+        if(pos->x > (g_width - sprite->frameWidth * (int)ZOOM_FACTOR))
         {
-            pos->x = (g_width - sprite->frameWidth);
+            pos->x = (g_width - sprite->frameWidth * (int)ZOOM_FACTOR);
         }
 
-        if(pos->y > (g_height - sprite->frameHeight))
+        if(pos->y > (g_height - sprite->frameHeight * (int)ZOOM_FACTOR))
         {
-            pos->y = (g_height - sprite->frameHeight);
+            pos->y = (g_height - sprite->frameHeight * (int)ZOOM_FACTOR);
         }
+        printf("%d %d\n", pos->x,  (g_width - sprite->frameWidth * (int)ZOOM_FACTOR));
+
     }
 }
 

@@ -10,5 +10,6 @@
 #include "PlayerComponent.h"
 #include "SpawnComponent.h"
 #include "ComponentManager.h"
+#include "CameraComponent.h"
 
 #endif // COMPONENTS_H

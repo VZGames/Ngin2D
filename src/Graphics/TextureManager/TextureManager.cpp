@@ -70,12 +70,10 @@ void TextureManager::drawFrame(const char * textureID, Point2DI pos, int width, 
     int frameX = width * col;
     int frameY = height * row;
 
-    auto camera = Camera::instance();
-
     SDL_Rect srcRect = {frameX, frameY, width, height};
     SDL_Rect destRect = {
-        pos.getX() - camera->viewport().x,
-        pos.getY() - camera->viewport().y,
+        pos.getX(),
+        pos.getY(),
         width,
         height
     };
