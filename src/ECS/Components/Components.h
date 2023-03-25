@@ -8,7 +8,6 @@
 #include "PositionComponent.h"
 #include "SpriteComponent.h"
 #include "PlayerComponent.h"
-#include "CameraComponent.h"
 #include "SpawnComponent.h"
 #include "ComponentManager.h"
 

@@ -39,6 +39,18 @@ public:
         return *this;
     }
 
+    Point2D<T> &updateX(const T &x)
+    {
+        this->x += x;
+        return *this;
+    }
+    Point2D<T> &updateY(const T &y)
+    {
+        this->y += y;
+        return *this;
+    }
+
+
     double distance(const Point2D<T> &other)
     {
         return std::sqrt(std::pow(other.x - this->x, 2) + std::pow(other.y - this->y, 2));

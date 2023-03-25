@@ -7,7 +7,6 @@ Player::Player()
 {
     ptr_entity = EntityManager::instance()->createEntity();
     ptr_entity->addComponent<PlayerComponent>();
-    ptr_entity->addComponent<CameraComponent>(Size{50, 50});
     ptr_entity->addComponent<ColliderComponent>();
     ptr_entity->addComponent<PositionComponent>(((g_width - 8)/2) / ZOOM_FACTOR, ((g_height - 8)/2) / ZOOM_FACTOR);
     ptr_entity->addComponent<SpawnComponent>(Point2DI(350, 150));
@@ -44,13 +43,12 @@ void Player::handleKeyEvent()
     {
         auto motion = ptr_entity->getComponent<MotionComponent>();
         auto sprite = ptr_entity->getComponent<SpriteComponent>();
-        auto pos = ptr_entity->getComponent<PositionComponent>();
-
+        auto pos    = ptr_entity->getComponent<PositionComponent>();
 
         sprite->frameCount = 2;
         if(KeyEvent::instance()->sendEvent(SDL_SCANCODE_A))
         {
-            pos->x += motion->speed * LEFT;
+            pos->x += (motion->speed * LEFT);
             sprite->frameCount = 4;
             sprite->row = 2;
             sprite->col = 2;
@@ -58,7 +56,7 @@ void Player::handleKeyEvent()
 
         if(KeyEvent::instance()->sendEvent(SDL_SCANCODE_D))
         {
-            pos->x += motion->speed * RIGHT;
+            pos->x += (motion->speed * RIGHT);
             sprite->frameCount = 4;
             sprite->row = 3;
             sprite->col = 2;
@@ -66,7 +64,7 @@ void Player::handleKeyEvent()
 
         if(KeyEvent::instance()->sendEvent(SDL_SCANCODE_W))
         {
-            pos->y += motion->speed * UP;
+            pos->y += (motion->speed * UP);
             sprite->frameCount = 4;
             sprite->row = 1;
             sprite->col = 2;
@@ -74,10 +72,30 @@ void Player::handleKeyEvent()
 
         if(KeyEvent::instance()->sendEvent(SDL_SCANCODE_S))
         {
-            pos->y += motion->speed * DOWN;
+            pos->y += (motion->speed * DOWN);
             sprite->frameCount = 4;
             sprite->row = 0;
             sprite->col = 2;
+        }
+
+        if(pos->x < 0)
+        {
+            pos->x = 0;
+        }
+
+        if(pos->y < 0)
+        {
+            pos->y = 0;
+        }
+
+        if(pos->x > (g_width - sprite->frameWidth))
+        {
+            pos->x = (g_width - sprite->frameWidth);
+        }
+
+        if(pos->y > (g_height - sprite->frameHeight))
+        {
+            pos->y = (g_height - sprite->frameHeight);
         }
     }
 }

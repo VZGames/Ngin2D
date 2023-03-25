@@ -1,6 +1,8 @@
 #include "TextureManager.h"
 #include "Game/Game.h"
 #include <cassert>
+#include "Scene/Camera/Camera.h"
+
 
 namespace ngin2D {
 TextureManager *TextureManager::s_instance = nullptr;
@@ -51,8 +53,15 @@ void TextureManager::drawTile(const char * textureID, int tileWidth, int tileHei
     int frameX = tileWidth  *col;
     int frameY = tileHeight  *row;
 
+    auto camera = Camera::instance();
+
     SDL_Rect srcRect = {frameX, frameY, tileWidth, tileHeight};
-    SDL_Rect destRect = {pos.getX(), pos.getY(), tileWidth, tileHeight};
+    SDL_Rect destRect = {
+        pos.getX() - camera->viewport().x,
+        pos.getY() - camera->viewport().y,
+        tileWidth,
+        tileHeight
+    };
     SDL_RenderCopyEx(Game::instance()->getRenderer(), textureDict[textureID], &srcRect, &destRect, 0, NULL, flip);
 }
 
@@ -60,8 +69,16 @@ void TextureManager::drawFrame(const char * textureID, Point2DI pos, int width, 
 {
     int frameX = width * col;
     int frameY = height * row;
+
+    auto camera = Camera::instance();
+
     SDL_Rect srcRect = {frameX, frameY, width, height};
-    SDL_Rect destRect = {pos.getX(), pos.getY(), width, height};
+    SDL_Rect destRect = {
+        pos.getX() - camera->viewport().x,
+        pos.getY() - camera->viewport().y,
+        width,
+        height
+    };
     SDL_RenderCopyEx(Game::instance()->getRenderer(), textureDict[textureID], &srcRect, &destRect, 0, NULL, flip);
 }
 
