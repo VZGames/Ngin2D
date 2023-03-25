@@ -66,8 +66,8 @@ void LayerManager::draw()
             tileY = (tileID / tileset.columns);
 
 
-            int frameX = x * tileset.tileWidth - Game::s_camera.x;
-            int frameY = y * tileset.tileHeight - Game::s_camera.y;
+            int frameX = x * tileset.tileWidth;
+            int frameY = y * tileset.tileHeight;
             TextureManager::instance()->drawTile(
                         tileset.name,
                         tileset.tileWidth,

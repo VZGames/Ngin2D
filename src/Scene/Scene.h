@@ -3,6 +3,8 @@
 
 #include "ECS/ECS.h"
 #include "ECS/Entity/Dynamic/Player/Player.h"
+#include "Event/Events.h"
+#include "Camera/Camera.h"
 
 namespace ngin2D {
 class Scene

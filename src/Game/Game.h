@@ -25,8 +25,6 @@ public:
 
     static bool s_gameRunning;
     static SDL_Event s_event;
-    static SDL_Rect s_camera;
-
 
 private:
     Game();

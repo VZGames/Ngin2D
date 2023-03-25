@@ -5,12 +5,12 @@
 #include "Event/Events.h"
 #include "Scene/Scene.h"
 
+
 int g_width, g_height;
 namespace ngin2D {
 bool Game::s_gameRunning          = false;
 Game *Game::s_instance            = nullptr;
 SDL_Event Game::s_event;
-SDL_Rect Game::s_camera;
 
 Game::Game(): ptr_window(nullptr), ptr_renderer(nullptr)
 {
@@ -56,6 +56,7 @@ bool Game::InitGame(const char *title)
 
     SDL_GetWindowSize(ptr_window, &g_width, &g_height);
 
+    std::cout << g_width << " " << g_height << std::endl;
     // [2] init renderer
     ptr_renderer = SDL_CreateRenderer(ptr_window, -1, SDL_RENDERER_ACCELERATED);
     if (ptr_renderer == nullptr)
@@ -119,7 +120,7 @@ void Game::render_game()
     // render objects
     GameMaps::instance()->draw();
     Scene::instance()->render();
-    SDL_RenderDrawRect(ptr_renderer, &s_camera);
+    SDL_RenderDrawRect(Game::instance()->getRenderer(), &Camera::instance()->viewport());
 
     SDL_RenderPresent(ptr_renderer);
 }

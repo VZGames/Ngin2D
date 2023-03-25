@@ -1,6 +1,5 @@
 #include "Scene.h"
 #include <algorithm>
-#include "Event/Events.h"
 
 namespace ngin2D {
 Scene *Scene::s_instance = nullptr;
@@ -17,16 +16,17 @@ void Scene::init()
 {
     Player::instance();
 
+    Camera::instance()->setTarget(Player::instance()->getID());
 
     SystemManager::instance()->addSystem<MovementSystem>();
     SystemManager::instance()->addSystem<SpawnSystem>();
     SystemManager::instance()->addSystem<RenderSystem>();
-    SystemManager::instance()->addSystem<CameraSystem>();
     SystemManager::instance()->init();
 }
 
 void Scene::update(float dt)
 {
+    Camera::instance()->update(dt);
     SystemManager::instance()->update(dt);
 }
 

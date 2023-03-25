@@ -3,7 +3,6 @@
 
 #include "MovementSystem/MovementSystem.h"
 #include "RenderSystem/RenderSystem.h"
-#include "CameraSystem/CameraSystem.h"
 #include "SpawnSystem/SpawnSystem.h"
 #include "SystemManager.h"
 #include "ISystem.h"
