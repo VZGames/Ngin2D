@@ -45,9 +45,9 @@ void RenderSystem::render()
             int cameraY = 0;
             if(hasCamera)
             {
-                auto viewPort = Camera::instance()->viewport();
-                cameraX = viewPort.x;
-                cameraY = viewPort.y;
+                auto camPos = Camera::instance()->position();
+                cameraX = camPos.getX();
+                cameraY = camPos.getY();
             }
 
             TextureManager::instance()->drawFrame(

@@ -1,6 +1,7 @@
 #include "SpawnSystem.h"
 #include "ECS/Components/Components.h"
 #include "ECS/Entity/EntityManager.h"
+#include "Scene/Camera/Camera.h"
 
 namespace ngin2D {
 SpawnSystem::SpawnSystem()
@@ -17,6 +18,7 @@ void SpawnSystem::init()
         if(hasComponent)
         {
             auto spawn = entity.getComponent<SpawnComponent>();
+            Camera::instance()->moveTo(Point2DI(spawn->position.getX(), spawn->position.getY()));
         }
     }
 }

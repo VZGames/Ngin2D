@@ -25,6 +25,11 @@ public:
         return *this;
     }
 
+    bool operator==(Point2D<T> other)
+    {
+        return this->x == other.x && this->y == other.y;;
+    }
+
     Point2D<T> &operator-=(const Point2D<T> &other)
     {
         this->x -= other.x;
@@ -36,6 +41,13 @@ public:
     {
         this->x += other.x;
         this->y += other.y;
+        return *this;
+    }
+
+    Point2D<T> &operator*=(const T scale)
+    {
+        this->x *= scale;
+        this->y *= scale;
         return *this;
     }
 

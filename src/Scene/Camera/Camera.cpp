@@ -11,12 +11,17 @@ Camera *Camera::instance()
 
 Camera::Camera()
 {
-    m_viewport = {0, 0, (int)std::round((double)g_width/ZOOM_FACTOR), (int)std::round((double)g_height/ZOOM_FACTOR)};
+    m_viewPort = {0, 0, (int)std::round((double)g_width/ZOOM_FACTOR), (int)std::round((double)g_height/ZOOM_FACTOR)};
+}
+
+Point2DI Camera::position() const
+{
+    return m_position;
 }
 
 const SDL_Rect &Camera::viewport() const
 {
-    return m_viewport;
+    return m_viewPort;
 }
 
 void Camera::update(float dt)
@@ -25,39 +30,55 @@ void Camera::update(float dt)
     {
         auto sprite = ptr_entity->getComponent<SpriteComponent>();
         auto pos    = ptr_entity->getComponent<PositionComponent>();
-        m_viewport.x = pos->x + sprite->frameWidth/2 - m_viewport.w/2;
-        m_viewport.y = pos->y + sprite->frameHeight/2 - m_viewport.h/2;
+
+
+        m_viewPort.x = pos->x - m_viewPort.w/2;
+        m_viewPort.y = pos->y - m_viewPort.h/2;
+
+        if(m_position == Point2DI(m_viewPort.x, m_viewPort.y))
+        {
+            return;
+        }
+
 
 
         int mapWidth, mapHeight;
         mapWidth = MapParser::instance()->getMapSize().width;
         mapHeight = MapParser::instance()->getMapSize().height;
 
-        if(m_viewport.x < 0)
+        if(m_viewPort.x < 0)
         {
-            m_viewport.x = 0;
+            m_viewPort.x = 0;
         }
 
-        if(m_viewport.y < 0)
+        if(m_viewPort.y < 0)
         {
-            m_viewport.y = 0;
+            m_viewPort.y = 0;
         }
 
-        if(m_viewport.x > (mapWidth - m_viewport.w))
+        if(m_viewPort.x > (mapWidth - m_viewPort.w))
         {
-            m_viewport.x = (mapWidth - m_viewport.w);
+            m_viewPort.x = (mapWidth - m_viewPort.w);
         }
 
-        if(m_viewport.y > (mapHeight - m_viewport.h))
+        if(m_viewPort.y > (mapHeight - m_viewPort.h))
         {
-            m_viewport.y = (mapHeight - m_viewport.h);
+            m_viewPort.y = (mapHeight - m_viewPort.h);
         }
+
+        m_position = Point2DI(m_viewPort.x, m_viewPort.y);
     }
 }
 
-void Camera::moveTo()
+void Camera::moveTo(Point2DI coord)
 {
-    
+    m_viewPort.x = coord.getX();
+    m_viewPort.y = coord.getY();
+    m_position   = Point2DI(m_viewPort.x, m_viewPort.y);
+    auto pos     = ptr_entity->getComponent<PositionComponent>();
+    pos->x       = m_position.getX() + m_viewPort.w/2;
+    pos->y       = m_position.getY() + m_viewPort.h/2;
+
 }
 
 void Camera::setTarget(EntityID id)

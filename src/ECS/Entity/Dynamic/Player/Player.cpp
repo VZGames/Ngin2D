@@ -81,26 +81,26 @@ void Player::handleKeyEvent()
             sprite->col = 2;
         }
 
-        if(pos->x < 0)
-        {
-            pos->x = 0;
-        }
+//        if(pos->x < 0)
+//        {
+//            pos->x = 0;
+//        }
 
-        if(pos->y < 0)
-        {
-            pos->y = 0;
-        }
+//        if(pos->y < 0)
+//        {
+//            pos->y = 0;
+//        }
 
-        if(pos->x > (g_width - sprite->frameWidth * (int)ZOOM_FACTOR))
-        {
-            pos->x = (g_width - sprite->frameWidth * (int)ZOOM_FACTOR);
-        }
+//        if(pos->x > (g_width * 2)/(int)ZOOM_FACTOR - 80)
+//        {
+//            pos->x = (g_width * 2)/(int)ZOOM_FACTOR - 80;
+//        }
 
-        if(pos->y > (g_height - sprite->frameHeight * (int)ZOOM_FACTOR))
-        {
-            pos->y = (g_height - sprite->frameHeight * (int)ZOOM_FACTOR);
-        }
-        printf("%d %d\n", pos->x,  (g_width - sprite->frameWidth * (int)ZOOM_FACTOR));
+//        if(pos->y > g_height - 80)
+//        {
+//            pos->y = g_height - 80;
+//        }
+//        printf("%d %d %d\n", pos->x, pos->y, (g_height * 2) / (int)ZOOM_FACTOR);
 
     }
 }

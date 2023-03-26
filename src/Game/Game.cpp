@@ -44,7 +44,7 @@ bool Game::InitGame(const char *title)
 
     // [1] init SDL and create the Game Window
     SDL_WindowFlags window_flags = (SDL_WindowFlags)(SDL_WINDOW_RESIZABLE | SDL_WINDOW_ALLOW_HIGHDPI);
-    ptr_window = SDL_CreateWindow(title, SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, WINDOW_WIDTH, WINDOW_HEIGHT, window_flags);
+    ptr_window = SDL_CreateWindow(title, SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, WINDOW_WIDTH, WINDOW_HEIGHT, 0);
 
 
     if (ptr_window == nullptr)
@@ -54,9 +54,13 @@ bool Game::InitGame(const char *title)
         return 0;
     }
 
+    SDL_MaximizeWindow(ptr_window);
+
+
     SDL_GetWindowSize(ptr_window, &g_width, &g_height);
 
     std::cout << g_width << " " << g_height << std::endl;
+
     // [2] init renderer
     ptr_renderer = SDL_CreateRenderer(ptr_window, -1, SDL_RENDERER_ACCELERATED);
     if (ptr_renderer == nullptr)
