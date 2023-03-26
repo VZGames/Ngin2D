@@ -72,12 +72,12 @@ void Camera::update(float dt)
 
 void Camera::moveTo(Point2DI coord)
 {
-    m_viewPort.x = coord.getX();
-    m_viewPort.y = coord.getY();
+    m_viewPort.x = coord.getX() - m_viewPort.w/2;
+    m_viewPort.y = coord.getY() - m_viewPort.h/2;
     m_position   = Point2DI(m_viewPort.x, m_viewPort.y);
-    auto pos     = ptr_entity->getComponent<PositionComponent>();
-    pos->x       = m_position.getX() + m_viewPort.w/2;
-    pos->y       = m_position.getY() + m_viewPort.h/2;
+    auto entityPos     = ptr_entity->getComponent<PositionComponent>();
+    entityPos->x       = coord.getX();
+    entityPos->y       = coord.getY();
 
 }
 

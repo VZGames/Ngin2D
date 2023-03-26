@@ -12,7 +12,7 @@ Player::Player()
     ptr_entity->addComponent<CameraComponent>();
     ptr_entity->addComponent<ColliderComponent>();
     ptr_entity->addComponent<PositionComponent>(((g_width - 8)/2) / ZOOM_FACTOR, ((g_height - 8)/2) / ZOOM_FACTOR);
-    ptr_entity->addComponent<SpawnComponent>(Point2DI(350, 150));
+    ptr_entity->addComponent<SpawnComponent>(Point2DI(390, 200));
     ptr_entity->addComponent<SpriteComponent>("Lover", PLAYER_MOTION, 16, 16, 2, 200);
     ptr_entity->addComponent<MotionComponent>(3, Vector2LF(), Vector2LF());
     ptr_entity->addComponent<HealthComponent>(100);
@@ -100,7 +100,7 @@ void Player::handleKeyEvent()
 //        {
 //            pos->y = g_height - 80;
 //        }
-//        printf("%d %d %d\n", pos->x, pos->y, (g_height * 2) / (int)ZOOM_FACTOR);
+        printf("%d %d\n", pos->x, pos->y);
 
     }
 }
