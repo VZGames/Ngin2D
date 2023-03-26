@@ -15,6 +15,7 @@ typedef struct Layer
     int id;
     const char *name;
     int width, height;
+    bool visible;
     Matrix2D<int> data;
 } Layer;
 

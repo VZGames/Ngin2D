@@ -24,6 +24,11 @@ public:
     const std::vector<TileSet> &getTilesets() const;
     const std::vector<GroupLayer> &getGroups() const;
 
+    const GroupLayer getGroupByName(const char *name) const;
+    const GroupLayer getGroupByID(const int &id) const;
+
+    bool isCollider(Point2DI pos);
+
 private:
     MapParser();
     bool loadTmx(const char *mapId);
@@ -46,6 +51,7 @@ private:
     std::vector<Layer> layers;
     std::vector<GroupLayer> groups;
     std::vector<TileSet> tilesets;
+    std::vector<std::map<int, Point2DI>> colliders;
 
     TiXmlDocument *ptr_doc;
     TiXmlElement *ptr_rootElement;

@@ -1,5 +1,8 @@
 #include "MapParser.h"
 #include "Math/math2D.h"
+#include <string>
+#include <algorithm>
+
 
 MapParser *MapParser::s_instance = nullptr;
 
@@ -11,7 +14,7 @@ MapParser *MapParser::instance()
 MapParser::MapParser()
 {
     ptr_doc = new TiXmlDocument();
-    if(loadTmx("2"))
+    if(loadTmx("1"))
     {
         parseTmx();
     }
@@ -109,7 +112,7 @@ void MapParser::parseLayer(TiXmlElement *e)
     const char *name    = e->Attribute("name");
     int width           = std::atoi(e->Attribute("width"));
     int height          = std::atoi(e->Attribute("height"));
-
+    bool visible        = e->LastAttribute()->Name() != std::string("visible"); // true if have not attribute
 
     dataEle = e->FirstChildElement("data");
 
@@ -122,7 +125,6 @@ void MapParser::parseLayer(TiXmlElement *e)
         std::string matrixStr(data);
         std::istringstream iss(matrixStr);
         std::string line;
-
 
         for (int row = 0; row < height; row++) {
             // read line
@@ -143,6 +145,7 @@ void MapParser::parseLayer(TiXmlElement *e)
             name,
             width,
             height,
+            visible,
             matrix
         };
 
@@ -197,6 +200,36 @@ const std::vector<GroupLayer> &MapParser::getGroups() const
     return groups;
 }
 
+const GroupLayer MapParser::getGroupByName(const char *name) const
+{
+    GroupLayer group = {NULL, NULL, std::vector<Layer>{}};
+    for(auto &_group: groups)
+    {
+        if(name == _group.name)
+        {
+            group = _group;
+        }
+    }
+    return group;
+}
+
+const GroupLayer MapParser::getGroupByID(const int &id) const
+{
+    GroupLayer group = {NULL, NULL, std::vector<Layer>{}};
+    for(auto &_group: groups)
+    {
+        if(id == _group.id)
+        {
+            group = _group;
+        }
+    }
+    return group;
+}
+
+bool MapParser::isCollider(Point2DI pos)
+{
+    return 0;
+}
 
 const std::vector<Layer> &MapParser::getLayers() const
 {

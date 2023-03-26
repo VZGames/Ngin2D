@@ -1,11 +1,24 @@
 #ifndef COLLISIONSYSTEM_H
 #define COLLISIONSYSTEM_H
 
+#include <iostream>
+#include "ECS/Systems/ISystem.h"
+#include "ECS/Components/Components.h"
+#include "ECS/Entity/EntityManager.h"
+#include "Math/math2D.h"
+#include "GameMaps/MapParser.h"
 
-class CollisionSystem
+
+namespace ngin2D {
+class CollisionSystem: public ISystem
 {
+
 public:
     CollisionSystem();
+    // ISystem interface
+public:
+    virtual void update(float dt) override;
 };
+}
 
 #endif // COLLISIONSYSTEM_H

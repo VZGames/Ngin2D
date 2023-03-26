@@ -19,6 +19,7 @@ void Scene::init()
     Camera::instance()->setTarget(Player::instance()->getID());
 
     SystemManager::instance()->addSystem<MovementSystem>();
+    SystemManager::instance()->addSystem<CollisionSystem>();
     SystemManager::instance()->addSystem<SpawnSystem>();
     SystemManager::instance()->addSystem<RenderSystem>();
     SystemManager::instance()->init();

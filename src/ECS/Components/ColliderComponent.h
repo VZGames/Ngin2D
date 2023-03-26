@@ -6,7 +6,7 @@
 namespace ngin2D {
 struct ColliderComponent: public ComponentBase<ColliderComponent>
 {
-    ColliderComponent(){}
+
 };
 }
 #endif // COLLIDERCOMPONENT_H

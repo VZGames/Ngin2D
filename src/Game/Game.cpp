@@ -54,7 +54,7 @@ bool Game::InitGame(const char *title)
         return 0;
     }
 
-    SDL_MaximizeWindow(ptr_window);
+//    SDL_MaximizeWindow(ptr_window);
 
 
     SDL_GetWindowSize(ptr_window, &g_width, &g_height);
@@ -124,7 +124,7 @@ void Game::render_game()
     // render objects
     GameMaps::instance()->draw();
     Scene::instance()->render();
-    SDL_RenderDrawRect(Game::instance()->getRenderer(), &Camera::instance()->viewport());
+//    SDL_RenderDrawRect(Game::instance()->getRenderer(), &Camera::instance()->viewport());
 
     SDL_RenderPresent(ptr_renderer);
 }

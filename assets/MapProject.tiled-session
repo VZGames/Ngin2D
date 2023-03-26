@@ -3,10 +3,11 @@
         "height": 4300,
         "width": 2
     },
-    "activeFile": "Map2.tmx",
+    "activeFile": "Map1.tmx",
+    "automapping.whileDrawing": false,
     "expandedProjectPaths": [
-        "Characters",
-        "."
+        ".",
+        "Characters"
     ],
     "fileStates": {
         "": {
@@ -49,13 +50,15 @@
         },
         "Map1.tmx": {
             "expandedGroupLayers": [
+                4,
+                7,
                 3
             ],
-            "scale": 0.75,
-            "selectedLayer": 1,
+            "scale": 1.5,
+            "selectedLayer": 4,
             "viewCenter": {
-                "x": 477.33333333333326,
-                "y": 346.66666666666663
+                "x": 287,
+                "y": 285.3333333333333
             }
         },
         "Map1.tmx#BasicGrassBiomthings": {
@@ -73,16 +76,19 @@
         "Map1.tmx#Water": {
             "scaleInDock": 4
         },
+        "Map1.tmx#block": {
+            "scaleInDock": 1
+        },
         "Map2.tmx": {
             "expandedGroupLayers": [
-                2,
-                10
+                10,
+                2
             ],
             "scale": 0.5,
             "selectedLayer": 1,
             "viewCenter": {
-                "x": 2756,
-                "y": 3262
+                "x": 2805,
+                "y": 3260
             }
         },
         "Map2.tmx#Grass": {
@@ -131,7 +137,7 @@
             "scaleInEditor": 1
         }
     },
-    "last.imagePath": "D:/Projects/O/SDL2_project/Ngin2D/assets/Characters",
+    "last.imagePath": "D:/Projects/O/SDL2_project/Ngin2D/assets",
     "map.fixedSize": true,
     "map.height": 480,
     "map.lastUsedFormat": "tmx",
@@ -140,7 +146,6 @@
     "map.tileWidth": 16,
     "map.width": 720,
     "openFiles": [
-        "Map2.tmx",
         "Map1.tmx"
     ],
     "project": "MapProject.tiled-project",
@@ -155,7 +160,7 @@
         "Water.tsx"
     ],
     "resizeMap.removeObjects": true,
-    "tileset.embedInMap": false,
+    "tileset.embedInMap": true,
     "tileset.lastUsedFormat": "tsx",
     "tileset.tileSize": {
         "height": 16,

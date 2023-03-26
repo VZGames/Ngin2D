@@ -2,6 +2,7 @@
 #define POINT2D_H
 
 #include <iostream>
+#include <string>
 #include <math.h>
 
 template<typename T>
@@ -76,6 +77,11 @@ public:
         return *this;
     }
 
+    const char *toString()
+    {
+         std::string res = std::to_string(x) + ", " + std::to_string(y);
+         return res.c_str();
+    }
 
     double distance(const Point2D<T> &other)
     {
@@ -103,7 +109,7 @@ public:
     }
 
     // log
-    friend std::ostream &operator<<(std::ostream &out, Point2D<T> &val)
+    friend std::ostream &operator<<(std::ostream &out, const Point2D<T> &val)
     {
         out << " (" << val.x << ", " << val.y << ") \n";
         return out;

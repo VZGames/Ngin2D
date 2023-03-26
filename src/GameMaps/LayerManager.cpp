@@ -68,6 +68,8 @@ void LayerManager::draw()
 
             int frameX = x * tileset.tileWidth;
             int frameY = y * tileset.tileHeight;
+
+            if(!layer.visible) continue;
             TextureManager::instance()->drawTile(
                         tileset.name,
                         tileset.tileWidth,
