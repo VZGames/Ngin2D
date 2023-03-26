@@ -2,7 +2,7 @@
 #include "ECS/Entity/EntityManager.h"
 #include "Event/KeyEvent/KeyEvent.h"
 #include "Scene/Camera/Camera.h"
-
+#include "GameMaps/MapParser.h"
 
 Player *Player::s_instance = nullptr;
 Player::Player()
@@ -81,26 +81,30 @@ void Player::handleKeyEvent()
             sprite->col = 2;
         }
 
-//        if(pos->x < 0)
-//        {
-//            pos->x = 0;
-//        }
+        int mapWidth, mapHeight;
+        mapWidth = MapParser::instance()->getMapSize().width;
+        mapHeight = MapParser::instance()->getMapSize().height;
 
-//        if(pos->y < 0)
-//        {
-//            pos->y = 0;
-//        }
+        if(pos->x < 0)
+        {
+            pos->x = 0;
+        }
 
-//        if(pos->x > (g_width * 2)/(int)ZOOM_FACTOR - 80)
-//        {
-//            pos->x = (g_width * 2)/(int)ZOOM_FACTOR - 80;
-//        }
+        if(pos->y < 0)
+        {
+            pos->y = 0;
+        }
 
-//        if(pos->y > g_height - 80)
-//        {
-//            pos->y = g_height - 80;
-//        }
-        printf("%d %d\n", pos->x, pos->y);
+        if(pos->x > mapWidth - sprite->frameWidth)
+        {
+            pos->x = mapWidth - sprite->frameWidth;
+        }
+
+        if(pos->y > mapHeight - sprite->frameHeight)
+        {
+            pos->y = mapHeight - sprite->frameHeight;
+        }
+//        printf("%d %d %f %f\n", pos->x, pos->y);
 
     }
 }

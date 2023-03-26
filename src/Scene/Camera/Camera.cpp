@@ -35,12 +35,6 @@ void Camera::update(float dt)
         m_viewPort.x = pos->x - m_viewPort.w/2;
         m_viewPort.y = pos->y - m_viewPort.h/2;
 
-        if(m_position == Point2DI(m_viewPort.x, m_viewPort.y))
-        {
-            return;
-        }
-
-
 
         int mapWidth, mapHeight;
         mapWidth = MapParser::instance()->getMapSize().width;
@@ -66,19 +60,21 @@ void Camera::update(float dt)
             m_viewPort.y = (mapHeight - m_viewPort.h);
         }
 
+
+        if(m_position == Point2DI(m_viewPort.x, m_viewPort.y))
+        {
+            return;
+        }
+
         m_position = Point2DI(m_viewPort.x, m_viewPort.y);
     }
 }
 
 void Camera::moveTo(Point2DI coord)
 {
-    m_viewPort.x = coord.getX() - m_viewPort.w/2;
-    m_viewPort.y = coord.getY() - m_viewPort.h/2;
-    m_position   = Point2DI(m_viewPort.x, m_viewPort.y);
     auto entityPos     = ptr_entity->getComponent<PositionComponent>();
     entityPos->x       = coord.getX();
     entityPos->y       = coord.getY();
-
 }
 
 void Camera::setTarget(EntityID id)

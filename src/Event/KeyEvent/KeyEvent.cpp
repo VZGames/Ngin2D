@@ -1,6 +1,6 @@
 #include "KeyEvent.h"
-#include <iostream>;
 #include "Game/Game.h"
+#include <iostream>
 
 namespace ngin2D {
 KeyEvent *KeyEvent::s_instance = nullptr;

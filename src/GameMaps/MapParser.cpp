@@ -11,7 +11,7 @@ MapParser *MapParser::instance()
 MapParser::MapParser()
 {
     ptr_doc = new TiXmlDocument();
-    if(loadTmx("1"))
+    if(loadTmx("2"))
     {
         parseTmx();
     }

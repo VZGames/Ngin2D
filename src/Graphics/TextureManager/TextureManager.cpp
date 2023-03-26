@@ -53,12 +53,12 @@ void TextureManager::drawTile(const char * textureID, int tileWidth, int tileHei
     int frameX = tileWidth  *col;
     int frameY = tileHeight  *row;
 
-    auto camera = Camera::instance();
+    auto cameraPos = Camera::instance()->position();
 
     SDL_Rect srcRect = {frameX, frameY, tileWidth, tileHeight};
     SDL_Rect destRect = {
-        pos.getX() - camera->viewport().x,
-        pos.getY() - camera->viewport().y,
+        pos.getX() - cameraPos.getX(),
+        pos.getY() - cameraPos.getY(),
         tileWidth,
         tileHeight
     };

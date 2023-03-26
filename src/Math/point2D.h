@@ -51,6 +51,13 @@ public:
         return *this;
     }
 
+    friend Point2D<T> operator*(const Point2D<T> &point, const T scale)
+    {
+        point.x *= scale;
+        point.y *= scale;
+        return point;
+    }
+
     Point2D<T> &operator/=(const T scale)
     {
         this->x /= scale;
