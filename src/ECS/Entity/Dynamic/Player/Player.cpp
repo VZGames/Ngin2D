@@ -14,7 +14,7 @@ Player::Player()
     ptr_entity->addComponent<PositionComponent>(((g_width - 8)/2) / ZOOM_FACTOR, ((g_height - 8)/2) / ZOOM_FACTOR);
     ptr_entity->addComponent<SpawnComponent>(Point2DI(390, 200));
     ptr_entity->addComponent<SpriteComponent>("Lover", PLAYER_MOTION, 16, 16, 2, 200);
-    ptr_entity->addComponent<MotionComponent>(3, Vector2LF(), Vector2LF());
+    ptr_entity->addComponent<MotionComponent>(PLAYER_SPEED, Vector2LF(), Vector2LF());
     ptr_entity->addComponent<HealthComponent>(100);
     ptr_entity->addComponent<TransformComponent>();
 }
@@ -41,16 +41,23 @@ void Player::handleKeyEvent()
     hasComponent &= ComponentManager::instance()->hasComponentType<MotionComponent>(ptr_entity->componentBitset);
     hasComponent &= ComponentManager::instance()->hasComponentType<SpriteComponent>(ptr_entity->componentBitset);
     hasComponent &= ComponentManager::instance()->hasComponentType<SpawnComponent>(ptr_entity->componentBitset);
+    hasComponent &= ComponentManager::instance()->hasComponentType<ColliderComponent>(ptr_entity->componentBitset);
 
     if(hasComponent)
     {
         auto motion = ptr_entity->getComponent<MotionComponent>();
         auto sprite = ptr_entity->getComponent<SpriteComponent>();
         auto pos    = ptr_entity->getComponent<PositionComponent>();
+        auto box    = ptr_entity->getComponent<ColliderComponent>();
+
+
+        pos->lastX = pos->x;
+        pos->lastY = pos->y;
 
         sprite->frameCount = 2;
         if(KeyEvent::instance()->sendEvent(SDL_SCANCODE_A))
         {
+            motion->direction = LEFT;
             pos->x += (motion->speed * LEFT);
             sprite->frameCount = 4;
             sprite->row = 2;
@@ -59,6 +66,7 @@ void Player::handleKeyEvent()
 
         if(KeyEvent::instance()->sendEvent(SDL_SCANCODE_D))
         {
+            motion->direction = RIGHT;
             pos->x += (motion->speed * RIGHT);
             sprite->frameCount = 4;
             sprite->row = 3;
@@ -67,6 +75,7 @@ void Player::handleKeyEvent()
 
         if(KeyEvent::instance()->sendEvent(SDL_SCANCODE_W))
         {
+            motion->direction = UP;
             pos->y += (motion->speed * UP);
             sprite->frameCount = 4;
             sprite->row = 1;
@@ -75,6 +84,7 @@ void Player::handleKeyEvent()
 
         if(KeyEvent::instance()->sendEvent(SDL_SCANCODE_S))
         {
+            motion->direction = DOWN;
             pos->y += (motion->speed * DOWN);
             sprite->frameCount = 4;
             sprite->row = 0;
@@ -104,7 +114,8 @@ void Player::handleKeyEvent()
         {
             pos->y = mapHeight - sprite->frameHeight;
         }
-//        printf("%d %d %f %f\n", pos->x, pos->y);
+        //        printf("%d %d %f %f\n", pos->x, pos->y);
+
 
     }
 }

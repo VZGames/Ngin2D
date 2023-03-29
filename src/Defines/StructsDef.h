@@ -19,11 +19,27 @@ typedef struct Layer
     Matrix2D<int> data;
 } Layer;
 
+typedef struct Object
+{
+    int id;
+    double x, y;
+    int width, height;
+} Object;
+
+typedef struct ObjectLayer
+{
+    int id;
+    const char *name;
+    const char *color;
+    std::vector<Object> objects;
+} ObjectLayer;
+
 typedef struct GroupLayer
 {
     int id;
     const char *name;
     std::vector<Layer> layers;
+    std::vector<ObjectLayer> objectLayers;
 } GroupLayer;
 
 typedef struct Image

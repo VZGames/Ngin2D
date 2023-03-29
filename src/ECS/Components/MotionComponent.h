@@ -9,6 +9,7 @@ struct MotionComponent: public ComponentBase<MotionComponent>
     MotionComponent(double speed, Vector2LF velocity, Vector2LF acceleration): speed(speed), velocity(velocity), acceleration(acceleration)
     {}
     double speed;
+    int direction;
     Vector2LF velocity;
     Vector2LF acceleration;
 };

@@ -54,7 +54,7 @@ bool Game::InitGame(const char *title)
         return 0;
     }
 
-//    SDL_MaximizeWindow(ptr_window);
+    SDL_MaximizeWindow(ptr_window);
 
 
     SDL_GetWindowSize(ptr_window, &g_width, &g_height);

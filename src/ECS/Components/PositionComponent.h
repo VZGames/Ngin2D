@@ -7,7 +7,8 @@ namespace ngin2D {
 struct PositionComponent: public ComponentBase<PositionComponent>
 {
     PositionComponent(int x, int y): x(x), y(y){}
-    int x,y;
+    int x, y;
+    int lastX, lastY;
 };
 }
 

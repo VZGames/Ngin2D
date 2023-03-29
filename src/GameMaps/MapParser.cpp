@@ -3,7 +3,6 @@
 #include <string>
 #include <algorithm>
 
-
 MapParser *MapParser::s_instance = nullptr;
 
 MapParser *MapParser::instance()
@@ -14,7 +13,7 @@ MapParser *MapParser::instance()
 MapParser::MapParser()
 {
     ptr_doc = new TiXmlDocument();
-    if(loadTmx("1"))
+    if(loadTmx("4"))
     {
         parseTmx();
     }
@@ -54,6 +53,10 @@ void MapParser::parseTmx()
             else if(e->Value() == std::string("layer"))
             {
                 parseLayer(e);
+            }
+            else if(e->Value() == std::string("objectgroup"))
+            {
+                parseObjectLayer(e);
             }
             else if(e->Value() == std::string("group"))
             {
@@ -154,6 +157,32 @@ void MapParser::parseLayer(TiXmlElement *e)
 
 }
 
+void MapParser::parseObjectLayer(TiXmlElement *e)
+{
+    // read layers element
+    int id              = std::atoi(e->Attribute("id"));
+    const char *name    = e->Attribute("name");
+    const char *color    = e->Attribute("color");
+
+    ObjectLayer objectLayer = {
+        id, name, color
+    };
+
+    for(TiXmlElement *objEle = e->FirstChildElement("object");
+        objEle != NULL;
+        objEle = objEle->NextSiblingElement("object"))
+    {
+        int id              = std::atoi(e->Attribute("id"));
+        double x            = std::atoi(e->Attribute("x"));
+        double y            = std::atoi(e->Attribute("y"));
+        int width           = std::atoi(e->Attribute("width"));
+        int height          = std::atoi(e->Attribute("height"));
+
+        Object obj = {id, x, y, width, height};
+        objectLayer.objects.push_back(obj);
+    }
+}
+
 void MapParser::parseGroup(TiXmlElement *e)
 {
     int id              = std::atoi(e->Attribute("id"));
@@ -171,11 +200,20 @@ void MapParser::parseGroup(TiXmlElement *e)
         {
             parseLayer(groupEle);
         }
+        else if(groupEle->Value() == std::string("objectgroup"))
+        {
+            parseObjectLayer(groupEle);
+        }
         else if(groupEle->Value() == std::string("group"))
         {
             parseGroup(groupEle);
         }
     }
+}
+
+const Size &MapParser::getTileSize() const
+{
+    return tileSize;
 }
 
 void MapParser::findById(int tileId, TileSet &result) const
@@ -226,10 +264,6 @@ const GroupLayer MapParser::getGroupByID(const int &id) const
     return group;
 }
 
-bool MapParser::isCollider(Point2DI pos)
-{
-    return 0;
-}
 
 const std::vector<Layer> &MapParser::getLayers() const
 {

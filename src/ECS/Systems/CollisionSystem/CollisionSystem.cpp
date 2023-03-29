@@ -1,6 +1,5 @@
 #include "CollisionSystem.h"
 
-
 namespace ngin2D {
 
 CollisionSystem::CollisionSystem()
@@ -22,15 +21,25 @@ void CollisionSystem::update(float dt)
             auto collition  = entity.getComponent<CameraComponent>();
             auto motion     = entity.getComponent<MotionComponent>();
             auto sprite     = entity.getComponent<SpriteComponent>();
-            auto position   = entity.getComponent<PositionComponent>();
+            auto pos        = entity.getComponent<PositionComponent>();
 
-            int left  = (position->x - sprite->frameWidth) / sprite->frameWidth;
-            int right = (position->x + sprite->frameWidth * 2) / sprite->frameWidth;
-            int top   = (position->y - sprite->frameHeight) / sprite->frameHeight;
+            Point2DI blockPos;
 
-            MapParser::instance()->isCollider(
-                        Point2DI(position->x / sprite->frameWidth,
-                                 position->y / sprite->frameHeight));
+            Size tileSize = MapParser::instance()->getTileSize();
+
+            int left   = (pos->x) / tileSize.width;
+            int right  = (pos->x + sprite->frameWidth) / tileSize.width;
+            int top    = (pos->y) / tileSize.height;
+            int bottom = (pos->y + sprite->frameHeight) / tileSize.height;
+
+            bool collided = false;
+
+            if(collided)
+            {
+                pos->x = pos->lastX;
+                pos->y = pos->lastY;
+            }
+
         }
     }
 }
