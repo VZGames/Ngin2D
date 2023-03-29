@@ -30,6 +30,8 @@ public:
 
     const Size &getTileSize() const;
 
+    const std::vector<Object> &getObjects() const;
+
 private:
     MapParser();
     bool loadTmx(const char *mapId);

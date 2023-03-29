@@ -40,8 +40,14 @@ void CollisionSystem::update(float dt)
                 pos->y = pos->lastY;
             }
 
+
         }
     }
+}
+
+bool CollisionSystem::MapCollision()
+{
+    return 0;
 }
 
 }

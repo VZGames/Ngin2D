@@ -18,6 +18,9 @@ public:
     // ISystem interface
 public:
     virtual void update(float dt) override;
+
+private:
+    bool MapCollision();
 };
 }
 

@@ -24,6 +24,7 @@ typedef struct Object
     int id;
     double x, y;
     int width, height;
+    const char *shape;
 } Object;
 
 typedef struct ObjectLayer

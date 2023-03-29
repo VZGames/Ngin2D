@@ -172,13 +172,19 @@ void MapParser::parseObjectLayer(TiXmlElement *e)
         objEle != NULL;
         objEle = objEle->NextSiblingElement("object"))
     {
-        int id              = std::atoi(e->Attribute("id"));
-        double x            = std::atoi(e->Attribute("x"));
-        double y            = std::atoi(e->Attribute("y"));
-        int width           = std::atoi(e->Attribute("width"));
-        int height          = std::atoi(e->Attribute("height"));
+        int id              = std::atoi(objEle->Attribute("id"));
+        double x            = std::atof(objEle->Attribute("x"));
+        double y            = std::atof(objEle->Attribute("y"));
+        int width           = std::atoi(objEle->Attribute("width"));
+        int height          = std::atoi(objEle->Attribute("height"));
+        const char *shape   = "rectangle";
+        if(objEle->FirstChildElement() != NULL)
+        {
 
-        Object obj = {id, x, y, width, height};
+            shape = objEle->FirstChildElement()->Value();
+        }
+
+        Object obj = {id, x, y, width, height, shape};
         objectLayer.objects.push_back(obj);
     }
 }
@@ -211,11 +217,6 @@ void MapParser::parseGroup(TiXmlElement *e)
     }
 }
 
-const Size &MapParser::getTileSize() const
-{
-    return tileSize;
-}
-
 void MapParser::findById(int tileId, TileSet &result) const
 {
     for (auto tileset: tilesets) {
@@ -228,15 +229,6 @@ void MapParser::findById(int tileId, TileSet &result) const
     return;
 }
 
-const Size MapParser::getMapSize() const
-{
-    return mapSize;
-}
-
-const std::vector<GroupLayer> &MapParser::getGroups() const
-{
-    return groups;
-}
 
 const GroupLayer MapParser::getGroupByName(const char *name) const
 {
@@ -264,6 +256,25 @@ const GroupLayer MapParser::getGroupByID(const int &id) const
     return group;
 }
 
+const Size &MapParser::getTileSize() const
+{
+    return tileSize;
+}
+
+const Size MapParser::getMapSize() const
+{
+    return mapSize;
+}
+
+const std::vector<GroupLayer> &MapParser::getGroups() const
+{
+    return groups;
+}
+
+const std::vector<Object> &MapParser::getObjects() const
+{
+    return objects;
+}
 
 const std::vector<Layer> &MapParser::getLayers() const
 {
