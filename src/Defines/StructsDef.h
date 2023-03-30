@@ -23,7 +23,7 @@ typedef struct Object
 {
     int id;
     double x, y;
-    int width, height;
+    double width, height;
     const char *shape;
 } Object;
 

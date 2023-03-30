@@ -7,5 +7,8 @@
 #include "point2d.h"
 #include "matrix2D.h"
 #include "vector2d.h"
+#include "Shape/IShape.h"
+#include "Shape/Shapes.h"
+#define PI  3.1415926535897932385
 
 #endif // MATH2D_H

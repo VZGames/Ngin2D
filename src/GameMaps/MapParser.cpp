@@ -175,18 +175,19 @@ void MapParser::parseObjectLayer(TiXmlElement *e)
         int id              = std::atoi(objEle->Attribute("id"));
         double x            = std::atof(objEle->Attribute("x"));
         double y            = std::atof(objEle->Attribute("y"));
-        int width           = std::atoi(objEle->Attribute("width"));
-        int height          = std::atoi(objEle->Attribute("height"));
+        double width        = std::atof(objEle->Attribute("width"));
+        double height       = std::atof(objEle->Attribute("height"));
         const char *shape   = "rectangle";
         if(objEle->FirstChildElement() != NULL)
         {
-
             shape = objEle->FirstChildElement()->Value();
         }
 
         Object obj = {id, x, y, width, height, shape};
         objectLayer.objects.push_back(obj);
+
     }
+    objectLayers.push_back(objectLayer);
 }
 
 void MapParser::parseGroup(TiXmlElement *e)
@@ -271,9 +272,9 @@ const std::vector<GroupLayer> &MapParser::getGroups() const
     return groups;
 }
 
-const std::vector<Object> &MapParser::getObjects() const
+const std::vector<ObjectLayer> &MapParser::getObjectLayers() const
 {
-    return objects;
+    return objectLayers;
 }
 
 const std::vector<Layer> &MapParser::getLayers() const

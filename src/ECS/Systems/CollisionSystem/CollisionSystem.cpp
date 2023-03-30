@@ -4,7 +4,17 @@ namespace ngin2D {
 
 CollisionSystem::CollisionSystem()
 {
-
+    for(auto layer: MapParser::instance()->getObjectLayers())
+    {
+        for(auto obj: layer.objects)
+        {
+            if(obj.shape == std::string("ellipse"))
+            {
+                Ellipse e(obj.width/2, obj.height/2);
+                colliders.push_back(e);
+            }
+        }
+    }
 }
 
 void CollisionSystem::update(float dt)
@@ -27,11 +37,6 @@ void CollisionSystem::update(float dt)
 
             Size tileSize = MapParser::instance()->getTileSize();
 
-            int left   = (pos->x) / tileSize.width;
-            int right  = (pos->x + sprite->frameWidth) / tileSize.width;
-            int top    = (pos->y) / tileSize.height;
-            int bottom = (pos->y + sprite->frameHeight) / tileSize.height;
-
             bool collided = false;
 
             if(collided)
@@ -39,8 +44,6 @@ void CollisionSystem::update(float dt)
                 pos->x = pos->lastX;
                 pos->y = pos->lastY;
             }
-
-
         }
     }
 }

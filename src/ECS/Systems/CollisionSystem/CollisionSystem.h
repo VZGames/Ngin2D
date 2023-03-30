@@ -7,7 +7,7 @@
 #include "ECS/Entity/EntityManager.h"
 #include "Math/math2D.h"
 #include "GameMaps/MapParser.h"
-
+#include "Math/Shape/IShape.h"
 
 namespace ngin2D {
 class CollisionSystem: public ISystem
@@ -21,6 +21,7 @@ public:
 
 private:
     bool MapCollision();
+    std::vector<IShape> colliders;
 };
 }
 

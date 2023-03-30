@@ -30,7 +30,7 @@ public:
 
     const Size &getTileSize() const;
 
-    const std::vector<Object> &getObjects() const;
+    const std::vector<ObjectLayer> &getObjectLayers() const;
 
 private:
     MapParser();
@@ -54,7 +54,7 @@ private:
 
     Size mapSize, tileSize;
     std::vector<Layer> layers;
-    std::vector<Object> objects;
+    std::vector<ObjectLayer> objectLayers;
     std::vector<GroupLayer> groups;
     std::vector<TileSet> tilesets;
 

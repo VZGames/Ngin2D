@@ -6,8 +6,8 @@
     "activeFile": "Map4.tmx",
     "automapping.whileDrawing": false,
     "expandedProjectPaths": [
-        ".",
-        "Characters"
+        "Characters",
+        "."
     ],
     "fileStates": {
         "": {
@@ -88,8 +88,8 @@
         },
         "Map2.tmx": {
             "expandedGroupLayers": [
-                10,
-                2
+                2,
+                10
             ],
             "expandedObjectLayers": [
                 10,
@@ -98,8 +98,8 @@
             "scale": 4,
             "selectedLayer": 7,
             "viewCenter": {
-                "x": 1599.875,
-                "y": 1599.875
+                "x": 330.125,
+                "y": 165.5
             }
         },
         "Map2.tmx#Grass": {
@@ -144,11 +144,14 @@
             "scaleInDock": 1
         },
         "Map4.tmx": {
-            "scale": 3,
-            "selectedLayer": 2,
+            "expandedObjectLayers": [
+                5
+            ],
+            "scale": 5.5,
+            "selectedLayer": 1,
             "viewCenter": {
-                "x": 163.5,
-                "y": 233.33333333333334
+                "x": 388.6363636363636,
+                "y": 249.45454545454544
             }
         },
         "Map4.tmx#Grass": {
@@ -158,7 +161,7 @@
             "scaleInDock": 1
         },
         "Map4.tmx#outside_a2_desert_shua_by_shuatinwe_dcepyb6": {
-            "scaleInDock": 1
+            "scaleInDock": 2
         },
         "Map4.tmx#outside_b_shua_by_shuatinwe_dax6nc8": {
             "scaleInDock": 1
@@ -186,8 +189,8 @@
     ],
     "project": "MapProject.tiled-project",
     "recentFiles": [
-        "Map4.tmx",
         "Map2.tmx",
+        "Map4.tmx",
         "Map1.tmx",
         "Map3.tmx",
         "Characters/BasicCharakterSpritesheet.tsx",
