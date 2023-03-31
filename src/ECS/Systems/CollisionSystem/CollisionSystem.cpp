@@ -10,7 +10,7 @@ CollisionSystem::CollisionSystem()
         {
             if(obj.shape == std::string("ellipse"))
             {
-                Ellipse e(obj.width/2, obj.height/2);
+                Ellipse *e = new Ellipse(obj.width/2, obj.height/2);
                 colliders.push_back(e);
             }
         }
@@ -43,6 +43,12 @@ void CollisionSystem::update(float dt)
             {
                 pos->x = pos->lastX;
                 pos->y = pos->lastY;
+            }
+
+            for(auto x: colliders)
+            {
+                Ellipse *e = (Ellipse*)x;
+                std::cout << e->contain(Point2DI(pos->x, pos->y));
             }
         }
     }

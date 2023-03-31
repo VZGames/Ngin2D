@@ -1,5 +1,5 @@
 #include "Ellipse.h"
-#include <cmath>
+
 Ellipse::Ellipse(double a, double b): a(a), b(b)
 {}
 

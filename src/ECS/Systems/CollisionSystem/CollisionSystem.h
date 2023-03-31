@@ -8,6 +8,7 @@
 #include "Math/math2D.h"
 #include "GameMaps/MapParser.h"
 #include "Math/Shape/IShape.h"
+#include "Math/Shape/Ellipse/Ellipse.h"
 
 namespace ngin2D {
 class CollisionSystem: public ISystem
@@ -21,7 +22,7 @@ public:
 
 private:
     bool MapCollision();
-    std::vector<IShape> colliders;
+    std::vector<IShape*> colliders;
 };
 }
 

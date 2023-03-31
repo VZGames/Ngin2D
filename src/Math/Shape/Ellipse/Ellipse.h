@@ -2,13 +2,12 @@
 #define ELLIPSE_H
 
 #include "Math/Shape/IShape.h"
-#include "Math/point2d.h"
+#include "Math/math2D.h"
 
 class Ellipse: public IShape
 {
 public:
     Ellipse(double a, double b);
-
 
     bool contain(Point2DI M);
 
