@@ -10,8 +10,8 @@ CollisionSystem::CollisionSystem()
         {
             if(obj.shape == std::string("ellipse"))
             {
-                Ellipse *e = new Ellipse(obj.width/2, obj.height/2);
-                colliders.push_back(e);
+                Ellipse *e = new Ellipse(obj.width/2, obj.height/2, (int)obj.x, (int)obj.y);
+                CollisionBlocks.push_back(e);
             }
         }
     }
@@ -21,23 +21,20 @@ void CollisionSystem::update(float dt)
 {
     for(Entity entity: EntityManager::instance()->getEntities())
     {
-        bool hasComponent = ComponentManager::instance()->hasComponentType<CameraComponent>(entity.componentBitset);
-        hasComponent &= ComponentManager::instance()->hasComponentType<PositionComponent>(entity.componentBitset);
+        bool hasComponent = ComponentManager::instance()->hasComponentType<PositionComponent>(entity.componentBitset);
         hasComponent &= ComponentManager::instance()->hasComponentType<SpriteComponent>(entity.componentBitset);
         hasComponent &= ComponentManager::instance()->hasComponentType<MotionComponent>(entity.componentBitset);
 
         if(hasComponent)
         {
-            auto collition  = entity.getComponent<CameraComponent>();
             auto motion     = entity.getComponent<MotionComponent>();
             auto sprite     = entity.getComponent<SpriteComponent>();
             auto pos        = entity.getComponent<PositionComponent>();
 
-            Point2DI blockPos;
-
             Size tileSize = MapParser::instance()->getTileSize();
 
             bool collided = false;
+            collided += MapCollision(&entity);
 
             if(collided)
             {
@@ -45,17 +42,22 @@ void CollisionSystem::update(float dt)
                 pos->y = pos->lastY;
             }
 
-            for(auto x: colliders)
-            {
-                Ellipse *e = (Ellipse*)x;
-                std::cout << e->contain(Point2DI(pos->x, pos->y));
-            }
         }
     }
 }
 
-bool CollisionSystem::MapCollision()
+bool CollisionSystem::MapCollision(Entity *entity)
 {
+    auto motion     = entity->getComponent<MotionComponent>();
+    auto sprite     = entity->getComponent<SpriteComponent>();
+    auto pos        = entity->getComponent<PositionComponent>();
+
+    Point2DI left   = Point2DI(pos->x + sprite->frameWidth, pos->y);
+
+    for(auto x: CollisionBlocks)
+    {
+        return x->contain(Point2DI(pos->x, pos->y));
+    }
     return 0;
 }
 

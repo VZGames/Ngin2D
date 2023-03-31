@@ -8,11 +8,11 @@ class Ellipse: public IShape
 {
 public:
     Ellipse(double a, double b);
-
-    bool contain(Point2DI M);
+    Ellipse(double a, double b, int x, int y);
 
     // IShape interface
 public:
+    virtual bool contain(Point2DI M) override;
     virtual double acreage() override;
     virtual double perimeter() override;
 

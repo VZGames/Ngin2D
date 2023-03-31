@@ -21,8 +21,8 @@ public:
     virtual void update(float dt) override;
 
 private:
-    bool MapCollision();
-    std::vector<IShape*> colliders;
+    bool MapCollision(Entity *entity);
+    std::vector<IShape*> CollisionBlocks;
 };
 }
 
