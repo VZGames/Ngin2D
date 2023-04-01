@@ -11,7 +11,12 @@ Camera *Camera::instance()
 
 Camera::Camera()
 {
-    m_viewPort = {0, 0, (int)std::round((double)g_width/ZOOM_FACTOR), (int)std::round((double)g_height/ZOOM_FACTOR)};
+    m_viewPort = {
+        0,
+        0,
+        (int)std::round((double)g_width/ZOOM_FACTOR),
+        (int)std::round((double)g_height/ZOOM_FACTOR)
+    };
 }
 
 Point2DI Camera::position() const
@@ -32,8 +37,8 @@ void Camera::update(float dt)
         auto pos    = ptr_entity->getComponent<PositionComponent>();
 
 
-        m_viewPort.x = pos->x - m_viewPort.w/2;
-        m_viewPort.y = pos->y - m_viewPort.h/2;
+        m_viewPort.x = pos->x + sprite->frameWidth/2 - m_viewPort.w/2;
+        m_viewPort.y = pos->y + sprite->frameHeight/2 - m_viewPort.h/2;
 
 
         int mapWidth, mapHeight;
@@ -72,9 +77,10 @@ void Camera::update(float dt)
 
 void Camera::moveTo(Point2DI coord)
 {
-    auto entityPos     = ptr_entity->getComponent<PositionComponent>();
-    entityPos->x       = coord.getX();
-    entityPos->y       = coord.getY();
+    auto sprite = ptr_entity->getComponent<SpriteComponent>();
+    auto pos     = ptr_entity->getComponent<PositionComponent>();
+    pos->x       = coord.getX();
+    pos->y       = coord.getY();
 }
 
 void Camera::setTarget(EntityID id)

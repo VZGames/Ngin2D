@@ -1,29 +1,27 @@
-#ifndef ELLIPSE_H
-#define ELLIPSE_H
+#ifndef RECTANGLE_H
+#define RECTANGLE_H
 
 #include "Math/Shape/IShape.h"
 #include "Math/math2D.h"
 
-class Ellipse: public IShape
+class Rectangle : public IShape
 {
 public:
-    Ellipse(double a, double b);
-    Ellipse(double a, double b, int x, int y);
+    Rectangle(double width, double height);
+    Rectangle(double width, double height, int x, int y);
 
     // IShape interface
 public:
     virtual Size size() const override;
-    virtual bool contain(Point2DI M) override;
     virtual Point2DI getPosition() const override;
     virtual const char *getTypeName() const override;
+    virtual bool contain(Point2DI point) override;
     virtual double acreage() override;
     virtual double perimeter() override;
 
-    Point2DI getCenterI() const;
-
 private:
-    Point2DI m_centerI;
-    double m_a, m_b;
+    double m_width, m_height;
+    int m_x, m_y;
 };
 
-#endif // ELLIPSE_H
+#endif // RECTANGLE_H

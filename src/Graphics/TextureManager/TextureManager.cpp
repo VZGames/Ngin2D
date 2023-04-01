@@ -62,6 +62,7 @@ void TextureManager::drawTile(const char * textureID, int tileWidth, int tileHei
         tileWidth,
         tileHeight
     };
+
     SDL_RenderCopyEx(Game::instance()->getRenderer(), textureDict[textureID], &srcRect, &destRect, 0, NULL, flip);
 }
 
@@ -77,7 +78,30 @@ void TextureManager::drawFrame(const char * textureID, Point2DI pos, int width, 
         width,
         height
     };
+
+    SDL_Rect box = {pos.getX(),  pos.getY(), width, height};
+    SDL_RenderDrawRect(Game::instance()->getRenderer(), &box);
+
     SDL_RenderCopyEx(Game::instance()->getRenderer(), textureDict[textureID], &srcRect, &destRect, 0, NULL, flip);
+}
+
+void TextureManager::drawEllipse(Point2DI I, int radiusX, int radiusY)
+{
+    int centerX = I.getX();
+    int centerY = I.getY();
+    double step = 0.01f;
+
+    for (auto angle = 0.0f; angle < PI * 2.0f; angle += step) {
+        int x = centerX + std::cos(angle) * radiusX;
+        int y = centerY + std::sin(angle) * radiusY;
+        SDL_RenderDrawPoint(Game::instance()->getRenderer(), x, y);
+    }
+}
+
+void TextureManager::drawRectangle(Point2DI pos, int width, int height)
+{
+    SDL_Rect rect = {pos.getX(),  pos.getY(), width, height};
+    SDL_RenderDrawRect(Game::instance()->getRenderer(), &rect);
 }
 
 void TextureManager::drop(const char * textureID)

@@ -11,8 +11,8 @@ Player::Player()
     ptr_entity->addComponent<PlayerComponent>();
     ptr_entity->addComponent<CameraComponent>();
     ptr_entity->addComponent<ColliderComponent>();
-    ptr_entity->addComponent<PositionComponent>(((g_width - 8)/2) / ZOOM_FACTOR, ((g_height - 8)/2) / ZOOM_FACTOR);
-    ptr_entity->addComponent<SpawnComponent>(Point2DI(390, 200));
+    ptr_entity->addComponent<PositionComponent>((g_width - 8) / (2 * ZOOM_FACTOR), (g_height - 8) / (2 * ZOOM_FACTOR));
+    ptr_entity->addComponent<SpawnComponent>(Point2DI(200, 176));
     ptr_entity->addComponent<SpriteComponent>("Lover", PLAYER_MOTION, 16, 16, 2, 200);
     ptr_entity->addComponent<MotionComponent>(PLAYER_SPEED, Vector2LF(), Vector2LF());
     ptr_entity->addComponent<HealthComponent>(100);
@@ -48,8 +48,9 @@ void Player::handleKeyEvent()
         auto motion = ptr_entity->getComponent<MotionComponent>();
         auto sprite = ptr_entity->getComponent<SpriteComponent>();
         auto pos    = ptr_entity->getComponent<PositionComponent>();
-        auto box    = ptr_entity->getComponent<ColliderComponent>();
 
+
+        bool pressed = KeyEvent::instance()->isPressed();
 
         pos->lastX = pos->x;
         pos->lastY = pos->y;
@@ -114,9 +115,6 @@ void Player::handleKeyEvent()
         {
             pos->y = mapHeight - sprite->frameHeight;
         }
-        //        printf("%d %d %f %f\n", pos->x, pos->y);
-
-
     }
 }
 

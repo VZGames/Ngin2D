@@ -8,7 +8,7 @@
 #include "Math/math2D.h"
 #include "GameMaps/MapParser.h"
 #include "Math/Shape/IShape.h"
-#include "Math/Shape/Ellipse/Ellipse.h"
+#include "Math/Shape/Shapes.h"
 
 namespace ngin2D {
 class CollisionSystem: public ISystem
@@ -19,6 +19,7 @@ public:
     // ISystem interface
 public:
     virtual void update(float dt) override;
+    virtual void render() override;
 
 private:
     bool MapCollision(Entity *entity);

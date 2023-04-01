@@ -19,6 +19,10 @@ public:
     void draw(const char * textureID, Point2DI pos, int width, int height, SDL_RendererFlip flip = SDL_FLIP_NONE);
     void drawTile(const char * textureID,int tileWidth, int tileHeight, Point2DI pos, int row, int col, SDL_RendererFlip flip = SDL_FLIP_NONE);
     void drawFrame(const char * textureID, Point2DI pos, int width, int height, int row, int col, SDL_RendererFlip flip = SDL_FLIP_NONE, double p_Angle = 0);
+
+    void drawEllipse(Point2DI I, int radiusX, int radiusY);
+    void drawRectangle(Point2DI pos, int width, int height);
+
     void drop(const char * textureID);
     void clean();
 

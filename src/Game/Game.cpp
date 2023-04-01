@@ -124,7 +124,7 @@ void Game::render_game()
     // render objects
     GameMaps::instance()->draw();
     Scene::instance()->render();
-//    SDL_RenderDrawRect(Game::instance()->getRenderer(), &Camera::instance()->viewport());
+//    SDL_RenderDrawRect(ptr_renderer, &Camera::instance()->viewport());
 
     SDL_RenderPresent(ptr_renderer);
 }

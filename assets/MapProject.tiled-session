@@ -147,11 +147,11 @@
             "expandedObjectLayers": [
                 5
             ],
-            "scale": 5.5,
-            "selectedLayer": 1,
+            "scale": 4,
+            "selectedLayer": 2,
             "viewCenter": {
-                "x": 360,
-                "y": 239.90909090909093
+                "x": 170.375,
+                "y": 176
             }
         },
         "Map4.tmx#Grass": {

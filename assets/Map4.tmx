@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.9" tiledversion="1.9.2" orientation="orthogonal" renderorder="right-down" width="45" height="30" tilewidth="16" tileheight="16" infinite="0" nextlayerid="6" nextobjectid="12">
+<map version="1.9" tiledversion="1.9.2" orientation="orthogonal" renderorder="right-down" width="45" height="30" tilewidth="16" tileheight="16" infinite="0" nextlayerid="6" nextobjectid="13">
  <tileset firstgid="1" name="outside_b_shua_by_shuatinwe_dax6nc8" tilewidth="16" tileheight="16" tilecount="1024" columns="32">
   <image source="outside_b_shua_by_shuatinwe_dax6nc8.png" width="512" height="512"/>
  </tileset>
@@ -78,12 +78,12 @@
 </data>
  </layer>
  <objectgroup color="#aa0000" id="5" name="Collision">
-  <object id="3" x="146.375" y="148.625" width="24" height="18.75">
+  <object id="3" x="150.568" y="149.102" width="16" height="8.42045">
    <ellipse/>
   </object>
   <object id="4" x="64.3636" y="146.727" width="29.6364" height="27.2727"/>
   <object id="9" x="252" y="115.333">
-   <polygon points="0,0 -12,42.6667 -2.66667,52 -8,59.3333 2,67.9167 13.75,67.1667 18.75,74.6667 28.75,75.1667 37,72.6667 42.25,72.1667 44.5,64.1667 39.5,60.4167 48.5,58.6667 58.3636,59.5758 64.5455,61.3939 73.4545,58.6667 71.0909,50.303 69.0909,48.4848 76.5455,38.1212 79.8182,31.5758 79.75,13.6667 64.3333,-3.66667 48.6667,-14 38.6667,-12.6667 28,1.33333 19.3333,8.66667"/>
+   <polygon points="0,0 -6.50717,19.9514 -9.33333,42.6667 -4.33334,54.3333 -8,59.3333 2,67.9167 13.75,67.1667 18.75,74.6667 28.75,75.1667 37,72.6667 42.25,72.1667 44.5,64.1667 40.8333,61.4167 49.1667,61.3334 58.0303,61.2425 66.2122,62.3939 74.0909,56.9697 68.0909,47.1515 81.4849,33.5758 79.75,13.6667 71,0.999997 56.6667,-11.6667 38.6667,-12.6667 28,1.33333 21.1887,9.30471 12.3333,-0.999997"/>
   </object>
   <object id="10" x="160" y="206">
    <point/>
