@@ -195,7 +195,14 @@ void MapParser::parseObjectLayer(TiXmlElement *e)
                     std::string coord;
                     iss >> coord;
 
-                    obj.points.push_back(coord.c_str());
+                    float tmp[2];
+                    for (int i = 0; i < 2; i++) {
+                        std::getline(iss, coord, ',');
+                        std::istringstream iss(coord);
+                        iss >> tmp[i];
+                    }
+
+                    obj.points.push_back(Point2DF(tmp[0], tmp[1]));
                 }
             }
         }

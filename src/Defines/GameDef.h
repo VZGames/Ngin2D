@@ -11,7 +11,7 @@
 
 
 //
-#define ZOOM_FACTOR 5.0f
+#define ZOOM_FACTOR 3.0f
 
 // direction
 #define RIGHT 1.0f
