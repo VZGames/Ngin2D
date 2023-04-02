@@ -35,11 +35,11 @@ void MapParser::parseTmx()
     ptr_rootElement = ptr_doc->RootElement();
     if(ptr_rootElement)
     {
-        int width   = std::atoi(ptr_rootElement->Attribute("width"));
-        int height  = std::atoi(ptr_rootElement->Attribute("height"));
+        float width   = std::atof(ptr_rootElement->Attribute("width"));
+        float height  = std::atof(ptr_rootElement->Attribute("height"));
 
-        int tileWidth  = std::atoi(ptr_rootElement->Attribute("tilewidth"));
-        int tileHeight = std::atoi(ptr_rootElement->Attribute("tileheight"));
+        float tileWidth  = std::atof(ptr_rootElement->Attribute("tilewidth"));
+        float tileHeight = std::atof(ptr_rootElement->Attribute("tileheight"));
 
         tileSize = {tileWidth, tileHeight};
         mapSize = {width * tileWidth, height * tileHeight};
@@ -77,8 +77,8 @@ void MapParser::parseTileset(TiXmlElement *e)
 
     int firstgid            = std::atoi(e->Attribute("firstgid"));
     const char *name        = e->Attribute("name");
-    int tileWidth           = std::atoi(e->Attribute("tilewidth"));
-    int tileHeight          = std::atoi(e->Attribute("tileheight"));
+    float tileWidth           = std::atof(e->Attribute("tilewidth"));
+    float tileHeight          = std::atof(e->Attribute("tileheight"));
     int tileCount           = std::atoi(e->Attribute("tilecount"));
     int columns             = std::atoi(e->Attribute("columns"));
     int rows                = tileCount / columns;
@@ -87,8 +87,8 @@ void MapParser::parseTileset(TiXmlElement *e)
     if(imageEle)
     {
         const char *src         = imageEle->Attribute("source");
-        int imgWidth            = std::atoi(imageEle->Attribute("width"));
-        int imgHeight           = std::atoi(imageEle->Attribute("height"));
+        float imgWidth            = std::atof(imageEle->Attribute("width"));
+        float imgHeight           = std::atof(imageEle->Attribute("height"));
         Image image = {src, imgWidth, imgHeight};
         TileSet tileSet = {
             firstgid,
@@ -173,17 +173,34 @@ void MapParser::parseObjectLayer(TiXmlElement *e)
         objEle = objEle->NextSiblingElement("object"))
     {
         int id              = std::atoi(objEle->Attribute("id"));
-        double x            = std::atof(objEle->Attribute("x"));
-        double y            = std::atof(objEle->Attribute("y"));
-        double width        = std::atof(objEle->Attribute("width"));
-        double height       = std::atof(objEle->Attribute("height"));
+        float x             = std::atof(objEle->Attribute("x"));
+        float y             = std::atof(objEle->Attribute("y"));
+        float width         = std::atof(objEle->Attribute("width"));
+        float height        = std::atof(objEle->Attribute("height"));
+        Object obj = {id, x, y, width, height};
         const char *shape   = "rectangle";
         if(objEle->FirstChildElement() != NULL)
         {
             shape = objEle->FirstChildElement()->Value();
+            if(shape == std::string("polygon"))
+            {
+                const char *_points = objEle->FirstChildElement()->Attribute("points");
+                std::string line;
+                std::istringstream iss(_points);
+
+                while (!iss.eof()) {
+                    std::getline(iss, line, ' ');
+                    std::istringstream iss(line);
+
+                    std::string coord;
+                    iss >> coord;
+
+                    obj.points.push_back(coord.c_str());
+                }
+            }
         }
 
-        Object obj = {id, x, y, width, height, shape};
+        obj.shape = shape;
         objectLayer.objects.push_back(obj);
 
     }

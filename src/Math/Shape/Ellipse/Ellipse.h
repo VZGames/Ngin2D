@@ -7,23 +7,26 @@
 class Ellipse: public IShape
 {
 public:
-    Ellipse(double a, double b);
-    Ellipse(double a, double b, int x, int y);
+    Ellipse(float a, float b);
+    Ellipse(float a, float b, float x, float y);
 
     // IShape interface
 public:
+    virtual const SDL_FRect &getRect() const override;
     virtual Size size() const override;
-    virtual bool contain(Point2DI M) override;
-    virtual Point2DI getPosition() const override;
+    virtual bool contain(Point2DF M) override;
+    virtual Point2DF getPosition() const override;
     virtual const char *getTypeName() const override;
-    virtual double acreage() override;
-    virtual double perimeter() override;
+    virtual float acreage() override;
+    virtual float perimeter() override;
 
-    Point2DI getCenterI() const;
+    Point2DF getCenterI() const;
 
 private:
-    Point2DI m_centerI;
-    double m_a, m_b;
+    Point2DF m_centerI;
+    float m_width, m_height;
+    float m_a, m_b;
+    SDL_FRect m_rect;
 };
 
 #endif // ELLIPSE_H

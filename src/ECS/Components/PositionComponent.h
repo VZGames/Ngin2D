@@ -6,9 +6,9 @@
 namespace ngin2D {
 struct PositionComponent: public ComponentBase<PositionComponent>
 {
-    PositionComponent(int x, int y): x(x), y(y){}
-    int x, y;
-    int lastX, lastY;
+    PositionComponent(float x, float y): x(x), y(y){}
+    float x, y;
+    float lastX, lastY;
 };
 }
 

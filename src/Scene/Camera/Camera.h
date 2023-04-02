@@ -13,19 +13,19 @@ class Camera
 public:
     static Camera *instance();
     void update(float dt);
-    void moveTo(Point2DI coord);
+    void moveTo(Point2DF coord);
 
     void setTarget(EntityID id);
 
-    const SDL_Rect &viewport() const;
+    const SDL_FRect &viewport() const;
 
-    Point2DI position() const;
+    Point2DF position() const;
 
 private:
     Camera();
     static Camera *s_instance;
-    SDL_Rect m_viewPort;
-    Point2DI m_position;
+    SDL_FRect m_viewPort;
+    Point2DF m_position;
 
     Entity *ptr_entity;
 

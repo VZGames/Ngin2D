@@ -12,19 +12,19 @@ Camera *Camera::instance()
 Camera::Camera()
 {
     m_viewPort = {
-        0,
-        0,
-        (int)std::round((double)g_width/ZOOM_FACTOR),
-        (int)std::round((double)g_height/ZOOM_FACTOR)
+        0.0f,
+        0.0f,
+        std::round((float)g_width/ZOOM_FACTOR),
+        std::round((float)g_height/ZOOM_FACTOR)
     };
 }
 
-Point2DI Camera::position() const
+Point2DF Camera::position() const
 {
     return m_position;
 }
 
-const SDL_Rect &Camera::viewport() const
+const SDL_FRect &Camera::viewport() const
 {
     return m_viewPort;
 }
@@ -66,16 +66,16 @@ void Camera::update(float dt)
         }
 
 
-        if(m_position == Point2DI(m_viewPort.x, m_viewPort.y))
+        if(m_position == Point2DF(m_viewPort.x, m_viewPort.y))
         {
             return;
         }
 
-        m_position = Point2DI(m_viewPort.x, m_viewPort.y);
+        m_position = Point2DF(m_viewPort.x, m_viewPort.y);
     }
 }
 
-void Camera::moveTo(Point2DI coord)
+void Camera::moveTo(Point2DF coord)
 {
     auto sprite = ptr_entity->getComponent<SpriteComponent>();
     auto pos     = ptr_entity->getComponent<PositionComponent>();

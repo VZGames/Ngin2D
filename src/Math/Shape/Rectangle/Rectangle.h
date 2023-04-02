@@ -1,27 +1,30 @@
 #ifndef RECTANGLE_H
 #define RECTANGLE_H
 
+#include "ECS/Components/Components.h"
 #include "Math/Shape/IShape.h"
 #include "Math/math2D.h"
 
 class Rectangle : public IShape
 {
 public:
-    Rectangle(double width, double height);
-    Rectangle(double width, double height, int x, int y);
+    Rectangle(float width, float height);
+    Rectangle(float width, float height, float x, float y);
 
     // IShape interface
 public:
     virtual Size size() const override;
-    virtual Point2DI getPosition() const override;
+    virtual Point2DF getPosition() const override;
     virtual const char *getTypeName() const override;
-    virtual bool contain(Point2DI point) override;
-    virtual double acreage() override;
-    virtual double perimeter() override;
+    virtual bool contain(Point2DF point) override;
+    virtual float acreage() override;
+    virtual float perimeter() override;
+    virtual const SDL_FRect &getRect() const override;
 
 private:
-    double m_width, m_height;
-    int m_x, m_y;
+    float m_width, m_height;
+    float m_x, m_y;
+    SDL_FRect m_rect;
 };
 
 #endif // RECTANGLE_H

@@ -1,23 +1,26 @@
 #include "Rectangle.h"
-#include <SDL2/SDL.h>
 
-Rectangle::Rectangle(double width, double height) : m_width(width),
-    m_height(height)
-{}
+Rectangle::Rectangle(float width, float height) : m_width(width),
+    m_height(height), m_x(0.0f), m_y(0.0f)
+{
+    m_rect = {m_x, m_y, m_width, m_height};
+}
 
-Rectangle::Rectangle(double width, double height, int x, int y) : m_width(width),
+Rectangle::Rectangle(float width, float height, float x, float y) : m_width(width),
     m_height(height), m_x(x), m_y(y)
-{}
+{
+    m_rect = {m_x, m_y, m_width, m_height};
+}
 
 
 Size Rectangle::size() const
 {
-    return Size{(int)m_width, (int)m_height};
+    return Size{m_width, m_height};
 }
 
-Point2DI Rectangle::getPosition() const
+Point2DF Rectangle::getPosition() const
 {
-    return Point2DI(m_x, m_y);
+    return Point2DF(m_x, m_y);
 }
 
 const char *Rectangle::getTypeName() const
@@ -25,20 +28,23 @@ const char *Rectangle::getTypeName() const
     return "rectangle";
 }
 
-bool Rectangle::contain(Point2DI point)
+bool Rectangle::contain(Point2DF point)
 {
-    SDL_Point _point = {point.getX(), point.getY()};
-    SDL_Rect rect = {m_x,  m_y, (int)m_width, (int)m_height};
-    return SDL_PointInRect(&_point, &rect);;
+    return 0;
 }
 
-double Rectangle::acreage()
+float Rectangle::acreage()
 {
     return m_height * m_width;
 }
 
-double Rectangle::perimeter()
+float Rectangle::perimeter()
 {
     return (m_height + m_width) * 2;
+}
+
+const SDL_FRect &Rectangle::getRect() const
+{
+    return m_rect;
 }
 

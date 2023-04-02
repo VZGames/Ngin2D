@@ -6,6 +6,10 @@ namespace ngin2D {
 
 CollisionSystem::CollisionSystem()
 {
+}
+
+void CollisionSystem::init()
+{
     for(auto layer: MapParser::instance()->getObjectLayers())
     {
         for(auto obj: layer.objects)
@@ -13,11 +17,11 @@ CollisionSystem::CollisionSystem()
             IShape *e = nullptr;
             if(obj.shape == std::string("ellipse"))
             {
-                e = new Ellipse(obj.width/2, obj.height/2, (int)obj.x, (int)obj.y);
+                e = new Ellipse(obj.width, obj.height, obj.x, obj.y);
             }
             else if(obj.shape == std::string("rectangle"))
             {
-                e = new Rectangle(obj.width, obj.height, (int)obj.x, (int)obj.y);
+                e = new Rectangle(obj.width, obj.height, obj.x, obj.y);
             }
 
             if(e != nullptr)
@@ -77,13 +81,43 @@ bool CollisionSystem::MapCollision(Entity *entity)
     auto sprite     = entity->getComponent<SpriteComponent>();
     auto pos        = entity->getComponent<PositionComponent>();
 
+    bool collided   = 0;
 
     for(auto block: CollisionBlocks)
     {
-        bool collided = block->contain(Point2DI(pos->x, pos->y));
-        return collided;
+        float x, y;
+        float w, h;
+
+        x = block->getPosition().getX();
+        y = block->getPosition().getY();
+
+        w = block->size().width;
+        h = block->size().height;
+
+        if(block->getTypeName() == std::string("ellipse"))
+        {
+            Point2DF topLeft(pos->x, pos->y);
+            Point2DF topRight(pos->x + sprite->frameWidth, pos->y);
+            Point2DF bottomLeft(pos->x, pos->y + sprite->frameHeight);
+            Point2DF bottomRight(pos->x + sprite->frameWidth, pos->y + sprite->frameHeight);
+
+            collided |= block->contain(topLeft);
+            collided |= block->contain(topRight);
+            collided |= block->contain(bottomLeft);
+            collided |= block->contain(bottomRight);
+        }
+        else if(block->getTypeName() == std::string("rectangle"))
+        {
+            SDL_FRect entiyBox = {
+                pos->x,
+                pos->y,
+                sprite->frameWidth,
+                sprite->frameHeight
+            };
+            collided += SDL_HasIntersectionF(&block->getRect(), &entiyBox);
+        }
     }
-    return 0;
+    return collided;
 }
 
 }

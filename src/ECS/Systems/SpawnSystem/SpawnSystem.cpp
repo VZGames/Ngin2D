@@ -18,7 +18,7 @@ void SpawnSystem::init()
         if(hasComponent)
         {
             auto spawn = entity.getComponent<SpawnComponent>();
-            Camera::instance()->moveTo(Point2DI(spawn->position.getX(), spawn->position.getY()));
+            Camera::instance()->moveTo(Point2DF(spawn->position.getX(), spawn->position.getY()));
         }
     }
 }

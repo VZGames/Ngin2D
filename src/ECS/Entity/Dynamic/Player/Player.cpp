@@ -10,7 +10,7 @@ Player::Player()
     ptr_entity = EntityManager::instance()->createEntity();
     ptr_entity->addComponent<PlayerComponent>();
     ptr_entity->addComponent<CameraComponent>();
-    ptr_entity->addComponent<ColliderComponent>();
+    ptr_entity->addComponent<ColliderComponent>(8, 8);
     ptr_entity->addComponent<PositionComponent>((g_width - 8) / (2 * ZOOM_FACTOR), (g_height - 8) / (2 * ZOOM_FACTOR));
     ptr_entity->addComponent<SpawnComponent>(Point2DI(200, 176));
     ptr_entity->addComponent<SpriteComponent>("Lover", PLAYER_MOTION, 16, 16, 2, 200);
@@ -45,10 +45,10 @@ void Player::handleKeyEvent()
 
     if(hasComponent)
     {
+        auto box    = ptr_entity->getComponent<ColliderComponent>();
         auto motion = ptr_entity->getComponent<MotionComponent>();
         auto sprite = ptr_entity->getComponent<SpriteComponent>();
         auto pos    = ptr_entity->getComponent<PositionComponent>();
-
 
         bool pressed = KeyEvent::instance()->isPressed();
 
@@ -115,6 +115,9 @@ void Player::handleKeyEvent()
         {
             pos->y = mapHeight - sprite->frameHeight;
         }
+
+        box->x = pos->x + box->w/2;
+        box->y = pos->y + box->h;
     }
 }
 

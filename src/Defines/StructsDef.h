@@ -5,7 +5,7 @@
 
 typedef struct Size
 {
-    int width, height;
+    float width, height;
 } Size;
 
 
@@ -22,9 +22,10 @@ typedef struct Layer
 typedef struct Object
 {
     int id;
-    double x, y;
-    double width, height;
+    float x, y;
+    float width, height;
     const char *shape;
+    std::vector<const char*> points;
 } Object;
 
 typedef struct ObjectLayer
@@ -46,14 +47,14 @@ typedef struct GroupLayer
 typedef struct Image
 {
     const char *src;
-    int width, height;
+    float width, height;
 } Image;
 
 typedef struct Tile
 {
     char *src;
     Point2DI position;
-    int width, height;
+    float width, height;
 } Tile;
 
 
@@ -61,7 +62,7 @@ typedef struct TileSet
 {
     int firstgid;
     const char *name;
-    int tileWidth, tileHeight;
+    float tileWidth, tileHeight;
     int count, columns, rows;
     Image image;
 } TileSet;

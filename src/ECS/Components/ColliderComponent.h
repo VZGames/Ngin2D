@@ -7,8 +7,9 @@
 namespace ngin2D {
 struct ColliderComponent: public ComponentBase<ColliderComponent>
 {
-    int x, y;
-    int w, h;
+    ColliderComponent(float w, float h): w(w), h(h){}
+    float x, y;
+    float w, h;
 };
 }
 #endif // COLLIDERCOMPONENT_H

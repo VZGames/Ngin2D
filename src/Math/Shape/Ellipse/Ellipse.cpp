@@ -1,30 +1,42 @@
 #include "Ellipse.h"
 
-Ellipse::Ellipse(double a, double b): m_a(a), m_b(b), m_centerI(0, 0)
-{}
-
-Ellipse::Ellipse(double a, double b, int x, int y): m_a(a), m_b(b)
+Ellipse::Ellipse(float width, float height): m_width(width), m_height(height), m_centerI(0.0f, 0.0f)
 {
-    m_centerI = Point2DI(x + a, y + b);
+    m_a = width/2;
+    m_b = height/2;
+    m_rect = {m_centerI.getX() - m_a, m_centerI.getY() - m_b, m_width, m_height};
+}
+
+Ellipse::Ellipse(float width, float height, float x, float y): m_width(width), m_height(height)
+{
+    m_a = width/2;
+    m_b = height/2;
+    m_centerI = Point2DF(x + m_a, y + m_b);
+    m_rect = {m_centerI.getX() - m_a, m_centerI.getY() - m_b, m_width, m_height};
+}
+
+const SDL_FRect &Ellipse::getRect() const
+{
+    return m_rect;
 }
 
 Size Ellipse::size() const
 {
-    return Size{(int)m_a * 2, (int)m_b * 2};
+    return Size{m_width, m_height};
 }
 
-bool Ellipse::contain(Point2DI M)
+bool Ellipse::contain(Point2DF M)
 {
     int mX, mY;
-    double iX, iY;
-    mX = (double)M.getX();
-    mY = (double)M.getY();
+    float iX, iY;
+    mX = M.getX();
+    mY = M.getY();
 
-    iX = (double)m_centerI.getX();
-    iY = (double)m_centerI.getY();
+    iX = m_centerI.getX();
+    iY = m_centerI.getY();
 
     // expression: ((x - h)^2 / a^2) + ((y - k)^2 / b^2) = 1
-    double expression = std::pow((mX - iX) / m_a, 2) + std::pow((mY - iY) / m_b, 2);
+    float expression = std::pow((mX - iX) / m_a, 2) + std::pow((mY - iY) / m_b, 2);
 
     bool condition = 0;
 
@@ -33,9 +45,9 @@ bool Ellipse::contain(Point2DI M)
     return condition;
 }
 
-Point2DI Ellipse::getPosition() const
+Point2DF Ellipse::getPosition() const
 {
-    return Point2DI(m_centerI.getX() - m_a, m_centerI.getY() - m_b);
+    return Point2DF(m_centerI.getX() - m_a, m_centerI.getY() - m_b);
 }
 
 const char *Ellipse::getTypeName() const
@@ -43,17 +55,17 @@ const char *Ellipse::getTypeName() const
     return "ellipse";
 }
 
-double Ellipse::acreage()
+float Ellipse::acreage()
 {
     return PI * m_a * m_b;
 }
 
-double Ellipse::perimeter()
+float Ellipse::perimeter()
 {
     return 2 * PI * sqrt((m_a * m_a + m_b * m_b) / 2);
 }
 
-Point2DI Ellipse::getCenterI() const
+Point2DF Ellipse::getCenterI() const
 {
     return m_centerI;
 }

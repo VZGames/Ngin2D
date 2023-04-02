@@ -57,8 +57,8 @@ void TextureManager::drawTile(const char * textureID, int tileWidth, int tileHei
 
     SDL_Rect srcRect = {frameX, frameY, tileWidth, tileHeight};
     SDL_Rect destRect = {
-        pos.getX() - cameraPos.getX(),
-        pos.getY() - cameraPos.getY(),
+        (int)(pos.getX() - cameraPos.getX()),
+        (int)(pos.getY() - cameraPos.getY()),
         tileWidth,
         tileHeight
     };
@@ -66,7 +66,7 @@ void TextureManager::drawTile(const char * textureID, int tileWidth, int tileHei
     SDL_RenderCopyEx(Game::instance()->getRenderer(), textureDict[textureID], &srcRect, &destRect, 0, NULL, flip);
 }
 
-void TextureManager::drawFrame(const char * textureID, Point2DI pos, int width, int height, int row, int col, SDL_RendererFlip flip, double angle)
+void TextureManager::drawFrame(const char * textureID, Point2DI pos, int width, int height, int row, int col, SDL_RendererFlip flip, float angle)
 {
     int frameX = width * col;
     int frameY = height * row;
@@ -85,23 +85,33 @@ void TextureManager::drawFrame(const char * textureID, Point2DI pos, int width, 
     SDL_RenderCopyEx(Game::instance()->getRenderer(), textureDict[textureID], &srcRect, &destRect, 0, NULL, flip);
 }
 
-void TextureManager::drawEllipse(Point2DI I, int radiusX, int radiusY)
+
+void TextureManager::drawEllipse(Point2DF I, float radiusX, float radiusY)
 {
-    int centerX = I.getX();
-    int centerY = I.getY();
-    double step = 0.01f;
+    float centerX = I.getX();
+    float centerY = I.getY();
+    float step = 0.01f;
 
     for (auto angle = 0.0f; angle < PI * 2.0f; angle += step) {
-        int x = centerX + std::cos(angle) * radiusX;
-        int y = centerY + std::sin(angle) * radiusY;
-        SDL_RenderDrawPoint(Game::instance()->getRenderer(), x, y);
+        float x = centerX + std::cos(angle) * radiusX;
+        float y = centerY + std::sin(angle) * radiusY;
+        SDL_RenderDrawPointF(Game::instance()->getRenderer(), x, y);
     }
 }
 
-void TextureManager::drawRectangle(Point2DI pos, int width, int height)
+void TextureManager::drawRectangle(Point2DF pos, float width, float height)
 {
-    SDL_Rect rect = {pos.getX(),  pos.getY(), width, height};
-    SDL_RenderDrawRect(Game::instance()->getRenderer(), &rect);
+    SDL_FRect rect = {pos.getX(),  pos.getY(), width, height};
+    SDL_RenderDrawRectF(Game::instance()->getRenderer(), &rect);
+}
+
+void TextureManager::drawPolygon(std::vector<Point2DF> points)
+{
+    for(auto &point: points)
+    {
+        SDL_FPoint _point = {point.getX(), point.getY()};
+        SDL_RenderDrawLinesF(Game::instance()->getRenderer(), &_point, points.size());
+    }
 }
 
 void TextureManager::drop(const char * textureID)
