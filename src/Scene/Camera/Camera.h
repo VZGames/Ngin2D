@@ -14,6 +14,7 @@ public:
     static Camera *instance();
     void update(float dt);
     void moveTo(Point2DF coord);
+    void rotate();
 
     void setTarget(EntityID id);
 

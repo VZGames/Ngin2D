@@ -9,7 +9,7 @@ class IShape
 {  
 public:
     virtual const SDL_FRect &getRect() const = 0;
-    virtual Size size() const = 0;
+    virtual SizeF size() const = 0;
     virtual Point2DF getPosition() const = 0;
     virtual const char *getTypeName() const = 0;
     virtual bool contain(Point2DF point) = 0;

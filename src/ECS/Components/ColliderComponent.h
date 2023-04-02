@@ -10,6 +10,7 @@ struct ColliderComponent: public ComponentBase<ColliderComponent>
     ColliderComponent(float w, float h): w(w), h(h){}
     float x, y;
     float w, h;
+    Point2DF centerI;
 };
 }
 #endif // COLLIDERCOMPONENT_H

@@ -13,9 +13,9 @@ Rectangle::Rectangle(float width, float height, float x, float y) : m_width(widt
 }
 
 
-Size Rectangle::size() const
+SizeF Rectangle::size() const
 {
-    return Size{m_width, m_height};
+    return SizeF {m_width, m_height};
 }
 
 Point2DF Rectangle::getPosition() const

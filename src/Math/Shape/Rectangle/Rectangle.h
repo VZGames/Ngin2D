@@ -13,7 +13,7 @@ public:
 
     // IShape interface
 public:
-    virtual Size size() const override;
+    virtual SizeF size() const override;
     virtual Point2DF getPosition() const override;
     virtual const char *getTypeName() const override;
     virtual bool contain(Point2DF point) override;

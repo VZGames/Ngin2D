@@ -79,7 +79,7 @@ public:
 
     const char *toString()
     {
-         std::string res = std::to_string(x) + ", " + std::to_string(y);
+         std::string &res = std::to_string(x) + ", " + std::to_string(y);
          return res.c_str();
     }
 

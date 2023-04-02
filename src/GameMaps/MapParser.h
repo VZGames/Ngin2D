@@ -20,7 +20,8 @@ public:
 
     void findById(int tileId, TileSet &tileset) const;
 
-    const Size getMapSize() const;
+    const SizeF &getMapSize() const;
+    const SizeF &getTileSize() const;
     const std::vector<Layer> &getLayers() const;
     const std::vector<TileSet> &getTilesets() const;
     const std::vector<GroupLayer> &getGroups() const;
@@ -28,7 +29,6 @@ public:
     const GroupLayer getGroupByName(const char *name) const;
     const GroupLayer getGroupByID(const int &id) const;
 
-    const Size &getTileSize() const;
 
     const std::vector<ObjectLayer> &getObjectLayers() const;
 
@@ -52,7 +52,7 @@ private:
         {"4", "./assets/Map4.tmx"},
     };
 
-    Size mapSize, tileSize;
+    SizeF mapSize, tileSize;
     std::vector<Layer> layers;
     std::vector<ObjectLayer> objectLayers;
     std::vector<GroupLayer> groups;

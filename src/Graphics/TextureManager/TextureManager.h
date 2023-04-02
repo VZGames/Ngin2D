@@ -22,7 +22,7 @@ public:
 
     void drawEllipse(Point2DF I, float radiusX, float radiusY);
     void drawRectangle(Point2DF pos, float width, float height);
-    void drawPolygon(std::vector<Point2DF> points);
+    void drawPolygon(Point2DF pos, std::vector<Point2DF> points);
 
     void drop(const char * textureID);
     void clean();

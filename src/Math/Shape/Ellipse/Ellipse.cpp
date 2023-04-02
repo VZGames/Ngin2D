@@ -20,9 +20,9 @@ const SDL_FRect &Ellipse::getRect() const
     return m_rect;
 }
 
-Size Ellipse::size() const
+SizeF Ellipse::size() const
 {
-    return Size{m_width, m_height};
+    return SizeF {m_width, m_height};
 }
 
 bool Ellipse::contain(Point2DF M)
@@ -68,4 +68,14 @@ float Ellipse::perimeter()
 Point2DF Ellipse::getCenterI() const
 {
     return m_centerI;
+}
+
+const float &Ellipse::radiusX() const
+{
+    return m_a;
+}
+
+const float &Ellipse::radiusY() const
+{
+    return m_b;
 }

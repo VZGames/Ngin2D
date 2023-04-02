@@ -5,8 +5,14 @@
 
 typedef struct Size
 {
-    float width, height;
+    int width, height;
 } Size;
+
+typedef struct SizeF
+{
+    float width, height;
+} SizeF;
+
 
 
 // tile map objects

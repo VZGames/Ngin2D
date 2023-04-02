@@ -118,6 +118,7 @@ void Player::handleKeyEvent()
 
         box->x = pos->x + box->w/2;
         box->y = pos->y + box->h;
+        box->centerI = Point2DF(box->x + box->w/2, box->y + box->h/2);
     }
 }
 

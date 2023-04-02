@@ -281,12 +281,12 @@ const GroupLayer MapParser::getGroupByID(const int &id) const
     return group;
 }
 
-const Size &MapParser::getTileSize() const
+const SizeF &MapParser::getTileSize() const
 {
     return tileSize;
 }
 
-const Size MapParser::getMapSize() const
+const SizeF &MapParser::getMapSize() const
 {
     return mapSize;
 }
