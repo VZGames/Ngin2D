@@ -96,15 +96,6 @@ bool CollisionSystem::MapCollision(Entity *entity)
 
     for(auto block: CollisionBlocks)
     {
-        float x, y;
-        float w, h;
-
-        x = block->getPosition().getX();
-        y = block->getPosition().getY();
-
-        w = block->size().width;
-        h = block->size().height;
-
         if(block->getTypeName() == std::string("ellipse"))
         {
             Ellipse *e = (Ellipse*)block;
@@ -112,14 +103,12 @@ bool CollisionSystem::MapCollision(Entity *entity)
                     .distance(Point2DF(pos->x + sprite->frameWidth/2,
                                        pos->y + sprite->frameHeight/2));
 
-            if (distance <= e->radiusX() + sprite->frameWidth/2)
-            {
-                collided += 1;
-            }
-            else if(distance <= e->radiusY())
-            {
-                collided += 1;
-            }
+            float radiusMax = (e->radiusX() > e->radiusY()) ? e->radiusX():e->radiusY();
+            float radiusMin = (e->radiusX() < e->radiusY()) ? e->radiusX():e->radiusY();
+
+            collided += (distance <= radiusMin + sprite->frameWidth/2);
+            collided += (distance <= radiusMax + sprite->frameWidth/2);
+            return collided;
         }
         else if(block->getTypeName() == std::string("rectangle"))
         {
@@ -129,7 +118,7 @@ bool CollisionSystem::MapCollision(Entity *entity)
                 sprite->frameWidth,
                 sprite->frameHeight
             };
-            collided += SDL_HasIntersectionF(&block->getRect(), &entiyBox);
+            return SDL_HasIntersectionF(&block->getRect(), &entiyBox);
         }
     }
     return collided;
