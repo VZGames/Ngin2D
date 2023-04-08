@@ -44,10 +44,13 @@ void CollisionSystem::update(float dt)
         bool hasComponent = ComponentManager::instance()->hasComponentType<PositionComponent>(entity.componentBitset);
         hasComponent &= ComponentManager::instance()->hasComponentType<SpriteComponent>(entity.componentBitset);
         hasComponent &= ComponentManager::instance()->hasComponentType<MotionComponent>(entity.componentBitset);
+        hasComponent &= ComponentManager::instance()->hasComponentType<ColliderComponent>(entity.componentBitset);
 
         if(hasComponent)
         {
+            auto motion   = entity.getComponent<MotionComponent>();
             auto pos      = entity.getComponent<PositionComponent>();
+            auto box      = entity.getComponent<ColliderComponent>();
 
             SizeF tileSize = MapParser::instance()->getTileSize();
 
@@ -56,7 +59,7 @@ void CollisionSystem::update(float dt)
 
             if(collided)
             {
-                pos->x = pos->lastX;
+                pos->x = pos->lastX + 1;
                 pos->y = pos->lastY;
             }
 
@@ -109,19 +112,27 @@ bool CollisionSystem::MapCollision(Entity *entity)
         {
             Ellipse *e = (Ellipse*)block;
             collided += block->contain(Point2DF(pos->x, pos->y));
-            collided += block->contain(Point2DF(pos->x + sprite->frameWidth/2, pos->y));
-            collided += block->contain(Point2DF(pos->x + sprite->frameWidth/2, pos->y + sprite->frameHeight/2));
-            collided += block->contain(Point2DF(pos->x, pos->y + sprite->frameHeight/2));
+            collided += block->contain(Point2DF(pos->x + sprite->frameWidth, pos->y));
+            collided += block->contain(Point2DF(pos->x + sprite->frameWidth, pos->y + sprite->frameHeight));
+            collided += block->contain(Point2DF(pos->x, pos->y + sprite->frameHeight));
 
-            float distance = e->getCenterI()
-                    .distance(Point2DF(pos->x + sprite->frameWidth/2,
-                                       pos->y + sprite->frameHeight/2));
+            if(collided)
+            {
+                continue;
+            }
 
-            float radiusMax = (e->radiusX() > e->radiusY()) ? e->radiusX():e->radiusY();
-            float radiusMin = (e->radiusX() < e->radiusY()) ? e->radiusX():e->radiusY();
+            else if((pos->x <= e->getCenterI().getX() + e->radiusX() &&
+                     pos->x + sprite->frameWidth >= e->getCenterI().getX() - e->radiusX()) &&
+                    (pos->y <= e->getCenterI().getY() + e->radiusY() &&
+                     pos->y + sprite->frameHeight >= e->getCenterI().getY() - e->radiusY()))
+            {
+                float distance = e->getCenterI()
+                                  .distance(Point2DF(pos->x + sprite->frameWidth/2,
+                                                     pos->y + sprite->frameHeight/2));
 
-            collided += (distance <= radiusMin);
-            collided += (distance <= radiusMax);
+//                if(pos->x + sprite->frameWidth/2 + e->getCenterI().getX())
+                collided = 1;
+            }
         }
         else if(block->getTypeName() == std::string("rectangle"))
         {

@@ -38,10 +38,7 @@ bool Ellipse::contain(Point2DF M)
     // expression: ((x - h)^2 / a^2) + ((y - k)^2 / b^2) = 1
     float expression = std::pow((mX - iX) / m_a, 2) + std::pow((mY - iY) / m_b, 2);
 
-    bool condition = 0;
-
-    condition = (std::abs(mX - iX) <= m_a) && (std::abs(mY - iY) <= m_b);    // check Point in ellipse
-    condition &= (std::round(expression) == 1.0f); // check Poin in Ellipse line
+    bool condition = (std::round(expression) == 1.0f); // check Poin in Ellipse line
     return condition;
 }
 

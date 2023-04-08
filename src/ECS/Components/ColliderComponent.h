@@ -11,6 +11,7 @@ struct ColliderComponent: public ComponentBase<ColliderComponent>
     float x, y;
     float w, h;
     Point2DF centerI;
+    bool collidedX, collidedY;
 };
 }
 #endif // COLLIDERCOMPONENT_H
