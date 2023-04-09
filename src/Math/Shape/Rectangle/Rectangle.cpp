@@ -1,21 +1,23 @@
 #include "Rectangle.h"
 
-Rectangle::Rectangle(float width, float height) : m_width(width),
+Rectangle::Rectangle(float width, float height, ListPoint2DF &vertices) : m_width(width),
     m_height(height)
 {
     m_rect = {m_x, m_y, m_width, m_height};
     m_x = 0.0f;
     m_y = 0.0f;
     m_centerI = Point2DF(m_x + m_width/2, m_y + m_height/2);
+    m_vertices = vertices;
 }
 
-Rectangle::Rectangle(float width, float height, float x, float y) : m_width(width),
+Rectangle::Rectangle(float width, float height, float x, float y, ListPoint2DF &vertices) : m_width(width),
     m_height(height)
 {
     m_x = x;
     m_y = y;
     m_rect = {m_x, m_y, m_width, m_height};
     m_centerI = Point2DF(m_x + m_width/2, m_y + m_height/2);
+    m_vertices = vertices;
 }
 
 

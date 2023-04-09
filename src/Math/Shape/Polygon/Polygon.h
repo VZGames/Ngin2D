@@ -7,7 +7,7 @@
 class Polygon: public IShape
 {
 public:
-    Polygon(float x, float y, const std::vector<Point2DF> &vertices);
+    Polygon(float x, float y, ListPoint2DF &vertices);
 
 
     // IShape interface

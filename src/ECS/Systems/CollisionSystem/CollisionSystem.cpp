@@ -21,7 +21,7 @@ void CollisionSystem::init()
             }
             else if(obj.shape == std::string("rectangle"))
             {
-                e = new Rectangle(obj.width, obj.height, obj.x, obj.y);
+                e = new Rectangle(obj.width, obj.height, obj.x, obj.y, obj.vertices);
             }
 
             else if(obj.shape == std::string("polygon"))

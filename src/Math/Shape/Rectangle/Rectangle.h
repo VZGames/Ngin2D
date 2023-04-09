@@ -8,8 +8,8 @@
 class Rectangle : public IShape
 {
 public:
-    Rectangle(float width, float height);
-    Rectangle(float width, float height, float x, float y);
+    Rectangle(float width, float height, ListPoint2DF &vertices);
+    Rectangle(float width, float height, float x, float y, ListPoint2DF &vertices);
 
     // IShape interface
 public:

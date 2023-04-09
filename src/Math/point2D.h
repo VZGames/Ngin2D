@@ -4,6 +4,7 @@
 #include <iostream>
 #include <string>
 #include <math.h>
+#include <vector>
 
 template<typename T>
 class Point2D
@@ -122,6 +123,9 @@ private:
 using Point2DI = Point2D<int>;
 using Point2DF = Point2D<float>;
 using Point2DLF = Point2D<double>;
+using ListPoint2DI = std::vector<Point2DI>;
+using ListPoint2DF = std::vector<Point2DF>;
+using ListPoint2DLF = std::vector<Point2DLF>;
 
 #endif // POINT2D_H
 

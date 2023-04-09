@@ -1,6 +1,6 @@
 #include "Polygon.h"
 
-Polygon::Polygon(float x, float y, const std::vector<Point2DF> &vertices)
+Polygon::Polygon(float x, float y, ListPoint2DF &vertices)
 {
     m_x = x;
     m_y = y;
