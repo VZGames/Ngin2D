@@ -26,7 +26,7 @@ void CollisionSystem::init()
 
             else if(obj.shape == std::string("polygon"))
             {
-                e = new Polygon(obj.x, obj.y, obj.points);
+                e = new Polygon(obj.x, obj.y, obj.vertices);
             }
 
             if(e != nullptr)
@@ -88,7 +88,7 @@ void CollisionSystem::render()
         else if(block->type() == std::string("polygon"))
         {
             Polygon *e = (Polygon*)block;
-            TextureManager::instance()->drawPolygon(e->position(), e->points());
+            TextureManager::instance()->drawPolygon(e->position(), e->vertices());
         }
     }
 }
@@ -110,15 +110,6 @@ bool CollisionSystem::MapCollision(Entity *entity)
         {
             Ellipse *e = (Ellipse*)shape;
             shape = e;
-            //            collided += block->contain(Point2DF(pos->x, pos->y));
-            //            collided += block->contain(Point2DF(pos->x + sprite->frameWidth, pos->y));
-            //            collided += block->contain(Point2DF(pos->x + sprite->frameWidth, pos->y + sprite->frameHeight));
-            //            collided += block->contain(Point2DF(pos->x, pos->y + sprite->frameHeight));
-
-            //            if(collided)
-            //            {
-            //                continue;
-            //            }
 
             if((pos->x <= e->center().getX() + e->radiusX() &&
                 pos->x + sprite->frameWidth >= e->center().getX() - e->radiusX()) &&
@@ -138,29 +129,6 @@ bool CollisionSystem::MapCollision(Entity *entity)
             };
             collided += SDL_HasIntersectionF(&block->getRect(), &entiyBox);
         }
-
-        if(collided)
-        {
-            float distance = block->center()
-                                .distance(Point2DF(pos->x + sprite->frameWidth/2,
-                                                   pos->y + sprite->frameHeight/2));
-
-//            printf("%f %f\n", distance- sprite->frameHeight/2, block->center().distance(block->position()));
-//            if(distance - sprite->frameHeight/2 == block->center().distance(block->position()))
-//            {
-//                std::cout << "Y\n";
-//                box->collidedX = 0;
-//                box->collidedY = 1;
-//            }
-//            else if(distance - sprite->frameWidth/2 == block->center().distance(block->position()))
-//            {
-//                std::cout << "X\n";
-//                box->collidedX = 1;
-//                box->collidedY = 0;
-//            }
-        }
-
-
     }
     return collided;
 }

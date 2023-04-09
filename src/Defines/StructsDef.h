@@ -31,7 +31,7 @@ typedef struct Object
     float x, y;
     float width, height;
     const char *shape;
-    std::vector<Point2DF> points;
+    std::vector<Point2DF> vertices;
 } Object;
 
 typedef struct ObjectLayer

@@ -205,10 +205,17 @@ void MapParser::parseObjectLayer(TiXmlElement *e)
                             std::istringstream iss(tmpStr);
                             iss >> tmp[i];
                         }
-                        obj.points.push_back(Point2DF(tmp[0], tmp[1]));
+                        obj.vertices.push_back(Point2DF(tmp[0], tmp[1]));
                     }
                 }
             }
+        }
+        else
+        {
+            obj.vertices.push_back(Point2DF(x, y));
+            obj.vertices.push_back(Point2DF(x + width, y));
+            obj.vertices.push_back(Point2DF(x, y + height));
+            obj.vertices.push_back(Point2DF(x + width, y + height));
         }
 
         obj.shape = shape;

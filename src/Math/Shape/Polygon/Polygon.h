@@ -7,7 +7,7 @@
 class Polygon: public IShape
 {
 public:
-    Polygon(float x, float y, const std::vector<Point2DF> &points);
+    Polygon(float x, float y, const std::vector<Point2DF> &vertices);
 
 
     // IShape interface
@@ -22,12 +22,9 @@ public:
     virtual float perimeter() override;
     virtual std::vector<Point2DF> vertices() const override;
 
-    const std::vector<Point2DF> &points() const;
-
 private:
     Point2DF m_centerI;
     SDL_FRect m_rect;
-    std::vector<Point2DF> m_points;
 
 };
 

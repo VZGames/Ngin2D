@@ -1,9 +1,10 @@
 #include "Polygon.h"
 
-Polygon::Polygon(float x, float y, const std::vector<Point2DF> &points) :m_points(points)
+Polygon::Polygon(float x, float y, const std::vector<Point2DF> &vertices)
 {
     m_x = x;
     m_y = y;
+    m_vertices = vertices;
 }
 
 const SDL_FRect &Polygon::getRect() const
@@ -51,8 +52,4 @@ std::vector<Point2DF> Polygon::vertices() const
     return m_vertices;
 }
 
-const std::vector<Point2DF> &Polygon::points() const
-{
-    return m_points;
-}
 
