@@ -105,17 +105,24 @@ void TextureManager::drawRectangle(Point2DF pos, float width, float height)
     SDL_RenderDrawRectF(Game::instance()->getRenderer(), &rect);
 }
 
-void TextureManager::drawPolygon(Point2DF pos, std::vector<Point2DF> points)
+void TextureManager::drawPolygon(Point2DF pos, std::vector<Point2DF> vertices)
 {
-    SDL_FPoint _points[points.size()];
-    for (int i = 0; i < points.size(); i++) {
+    SDL_FPoint points[vertices.size() + 1];
+    for (int i = 0; i <= vertices.size(); i++) {
         auto cameraPos = Camera::instance()->position();
-        _points[i] = {pos.getX() + points[i].getX() - cameraPos.getX(),
-                      pos.getY() + points[i].getY() - cameraPos.getY()};
+        if(i == vertices.size())
+        {
+            points[i] = {pos.getX() + vertices[0].getX() - cameraPos.getX(),
+                         pos.getY() + vertices[0].getY() - cameraPos.getY()};
+            break;
+        }
+        points[i] = {pos.getX() + vertices[i].getX() - cameraPos.getX(),
+                      pos.getY() + vertices[i].getY() - cameraPos.getY()};
     }
 
-    int numPoints = sizeof(_points) / sizeof(SDL_FPoint);
-    SDL_RenderDrawLinesF(Game::instance()->getRenderer(), _points, numPoints);
+
+    int numPoints = sizeof(points) / sizeof(SDL_FPoint);
+    SDL_RenderDrawLinesF(Game::instance()->getRenderer(), points, numPoints);
 }
 
 void TextureManager::drop(const char * textureID)

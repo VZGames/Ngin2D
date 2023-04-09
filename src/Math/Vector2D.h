@@ -36,12 +36,12 @@ private:
 public:
     T x;
     T y;
-    Vector2D(const Vector2D<T> &p_Copy) {
-        this->x = p_Copy.x;
-        this->y = p_Copy.y;
+    Vector2D(const Vector2D<T> &Copy) {
+        this->x = Copy.x;
+        this->y = Copy.y;
     }
     Vector2D() : x(0), y(0) {}
-    Vector2D(T p_X, T p_Y) : x(p_X), y(p_Y) {}
+    Vector2D(T X, T Y) : x(X), y(Y) {}
 
     Vector2D<T> &Ones()
     {
@@ -56,41 +56,41 @@ public:
         return *this;
     }
 
-    friend Vector2D<T> &operator+(Vector2D<T> &p_A, const Vector2D<T> &p_B)
+    friend Vector2D<T> &operator+(Vector2D<T> &A, const Vector2D<T> &B)
     {
-        return p_A.Add(p_B);
+        return A.Add(B);
     }
-    friend Vector2D<T> &operator-(Vector2D<T> &p_A, const Vector2D<T> &p_B)
+    friend Vector2D<T> &operator-(Vector2D<T> &A, const Vector2D<T> &B)
     {
 
-        return p_A.Subtract(p_B);
+        return A.Subtract(B);
     }
-    friend Vector2D<T> &operator*(Vector2D<T> &p_A, const Vector2D<T> &p_B)
+    friend Vector2D<T> &operator*(Vector2D<T> &A, const Vector2D<T> &B)
     {
 
-        return p_A.Multiply(p_B);
+        return A.Multiply(B);
     }
-    friend Vector2D<T> &operator/(Vector2D<T> &p_A, const Vector2D<T> &p_B)
+    friend Vector2D<T> &operator/(Vector2D<T> &A, const Vector2D<T> &B)
     {
 
-        return p_A.Divide(p_B);
+        return A.Divide(B);
     }
 
-    Vector2D<T> &operator+=(const Vector2D<T> &p_B)
+    Vector2D<T> &operator+=(const Vector2D<T> &B)
     {
-        return this->Add(p_B);
+        return this->Add(B);
     }
-    Vector2D<T> &operator-=(const Vector2D<T> &p_B)
+    Vector2D<T> &operator-=(const Vector2D<T> &B)
     {
-        return this->Subtract(p_B);
+        return this->Subtract(B);
     }
-    Vector2D<T> &operator*=(const Vector2D<T> &p_B)
+    Vector2D<T> &operator*=(const Vector2D<T> &B)
     {
-        return this->Multiply(p_B);
+        return this->Multiply(B);
     }
-    Vector2D<T> &operator/=(const Vector2D<T> &p_B)
+    Vector2D<T> &operator/=(const Vector2D<T> &B)
     {
-        return this->Divide(p_B);
+        return this->Divide(B);
     }
 
     Vector2D<T> &operator*(T &i)
@@ -107,14 +107,14 @@ public:
         return *this;
     }
 
-    Vector2D<T> &operator=(const Vector2D<T> &p_B)
+    Vector2D<T> &operator=(const Vector2D<T> &B)
     {
-        this->x = p_B.x;
-        this->y = p_B.y;
+        this->x = B.x;
+        this->y = B.y;
         return *this;
     }
 
-    float scalar() const
+    float magnitude() const
     {
         return (float)std::sqrt(std::pow(x,2) + std::pow(y,2));
     }
