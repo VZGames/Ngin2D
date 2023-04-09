@@ -119,6 +119,11 @@ public:
         return (float)std::sqrt(std::pow(x,2) + std::pow(y,2));
     }
 
+    float dotProduct(const Vector2D<T> &A, const Vector2D<T> &B)
+    {
+        return A.x * B.x + A.y * B.y;
+    }
+
     void print()
     {
         std::cout << x << ", " << y << std::endl;
