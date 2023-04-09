@@ -47,12 +47,12 @@ bool Ellipse::contain(Point2DF M)
     return condition;
 }
 
-Point2DF Ellipse::getPosition() const
+Point2DF Ellipse::position() const
 {
     return Point2DF(m_centerI.getX() - m_a, m_centerI.getY() - m_b);
 }
 
-const char *Ellipse::getTypeName() const
+const char *Ellipse::type() const
 {
     return "ellipse";
 }
@@ -67,7 +67,12 @@ float Ellipse::perimeter()
     return 2 * PI * sqrt((m_a * m_a + m_b * m_b) / 2);
 }
 
-Point2DF Ellipse::getCenterI() const
+std::vector<Point2DF> Ellipse::vertices() const
+{
+    return m_vertices;
+}
+
+Point2DF Ellipse::center() const
 {
     return m_centerI;
 }

@@ -15,11 +15,12 @@ public:
     virtual const SDL_FRect &getRect() const override;
     virtual SizeF size() const override;
     virtual bool contain(Point2DF M) override;
-    virtual Point2DF getPosition() const override;
-    virtual Point2DF getCenterI() const override;
-    virtual const char *getTypeName() const override;
+    virtual Point2DF position() const override;
+    virtual Point2DF center() const override;
+    virtual const char *type() const override;
     virtual float acreage() override;
     virtual float perimeter() override;
+    virtual std::vector<Point2DF> vertices() const override;
 
     const float &radiusX() const;
     const float &radiusY() const;
@@ -29,6 +30,7 @@ private:
     float m_width, m_height;
     float m_a, m_b;
     SDL_FRect m_rect;
+
 };
 
 #endif // ELLIPSE_H

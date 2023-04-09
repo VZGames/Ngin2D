@@ -75,20 +75,20 @@ void CollisionSystem::render()
 {
     for(auto block: CollisionBlocks)
     {
-        if(block->getTypeName() == std::string("ellipse"))
+        if(block->type() == std::string("ellipse"))
         {
             Ellipse *e = (Ellipse*)block;
-            TextureManager::instance()->drawEllipse(e->getCenterI() -= Camera::instance()->position(), e->size().width/2, e->size().height/2);
+            TextureManager::instance()->drawEllipse(e->center() -= Camera::instance()->position(), e->size().width/2, e->size().height/2);
         }
-        else if(block->getTypeName() == std::string("rectangle"))
+        else if(block->type() == std::string("rectangle"))
         {
             Rectangle *e = (Rectangle*)block;
-            TextureManager::instance()->drawRectangle(e->getPosition() -= Camera::instance()->position(), e->size().width, e->size().height);
+            TextureManager::instance()->drawRectangle(e->position() -= Camera::instance()->position(), e->size().width, e->size().height);
         }
-        else if(block->getTypeName() == std::string("polygon"))
+        else if(block->type() == std::string("polygon"))
         {
             Polygon *e = (Polygon*)block;
-            TextureManager::instance()->drawPolygon(e->getPosition(), e->points());
+            TextureManager::instance()->drawPolygon(e->position(), e->points());
         }
     }
 }
@@ -106,7 +106,7 @@ bool CollisionSystem::MapCollision(Entity *entity)
     for(auto block: CollisionBlocks)
     {
         IShape *shape = block;
-        if(block->getTypeName() == std::string("ellipse"))
+        if(block->type() == std::string("ellipse"))
         {
             Ellipse *e = (Ellipse*)shape;
             shape = e;
@@ -120,15 +120,15 @@ bool CollisionSystem::MapCollision(Entity *entity)
             //                continue;
             //            }
 
-            if((pos->x <= e->getCenterI().getX() + e->radiusX() &&
-                pos->x + sprite->frameWidth >= e->getCenterI().getX() - e->radiusX()) &&
-                    (pos->y <= e->getCenterI().getY() + e->radiusY() &&
-                     pos->y + sprite->frameHeight >= e->getCenterI().getY() - e->radiusY()))
+            if((pos->x <= e->center().getX() + e->radiusX() &&
+                pos->x + sprite->frameWidth >= e->center().getX() - e->radiusX()) &&
+                    (pos->y <= e->center().getY() + e->radiusY() &&
+                     pos->y + sprite->frameHeight >= e->center().getY() - e->radiusY()))
             {
                 collided = 1;
             }
         }
-        else if(block->getTypeName() == std::string("rectangle"))
+        else if(block->type() == std::string("rectangle"))
         {
             SDL_FRect entiyBox = {
                 pos->x,
@@ -141,18 +141,18 @@ bool CollisionSystem::MapCollision(Entity *entity)
 
         if(collided)
         {
-            float distance = block->getCenterI()
+            float distance = block->center()
                                 .distance(Point2DF(pos->x + sprite->frameWidth/2,
                                                    pos->y + sprite->frameHeight/2));
 
-//            printf("%f %f\n", distance- sprite->frameHeight/2, block->getCenterI().distance(block->getPosition()));
-//            if(distance - sprite->frameHeight/2 == block->getCenterI().distance(block->getPosition()))
+//            printf("%f %f\n", distance- sprite->frameHeight/2, block->center().distance(block->position()));
+//            if(distance - sprite->frameHeight/2 == block->center().distance(block->position()))
 //            {
 //                std::cout << "Y\n";
 //                box->collidedX = 0;
 //                box->collidedY = 1;
 //            }
-//            else if(distance - sprite->frameWidth/2 == block->getCenterI().distance(block->getPosition()))
+//            else if(distance - sprite->frameWidth/2 == block->center().distance(block->position()))
 //            {
 //                std::cout << "X\n";
 //                box->collidedX = 1;

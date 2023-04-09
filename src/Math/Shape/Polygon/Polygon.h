@@ -14,12 +14,13 @@ public:
 public:
     virtual const SDL_FRect &getRect() const override;
     virtual SizeF size() const override;
-    virtual Point2DF getPosition() const override;
-    virtual Point2DF getCenterI() const override;
-    virtual const char *getTypeName() const override;
+    virtual Point2DF position() const override;
+    virtual Point2DF center() const override;
+    virtual const char *type() const override;
     virtual bool contain(Point2DF point) override;
     virtual float acreage() override;
     virtual float perimeter() override;
+    virtual std::vector<Point2DF> vertices() const override;
 
     const std::vector<Point2DF> &points() const;
 

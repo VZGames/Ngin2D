@@ -24,17 +24,17 @@ SizeF Rectangle::size() const
     return SizeF {m_width, m_height};
 }
 
-Point2DF Rectangle::getPosition() const
+Point2DF Rectangle::position() const
 {
     return Point2DF(m_x, m_y);
 }
 
-Point2DF Rectangle::getCenterI() const
+Point2DF Rectangle::center() const
 {
     return m_centerI;
 }
 
-const char *Rectangle::getTypeName() const
+const char *Rectangle::type() const
 {
     return "rectangle";
 }
@@ -57,5 +57,10 @@ float Rectangle::perimeter()
 const SDL_FRect &Rectangle::getRect() const
 {
     return m_rect;
+}
+
+std::vector<Point2DF> Rectangle::vertices() const
+{
+    return m_vertices;
 }
 

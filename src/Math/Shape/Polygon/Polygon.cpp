@@ -16,17 +16,17 @@ SizeF Polygon::size() const
     return SizeF {0, 0};
 }
 
-Point2DF Polygon::getPosition() const
+Point2DF Polygon::position() const
 {
     return Point2DF(m_x, m_y);
 }
 
-Point2DF Polygon::getCenterI() const
+Point2DF Polygon::center() const
 {
     return m_centerI;
 }
 
-const char *Polygon::getTypeName() const
+const char *Polygon::type() const
 {
     return "polygon";
 }
@@ -44,6 +44,11 @@ float Polygon::acreage()
 float Polygon::perimeter()
 {
     return 0.0;
+}
+
+std::vector<Point2DF> Polygon::vertices() const
+{
+    return m_vertices;
 }
 
 const std::vector<Point2DF> &Polygon::points() const
