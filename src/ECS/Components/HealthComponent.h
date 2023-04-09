@@ -6,8 +6,8 @@
 namespace ngin2D {
 struct HealthComponent: public ComponentBase<HealthComponent>
 {
-    HealthComponent(int max): max(max){}
-    int max;
+    HealthComponent(float max): max(max){}
+    float current, max;
 };
 }
 
