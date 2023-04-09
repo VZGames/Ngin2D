@@ -20,7 +20,7 @@ public:
     virtual bool contain(Point2DF point) override;
     virtual float acreage() override;
     virtual float perimeter() override;
-    virtual const SDL_FRect &getRect() const override;
+    virtual const SDL_FRect &rect() const override;
     virtual std::vector<Point2DF> vertices() const override;
 
 

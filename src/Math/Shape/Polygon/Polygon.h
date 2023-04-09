@@ -12,7 +12,7 @@ public:
 
     // IShape interface
 public:
-    virtual const SDL_FRect &getRect() const override;
+    virtual const SDL_FRect &rect() const override;
     virtual SizeF size() const override;
     virtual Point2DF position() const override;
     virtual Point2DF center() const override;

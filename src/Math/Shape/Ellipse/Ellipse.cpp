@@ -20,7 +20,7 @@ Ellipse::Ellipse(float width, float height, float x, float y): m_width(width), m
     m_rect = {m_centerI.getX() - m_a, m_centerI.getY() - m_b, m_width, m_height};
 }
 
-const SDL_FRect &Ellipse::getRect() const
+const SDL_FRect &Ellipse::rect() const
 {
     return m_rect;
 }

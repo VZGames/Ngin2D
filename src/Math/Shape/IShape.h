@@ -14,7 +14,7 @@ protected:
 public:
     virtual std::vector<Point2DF> vertices() const = 0;
     virtual Point2DF center() const = 0;
-    virtual const SDL_FRect &getRect() const = 0;
+    virtual const SDL_FRect &rect() const = 0;
     virtual SizeF size() const = 0;
     virtual Point2DF position() const = 0;
     virtual const char *type() const = 0;

@@ -56,7 +56,7 @@ float Rectangle::perimeter()
     return (m_height + m_width) * 2;
 }
 
-const SDL_FRect &Rectangle::getRect() const
+const SDL_FRect &Rectangle::rect() const
 {
     return m_rect;
 }

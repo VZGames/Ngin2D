@@ -7,7 +7,7 @@ Polygon::Polygon(float x, float y, ListPoint2DF &vertices)
     m_vertices = vertices;
 }
 
-const SDL_FRect &Polygon::getRect() const
+const SDL_FRect &Polygon::rect() const
 {
     return m_rect;
 }

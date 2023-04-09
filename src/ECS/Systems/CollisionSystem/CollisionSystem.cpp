@@ -108,9 +108,7 @@ bool CollisionSystem::MapCollision(Entity *entity)
         IShape *shape = block;
         if(block->type() == std::string("ellipse"))
         {
-            Ellipse *e = (Ellipse*)shape;
-            shape = e;
-
+            Ellipse *e = (Ellipse*)block;
             if((pos->x <= e->center().getX() + e->radiusX() &&
                 pos->x + sprite->frameWidth >= e->center().getX() - e->radiusX()) &&
                     (pos->y <= e->center().getY() + e->radiusY() &&
@@ -121,13 +119,14 @@ bool CollisionSystem::MapCollision(Entity *entity)
         }
         else if(block->type() == std::string("rectangle"))
         {
+            Rectangle *e = (Rectangle*)block;
             SDL_FRect entiyBox = {
                 pos->x,
                 pos->y,
                 sprite->frameWidth,
                 sprite->frameHeight
             };
-            collided += SDL_HasIntersectionF(&block->getRect(), &entiyBox);
+            collided += SDL_HasIntersectionF(&e->rect(), &entiyBox);
         }
     }
     return collided;
