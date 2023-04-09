@@ -7,7 +7,10 @@
 
 class IShape
 {  
+protected:
+    float m_x, m_y;
 public:
+    virtual Point2DF getCenterI() const = 0;
     virtual const SDL_FRect &getRect() const = 0;
     virtual SizeF size() const = 0;
     virtual Point2DF getPosition() const = 0;

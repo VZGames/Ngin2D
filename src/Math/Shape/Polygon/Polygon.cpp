@@ -1,9 +1,10 @@
 #include "Polygon.h"
 
-Polygon::Polygon(float x, float y, const std::vector<Point2DF> &points) : m_x(x),
-    m_y(y),
-    m_points(points)
-{}
+Polygon::Polygon(float x, float y, const std::vector<Point2DF> &points) :m_points(points)
+{
+    m_x = x;
+    m_y = y;
+}
 
 const SDL_FRect &Polygon::getRect() const
 {
@@ -18,6 +19,11 @@ SizeF Polygon::size() const
 Point2DF Polygon::getPosition() const
 {
     return Point2DF(m_x, m_y);
+}
+
+Point2DF Polygon::getCenterI() const
+{
+    return m_centerI;
 }
 
 const char *Polygon::getTypeName() const

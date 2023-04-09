@@ -59,10 +59,14 @@ void CollisionSystem::update(float dt)
 
             if(collided)
             {
-                pos->x = pos->lastX + 1;
-                pos->y = pos->lastY;
+                pos->x = box->collidedY? pos->lastX + motion->direction: pos->lastX;
+                pos->y = box->collidedX? pos->lastY + motion->direction: pos->lastY;
             }
-
+            else
+            {
+                box->collidedY = 0;
+                box->collidedX = 0;
+            }
         }
     }
 }
@@ -91,46 +95,36 @@ void CollisionSystem::render()
 
 bool CollisionSystem::MapCollision(Entity *entity)
 {
-    auto motion     = entity->getComponent<MotionComponent>();
     auto sprite     = entity->getComponent<SpriteComponent>();
     auto pos        = entity->getComponent<PositionComponent>();
+    auto box        = entity->getComponent<ColliderComponent>();
 
+    Point2DF entityI = Point2DF(pos->x + sprite->frameWidth/2,
+                                pos->y + sprite->frameHeight/2);
     bool collided   = 0;
 
     for(auto block: CollisionBlocks)
     {
-        float x, y;
-        float w, h;
-
-        x = block->getPosition().getX();
-        y = block->getPosition().getY();
-
-        w = block->size().width;
-        h = block->size().height;
-
+        IShape *shape = block;
         if(block->getTypeName() == std::string("ellipse"))
         {
-            Ellipse *e = (Ellipse*)block;
-            collided += block->contain(Point2DF(pos->x, pos->y));
-            collided += block->contain(Point2DF(pos->x + sprite->frameWidth, pos->y));
-            collided += block->contain(Point2DF(pos->x + sprite->frameWidth, pos->y + sprite->frameHeight));
-            collided += block->contain(Point2DF(pos->x, pos->y + sprite->frameHeight));
+            Ellipse *e = (Ellipse*)shape;
+            shape = e;
+            //            collided += block->contain(Point2DF(pos->x, pos->y));
+            //            collided += block->contain(Point2DF(pos->x + sprite->frameWidth, pos->y));
+            //            collided += block->contain(Point2DF(pos->x + sprite->frameWidth, pos->y + sprite->frameHeight));
+            //            collided += block->contain(Point2DF(pos->x, pos->y + sprite->frameHeight));
 
-            if(collided)
-            {
-                continue;
-            }
+            //            if(collided)
+            //            {
+            //                continue;
+            //            }
 
-            else if((pos->x <= e->getCenterI().getX() + e->radiusX() &&
-                     pos->x + sprite->frameWidth >= e->getCenterI().getX() - e->radiusX()) &&
+            if((pos->x <= e->getCenterI().getX() + e->radiusX() &&
+                pos->x + sprite->frameWidth >= e->getCenterI().getX() - e->radiusX()) &&
                     (pos->y <= e->getCenterI().getY() + e->radiusY() &&
                      pos->y + sprite->frameHeight >= e->getCenterI().getY() - e->radiusY()))
             {
-                float distance = e->getCenterI()
-                                  .distance(Point2DF(pos->x + sprite->frameWidth/2,
-                                                     pos->y + sprite->frameHeight/2));
-
-//                if(pos->x + sprite->frameWidth/2 + e->getCenterI().getX())
                 collided = 1;
             }
         }
@@ -144,8 +138,36 @@ bool CollisionSystem::MapCollision(Entity *entity)
             };
             collided += SDL_HasIntersectionF(&block->getRect(), &entiyBox);
         }
+
+        if(collided)
+        {
+            float distance = block->getCenterI()
+                                .distance(Point2DF(pos->x + sprite->frameWidth/2,
+                                                   pos->y + sprite->frameHeight/2));
+
+//            printf("%f %f\n", distance- sprite->frameHeight/2, block->getCenterI().distance(block->getPosition()));
+//            if(distance - sprite->frameHeight/2 == block->getCenterI().distance(block->getPosition()))
+//            {
+//                std::cout << "Y\n";
+//                box->collidedX = 0;
+//                box->collidedY = 1;
+//            }
+//            else if(distance - sprite->frameWidth/2 == block->getCenterI().distance(block->getPosition()))
+//            {
+//                std::cout << "X\n";
+//                box->collidedX = 1;
+//                box->collidedY = 0;
+//            }
+        }
+
+
     }
     return collided;
+}
+
+bool CollisionSystem::OtherEntitiesCollision(Entity *entity)
+{
+    return 0;
 }
 
 }

@@ -1,9 +1,12 @@
 #include "Ellipse.h"
 
-Ellipse::Ellipse(float width, float height): m_width(width), m_height(height), m_centerI(0.0f, 0.0f)
+Ellipse::Ellipse(float width, float height): m_width(width), m_height(height)
 {
     m_a = width/2;
     m_b = height/2;
+    m_x = 0.0f;
+    m_y = 0.0f;
+    m_centerI = Point2DF(m_x + m_a, m_y + m_b);
     m_rect = {m_centerI.getX() - m_a, m_centerI.getY() - m_b, m_width, m_height};
 }
 
@@ -11,7 +14,9 @@ Ellipse::Ellipse(float width, float height, float x, float y): m_width(width), m
 {
     m_a = width/2;
     m_b = height/2;
-    m_centerI = Point2DF(x + m_a, y + m_b);
+    m_x = x;
+    m_y = y;
+    m_centerI = Point2DF(m_x + m_a, m_y + m_b);
     m_rect = {m_centerI.getX() - m_a, m_centerI.getY() - m_b, m_width, m_height};
 }
 

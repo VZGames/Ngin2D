@@ -15,6 +15,7 @@ public:
     virtual const SDL_FRect &getRect() const override;
     virtual SizeF size() const override;
     virtual Point2DF getPosition() const override;
+    virtual Point2DF getCenterI() const override;
     virtual const char *getTypeName() const override;
     virtual bool contain(Point2DF point) override;
     virtual float acreage() override;
@@ -23,7 +24,7 @@ public:
     const std::vector<Point2DF> &points() const;
 
 private:
-    float m_x, m_y;
+    Point2DF m_centerI;
     SDL_FRect m_rect;
     std::vector<Point2DF> m_points;
 

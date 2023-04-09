@@ -15,6 +15,7 @@ public:
 public:
     virtual SizeF size() const override;
     virtual Point2DF getPosition() const override;
+    virtual Point2DF getCenterI() const override;
     virtual const char *getTypeName() const override;
     virtual bool contain(Point2DF point) override;
     virtual float acreage() override;
@@ -22,8 +23,8 @@ public:
     virtual const SDL_FRect &getRect() const override;
 
 private:
+    Point2DF m_centerI;
     float m_width, m_height;
-    float m_x, m_y;
     SDL_FRect m_rect;
 };
 
