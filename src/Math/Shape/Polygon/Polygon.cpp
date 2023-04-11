@@ -1,10 +1,9 @@
 #include "Polygon.h"
 
-Polygon::Polygon(float x, float y, ListPoint2DF &vertices)
+Polygon::Polygon(float x, float y)
 {
     m_x = x;
     m_y = y;
-    m_vertices = vertices;
 }
 
 const SDL_FRect &Polygon::rect() const

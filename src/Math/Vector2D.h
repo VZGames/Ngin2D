@@ -3,6 +3,7 @@
 
 #include <iostream>
 #include <cmath>
+#include <vector>
 #include "Utils/Utils.h"
 
 template <typename T>
@@ -108,6 +109,13 @@ public:
         return *this;
     }
 
+    Vector2D<T> &operator*=(T i)
+    {
+        this->x *= i;
+        this->y *= i;
+        return *this;
+    }
+
     Vector2D<T> &operator=(const Vector2D<T> &B)
     {
         this->x = B.x;
@@ -143,9 +151,14 @@ public:
     }
 };
 
-using Vector2I = Vector2D<int>;
-using Vector2U = Vector2D<unsigned int>;
-using Vector2F = Vector2D<float>;
-using Vector2LF = Vector2D<double>;
+using Vector2DI = Vector2D<int>;
+using Vector2DU = Vector2D<unsigned int>;
+using Vector2DF = Vector2D<float>;
+using Vector2DLF = Vector2D<double>;
+
+using ListVector2DI = std::vector<Vector2DI>;
+using ListVector2DU = std::vector<Vector2DU>;
+using ListVector2DF = std::vector<Vector2DF>;
+using ListVector2DLF = std::vector<Vector2DF>;
 
 #endif // VECTOR2D_H

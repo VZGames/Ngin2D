@@ -16,7 +16,7 @@ struct Entity
     std::map<const char*, IComponent*> components;
 
 
-    template<typename T, typename... TArgs>
+    template<class T, typename... TArgs>
     T &addComponent(TArgs&&... mArgs)
     {
         const char *typeName = typeid(T).name();
@@ -28,7 +28,7 @@ struct Entity
         return *c;
     }
 
-    template<typename T>
+    template<class T>
     bool destroyComponent()
     {
         const char *typeName = typeid(T).name();
@@ -40,7 +40,7 @@ struct Entity
 
     }
 
-    template<typename T>
+    template<class T>
     T *getComponent() const
     {
         const char *typeName = typeid(T).name();

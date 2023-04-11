@@ -3,17 +3,17 @@
 
 #include <SDL2/SDL.h>
 #include "Defines/Defines.h"
-#include "Math/point2d.h"
+#include "Math/math2D.h"
 
 class IShape
 {  
 protected:
     float m_x, m_y;
-    std::vector<Point2DF> m_vertices;
-    std::vector<Vector2F> m_axes;
+    ListPoint2DF m_vertices;
+    ListVector2DF m_axes;
 
 public:
-    inline std::vector<Vector2F> axes()
+    inline ListVector2DF axes()
     {
         for (int i = 0; i < m_vertices.size(); i++) {
             Point2DF p1 = m_vertices[i];
@@ -22,13 +22,25 @@ public:
             float a = p2.getX() - p1.getX();
             float b = p2.getY() - p1.getY();
 
-            Vector2F vecU(a,b);
-            Vector2F vecNormal = vecU.perp();
-            m_axes.push_back(vecNormal);
+            Vector2DF u(a,b);
+            Vector2DF normal = u.perp();
+
+            float magnitude = normal.magnitude();
+            if(magnitude != 0)
+            {
+                normal *= 1/magnitude;
+            }
+
+            std::cout << normal;
+            m_axes.push_back(normal);
         }
         return m_axes;
     }
 
+    inline void setVertices(ListPoint2DF &vertices)
+    {
+        m_vertices = vertices;
+    }
     virtual std::vector<Point2DF> vertices() const = 0;
     virtual Point2DF center() const = 0;
     virtual const SDL_FRect &rect() const = 0;

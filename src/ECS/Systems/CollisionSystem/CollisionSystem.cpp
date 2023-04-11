@@ -18,22 +18,24 @@ void CollisionSystem::init()
             if(obj.shape == std::string("ellipse"))
             {
                 e = new Ellipse(obj.width, obj.height, obj.x, obj.y);
+                e->setVertices(obj.vertices);
             }
             else if(obj.shape == std::string("rectangle"))
             {
-                e = new Rectangle(obj.width, obj.height, obj.x, obj.y, obj.vertices);
+                e = new Rectangle(obj.width, obj.height, obj.x, obj.y);
+                e->setVertices(obj.vertices);
             }
-
             else if(obj.shape == std::string("polygon"))
             {
-                e = new Polygon(obj.x, obj.y, obj.vertices);
-                e->axes();
+                e = new Polygon(obj.x, obj.y);
+                e->setVertices(obj.vertices);
+            }
+            else
+            {
+                continue;
             }
 
-            if(e != nullptr)
-            {
-                CollisionBlocks.push_back(e);
-            }
+            CollisionBlocks.push_back(e);
         }
     }
 }

@@ -2,9 +2,9 @@
 #define SCENE_H
 
 #include "ECS/ECS.h"
-#include "ECS/Entity/Dynamic/Player/Player.h"
 #include "Event/Events.h"
 #include "Camera/Camera.h"
+#include "ECS/Entity/Entities.h"
 
 namespace ngin2D {
 class Scene
