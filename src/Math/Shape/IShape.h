@@ -31,7 +31,6 @@ public:
                 normal *= 1/magnitude;
             }
 
-            std::cout << normal;
             m_axes.push_back(normal);
         }
         return m_axes;

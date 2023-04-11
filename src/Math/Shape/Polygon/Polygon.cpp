@@ -1,9 +1,23 @@
 #include "Polygon.h"
 
-Polygon::Polygon(float x, float y)
+Polygon::Polygon(float x, float y, ListPoint2DF &vertices)
 {
     m_x = x;
     m_y = y;
+    m_vertices = vertices;
+
+    int k = m_vertices.size();
+    float gX, gY;
+    for (int i = 0; i < m_vertices.size(); i++) {
+        gX += m_vertices[i].getX();
+        gY += m_vertices[i].getY();
+    }
+    gX /= k;
+    gY /= k;
+
+    m_centerI = Point2DF(m_x + gX, m_y + gY);
+
+    std::cout << m_centerI;
 }
 
 const SDL_FRect &Polygon::rect() const

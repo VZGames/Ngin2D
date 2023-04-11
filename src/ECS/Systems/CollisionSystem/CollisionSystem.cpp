@@ -27,8 +27,7 @@ void CollisionSystem::init()
             }
             else if(obj.shape == std::string("polygon"))
             {
-                e = new Polygon(obj.x, obj.y);
-                e->setVertices(obj.vertices);
+                e = new Polygon(obj.x, obj.y, obj.vertices);
             }
             else
             {
@@ -109,27 +108,19 @@ bool CollisionSystem::MapCollision(Entity *entity)
     for(auto block: CollisionBlocks)
     {
         IShape *shape = block;
-        if(block->type() == std::string("ellipse"))
+        float distance = entityI.distance(shape->center());
+        if(distance <= 50)
         {
-            Ellipse *e = (Ellipse*)block;
-            if((pos->x <= e->center().getX() + e->radiusX() &&
-                pos->x + sprite->frameWidth >= e->center().getX() - e->radiusX()) &&
-                    (pos->y <= e->center().getY() + e->radiusY() &&
-                     pos->y + sprite->frameHeight >= e->center().getY() - e->radiusY()))
+            std::cout << block->type() << std::endl;
+            if(block->type() == std::string("ellipse"))
             {
-                collided = 1;
+                Ellipse *e = (Ellipse*)block;
+
             }
-        }
-        else if(block->type() == std::string("rectangle"))
-        {
-            Rectangle *e = (Rectangle*)block;
-            SDL_FRect entiyBox = {
-                pos->x,
-                pos->y,
-                sprite->frameWidth,
-                sprite->frameHeight
-            };
-            collided += SDL_HasIntersectionF(&e->rect(), &entiyBox);
+            else if(block->type() == std::string("rectangle"))
+            {
+                Rectangle *e = (Rectangle*)block;
+            }
         }
     }
     return collided;
