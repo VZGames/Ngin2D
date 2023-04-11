@@ -3,6 +3,7 @@
 #include "Event/KeyEvent/KeyEvent.h"
 #include "Scene/Camera/Camera.h"
 #include "GameMaps/MapParser.h"
+#include "Utils/Utils.h"
 
 Player *Player::s_instance = nullptr;
 Player::Player()
@@ -21,8 +22,7 @@ Player::Player()
 
 Player::~Player()
 {
-    delete ptr_entity;
-    ptr_entity = NULL;
+    safeDelete(ptr_entity);
 }
 
 Player *Player::instance()

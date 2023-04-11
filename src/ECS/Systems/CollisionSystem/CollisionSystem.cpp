@@ -27,6 +27,7 @@ void CollisionSystem::init()
             else if(obj.shape == std::string("polygon"))
             {
                 e = new Polygon(obj.x, obj.y, obj.vertices);
+                e->axes();
             }
 
             if(e != nullptr)

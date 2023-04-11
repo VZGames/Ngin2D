@@ -1,6 +1,7 @@
 #include "KeyEvent.h"
 #include "Game/Game.h"
 #include <iostream>
+#include "Utils/Utils.h"
 
 namespace ngin2D {
 KeyEvent *KeyEvent::s_instance = nullptr;
@@ -57,8 +58,7 @@ KeyEvent::KeyEvent()
 
 KeyEvent::~KeyEvent()
 {
-    delete keyBoardState;
-    keyBoardState = NULL;
+    safeDelete(keyBoardState);
 }
 
 bool KeyEvent::isReleased() const

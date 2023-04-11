@@ -3,6 +3,7 @@
 
 #include <iostream>
 #include <cmath>
+#include "Utils/Utils.h"
 
 template <typename T>
 class Vector2D
@@ -111,6 +112,13 @@ public:
     {
         this->x = B.x;
         this->y = B.y;
+        return *this;
+    }
+
+    Vector2D<T> &perp()
+    {
+        swap(this->x, this->y);
+        this->Multiply(Vector2D<T>(-1, 1));
         return *this;
     }
 
