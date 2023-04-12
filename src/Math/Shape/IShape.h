@@ -27,6 +27,8 @@ public:
             Vector2DF normal = u.perp();
 
             float magnitude = normal.magnitude();
+
+            // convert normal vector to unit vector(length to 1
             if(magnitude != 0)
             {
                 normal *= 1/magnitude;
@@ -43,9 +45,16 @@ public:
         float dotProductMax = dotProductMin;
 
         for (int i = 0; i < m_vertices.size(); i++) {
-             float dotProduct = axis.dotProduct(m_vertices[i].toVector());
-             dotProductMin = min(dotProductMin, dotProduct);
-             dotProductMax = max(dotProductMin, dotProduct);
+            float dotProduct = axis.dotProduct(m_vertices[i].toVector());
+            dotProductMin = min(dotProductMin, dotProduct);
+            dotProductMax = max(dotProductMax, dotProduct);
+
+            // [Formula] project = (dotProduct/|axis|^2) * axis
+            Vector2DF project1 = axis * dotProductMin;
+            Vector2DF project2 = axis * dotProductMax;
+
+            std::cout << project1 << project2;
+
         }
     }
 

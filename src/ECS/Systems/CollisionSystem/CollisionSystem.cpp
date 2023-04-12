@@ -28,6 +28,10 @@ void CollisionSystem::init()
             else if(obj.shape == std::string("polygon"))
             {
                 e = new Polygon(obj.x, obj.y, obj.vertices);
+                for (auto axis: e->axes())
+                {
+                    e->project(axis);
+                }
             }
             else
             {
@@ -90,7 +94,7 @@ void CollisionSystem::render()
         else if(block->type() == std::string("polygon"))
         {
             Polygon *e = (Polygon*)block;
-            TextureManager::instance()->drawPolygon(e->position(), e->vertices());
+            TextureManager::instance()->drawPolygon(e->vertices());
         }
     }
 }

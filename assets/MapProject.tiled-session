@@ -88,8 +88,8 @@
         },
         "Map2.tmx": {
             "expandedGroupLayers": [
-                2,
-                10
+                10,
+                2
             ],
             "expandedObjectLayers": [
                 11,
@@ -147,11 +147,11 @@
             "expandedObjectLayers": [
                 5
             ],
-            "scale": 0.5,
+            "scale": 2,
             "selectedLayer": 2,
             "viewCenter": {
-                "x": -151,
-                "y": 390
+                "x": 7.25,
+                "y": 177
             }
         },
         "Map4.tmx#Grass": {

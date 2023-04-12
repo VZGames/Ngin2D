@@ -48,6 +48,14 @@ public:
         return *this;
     }
 
+    Point2D<T> operator+(const Point2D<T> &other)
+    {
+        Point2D<T> point = *this;
+        point.x += other.x;
+        point.y += other.y;
+        return point;
+    }
+
     friend Point2D<T> operator*(const Point2D<T> &point, const T scale)
     {
         point.x *= scale;

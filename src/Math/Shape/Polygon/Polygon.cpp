@@ -16,8 +16,6 @@ Polygon::Polygon(float x, float y, ListPoint2DF &vertices)
     gY /= k;
 
     m_centerI = Point2DF(m_x + gX, m_y + gY);
-
-    std::cout << m_centerI;
 }
 
 const SDL_FRect &Polygon::rect() const

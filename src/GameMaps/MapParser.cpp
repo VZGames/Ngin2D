@@ -205,7 +205,7 @@ void MapParser::parseObjectLayer(TiXmlElement *e)
                             std::istringstream iss(tmpStr);
                             iss >> tmp[i];
                         }
-                        obj.vertices.push_back(Point2DF(tmp[0], tmp[1]));
+                        obj.vertices.push_back(Point2DF(x + tmp[0], y + tmp[1]));
                     }
                 }
             }

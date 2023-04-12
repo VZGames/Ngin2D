@@ -74,7 +74,6 @@ public:
     }
     friend Vector2D<T> &operator/(Vector2D<T> &A, const Vector2D<T> &B)
     {
-
         return A.Divide(B);
     }
 
@@ -95,16 +94,27 @@ public:
         return this->Divide(B);
     }
 
-    Vector2D<T> &operator*(const Vector2D<T> &B)
+
+    Vector2D<T> operator*(const Vector2D<T> &B)
     {
-        return this->Multiply(B);
+        Vector2D<T> vec = *this;
+        return vec->Multiply(B);
     }
 
-    Vector2D<T> &operator*(T &i)
+    Vector2D<T> operator*(const T &i)
     {
-        this->x *= i;
-        this->y *= i;
-        return *this;
+        Vector2D<T> vec = *this;
+        vec.x *= i;
+        vec.y *= i;
+        return vec;
+    }
+
+    Vector2D<T> operator*=(T i)
+    {
+        Vector2D<T> vec = *this;
+        vec.x *= i;
+        vec.y *= i;
+        return vec;
     }
 
     Vector2D<T> &operator*=(T &i)
@@ -114,12 +124,6 @@ public:
         return *this;
     }
 
-    Vector2D<T> &operator*=(T i)
-    {
-        this->x *= i;
-        this->y *= i;
-        return *this;
-    }
 
     Vector2D<T> &operator/=(T &i)
     {
