@@ -121,6 +121,20 @@ public:
         return *this;
     }
 
+    Vector2D<T> &operator/=(T &i)
+    {
+        this->x /= i;
+        this->y /= i;
+        return *this;
+    }
+
+    Vector2D<T> &operator/=(T i)
+    {
+        this->x /= i;
+        this->y /= i;
+        return *this;
+    }
+
     Vector2D<T> &operator=(const Vector2D<T> &B)
     {
         this->x = B.x;
