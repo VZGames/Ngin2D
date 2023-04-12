@@ -95,6 +95,11 @@ public:
         return this->Divide(B);
     }
 
+    Vector2D<T> &operator*(const Vector2D<T> &B)
+    {
+        return this->Multiply(B);
+    }
+
     Vector2D<T> &operator*(T &i)
     {
         this->x *= i;
@@ -135,7 +140,12 @@ public:
         return (float)std::sqrt(std::pow(x,2) + std::pow(y,2));
     }
 
-    float dotProduct(const Vector2D<T> &A, const Vector2D<T> &B)
+    float dotProduct(const Vector2D<T> &vec)
+    {
+        return this->x * vec.x + this->y * vec.y;
+    }
+
+    static float dotProduct(const Vector2D<T> &A, const Vector2D<T> &B)
     {
         return A.x * B.x + A.y * B.y;
     }

@@ -108,19 +108,17 @@ bool CollisionSystem::MapCollision(Entity *entity)
     for(auto block: CollisionBlocks)
     {
         IShape *shape = block;
-        float distance = entityI.distance(shape->center());
-        if(distance <= 50)
+        if(block->type() == std::string("ellipse"))
         {
-            std::cout << block->type() << std::endl;
-            if(block->type() == std::string("ellipse"))
-            {
-                Ellipse *e = (Ellipse*)block;
-
-            }
-            else if(block->type() == std::string("rectangle"))
-            {
-                Rectangle *e = (Rectangle*)block;
-            }
+            Ellipse *e = (Ellipse*)block;
+        }
+        else if(block->type() == std::string("rectangle"))
+        {
+            Rectangle *e = (Rectangle*)block;
+        }
+        else if(block->type() == std::string("polygon"))
+        {
+            Polygon *e = (Polygon*)block;
         }
     }
     return collided;

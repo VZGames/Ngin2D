@@ -4,6 +4,7 @@
 #include <SDL2/SDL.h>
 #include "Defines/Defines.h"
 #include "Math/math2D.h"
+#include "Utils/Utils.h"
 
 class IShape
 {  
@@ -36,10 +37,24 @@ public:
         return m_axes;
     }
 
+    inline void project(Vector2DF axis)
+    {
+        float dotProductMin = axis.dotProduct(m_vertices[0].toVector());
+        float dotProductMax = dotProductMin;
+
+        for (int i = 0; i < m_vertices.size(); i++) {
+             float dotProduct = axis.dotProduct(m_vertices[i].toVector());
+             dotProductMin = min(dotProductMin, dotProduct);
+             dotProductMax = max(dotProductMin, dotProduct);
+        }
+    }
+
     inline void setVertices(ListPoint2DF &vertices)
     {
         m_vertices = vertices;
     }
+
+
     virtual std::vector<Point2DF> vertices() const = 0;
     virtual Point2DF center() const = 0;
     virtual const SDL_FRect &rect() const = 0;

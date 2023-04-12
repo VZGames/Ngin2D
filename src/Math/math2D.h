@@ -5,7 +5,7 @@
 #include <cmath>
 #include <cstdlib>
 #include <iomanip>
-#include "point2d.h"
+#include "point2D.h"
 #include "matrix2D.h"
 #include "vector2d.h"
 #define PI  3.1415926535897932385

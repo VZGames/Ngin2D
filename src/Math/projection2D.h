@@ -1,9 +1,9 @@
 #ifndef PROJECTION_H
 #define PROJECTION_H
 
-class Projection
+class Projection2D
 {
 public:
-    Projection() {}
+    Projection2D() {}
 };
 #endif // PROJECTION_H

@@ -5,6 +5,8 @@
 #include <string>
 #include <math.h>
 #include <vector>
+#include "vector2D.h"
+
 
 template<typename T>
 class Point2D
@@ -101,6 +103,12 @@ public:
     {
         y = newY;
     }
+
+    Vector2D<T> toVector()
+    {
+        return Vector2D<T>(x, y);
+    }
+
 
     // log
     friend std::ostream &operator<<(std::ostream &out, const Point2D<T> &val)
