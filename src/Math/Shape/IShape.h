@@ -52,9 +52,6 @@ public:
             // [Formula] project = (dotProduct/|axis|^2) * axis
             Vector2DF project1 = axis * dotProductMin;
             Vector2DF project2 = axis * dotProductMax;
-
-            std::cout << project1 << project2;
-
         }
     }
 

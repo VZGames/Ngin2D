@@ -28,10 +28,6 @@ void CollisionSystem::init()
             else if(obj.shape == std::string("polygon"))
             {
                 e = new Polygon(obj.x, obj.y, obj.vertices);
-                for (auto axis: e->axes())
-                {
-                    e->project(axis);
-                }
             }
             else
             {
@@ -111,6 +107,21 @@ bool CollisionSystem::MapCollision(Entity *entity)
 
     for(auto block: CollisionBlocks)
     {
+        float x, y;
+        float w, h;
+
+        x = block->position().getX();
+        y = block->position().getY();
+
+        w = block->size().width;
+        h = block->size().height;
+
+
+        if(pos->x - x > 50 || pos->y - y > 50 || x - (pos->x + sprite->frameWidth) > 50 || y - (pos->y + sprite->frameHeight) > 50)
+        {
+            continue;
+        }
+
         IShape *shape = block;
         if(block->type() == std::string("ellipse"))
         {
@@ -123,6 +134,11 @@ bool CollisionSystem::MapCollision(Entity *entity)
         else if(block->type() == std::string("polygon"))
         {
             Polygon *e = (Polygon*)block;
+        }
+
+        for (auto axis: shape->axes())
+        {
+            shape->project(axis);
         }
     }
     return collided;
