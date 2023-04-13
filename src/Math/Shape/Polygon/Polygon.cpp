@@ -64,7 +64,6 @@ SizeF Polygon::size() const
     w = xMax;
     h = yMax;
 
-    std::cout << w << "," << h << std::endl;
     return SizeF {w, h};
 }
 

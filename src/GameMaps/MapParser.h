@@ -50,6 +50,7 @@ private:
         {"2", "./assets/Map2.tmx"},
         {"3", "./assets/Map3.tmx"},
         {"4", "./assets/Map4.tmx"},
+        {"5", "./assets/Map5.tmx"},
     };
 
     SizeF mapSize, tileSize;

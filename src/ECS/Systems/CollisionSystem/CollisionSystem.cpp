@@ -125,22 +125,7 @@ bool CollisionSystem::MapCollision(Entity *entity)
             continue;
         }
 
-        std::cout << "XXXXXXXXXXX\n";
-
         IShape *shape = block;
-        if(block->type() == std::string("ellipse"))
-        {
-            Ellipse *e = (Ellipse*)block;
-        }
-        else if(block->type() == std::string("rectangle"))
-        {
-            Rectangle *e = (Rectangle*)block;
-        }
-        else if(block->type() == std::string("polygon"))
-        {
-            Polygon *e = (Polygon*)block;
-        }
-
         for (auto axis: shape->axes())
         {
             shape->project(axis);

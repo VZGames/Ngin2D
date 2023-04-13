@@ -15,7 +15,7 @@ Player::Player()
     ptr_entity->addComponent<PositionComponent>((g_width - 8) / (2 * ZOOM_FACTOR), (g_height - 8) / (2 * ZOOM_FACTOR));
     ptr_entity->addComponent<SpawnComponent>(Point2DI(200, 176));
     ptr_entity->addComponent<SpriteComponent>("Lover", PLAYER_MOTION, 16, 16, 2, 200);
-    ptr_entity->addComponent<MotionComponent>(PLAYER_SPEED, Vector2DLF(), Vector2DLF());
+    ptr_entity->addComponent<MotionComponent>(PLAYER_SPEED, Vector2DF(), Vector2DF());
     ptr_entity->addComponent<HealthComponent>(100);
     ptr_entity->addComponent<TransformComponent>();
 }
@@ -116,9 +116,9 @@ void Player::handleKeyEvent()
             pos->y = mapHeight - sprite->frameHeight;
         }
 
-        box->x = pos->x + box->w/2;
-        box->y = pos->y + box->h;
-        box->centerI = Point2DF(box->x + box->w/2, box->y + box->h/2);
+//        box->x = pos->x + box->w/2;
+//        box->y = pos->y + box->h;
+//        box->centerI = Point2DF(box->x + box->w/2, box->y + box->h/2);
     }
 }
 

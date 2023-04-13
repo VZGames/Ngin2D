@@ -41,8 +41,8 @@ void RenderSystem::render()
             TextureManager::instance()->loadTexture(sprite->textureId, sprite->source);
 
             bool hasCamera = ComponentManager::instance()->hasComponentType<CameraComponent>(entity.componentBitset);
-            int cameraX = 0;
-            int cameraY = 0;
+            float cameraX = 0.0f;
+            float cameraY = 0.0f;
             if(hasCamera)
             {
                 auto camPos = Camera::instance()->position();
@@ -52,7 +52,7 @@ void RenderSystem::render()
 
             TextureManager::instance()->drawFrame(
                         sprite->textureId,
-                        Point2DI(position->x - cameraX,
+                        Point2DF(position->x - cameraX,
                                  position->y - cameraY),
                         sprite->frameWidth,
                         sprite->frameHeight,

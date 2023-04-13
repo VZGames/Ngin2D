@@ -66,15 +66,16 @@ void LayerManager::draw()
             tileY = (tileID / tileset.columns);
 
 
-            int frameX = x * tileset.tileWidth;
-            int frameY = y * tileset.tileHeight;
+            float frameX = x * tileset.tileWidth;
+            float frameY = y * tileset.tileHeight;
 
             if(!layer.visible) continue;
+
             TextureManager::instance()->drawTile(
                         tileset.name,
                         tileset.tileWidth,
                         tileset.tileHeight,
-                        Point2DI(frameX, frameY),
+                        Point2DF(frameX, frameY),
                         tileY,
                         tileX);
         }

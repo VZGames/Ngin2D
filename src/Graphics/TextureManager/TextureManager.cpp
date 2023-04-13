@@ -48,6 +48,13 @@ void TextureManager::draw(const char * textureID, Point2DI pos, int width, int h
     SDL_RenderCopy(Game::instance()->getRenderer(), textureDict[textureID], &srcRect, &destRect);
 }
 
+void TextureManager::draw(const char * textureID, Point2DF pos, int width, int height, SDL_RendererFlip flip)
+{
+    SDL_Rect srcRect = {0, 0, width, height};
+    SDL_FRect destRect = {pos.getX(), pos.getY(), (float)width, (float)height};
+    SDL_RenderCopyF(Game::instance()->getRenderer(), textureDict[textureID], &srcRect, &destRect);
+}
+
 void TextureManager::drawTile(const char * textureID, int tileWidth, int tileHeight, Point2DI pos, int row, int col, SDL_RendererFlip flip)
 {
     int frameX = tileWidth  *col;
@@ -64,6 +71,24 @@ void TextureManager::drawTile(const char * textureID, int tileWidth, int tileHei
     };
 
     SDL_RenderCopyEx(Game::instance()->getRenderer(), textureDict[textureID], &srcRect, &destRect, 0, NULL, flip);
+}
+
+void TextureManager::drawTile(const char * textureID, int tileWidth, int tileHeight, Point2DF pos, int row, int col, SDL_RendererFlip flip)
+{
+    int frameX = tileWidth  *col;
+    int frameY = tileHeight  *row;
+
+    auto cameraPos = Camera::instance()->position();
+
+    SDL_Rect srcRect = {frameX, frameY, tileWidth, tileHeight};
+    SDL_FRect destRect = {
+        (pos.getX() - cameraPos.getX()),
+        (pos.getY() - cameraPos.getY()),
+        (float)tileWidth,
+        (float)tileHeight
+    };
+
+    SDL_RenderCopyExF(Game::instance()->getRenderer(), textureDict[textureID], &srcRect, &destRect, 0, NULL, flip);
 }
 
 void TextureManager::drawFrame(const char * textureID, Point2DI pos, int width, int height, int row, int col, SDL_RendererFlip flip, float angle)
@@ -83,6 +108,25 @@ void TextureManager::drawFrame(const char * textureID, Point2DI pos, int width, 
     SDL_RenderDrawRect(Game::instance()->getRenderer(), &box);
 
     SDL_RenderCopyEx(Game::instance()->getRenderer(), textureDict[textureID], &srcRect, &destRect, 0, NULL, flip);
+}
+
+void TextureManager::drawFrame(const char * textureID, Point2DF pos, int width, int height, int row, int col, SDL_RendererFlip flip, float angle)
+{
+    int frameX = width * col;
+    int frameY = height * row;
+
+    SDL_Rect srcRect = {frameX, frameY, width, height};
+    SDL_FRect destRect = {
+        pos.getX(),
+        pos.getY(),
+        (float)width,
+        (float)height
+    };
+
+    SDL_FRect box = {pos.getX(),  pos.getY(), (float)width, (float)height};
+    SDL_RenderDrawRectF(Game::instance()->getRenderer(), &box);
+
+    SDL_RenderCopyExF(Game::instance()->getRenderer(), textureDict[textureID], &srcRect, &destRect, 0, NULL, flip);
 }
 
 
