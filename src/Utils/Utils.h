@@ -2,6 +2,7 @@
 #define UTILS_H
 
 #include <stdlib.h>
+#include <iostream>
 
 template<class T>
 void safeDelete(T *ptr)

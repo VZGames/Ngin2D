@@ -1,4 +1,5 @@
 #include "Polygon.h"
+#include "Utils/Utils.h"
 
 Polygon::Polygon(float x, float y, ListPoint2DF &vertices)
 {
@@ -25,7 +26,46 @@ const SDL_FRect &Polygon::rect() const
 
 SizeF Polygon::size() const
 {
-    return SizeF {0, 0};
+    float w,h;
+    float xMin, xMax;
+    float yMin, yMax;
+
+    xMin = std::abs(m_vertices[0].getX()) < m_x
+            ?m_x - std::abs(m_vertices[0].getX())
+            :std::abs(m_vertices[0].getX()) - m_x;
+    yMin = std::abs(m_vertices[0].getY()) < m_y
+            ?m_y - std::abs(m_vertices[0].getY())
+            :std::abs(m_vertices[0].getY()) - m_y;
+
+    xMax = xMin;
+    yMax = yMin;
+
+    for (Point2DF vertex: m_vertices)
+    {
+        float _x = std::abs(vertex.getX()) < m_x
+                ?m_x - std::abs(vertex.getX())
+                :std::abs(vertex.getX()) - m_x;
+        float _y = std::abs(vertex.getY()) < m_y
+                ?m_y - std::abs(vertex.getY())
+                :std::abs(vertex.getY()) - m_y;
+        if(_x > xMin)
+        {
+            xMax = _x;
+            xMin = xMax;
+        }
+
+        if(_y > yMin)
+        {
+            yMax = _y;
+            yMin = yMax;
+        }
+    }
+
+    w = xMax;
+    h = yMax;
+
+    std::cout << w << "," << h << std::endl;
+    return SizeF {w, h};
 }
 
 Point2DF Polygon::position() const

@@ -117,10 +117,15 @@ bool CollisionSystem::MapCollision(Entity *entity)
         h = block->size().height;
 
 
-        if(pos->x - x > 50 || pos->y - y > 50 || x - (pos->x + sprite->frameWidth) > 50 || y - (pos->y + sprite->frameHeight) > 50)
+        if(pos->x - (x + w) > 50
+           || pos->y - (y + h) > 50
+           || x - (pos->x + sprite->frameWidth) > 50
+           || y - (pos->y + sprite->frameHeight) > 50)
         {
             continue;
         }
+
+        std::cout << "XXXXXXXXXXX\n";
 
         IShape *shape = block;
         if(block->type() == std::string("ellipse"))
