@@ -12,26 +12,26 @@ class Vector2D
 private:
     Vector2D<T> &Add(const Vector2D<T> &vec)
     {
-        this->x += vec.x;
-        this->y += vec.y;
+        this->x += static_cast<T>(vec.x);
+        this->y += static_cast<T>(vec.y);
         return *this;
     }
     Vector2D<T> &Subtract(const Vector2D<T> &vec)
     {
-        this->x -= vec.x;
-        this->y -= vec.y;
+        this->x -= static_cast<T>(vec.x);
+        this->y -= static_cast<T>(vec.y);
         return *this;
     }
     Vector2D<T> &Multiply(const Vector2D<T> &vec)
     {
-        this->x *= vec.x;
-        this->y *= vec.y;
+        this->x *= static_cast<T>(vec.x);
+        this->y *= static_cast<T>(vec.y);
         return *this;
     }
     Vector2D<T> &Divide(const Vector2D<T> &vec)
     {
-        this->x /= vec.x;
-        this->y /= vec.y;
+        this->x /= static_cast<T>(vec.x);
+        this->y /= static_cast<T>(vec.y);
         return *this;
     }
 
@@ -141,8 +141,8 @@ public:
 
     Vector2D<T> &operator=(const Vector2D<T> &B)
     {
-        this->x = B.x;
-        this->y = B.y;
+        this->x = static_cast<T>(B.x);
+        this->y = static_cast<T>(B.y);
         return *this;
     }
 
@@ -156,12 +156,12 @@ public:
 
     float magnitude() const
     {
-        return (float)std::sqrt(std::pow(x,2) + std::pow(y,2));
+        return static_cast<float>(std::sqrt(std::pow(x,2) + std::pow(y,2)));
     }
 
     float dotProduct(const Vector2D<T> &vec)
     {
-        return this->x * vec.x + this->y * vec.y;
+        return this->x * static_cast<T>(vec.x) + this->y * static_cast<T>(vec.y);
     }
 
     static float dotProduct(const Vector2D<T> &A, const Vector2D<T> &B)
