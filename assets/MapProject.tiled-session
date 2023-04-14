@@ -3,11 +3,11 @@
         "height": 4300,
         "width": 2
     },
-    "activeFile": "Map4.tmx",
+    "activeFile": "Map5.tmx",
     "automapping.whileDrawing": false,
     "expandedProjectPaths": [
-        "Characters",
-        "."
+        ".",
+        "Characters"
     ],
     "fileStates": {
         "": {
@@ -172,11 +172,14 @@
         },
         "Map5.tmx": {
             "scale": 0.015625,
-            "selectedLayer": 0,
+            "selectedLayer": 1,
             "viewCenter": {
-                "x": 22944,
-                "y": 7808
+                "x": 3712,
+                "y": 16896
             }
+        },
+        "Map5.tmx#Grass": {
+            "scaleInDock": 1
         },
         "Map5.tmx#Water": {
             "scaleInDock": 1
@@ -196,12 +199,14 @@
     "map.width": 3000,
     "openFiles": [
         "Map4.tmx",
-        "Map2.tmx"
+        "Map2.tmx",
+        "Map5.tmx"
     ],
     "project": "MapProject.tiled-project",
     "recentFiles": [
-        "Map2.tmx",
         "Map4.tmx",
+        "Map2.tmx",
+        "Map5.tmx",
         "Map1.tmx",
         "Map3.tmx",
         "Characters/BasicCharakterSpritesheet.tsx",
