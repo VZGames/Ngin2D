@@ -104,38 +104,38 @@ public:
     Vector2D<T> operator*(const T &i)
     {
         Vector2D<T> vec = *this;
-        vec.x *= i;
-        vec.y *= i;
+        vec.x *= static_cast<T>(i);
+        vec.y *= static_cast<T>(i);
         return vec;
     }
 
     Vector2D<T> operator*=(T i)
     {
         Vector2D<T> vec = *this;
-        vec.x *= i;
-        vec.y *= i;
+        vec.x *= static_cast<T>(i);
+        vec.y *= static_cast<T>(i);
         return vec;
     }
 
     Vector2D<T> &operator*=(T &i)
     {
-        this->x *= i;
-        this->y *= i;
+        this->x *= static_cast<T>(i);
+        this->y *= static_cast<T>(i);
         return *this;
     }
 
 
     Vector2D<T> &operator/=(T &i)
     {
-        this->x /= i;
-        this->y /= i;
+        this->x /= static_cast<T>(i);
+        this->y /= static_cast<T>(i);
         return *this;
     }
 
     Vector2D<T> &operator/=(T i)
     {
-        this->x /= i;
-        this->y /= i;
+        this->x /= static_cast<T>(i);
+        this->y /= static_cast<T>(i);
         return *this;
     }
 
@@ -146,11 +146,12 @@ public:
         return *this;
     }
 
-    Vector2D<T> &perp()
+    Vector2D<T> perp()
     {
-        swap(this->x, this->y);
-        this->Multiply(Vector2D<T>(-1, 1));
-        return *this;
+        *this *= Vector2D<T>(static_cast<T>(-1), static_cast<T>(1));
+        Vector2D<T> vec = *this;
+        swap(vec.x, vec.y);
+        return vec;
     }
 
     float magnitude() const

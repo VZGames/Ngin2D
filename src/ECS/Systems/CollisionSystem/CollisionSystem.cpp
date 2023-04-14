@@ -34,6 +34,12 @@ void CollisionSystem::init()
                 continue;
             }
 
+
+            std::cout << e->type() << "\n";
+            for (auto axis: e->axes())
+            {
+                e->project(axis);
+            }
             CollisionBlocks.push_back(e);
         }
     }
@@ -126,10 +132,10 @@ bool CollisionSystem::MapCollision(Entity *entity)
         }
 
         IShape *shape = block;
-        for (auto axis: shape->axes())
-        {
-            shape->project(axis);
-        }
+//        for (auto axis: shape->axes())
+//        {
+//            shape->project(axis);
+//        }
     }
     return collided;
 }
