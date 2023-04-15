@@ -80,7 +80,7 @@
  <objectgroup color="#aa0000" id="5" name="Collision">
   <object id="77" x="38.6667" y="229.667" width="30" height="27"/>
   <object id="78" x="229.167" y="402.333">
-   <polygon points="0,0 27.5,-34 53,-10 45.5,9.5"/>
+   <polygon points="0,0 2.23787,-27.7077 27.5,-34 48.4737,-30.4512 53,-10 45.5,9.5 19.4816,14.6527"/>
   </object>
   <object id="79" x="149" y="148.5" width="17.5" height="10">
    <ellipse/>

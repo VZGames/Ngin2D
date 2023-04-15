@@ -19,11 +19,6 @@ Polygon::Polygon(float x, float y, ListPoint2DF &vertices)
     m_centerI = Point2DF(m_x + gX, m_y + gY);
 }
 
-const SDL_FRect &Polygon::rect() const
-{
-    return m_rect;
-}
-
 SizeF Polygon::size() const
 {
     float w,h;
@@ -97,9 +92,5 @@ float Polygon::perimeter()
     return 0.0;
 }
 
-std::vector<Point2DF> Polygon::vertices() const
-{
-    return m_vertices;
-}
 
 

@@ -20,11 +20,6 @@ Ellipse::Ellipse(float width, float height, float x, float y): m_width(width), m
     m_rect = {m_centerI.getX() - m_a, m_centerI.getY() - m_b, m_width, m_height};
 }
 
-const SDL_FRect &Ellipse::rect() const
-{
-    return m_rect;
-}
-
 SizeF Ellipse::size() const
 {
     return SizeF {m_width, m_height};
@@ -65,11 +60,6 @@ float Ellipse::acreage()
 float Ellipse::perimeter()
 {
     return 2 * PI * sqrt((m_a * m_a + m_b * m_b) / 2);
-}
-
-std::vector<Point2DF> Ellipse::vertices() const
-{
-    return m_vertices;
 }
 
 Point2DF Ellipse::center() const

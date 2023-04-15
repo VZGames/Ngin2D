@@ -3,6 +3,9 @@
 
 #include <stdio.h>
 #include <iostream>
+#include <iomanip>
+#include <string>
+#include <ctime>
 #include "Defines/EnumDef.h"
 
 /** @brief Indicates if warning level logging is enabled. */
@@ -19,7 +22,6 @@
 #define LOG_DEBUG_ENABLED 0
 #define LOG_TRACE_ENABLED 0
 #endif
-
 
 void log_output(LOG_LEVEL level, const char *message, ...);
 

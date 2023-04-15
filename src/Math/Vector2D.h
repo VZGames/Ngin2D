@@ -6,6 +6,7 @@
 #include <vector>
 #include "Utils/Utils.h"
 
+
 template <typename T>
 class Vector2D
 {
@@ -94,34 +95,42 @@ public:
         return this->Divide(B);
     }
 
+    Vector2D<T> operator+(const Vector2D<T> &B)
+    {
+        Vector2D<T> vec = *this;
+        return vec.Add(B);
+    }
+
+    Vector2D<T> operator-(const Vector2D<T> &B)
+    {
+        Vector2D<T> vec = *this;
+        return vec.Subtract(B);
+    }
 
     Vector2D<T> operator*(const Vector2D<T> &B)
     {
         Vector2D<T> vec = *this;
-        return vec->Multiply(B);
+        return vec.Multiply(B);
     }
 
     Vector2D<T> operator*(const T &i)
     {
         Vector2D<T> vec = *this;
-        vec.x *= static_cast<T>(i);
-        vec.y *= static_cast<T>(i);
+        vec *= i;
         return vec;
     }
 
-    Vector2D<T> operator*=(T i)
-    {
-        Vector2D<T> vec = *this;
-        vec.x *= static_cast<T>(i);
-        vec.y *= static_cast<T>(i);
-        return vec;
-    }
 
-    Vector2D<T> &operator*=(T &i)
+    Vector2D<T> &operator*=(T i)
     {
         this->x *= static_cast<T>(i);
         this->y *= static_cast<T>(i);
         return *this;
+    }
+
+    Vector2D<T> &operator*=(T &i)
+    {
+        return this * i;
     }
 
 
@@ -169,14 +178,15 @@ public:
         return A.x * B.x + A.y * B.y;
     }
 
-    void print()
-    {
-        std::cout << x << ", " << y << std::endl;
-    }
     friend std::ostream &operator<<(std::ostream &out, const Vector2D &vec)
     {
         out << "(" << vec.x << ", " << vec.y << ")\n";
         return out;
+    }
+
+    void print()
+    {
+        std::cout << x << ", " << y << std::endl;
     }
 };
 

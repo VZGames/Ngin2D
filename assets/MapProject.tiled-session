@@ -3,11 +3,11 @@
         "height": 4300,
         "width": 2
     },
-    "activeFile": "Map5.tmx",
+    "activeFile": "Map4.tmx",
     "automapping.whileDrawing": false,
     "expandedProjectPaths": [
-        ".",
-        "Characters"
+        "Characters",
+        "."
     ],
     "fileStates": {
         "": {
@@ -88,8 +88,8 @@
         },
         "Map2.tmx": {
             "expandedGroupLayers": [
-                10,
-                2
+                2,
+                10
             ],
             "expandedObjectLayers": [
                 11,
@@ -147,11 +147,11 @@
             "expandedObjectLayers": [
                 5
             ],
-            "scale": 0.33,
+            "scale": 4,
             "selectedLayer": 2,
             "viewCenter": {
-                "x": 537.878787878788,
-                "y": 421.21212121212113
+                "x": 299.5,
+                "y": 347.5
             }
         },
         "Map4.tmx#Grass": {
@@ -204,9 +204,9 @@
     ],
     "project": "MapProject.tiled-project",
     "recentFiles": [
-        "Map4.tmx",
-        "Map2.tmx",
         "Map5.tmx",
+        "Map2.tmx",
+        "Map4.tmx",
         "Map1.tmx",
         "Map3.tmx",
         "Characters/BasicCharakterSpritesheet.tsx",

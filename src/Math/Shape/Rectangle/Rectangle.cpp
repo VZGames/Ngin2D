@@ -53,14 +53,3 @@ float Rectangle::perimeter()
 {
     return (m_height + m_width) * 2;
 }
-
-const SDL_FRect &Rectangle::rect() const
-{
-    return m_rect;
-}
-
-std::vector<Point2DF> Rectangle::vertices() const
-{
-    return m_vertices;
-}
-

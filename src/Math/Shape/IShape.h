@@ -4,14 +4,17 @@
 #include <SDL2/SDL.h>
 #include "Defines/Defines.h"
 #include "Math/math2D.h"
+#include "Math/projection2D.h"
 #include "Utils/Utils.h"
 
 class IShape
 {  
 protected:
     float m_x, m_y;
+    SDL_FRect m_rect;
     ListPoint2DF m_vertices;
     ListVector2DF m_axes;
+    std::vector<Projection2D> m_projections;
 
 public:
     inline ListVector2DF axes()
@@ -20,11 +23,9 @@ public:
             Point2DF p1 = m_vertices[i];
             Point2DF p2 = m_vertices[i + 1 == m_vertices.size()? 0: i+1];
 
-            float a = p2.getX() - p1.getX();
-            float b = p2.getY() - p1.getY();
+            Vector2DF edge = p1.toVector() - p2.toVector();
 
-            Vector2DF u(a,b);
-            Vector2DF normal = u.perp();
+            Vector2DF normal = edge.perp();
 
             float magnitude = normal.magnitude();
 
@@ -50,10 +51,10 @@ public:
             dotProductMax = max(dotProductMax, dotProduct);
         }
         // [Formula] project = (dotProduct/|axis|^2) * axis
-        Vector2DF project1 = axis * dotProductMin;
-        Vector2DF project2 = axis * dotProductMax;
+        Vector2DF projectMin = axis * dotProductMin;
+        Vector2DF projectMax = axis * dotProductMax;
+        m_projections.push_back(Projection2D(projectMin, projectMax));
 
-        std::cout << axis << project1 << project2 << "\n";
     }
 
     inline void setVertices(ListPoint2DF &vertices)
@@ -61,16 +62,29 @@ public:
         m_vertices = vertices;
     }
 
+    inline std::vector<Point2DF> vertices() const
+    {
+        return m_vertices;
+    }
 
-    virtual std::vector<Point2DF> vertices() const = 0;
+    inline std::vector<Projection2D> projections() const
+    {
+        return m_projections;
+    }
+
+
+    inline const SDL_FRect &rect() const
+    {
+        return m_rect;
+    };
+
     virtual Point2DF center() const = 0;
-    virtual const SDL_FRect &rect() const = 0;
     virtual SizeF size() const = 0;
     virtual Point2DF position() const = 0;
     virtual const char *type() const = 0;
-    virtual bool contain(Point2DF point) = 0;
-    virtual float acreage() = 0;
-    virtual float perimeter() = 0;
+    virtual bool contain(Point2DF point) { return 0; };
+    virtual float acreage() { return 0.0f; };
+    virtual float perimeter() { return 0.0f; };
 
 };
 #endif // ISHAPE_H
