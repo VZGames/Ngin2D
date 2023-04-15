@@ -43,7 +43,6 @@ void KeyEvent::listen()
 
 bool KeyEvent::sendEvent(SDL_Scancode numKey)
 {
-
     if (keyBoardState[numKey])
     {
         return 1;

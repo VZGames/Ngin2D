@@ -125,7 +125,9 @@ bool CollisionSystem::MapCollision(Entity *entity)
             IShape *shape = block;
             for (auto axis: box->axes())
             {
+//                std::cout << "Proj1\n";
                 Projection2D project1 = box->project(axis);
+//                std::cout << "Proj2\n";
                 Projection2D project2 = shape->project(axis);
                 if(!project1.overlap(project2))
                 {
@@ -137,7 +139,9 @@ bool CollisionSystem::MapCollision(Entity *entity)
 
             for (auto axis: shape->axes())
             {
+//                std::cout << "Proj1\n";
                 Projection2D project1 = box->project(axis);
+//                std::cout << "Proj2\n";
                 Projection2D project2 = shape->project(axis);
                 if(!project1.overlap(project2))
                 {

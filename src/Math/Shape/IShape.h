@@ -57,7 +57,7 @@ public:
 
 //        std::cout << projectMin << projectMax;
 //        m_projections.push_back(Projection2D(projectMin, projectMax));
-        return Projection2D(projectMin, projectMax);
+        return Projection2D(dotProductMin, dotProductMax);
 
     }
 
