@@ -14,7 +14,7 @@ Player::Player()
     ptr_entity->addComponent<ColliderComponent>(8, 8);
     ptr_entity->addComponent<PositionComponent>((g_width - 8) / (2 * ZOOM_FACTOR), (g_height - 8) / (2 * ZOOM_FACTOR));
     ptr_entity->addComponent<SpawnComponent>(Point2DI(200, 176));
-    ptr_entity->addComponent<SpriteComponent>("Lover", PLAYER_MOTION, 16, 16, 2, 200);
+    ptr_entity->addComponent<SpriteComponent>("Lover", PLAYER_MOTION, 32, 32, 2, 200);
     ptr_entity->addComponent<MotionComponent>(PLAYER_SPEED, Vector2DF(), Vector2DF());
     ptr_entity->addComponent<HealthComponent>(100);
     ptr_entity->addComponent<TransformComponent>();
@@ -51,18 +51,25 @@ void Player::handleKeyEvent()
         auto pos    = ptr_entity->getComponent<PositionComponent>();
 
         bool pressed = KeyEvent::instance()->isPressed();
+        if(pressed)
+        {
+            motion->running = 1;
+        } else
+        {
+            motion->running = 0;
+        }
 
         pos->lastX = pos->x;
         pos->lastY = pos->y;
 
-        sprite->frameCount = 2;
+        sprite->frameCount = 1;
         if(KeyEvent::instance()->sendEvent(SDL_SCANCODE_A))
         {
             motion->direction = LEFT;
             pos->x += (motion->speed * LEFT);
             sprite->frameCount = 4;
             sprite->row = 2;
-            sprite->col = 2;
+            sprite->col = 1;
         }
 
         if(KeyEvent::instance()->sendEvent(SDL_SCANCODE_D))
@@ -71,7 +78,7 @@ void Player::handleKeyEvent()
             pos->x += (motion->speed * RIGHT);
             sprite->frameCount = 4;
             sprite->row = 3;
-            sprite->col = 2;
+            sprite->col = 1;
         }
 
         if(KeyEvent::instance()->sendEvent(SDL_SCANCODE_W))
@@ -79,8 +86,8 @@ void Player::handleKeyEvent()
             motion->direction = UP;
             pos->y += (motion->speed * UP);
             sprite->frameCount = 4;
-            sprite->row = 1;
-            sprite->col = 2;
+            sprite->row = 0;
+            sprite->col = 1;
         }
 
         if(KeyEvent::instance()->sendEvent(SDL_SCANCODE_S))
@@ -88,8 +95,8 @@ void Player::handleKeyEvent()
             motion->direction = DOWN;
             pos->y += (motion->speed * DOWN);
             sprite->frameCount = 4;
-            sprite->row = 0;
-            sprite->col = 2;
+            sprite->row = 1;
+            sprite->col = 1;
         }
 
         int mapWidth, mapHeight;
@@ -116,9 +123,17 @@ void Player::handleKeyEvent()
             pos->y = mapHeight - sprite->frameHeight;
         }
 
-//        box->x = pos->x + box->w/2;
-//        box->y = pos->y + box->h;
-//        box->centerI = Point2DF(box->x + box->w/2, box->y + box->h/2);
+        ListPoint2DF _vertices;
+
+        box->x = pos->x + box->w/2;
+        box->y = pos->y + box->h;
+        box->setRect({box->x, box->y, box->w, box->h});
+        box->setCenter(Point2DF(box->x + box->w/2, box->y + box->h/2));
+        _vertices.push_back(Point2DF(box->x, box->y));
+        _vertices.push_back(Point2DF(box->x + box->w, box->y));
+        _vertices.push_back(Point2DF(box->x, box->y + box->h));
+        _vertices.push_back(Point2DF(box->x + box->w, box->y + box->h));
+        box->setVertices(_vertices);
     }
 }
 

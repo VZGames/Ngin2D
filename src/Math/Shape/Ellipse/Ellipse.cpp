@@ -6,8 +6,8 @@ Ellipse::Ellipse(float width, float height): m_width(width), m_height(height)
     m_b = height/2;
     m_x = 0.0f;
     m_y = 0.0f;
-    m_centerI = Point2DF(m_x + m_a, m_y + m_b);
-    m_rect = {m_centerI.getX() - m_a, m_centerI.getY() - m_b, m_width, m_height};
+    m_center = Point2DF(m_x + m_a, m_y + m_b);
+    m_rect ={m_center.getX() - m_a, m_center.getY() - m_b, m_width, m_height};
 }
 
 Ellipse::Ellipse(float width, float height, float x, float y): m_width(width), m_height(height)
@@ -16,8 +16,8 @@ Ellipse::Ellipse(float width, float height, float x, float y): m_width(width), m
     m_b = height/2;
     m_x = x;
     m_y = y;
-    m_centerI = Point2DF(m_x + m_a, m_y + m_b);
-    m_rect = {m_centerI.getX() - m_a, m_centerI.getY() - m_b, m_width, m_height};
+    m_center = Point2DF(m_x + m_a, m_y + m_b);
+    m_rect ={m_center.getX() - m_a, m_center.getY() - m_b, m_width, m_height};
 }
 
 SizeF Ellipse::size() const
@@ -32,9 +32,8 @@ bool Ellipse::contain(Point2DF M)
     mX = M.getX();
     mY = M.getY();
 
-    iX = m_centerI.getX();
-    iY = m_centerI.getY();
-
+    iX = m_center.getX();
+    iY = m_center.getY();
     // expression: ((x - h)^2 / a^2) + ((y - k)^2 / b^2) = 1
     float expression = std::pow((mX - iX) / m_a, 2) + std::pow((mY - iY) / m_b, 2);
 
@@ -44,7 +43,7 @@ bool Ellipse::contain(Point2DF M)
 
 Point2DF Ellipse::position() const
 {
-    return Point2DF(m_centerI.getX() - m_a, m_centerI.getY() - m_b);
+    return Point2DF(m_center.getX() - m_a, m_center.getY() - m_b);
 }
 
 const char *Ellipse::type() const
@@ -62,10 +61,6 @@ float Ellipse::perimeter()
     return 2 * PI * sqrt((m_a * m_a + m_b * m_b) / 2);
 }
 
-Point2DF Ellipse::center() const
-{
-    return m_centerI;
-}
 
 const float &Ellipse::radiusX() const
 {

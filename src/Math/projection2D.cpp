@@ -8,5 +8,5 @@ Projection2D::Projection2D(Vector2DF min, Vector2DF max): m_min(min), m_max(max)
 
 bool Projection2D::overlap(const Projection2D &projectB)
 {
-
+    return !(m_max.x < projectB.m_min.x || projectB.m_max.x < m_min.x);
 }

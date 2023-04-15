@@ -34,12 +34,6 @@ void CollisionSystem::init()
                 continue;
             }
 
-
-            std::cout << e->type() << "\n";
-            for (auto axis: e->axes())
-            {
-                e->project(axis);
-            }
             CollisionBlocks.push_back(e);
         }
     }
@@ -67,13 +61,8 @@ void CollisionSystem::update(float dt)
 
             if(collided)
             {
-                pos->x = box->collidedY? pos->lastX + motion->direction: pos->lastX;
-                pos->y = box->collidedX? pos->lastY + motion->direction: pos->lastY;
-            }
-            else
-            {
-                box->collidedY = 0;
-                box->collidedX = 0;
+                pos->x = pos->lastX;
+                pos->y = pos->lastY;
             }
         }
     }
@@ -103,6 +92,7 @@ void CollisionSystem::render()
 
 bool CollisionSystem::MapCollision(Entity *entity)
 {
+    auto motion     = entity->getComponent<MotionComponent>();
     auto sprite     = entity->getComponent<SpriteComponent>();
     auto pos        = entity->getComponent<PositionComponent>();
     auto box        = entity->getComponent<ColliderComponent>();
@@ -111,35 +101,55 @@ bool CollisionSystem::MapCollision(Entity *entity)
                                 pos->y + sprite->frameHeight/2);
     bool collided   = 0;
 
-    for(auto block: CollisionBlocks)
+    if(motion->running)
     {
-        float x, y;
-        float w, h;
-
-        x = block->position().getX();
-        y = block->position().getY();
-
-        w = block->size().width;
-        h = block->size().height;
-
-
-//        if(pos->x - (x + w) > 50
-//           || pos->y - (y + h) > 50
-//           || x - (pos->x + sprite->frameWidth) > 50
-//           || y - (pos->y + sprite->frameHeight) > 50)
-//        {
-//            continue;
-//        }
-
-        IShape *shape = block;
-        for (auto project: shape->projections())
+        for(auto block: CollisionBlocks)
         {
-//            if(project.overlap(Projection2D()))
-//            {
-//                std::cout << "XXXXXXXXXXX\n";
-//            }
+            float x, y;
+            float w, h;
+
+            x = block->position().getX();
+            y = block->position().getY();
+
+            w = block->size().width;
+            h = block->size().height;
+
+            if(pos->x - (x + w) > 50
+                    || pos->y - (y + h) > 50
+                    || x - (pos->x + sprite->frameWidth) > 50
+                    || y - (pos->y + sprite->frameHeight) > 50)
+            {
+                continue;
+            }
+
+            IShape *shape = block;
+            for (auto axis: box->axes())
+            {
+                Projection2D project1 = box->project(axis);
+                Projection2D project2 = shape->project(axis);
+                if(!project1.overlap(project2))
+                {
+                    collided = 0;
+                    break;
+                }
+                collided += 1;
+            }
+
+            for (auto axis: shape->axes())
+            {
+                Projection2D project1 = box->project(axis);
+                Projection2D project2 = shape->project(axis);
+                if(!project1.overlap(project2))
+                {
+                    collided = 0;
+                    break;
+                }
+                collided += 1;
+            }
         }
+
     }
+
     return collided;
 }
 

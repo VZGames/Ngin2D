@@ -14,7 +14,6 @@ public:
 public:
     virtual SizeF size() const override;
     virtual Point2DF position() const override;
-    virtual Point2DF center() const override;
     virtual const char *type() const override;
     virtual bool contain(Point2DF M) override;
     virtual float acreage() override;
@@ -25,7 +24,6 @@ public:
     const float &radiusY() const;
 
 private:
-    Point2DF m_centerI;
     float m_width, m_height;
     float m_a, m_b;
 

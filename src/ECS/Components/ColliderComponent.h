@@ -8,21 +8,22 @@
 namespace ngin2D {
 struct ColliderComponent: public ComponentBase<ColliderComponent>, public IShape
 {
-    ColliderComponent(float w, float h): w(w), h(h){
-        m_rect  = {x, y, w, h};
-    }
+    ColliderComponent(float w, float h): w(w), h(h){}
     float x, y;
     float w, h;
-    Point2DF centerI;
-    bool collidedX, collidedY;
+
+    void setRect(SDL_FRect rect)
+    {
+        m_rect = rect;
+    }
+
+    void setCenter(Point2DF center)
+    {
+        m_center = center;
+    }
 
     // IShape interface
 public:
-    virtual Point2DF center() const override
-    {
-        return centerI;
-    }
-
     virtual SizeF size() const override
     {
         return SizeF {w, h};

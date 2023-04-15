@@ -11,6 +11,7 @@ struct MotionComponent: public ComponentBase<MotionComponent>
     float speed, direction;
     Vector2DF velocity;
     Vector2DF acceleration;
+    bool running = 0;
 };
 }
 #endif // MotionComponent_H

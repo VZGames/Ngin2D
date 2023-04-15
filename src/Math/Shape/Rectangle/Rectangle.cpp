@@ -6,7 +6,7 @@ Rectangle::Rectangle(float width, float height) : m_width(width),
     m_rect = {m_x, m_y, m_width, m_height};
     m_x = 0.0f;
     m_y = 0.0f;
-    m_centerI = Point2DF(m_x + m_width/2, m_y + m_height/2);
+    m_center = Point2DF(m_x + m_width/2, m_y + m_height/2);
 }
 
 Rectangle::Rectangle(float width, float height, float x, float y) : m_width(width),
@@ -15,7 +15,7 @@ Rectangle::Rectangle(float width, float height, float x, float y) : m_width(widt
     m_x = x;
     m_y = y;
     m_rect = {m_x, m_y, m_width, m_height};
-    m_centerI = Point2DF(m_x + m_width/2, m_y + m_height/2);
+    m_center = Point2DF(m_x + m_width/2, m_y + m_height/2);
 }
 
 
@@ -27,11 +27,6 @@ SizeF Rectangle::size() const
 Point2DF Rectangle::position() const
 {
     return Point2DF(m_x, m_y);
-}
-
-Point2DF Rectangle::center() const
-{
-    return m_centerI;
 }
 
 const char *Rectangle::type() const

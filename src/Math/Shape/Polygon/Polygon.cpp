@@ -16,7 +16,7 @@ Polygon::Polygon(float x, float y, ListPoint2DF &vertices)
     gX /= k;
     gY /= k;
 
-    m_centerI = Point2DF(m_x + gX, m_y + gY);
+    m_center = Point2DF(m_x + gX, m_y + gY);
 }
 
 SizeF Polygon::size() const
@@ -65,11 +65,6 @@ SizeF Polygon::size() const
 Point2DF Polygon::position() const
 {
     return Point2DF(m_x, m_y);
-}
-
-Point2DF Polygon::center() const
-{
-    return m_centerI;
 }
 
 const char *Polygon::type() const

@@ -11,6 +11,7 @@ class IShape
 {  
 protected:
     float m_x, m_y;
+    Point2DF m_center;
     SDL_FRect m_rect;
     ListPoint2DF m_vertices;
     ListVector2DF m_axes;
@@ -40,7 +41,7 @@ public:
         return m_axes;
     }
 
-    inline void project(Vector2DF axis)
+    inline Projection2D project(Vector2DF axis)
     {
         float dotProductMin = axis.dotProduct(m_vertices[0].toVector());
         float dotProductMax = dotProductMin;
@@ -53,7 +54,10 @@ public:
         // [Formula] project = (dotProduct/|axis|^2) * axis
         Vector2DF projectMin = axis * dotProductMin;
         Vector2DF projectMax = axis * dotProductMax;
-        m_projections.push_back(Projection2D(projectMin, projectMax));
+
+//        std::cout << projectMin << projectMax;
+//        m_projections.push_back(Projection2D(projectMin, projectMax));
+        return Projection2D(projectMin, projectMax);
 
     }
 
@@ -78,7 +82,10 @@ public:
         return m_rect;
     };
 
-    virtual Point2DF center() const = 0;
+    virtual Point2DF center() const
+    {
+        return m_center;
+    };
     virtual SizeF size() const = 0;
     virtual Point2DF position() const = 0;
     virtual const char *type() const = 0;
