@@ -123,7 +123,7 @@ void TextureManager::drawFrame(const char * textureID, Point2DF pos, int width, 
         (float)height
     };
 
-    SDL_FRect box = {pos.getX(),  pos.getY(), (float)width, (float)height};
+    SDL_FRect box = {pos.getX() + 8,  pos.getY(), 16, (float)height};
     SDL_RenderDrawRectF(Game::instance()->getRenderer(), &box);
 
     SDL_RenderCopyExF(Game::instance()->getRenderer(), textureDict[textureID], &srcRect, &destRect, 0, NULL, flip);

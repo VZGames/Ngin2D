@@ -20,6 +20,6 @@
 #define DOWN 1.0f
 
 
-#define PLAYER_SPEED 0.8f
+#define PLAYER_SPEED 1.2f
 
 #endif // GAMEDEF_H

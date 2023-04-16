@@ -11,7 +11,9 @@ class IShape
 {  
 protected:
     float m_x, m_y;
+    SizeF m_size;
     Point2DF m_center;
+    Point2DF m_position;
     SDL_FRect m_rect;
     ListPoint2DF m_vertices;
     ListVector2DF m_axes;
@@ -76,18 +78,36 @@ public:
         return m_projections;
     }
 
-
     inline const SDL_FRect &rect() const
     {
         return m_rect;
     };
 
-    virtual Point2DF center() const
+    inline Point2DF center() const
     {
         return m_center;
     };
-    virtual SizeF size() const = 0;
-    virtual Point2DF position() const = 0;
+
+    inline SizeF size() const
+    {
+        return m_size;
+    }
+
+    inline Point2DF position() const
+    {
+        return m_position;
+    }
+
+    virtual SizeF size()
+    {
+        return m_size;
+    }
+
+    virtual Point2DF position()
+    {
+        return m_position;
+    }
+
     virtual const char *type() const = 0;
     virtual bool contain(Point2DF point) { return 0; };
     virtual float acreage() { return 0.0f; };

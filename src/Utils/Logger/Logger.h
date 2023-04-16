@@ -23,7 +23,7 @@
 #define LOG_TRACE_ENABLED 0
 #endif
 
-void log_output(LOG_LEVEL level, const char *message, ...);
+void log_output(LOG_LEVEL level, std::ostream &out, const char *message, ...);
 
 
 /**
@@ -31,7 +31,7 @@ void log_output(LOG_LEVEL level, const char *message, ...);
  * @param message The message to be logged. Can be a format string for additional parameters.
  * @param ... Additional parameters to be logged.
  */
-#define OFATAL(message, ...) log_output(LOG_LEVEL_FATAL, message, ##__VA_ARGS__);
+#define OFATAL(message, ...) log_output(LOG_LEVEL::FATAL, std::cout, message, ##__VA_ARGS__);
 
 #ifndef KERROR
 /**
@@ -40,7 +40,7 @@ void log_output(LOG_LEVEL level, const char *message, ...);
  * @param message The message to be logged.
  * @param ... Any formatted data that should be included in the log entry.
  */
-#define OERROR(message, ...) log_output(LOG_LEVEL_ERROR, message, ##__VA_ARGS__);
+#define OERROR(message, ...) log_output(LOG_LEVEL::ERROR, std::cout, message, ##__VA_ARGS__);
 #endif
 
 #if LOG_WARN_ENABLED == 1
@@ -50,7 +50,7 @@ void log_output(LOG_LEVEL level, const char *message, ...);
  * @param message The message to be logged.
  * @param ... Any formatted data that should be included in the log entry.
  */
-#define OWARN(message, ...) log_output(LOG_LEVEL_WARN, message, ##__VA_ARGS__);
+#define OWARN(message, ...) log_output(LOG_LEVEL::WARN, std::cout, message, ##__VA_ARGS__);
 #else
 /**
  * @brief Logs a warning-level message. Should be used to indicate non-critial problems with
@@ -67,7 +67,7 @@ void log_output(LOG_LEVEL level, const char *message, ...);
  * @param message The message to be logged.
  * @param ... Any formatted data that should be included in the log entry.
  */
-#define OINFO(message, ...) log_output(LOG_LEVEL_INFO, message, ##__VA_ARGS__);
+#define OINFO(message, ...) log_output(LOG_LEVEL::INFO, std::cout, message, ##__VA_ARGS__);
 #else
 /**
  * @brief Logs an info-level message. Should be used for non-erronuous informational purposes.
@@ -84,7 +84,7 @@ void log_output(LOG_LEVEL level, const char *message, ...);
  * @param message The message to be logged.
  * @param ... Any formatted data that should be included in the log entry.
  */
-#define ODEBUG(message, ...) log_output(LOG_LEVEL_DEBUG, message, ##__VA_ARGS__);
+#define ODEBUG(message, ...) log_output(LOG_LEVEL::DEBUG, std::cout, message, ##__VA_ARGS__);
 #else
 /**
  * @brief Logs a debug-level message. Should be used for debugging purposes.
@@ -101,7 +101,7 @@ void log_output(LOG_LEVEL level, const char *message, ...);
  * @param message The message to be logged.
  * @param ... Any formatted data that should be included in the log entry.
  */
-#define OTRACE(message, ...) log_output(LOG_LEVEL_TRACE, message, ##__VA_ARGS__);
+#define OTRACE(message, ...) log_output(LOG_LEVEL::TRACE, std::cout, message, ##__VA_ARGS__);
 #else
 /**
  * @brief Logs a trace-level message. Should be used for verbose debugging purposes.

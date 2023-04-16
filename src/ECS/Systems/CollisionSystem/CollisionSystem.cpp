@@ -114,10 +114,10 @@ bool CollisionSystem::MapCollision(Entity *entity)
             w = block->size().width;
             h = block->size().height;
 
-            if(pos->x - (x + w) > 50
-                    || pos->y - (y + h) > 50
-                    || x - (pos->x + sprite->frameWidth) > 50
-                    || y - (pos->y + sprite->frameHeight) > 50)
+            if(pos->x - (x + w) > 50.0f
+                    || pos->y - (y + h) > 50.0f
+                    || x - (pos->x + sprite->frameWidth) > 50.0f
+                    || y - (pos->y + sprite->frameHeight) > 50.0f)
             {
                 continue;
             }
@@ -125,33 +125,28 @@ bool CollisionSystem::MapCollision(Entity *entity)
             IShape *shape = block;
             for (auto axis: box->axes())
             {
-//                std::cout << "Proj1\n";
                 Projection2D project1 = box->project(axis);
-//                std::cout << "Proj2\n";
                 Projection2D project2 = shape->project(axis);
                 if(!project1.overlap(project2))
                 {
                     collided = 0;
                     break;
                 }
-                collided += 1;
+                collided = 1;
             }
 
             for (auto axis: shape->axes())
             {
-//                std::cout << "Proj1\n";
                 Projection2D project1 = box->project(axis);
-//                std::cout << "Proj2\n";
                 Projection2D project2 = shape->project(axis);
                 if(!project1.overlap(project2))
                 {
                     collided = 0;
                     break;
                 }
-                collided += 1;
+                collided = 1;
             }
         }
-
     }
 
     return collided;

@@ -24,12 +24,12 @@ struct ColliderComponent: public ComponentBase<ColliderComponent>, public IShape
 
     // IShape interface
 public:
-    virtual SizeF size() const override
+    virtual SizeF size() const
     {
         return SizeF {w, h};
     }
 
-    virtual Point2DF position() const override
+    virtual Point2DF position() const
     {
         return Point2DF(x, y);
     }

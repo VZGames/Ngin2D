@@ -11,7 +11,7 @@ Player::Player()
     ptr_entity = EntityManager::instance()->createEntity();
     ptr_entity->addComponent<PlayerComponent>();
     ptr_entity->addComponent<CameraComponent>();
-    ptr_entity->addComponent<ColliderComponent>(8, 8);
+    ptr_entity->addComponent<ColliderComponent>(16, 32);
     ptr_entity->addComponent<PositionComponent>((g_width - 8) / (2 * ZOOM_FACTOR), (g_height - 8) / (2 * ZOOM_FACTOR));
     ptr_entity->addComponent<SpawnComponent>(Point2DI(200, 176));
     ptr_entity->addComponent<SpriteComponent>("Lover", PLAYER_MOTION, 32, 32, 2, 200);
@@ -62,7 +62,31 @@ void Player::handleKeyEvent()
         pos->lastX = pos->x;
         pos->lastY = pos->y;
 
+        ListPoint2DF _vertices;
+
+        box->x = pos->x + 8;
+        box->y = pos->y + 8;
+        box->setRect({box->x, box->y, box->w, box->h});
+        box->setCenter(Point2DF(box->x + box->w/2, box->y + box->h/2));
+        _vertices.push_back(Point2DF(box->x, box->y));
+        _vertices.push_back(Point2DF(box->x + box->w, box->y));
+        _vertices.push_back(Point2DF(box->x, box->y + box->h));
+        _vertices.push_back(Point2DF(box->x + box->w, box->y + box->h));
+        box->setVertices(_vertices);
+
+
         sprite->frameCount = 1;
+
+        bool moveTopLeft        = KeyEvent::instance()->sendEvent(SDL_SCANCODE_A) && KeyEvent::instance()->sendEvent(SDL_SCANCODE_W);
+        bool moveTopRight       = KeyEvent::instance()->sendEvent(SDL_SCANCODE_D) && KeyEvent::instance()->sendEvent(SDL_SCANCODE_W);
+        bool moveBottomLeft     = KeyEvent::instance()->sendEvent(SDL_SCANCODE_A) && KeyEvent::instance()->sendEvent(SDL_SCANCODE_S);
+        bool moveBottomRight    = KeyEvent::instance()->sendEvent(SDL_SCANCODE_D) && KeyEvent::instance()->sendEvent(SDL_SCANCODE_S);
+
+        if(moveTopLeft || moveTopRight || moveBottomLeft || moveBottomRight)
+        {
+            motion->speed = PLAYER_SPEED / 2.0f;
+        }
+
         if(KeyEvent::instance()->sendEvent(SDL_SCANCODE_A))
         {
             motion->direction = LEFT;
@@ -122,18 +146,6 @@ void Player::handleKeyEvent()
         {
             pos->y = mapHeight - sprite->frameHeight;
         }
-
-        ListPoint2DF _vertices;
-
-        box->x = pos->x + box->w/2;
-        box->y = pos->y + box->h;
-        box->setRect({box->x, box->y, box->w, box->h});
-        box->setCenter(Point2DF(box->x + box->w/2, box->y + box->h/2));
-        _vertices.push_back(Point2DF(box->x, box->y));
-        _vertices.push_back(Point2DF(box->x + box->w, box->y));
-        _vertices.push_back(Point2DF(box->x, box->y + box->h));
-        _vertices.push_back(Point2DF(box->x + box->w, box->y + box->h));
-        box->setVertices(_vertices);
     }
 }
 
