@@ -123,7 +123,7 @@ bool CollisionSystem::MapCollision(Entity *entity)
             }
 
             IShape *shape = block;
-            for (auto &axis: box->axes(shape->type()))
+            for (auto &axis: box->axes(box->type()))
             {
                 Projection2D project1 = box->project(axis);
                 Projection2D project2 = shape->project(axis);

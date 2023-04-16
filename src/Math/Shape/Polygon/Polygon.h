@@ -12,7 +12,6 @@ public:
 
     // IShape interface
 public:
-    virtual TYPE_SHAPE type() const override;
     virtual bool contain(Point2DF point) override;
     virtual float acreage() override;
     virtual float perimeter() override;

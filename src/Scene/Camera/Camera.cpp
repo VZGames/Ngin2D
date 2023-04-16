@@ -19,7 +19,7 @@ Camera::Camera()
     };
 }
 
-Point2DF Camera::position() const
+const Point2DF &Camera::position() const
 {
     return m_position;
 }

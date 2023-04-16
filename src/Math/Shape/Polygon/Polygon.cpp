@@ -3,6 +3,7 @@
 
 Polygon::Polygon(float x, float y, ListPoint2DF &vertices)
 {
+    m_type = TYPE_SHAPE::POLYGON;
     m_vertices = vertices;
 
     float w,h;
@@ -19,7 +20,7 @@ Polygon::Polygon(float x, float y, ListPoint2DF &vertices)
     xMax = xMin;
     yMax = yMin;
 
-    for (Point2DF vertex: m_vertices)
+    for (Point2DF &vertex: m_vertices)
     {
         float realX = vertex.getX() - x;
         float realY = vertex.getY() - y;
@@ -44,11 +45,6 @@ Polygon::Polygon(float x, float y, ListPoint2DF &vertices)
         m_center += m_vertices[i];
     }
     m_center /= k;
-}
-
-TYPE_SHAPE Polygon::type() const
-{
-    return TYPE_SHAPE::POLYGON;
 }
 
 bool Polygon::contain(Point2DF point)

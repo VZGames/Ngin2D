@@ -215,10 +215,15 @@ void MapParser::parseObjectLayer(TiXmlElement *e)
             else if(tag == std::string("ellipse"))
             {
                 shape = TYPE_SHAPE::ELLIPSE;
+                obj.vertices.push_back(Point2DF(x, y + height / 2));
+                obj.vertices.push_back(Point2DF(x + width / 2, y));
+                obj.vertices.push_back(Point2DF(x + width, y + height / 2));
+                obj.vertices.push_back(Point2DF(x + width / 2, y + height));
             }
         }
         else
         {
+            shape   = TYPE_SHAPE::RECTANGLE;
             obj.vertices.push_back(Point2DF(x, y));
             obj.vertices.push_back(Point2DF(x + width, y));
             obj.vertices.push_back(Point2DF(x, y + height));

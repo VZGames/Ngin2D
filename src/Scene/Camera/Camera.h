@@ -20,7 +20,7 @@ public:
 
     const SDL_FRect &viewport() const;
 
-    Point2DF position() const;
+    const Point2DF &position() const;
 
 private:
     Camera();

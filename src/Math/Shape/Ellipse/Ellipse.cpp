@@ -2,6 +2,7 @@
 
 Ellipse::Ellipse(float width, float height): m_width(width), m_height(height)
 {
+    m_type = TYPE_SHAPE::ELLIPSE;
     m_a = width/2;
     m_b = height/2;
     m_x = 0.0f;
@@ -14,6 +15,7 @@ Ellipse::Ellipse(float width, float height): m_width(width), m_height(height)
 
 Ellipse::Ellipse(float width, float height, float x, float y): m_width(width), m_height(height)
 {
+    m_type = TYPE_SHAPE::ELLIPSE;
     m_a = width/2;
     m_b = height/2;
     m_x = x;
@@ -38,11 +40,6 @@ bool Ellipse::contain(Point2DF M)
 
     bool condition = (std::round(expression) == 1.0f); // check Poin in Ellipse line
     return condition;
-}
-
-TYPE_SHAPE Ellipse::type() const
-{
-    return  TYPE_SHAPE::ELLIPSE;
 }
 
 float Ellipse::acreage()

@@ -8,7 +8,9 @@
 namespace ngin2D {
 struct ColliderComponent: public ComponentBase<ColliderComponent>, public IShape
 {
-    ColliderComponent(float w, float h): w(w), h(h){}
+    ColliderComponent(float w, float h): w(w), h(h){
+        m_type = TYPE_SHAPE::RECTANGLE;
+    }
     float x, y;
     float w, h;
 
@@ -32,11 +34,6 @@ public:
     virtual Point2DF position() const
     {
         return Point2DF(x, y);
-    }
-
-    virtual TYPE_SHAPE type() const override
-    {
-        return TYPE_SHAPE::RECTANGLE;
     }
 };
 }

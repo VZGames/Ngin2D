@@ -15,37 +15,58 @@ protected:
     Point2DF m_center;
     Point2DF m_position;
     SDL_FRect m_rect;
+    TYPE_SHAPE m_type;
     ListPoint2DF m_vertices;
     ListVector2DF m_axes;
 
 public:
-    inline ListVector2DF axes(TYPE_SHAPE type = TYPE_SHAPE::POLYGON)
+    inline ListVector2DF axes(TYPE_SHAPE type)
     {
-        if(type == TYPE_SHAPE::POLYGON || type == TYPE_SHAPE::RECTANGLE)
-        {
-            for (int i = 0; i < m_vertices.size(); i++)
-            {
-                Point2DF p1 = m_vertices[i];
-                Point2DF p2 = m_vertices[i + 1 == m_vertices.size()? 0: i+1];
+//        if(type == TYPE_SHAPE::POLYGON || type == TYPE_SHAPE::RECTANGLE)
+//        {
+//            for (int i = 0; i < m_vertices.size(); i++)
+//            {
+//                Point2DF p1 = m_vertices[i];
+//                Point2DF p2 = m_vertices[i + 1 == m_vertices.size()? 0: i+1];
 
-                Vector2DF edge = p1.toVector() - p2.toVector();
+//                Vector2DF edge = p1.toVector() - p2.toVector();
 
-                Vector2DF normal = edge.perp();
+//                Vector2DF normal = edge.perp();
 
-                float magnitude = normal.magnitude();
+//                float magnitude = normal.magnitude();
 
-                // convert normal vector to unit vector(length to 1)
-                if(magnitude != 0)
-                {
-                    normal *= 1/magnitude;
-                }
+//                // convert normal vector to unit vector(length to 1)
+//                if(magnitude != 0)
+//                {
+//                    normal *= 1/magnitude;
+//                }
 
-                m_axes.push_back(normal);
-            }
-        }
-        else if(type == TYPE_SHAPE::ELLIPSE)
-        {
+//                m_axes.push_back(normal);
+//            }
+//        }
+//        else if(type == TYPE_SHAPE::ELLIPSE)
+//        {
 //            m_axes.push_back(m_center.toVector());
+//        }
+
+        for (int i = 0; i < m_vertices.size(); i++)
+        {
+            Point2DF p1 = m_vertices[i];
+            Point2DF p2 = m_vertices[i + 1 == m_vertices.size()? 0: i+1];
+
+            Vector2DF edge = p1.toVector() - p2.toVector();
+
+            Vector2DF normal = edge.perp();
+
+            float magnitude = normal.magnitude();
+
+            // convert normal vector to unit vector(length to 1)
+            if(magnitude != 0)
+            {
+                normal *= 1/magnitude;
+            }
+
+            m_axes.push_back(normal);
         }
 
         return m_axes;
@@ -79,7 +100,7 @@ public:
         return m_vertices;
     }
 
-    inline const SDL_FRect &rect() const
+    inline SDL_FRect rect() const
     {
         return m_rect;
     };
@@ -99,6 +120,11 @@ public:
         return m_position;
     }
 
+    inline TYPE_SHAPE type() const
+    {
+        return m_type;
+    };
+
     virtual SizeF size()
     {
         return m_size;
@@ -109,7 +135,6 @@ public:
         return m_position;
     }
 
-    virtual TYPE_SHAPE type() const = 0;
     virtual bool contain(Point2DF point) { return 0; };
     virtual float acreage() { return 0.0f; };
     virtual float perimeter() { return 0.0f; };
