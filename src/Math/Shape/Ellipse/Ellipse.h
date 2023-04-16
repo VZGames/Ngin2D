@@ -12,8 +12,6 @@ public:
 
     // IShape interface
 public:
-    virtual SizeF size() const override;
-    virtual Point2DF position() const override;
     virtual const char *type() const override;
     virtual bool contain(Point2DF M) override;
     virtual float acreage() override;

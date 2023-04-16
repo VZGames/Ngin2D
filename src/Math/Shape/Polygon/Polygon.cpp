@@ -17,54 +17,37 @@ Polygon::Polygon(float x, float y, ListPoint2DF &vertices)
     gY /= k;
 
     m_center = Point2DF(m_x + gX, m_y + gY);
-}
 
-SizeF Polygon::size() const
-{
     float w,h;
     float xMin, xMax;
     float yMin, yMax;
 
-    xMin = std::abs(m_vertices[0].getX()) < m_x
-            ?m_x - std::abs(m_vertices[0].getX())
-            :std::abs(m_vertices[0].getX()) - m_x;
-    yMin = std::abs(m_vertices[0].getY()) < m_y
-            ?m_y - std::abs(m_vertices[0].getY())
-            :std::abs(m_vertices[0].getY()) - m_y;
+    xMin = m_vertices[0].getX() <= m_x
+            ?m_x - m_vertices[0].getX()
+            :m_vertices[0].getX() - m_x;
+    yMin = m_vertices[0].getY() <= m_y
+            ?m_y - m_vertices[0].getY()
+            :m_vertices[0].getY() - m_y;
 
     xMax = xMin;
     yMax = yMin;
 
     for (Point2DF vertex: m_vertices)
     {
-        float _x = std::abs(vertex.getX()) < m_x
-                ?m_x - std::abs(vertex.getX())
-                :std::abs(vertex.getX()) - m_x;
-        float _y = std::abs(vertex.getY()) < m_y
-                ?m_y - std::abs(vertex.getY())
-                :std::abs(vertex.getY()) - m_y;
-        if(_x > xMin)
-        {
-            xMax = _x;
-            xMin = xMax;
-        }
+        float realX = vertex.getX() - m_x;
+        float realY = vertex.getY() - m_y;
 
-        if(_y > yMin)
-        {
-            yMax = _y;
-            yMin = yMax;
-        }
+        xMin = min(xMin, realX);
+        xMax = max(xMax, realX);
+        yMin = min(yMin, realY);
+        yMax = max(yMax, realY);
     }
 
-    w = xMax;
-    h = yMax;
+    w = xMax - xMin;
+    h = yMax - yMin;
 
-    return SizeF {w, h};
-}
-
-Point2DF Polygon::position() const
-{
-    return Point2DF(m_x, m_y);
+    m_size = {w, h};
+    m_position = Point2DF(m_x, m_y);
 }
 
 const char *Polygon::type() const

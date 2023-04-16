@@ -8,6 +8,8 @@ Ellipse::Ellipse(float width, float height): m_width(width), m_height(height)
     m_y = 0.0f;
     m_center = Point2DF(m_x + m_a, m_y + m_b);
     m_rect ={m_center.getX() - m_a, m_center.getY() - m_b, m_width, m_height};
+    m_size = SizeF {m_width, m_height};
+    m_position = Point2DF(m_center.getX() - m_a, m_center.getY() - m_b);
 }
 
 Ellipse::Ellipse(float width, float height, float x, float y): m_width(width), m_height(height)
@@ -18,11 +20,8 @@ Ellipse::Ellipse(float width, float height, float x, float y): m_width(width), m
     m_y = y;
     m_center = Point2DF(m_x + m_a, m_y + m_b);
     m_rect ={m_center.getX() - m_a, m_center.getY() - m_b, m_width, m_height};
-}
-
-SizeF Ellipse::size() const
-{
-    return SizeF {m_width, m_height};
+    m_size = SizeF {m_width, m_height};
+    m_position = Point2DF(m_center.getX() - m_a, m_center.getY() - m_b);
 }
 
 bool Ellipse::contain(Point2DF M)
@@ -39,11 +38,6 @@ bool Ellipse::contain(Point2DF M)
 
     bool condition = (std::round(expression) == 1.0f); // check Poin in Ellipse line
     return condition;
-}
-
-Point2DF Ellipse::position() const
-{
-    return Point2DF(m_center.getX() - m_a, m_center.getY() - m_b);
 }
 
 const char *Ellipse::type() const
