@@ -59,21 +59,27 @@ public:
         return *this;
     }
 
-    friend Vector2D<T> &operator+(Vector2D<T> &A, const Vector2D<T> &B)
+    bool operator==(const Vector2D<T> &other)
+    {
+        return this->x == other.x && this->y == other.y;
+    }
+
+    friend Vector2D<T> operator+(Vector2D<T> &A, const Vector2D<T> &B)
     {
         return A.Add(B);
     }
-    friend Vector2D<T> &operator-(Vector2D<T> &A, const Vector2D<T> &B)
-    {
 
+    friend Vector2D<T> operator-(Vector2D<T> &A, const Vector2D<T> &B)
+    {
         return A.Subtract(B);
     }
-    friend Vector2D<T> &operator*(Vector2D<T> &A, const Vector2D<T> &B)
-    {
 
+    friend Vector2D<T> operator*(Vector2D<T> &A, const Vector2D<T> &B)
+    {
         return A.Multiply(B);
     }
-    friend Vector2D<T> &operator/(Vector2D<T> &A, const Vector2D<T> &B)
+
+    friend Vector2D<T> operator/(Vector2D<T> &A, const Vector2D<T> &B)
     {
         return A.Divide(B);
     }
@@ -116,10 +122,14 @@ public:
     Vector2D<T> operator*(const T &i)
     {
         Vector2D<T> vec = *this;
-        vec *= i;
-        return vec;
+        return vec *= i;
     }
 
+    Vector2D<T> operator/(const T &i)
+    {
+        Vector2D<T> vec = *this;
+        return vec /= i;
+    }
 
     Vector2D<T> &operator*=(T i)
     {
@@ -130,9 +140,10 @@ public:
 
     Vector2D<T> &operator*=(T &i)
     {
+        this->x *= static_cast<T>(i);
+        this->y *= static_cast<T>(i);
         return this * i;
     }
-
 
     Vector2D<T> &operator/=(T &i)
     {
@@ -157,9 +168,9 @@ public:
 
     Vector2D<T> perp()
     {
-        *this *= Vector2D<T>(static_cast<T>(-1), static_cast<T>(1));
         Vector2D<T> vec = *this;
         swap(vec.x, vec.y);
+        vec *= Vector2D<T>(static_cast<T>(-1), static_cast<T>(1));
         return vec;
     }
 

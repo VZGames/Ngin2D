@@ -118,6 +118,11 @@ public:
     }
 
 
+    static Point2D<T> fromVector(const Vector2DF &vec)
+    {
+        return Point2D<T>(vec.x, vec.y);
+    }
+
     // log
     friend std::ostream &operator<<(std::ostream &out, const Point2D<T> &val)
     {

@@ -12,6 +12,7 @@ public:
     bool overlap(const Projection2D &projectB);
 
 private:
-    float m_min, m_max;
+    float m_min;
+    float m_max;
 };
 #endif // PROJECTION_H

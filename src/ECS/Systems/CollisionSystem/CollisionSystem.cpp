@@ -57,7 +57,7 @@ void CollisionSystem::update(float dt)
             SizeF tileSize = MapParser::instance()->getTileSize();
 
             bool collided = false;
-            collided += MapCollision(&entity);
+            collided = MapCollision(&entity);
 
             if(collided)
             {
@@ -127,24 +127,22 @@ bool CollisionSystem::MapCollision(Entity *entity)
             {
                 Projection2D project1 = box->project(axis);
                 Projection2D project2 = shape->project(axis);
-                if(!project1.overlap(project2))
+                collided = project1.overlap(project2);
+                if(!collided)
                 {
-                    collided = 0;
                     break;
                 }
-                collided = 1;
             }
 
             for (auto axis: shape->axes())
             {
                 Projection2D project1 = box->project(axis);
                 Projection2D project2 = shape->project(axis);
-                if(!project1.overlap(project2))
+                collided = project1.overlap(project2);
+                if(!collided)
                 {
-                    collided = 0;
                     break;
                 }
-                collided = 1;
             }
         }
     }

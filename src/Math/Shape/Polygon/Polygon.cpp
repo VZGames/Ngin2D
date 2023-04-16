@@ -3,39 +3,26 @@
 
 Polygon::Polygon(float x, float y, ListPoint2DF &vertices)
 {
-    m_x = x;
-    m_y = y;
     m_vertices = vertices;
-
-    int k = m_vertices.size();
-    float gX, gY;
-    for (int i = 0; i < m_vertices.size(); i++) {
-        gX += m_vertices[i].getX();
-        gY += m_vertices[i].getY();
-    }
-    gX /= k;
-    gY /= k;
-
-    m_center = Point2DF(m_x + gX, m_y + gY);
 
     float w,h;
     float xMin, xMax;
     float yMin, yMax;
 
-    xMin = m_vertices[0].getX() <= m_x
-            ?m_x - m_vertices[0].getX()
-            :m_vertices[0].getX() - m_x;
-    yMin = m_vertices[0].getY() <= m_y
-            ?m_y - m_vertices[0].getY()
-            :m_vertices[0].getY() - m_y;
+    xMin = m_vertices[0].getX() <= x
+            ?x - m_vertices[0].getX()
+            :m_vertices[0].getX() - x;
+    yMin = m_vertices[0].getY() <= y
+            ?y - m_vertices[0].getY()
+            :m_vertices[0].getY() - y;
 
     xMax = xMin;
     yMax = yMin;
 
     for (Point2DF vertex: m_vertices)
     {
-        float realX = vertex.getX() - m_x;
-        float realY = vertex.getY() - m_y;
+        float realX = vertex.getX() - x;
+        float realY = vertex.getY() - y;
 
         xMin = min(xMin, realX);
         xMax = max(xMax, realX);
@@ -47,7 +34,16 @@ Polygon::Polygon(float x, float y, ListPoint2DF &vertices)
     h = yMax - yMin;
 
     m_size = {w, h};
-    m_position = Point2DF(m_x, m_y);
+    m_x = xMin;
+    m_y = yMin;
+    m_position = Point2DF(m_x + x, m_y + y);
+
+
+    int k = m_vertices.size();
+    for (int i = 0; i < m_vertices.size(); i++) {
+        m_center += m_vertices[i];
+    }
+    m_center /= k;
 }
 
 const char *Polygon::type() const

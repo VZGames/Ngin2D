@@ -17,7 +17,6 @@ protected:
     SDL_FRect m_rect;
     ListPoint2DF m_vertices;
     ListVector2DF m_axes;
-    std::vector<Projection2D> m_projections;
 
 public:
     inline ListVector2DF axes()
@@ -45,20 +44,19 @@ public:
 
     inline Projection2D project(Vector2DF axis)
     {
+        float dotProduct = 0.0f;
         float dotProductMin = axis.dotProduct(m_vertices[0].toVector());
         float dotProductMax = dotProductMin;
-
         for (int i = 0; i < m_vertices.size(); i++) {
-            float dotProduct = axis.dotProduct(m_vertices[i].toVector());
+            dotProduct = axis.dotProduct(m_vertices[i].toVector());
             dotProductMin = min(dotProductMin, dotProduct);
             dotProductMax = max(dotProductMax, dotProduct);
         }
         // [Formula] project = (dotProduct/|axis|^2) * axis
         Vector2DF projectMin = axis * dotProductMin;
         Vector2DF projectMax = axis * dotProductMax;
+//        std::cout << axis << projectMin << projectMax;
 
-//        std::cout << projectMin << projectMax;
-//        m_projections.push_back(Projection2D(projectMin, projectMax));
         return Projection2D(dotProductMin, dotProductMax);
 
     }
@@ -71,11 +69,6 @@ public:
     inline std::vector<Point2DF> vertices() const
     {
         return m_vertices;
-    }
-
-    inline std::vector<Projection2D> projections() const
-    {
-        return m_projections;
     }
 
     inline const SDL_FRect &rect() const
