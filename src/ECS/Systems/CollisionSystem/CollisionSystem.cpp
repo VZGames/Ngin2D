@@ -15,17 +15,17 @@ void CollisionSystem::init()
         for(auto obj: layer.objects)
         {
             IShape *e = nullptr;
-            if(obj.shape == std::string("ellipse"))
+            if(obj.shape == TYPE_SHAPE::ELLIPSE)
             {
                 e = new Ellipse(obj.width, obj.height, obj.x, obj.y);
                 e->setVertices(obj.vertices);
             }
-            else if(obj.shape == std::string("rectangle"))
+            else if(obj.shape == TYPE_SHAPE::RECTANGLE)
             {
                 e = new Rectangle(obj.width, obj.height, obj.x, obj.y);
                 e->setVertices(obj.vertices);
             }
-            else if(obj.shape == std::string("polygon"))
+            else if(obj.shape == TYPE_SHAPE::POLYGON)
             {
                 e = new Polygon(obj.x, obj.y, obj.vertices);
             }
@@ -72,17 +72,17 @@ void CollisionSystem::render()
 {
     for(auto block: CollisionBlocks)
     {
-        if(block->type() == std::string("ellipse"))
+        if(block->type() == TYPE_SHAPE::ELLIPSE)
         {
             Ellipse *e = (Ellipse*)block;
             TextureManager::instance()->drawEllipse(e->center() -= Camera::instance()->position(), e->size().width/2, e->size().height/2);
         }
-        else if(block->type() == std::string("rectangle"))
+        else if(block->type() == TYPE_SHAPE::RECTANGLE)
         {
             Rectangle *e = (Rectangle*)block;
             TextureManager::instance()->drawRectangle(e->position() -= Camera::instance()->position(), e->size().width, e->size().height);
         }
-        else if(block->type() == std::string("polygon"))
+        else if(block->type() == TYPE_SHAPE::POLYGON)
         {
             Polygon *e = (Polygon*)block;
             TextureManager::instance()->drawPolygon(e->vertices());
@@ -114,38 +114,42 @@ bool CollisionSystem::MapCollision(Entity *entity)
             w = block->size().width;
             h = block->size().height;
 
-            if(pos->x - (x + w) > 50.0f
-                    || pos->y - (y + h) > 50.0f
-                    || x - (pos->x + sprite->frameWidth) > 50.0f
-                    || y - (pos->y + sprite->frameHeight) > 50.0f)
+            if(pos->x - (x + w) > 20.0f
+                    || pos->y - (y + h) > 20.0f
+                    || x - (pos->x + sprite->frameWidth) > 20.0f
+                    || y - (pos->y + sprite->frameHeight) > 20.0f)
             {
                 continue;
             }
 
             IShape *shape = block;
-            for (auto axis: box->axes())
+            for (auto &axis: box->axes(shape->type()))
             {
                 Projection2D project1 = box->project(axis);
                 Projection2D project2 = shape->project(axis);
                 collided = project1.overlap(project2);
+
                 if(!collided)
                 {
+                    collided = 0;
                     break;
                 }
             }
 
-            for (auto axis: shape->axes())
+            for (auto &axis: shape->axes(shape->type()))
             {
                 Projection2D project1 = box->project(axis);
                 Projection2D project2 = shape->project(axis);
                 collided = project1.overlap(project2);
                 if(!collided)
                 {
+                    collided = 0;
                     break;
                 }
             }
         }
     }
+
 
     return collided;
 }

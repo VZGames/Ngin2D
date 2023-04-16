@@ -40,9 +40,9 @@ bool Ellipse::contain(Point2DF M)
     return condition;
 }
 
-const char *Ellipse::type() const
+TYPE_SHAPE Ellipse::type() const
 {
-    return "ellipse";
+    return  TYPE_SHAPE::ELLIPSE;
 }
 
 float Ellipse::acreage()

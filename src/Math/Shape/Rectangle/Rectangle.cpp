@@ -22,9 +22,9 @@ Rectangle::Rectangle(float width, float height, float x, float y) : m_width(widt
     m_position = Point2DF(m_x, m_y);
 }
 
-const char *Rectangle::type() const
+TYPE_SHAPE Rectangle::type() const
 {
-    return "rectangle";
+    return TYPE_SHAPE::RECTANGLE;
 }
 
 bool Rectangle::contain(Point2DF point)

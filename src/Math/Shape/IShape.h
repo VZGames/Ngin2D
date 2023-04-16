@@ -19,43 +19,51 @@ protected:
     ListVector2DF m_axes;
 
 public:
-    inline ListVector2DF axes()
+    inline ListVector2DF axes(TYPE_SHAPE type = TYPE_SHAPE::POLYGON)
     {
-        for (int i = 0; i < m_vertices.size(); i++) {
-            Point2DF p1 = m_vertices[i];
-            Point2DF p2 = m_vertices[i + 1 == m_vertices.size()? 0: i+1];
-
-            Vector2DF edge = p1.toVector() - p2.toVector();
-
-            Vector2DF normal = edge.perp();
-
-            float magnitude = normal.magnitude();
-
-            // convert normal vector to unit vector(length to 1)
-            if(magnitude != 0)
+        if(type == TYPE_SHAPE::POLYGON || type == TYPE_SHAPE::RECTANGLE)
+        {
+            for (int i = 0; i < m_vertices.size(); i++)
             {
-                normal *= 1/magnitude;
-            }
+                Point2DF p1 = m_vertices[i];
+                Point2DF p2 = m_vertices[i + 1 == m_vertices.size()? 0: i+1];
 
-            m_axes.push_back(normal);
+                Vector2DF edge = p1.toVector() - p2.toVector();
+
+                Vector2DF normal = edge.perp();
+
+                float magnitude = normal.magnitude();
+
+                // convert normal vector to unit vector(length to 1)
+                if(magnitude != 0)
+                {
+                    normal *= 1/magnitude;
+                }
+
+                m_axes.push_back(normal);
+            }
         }
+        else if(type == TYPE_SHAPE::ELLIPSE)
+        {
+//            m_axes.push_back(m_center.toVector());
+        }
+
         return m_axes;
     }
 
     inline Projection2D project(Vector2DF axis)
     {
-        float dotProduct = 0.0f;
         float dotProductMin = axis.dotProduct(m_vertices[0].toVector());
         float dotProductMax = dotProductMin;
-        for (int i = 0; i < m_vertices.size(); i++) {
-            dotProduct = axis.dotProduct(m_vertices[i].toVector());
-            dotProductMin = min(dotProductMin, dotProduct);
-            dotProductMax = max(dotProductMax, dotProduct);
+        for (int i = 0; i < m_vertices.size(); i++)
+        {
+            float dotProduct = axis.dotProduct(m_vertices[i].toVector());
+            dotProductMin    = min(dotProductMin, dotProduct);
+            dotProductMax    = max(dotProductMax, dotProduct);
         }
-        // [Formula] project = (dotProduct/|axis|^2) * axis
-        Vector2DF projectMin = axis * dotProductMin;
-        Vector2DF projectMax = axis * dotProductMax;
-//        std::cout << axis << projectMin << projectMax;
+        //        [Formula] project = (dotProduct/|axis|^2) * axis
+        //        Vector2DF projectMin = axis * dotProductMin;
+        //        Vector2DF projectMax = axis * dotProductMax;
 
         return Projection2D(dotProductMin, dotProductMax);
 
@@ -101,7 +109,7 @@ public:
         return m_position;
     }
 
-    virtual const char *type() const = 0;
+    virtual TYPE_SHAPE type() const = 0;
     virtual bool contain(Point2DF point) { return 0; };
     virtual float acreage() { return 0.0f; };
     virtual float perimeter() { return 0.0f; };

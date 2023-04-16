@@ -62,17 +62,17 @@ void Player::handleKeyEvent()
         pos->lastX = pos->x;
         pos->lastY = pos->y;
 
-        ListPoint2DF _vertices;
+        ListPoint2DF vertices;
 
-        box->x = pos->x + 8;
-        box->y = pos->y + 8;
+        box->x = pos->x + box->w/2;
+        box->y = pos->y;
         box->setRect({box->x, box->y, box->w, box->h});
         box->setCenter(Point2DF(box->x + box->w/2, box->y + box->h/2));
-        _vertices.push_back(Point2DF(box->x, box->y));
-        _vertices.push_back(Point2DF(box->x + box->w, box->y));
-        _vertices.push_back(Point2DF(box->x, box->y + box->h));
-        _vertices.push_back(Point2DF(box->x + box->w, box->y + box->h));
-        box->setVertices(_vertices);
+        vertices.push_back(Point2DF(box->x, box->y));
+        vertices.push_back(Point2DF(box->x + box->w, box->y));
+        vertices.push_back(Point2DF(box->x, box->y + box->h));
+        vertices.push_back(Point2DF(box->x + box->w, box->y + box->h));
+        box->setVertices(vertices);
 
 
         sprite->frameCount = 1;

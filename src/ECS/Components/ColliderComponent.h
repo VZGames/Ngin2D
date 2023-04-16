@@ -34,9 +34,9 @@ public:
         return Point2DF(x, y);
     }
 
-    virtual const char *type() const override
+    virtual TYPE_SHAPE type() const override
     {
-        return "ColliderBox";
+        return TYPE_SHAPE::RECTANGLE;
     }
 };
 }

@@ -1,6 +1,7 @@
 #ifndef STRUCTSDEF_H
 #define STRUCTSDEF_H
 
+#include "EnumDef.h"
 #include "Math/math2D.h"
 
 typedef struct Size
@@ -30,7 +31,7 @@ typedef struct Object
     int id;
     float x, y;
     float width, height;
-    const char *shape;
+    TYPE_SHAPE shape;
     std::vector<Point2DF> vertices;
 } Object;
 

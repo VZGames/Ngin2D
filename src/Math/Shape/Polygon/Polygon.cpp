@@ -46,9 +46,9 @@ Polygon::Polygon(float x, float y, ListPoint2DF &vertices)
     m_center /= k;
 }
 
-const char *Polygon::type() const
+TYPE_SHAPE Polygon::type() const
 {
-    return "polygon";
+    return TYPE_SHAPE::POLYGON;
 }
 
 bool Polygon::contain(Point2DF point)

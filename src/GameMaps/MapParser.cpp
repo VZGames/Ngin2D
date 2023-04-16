@@ -1,7 +1,8 @@
 #include "MapParser.h"
-#include "Math/math2D.h"
 #include <string>
 #include <algorithm>
+#include "Defines/EnumDef.h"
+#include "Math/math2D.h"
 
 MapParser *MapParser::s_instance = nullptr;
 
@@ -178,12 +179,13 @@ void MapParser::parseObjectLayer(TiXmlElement *e)
         float width         = std::atof(objEle->Attribute("width"));
         float height        = std::atof(objEle->Attribute("height"));
         Object obj = {id, x, y, width, height};
-        const char *shape   = "rectangle";
+        TYPE_SHAPE shape   = TYPE_SHAPE::RECTANGLE;
         if(objEle->FirstChildElement() != NULL)
         {
-            shape = objEle->FirstChildElement()->Value();
-            if(shape == std::string("polygon"))
+            const char* tag = objEle->FirstChildElement()->Value();
+            if(tag == std::string("polygon"))
             {
+                shape = TYPE_SHAPE::POLYGON;
                 const char *_points = objEle->FirstChildElement()->Attribute("points");
                 std::string line;
                 std::istringstream iss(_points);
@@ -210,12 +212,9 @@ void MapParser::parseObjectLayer(TiXmlElement *e)
                     }
                 }
             }
-            else if(shape == std::string("ellipse"))
+            else if(tag == std::string("ellipse"))
             {
-                obj.vertices.push_back(Point2DF(x, y + height / 2));
-                obj.vertices.push_back(Point2DF(x + width / 2, y));
-                obj.vertices.push_back(Point2DF(x + width, y + height / 2));
-                obj.vertices.push_back(Point2DF(x + width / 2, y + height));
+                shape = TYPE_SHAPE::ELLIPSE;
             }
         }
         else
