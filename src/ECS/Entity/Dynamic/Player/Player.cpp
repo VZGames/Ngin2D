@@ -82,6 +82,7 @@ void Player::handleKeyEvent()
         bool moveBottomLeft     = KeyEvent::instance()->sendEvent(SDL_SCANCODE_A) && KeyEvent::instance()->sendEvent(SDL_SCANCODE_S);
         bool moveBottomRight    = KeyEvent::instance()->sendEvent(SDL_SCANCODE_D) && KeyEvent::instance()->sendEvent(SDL_SCANCODE_S);
 
+        motion->speed = PLAYER_SPEED;
         if(moveTopLeft || moveTopRight || moveBottomLeft || moveBottomRight)
         {
             motion->speed = PLAYER_SPEED / 2.0f;

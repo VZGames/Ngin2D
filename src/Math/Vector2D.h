@@ -174,6 +174,16 @@ public:
         return vec;
     }
 
+    Vector2D<T> &toUnit()
+    {
+        float magnitude = this->magnitude();
+        if(magnitude != 0)
+        {
+            *this *= 1/magnitude;
+        }
+        return *this;
+    }
+
     float magnitude() const
     {
         return static_cast<float>(std::sqrt(std::pow(x,2) + std::pow(y,2)));

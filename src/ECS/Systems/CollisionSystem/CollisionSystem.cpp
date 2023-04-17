@@ -1,6 +1,7 @@
 #include "CollisionSystem.h"
 #include "Graphics/Graphics.h"
 #include "Scene/Scene.h"
+#include <limits>
 
 namespace ngin2D {
 
@@ -10,7 +11,7 @@ CollisionSystem::CollisionSystem()
 
 void CollisionSystem::init()
 {
-    for(auto layer: MapParser::instance()->getObjectLayers())
+    for(auto &layer: MapParser::instance()->getObjectLayers())
     {
         for(auto obj: layer.objects)
         {
@@ -18,7 +19,6 @@ void CollisionSystem::init()
             if(obj.shape == TYPE_SHAPE::ELLIPSE)
             {
                 e = new Ellipse(obj.width, obj.height, obj.x, obj.y);
-                e->setVertices(obj.vertices);
             }
             else if(obj.shape == TYPE_SHAPE::RECTANGLE)
             {
@@ -50,9 +50,7 @@ void CollisionSystem::update(float dt)
 
         if(hasComponent)
         {
-            auto motion   = entity.getComponent<MotionComponent>();
             auto pos      = entity.getComponent<PositionComponent>();
-            auto box      = entity.getComponent<ColliderComponent>();
 
             SizeF tileSize = MapParser::instance()->getTileSize();
 
@@ -123,29 +121,71 @@ bool CollisionSystem::MapCollision(Entity *entity)
             }
 
             IShape *shape = block;
+
+            if(box->axes(box->type()).size() < 1) break;
+            if(box->axes(shape->type()).size() < 1) break;
+
+            if(shape->type() == TYPE_SHAPE::ELLIPSE)
+            {
+                shape->clearVertices();
+                shape->appendVertices(shape->center());
+                shape->appendVertices(shape->center().nearestPoint(box->vertices()));
+            }
+
+
+            float minOverlap = std::numeric_limits<float>::infinity();
+
             for (auto &axis: box->axes(box->type()))
             {
                 Projection2D project1 = box->project(axis);
                 Projection2D project2 = shape->project(axis);
-                collided = project1.overlap(project2);
 
                 if(!collided)
                 {
                     collided = 0;
                     break;
                 }
+
+                float overlap = project1.gap(project2);
+                if (overlap == 0.f)
+                { // shapes are not overlapping
+                    break;
+                } else
+                {
+                    if (overlap < minOverlap)
+                    {
+                        minOverlap = overlap;
+                    }
+                }
+
+                collided = project1.overlap(project2);
+
+
             }
 
             for (auto &axis: shape->axes(shape->type()))
             {
                 Projection2D project1 = box->project(axis);
                 Projection2D project2 = shape->project(axis);
-                collided = project1.overlap(project2);
+
                 if(!collided)
                 {
                     collided = 0;
                     break;
                 }
+
+                float overlap = project1.gap(project2);
+                if (overlap == 0.f) { // shapes are not overlapping
+                    break;
+                } else {
+                    if (overlap < minOverlap)
+                    {
+                        minOverlap = overlap;
+                    }
+                }
+
+                collided = project1.overlap(project2);
+
             }
         }
     }

@@ -22,33 +22,6 @@ protected:
 public:
     inline ListVector2DF axes(TYPE_SHAPE type)
     {
-//        if(type == TYPE_SHAPE::POLYGON || type == TYPE_SHAPE::RECTANGLE)
-//        {
-//            for (int i = 0; i < m_vertices.size(); i++)
-//            {
-//                Point2DF p1 = m_vertices[i];
-//                Point2DF p2 = m_vertices[i + 1 == m_vertices.size()? 0: i+1];
-
-//                Vector2DF edge = p1.toVector() - p2.toVector();
-
-//                Vector2DF normal = edge.perp();
-
-//                float magnitude = normal.magnitude();
-
-//                // convert normal vector to unit vector(length to 1)
-//                if(magnitude != 0)
-//                {
-//                    normal *= 1/magnitude;
-//                }
-
-//                m_axes.push_back(normal);
-//            }
-//        }
-//        else if(type == TYPE_SHAPE::ELLIPSE)
-//        {
-//            m_axes.push_back(m_center.toVector());
-//        }
-
         for (int i = 0; i < m_vertices.size(); i++)
         {
             Point2DF p1 = m_vertices[i];
@@ -61,10 +34,7 @@ public:
             float magnitude = normal.magnitude();
 
             // convert normal vector to unit vector(length to 1)
-            if(magnitude != 0)
-            {
-                normal *= 1/magnitude;
-            }
+            normal.toUnit();
 
             m_axes.push_back(normal);
         }
@@ -93,6 +63,16 @@ public:
     inline void setVertices(ListPoint2DF &vertices)
     {
         m_vertices = vertices;
+    }
+
+    inline void appendVertices(const Point2DF &point)
+    {
+        m_vertices.push_back(point);
+    }
+
+    inline void clearVertices()
+    {
+        m_vertices.clear();
     }
 
     inline std::vector<Point2DF> vertices() const

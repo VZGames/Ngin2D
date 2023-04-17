@@ -1,6 +1,7 @@
 #ifndef POINT2D_H
 #define POINT2D_H
 
+#include <algorithm>
 #include <iostream>
 #include <string>
 #include <math.h>
@@ -115,6 +116,19 @@ public:
     Vector2D<T> toVector()
     {
         return Vector2D<T>(x, y);
+    }
+
+    Point2D<T> nearestPoint(std::vector<Point2D<T>> points)
+    {
+        std::vector<float> dists;
+        for(Point2D<T> &point: points)
+        {
+            float dist = this->distance(point);
+            dists.push_back(dist);
+        }
+
+        int minDistAt = std::min_element(dists.begin(), dists.end()) - dists.begin();
+        return points[minDistAt];
     }
 
 
