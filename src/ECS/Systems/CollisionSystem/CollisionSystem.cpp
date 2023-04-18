@@ -1,6 +1,7 @@
 #include "CollisionSystem.h"
 #include "Graphics/Graphics.h"
 #include "Scene/Scene.h"
+#include "Utils/Logger/Logger.h"
 #include <limits>
 
 namespace ngin2D {
@@ -55,12 +56,16 @@ void CollisionSystem::update(float dt)
             SizeF tileSize = MapParser::instance()->getTileSize();
 
             bool collided = false;
-            collided = MapCollision(&entity);
+
+            Vector2DF mtv;
+
+            collided = MapCollision(&entity, mtv);
 
             if(collided)
             {
-                pos->x = pos->lastX;
-                pos->y = pos->lastY;
+                LOG_INFO("TRUE");
+                pos->x += mtv.x;
+                pos->y += mtv.y;
             }
         }
     }
@@ -88,7 +93,7 @@ void CollisionSystem::render()
     }
 }
 
-bool CollisionSystem::MapCollision(Entity *entity)
+bool CollisionSystem::MapCollision(Entity *entity, Vector2DF &mtv)
 {
     auto motion     = entity->getComponent<MotionComponent>();
     auto sprite     = entity->getComponent<SpriteComponent>();
@@ -140,27 +145,22 @@ bool CollisionSystem::MapCollision(Entity *entity)
                 Projection2D project1 = box->project(axis);
                 Projection2D project2 = shape->project(axis);
 
-                if(!collided)
-                {
-                    collided = 0;
-                    break;
-                }
 
                 float overlap = project1.gap(project2);
-                if (overlap == 0.f)
-                { // shapes are not overlapping
-                    break;
-                } else
+                if (overlap == 0.f) // shapes are not overlapping
+                {
+                    mtv = Vector2DF();
+                    return 0;
+                }
+                else
                 {
                     if (overlap < minOverlap)
                     {
                         minOverlap = overlap;
+                        mtv = axis * minOverlap;
+                        collided = 1;
                     }
                 }
-
-                collided = project1.overlap(project2);
-
-
             }
 
             for (auto &axis: shape->axes(shape->type()))
@@ -168,24 +168,30 @@ bool CollisionSystem::MapCollision(Entity *entity)
                 Projection2D project1 = box->project(axis);
                 Projection2D project2 = shape->project(axis);
 
-                if(!collided)
-                {
-                    collided = 0;
-                    break;
-                }
-
                 float overlap = project1.gap(project2);
-                if (overlap == 0.f) { // shapes are not overlapping
-                    break;
-                } else {
+                if (overlap == 0.f) // shapes are not overlapping
+                {
+                    mtv = Vector2DF();
+                    return 0;
+                }
+                else
+                {
                     if (overlap < minOverlap)
                     {
                         minOverlap = overlap;
+                        mtv = axis * minOverlap;
+                        collided = 1;
                     }
                 }
+            }
 
-                collided = project1.overlap(project2);
+            // need to reverse MTV if center offset and overlap are not pointing in the same direction
+            bool notPointingInTheSameDirection = mtv.dotProduct((box->center() - shape->center()).toVector(), mtv) < 0;
+            if (notPointingInTheSameDirection) { mtv = mtv * -1; }
 
+            if(collided)
+            {
+                return 1;
             }
         }
     }

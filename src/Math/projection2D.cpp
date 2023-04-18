@@ -1,10 +1,12 @@
 #include "projection2D.h"
+#include "Utils/Logger/Logger.h"
 
 Projection2D::Projection2D(): m_min(0.0f), m_max(0.0f)
 {}
 
 Projection2D::Projection2D(float min, float max): m_min(min), m_max(max)
-{}
+{
+}
 
 bool Projection2D::overlap(const Projection2D &b)
 {

@@ -23,7 +23,7 @@ public:
     virtual void render() override;
 
 private:
-    bool MapCollision(Entity *entity);
+    bool MapCollision(Entity *entity, Vector2DF &mtv);
     bool OtherEntitiesCollision(Entity *entity);
 
     std::vector<IShape*> CollisionBlocks;

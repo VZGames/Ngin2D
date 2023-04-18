@@ -49,6 +49,13 @@ public:
         return *this;
     }
 
+    Point2D<T> &operator/=(const T scale)
+    {
+        this->x /= scale;
+        this->y /= scale;
+        return *this;
+    }
+
     Point2D<T> operator+(const Point2D<T> &other)
     {
         Point2D<T> point = *this;
@@ -57,19 +64,22 @@ public:
         return point;
     }
 
-    friend Point2D<T> operator*(const Point2D<T> &point, const T scale)
+    Point2D<T> operator-(const Point2D<T> &other)
     {
-        point.x *= scale;
-        point.y *= scale;
+        Point2D<T> point = *this;
+        point.x -= other.x;
+        point.y -= other.y;
         return point;
     }
 
-    Point2D<T> &operator/=(const T scale)
+    Point2D<T> &operator*(const T scale)
     {
-        this->x /= scale;
-        this->y /= scale;
+        this->x *= scale;
+        this->y *= scale;
         return *this;
     }
+
+
 
     Point2D<T> &updateX(const T &x)
     {

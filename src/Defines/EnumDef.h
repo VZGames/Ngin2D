@@ -10,7 +10,7 @@ typedef enum TYPE_SHAPE
 
 typedef enum LOG_LEVEL
 {
-    FATAL = POLYGON + 1,
+    FATAL,
     ERROR,
     WARN,
     INFO,
