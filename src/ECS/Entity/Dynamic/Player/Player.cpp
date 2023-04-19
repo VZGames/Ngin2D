@@ -77,16 +77,16 @@ void Player::handleKeyEvent()
 
         sprite->frameCount = 1;
 
-        bool moveTopLeft        = KeyEvent::instance()->sendEvent(SDL_SCANCODE_A) && KeyEvent::instance()->sendEvent(SDL_SCANCODE_W);
-        bool moveTopRight       = KeyEvent::instance()->sendEvent(SDL_SCANCODE_D) && KeyEvent::instance()->sendEvent(SDL_SCANCODE_W);
-        bool moveBottomLeft     = KeyEvent::instance()->sendEvent(SDL_SCANCODE_A) && KeyEvent::instance()->sendEvent(SDL_SCANCODE_S);
-        bool moveBottomRight    = KeyEvent::instance()->sendEvent(SDL_SCANCODE_D) && KeyEvent::instance()->sendEvent(SDL_SCANCODE_S);
+//        bool moveTopLeft        = KeyEvent::instance()->sendEvent(SDL_SCANCODE_A) && KeyEvent::instance()->sendEvent(SDL_SCANCODE_W);
+//        bool moveTopRight       = KeyEvent::instance()->sendEvent(SDL_SCANCODE_D) && KeyEvent::instance()->sendEvent(SDL_SCANCODE_W);
+//        bool moveBottomLeft     = KeyEvent::instance()->sendEvent(SDL_SCANCODE_A) && KeyEvent::instance()->sendEvent(SDL_SCANCODE_S);
+//        bool moveBottomRight    = KeyEvent::instance()->sendEvent(SDL_SCANCODE_D) && KeyEvent::instance()->sendEvent(SDL_SCANCODE_S);
 
-        motion->speed = PLAYER_SPEED;
-        if(moveTopLeft || moveTopRight || moveBottomLeft || moveBottomRight)
-        {
-            motion->speed = PLAYER_SPEED / 2.0f;
-        }
+//        motion->speed = PLAYER_SPEED;
+//        if(moveTopLeft || moveTopRight || moveBottomLeft || moveBottomRight)
+//        {
+//            motion->speed = PLAYER_SPEED / 2.0f;
+//        }
 
         if(KeyEvent::instance()->sendEvent(SDL_SCANCODE_A))
         {

@@ -117,18 +117,19 @@ bool CollisionSystem::MapCollision(Entity *entity, Vector2DF &mtv)
             w = block->size().width;
             h = block->size().height;
 
-            if(pos->x - (x + w) > 20.0f
-                    || pos->y - (y + h) > 20.0f
-                    || x - (pos->x + sprite->frameWidth) > 20.0f
-                    || y - (pos->y + sprite->frameHeight) > 20.0f)
+            if(pos->x - (x + w) > 10.0f
+                    || pos->y - (y + h) > 10.0f
+                    || x - (pos->x + sprite->frameWidth) > 10.0f
+                    || y - (pos->y + sprite->frameHeight) > 10.0f)
             {
                 continue;
             }
 
+            LOG_INFO("In Range");
+
             IShape *shape = block;
 
-            if(box->axes(box->type()).size() < 1) break;
-            if(box->axes(shape->type()).size() < 1) break;
+
 
             if(shape->type() == TYPE_SHAPE::ELLIPSE)
             {
@@ -136,6 +137,9 @@ bool CollisionSystem::MapCollision(Entity *entity, Vector2DF &mtv)
                 shape->appendVertices(shape->center());
                 shape->appendVertices(shape->center().nearestPoint(box->vertices()));
             }
+
+            if(box->axes(box->type()).size() < 1) break;
+            if(box->axes(shape->type()).size() < 1) break;
 
 
             float minOverlap = std::numeric_limits<float>::infinity();
@@ -158,7 +162,7 @@ bool CollisionSystem::MapCollision(Entity *entity, Vector2DF &mtv)
                     {
                         minOverlap = overlap;
                         mtv = axis * minOverlap;
-                        collided = 1;
+                        collided *= 1;
                     }
                 }
             }
@@ -180,7 +184,7 @@ bool CollisionSystem::MapCollision(Entity *entity, Vector2DF &mtv)
                     {
                         minOverlap = overlap;
                         mtv = axis * minOverlap;
-                        collided = 1;
+                        collided *= 1;
                     }
                 }
             }
@@ -197,7 +201,7 @@ bool CollisionSystem::MapCollision(Entity *entity, Vector2DF &mtv)
     }
 
 
-    return collided;
+    return 0;
 }
 
 bool CollisionSystem::OtherEntitiesCollision(Entity *entity)

@@ -6,6 +6,8 @@
 #include <iomanip>
 #include <string>
 #include <ctime>
+#include <memory>
+#include <stdexcept>
 #include "Defines/EnumDef.h"
 
 /** @brief Indicates if warning level logging is enabled. */
@@ -24,7 +26,7 @@
 #endif
 
 template<typename ...TArgs>
-void log_output(LOG_LEVEL level, const char *message, const char* fn, int line, TArgs... args)
+void log_output(LOG_LEVEL level, const char* fn, int line, const char *format, TArgs... args)
 {
     // TODO: These string operations are all pretty slow. This needs to be
     // moved to another thread eventually, along with the file writes, to
@@ -34,23 +36,25 @@ void log_output(LOG_LEVEL level, const char *message, const char* fn, int line, 
     time_t now = time(nullptr);
     tm *localTime = localtime(&now);
 
+    int size_s = std::snprintf( nullptr, 0, format, args ... ) + 1; // Extra space for '\0'
+    if( size_s <= 0 ){ throw std::runtime_error( "Error during formatting." ); }
+    auto size = static_cast<size_t>( size_s );
+    std::unique_ptr<char[]> buff( new char[ size ] );
+    std::snprintf( buff.get(), size, format, args ... );
     std::cout << "[" << std::put_time(localTime, "%Y-%m-%d %H:%M:%S") << "]"
               << level_strings[level]
-              << message
-              << "\t[" << fn << "]"
+              << std::string( buff.get(), buff.get() + size - 1 ).c_str()
+              << "\t\[" << fn << "]"
               << "[" << line << "]"
-              << std::endl;
+              << '\n';
 }
-
-
-void log_output(LOG_LEVEL level, const char *message, ...);
 
 /**
  * @brief Logs a fatal-level message. Should be used to stop the application when hit.
  * @param message The message to be logged. Can be a format string for additional parameters.
  * @param ... Additional parameters to be logged.
  */
-#define LOG_FATAL(message, ...) log_output(LOG_LEVEL::FATAL, message, __FUNCTION__, __LINE__ ##__VA_ARGS__);
+#define LOG_FATAL(message, ...) log_output(LOG_LEVEL::FATAL, __FUNCTION__, __LINE__, message, ##__VA_ARGS__);
 
 #ifndef KERROR
 /**
@@ -59,7 +63,7 @@ void log_output(LOG_LEVEL level, const char *message, ...);
  * @param message The message to be logged.
  * @param ... Any formatted data that should be included in the log entry.
  */
-#define LOG_ERROR(message, ...) log_output(LOG_LEVEL::ERROR, message, __FUNCTION__, __LINE__ ##__VA_ARGS__);
+#define LOG_ERROR(message, ...) log_output(LOG_LEVEL::ERROR, __FUNCTION__, __LINE__, message, ##__VA_ARGS__);
 #endif
 
 #if LOG_WARN_ENABLED == 1
@@ -69,7 +73,7 @@ void log_output(LOG_LEVEL level, const char *message, ...);
  * @param message The message to be logged.
  * @param ... Any formatted data that should be included in the log entry.
  */
-#define LOG_WARN(message, ...) log_output(LOG_LEVEL::WARN, message, __FUNCTION__, __LINE__ ##__VA_ARGS__);
+#define LOG_WARN(message, ...) log_output(LOG_LEVEL::WARN, __FUNCTION__, __LINE__, message, ##__VA_ARGS__);
 #else
 /**
  * @brief Logs a warning-level message. Should be used to indicate non-critial problems with
@@ -86,7 +90,7 @@ void log_output(LOG_LEVEL level, const char *message, ...);
  * @param message The message to be logged.
  * @param ... Any formatted data that should be included in the log entry.
  */
-#define LOG_INFO(message, ...) log_output(LOG_LEVEL::INFO, message, __FUNCTION__, __LINE__ ##__VA_ARGS__);
+#define LOG_INFO(message, ...) log_output(LOG_LEVEL::INFO, __FUNCTION__, __LINE__, message, ##__VA_ARGS__);
 #else
 /**
  * @brief Logs an info-level message. Should be used for non-erronuous informational purposes.
@@ -103,7 +107,7 @@ void log_output(LOG_LEVEL level, const char *message, ...);
  * @param message The message to be logged.
  * @param ... Any formatted data that should be included in the log entry.
  */
-#define LOG_DEBUG(message, ...) log_output(LOG_LEVEL::DEBUG, message, __FUNCTION__, __LINE__ ##__VA_ARGS__);
+#define LOG_DEBUG(message, ...) log_output(LOG_LEVEL::DEBUG, __FUNCTION__, __LINE__, message, ##__VA_ARGS__);
 #else
 /**
  * @brief Logs a debug-level message. Should be used for debugging purposes.
@@ -120,7 +124,7 @@ void log_output(LOG_LEVEL level, const char *message, ...);
  * @param message The message to be logged.
  * @param ... Any formatted data that should be included in the log entry.
  */
-#define LOG_TRACE(message, ...) log_output(LOG_LEVEL::TRACE, message, __FUNCTION__, __LINE__ ##__VA_ARGS__);
+#define LOG_TRACE(message, ...) log_output(LOG_LEVEL::TRACE, __FUNCTION__, __LINE__, message, ##__VA_ARGS__);
 #else
 /**
  * @brief Logs a trace-level message. Should be used for verbose debugging purposes.
@@ -130,5 +134,18 @@ void log_output(LOG_LEVEL level, const char *message, ...);
  */
 #define LOG_TRACE(message, ...)
 #endif
+
+class Logger
+{
+public:
+    Logger();
+
+    Logger &begin();
+
+private:
+//    LOG_LEVEL m_level;
+//    std::ostream m_out;
+
+};
 
 #endif // LOGGER_H
