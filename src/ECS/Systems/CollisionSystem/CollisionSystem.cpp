@@ -3,6 +3,7 @@
 #include "Scene/Scene.h"
 #include "Utils/Logger/Logger.h"
 #include <limits>
+#include <future>
 
 namespace ngin2D {
 
@@ -63,7 +64,7 @@ void CollisionSystem::update(float dt)
 
             if(collided)
             {
-                LOG_INFO("TRUE");
+                LOG_INFO("COLLIDED");
                 pos->x += mtv.x;
                 pos->y += mtv.y;
             }
@@ -102,104 +103,97 @@ bool CollisionSystem::MapCollision(Entity *entity, Vector2DF &mtv)
 
     Point2DF entityI = Point2DF(pos->x + sprite->frameWidth/2,
                                 pos->y + sprite->frameHeight/2);
-    bool collided   = 0;
 
-    if(motion->running)
+    for(auto block: CollisionBlocks)
     {
-        for(auto block: CollisionBlocks)
+        float x, y;
+        float w, h;
+
+        x = block->position().getX();
+        y = block->position().getY();
+
+        w = block->size().width;
+        h = block->size().height;
+
+        if(box->x - (x + w) > 5.0f
+                || box->y - (y + h) > 5.0f
+                || x - (box->x + box->w) > 5.0f
+                || y - (box->y + box->h) > 5.0f)
         {
-            float x, y;
-            float w, h;
+            continue;
+        }
 
-            x = block->position().getX();
-            y = block->position().getY();
 
-            w = block->size().width;
-            h = block->size().height;
+        IShape *shape = block;
 
-            if(pos->x - (x + w) > 10.0f
-                    || pos->y - (y + h) > 10.0f
-                    || x - (pos->x + sprite->frameWidth) > 10.0f
-                    || y - (pos->y + sprite->frameHeight) > 10.0f)
+        if(shape->type() == TYPE_SHAPE::ELLIPSE)
+        {
+            shape->clearVertices();
+            shape->appendVertices(shape->center());
+            shape->appendVertices(shape->center().nearestPoint(box->vertices()));
+        }
+
+        if(box->axes(box->type()).size() < 1) break;
+        if(box->axes(shape->type()).size() < 1) break;
+
+
+
+        float minOverlap = std::numeric_limits<float>::infinity();
+
+        for (auto &axis: box->axes(box->type()))
+        {
+            Projection2D project1 = box->project(axis);
+            Projection2D project2 = shape->project(axis);
+
+
+            float overlap = project1.gap(project2);
+            if (overlap == 0.0f) // shapes are not overlapping
             {
-                continue;
+                mtv = Vector2DF();
+                goto next;
             }
-
-            LOG_INFO("In Range");
-
-            IShape *shape = block;
-
-
-
-            if(shape->type() == TYPE_SHAPE::ELLIPSE)
+            else
             {
-                shape->clearVertices();
-                shape->appendVertices(shape->center());
-                shape->appendVertices(shape->center().nearestPoint(box->vertices()));
-            }
-
-            if(box->axes(box->type()).size() < 1) break;
-            if(box->axes(shape->type()).size() < 1) break;
-
-
-            float minOverlap = std::numeric_limits<float>::infinity();
-
-            for (auto &axis: box->axes(box->type()))
-            {
-                Projection2D project1 = box->project(axis);
-                Projection2D project2 = shape->project(axis);
-
-
-                float overlap = project1.gap(project2);
-                if (overlap == 0.f) // shapes are not overlapping
+                if (overlap < minOverlap)
                 {
-                    mtv = Vector2DF();
-                    return 0;
+                    minOverlap = overlap;
+                    mtv = axis * minOverlap;
                 }
-                else
-                {
-                    if (overlap < minOverlap)
-                    {
-                        minOverlap = overlap;
-                        mtv = axis * minOverlap;
-                        collided *= 1;
-                    }
-                }
-            }
-
-            for (auto &axis: shape->axes(shape->type()))
-            {
-                Projection2D project1 = box->project(axis);
-                Projection2D project2 = shape->project(axis);
-
-                float overlap = project1.gap(project2);
-                if (overlap == 0.f) // shapes are not overlapping
-                {
-                    mtv = Vector2DF();
-                    return 0;
-                }
-                else
-                {
-                    if (overlap < minOverlap)
-                    {
-                        minOverlap = overlap;
-                        mtv = axis * minOverlap;
-                        collided *= 1;
-                    }
-                }
-            }
-
-            // need to reverse MTV if center offset and overlap are not pointing in the same direction
-            bool notPointingInTheSameDirection = mtv.dotProduct((box->center() - shape->center()).toVector(), mtv) < 0;
-            if (notPointingInTheSameDirection) { mtv = mtv * -1; }
-
-            if(collided)
-            {
-                return 1;
             }
         }
-    }
 
+        for (auto &axis: shape->axes(shape->type()))
+        {
+            Projection2D project1 = box->project(axis);
+            Projection2D project2 = shape->project(axis);
+
+            float overlap = project1.gap(project2);
+            if (overlap == 0.0f) // shapes are not overlapping
+            {
+                mtv = Vector2DF();
+                goto next;
+            }
+            else
+            {
+                if (overlap < minOverlap)
+                {
+                    minOverlap = overlap;
+                    mtv = axis * minOverlap;
+                }
+            }
+        }
+
+        goto collided;
+
+next:
+        continue;
+
+collided:
+        // need to reverse MTV if center offset and overlap are not pointing in the same direction
+        bool notPointingInTheSameDirection = mtv.dotProduct((box->center() - shape->center()).toVector(), mtv) < 0;
+        if (notPointingInTheSameDirection) { mtv = mtv * -1; }
+        return 1;
+    }
 
     return 0;
 }

@@ -8,6 +8,7 @@
 #include <ctime>
 #include <memory>
 #include <stdexcept>
+#include <mutex>
 #include "Defines/EnumDef.h"
 
 /** @brief Indicates if warning level logging is enabled. */
@@ -24,30 +25,6 @@
 #define LOG_DEBUG_ENABLED 0
 #define LOG_TRACE_ENABLED 0
 #endif
-
-template<typename ...TArgs>
-void log_output(LOG_LEVEL level, const char* fn, int line, const char *format, TArgs... args)
-{
-    // TODO: These string operations are all pretty slow. This needs to be
-    // moved to another thread eventually, along with the file writes, to
-    // avoid slowing things down while the engine is trying to run.
-    const char* level_strings[6] = {"[FATAL]: ", "[ERROR]: ", "[WARN]:  ", "[INFO]:  ", "[DEBUG]: ", "[TRACE]: "};
-
-    time_t now = time(nullptr);
-    tm *localTime = localtime(&now);
-
-    int size_s = std::snprintf( nullptr, 0, format, args ... ) + 1; // Extra space for '\0'
-    if( size_s <= 0 ){ throw std::runtime_error( "Error during formatting." ); }
-    auto size = static_cast<size_t>( size_s );
-    std::unique_ptr<char[]> buff( new char[ size ] );
-    std::snprintf( buff.get(), size, format, args ... );
-    std::cout << "[" << std::put_time(localTime, "%Y-%m-%d %H:%M:%S") << "]"
-              << level_strings[level]
-              << std::string( buff.get(), buff.get() + size - 1 ).c_str()
-              << "\t\[" << fn << "]"
-              << "[" << line << "]"
-              << '\n';
-}
 
 /**
  * @brief Logs a fatal-level message. Should be used to stop the application when hit.
@@ -135,17 +112,67 @@ void log_output(LOG_LEVEL level, const char* fn, int line, const char *format, T
 #define LOG_TRACE(message, ...)
 #endif
 
+template<typename ...TArgs>
+void log_output(LOG_LEVEL level, const char* fn, int line, const char *format, TArgs... args)
+{
+    // TODO: These string operations are all pretty slow. This needs to be
+    // moved to another thread eventually, along with the file writes, to
+    // avoid slowing things down while the engine is trying to run.
+    const char* level_strings[6] = {"[FATAL]: ", "[ERROR]: ", "[WARN]:  ", "[INFO]:  ", "[DEBUG]: ", "[TRACE]: "};
+
+    time_t now = time(nullptr);
+    tm *localTime = localtime(&now);
+    char time_str[100];
+    strftime(time_str, sizeof(time_str), "%Y-%m-%d %H:%M:%S", localTime);
+
+    printf("[%s][Fn:%s, Line:%d]%s", time_str, fn, line, level_strings[level]);
+    printf(format, args...);
+    printf("\n");
+
+}
+
+
+
 class Logger
 {
 public:
-    Logger();
+    static Logger *instance();
 
-    Logger &begin();
+    Logger &info();
 
+    friend std::ostream &operator<<(std::ostream &out, const char* t)
+    {
+        // TODO: These string operations are all pretty slow. This needs to be
+        // moved to another thread eventually, along with the file writes, to
+        // avoid slowing things down while the engine is trying to run.
+//        const char* level_strings[6] = {"[FATAL]: ", "[ERROR]: ", "[WARN]:  ", "[INFO]:  ", "[DEBUG]: ", "[TRACE]: "};
+
+//        time_t now = time(nullptr);
+//        tm *localTime = localtime(&now);
+
+//        int size_s = std::snprintf( nullptr, 0, m_format, args ... ) + 1; // Extra space for '\0'
+//        if( size_s <= 0 ){ throw std::runtime_error( "Error during formatting." ); }
+//        auto size = static_cast<size_t>( size_s );
+//        std::unique_ptr<char[]> buff( new char[ size ] );
+//        std::snprintf( buff.get(), size, m_format, args ... );
+//        out << "[" << std::put_time(localTime, "%Y-%m-%d %H:%M:%S") << "]"
+//                  << level_strings[m_level]
+//                  << std::string( buff.get(), buff.get() + size - 1 ).c_str()
+//                  << "\t\[" << m_fn << "]"
+//                  << "[" << m_line << "]"
+//                  << '\n';
+        return out;
+    }
 private:
-//    LOG_LEVEL m_level;
-//    std::ostream m_out;
+    Logger();
+    static Logger *s_instance;
+    LOG_LEVEL m_level = LOG_LEVEL::INFO;
+//    const char* m_format, m_fn;
+//    int m_line;
+    std::mutex m_mutex;
+
 
 };
+
 
 #endif // LOGGER_H

@@ -2,6 +2,7 @@
 #define ISHAPE_H
 
 #include <SDL2/SDL.h>
+#include <limits>
 #include "Defines/Defines.h"
 #include "Math/math2D.h"
 #include "Math/projection2D.h"
@@ -44,8 +45,9 @@ public:
 
     inline Projection2D project(Vector2DF axis)
     {
-        float dotProductMin = axis.dotProduct(m_vertices[0].toVector());
-        float dotProductMax = dotProductMin;
+
+        float dotProductMin = std::numeric_limits<float>::infinity();
+        float dotProductMax = -std::numeric_limits<float>::infinity();
         for (int i = 0; i < m_vertices.size(); i++)
         {
             float dotProduct = axis.dotProduct(m_vertices[i].toVector());

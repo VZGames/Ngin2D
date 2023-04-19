@@ -25,6 +25,7 @@ public:
 private:
     bool MapCollision(Entity *entity, Vector2DF &mtv);
     bool OtherEntitiesCollision(Entity *entity);
+    bool testCollision();
 
     std::vector<IShape*> CollisionBlocks;
 };
