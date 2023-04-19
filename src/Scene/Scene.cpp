@@ -15,7 +15,6 @@ Scene::Scene()
 void Scene::init()
 {
     Player::instance();
-
     Camera::instance()->setTarget(Player::instance()->getID());
 
     SystemManager::instance()->addSystem<MovementSystem>();

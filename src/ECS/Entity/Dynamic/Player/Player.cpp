@@ -10,11 +10,11 @@ Player::Player()
 {
     ptr_entity = EntityManager::instance()->createEntity();
     ptr_entity->addComponent<PlayerComponent>();
-    ptr_entity->addComponent<CameraComponent>();
+    ptr_entity->addComponent<CameraComponent>(1);
     ptr_entity->addComponent<ColliderComponent>(16, 32);
     ptr_entity->addComponent<PositionComponent>((g_width - 8) / (2 * ZOOM_FACTOR), (g_height - 8) / (2 * ZOOM_FACTOR));
     ptr_entity->addComponent<SpawnComponent>(Point2DI(200, 176));
-    ptr_entity->addComponent<SpriteComponent>("Lover", PLAYER_MOTION, 32, 32, 2, 200);
+    ptr_entity->addComponent<SpriteComponent>("Player", PLAYER_MOTION, 32, 32, 2, 200);
     ptr_entity->addComponent<MotionComponent>(PLAYER_SPEED, Vector2DF(), Vector2DF());
     ptr_entity->addComponent<HealthComponent>(100);
     ptr_entity->addComponent<TransformComponent>();
@@ -33,6 +33,14 @@ Player *Player::instance()
 EntityID Player::getID() const
 {
     return ptr_entity->id;
+}
+
+void Player::followTarget(Entity *target)
+{
+    if(target == nullptr)
+    {
+        return;
+    }
 }
 
 void Player::handleKeyEvent()

@@ -18,6 +18,8 @@ void RenderSystem::update(float dt)
     {
         bool hasComponent = ComponentManager::instance()->hasComponentType<SpriteComponent>(entity.componentBitset);
         hasComponent &= ComponentManager::instance()->hasComponentType<HealthComponent>(entity.componentBitset);
+        hasComponent &= ComponentManager::instance()->hasComponentType<PositionComponent>(entity.componentBitset);
+
         if(hasComponent)
         {
            auto sprite = entity.getComponent<SpriteComponent>();
@@ -31,6 +33,7 @@ void RenderSystem::render()
     for(Entity entity: EntityManager::instance()->getEntities())
     {
         bool hasComponent = ComponentManager::instance()->hasComponentType<SpriteComponent>(entity.componentBitset);
+        hasComponent &= ComponentManager::instance()->hasComponentType<HealthComponent>(entity.componentBitset);
         hasComponent &= ComponentManager::instance()->hasComponentType<PositionComponent>(entity.componentBitset);
 
         if(hasComponent)

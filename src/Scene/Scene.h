@@ -21,6 +21,9 @@ public:
 private:
     Scene();
     static Scene *s_instance;
+
+//    tmp
+    Slime slimes[2];
 };
 }
 

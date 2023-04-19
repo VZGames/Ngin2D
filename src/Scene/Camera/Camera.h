@@ -15,7 +15,7 @@ public:
     void update(float dt);
     void moveTo(Point2DF coord);
     void rotate();
-
+    EntityID target() const;
     void setTarget(EntityID id);
 
     const SDL_FRect &viewport() const;

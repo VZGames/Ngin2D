@@ -6,6 +6,8 @@
 namespace ngin2D {
 struct CameraComponent: public ComponentBase<CameraComponent>
 {
+    CameraComponent(bool focus = 0): inFocus(focus){}
+    bool inFocus;
 };
 }
 

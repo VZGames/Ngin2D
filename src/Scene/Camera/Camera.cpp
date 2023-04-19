@@ -77,10 +77,14 @@ void Camera::update(float dt)
 
 void Camera::moveTo(Point2DF coord)
 {
-    auto sprite = ptr_entity->getComponent<SpriteComponent>();
     auto pos     = ptr_entity->getComponent<PositionComponent>();
     pos->x       = coord.getX();
     pos->y       = coord.getY();
+}
+
+EntityID Camera::target() const
+{
+    return ptr_entity->id;
 }
 
 void Camera::setTarget(EntityID id)

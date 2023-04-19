@@ -2,21 +2,19 @@
 #define IENTITY_H
 
 #include "ECS/Components/Components.h"
+#include "ECS/Entity/Entity.h"
 
 namespace ngin2D {
 class IEntity
 {
 public:
-    void followTarget(IEntity *target = nullptr)
-    {
-        if(target == nullptr)
-        {
-            return;
-        }
-    }
     virtual void init(){};
+    virtual void followTarget(Entity *target = nullptr) = 0;
     virtual void handleKeyEvent() = 0;
     virtual void handleMouseEvent() = 0;
+
+protected:
+    Entity *ptr_entity;
 };
 }
 #endif // IENTITY_H
