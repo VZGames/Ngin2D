@@ -7,6 +7,13 @@ namespace ngin2D {
 class IEntity
 {
 public:
+    void followTarget(IEntity *target = nullptr)
+    {
+        if(target == nullptr)
+        {
+            return;
+        }
+    }
     virtual void init(){};
     virtual void handleKeyEvent() = 0;
     virtual void handleMouseEvent() = 0;

@@ -21,7 +21,7 @@
 #define LOG_TRACE_ENABLED 1
 
 // Disable debug and trace logging for release builds.
-#if ORELEASE == 1
+#if BUILD_RELEASE == 1
 #define LOG_DEBUG_ENABLED 0
 #define LOG_TRACE_ENABLED 0
 #endif
@@ -33,7 +33,7 @@
  */
 #define LOG_FATAL(message, ...) log_output(LOG_LEVEL::FATAL, __FUNCTION__, __LINE__, message, ##__VA_ARGS__);
 
-#ifndef KERROR
+#ifndef RUNTIME_ERROR
 /**
  * @brief Logs an error-level message. Should be used to indicate critical runtime problems
  * that cause the application to run improperly or not at all.
@@ -68,6 +68,8 @@
  * @param ... Any formatted data that should be included in the log entry.
  */
 #define LOG_INFO(message, ...) log_output(LOG_LEVEL::INFO, __FUNCTION__, __LINE__, message, ##__VA_ARGS__);
+//#define cLOG_INFO(message)     Logger::instance()->info() << message << "\t\t\t\t\t[fn: " << __FUNCTION__ << ", line: " << __LINE__ << "]\n";
+
 #else
 /**
  * @brief Logs an info-level message. Should be used for non-erronuous informational purposes.
@@ -125,7 +127,7 @@ void log_output(LOG_LEVEL level, const char* fn, int line, const char *format, T
     char time_str[100];
     strftime(time_str, sizeof(time_str), "%Y-%m-%d %H:%M:%S", localTime);
 
-    printf("[%s][Fn:%s, Line:%d]%s", time_str, fn, line, level_strings[level]);
+    printf("[%s][fn: %s, line: %d]%s", time_str, fn, line, level_strings[level]);
     printf(format, args...);
     printf("\n");
 
@@ -138,39 +140,29 @@ class Logger
 public:
     static Logger *instance();
 
+
     Logger &info();
 
-    friend std::ostream &operator<<(std::ostream &out, const char* t)
+    std::ostream &operator<<(const char* t)
     {
-        // TODO: These string operations are all pretty slow. This needs to be
-        // moved to another thread eventually, along with the file writes, to
-        // avoid slowing things down while the engine is trying to run.
-//        const char* level_strings[6] = {"[FATAL]: ", "[ERROR]: ", "[WARN]:  ", "[INFO]:  ", "[DEBUG]: ", "[TRACE]: "};
-
-//        time_t now = time(nullptr);
-//        tm *localTime = localtime(&now);
-
-//        int size_s = std::snprintf( nullptr, 0, m_format, args ... ) + 1; // Extra space for '\0'
-//        if( size_s <= 0 ){ throw std::runtime_error( "Error during formatting." ); }
-//        auto size = static_cast<size_t>( size_s );
-//        std::unique_ptr<char[]> buff( new char[ size ] );
-//        std::snprintf( buff.get(), size, m_format, args ... );
-//        out << "[" << std::put_time(localTime, "%Y-%m-%d %H:%M:%S") << "]"
-//                  << level_strings[m_level]
-//                  << std::string( buff.get(), buff.get() + size - 1 ).c_str()
-//                  << "\t\[" << m_fn << "]"
-//                  << "[" << m_line << "]"
-//                  << '\n';
-        return out;
+        m_out << t;
+        return m_out;
     }
+
+    std::ostream &operator<<(int t)
+    {
+        m_out << t;
+        return m_out;
+    }
+
+
 private:
     Logger();
     static Logger *s_instance;
-    LOG_LEVEL m_level = LOG_LEVEL::INFO;
-//    const char* m_format, m_fn;
-//    int m_line;
+    const char* level_strings[6] = {"[FATAL]: ", "[ERROR]: ", "[WARN]:  ", "[INFO]:  ", "[DEBUG]: ", "[TRACE]: "};
+    const char* m_format;
     std::mutex m_mutex;
-
+    std::ostream &m_out = std::cout;
 
 };
 

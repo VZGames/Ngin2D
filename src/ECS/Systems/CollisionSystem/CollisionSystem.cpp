@@ -96,7 +96,6 @@ void CollisionSystem::render()
 
 bool CollisionSystem::MapCollision(Entity *entity, Vector2DF &mtv)
 {
-    auto motion     = entity->getComponent<MotionComponent>();
     auto sprite     = entity->getComponent<SpriteComponent>();
     auto pos        = entity->getComponent<PositionComponent>();
     auto box        = entity->getComponent<ColliderComponent>();
@@ -115,10 +114,10 @@ bool CollisionSystem::MapCollision(Entity *entity, Vector2DF &mtv)
         w = block->size().width;
         h = block->size().height;
 
-        if(box->x - (x + w) > 5.0f
-                || box->y - (y + h) > 5.0f
-                || x - (box->x + box->w) > 5.0f
-                || y - (box->y + box->h) > 5.0f)
+        if(box->x - (x + w) > 50.0f
+                || box->y - (y + h) > 50.0f
+                || x - (box->x + box->w) > 50.0f
+                || y - (box->y + box->h) > 50.0f)
         {
             continue;
         }
@@ -133,18 +132,16 @@ bool CollisionSystem::MapCollision(Entity *entity, Vector2DF &mtv)
             shape->appendVertices(shape->center().nearestPoint(box->vertices()));
         }
 
-        if(box->axes(box->type()).size() < 1) break;
-        if(box->axes(shape->type()).size() < 1) break;
-
+        if(box->axes().size() < 1) break;
+        if(shape->axes().size() < 1) break;
 
 
         float minOverlap = std::numeric_limits<float>::infinity();
 
-        for (auto &axis: box->axes(box->type()))
+        for (auto &axis: box->axes())
         {
             Projection2D project1 = box->project(axis);
             Projection2D project2 = shape->project(axis);
-
 
             float overlap = project1.gap(project2);
             if (overlap == 0.0f) // shapes are not overlapping
@@ -162,7 +159,7 @@ bool CollisionSystem::MapCollision(Entity *entity, Vector2DF &mtv)
             }
         }
 
-        for (auto &axis: shape->axes(shape->type()))
+        for (auto &axis: shape->axes())
         {
             Projection2D project1 = box->project(axis);
             Projection2D project2 = shape->project(axis);

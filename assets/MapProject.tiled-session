@@ -6,8 +6,8 @@
     "activeFile": "Map4.tmx",
     "automapping.whileDrawing": false,
     "expandedProjectPaths": [
-        "Characters",
-        "."
+        ".",
+        "Characters"
     ],
     "fileStates": {
         "": {
@@ -92,8 +92,8 @@
                 2
             ],
             "expandedObjectLayers": [
-                11,
-                10
+                10,
+                11
             ],
             "scale": 4,
             "selectedLayer": 7,
@@ -147,11 +147,11 @@
             "expandedObjectLayers": [
                 5
             ],
-            "scale": 3,
+            "scale": 0.75,
             "selectedLayer": 2,
             "viewCenter": {
-                "x": 360,
-                "y": 239.83333333333331
+                "x": -166.66666666666674,
+                "y": -58.66666666666663
             }
         },
         "Map4.tmx#Grass": {

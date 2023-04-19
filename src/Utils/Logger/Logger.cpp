@@ -8,10 +8,15 @@ Logger *Logger::instance()
 
 Logger &Logger::info()
 {
+    time_t now = time(nullptr);
+    tm *localTime = localtime(&now);
+
+    m_out << "[" << std::put_time(localTime, "%Y-%m-%d %H:%M:%S") << "]"
+              << level_strings[LOG_LEVEL::INFO];
+
     return *this;
 }
 
 Logger::Logger()
 {
-
 }

@@ -7,7 +7,7 @@
 #include <math.h>
 #include <vector>
 #include "vector2D.h"
-
+#include "Utils/Logger/Logger.h"
 
 template<typename T>
 class Point2D

@@ -79,7 +79,7 @@
  </layer>
  <objectgroup color="#aa0000" id="5" name="Collision">
   <object id="77" x="64.334" y="148.333" width="30" height="27"/>
-  <object id="82" x="121.334" y="367.667" width="86.3333" height="46.6667">
+  <object id="82" x="346.667" y="163.667" width="86.3333" height="46.6667">
    <ellipse/>
   </object>
   <object id="83" x="80.3333" y="227">

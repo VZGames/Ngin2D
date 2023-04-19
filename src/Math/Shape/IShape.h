@@ -21,8 +21,14 @@ protected:
     ListVector2DF m_axes;
 
 public:
-    inline ListVector2DF axes(TYPE_SHAPE type)
+    inline ListVector2DF axes()
     {
+        if(m_type == TYPE_SHAPE::ELLIPSE)
+        {
+            m_axes.push_back((m_center - m_vertices[0]).toVector());
+            return m_axes;
+        }
+
         for (int i = 0; i < m_vertices.size(); i++)
         {
             Point2DF p1 = m_vertices[i];
@@ -31,8 +37,6 @@ public:
             Vector2DF edge = p1.toVector() - p2.toVector();
 
             Vector2DF normal = edge.perp();
-
-            float magnitude = normal.magnitude();
 
             // convert normal vector to unit vector(length to 1)
             normal.toUnit();
