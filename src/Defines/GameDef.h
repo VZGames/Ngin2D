@@ -19,6 +19,6 @@
 #define UP -1.0f
 #define DOWN 1.0f
 
-#define SLIME_COUNT 10
+#define SLIME_COUNT 3
 
 #endif // GAMEDEF_H

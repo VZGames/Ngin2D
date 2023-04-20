@@ -3,6 +3,9 @@
 
 #include <stdlib.h>
 #include <iostream>
+#include <sstream>
+#include <string>
+
 
 template<class T>
 void safeDelete(T *ptr)
@@ -23,7 +26,7 @@ void safeDeleteArray(T *ptr)
 template <class T>
 void swap ( T& a, T& b )
 {
-  T c(a); a=b; b=c;
+    T c(a); a=b; b=c;
 }
 
 template<class T>
@@ -36,6 +39,16 @@ template<class T>
 T max(const T& a, const T& b)
 {
     return (a > b)? a:b;
+}
+
+template< typename ... Args >
+std::string stringer(Args const& ... args )
+{
+    std::ostringstream stream;
+    using List= int[];
+    (void)List{0, ( (void)(stream << args), 0 ) ... };
+
+    return stream.str();
 }
 
 #endif // UTILS_H

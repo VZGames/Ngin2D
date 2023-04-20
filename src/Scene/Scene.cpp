@@ -10,7 +10,6 @@ Scene *Scene::instance()
 
 Scene::Scene()
 {
-    loadEnemy();
 }
 
 Scene::~Scene()
@@ -23,20 +22,32 @@ Scene::~Scene()
     m_enemies.clear();
 }
 
-void Scene::loadEnemy()
+void Scene::updateEnemies(float dt)
+{
+    for (IEntity *entity: m_enemies) {
+        if(entity == nullptr)
+        {
+            LOG_INFO("XXXXXXXXXXXx");
+        }
+        entity->update(dt);
+    }
+}
+
+void Scene::loadEnemies()
 {
     for (int i = 0; i < SLIME_COUNT; ++i) {
         Slime *slime = new Slime();
+        slime->init();
         auto spawn   = slime->data()->getComponent<SpawnComponent>();
         spawn->position.setX(i * 100);
-
         m_enemies.push_back(slime);
     }
 }
 
 void Scene::init()
 {
-    Player::instance();
+    loadEnemies();
+    Player::instance()->init();
     Camera::instance()->setTarget(Player::instance()->getID());
 
     SystemManager::instance()->addSystem<MovementSystem>();
@@ -48,6 +59,8 @@ void Scene::init()
 
 void Scene::update(float dt)
 {
+    updateEnemies(dt);
+    Player::instance()->update(dt);
     Camera::instance()->update(dt);
     SystemManager::instance()->update(dt);
 }

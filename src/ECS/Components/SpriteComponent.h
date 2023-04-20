@@ -12,7 +12,8 @@ struct SpriteComponent: public ComponentBase<SpriteComponent>
         frameHeight(height),
         frameCount(frameCount),
         frameSpeed(frameSpeed)
-    {}
+    {
+    }
     const char *textureId;
     const char *source;
     float frameWidth, frameHeight;

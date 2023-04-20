@@ -9,10 +9,14 @@ class Player: public IEntity
 public:
     static Player *instance();
 
-    EntityID getID() const;
 
     // IEntity interface
 public:
+    virtual void init() override;
+    virtual void update(float dt) override;
+    virtual void render() override;
+
+    virtual bool hasComponents() override;
     virtual void followTarget(Entity *target) override;
     virtual void handleKeyEvent() override;
     virtual void handleMouseEvent() override;
