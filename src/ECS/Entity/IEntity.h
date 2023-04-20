@@ -8,6 +8,11 @@ namespace ngin2D {
 class IEntity
 {
 public:
+    Entity *data() const
+    {
+        return ptr_entity;
+    }
+public:
     virtual void init(){};
     virtual void followTarget(Entity *target = nullptr) = 0;
     virtual void handleKeyEvent() = 0;

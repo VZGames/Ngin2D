@@ -19,7 +19,6 @@
 #define UP -1.0f
 #define DOWN 1.0f
 
-
-#define PLAYER_SPEED 0.8f
+#define SLIME_COUNT 10
 
 #endif // GAMEDEF_H

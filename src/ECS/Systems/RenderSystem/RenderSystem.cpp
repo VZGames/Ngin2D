@@ -22,8 +22,8 @@ void RenderSystem::update(float dt)
 
         if(hasComponent)
         {
-           auto sprite = entity.getComponent<SpriteComponent>();
-           sprite->col = (SDL_GetTicks() / sprite->frameSpeed) % sprite->frameCount;
+            auto sprite = entity.getComponent<SpriteComponent>();
+            sprite->col = (SDL_GetTicks() / sprite->frameSpeed) % sprite->frameCount;
         }
     }
 }
@@ -46,12 +46,10 @@ void RenderSystem::render()
             bool hasCamera = ComponentManager::instance()->hasComponentType<CameraComponent>(entity.componentBitset);
             float cameraX = 0.0f;
             float cameraY = 0.0f;
-            if(hasCamera)
-            {
-                auto camPos = Camera::instance()->position();
-                cameraX = camPos.getX();
-                cameraY = camPos.getY();
-            }
+
+            auto camPos = Camera::instance()->position();
+            cameraX = camPos.getX();
+            cameraY = camPos.getY();
 
             TextureManager::instance()->drawFrame(
                         sprite->textureId,

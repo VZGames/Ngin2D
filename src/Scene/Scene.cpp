@@ -10,6 +10,28 @@ Scene *Scene::instance()
 
 Scene::Scene()
 {
+    loadEnemy();
+}
+
+Scene::~Scene()
+{
+    for(auto enemy: m_enemies)
+    {
+        safeDeleteArray(enemy);
+    }
+
+    m_enemies.clear();
+}
+
+void Scene::loadEnemy()
+{
+    for (int i = 0; i < SLIME_COUNT; ++i) {
+        Slime *slime = new Slime();
+        auto spawn   = slime->data()->getComponent<SpawnComponent>();
+        spawn->position.setX(i * 100);
+
+        m_enemies.push_back(slime);
+    }
 }
 
 void Scene::init()

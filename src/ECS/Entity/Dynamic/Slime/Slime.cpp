@@ -10,8 +10,8 @@ Slime::Slime()
 {
     ptr_entity = EntityManager::instance()->createEntity();
     ptr_entity->addComponent<ColliderComponent>(32, 32);
-    ptr_entity->addComponent<PositionComponent>(200, 50);
-    ptr_entity->addComponent<SpawnComponent>(Point2DI(0, 0));
+    ptr_entity->addComponent<PositionComponent>();
+    ptr_entity->addComponent<SpawnComponent>(Point2DI(50, 100));
     ptr_entity->addComponent<SpriteComponent>("Slime", "./assets/Characters/slime.png", 32, 32, 1, 200);
     ptr_entity->addComponent<MotionComponent>(2.0, Vector2DF(), Vector2DF());
     ptr_entity->addComponent<HealthComponent>(100);

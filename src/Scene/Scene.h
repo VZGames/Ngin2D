@@ -20,10 +20,11 @@ public:
 
 private:
     Scene();
+    ~Scene();
+    void loadEnemy();
     static Scene *s_instance;
 
-//    tmp
-    Slime slimes[2];
+    std::vector<IEntity*> m_enemies;
 };
 }
 

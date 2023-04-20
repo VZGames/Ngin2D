@@ -12,10 +12,10 @@ Player::Player()
     ptr_entity->addComponent<PlayerComponent>();
     ptr_entity->addComponent<CameraComponent>(1);
     ptr_entity->addComponent<ColliderComponent>(16, 32);
-    ptr_entity->addComponent<PositionComponent>((g_width - 8) / (2 * ZOOM_FACTOR), (g_height - 8) / (2 * ZOOM_FACTOR));
+    ptr_entity->addComponent<PositionComponent>();
     ptr_entity->addComponent<SpawnComponent>(Point2DI(200, 176));
     ptr_entity->addComponent<SpriteComponent>("Player", PLAYER_MOTION, 32, 32, 2, 200);
-    ptr_entity->addComponent<MotionComponent>(PLAYER_SPEED, Vector2DF(), Vector2DF());
+    ptr_entity->addComponent<MotionComponent>(1, Vector2DF(), Vector2DF());
     ptr_entity->addComponent<HealthComponent>(100);
     ptr_entity->addComponent<TransformComponent>();
 }
@@ -90,10 +90,10 @@ void Player::handleKeyEvent()
         bool moveBottomLeft     = KeyEvent::instance()->sendEvent(SDL_SCANCODE_A) && KeyEvent::instance()->sendEvent(SDL_SCANCODE_S);
         bool moveBottomRight    = KeyEvent::instance()->sendEvent(SDL_SCANCODE_D) && KeyEvent::instance()->sendEvent(SDL_SCANCODE_S);
 
-        motion->speed = PLAYER_SPEED;
+        motion->speed = 1;
         if(moveTopLeft || moveTopRight || moveBottomLeft || moveBottomRight)
         {
-            motion->speed = PLAYER_SPEED / 2.0f;
+            motion->speed = 1 / 2.0f;
         }
 
         if(KeyEvent::instance()->sendEvent(SDL_SCANCODE_A))

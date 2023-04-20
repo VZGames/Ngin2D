@@ -14,14 +14,14 @@ void SpawnSystem::init()
     for(Entity entity: EntityManager::instance()->getEntities())
     {
         bool hasComponent = ComponentManager::instance()->hasComponentType<SpawnComponent>(entity.componentBitset);
+        hasComponent &= ComponentManager::instance()->hasComponentType<PositionComponent>(entity.componentBitset);
 
         if(hasComponent)
         {
             auto spawn = entity.getComponent<SpawnComponent>();
-            if(Camera::instance()->target() == entity.id)
-            {
-                Camera::instance()->moveTo(Point2DF(spawn->position.getX(), spawn->position.getY()));
-            }
+            auto pos     = entity.getComponent<PositionComponent>();
+            pos->x       = spawn->position.getX();
+            pos->y       = spawn->position.getY();
         }
     }
 }

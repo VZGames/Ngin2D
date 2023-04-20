@@ -1,4 +1,5 @@
 #include "EntityManager.h"
+#include "Utils/Logger/Logger.h"
 #include <stdio.h>
 #include <algorithm>
 
@@ -16,6 +17,9 @@ Entity *EntityManager::createEntity()
     availableIDs.pop();
     entities.push_back(Entity{id});
     entityCount++;
+
+    LOG_INFO("Created Entity has ID %d", id);
+
     return &entities.back();
 }
 
@@ -37,7 +41,7 @@ Entity *EntityManager::getEntityByID(EntityID id)
     auto it = std::find(entities.begin(), entities.end(), entity);
     if(it != entities.end())
     {
-        printf("Entity ID %d, Components: %s\n", it->id, it->componentBitset.to_string().c_str());
+        LOG_INFO("Entity ID %d, Components: %s", it->id, it->componentBitset.to_string().c_str());
         return &(*it);
     }
 
