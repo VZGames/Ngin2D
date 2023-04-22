@@ -8,9 +8,14 @@ MovementSystem::MovementSystem()
 
 }
 
+void MovementSystem::init()
+{
+    m_entities = EntityManager::instance()->getEntities();
+}
+
 void MovementSystem::update(float dt)
 {
-    for(Entity entity: EntityManager::instance()->getEntities())
+    for(Entity entity: m_entities)
     {
         bool hasComponent = ComponentManager::instance()->hasComponentType<MotionComponent>(entity.componentBitset);
         hasComponent &= ComponentManager::instance()->hasComponentType<PositionComponent>(entity.componentBitset);

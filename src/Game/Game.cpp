@@ -29,16 +29,18 @@ Game::~Game()
 
 bool Game::InitGame(const char *title)
 {
-    printf("Game Init\n");
+    LOG_INFO("Game Init");
+
     if (SDL_Init(SDL_INIT_EVERYTHING) != 0)
     {
-        printf("Unable to initialize SDL: %s\n", SDL_GetError());
+        LOG_INFO("Unable to initialize SDL: %s", SDL_GetError());
+
         return 0;
     }
 
     if (!(IMG_Init(IMG_INIT_PNG | IMG_INIT_JPG)))
     {
-        printf("Unable to initialize SDL Image: %s\n", SDL_GetError());
+        LOG_INFO("Unable to initialize SDL Image: %s", SDL_GetError());
         return 0;
     }
 
@@ -50,7 +52,8 @@ bool Game::InitGame(const char *title)
     if (ptr_window == nullptr)
     {
         // In the case that the window could not be made...
-        printf("Could not create window: %s\n\n", SDL_GetError());
+        LOG_INFO("Could not create window: %s", SDL_GetError());
+
         return 0;
     }
 
@@ -65,7 +68,7 @@ bool Game::InitGame(const char *title)
     ptr_renderer = SDL_CreateRenderer(ptr_window, -1, SDL_RENDERER_ACCELERATED);
     if (ptr_renderer == nullptr)
     {
-        printf("Could not create renderer: %s\n\n", SDL_GetError());
+        LOG_INFO("Could not create renderer: %s", SDL_GetError());
         return 0;
     }
 
@@ -131,7 +134,8 @@ void Game::render_game()
 
 void Game::Clean()
 {
-    printf("Game Release Resource\n");
+    LOG_INFO("Game Release Resource");
+
     GameMaps::instance()->clean();
     TextureManager::instance()->clean();
     // Close and destroy the window and the renderer
@@ -141,7 +145,8 @@ void Game::Clean()
 
 void Game::Quit()
 {
-    printf("Game Quit\n");
+    LOG_INFO("Game Quit");
+
     SDL_Quit();
     IMG_Quit();
 }

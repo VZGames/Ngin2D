@@ -5,7 +5,6 @@
 #include "GameMaps/MapParser.h"
 #include "Utils/Utils.h"
 
-namespace ngin2D {
 Slime::Slime()
 {
     ptr_entity = EntityManager::instance()->createEntity();
@@ -20,10 +19,11 @@ void Slime::init()
 {
     if(ptr_entity != nullptr)
     {
+        const char* textureId = randomStr(5);
         ptr_entity->addComponent<ColliderComponent>(32, 32);
         ptr_entity->addComponent<PositionComponent>();
         ptr_entity->addComponent<SpawnComponent>(Point2DI(50, 100));
-        ptr_entity->addComponent<SpriteComponent>(stringer("Slime_", ptr_entity->id).c_str(), "./assets/Characters/slime.png", 32, 32, 1, 200);
+        ptr_entity->addComponent<SpriteComponent>(textureId, "./assets/Characters/slime.png", 32, 32, 4, 200);
         ptr_entity->addComponent<MotionComponent>(2.0, Vector2DF(), Vector2DF());
         ptr_entity->addComponent<HealthComponent>(100);
         ptr_entity->addComponent<TransformComponent>();
@@ -35,13 +35,9 @@ void Slime::update(float dt)
     if(hasComponents())
     {
         auto sprite = ptr_entity->getComponent<SpriteComponent>();
-        if(sprite != nullptr)
-        {
-            sprite->frameCount = 4;
-            sprite->row = 1;
-            sprite->col = 1;
-        }
-
+        sprite->frameCount = 6;
+        sprite->col = 0;
+        sprite->row = 1;
     }
 }
 
@@ -63,6 +59,5 @@ bool Slime::hasComponents()
 void Slime::followTarget(Entity *target)
 {
 
-}
 }
 

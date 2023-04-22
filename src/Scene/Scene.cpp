@@ -1,5 +1,6 @@
 #include "Scene.h"
 #include <algorithm>
+#include <future>
 
 namespace ngin2D {
 Scene *Scene::s_instance = nullptr;
@@ -24,24 +25,22 @@ Scene::~Scene()
 
 void Scene::updateEnemies(float dt)
 {
-    for (IEntity *entity: m_enemies) {
-        if(entity == nullptr)
-        {
-            LOG_INFO("XXXXXXXXXXXx");
-        }
-        entity->update(dt);
-    }
+
 }
 
 void Scene::loadEnemies()
 {
-    for (int i = 0; i < SLIME_COUNT; ++i) {
-        Slime *slime = new Slime();
-        slime->init();
-        auto spawn   = slime->data()->getComponent<SpawnComponent>();
-        spawn->position.setX(i * 100);
-        m_enemies.push_back(slime);
-    }
+    Slime *slime1 = new Slime();
+    slime1->init();
+    slime1->data()->getComponent<SpawnComponent>()->position.setX(10);
+
+    Slime *slime2 = new Slime();
+    slime2->init();
+    slime2->data()->getComponent<SpawnComponent>()->position.setX(200);
+
+    Slime *slime3 = new Slime();
+    slime3->init();
+    slime3->data()->getComponent<SpawnComponent>()->position.setX(90);
 }
 
 void Scene::init()
@@ -59,7 +58,13 @@ void Scene::init()
 
 void Scene::update(float dt)
 {
-    updateEnemies(dt);
+    auto f = std::async(std::launch::deferred, [&](float dt){
+        for (IEntity *entity: m_enemies) {
+           ((Slime*)entity)->update(dt);
+        }
+    }, dt);
+
+    f.get();
     Player::instance()->update(dt);
     Camera::instance()->update(dt);
     SystemManager::instance()->update(dt);

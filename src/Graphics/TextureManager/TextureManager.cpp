@@ -2,6 +2,7 @@
 #include "Game/Game.h"
 #include <cassert>
 #include "Scene/Camera/Camera.h"
+#include "Utils/Logger/Logger.h"
 
 
 namespace ngin2D {
@@ -25,11 +26,11 @@ bool TextureManager::loadTexture(const char * textureID, const char *filePath)
 {
     if(textureDict.find(textureID) != textureDict.end())
     {
+//        LOG_INFO("TextureID: %s, Texture Path: %s already existed!", textureID, filePath);
         return 1;
     }
-    printf("TextureID: %s, Texture Path: %s \n", textureID, filePath);
-
-    SDL_Texture *texture = NULL;
+    LOG_INFO("TextureID: %s, Texture Path: %s", textureID, filePath);
+    SDL_Texture *texture = nullptr;
     SDL_Surface *surface = IMG_Load(filePath);
     if (!surface) {
         return 0;
@@ -182,6 +183,7 @@ void TextureManager::clean()
         SDL_DestroyTexture(texture.second);
     }
     textureDict.clear();
-    printf("Textures cleaned\n");
+    LOG_INFO("Textures cleaned");
+
 }
 }

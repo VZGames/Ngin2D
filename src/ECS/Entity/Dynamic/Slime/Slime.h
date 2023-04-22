@@ -3,7 +3,8 @@
 
 #include "ECS/Entity/IEntity.h"
 
-namespace ngin2D {
+using namespace ngin2D;
+
 class Slime: public IEntity
 {
 public:
@@ -18,8 +19,7 @@ public:
 
     virtual bool hasComponents() override;
     virtual void followTarget(Entity *target) override;
-
 };
-}
+
 
 #endif // SLIME_H

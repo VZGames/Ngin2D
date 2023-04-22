@@ -10,11 +10,12 @@ RenderSystem::RenderSystem()
 
 void RenderSystem::init()
 {
+    m_entities = EntityManager::instance()->getEntities();
 }
 
 void RenderSystem::update(float dt)
 {
-    for(Entity entity: EntityManager::instance()->getEntities())
+    for(Entity entity: m_entities)
     {
         bool hasComponent = ComponentManager::instance()->hasComponentType<SpriteComponent>(entity.componentBitset);
         hasComponent &= ComponentManager::instance()->hasComponentType<HealthComponent>(entity.componentBitset);
@@ -30,7 +31,7 @@ void RenderSystem::update(float dt)
 
 void RenderSystem::render()
 {
-    for(Entity entity: EntityManager::instance()->getEntities())
+    for(Entity entity: m_entities)
     {
         bool hasComponent = ComponentManager::instance()->hasComponentType<SpriteComponent>(entity.componentBitset);
         hasComponent &= ComponentManager::instance()->hasComponentType<HealthComponent>(entity.componentBitset);

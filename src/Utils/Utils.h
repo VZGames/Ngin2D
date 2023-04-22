@@ -5,10 +5,10 @@
 #include <iostream>
 #include <sstream>
 #include <string>
-
+#include <random>
 
 template<class T>
-void safeDelete(T *ptr)
+inline void safeDelete(T *ptr)
 {
     if(ptr != NULL)
     {
@@ -18,37 +18,69 @@ void safeDelete(T *ptr)
 }
 
 template<class T>
-void safeDeleteArray(T *ptr)
+inline void safeDeleteArray(T *ptr)
 {
     delete []ptr;
 }
 
 template <class T>
-void swap ( T& a, T& b )
+inline void swap ( T& a, T& b )
 {
     T c(a); a=b; b=c;
 }
 
 template<class T>
-T min(const T& a, const T& b)
+inline T min(const T& a, const T& b)
 {
     return (a < b)? a:b;
 }
 
 template<class T>
-T max(const T& a, const T& b)
+inline T max(const T& a, const T& b)
 {
     return (a > b)? a:b;
 }
 
-template< typename ... Args >
-std::string stringer(Args const& ... args )
+template<typename T>
+inline std::string numberToStr(T num)
 {
-    std::ostringstream stream;
-    using List= int[];
-    (void)List{0, ( (void)(stream << args), 0 ) ... };
+    std::ostringstream convert;
+    convert << num;
+    return convert.str();
+}
 
-    return stream.str();
+template<typename ... TArgs >
+inline std::string stringer(TArgs&&... args )
+{
+    std::string result = "";
+    ((result += std::forward<TArgs>(args)), ...);
+    return result;
+}
+
+template<typename T>
+inline T randomNum(T from, T to)
+{
+    std::random_device dev;
+    std::default_random_engine eng(dev());
+    std::uniform_int_distribution<T> dist(from, to);
+
+    return dist(eng);
+}
+
+inline const char* randomStr(int length) {
+    std::random_device dev;
+    std::default_random_engine eng(dev());
+    std::uniform_int_distribution<int> dist('a', 'z');
+
+    char* result = new char[length + 1];
+    for (int i = 0; i < length; i++) {
+        char c = dist(eng);
+        result[i] = c;
+    }
+
+    result[length] = '\0';
+
+    return result;
 }
 
 #endif // UTILS_H

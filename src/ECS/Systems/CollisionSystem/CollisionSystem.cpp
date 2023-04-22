@@ -13,6 +13,7 @@ CollisionSystem::CollisionSystem()
 
 void CollisionSystem::init()
 {
+    m_entities = EntityManager::instance()->getEntities();
     for(auto &layer: MapParser::instance()->getObjectLayers())
     {
         for(auto obj: layer.objects)
@@ -43,7 +44,7 @@ void CollisionSystem::init()
 
 void CollisionSystem::update(float dt)
 {
-    for(Entity entity: EntityManager::instance()->getEntities())
+    for(Entity entity: m_entities)
     {
         bool hasComponent = ComponentManager::instance()->hasComponentType<PositionComponent>(entity.componentBitset);
         hasComponent &= ComponentManager::instance()->hasComponentType<SpriteComponent>(entity.componentBitset);

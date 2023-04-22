@@ -11,7 +11,8 @@ SpawnSystem::SpawnSystem()
 
 void SpawnSystem::init()
 {
-    for(Entity entity: EntityManager::instance()->getEntities())
+    m_entities = EntityManager::instance()->getEntities();
+    for(Entity entity: m_entities)
     {
         bool hasComponent = ComponentManager::instance()->hasComponentType<SpawnComponent>(entity.componentBitset);
         hasComponent &= ComponentManager::instance()->hasComponentType<PositionComponent>(entity.componentBitset);
