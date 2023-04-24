@@ -34,6 +34,7 @@ public:
 
 private:
     MapParser();
+    ~MapParser();
     bool loadTmx(const char *mapId);
     void parseTmx();
     void parseTileset(TiXmlElement *e);

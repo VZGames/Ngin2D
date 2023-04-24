@@ -62,7 +62,7 @@ bool Game::InitGame(const char *title)
 
     SDL_GetWindowSize(ptr_window, &g_width, &g_height);
 
-    std::cout << g_width << " " << g_height << std::endl;
+    LOG_INFO("Window size: %d, %d", g_width, g_height);
 
     // [2] init renderer
     ptr_renderer = SDL_CreateRenderer(ptr_window, -1, SDL_RENDERER_ACCELERATED);
@@ -145,10 +145,10 @@ void Game::Clean()
 
 void Game::Quit()
 {
-    LOG_INFO("Game Quit");
 
     SDL_Quit();
     IMG_Quit();
+    LOG_INFO("Game Quit");
 }
 
 

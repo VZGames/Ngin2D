@@ -23,12 +23,6 @@ protected:
 public:
     inline ListVector2DF axes()
     {
-        if(m_type == TYPE_SHAPE::ELLIPSE)
-        {
-            m_axes.push_back((m_center - m_vertices[0]).toVector());
-            return m_axes;
-        }
-
         for (int i = 0; i < m_vertices.size(); i++)
         {
             Point2DF p1 = m_vertices[i];

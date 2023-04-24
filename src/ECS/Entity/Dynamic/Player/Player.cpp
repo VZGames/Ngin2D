@@ -31,7 +31,7 @@ void Player::init()
         ptr_entity->addComponent<PositionComponent>();
         ptr_entity->addComponent<SpawnComponent>(Point2DI(200, 176));
         ptr_entity->addComponent<SpriteComponent>("Player", PLAYER_MOTION, 32, 32, 2, 200);
-        ptr_entity->addComponent<MotionComponent>(1, Vector2DF(), Vector2DF());
+        ptr_entity->addComponent<MotionComponent>(0.6);
         ptr_entity->addComponent<HealthComponent>(100);
         ptr_entity->addComponent<TransformComponent>();
     }
@@ -39,7 +39,7 @@ void Player::init()
 
 void Player::update(float dt)
 {
-    if(hasComponents())
+    if(hasComponents() && ptr_entity != nullptr)
     {
         auto box    = ptr_entity->getComponent<ColliderComponent>();
         auto motion = ptr_entity->getComponent<MotionComponent>();
@@ -57,8 +57,8 @@ void Player::update(float dt)
         box->setRect({box->x, box->y, box->w, box->h});
         box->setCenter(Point2DF(box->x + box->w/2, box->y + box->h/2));
         vertices.push_back(Point2DF(box->x, box->y));
-        vertices.push_back(Point2DF(box->x + box->w, box->y));
         vertices.push_back(Point2DF(box->x, box->y + box->h));
+        vertices.push_back(Point2DF(box->x + box->w, box->y));
         vertices.push_back(Point2DF(box->x + box->w, box->y + box->h));
         box->setVertices(vertices);
 
@@ -116,28 +116,29 @@ void Player::followTarget(Entity *target)
 void Player::handleKeyEvent()
 {
 
-    if(hasComponents())
+    if(hasComponents() && ptr_entity != nullptr)
     {
         auto box    = ptr_entity->getComponent<ColliderComponent>();
         auto motion = ptr_entity->getComponent<MotionComponent>();
         auto sprite = ptr_entity->getComponent<SpriteComponent>();
         auto pos    = ptr_entity->getComponent<PositionComponent>();
 
-        bool moveTopLeft        = KeyEvent::instance()->sendEvent(SDL_SCANCODE_A) && KeyEvent::instance()->sendEvent(SDL_SCANCODE_W);
-        bool moveTopRight       = KeyEvent::instance()->sendEvent(SDL_SCANCODE_D) && KeyEvent::instance()->sendEvent(SDL_SCANCODE_W);
-        bool moveBottomLeft     = KeyEvent::instance()->sendEvent(SDL_SCANCODE_A) && KeyEvent::instance()->sendEvent(SDL_SCANCODE_S);
-        bool moveBottomRight    = KeyEvent::instance()->sendEvent(SDL_SCANCODE_D) && KeyEvent::instance()->sendEvent(SDL_SCANCODE_S);
+//        bool moveTopLeft        = KeyEvent::instance()->sendEvent(SDL_SCANCODE_A) && KeyEvent::instance()->sendEvent(SDL_SCANCODE_W);
+//        bool moveTopRight       = KeyEvent::instance()->sendEvent(SDL_SCANCODE_D) && KeyEvent::instance()->sendEvent(SDL_SCANCODE_W);
+//        bool moveBottomLeft     = KeyEvent::instance()->sendEvent(SDL_SCANCODE_A) && KeyEvent::instance()->sendEvent(SDL_SCANCODE_S);
+//        bool moveBottomRight    = KeyEvent::instance()->sendEvent(SDL_SCANCODE_D) && KeyEvent::instance()->sendEvent(SDL_SCANCODE_S);
 
-        motion->speed = 1;
-        if(moveTopLeft || moveTopRight || moveBottomLeft || moveBottomRight)
-        {
-            motion->speed = 1 / 2.0f;
-        }
+//        motion->speed = 1;
+//        if(moveTopLeft || moveTopRight || moveBottomLeft || moveBottomRight)
+//        {
+//            motion->speed = 1 / 2.0f;
+//        }
 
         sprite->frameCount = 1;
-
+        motion->running = 0;
         if(KeyEvent::instance()->sendEvent(SDL_SCANCODE_A))
         {
+            motion->running = 1;
             motion->direction = LEFT;
             pos->x += (motion->speed * LEFT);
             sprite->frameCount = 4;
@@ -147,6 +148,7 @@ void Player::handleKeyEvent()
 
         if(KeyEvent::instance()->sendEvent(SDL_SCANCODE_D))
         {
+            motion->running = 1;
             motion->direction = RIGHT;
             pos->x += (motion->speed * RIGHT);
             sprite->frameCount = 4;
@@ -156,6 +158,7 @@ void Player::handleKeyEvent()
 
         if(KeyEvent::instance()->sendEvent(SDL_SCANCODE_W))
         {
+            motion->running = 1;
             motion->direction = UP;
             pos->y += (motion->speed * UP);
             sprite->frameCount = 4;
@@ -165,6 +168,7 @@ void Player::handleKeyEvent()
 
         if(KeyEvent::instance()->sendEvent(SDL_SCANCODE_S))
         {
+            motion->running = 1;
             motion->direction = DOWN;
             pos->y += (motion->speed * DOWN);
             sprite->frameCount = 4;

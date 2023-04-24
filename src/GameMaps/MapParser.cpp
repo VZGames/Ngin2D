@@ -3,6 +3,7 @@
 #include <algorithm>
 #include "Defines/EnumDef.h"
 #include "Math/math2D.h"
+#include "Utils/Logger/Logger.h"
 
 MapParser *MapParser::s_instance = nullptr;
 
@@ -18,6 +19,11 @@ MapParser::MapParser()
     {
         parseTmx();
     }
+}
+
+MapParser::~MapParser()
+{
+    safeDelete(ptr_doc);
 }
 
 bool MapParser::loadTmx(const char *mapId)
@@ -67,7 +73,7 @@ void MapParser::parseTmx()
 
     }
 
-    printf("Layers: %zd, Tilesets: %zd, Groups: %zd\n", layers.size(), tilesets.size(), groups.size());
+    LOG_INFO("Map Layers: %zd, Tilesets: %zd, Groups: %zd", layers.size(), tilesets.size(), groups.size())
 
 }
 
@@ -78,8 +84,8 @@ void MapParser::parseTileset(TiXmlElement *e)
 
     int firstgid            = std::atoi(e->Attribute("firstgid"));
     const char *name        = e->Attribute("name");
-    float tileWidth           = std::atof(e->Attribute("tilewidth"));
-    float tileHeight          = std::atof(e->Attribute("tileheight"));
+    float tileWidth         = std::atof(e->Attribute("tilewidth"));
+    float tileHeight        = std::atof(e->Attribute("tileheight"));
     int tileCount           = std::atoi(e->Attribute("tilecount"));
     int columns             = std::atoi(e->Attribute("columns"));
     int rows                = tileCount / columns;

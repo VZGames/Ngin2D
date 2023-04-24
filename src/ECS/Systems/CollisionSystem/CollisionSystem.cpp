@@ -65,7 +65,6 @@ void CollisionSystem::update(float dt)
 
             if(collided)
             {
-                LOG_INFO("COLLIDED");
                 pos->x += mtv.x;
                 pos->y += mtv.y;
             }
@@ -99,10 +98,14 @@ bool CollisionSystem::MapCollision(Entity *entity, Vector2DF &mtv)
 {
     auto sprite     = entity->getComponent<SpriteComponent>();
     auto pos        = entity->getComponent<PositionComponent>();
+    auto motion     = entity->getComponent<MotionComponent>();
     auto box        = entity->getComponent<ColliderComponent>();
 
     Point2DF entityI = Point2DF(pos->x + sprite->frameWidth/2,
                                 pos->y + sprite->frameHeight/2);
+
+    // if entity are not moving then do nothing after
+    if(!motion->running) return 0;
 
     for(auto block: CollisionBlocks)
     {
@@ -115,23 +118,16 @@ bool CollisionSystem::MapCollision(Entity *entity, Vector2DF &mtv)
         w = block->size().width;
         h = block->size().height;
 
-        if(box->x - (x + w) > 50.0f
-                || box->y - (y + h) > 50.0f
-                || x - (box->x + box->w) > 50.0f
-                || y - (box->y + box->h) > 50.0f)
+        if((box->x - (x + w) > 1.0f
+                || box->y - (y + h) > 1.0f
+                || x - (box->x + box->w) > 1.0f
+                || y - (box->y + box->h) > 1.0f))
         {
             continue;
         }
 
 
         IShape *shape = block;
-
-        if(shape->type() == TYPE_SHAPE::ELLIPSE)
-        {
-            shape->clearVertices();
-            shape->appendVertices(shape->center());
-            shape->appendVertices(shape->center().nearestPoint(box->vertices()));
-        }
 
         if(box->axes().size() < 1) break;
         if(shape->axes().size() < 1) break;
@@ -148,7 +144,7 @@ bool CollisionSystem::MapCollision(Entity *entity, Vector2DF &mtv)
             if (overlap == 0.0f) // shapes are not overlapping
             {
                 mtv = Vector2DF();
-                goto next;
+                return 0;
             }
             else
             {
@@ -169,7 +165,7 @@ bool CollisionSystem::MapCollision(Entity *entity, Vector2DF &mtv)
             if (overlap == 0.0f) // shapes are not overlapping
             {
                 mtv = Vector2DF();
-                goto next;
+                return 0;
             }
             else
             {
@@ -181,12 +177,6 @@ bool CollisionSystem::MapCollision(Entity *entity, Vector2DF &mtv)
             }
         }
 
-        goto collided;
-
-next:
-        continue;
-
-collided:
         // need to reverse MTV if center offset and overlap are not pointing in the same direction
         bool notPointingInTheSameDirection = mtv.dotProduct((box->center() - shape->center()).toVector(), mtv) < 0;
         if (notPointingInTheSameDirection) { mtv = mtv * -1; }

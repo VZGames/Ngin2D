@@ -10,7 +10,7 @@
 template<class T>
 inline void safeDelete(T *ptr)
 {
-    if(ptr != NULL)
+    if(ptr != nullptr)
     {
         delete ptr;
         ptr = NULL;

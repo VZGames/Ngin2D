@@ -1,6 +1,8 @@
 #ifndef MATRIX2D_H
 #define MATRIX2D_H
 
+#include "Utils/Utils.h"
+
 template<typename T>
 class Matrix2D
 {

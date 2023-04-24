@@ -7,7 +7,15 @@
 
 Slime::Slime()
 {
+    const char* textureId = randomStr(5);
     ptr_entity = EntityManager::instance()->createEntity();
+    ptr_entity->addComponent<ColliderComponent>(32, 32);
+    ptr_entity->addComponent<PositionComponent>(50, 100);
+    ptr_entity->addComponent<SpawnComponent>(Point2DI(50, 100));
+    ptr_entity->addComponent<SpriteComponent>(textureId, "./assets/Characters/slime.png", 32, 32, 4, 200);
+    ptr_entity->addComponent<MotionComponent>(2.0);
+    ptr_entity->addComponent<HealthComponent>(100);
+    ptr_entity->addComponent<TransformComponent>();
 }
 
 Slime::~Slime()
@@ -17,22 +25,11 @@ Slime::~Slime()
 
 void Slime::init()
 {
-    if(ptr_entity != nullptr)
-    {
-        const char* textureId = randomStr(5);
-        ptr_entity->addComponent<ColliderComponent>(32, 32);
-        ptr_entity->addComponent<PositionComponent>();
-        ptr_entity->addComponent<SpawnComponent>(Point2DI(50, 100));
-        ptr_entity->addComponent<SpriteComponent>(textureId, "./assets/Characters/slime.png", 32, 32, 4, 200);
-        ptr_entity->addComponent<MotionComponent>(2.0, Vector2DF(), Vector2DF());
-        ptr_entity->addComponent<HealthComponent>(100);
-        ptr_entity->addComponent<TransformComponent>();
-    }
 }
 
 void Slime::update(float dt)
 {
-    if(hasComponents())
+    if(hasComponents() && ptr_entity != nullptr)
     {
         auto sprite = ptr_entity->getComponent<SpriteComponent>();
         sprite->frameCount = 6;

@@ -6,8 +6,8 @@
     "activeFile": "Map4.tmx",
     "automapping.whileDrawing": false,
     "expandedProjectPaths": [
-        ".",
-        "Characters"
+        "Characters",
+        "."
     ],
     "fileStates": {
         "": {
@@ -88,8 +88,8 @@
         },
         "Map2.tmx": {
             "expandedGroupLayers": [
-                10,
-                2
+                2,
+                10
             ],
             "expandedObjectLayers": [
                 10,

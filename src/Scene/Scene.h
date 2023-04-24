@@ -22,12 +22,7 @@ private:
     Scene();
     ~Scene();
 
-    void loadEnemies();
-    void updateEnemies(float dt);
-
     static Scene *s_instance;
-
-    std::vector<IEntity*> m_enemies;
 };
 }
 
