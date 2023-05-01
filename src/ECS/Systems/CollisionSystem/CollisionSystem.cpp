@@ -59,14 +59,12 @@ void CollisionSystem::update(float dt)
 
             bool collided = false;
 
-            Vector2DF mtv;
-
-            collided = MapCollision(&entity, mtv);
+            collided = MapCollision(&entity);
 
             if(collided)
             {
-                pos->x += mtv.x;
-                pos->y += mtv.y;
+                pos->x += m_collisionManager.mtv().x;
+                pos->y += m_collisionManager.mtv().y;
             }
         }
     }
@@ -94,7 +92,7 @@ void CollisionSystem::render()
     }
 }
 
-bool CollisionSystem::MapCollision(Entity *entity, Vector2DF &mtv)
+bool CollisionSystem::MapCollision(Entity *entity)
 {
     auto sprite     = entity->getComponent<SpriteComponent>();
     auto pos        = entity->getComponent<PositionComponent>();
@@ -119,9 +117,9 @@ bool CollisionSystem::MapCollision(Entity *entity, Vector2DF &mtv)
         h = block->size().height;
 
         if((box->x - (x + w) > 1.0f
-                || box->y - (y + h) > 1.0f
-                || x - (box->x + box->w) > 1.0f
-                || y - (box->y + box->h) > 1.0f))
+            || box->y - (y + h) > 1.0f
+            || x - (box->x + box->w) > 1.0f
+            || y - (box->y + box->h) > 1.0f))
         {
             continue;
         }
@@ -130,57 +128,19 @@ bool CollisionSystem::MapCollision(Entity *entity, Vector2DF &mtv)
         IShape *shape = block;
 
         if(box->axes().size() < 1) break;
-        if(shape->axes().size() < 1) break;
 
-
-        float minOverlap = std::numeric_limits<float>::infinity();
-
-        for (auto &axis: box->axes())
+        if(shape->type() == TYPE_SHAPE::ELLIPSE
+                || box->type() == TYPE_SHAPE::ELLIPSE)
         {
-            Projection2D project1 = box->project(axis);
-            Projection2D project2 = shape->project(axis);
-
-            float overlap = project1.gap(project2);
-            if (overlap == 0.0f) // shapes are not overlapping
-            {
-                mtv = Vector2DF();
-                return 0;
-            }
-            else
-            {
-                if (overlap < minOverlap)
-                {
-                    minOverlap = overlap;
-                    mtv = axis * minOverlap;
-                }
-            }
+            return m_collisionManager.IntersectCurvePolygon((Ellipse*)shape, (Polygon*)box);
+        }
+        else
+        {
+            if(shape->axes().size() < 1) break;
+            return m_collisionManager.IntersectPolygons((Polygon*)box,  (Polygon*)shape);
         }
 
-        for (auto &axis: shape->axes())
-        {
-            Projection2D project1 = box->project(axis);
-            Projection2D project2 = shape->project(axis);
 
-            float overlap = project1.gap(project2);
-            if (overlap == 0.0f) // shapes are not overlapping
-            {
-                mtv = Vector2DF();
-                return 0;
-            }
-            else
-            {
-                if (overlap < minOverlap)
-                {
-                    minOverlap = overlap;
-                    mtv = axis * minOverlap;
-                }
-            }
-        }
-
-        // need to reverse MTV if center offset and overlap are not pointing in the same direction
-        bool notPointingInTheSameDirection = mtv.dotProduct((box->center() - shape->center()).toVector(), mtv) < 0;
-        if (notPointingInTheSameDirection) { mtv = mtv * -1; }
-        return 1;
     }
 
     return 0;

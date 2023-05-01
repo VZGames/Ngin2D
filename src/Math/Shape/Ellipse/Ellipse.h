@@ -10,6 +10,8 @@ public:
     Ellipse(float a, float b);
     Ellipse(float a, float b, float x, float y);
 
+    void findIntersectWithLine(Point2DF B);
+
     // IShape interface
 public:
     virtual bool contain(Point2DF M) override;
@@ -21,6 +23,7 @@ public:
     const float &radiusY() const;
 
 private:
+
     float m_width, m_height;
     float m_a, m_b;
 

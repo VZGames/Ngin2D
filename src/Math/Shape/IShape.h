@@ -41,7 +41,22 @@ public:
         return m_axes;
     }
 
-    inline Projection2D project(Vector2DF axis)
+
+    inline Projection2D projectCircle(Point2DF center, float radius, Vector2DF axis)
+    {
+        Vector2DF p1 = center.toVector() + axis;
+        Vector2DF p2 = center.toVector() - axis;
+
+        float dotProductMin = axis.dotProduct(p1);
+        float dotProductMax = axis.dotProduct(p1);
+        dotProductMin    = min(dotProductMin, dotProductMax);
+        dotProductMax    = max(dotProductMax, dotProductMin);
+
+        return Projection2D(dotProductMin, dotProductMax);
+
+    }
+
+    inline Projection2D projectVertices(Vector2DF axis)
     {
 
         float dotProductMin = std::numeric_limits<float>::infinity();

@@ -3,27 +3,62 @@
 Ellipse::Ellipse(float width, float height): m_width(width), m_height(height)
 {
     m_type = TYPE_SHAPE::ELLIPSE;
-    m_a = width/2;
-    m_b = height/2;
+    m_a = height/2;
+    m_b = width/2;
     m_x = 0.0f;
     m_y = 0.0f;
-    m_center = Point2DF(m_x + m_a, m_y + m_b);
-    m_rect ={m_center.getX() - m_a, m_center.getY() - m_b, m_width, m_height};
+    m_center = Point2DF(m_x + m_b, m_y + m_a);
+    m_rect ={m_center.getX() - m_b, m_center.getY() - m_a, m_width, m_height};
     m_size = SizeF {m_width, m_height};
-    m_position = Point2DF(m_center.getX() - m_a, m_center.getY() - m_b);
+    m_position = Point2DF(m_center.getX() - m_b, m_center.getY() - m_a);
 }
 
 Ellipse::Ellipse(float width, float height, float x, float y): m_width(width), m_height(height)
 {
     m_type = TYPE_SHAPE::ELLIPSE;
-    m_a = width/2;
-    m_b = height/2;
+    m_a = height/2;
+    m_b = width/2;
     m_x = x;
     m_y = y;
-    m_center = Point2DF(m_x + m_a, m_y + m_b);
-    m_rect ={m_center.getX() - m_a, m_center.getY() - m_b, m_width, m_height};
+    m_center = Point2DF(m_x + m_b, m_y + m_a);
+    m_rect ={m_center.getX() - m_b, m_center.getY() - m_a, m_width, m_height};
     m_size = SizeF {m_width, m_height};
-    m_position = Point2DF(m_center.getX() - m_a, m_center.getY() - m_b);
+    m_position = Point2DF(m_center.getX() - m_b, m_center.getY() - m_a);
+}
+
+void Ellipse::findIntersectWithLine(Point2DF closestPoint)
+{
+    float m = std::abs((closestPoint.getY() - m_center.getY()) / (closestPoint.getX() - m_center.getX()));
+    float c = 0;
+    float expressionA = std::pow(m_b, 2) + std::pow(m * m_a, 2);
+    float expressionB = 2 * m * c - 2 * m * m_center.getX() * std::pow(m_a, 2);
+    float expressionC = std::pow(m_center.getX(), 2) * std::pow(m, 2) * std::pow(m_a, 2) + std::pow(m_center.getY(), 2) * std::pow(m_b, 2) - std::pow(m_b, 2) * std::pow(m_a, 2);
+
+    float delta = std::pow(expressionB, 2) - 4 * expressionA * expressionC;
+
+    float x1, x2;
+    if(delta < 0)
+    {
+        return;
+    }
+    else if(delta == 0)
+    {
+        x1 = -1 * (expressionB/2*expressionA);
+        x2 = x1;
+    }
+    else
+    {
+        x1 = (-expressionB + sqrt(delta)) / (2 * expressionA);
+        x2 = (-expressionB - sqrt(delta)) / (2 * expressionA);
+    }
+
+    float y1 = m * x1 + c;
+    float y2 = m * x2 + c;
+
+    m_vertices.push_back(Point2DF(x1, y1));
+    m_vertices.push_back(Point2DF(x2, y2));
+
+    std::cout << Point2DF(x1, y1) << Point2DF(x2, y2);
 }
 
 bool Ellipse::contain(Point2DF M)

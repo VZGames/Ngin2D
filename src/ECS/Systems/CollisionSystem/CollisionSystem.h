@@ -9,6 +9,7 @@
 #include "GameMaps/MapParser.h"
 #include "Math/Shape/IShape.h"
 #include "Math/Shape/Shapes.h"
+#include "CollisionManager.h"
 
 namespace ngin2D {
 class CollisionSystem: public ISystem
@@ -23,10 +24,11 @@ public:
     virtual void render() override;
 
 private:
-    bool MapCollision(Entity *entity, Vector2DF &mtv);
+    bool MapCollision(Entity *entity);
     bool OtherEntitiesCollision(Entity *entity);
     bool testCollision();
 
+    CollisionManager m_collisionManager;
     std::vector<IShape*> CollisionBlocks;
 };
 }

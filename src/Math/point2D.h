@@ -128,7 +128,7 @@ public:
         return Vector2D<T>(x, y);
     }
 
-    Point2D<T> nearestPoint(std::vector<Point2D<T>> points)
+    Point2D<T> closestPoint(std::vector<Point2D<T>> points)
     {
         std::vector<float> dists;
         for(Point2D<T> &point: points)
