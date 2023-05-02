@@ -18,6 +18,25 @@ bool CollisionManager::IntersectCurvePolygon(Ellipse *A, Polygon *B)
 
     A->findIntersectWithLine(closestPoint);
 
+    for (auto &axis: A->axes())
+    {
+        Projection2D projectA = A->projectVertices(axis);
+        Projection2D projectB = B->projectVertices(axis);
+
+        float gap = projectA.gap(projectB);
+        if (gap == 0.0f) // shapes are not overlapping
+        {
+            m_mtv = Vector2DF();
+            return 0;
+        }
+        else
+        {
+        }
+    }
+
+
+    LOG_INFO("COLLIDED");
+
     return 0;
 }
 

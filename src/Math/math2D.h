@@ -5,6 +5,7 @@
 #include <cmath>
 #include <cstdlib>
 #include <iomanip>
+#include <Box2D/box2d.h>
 #include "point2D.h"
 #include "matrix2D.h"
 #include "vector2d.h"

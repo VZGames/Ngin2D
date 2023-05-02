@@ -4,7 +4,7 @@ if(WIN32)
     set(LIBRARY_DIR "${CMAKE_SOURCE_DIR}/libs")
 
     # use bundled version to save ourselves a lot of trouble
-    set(LINKER_LIBRARY "-lmingw32 -lSDL2main -lSDL2 -lSDL2_image")
+    set(LINKER_LIBRARY "-lmingw32 -lSDL2main -lSDL2 -lSDL2_image -lbox2d")
 
     # copy dynamic libraries
     file(COPY
