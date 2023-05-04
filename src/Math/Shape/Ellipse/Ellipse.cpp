@@ -29,21 +29,12 @@ Ellipse::Ellipse(float width, float height, float x, float y): m_width(width), m
 void Ellipse::findIntersectWithLine(Point2DF closestPoint)
 {
     m_vertices.clear();
-    m_vertices.push_back(m_center);
-
-    float minY = min(closestPoint.getY(), m_center.getY());
-    float maxY = max(closestPoint.getY(), m_center.getY());
-    float minX = min(closestPoint.getX(), m_center.getX());
-    float maxX = max(closestPoint.getX(), m_center.getX());
 
     float m = (closestPoint.getY() - m_center.getY()) / (closestPoint.getX() - m_center.getX());
     float c = m_center.getY() - m * m_center.getX();
     float A = std::pow(m_b, 2) + std::pow(m * m_a, 2);
-    float B = -2 * (std::pow(m_b, 2) * m_center.getX() + 2 * std::pow(m_a, 2) * m * m_center.getY() - std::pow(m_a, 2) * m * c);
-    float C = std::pow(m_b * m_center.getX(), 2)
-            + std::pow(m_a * c, 2) * (m + 1)
-            - 2 * std::pow(m_a, 2) * c * m_center.getY()
-            + std::pow(m_a * m_center.getY(), 2) - std::pow(m_a * m_b, 2);
+    float B = -2 * std::pow(m_b, 2) * m_center.getX() + 2 * std::pow(m_a, 2) * c * m - 2 * std::pow(m_a, 2) * m * m_center.getY();
+    float C = std::pow(m_b * m_center.getX(),2) + std::pow(m_a * c, 2) - 2 * std::pow(m_a, 2) * c * m_center.getY() + std::pow(m_a * m_center.getY(), 2) - std::pow(m_a * m_b, 2);
 
     float delta = std::pow(B, 2) - 4 * A * C;
 
@@ -77,7 +68,6 @@ void Ellipse::findIntersectWithLine(Point2DF closestPoint)
     {
         m_vertices.push_back(Point2DF(x1, y1));
     }
-    std::cout << m_vertices.back();
 }
 
 bool Ellipse::contain(Point2DF M)

@@ -18,8 +18,8 @@ public:
     bool loadTexture(const char * textureID, const char *filePath);
     void draw(const char * textureID, Point2DI pos, int width, int height, SDL_RendererFlip flip = SDL_FLIP_NONE);
     void draw(const char * textureID, Point2DF pos, int width, int height, SDL_RendererFlip flip = SDL_FLIP_NONE);
-    void drawTile(const char * textureID,int tileWidth, int tileHeight, Point2DI pos, int row, int col, SDL_RendererFlip flip = SDL_FLIP_NONE);
-    void drawTile(const char * textureID,int tileWidth, int tileHeight, Point2DF pos, int row, int col, SDL_RendererFlip flip = SDL_FLIP_NONE);
+    void drawTile(const char * textureID,int tileWidth, int tileHeight, Point2DI pos, int row, int col, double rotation = 0.0f, SDL_RendererFlip flip = SDL_FLIP_NONE);
+    void drawTile(const char * textureID,int tileWidth, int tileHeight, Point2DF pos, int row, int col, double rotation = 0.0f, SDL_RendererFlip flip = SDL_FLIP_NONE);
     void drawFrame(const char * textureID, Point2DI pos, int width, int height, int row, int col, SDL_RendererFlip flip = SDL_FLIP_NONE, float p_Angle = 0);
     void drawFrame(const char * textureID, Point2DF pos, int width, int height, int row, int col, SDL_RendererFlip flip = SDL_FLIP_NONE, float p_Angle = 0);
 

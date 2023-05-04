@@ -56,7 +56,7 @@ void TextureManager::draw(const char * textureID, Point2DF pos, int width, int h
     SDL_RenderCopyF(Game::instance()->getRenderer(), textureDict[textureID], &srcRect, &destRect);
 }
 
-void TextureManager::drawTile(const char * textureID, int tileWidth, int tileHeight, Point2DI pos, int row, int col, SDL_RendererFlip flip)
+void TextureManager::drawTile(const char * textureID, int tileWidth, int tileHeight, Point2DI pos, int row, int col, double rotation, SDL_RendererFlip flip)
 {
     int frameX = tileWidth  *col;
     int frameY = tileHeight  *row;
@@ -71,10 +71,10 @@ void TextureManager::drawTile(const char * textureID, int tileWidth, int tileHei
         tileHeight
     };
 
-    SDL_RenderCopyEx(Game::instance()->getRenderer(), textureDict[textureID], &srcRect, &destRect, 0, NULL, flip);
+    SDL_RenderCopyEx(Game::instance()->getRenderer(), textureDict[textureID], &srcRect, &destRect, rotation, NULL, flip);
 }
 
-void TextureManager::drawTile(const char * textureID, int tileWidth, int tileHeight, Point2DF pos, int row, int col, SDL_RendererFlip flip)
+void TextureManager::drawTile(const char * textureID, int tileWidth, int tileHeight, Point2DF pos, int row, int col, double rotation, SDL_RendererFlip flip)
 {
     int frameX = tileWidth  *col;
     int frameY = tileHeight  *row;
@@ -89,7 +89,7 @@ void TextureManager::drawTile(const char * textureID, int tileWidth, int tileHei
         (float)tileHeight
     };
 
-    SDL_RenderCopyExF(Game::instance()->getRenderer(), textureDict[textureID], &srcRect, &destRect, 0, NULL, flip);
+    SDL_RenderCopyExF(Game::instance()->getRenderer(), textureDict[textureID], &srcRect, &destRect, rotation, NULL, flip);
 }
 
 void TextureManager::drawFrame(const char * textureID, Point2DI pos, int width, int height, int row, int col, SDL_RendererFlip flip, float angle)

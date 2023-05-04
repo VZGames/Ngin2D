@@ -3,8 +3,8 @@
 #include "GameMaps/GameMaps.h"
 #include "Graphics/Graphics.h"
 #include "Event/Events.h"
+#include "World/World.h"
 #include "Scene/Scene.h"
-
 
 int g_width, g_height;
 namespace ngin2D {
@@ -75,6 +75,9 @@ bool Game::InitGame(const char *title)
     // [3] Select the color for drawing.
     SDL_RenderSetScale(ptr_renderer, ZOOM_FACTOR, ZOOM_FACTOR);
     SDL_SetRenderDrawColor(ptr_renderer, 255, 255, 255, 255);
+
+    b2Vec2 gravity(0.0f, -10.0f);
+    World::instance(gravity);
 
     Scene::instance()->init();
 

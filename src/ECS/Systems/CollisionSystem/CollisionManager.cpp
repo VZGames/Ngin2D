@@ -16,7 +16,9 @@ bool CollisionManager::IntersectCurvePolygon(Ellipse *A, Polygon *B)
 
     Point2DF closestPoint = A->center().closestPoint(B->vertices());
 
+
     A->findIntersectWithLine(closestPoint);
+    A->appendVertices(A->center());
 
     for (auto &axis: A->axes())
     {
@@ -31,13 +33,20 @@ bool CollisionManager::IntersectCurvePolygon(Ellipse *A, Polygon *B)
         }
         else
         {
+            if (gap < m_minGap)
+            {
+                m_minGap = gap;
+                m_mtv = axis * m_minGap;
+            }
         }
     }
 
 
     LOG_INFO("COLLIDED");
-
-    return 0;
+    // need to reverse MTV if center offset and overlap are not pointing in the same direction
+    bool notPointingInTheSameDirection = Vector2DF::dotProduct((A->center() - B->center()).toVector(), m_mtv) < 0;
+    if (notPointingInTheSameDirection) { m_mtv = m_mtv * -1; }
+    return 1;
 }
 
 bool CollisionManager::IntersectPolygons(Polygon* A, Polygon* B)

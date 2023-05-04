@@ -3,15 +3,15 @@
         "height": 4300,
         "width": 2
     },
-    "activeFile": "Map4.tmx",
+    "activeFile": "Map2.tmx",
     "automapping.whileDrawing": false,
     "expandedProjectPaths": [
-        ".",
-        "Characters"
+        "Characters",
+        "."
     ],
     "fileStates": {
         "": {
-            "scaleInDock": 1,
+            "scaleInDock": 3,
             "scaleInEditor": 1
         },
         ":/automap-tiles.tsx": {
@@ -54,14 +54,14 @@
         },
         "Map1.tmx": {
             "expandedGroupLayers": [
-                4,
+                3,
                 7,
-                3
+                4
             ],
             "scale": 0.75,
             "selectedLayer": 6,
             "viewCenter": {
-                "x": 332.6666666666667,
+                "x": 333.33333333333326,
                 "y": 230.66666666666663
             }
         },
@@ -89,18 +89,22 @@
         "Map2.tmx": {
             "expandedGroupLayers": [
                 2,
+                6,
                 10
             ],
             "expandedObjectLayers": [
-                11,
-                10
+                10,
+                11
             ],
-            "scale": 4,
-            "selectedLayer": 7,
+            "scale": 5.5,
+            "selectedLayer": 9,
             "viewCenter": {
-                "x": 1599.875,
-                "y": 1599.875
+                "x": 337.6363636363636,
+                "y": 278.1818181818182
             }
+        },
+        "Map2.tmx#Basic_Grass_Biom_things_1": {
+            "scaleInDock": 2
         },
         "Map2.tmx#Grass": {
             "scaleInDock": 1,
@@ -130,7 +134,7 @@
             "scale": 0.0625,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 5768,
+                "x": 5776,
                 "y": 6048
             }
         },
@@ -150,8 +154,8 @@
             "scale": 1.5,
             "selectedLayer": 2,
             "viewCenter": {
-                "x": 185.33333333333331,
-                "y": 72.66666666666666
+                "x": 196.66666666666663,
+                "y": 200.66666666666666
             }
         },
         "Map4.tmx#Grass": {
@@ -189,7 +193,7 @@
             "scaleInEditor": 1
         }
     },
-    "last.imagePath": "D:/Projects/O/SDL2_project/Ngin2D/assets/Tilesets/ground_tiles/old_tiles",
+    "last.imagePath": "D:/Projects/O/SDL2_project/Ngin2D/assets/Objects",
     "map.fixedSize": true,
     "map.height": 1800,
     "map.lastUsedFormat": "tmx",
@@ -200,15 +204,17 @@
     "openFiles": [
         "Map4.tmx",
         "Map2.tmx",
-        "Map5.tmx"
+        "Map5.tmx",
+        "Map3.tmx",
+        "Map1.tmx"
     ],
     "project": "MapProject.tiled-project",
     "recentFiles": [
-        "Map5.tmx",
-        "Map2.tmx",
         "Map4.tmx",
         "Map1.tmx",
         "Map3.tmx",
+        "Map5.tmx",
+        "Map2.tmx",
         "Characters/BasicCharakterSpritesheet.tsx",
         "D:/Projects/O/SDL2_project/build-XYZ-Desktop_MinGW_64_bit-Debug/assets/Map1.tmx",
         "Grass.tsx",

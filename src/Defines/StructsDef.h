@@ -31,6 +31,7 @@ typedef struct Object
     int id;
     float x, y;
     float width, height;
+    double rotation;
     TYPE_SHAPE shape;
     std::vector<Point2DF> vertices;
 } Object;

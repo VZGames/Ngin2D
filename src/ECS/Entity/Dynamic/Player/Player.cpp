@@ -29,7 +29,7 @@ void Player::init()
         ptr_entity->addComponent<CameraComponent>(1);
         ptr_entity->addComponent<ColliderComponent>(16, 32);
         ptr_entity->addComponent<PositionComponent>();
-        ptr_entity->addComponent<SpawnComponent>(Point2DI(200, 176));
+        ptr_entity->addComponent<SpawnComponent>(Point2DI(368, 176));
         ptr_entity->addComponent<SpriteComponent>("Player", PLAYER_MOTION, 32, 32, 2, 200);
         ptr_entity->addComponent<MotionComponent>(0.6);
         ptr_entity->addComponent<HealthComponent>(100);

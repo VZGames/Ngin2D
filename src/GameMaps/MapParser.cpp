@@ -15,7 +15,7 @@ MapParser *MapParser::instance()
 MapParser::MapParser()
 {
     ptr_doc = new TiXmlDocument();
-    if(loadTmx("4"))
+    if(loadTmx("2"))
     {
         parseTmx();
     }
@@ -184,7 +184,8 @@ void MapParser::parseObjectLayer(TiXmlElement *e)
         float y             = std::atof(objEle->Attribute("y"));
         float width         = std::atof(objEle->Attribute("width"));
         float height        = std::atof(objEle->Attribute("height"));
-        Object obj = {id, x, y, width, height};
+        double rotation     = std::atof(objEle->Attribute("rotation"));
+        Object obj = {id, x, y, width, height, rotation};
         TYPE_SHAPE shape   = TYPE_SHAPE::RECTANGLE;
         if(objEle->FirstChildElement() != NULL)
         {
