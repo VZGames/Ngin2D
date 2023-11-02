@@ -5,6 +5,7 @@
 #include "Alias.h"
 
 BEGIN_NAMESPACE(GameNgin)
+class CWorld;
 class CNgin
 {
 private:
@@ -21,7 +22,7 @@ public:
     static CNgin *instance();
     static bool running();
     static void setRunning(bool);
-    bool initialize(Title, Width, Height);
+    bool initialize(Title, Width, Height, CWorld*);
     void loop();
     void clean();
     void quit();

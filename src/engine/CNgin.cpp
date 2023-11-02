@@ -2,6 +2,7 @@
 #include "Logger/LoggerDefines.h"
 #include "CKeyEvent.h"
 #include "CSceneManager.h"
+#include "CWorld.h"
 
 BEGIN_NAMESPACE(GameNgin)
 CNgin *CNgin::s_instance = nullptr;
@@ -26,7 +27,7 @@ void CNgin::setRunning(bool running)
     s_running = running;
 }
 
-bool CNgin::initialize(Title title, Width width, Height height)
+bool CNgin::initialize(Title title, Width width, Height height, CWorld *world)
 {
     MORGAN_DEBUG("Game Init");
     if (SDL_Init(SDL_INIT_EVERYTHING) != 0)

@@ -2,12 +2,19 @@
 #define CWORLD_H
 
 #include "CommonDefine.h"
-
 BEGIN_NAMESPACE(GameNgin)
+class CEntity;
+class AScene;
 class CWorld
 {
-public:
+private:
     CWorld();
+    static CWorld *s_instance;
+public:
+    static CWorld *instance();
+    
+    void registerEntity(CEntity*);
+    void registerScene(AScene*);
 };
 END_NAMESPACE
 
