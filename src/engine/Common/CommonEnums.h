@@ -64,4 +64,10 @@ enum E_POPUP_PRIORITY_LEVEL
     HIGH
 };
 
+enum E_LOAD_SCENE_MODE
+{
+    SINGLE,
+    ADDITIVE
+};
+
 #endif // COMMONENUMS_H

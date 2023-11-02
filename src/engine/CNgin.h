@@ -17,7 +17,6 @@ private:
     int          m_win_width;
     int          m_win_height;
 
-
 public:
     static CNgin *instance();
     static bool running();

@@ -1,7 +1,6 @@
 TEMPLATE = app
-CONFIG += console c++17
-CONFIG -= app_bundle
-CONFIG -= qt
+CONFIG += c++11 console
+CONFIG -= app_bundle qt
 
 include(src/engine/engine.pri)
 include(src/utils/utils.pri)

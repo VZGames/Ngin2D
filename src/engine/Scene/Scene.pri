@@ -1,5 +1,7 @@
 HEADERS += \
-    $$PWD/AScene.h
+    $$PWD/AScene.h \
+    $$PWD/CSceneManager.h
 
 SOURCES += \
-    $$PWD/AScene.cpp
+    $$PWD/AScene.cpp \
+    $$PWD/CSceneManager.cpp

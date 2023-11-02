@@ -8,6 +8,9 @@
 #include <typeinfo>
 #include <assert.h>
 #include <cstring>
+#include <map>
+#include <algorithm>
+
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_events.h>
 #include <SDL2/SDL_image.h>

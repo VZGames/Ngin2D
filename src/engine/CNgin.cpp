@@ -1,6 +1,7 @@
 #include "CNgin.h"
 #include "Logger/LoggerDefines.h"
 #include "CKeyEvent.h"
+#include "CSceneManager.h"
 
 BEGIN_NAMESPACE(GameNgin)
 CNgin *CNgin::s_instance = nullptr;
@@ -27,6 +28,7 @@ void CNgin::setRunning(bool running)
 
 bool CNgin::initialize(Title title, Width width, Height height)
 {
+    MORGAN_DEBUG("Game Init");
     if (SDL_Init(SDL_INIT_EVERYTHING) != 0)
     {
         MORGAN_DEBUG("Unable to initialize SDL: %s", SDL_GetError());
@@ -41,8 +43,9 @@ bool CNgin::initialize(Title title, Width width, Height height)
     }
 
     // [1] init SDL and create the Game Window
-     SDL_WindowFlags window_flags = (SDL_WindowFlags)(SDL_WINDOW_RESIZABLE | SDL_WINDOW_ALLOW_HIGHDPI);
-    m_window = SDL_CreateWindow(title, SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, width, height, window_flags);
+    SDL_WindowFlags window_flags = (SDL_WindowFlags)(SDL_WINDOW_RESIZABLE | SDL_WINDOW_ALLOW_HIGHDPI);
+    UNUSED(window_flags)
+    m_window = SDL_CreateWindow(title, SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, width, height, 0);
 
 
     if (m_window == nullptr)
@@ -139,7 +142,7 @@ void CNgin::render()
 
 void CNgin::update(float dt)
 {
-
+    CSceneManager::instance()->update(dt);
 }
 void CNgin::handle_events()
 {
