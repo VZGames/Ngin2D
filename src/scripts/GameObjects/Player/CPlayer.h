@@ -3,7 +3,7 @@
 
 #include "CommonDefine.h"
 #include "Entity/CEntity.h"
-#include "enums.h"
+#include "Common/enums.h"
 
 BEGIN_NAMESPACE(GameScript)
 class CPlayer: public GameNgin::CEntity

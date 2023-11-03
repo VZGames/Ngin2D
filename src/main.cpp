@@ -3,6 +3,11 @@
 #include "CWorld.h"
 #include "LoggerDefines.h"
 
+#include "SceneObjects/CGameScene.h"
+#include "GameObjects/Player/CPlayer.h"
+#include "GameObjects/Enemy/CEnemy.h"
+
+
 using namespace GameNgin;
 
 int main(int argc, char *argv[])
@@ -10,9 +15,27 @@ int main(int argc, char *argv[])
     UNUSED(argc)
     UNUSED(argv)
 
+    GameScript::CGameScene gameScene;
+
+    GameScript::CPlayer player;
+    GameScript::CEnemy  enemy;
+
+    std::vector<CEntity*> entities
+        {
+            &player,
+            &enemy
+        };
+
+    std::vector<AScene*> scenes
+        {
+            &gameScene,
+        };
+
     CWorld *world = GameNgin::CWorld::instance();
-    world->registerEntity(nullptr);
-    world->registerScene(nullptr);
+
+
+    world->registerEntities(entities);
+    world->registerScenes(scenes);
 
     if(GameNgin::CNgin::instance()->initialize("Game Framework", 980, 620, world))
     {

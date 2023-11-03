@@ -11,5 +11,4 @@ SOURCES += \
 
 
 INCLUDEPATH += \
-    $$PWD/Common \
     $$PWD

@@ -10,7 +10,7 @@ class CECSystemManager
 private:
     CECSystemManager();
     static CECSystemManager                   *s_instance;
-    std::vector<IECSystem*>                 m_systems;
+    std::vector<IECSystem*>                   m_systems;
 
 public:
     static CECSystemManager *instance();

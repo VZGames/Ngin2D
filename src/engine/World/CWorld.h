@@ -8,13 +8,22 @@ class AScene;
 class CWorld
 {
 private:
-    CWorld();
+    explicit CWorld();
     static CWorld *s_instance;
+
+    std::vector<CEntity*> m_entities;
+    std::vector<AScene*>  m_scenes;
+
 public:
     static CWorld *instance();
     
-    void registerEntity(CEntity*);
-    void registerScene(AScene*);
+    void registerEntities(std::vector<CEntity*>&);
+    void registerScenes(std::vector<AScene*>&);
+
+
+    void init();
+    void update(float);
+    void render();
 };
 END_NAMESPACE
 

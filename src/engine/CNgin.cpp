@@ -46,8 +46,9 @@ bool CNgin::initialize(Title title, Width width, Height height, CWorld *world)
     // [1] init SDL and create the Game Window
     SDL_WindowFlags window_flags = (SDL_WindowFlags)(SDL_WINDOW_RESIZABLE | SDL_WINDOW_ALLOW_HIGHDPI);
     UNUSED(window_flags)
-    m_window = SDL_CreateWindow(title, SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, width, height, 0);
 
+    m_window = SDL_CreateWindow(title, SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, width, height, 0);
+    m_world  = world;
 
     if (m_window == nullptr)
     {
@@ -55,6 +56,17 @@ bool CNgin::initialize(Title title, Width width, Height height, CWorld *world)
         MORGAN_DEBUG("Could not create window: %s", SDL_GetError());
 
         return 0;
+    }
+
+    if(m_world == nullptr)
+    {
+        MORGAN_DEBUG("Could not create World");
+
+        return 0;
+    }
+    else
+    {
+        m_world->init();
     }
 
 //    SDL_MaximizeWindow(m_window);
@@ -137,13 +149,13 @@ void CNgin::quit()
 void CNgin::render()
 {
 //    SDL_RenderClear(m_renderer);
-
+    m_world->render();
 //    SDL_RenderPresent(m_renderer);
 }
 
 void CNgin::update(float dt)
 {
-    CSceneManager::instance()->update(dt);
+    m_world->update(dt);
 }
 void CNgin::handle_events()
 {

@@ -14,6 +14,7 @@ private:
     static CNgin *s_instance;
     SDL_Renderer *m_renderer;
     SDL_Window   *m_window;
+    CWorld       *m_world;
 
     int          m_win_width;
     int          m_win_height;

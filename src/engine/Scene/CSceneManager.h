@@ -6,6 +6,7 @@
 
 BEGIN_NAMESPACE(GameNgin)
 class AScene;
+class CEntity;
 class CSceneManager
 {
 private:
@@ -20,7 +21,7 @@ public:
     void loadScene(const char*, E_LOAD_SCENE_MODE);
 
     void init();
-    void update(float);
+    void update(std::vector<CEntity*> &, float);
     void render();
 };
 END_NAMESPACE

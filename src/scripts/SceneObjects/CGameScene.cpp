@@ -13,14 +13,18 @@ void CGameScene::init()
 
 }
 
-void CGameScene::update(float dt)
+void CGameScene::update(std::vector<GameNgin::CEntity*> &entities, float dt)
 {
-    MORGAN_DEBUG("XXXXXXXXXXXXXXXXX %f", dt)
+    std::vector<GameNgin::CEntity*>::iterator it = entities.begin();
+    while (it != entities.end())
+    {
+
+        ++it;
+    }
 }
 
 void CGameScene::render()
 {
-
 }
 END_NAMESPACE
 

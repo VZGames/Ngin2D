@@ -1,4 +1,6 @@
 #include "CWorld.h"
+#include "Scene/CSceneManager.h"
+#include "Systems/CECSystemManager.h"
 
 BEGIN_NAMESPACE(GameNgin)
 CWorld* CWorld::s_instance = nullptr;
@@ -12,13 +14,39 @@ CWorld* CWorld::instance()
     return s_instance = (s_instance == nullptr)? new CWorld():s_instance;
 }
 
-void CWorld::registerEntity(CEntity*entity)
+void CWorld::registerEntities(std::vector<CEntity*> &entities)
 {
-    
+    std::vector<CEntity*>::iterator it = entities.begin();
+    while (it != entities.end())
+    {
+        m_entities.push_back(*it);
+        ++it;
+    }
 }
 
-void CWorld::registerScene(AScene*scene)
+void CWorld::registerScenes(std::vector<AScene*> &scenes)
 {
-    
+    std::vector<AScene*>::iterator it = scenes.begin();
+    while (it != scenes.end())
+    {
+        m_scenes.push_back(*it);
+        ++it;
+    }
+}
+
+void CWorld::init()
+{
+    CSceneManager::instance()->init();
+}
+
+void CWorld::update(float dt)
+{
+    CSceneManager::instance()->update(m_entities, dt);
+}
+
+void CWorld::render()
+{
+    CSceneManager::instance()->render();
 }
 END_NAMESPACE
+

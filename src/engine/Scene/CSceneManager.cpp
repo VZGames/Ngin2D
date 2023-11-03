@@ -38,11 +38,11 @@ void CSceneManager::init()
     }
 }
 
-void CSceneManager::update(float dt)
+void CSceneManager::update(std::vector<CEntity*> &entities, float dt)
 {
     for(std::pair<const char*, AScene*> scene: m_scenes)
     {
-        scene.second->update(dt);
+        scene.second->update(entities, dt);
     }
 }
 
