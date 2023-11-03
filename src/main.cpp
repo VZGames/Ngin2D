@@ -2,7 +2,6 @@
 #include "CNgin.h"
 #include "CWorld.h"
 #include "LoggerDefines.h"
-
 #include "SceneObjects/CGameScene.h"
 #include "GameObjects/Player/CPlayer.h"
 #include "GameObjects/Enemy/CEnemy.h"
@@ -15,6 +14,7 @@ int main(int argc, char *argv[])
     UNUSED(argc)
     UNUSED(argv)
 
+    // gamescript
     GameScript::CGameScene gameScene;
 
     GameScript::CPlayer player;

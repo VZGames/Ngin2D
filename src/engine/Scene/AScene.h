@@ -8,9 +8,9 @@ BEGIN_NAMESPACE(GameNgin)
 class AScene
 {
 public:
-    virtual void init() = 0;
-    virtual void update(std::vector<GameNgin::CEntity*> &entities, float dt) = 0;
-    virtual void render() = 0;
+    virtual void init();
+    virtual void update(std::vector<GameNgin::CEntity*> &entities, float dt);
+    virtual void render();
 };
 END_NAMESPACE
 

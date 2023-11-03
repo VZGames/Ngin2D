@@ -11,7 +11,6 @@ public:
     CGameScene();
 
     virtual void init() override;
-    virtual void update(std::vector<GameNgin::CEntity*> &entities, float dt) override;
     virtual void render() override;
 };
 END_NAMESPACE

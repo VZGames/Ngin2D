@@ -2,9 +2,14 @@
 #define CECSYSTEMMANAGER_H
 
 #include "CommonDefine.h"
-#include "Systems/IECSystem.h"
+#include "CollisionSystem/CCollisionSystem.h"
+#include "MovementSystem/CMovementSystem.h"
+#include "RenderSystem/CRenderSystem.h"
 
 BEGIN_NAMESPACE(GameNgin)
+class CEntity;
+class IECSystem;
+
 class CECSystemManager
 {
 private:
@@ -12,9 +17,14 @@ private:
     static CECSystemManager                   *s_instance;
     std::vector<IECSystem*>                   m_systems;
 
+    CCollisionSystem                          m_collision_system;
+    CMovementSystem                            m_movement_system;
+    CRenderSystem                              m_render_system;
 public:
     static CECSystemManager *instance();
 
+    void init();
+    void update(std::vector<CEntity*> &entities, float dt);
 };
 END_NAMESPACE
 

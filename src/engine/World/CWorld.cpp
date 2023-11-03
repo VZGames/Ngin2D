@@ -1,6 +1,6 @@
 #include "CWorld.h"
+#include "CECSystemManager.h"
 #include "Scene/CSceneManager.h"
-#include "Systems/CECSystemManager.h"
 
 BEGIN_NAMESPACE(GameNgin)
 CWorld* CWorld::s_instance = nullptr;
@@ -36,6 +36,7 @@ void CWorld::registerScenes(std::vector<AScene*> &scenes)
 
 void CWorld::init()
 {
+    CECSystemManager::instance()->init();
     CSceneManager::instance()->init();
 }
 

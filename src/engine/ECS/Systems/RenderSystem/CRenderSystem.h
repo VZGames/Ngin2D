@@ -13,6 +13,8 @@ public:
     //    Implement IECSystem Interfaces
 public:
     virtual void update(float dt) override;
+    virtual void update(std::vector<CEntity*> &entities, float dt) override;
+
 };
 END_NAMESPACE
 
