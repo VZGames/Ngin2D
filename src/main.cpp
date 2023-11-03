@@ -19,11 +19,15 @@ int main(int argc, char *argv[])
 
     GameScript::CPlayer player;
     GameScript::CEnemy  enemy;
+    GameScript::CEnemy  enemy2;
+    GameScript::CEnemy  enemy3;
 
     std::vector<CEntity*> entities
         {
             &player,
-            &enemy
+            &enemy,
+            &enemy2,
+            &enemy3
         };
 
     std::vector<AScene*> scenes
@@ -32,13 +36,10 @@ int main(int argc, char *argv[])
         };
 
     CWorld *world = GameNgin::CWorld::instance();
-
-
-    world->registerEntities(entities);
-    world->registerScenes(scenes);
-
     if(GameNgin::CNgin::instance()->initialize("Game Framework", 980, 620, world))
     {
+        world->registerEntities(entities);
+        world->registerScenes(scenes);
         GameNgin::CNgin::instance()->loop();
         GameNgin::CNgin::instance()->clean();
         GameNgin::CNgin::instance()->quit();
