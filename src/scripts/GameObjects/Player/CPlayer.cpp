@@ -1,18 +1,22 @@
 #include "CPlayer.h"
 #include "Entity/CEntityManager.h"
-#include "Component/ComponentDef/SSpriteComponent.h"
-#include "Component/ComponentDef/SHealthComponent.h"
-#include "Component/ComponentDef/SPositionComponent.h"
-#include "Component/ComponentDef/SCameraComponent.h"
+#include "ComponentDef/SSpriteComponent.h"
+#include "ComponentDef/SHealthComponent.h"
+#include "ComponentDef/SPositionComponent.h"
+#include "ComponentDef/SCameraComponent.h"
+#include "ComponentDef/SMotionComponent.h"
+#include "ComponentDef/SKeyInputComponent.h"
 
-BEGIN_NAMESPACE(GameScript)
+BEGIN_NAMESPACE(Script)
 CPlayer::CPlayer()
 {
-    GameNgin::CEntityManager::instance()->createEntity(this);
-    this->addComponent<GameNgin::SPositionComponent>(200, 200)
-        ->addComponent<GameNgin::SHealthComponent>(100)
-        ->addComponent<GameNgin::SSpriteComponent>("Player", "./debug/assets/Characters/BasicCharakterSpritesheet.png", 48, 48, 2, 200)
-        ->addComponent<GameNgin::SCameraComponent>();
+    Ngin::CEntityManager::instance()->createEntity(this);
+    this->addComponent<Ngin::SPositionComponent>(200, 200)
+        ->addComponent<Ngin::SHealthComponent>(100)
+        ->addComponent<Ngin::SSpriteComponent>("Player", "./debug/assets/Characters/BasicCharakterSpritesheet.png", 48, 48, 2, 200)
+        ->addComponent<Ngin::SCameraComponent>()
+        ->addComponent<Ngin::SMotionComponent>(1)
+        ->addComponent<Ngin::SKeyInputComponent>();
 }
 
 void CPlayer::idle()

@@ -1,7 +1,7 @@
 #include "CEntityManager.h"
 #include "LoggerDefines.h"
 
-BEGIN_NAMESPACE(GameNgin)
+BEGIN_NAMESPACE(Ngin)
 CEntityManager *CEntityManager::s_instance = nullptr;
 CEntityManager::CEntityManager()
 {

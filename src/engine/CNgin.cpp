@@ -4,7 +4,7 @@
 //#include "CSceneManager.h"
 #include "CWorld.h"
 
-BEGIN_NAMESPACE(GameNgin)
+BEGIN_NAMESPACE(Ngin)
 CNgin *CNgin::s_instance = nullptr;
 SDL_Renderer  *CNgin::s_renderer = nullptr;
 bool  CNgin::s_running = false;

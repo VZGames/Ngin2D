@@ -4,7 +4,7 @@
 #include "CommonDefine.h"
 #include "CommonEnums.h"
 
-BEGIN_NAMESPACE(GameNgin)
+BEGIN_NAMESPACE(Ngin)
 class AScene;
 class CEntity;
 class CSceneManager

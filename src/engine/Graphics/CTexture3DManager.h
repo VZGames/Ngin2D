@@ -4,7 +4,7 @@
 #include "CommonDefine.h"
 #include "ITextureManager.h"
 
-BEGIN_NAMESPACE(GameNgin)
+BEGIN_NAMESPACE(Ngin)
 class CTexture3DManager: public ITextureManager
 {
 public:

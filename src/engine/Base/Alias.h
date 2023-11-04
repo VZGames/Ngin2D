@@ -6,7 +6,7 @@
 
 #include "CommonDefine.h"
 
-BEGIN_NAMESPACE(GameNgin)
+BEGIN_NAMESPACE(Ngin)
 
 using EntityID      = uint32_t;
 using ComponentID   = uint32_t;

@@ -6,7 +6,7 @@
 #include "MovementSystem/CMovementSystem.h"
 #include "RenderSystem/CRenderSystem.h"
 
-BEGIN_NAMESPACE(GameNgin)
+BEGIN_NAMESPACE(Ngin)
 class CEntity;
 class AECSystem;
 

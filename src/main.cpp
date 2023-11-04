@@ -8,21 +8,20 @@
 #include "GameObjects/Player/CPlayer.h"
 #include "GameObjects/Enemy/CEnemy.h"
 
-
-using namespace GameNgin;
+using namespace Ngin;
 
 int main(int argc, char *argv[])
 {
     UNUSED(argc)
     UNUSED(argv)
 
-    // gamescript
-    GameScript::CGameScene gameScene;
-    GameScript::CSettingScene settingScene;
-    GameScript::CPlayer player;
-    GameScript::CEnemy  enemy;
-    GameScript::CEnemy  enemy2;
-    GameScript::CEnemy  enemy3;
+    // Script
+    Script::CGameScene gameScene;
+    Script::CSettingScene settingScene;
+    Script::CPlayer player;
+    Script::CEnemy  enemy;
+    Script::CEnemy  enemy2;
+    Script::CEnemy  enemy3;
 
     std::vector<CEntity*> entities
         {
@@ -37,17 +36,17 @@ int main(int argc, char *argv[])
             &settingScene
         };
 
-    CWorld *world = GameNgin::CWorld::instance();
+    CWorld *world = Ngin::CWorld::instance();
     CSceneManager::instance()->loadScene(gameScene.id(), E_LOAD_SCENE_MODE::SINGLE);
 
-    if(GameNgin::CNgin::instance()->initialize("Game Framework", 980, 620, world))
+    if(Ngin::CNgin::instance()->initialize("Game Framework", 980, 620, world))
     {
         world->registerEntities(entities);
         world->registerScenes(scenes);
 
-        GameNgin::CNgin::instance()->loop();
-        GameNgin::CNgin::instance()->clean();
-        GameNgin::CNgin::instance()->quit();
+        Ngin::CNgin::instance()->loop();
+        Ngin::CNgin::instance()->clean();
+        Ngin::CNgin::instance()->quit();
     }
     else
     {

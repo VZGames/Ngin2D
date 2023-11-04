@@ -3,7 +3,7 @@
 
 #include "CComponent.h"
 
-BEGIN_NAMESPACE(GameNgin)
+BEGIN_NAMESPACE(Ngin)
 class CComponentManager
 {
 private:

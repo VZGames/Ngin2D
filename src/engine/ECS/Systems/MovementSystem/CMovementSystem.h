@@ -4,7 +4,7 @@
 #include "CommonDefine.h"
 #include "Systems/AECSystem.h"
 
-BEGIN_NAMESPACE(GameNgin)
+BEGIN_NAMESPACE(Ngin)
 class CMovementSystem: public AECSystem
 {
 public:

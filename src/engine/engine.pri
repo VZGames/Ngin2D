@@ -6,6 +6,7 @@ include($$PWD/ECS/ECS.pri)
 include($$PWD/Scene/Scene.pri)
 include($$PWD/World/World.pri)
 include($$PWD/Control/Control.pri)
+include($$PWD/System/System.pri)
 
 
 INCLUDEPATH += \
@@ -17,6 +18,7 @@ INCLUDEPATH += \
     $$PWD/Scene \
     $$PWD/World \
     $$PWD/Control \
+    $$PWD/System \
     $$PWD
 
 HEADERS += \

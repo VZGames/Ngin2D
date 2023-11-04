@@ -5,8 +5,8 @@
 #include "Entity/CEntity.h"
 #include "Common/enums.h"
 
-BEGIN_NAMESPACE(GameScript)
-class CPlayer: public GameNgin::CEntity
+BEGIN_NAMESPACE(Script)
+class CPlayer: public Ngin::CEntity
 {
 public:
     CPlayer();

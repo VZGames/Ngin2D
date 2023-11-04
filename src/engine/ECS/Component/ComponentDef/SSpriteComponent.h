@@ -4,7 +4,7 @@
 #include "CommonDefine.h"
 #include "Component/CComponent.h"
 
-BEGIN_NAMESPACE(GameNgin)
+BEGIN_NAMESPACE(Ngin)
 struct SSpriteComponent: public  CComponent
 {
     SSpriteComponent(const char *textureId, const char *source, float width, float height, int frameCount, int frameSpeed = 200):

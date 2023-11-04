@@ -1,7 +1,7 @@
 #include "CComponentManager.h"
 #include "LoggerDefines.h"
 
-BEGIN_NAMESPACE(GameNgin)
+BEGIN_NAMESPACE(Ngin)
 CComponentManager *CComponentManager::s_instance = nullptr;
 CComponentManager::CComponentManager()
 {

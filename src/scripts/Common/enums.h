@@ -1,9 +1,9 @@
-#ifndef COMMONENUMS_GAMESCRIPT_H
-#define COMMONENUMS_GAMESCRIPT_H
+#ifndef COMMONENUMS_Script_H
+#define COMMONENUMS_Script_H
 
 #include "CommonDefine.h"
 
-BEGIN_NAMESPACE(GameScript)
+BEGIN_NAMESPACE(Script)
 enum MOVE_DIRECTION: char
 {
     MOVE_LEFT,
@@ -28,4 +28,4 @@ enum CTRL_SLOTS
 };
 END_NAMESPACE
 
-#endif // COMMONENUMS_GAMESCRIPT_H
+#endif // COMMONENUMS_Script_H

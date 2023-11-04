@@ -1,6 +1,6 @@
 #include "CEntity.h"
 
-BEGIN_NAMESPACE(GameNgin)
+BEGIN_NAMESPACE(Ngin)
 CEntity::CEntity()
 {
 }
@@ -14,8 +14,8 @@ void CEntity::setId(const EntityID &newId)
 {
     m_id = newId;
 }
-
 END_NAMESPACE
+
 
 
 

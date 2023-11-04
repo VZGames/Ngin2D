@@ -2,8 +2,9 @@
 #include "CECSystemManager.h"
 #include "Scene/CSceneManager.h"
 #include "LoggerDefines.h"
+#include "CCamera.h"
 
-BEGIN_NAMESPACE(GameNgin)
+BEGIN_NAMESPACE(Ngin)
 CWorld* CWorld::s_instance = nullptr;
 CWorld::CWorld()
 {

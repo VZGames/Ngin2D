@@ -1,7 +1,7 @@
 #include "CECSystemManager.h"
 #include "AECSystem.h"
 #include "LoggerDefines.h"
-BEGIN_NAMESPACE(GameNgin)
+BEGIN_NAMESPACE(Ngin)
 CECSystemManager *CECSystemManager::s_instance = nullptr;
 CECSystemManager::CECSystemManager()
 {

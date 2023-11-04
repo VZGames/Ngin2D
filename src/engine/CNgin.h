@@ -4,7 +4,7 @@
 #include "CommonDefine.h"
 #include "Alias.h"
 
-BEGIN_NAMESPACE(GameNgin)
+BEGIN_NAMESPACE(Ngin)
 class CWorld;
 class CNgin
 {

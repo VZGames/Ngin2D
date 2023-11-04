@@ -6,7 +6,7 @@
 #include "ITextureManager.h"
 #include "Math/point2D.h"
 
-BEGIN_NAMESPACE(GameNgin)
+BEGIN_NAMESPACE(Ngin)
 class CTexture2DManager: public ITextureManager
 {
 private:

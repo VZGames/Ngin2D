@@ -2,7 +2,7 @@
 #define CWORLD_H
 
 #include "CommonDefine.h"
-BEGIN_NAMESPACE(GameNgin)
+BEGIN_NAMESPACE(Ngin)
 class CEntity;
 class AScene;
 class CWorld

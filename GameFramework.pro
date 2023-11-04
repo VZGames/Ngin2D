@@ -8,6 +8,7 @@ include(src/scripts/scripts.pri)
 
 SOURCES += \
     src/main.cpp
+#    src/main_test_1.cpp
 
 
 # Set include and library directories based on the platform

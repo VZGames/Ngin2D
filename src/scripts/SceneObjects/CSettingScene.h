@@ -3,8 +3,8 @@
 
 #include "AScene.h"
 
-BEGIN_NAMESPACE(GameScript)
-class CSettingScene : public GameNgin::AScene
+BEGIN_NAMESPACE(Script)
+class CSettingScene : public Ngin::AScene
 {
 public:
     CSettingScene();

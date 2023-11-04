@@ -4,8 +4,8 @@
 #include "CommonDefine.h"
 #include "Entity/CEntity.h"
 
-BEGIN_NAMESPACE(GameScript)
-class CEnemy: public GameNgin::CEntity
+BEGIN_NAMESPACE(Script)
+class CEnemy: public Ngin::CEntity
 {
 public:
     CEnemy();

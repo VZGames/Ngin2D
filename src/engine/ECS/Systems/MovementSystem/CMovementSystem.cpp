@@ -2,7 +2,7 @@
 #include "LoggerDefines.h"
 #include "CEntity.h"
 
-BEGIN_NAMESPACE(GameNgin)
+BEGIN_NAMESPACE(Ngin)
 CMovementSystem::CMovementSystem()
 {}
 

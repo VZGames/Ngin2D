@@ -1,7 +1,7 @@
 #include "CKeyEvent.h"
 #include "CNgin.h"
 #include "LoggerDefines.h"
-BEGIN_NAMESPACE(GameNgin)
+BEGIN_NAMESPACE(Ngin)
 CKeyEvent *CKeyEvent::s_instance = nullptr;
 CKeyEvent::CKeyEvent()
 {
@@ -23,10 +23,12 @@ void CKeyEvent::listen()
             CNgin::setRunning(false);
             break;
         case SDL_KEYDOWN:
-            m_released = 0;
+            m_released = false;
+            m_pressed  = true;
             break;
         case SDL_KEYUP:
-            m_released = 1;
+            m_released = true;
+            m_pressed  = false;
             break;
         case SDL_WINDOWEVENT:
             switch (m_event.window.event) {
@@ -66,9 +68,15 @@ bool CKeyEvent::sendEvent(SDL_Scancode numKey)
 {
     if (m_state[numKey])
     {
-        return 1;
+        inputs[numKey]();
+        return true;
     }
-    return 0;
+    return false;
+}
+
+void CKeyEvent::registerEvent(SDL_Scancode numKey, std::function<void ()> &handle)
+{
+    inputs[numKey] = handle;
 }
 
 const SDL_Event &CKeyEvent::getEvent() const
@@ -86,4 +94,6 @@ bool CKeyEvent::isPressed() const
     return !m_released;
 }
 END_NAMESPACE
+
+
 

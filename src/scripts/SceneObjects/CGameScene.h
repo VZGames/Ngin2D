@@ -4,8 +4,8 @@
 #include "CommonDefine.h"
 #include "AScene.h"
 
-BEGIN_NAMESPACE(GameScript)
-class CGameScene: public GameNgin::AScene
+BEGIN_NAMESPACE(Script)
+class CGameScene: public Ngin::AScene
 {
 public:
     CGameScene();

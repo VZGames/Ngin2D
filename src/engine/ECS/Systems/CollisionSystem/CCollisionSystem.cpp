@@ -3,7 +3,7 @@
 #include "CEntity.h"
 #include "ComponentDef/SPositionComponent.h"
 
-BEGIN_NAMESPACE(GameNgin)
+BEGIN_NAMESPACE(Ngin)
 CCollisionSystem::CCollisionSystem()
 {}
 

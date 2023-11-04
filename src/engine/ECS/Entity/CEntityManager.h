@@ -3,7 +3,7 @@
 
 #include "CEntity.h"
 
-BEGIN_NAMESPACE(GameNgin)
+BEGIN_NAMESPACE(Ngin)
 class CEntityManager
 {
 private:

@@ -6,10 +6,11 @@
 #include "Alias.h"
 #include "Component/CComponent.h"
 #include "Component/CComponentManager.h"
+#include "CCamera.h"
 
 #define COMP_MANAGER CComponentManager::instance()
 
-BEGIN_NAMESPACE(GameNgin)
+BEGIN_NAMESPACE(Ngin)
 class CEntity
 {
 private:

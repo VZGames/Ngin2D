@@ -3,6 +3,8 @@ HEADERS += \
     $$PWD/Component/CComponentManager.h \
     $$PWD/Component/ComponentDef/SCameraComponent.h \
     $$PWD/Component/ComponentDef/SHealthComponent.h \
+    $$PWD/Component/ComponentDef/SKeyInputComponent.h \
+    $$PWD/Component/ComponentDef/SMotionComponent.h \
     $$PWD/Component/ComponentDef/SPositionComponent.h \
     $$PWD/Component/ComponentDef/SSpriteComponent.h \
     $$PWD/Entity/CEntity.h \

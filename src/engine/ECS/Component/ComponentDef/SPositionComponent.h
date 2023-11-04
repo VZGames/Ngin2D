@@ -3,13 +3,17 @@
 
 #include "CommonDefine.h"
 #include "Component/CComponent.h"
-
-BEGIN_NAMESPACE(GameNgin)
+#include "point2D.h"
+BEGIN_NAMESPACE(Ngin)
 struct SPositionComponent: public CComponent
 {
     SPositionComponent(float x = 0.0f, float y = 0.0f): x(x), y(y)
     {
         m_name = __FUNCTION__;
+    }
+    Point2DF toPoint2DF()
+    {
+        return Point2DF(x, y);
     }
     float x, y;
     float lastX, lastY;

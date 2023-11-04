@@ -1,6 +1,6 @@
 #include "CComponent.h"
 
-BEGIN_NAMESPACE(GameNgin)
+BEGIN_NAMESPACE(Ngin)
 CComponent::CComponent()
 {}
 

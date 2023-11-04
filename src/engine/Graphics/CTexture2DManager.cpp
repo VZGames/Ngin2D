@@ -1,7 +1,7 @@
 #include "CTexture2DManager.h"
 #include "LoggerDefines.h"
 #include "CNgin.h"
-BEGIN_NAMESPACE(GameNgin)
+BEGIN_NAMESPACE(Ngin)
 CTexture2DManager *CTexture2DManager::s_instance = nullptr;
 CTexture2DManager::CTexture2DManager()
 {
