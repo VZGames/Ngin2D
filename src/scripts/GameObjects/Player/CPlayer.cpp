@@ -66,8 +66,8 @@ void CPlayer::motionUpdate(float dt)
     m_sprite   = this->getComponent<Ngin::SSpriteComponent>();
 
     Size2D<float> winSize = Ngin::CNgin::windowSize();
-    m_camera->offset.setX(m_position->x - (winSize.width/2));
-    m_camera->offset.setY(m_position->y - (winSize.height/2));
+    m_camera->offset.setX(m_position->x - (winSize.width/2 - m_sprite->frameWidth/2));
+    m_camera->offset.setY(m_position->y - (winSize.height/2 - m_sprite->frameHeight/2));
 
     m_position->x -= m_camera->offset.getX();
     m_position->y -= m_camera->offset.getY();
