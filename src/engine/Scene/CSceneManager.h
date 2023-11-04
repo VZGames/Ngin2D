@@ -14,12 +14,13 @@ private:
     static CSceneManager                *s_instance;
     static int                          s_scene_count;
     std::map<const char*, AScene*>      m_scenes;
+    const char*                         m_current_scene_id;
 public:
     static CSceneManager* instance();
     static int sceneCount();
     void createScene(const char*, AScene*);
     void loadScene(const char*, E_LOAD_SCENE_MODE);
-
+    AScene* currentScene() const;
     void init();
     void update(std::vector<CEntity*> &, float);
     void render();

@@ -10,6 +10,10 @@
 #include <cstring>
 #include <map>
 #include <algorithm>
+#include <optional>
+#include <functional>
+#include <thread>
+#include <mutex>
 
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_events.h>

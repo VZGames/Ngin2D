@@ -13,8 +13,8 @@ BEGIN_NAMESPACE(GameNgin)
 class CEntity
 {
 private:
-    EntityID                                        m_id;
-    std::unordered_map<const char*, CComponent*>    m_components;
+    EntityID                                                        m_id;
+    std::unordered_map<const char*, CComponent*>     m_components;
 
 public:
     CEntity();
@@ -58,6 +58,18 @@ public:
             return nullptr;
         }
         return (T*)m_components.at(compName);
+    }
+
+    template<class T>
+    bool hasComponent() const
+    {
+        const char *compName = typeid(T).name();
+        if(m_components.find(compName) == m_components.end()) return false;
+        if(m_components.at(compName) == nullptr)
+        {
+            return false;
+        }
+        return true;
     }
 
 };

@@ -2,10 +2,10 @@
 #define CMOVEMENTSYSTEM_H
 
 #include "CommonDefine.h"
-#include "Systems/IECSystem.h"
+#include "Systems/AECSystem.h"
 
 BEGIN_NAMESPACE(GameNgin)
-class CMovementSystem: public IECSystem
+class CMovementSystem: public AECSystem
 {
 public:
     CMovementSystem();

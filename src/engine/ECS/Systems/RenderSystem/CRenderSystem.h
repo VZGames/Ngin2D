@@ -2,10 +2,10 @@
 #define CRENDERSYSTEM_H
 
 #include "CommonDefine.h"
-#include "Systems/IECSystem.h"
+#include "Systems/AECSystem.h"
 
 BEGIN_NAMESPACE(GameNgin)
-class CRenderSystem: public IECSystem
+class CRenderSystem: public AECSystem
 {
 public:
     CRenderSystem();

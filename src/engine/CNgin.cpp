@@ -1,7 +1,7 @@
 #include "CNgin.h"
 #include "Logger/LoggerDefines.h"
 #include "CKeyEvent.h"
-#include "CSceneManager.h"
+//#include "CSceneManager.h"
 #include "CWorld.h"
 
 BEGIN_NAMESPACE(GameNgin)
@@ -115,8 +115,8 @@ void CNgin::loop()
 
         // [game logic]
         {
-            render();
             update(deltaTime);
+            render();
             handle_events();
         }
         // [game logic]

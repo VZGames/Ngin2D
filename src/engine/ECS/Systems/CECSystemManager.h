@@ -8,14 +8,14 @@
 
 BEGIN_NAMESPACE(GameNgin)
 class CEntity;
-class IECSystem;
+class AECSystem;
 
 class CECSystemManager
 {
 private:
     CECSystemManager();
     static CECSystemManager                   *s_instance;
-    std::vector<IECSystem*>                   m_systems;
+    std::vector<AECSystem*>                   m_systems;
 
     CCollisionSystem                          m_collision_system;
     CMovementSystem                            m_movement_system;

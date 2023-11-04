@@ -1,5 +1,5 @@
 #include "CECSystemManager.h"
-#include "IECSystem.h"
+#include "AECSystem.h"
 
 BEGIN_NAMESPACE(GameNgin)
 CECSystemManager *CECSystemManager::s_instance = nullptr;
@@ -22,11 +22,20 @@ void CECSystemManager::init()
 
 void CECSystemManager::update(std::vector<CEntity *> &entities, float dt)
 {
-    std::vector<IECSystem *>::iterator it = m_systems.begin();
+    std::vector<std::thread> _threads;
+    std::vector<AECSystem *>::iterator it = m_systems.begin();
     while(it != m_systems.end())
     {
-        (*it)->update(entities, dt);
+
+        _threads.push_back(std::thread([&]{
+            (*it)->update(entities, dt);
+        }));
         ++it;
+    }
+
+    for(auto &thread:_threads)
+    {
+        thread.detach();
     }
 }
 

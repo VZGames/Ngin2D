@@ -21,13 +21,20 @@ int CSceneManager::sceneCount()
 
 void CSceneManager::createScene(const char *id, AScene *scene)
 {
+    scene->m_id = id;
     m_scenes[id] = scene;
 }
 
 void CSceneManager::loadScene(const char *id, E_LOAD_SCENE_MODE mode)
 {
+    m_current_scene_id = id;
     m_scenes.at(id);
     UNUSED(mode)
+}
+
+AScene *CSceneManager::currentScene() const
+{
+    return m_scenes.at(m_current_scene_id);
 }
 
 void CSceneManager::init()
@@ -40,19 +47,14 @@ void CSceneManager::init()
 
 void CSceneManager::update(std::vector<CEntity*> &entities, float dt)
 {
-    for(std::pair<const char*, AScene*> scene: m_scenes)
-    {
-        scene.second->update(entities, dt);
-    }
+    currentScene()->update(entities, dt);
 }
 
 void CSceneManager::render()
 {
-    for(std::pair<const char*, AScene*> scene: m_scenes)
-    {
-        scene.second->render();
-    }
+    currentScene()->render();
 }
 END_NAMESPACE
+
 
 

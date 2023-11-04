@@ -12,6 +12,7 @@ void CRenderSystem::update(float dt)
 void CRenderSystem::update(std::vector<CEntity *> &entities, float dt)
 {
     UNUSED(dt);
+    m_mutex.lock();
     std::vector<CEntity *>::iterator it = entities.begin();
     while(it != entities.end())
     {
@@ -19,6 +20,7 @@ void CRenderSystem::update(std::vector<CEntity *> &entities, float dt)
         MORGAN_DEBUG("do update RENDER for each entity")
         ++it;
     }
+    m_mutex.unlock();
 }
 END_NAMESPACE
 

@@ -2,10 +2,10 @@
 #define CCOLLISIONSYSTEM_H
 
 #include "CommonDefine.h"
-#include "Systems/IECSystem.h"
+#include "Systems/AECSystem.h"
 
 BEGIN_NAMESPACE(GameNgin)
-class CCollisionSystem: public IECSystem
+class CCollisionSystem: public AECSystem
 {
 public:
     CCollisionSystem();

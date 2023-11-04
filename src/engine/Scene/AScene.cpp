@@ -18,4 +18,9 @@ void AScene::render()
 
 }
 
+const char *AScene::id() const
+{
+    return m_id;
+}
+
 END_NAMESPACE

@@ -13,6 +13,7 @@ void CMovementSystem::update(float dt)
 void CMovementSystem::update(std::vector<CEntity *> &entities, float dt)
 {
     UNUSED(dt);
+    m_mutex.lock();
     std::vector<CEntity *>::iterator it = entities.begin();
     while(it != entities.end())
     {
@@ -20,6 +21,7 @@ void CMovementSystem::update(std::vector<CEntity *> &entities, float dt)
         MORGAN_DEBUG("do update MOVEMENT for each entity")
         ++it;
     }
+    m_mutex.unlock();
 }
 END_NAMESPACE
 
