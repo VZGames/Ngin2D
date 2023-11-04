@@ -8,7 +8,8 @@ BEGIN_NAMESPACE(Ngin)
 CNgin *CNgin::s_instance = nullptr;
 SDL_Renderer  *CNgin::s_renderer = nullptr;
 bool  CNgin::s_running = false;
-
+int CNgin::s_win_width = 0;
+int CNgin::s_win_height = 0;
 CNgin::CNgin()
 {
 
@@ -32,6 +33,11 @@ void CNgin::setRunning(bool running)
 SDL_Renderer* CNgin::renderer()
 {
     return s_renderer;
+}
+
+Size2D<float> CNgin::windowSize()
+{
+    return Size2D<float>{(float)s_win_width, (float)s_win_height};
 }
 
 bool CNgin::initialize(Title title, Width width, Height height, CWorld *world)
@@ -65,7 +71,7 @@ bool CNgin::initialize(Title title, Width width, Height height, CWorld *world)
     }
 
 
-    SDL_GetWindowSize(m_window, &m_win_width, &m_win_height);
+    SDL_GetWindowSize(m_window, &s_win_width, &s_win_height);
 
     MORGAN_DEBUG("Window size: %d, %d", width, height);
 
@@ -167,6 +173,8 @@ void CNgin::handle_events()
     CKeyEvent::instance()->listen();
 }
 END_NAMESPACE
+
+
 
 
 

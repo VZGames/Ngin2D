@@ -20,9 +20,8 @@ void CMovementSystem::update(std::vector<CEntity *> &entities, float dt)
     // do update for each entity
     for(CEntity *entity: *m_entities)
     {
-        UNUSED(entity)
+        entity->motionUpdate(dt);
     }
-   
 }
 
 void CMovementSystem::render()

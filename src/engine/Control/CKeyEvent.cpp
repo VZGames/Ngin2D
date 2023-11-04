@@ -5,7 +5,7 @@ BEGIN_NAMESPACE(Ngin)
 CKeyEvent *CKeyEvent::s_instance = nullptr;
 CKeyEvent::CKeyEvent()
 {
-
+    m_state = SDL_GetKeyboardState(nullptr);
 }
 
 CKeyEvent *CKeyEvent::instance()
@@ -23,13 +23,9 @@ void CKeyEvent::listen()
             CNgin::setRunning(false);
             break;
         case SDL_KEYDOWN:
-        {
             m_released = false;
             m_pressed  = true;
-            SDL_Scancode scancode = m_event.key.keysym.scancode;
-            sendEvent(scancode);
-        }
-        break;
+            break;
         case SDL_KEYUP:
             m_released = true;
             m_pressed  = false;
@@ -71,6 +67,7 @@ void CKeyEvent::listen()
 
 bool CKeyEvent::sendEvent(SDL_Scancode numKey)
 {
+    if(m_inputs.find(numKey) == m_inputs.end()) return false;
     if (m_state[numKey])
     {
         m_inputs[numKey]();
