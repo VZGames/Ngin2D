@@ -7,7 +7,7 @@
 BEGIN_NAMESPACE(Ngin)
 struct SPositionComponent: public CComponent
 {
-    SPositionComponent(float x = 0.0f, float y = 0.0f): x(x), y(y)
+    SPositionComponent(float &x, float &y): x(x), y(y)
     {
         m_name = __FUNCTION__;
     }
@@ -15,7 +15,8 @@ struct SPositionComponent: public CComponent
     {
         return Point2DF(x, y);
     }
-    float x, y;
+    float &x;
+    float &y;
     float lastX, lastY;
 };
 END_NAMESPACE

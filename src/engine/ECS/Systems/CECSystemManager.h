@@ -5,6 +5,7 @@
 #include "CollisionSystem/CCollisionSystem.h"
 #include "MovementSystem/CMovementSystem.h"
 #include "RenderSystem/CRenderSystem.h"
+#include "KeyInputSystem/CKeyInputSystem.h"
 
 BEGIN_NAMESPACE(Ngin)
 class CEntity;
@@ -20,6 +21,7 @@ private:
     CCollisionSystem                           m_collision_system;
     CMovementSystem                            m_movement_system;
     CRenderSystem                              m_render_system;
+    CKeyInputSystem                            m_keyinput_system;
 public:
     static CECSystemManager *instance();
 

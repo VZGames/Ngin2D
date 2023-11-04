@@ -18,6 +18,7 @@ void CECSystemManager::init()
     m_systems.push_back(&m_collision_system);
     m_systems.push_back(&m_movement_system);
     m_systems.push_back(&m_render_system);
+    m_systems.push_back(&m_keyinput_system);
 }
 
 void CECSystemManager::update(std::vector<CEntity *> &entities, float dt)

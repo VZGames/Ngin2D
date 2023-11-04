@@ -15,6 +15,10 @@ public:
     void jump();
     void walk(MOVE_DIRECTION);
     void attach(CTRL_SLOTS);
+
+//    Implement CEntity's Interface
+public:
+    virtual void handleKeyInput();
 };
 END_NAMESPACE
 

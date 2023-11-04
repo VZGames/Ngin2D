@@ -14,13 +14,13 @@ private:
     bool                                                        m_released{true};
     bool                                                        m_pressed{false};
     SDL_Event                                                   m_event;
-    std::unordered_map<SDL_Scancode, std::function<void(void)>> inputs;
+    std::unordered_map<SDL_Scancode, std::function<void(void)>> m_inputs;
 public:
     static CKeyEvent *instance();
     void listen();
 
     bool sendEvent(SDL_Scancode);
-    void registerEvent(SDL_Scancode, std::function<void(void)>&);
+    CKeyEvent *registerEvent(SDL_Scancode, std::function<void(void)>);
     const SDL_Event &getEvent() const;
 
     bool isReleased() const;

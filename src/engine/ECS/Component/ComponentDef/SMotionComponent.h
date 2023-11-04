@@ -8,7 +8,7 @@
 BEGIN_NAMESPACE(Ngin)
 struct SMotionComponent: public CComponent
 {
-    SMotionComponent(float speed): speed(speed)
+    SMotionComponent(float &speed): speed(speed)
     {
         m_name = __FUNCTION__;
     }

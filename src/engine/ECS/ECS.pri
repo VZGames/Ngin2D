@@ -12,6 +12,7 @@ HEADERS += \
     $$PWD/Systems/AECSystem.h \
     $$PWD/Systems/CECSystemManager.h \
     $$PWD/Systems/CollisionSystem/CCollisionSystem.h \
+    $$PWD/Systems/KeyInputSystem/CKeyInputSystem.h \
     $$PWD/Systems/MovementSystem/CMovementSystem.h \
     $$PWD/Systems/RenderSystem/CRenderSystem.h
 
@@ -22,6 +23,7 @@ SOURCES += \
     $$PWD/Entity/CEntityManager.cpp \
     $$PWD/Systems/CECSystemManager.cpp \
     $$PWD/Systems/CollisionSystem/CCollisionSystem.cpp \
+    $$PWD/Systems/KeyInputSystem/CKeyInputSystem.cpp \
     $$PWD/Systems/MovementSystem/CMovementSystem.cpp \
     $$PWD/Systems/RenderSystem/CRenderSystem.cpp
 

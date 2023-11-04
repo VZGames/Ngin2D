@@ -17,6 +17,11 @@ private:
     EntityID                                                        m_id;
     std::unordered_map<const char*, CComponent*>     m_components;
 
+protected:
+    float m_x;
+    float m_y;
+    float m_speed;
+
 public:
     CEntity();
 
@@ -25,6 +30,8 @@ public:
 
     EntityID id() const;
     void setId(const EntityID &newId);
+    
+    virtual void handleKeyInput() {};
 
     template<class T, typename ...TArgs>
     CEntity *addComponent(TArgs&&...args)

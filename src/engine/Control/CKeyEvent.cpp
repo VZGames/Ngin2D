@@ -23,9 +23,13 @@ void CKeyEvent::listen()
             CNgin::setRunning(false);
             break;
         case SDL_KEYDOWN:
+        {
             m_released = false;
             m_pressed  = true;
-            break;
+            SDL_Scancode scancode = m_event.key.keysym.scancode;
+            sendEvent(scancode);
+        }
+        break;
         case SDL_KEYUP:
             m_released = true;
             m_pressed  = false;
@@ -59,7 +63,8 @@ void CKeyEvent::listen()
             SDL_RenderSetScale(CNgin::renderer(), x, y);
             break;
         }
-
+        default:
+            break;
         }
     }
 }
@@ -68,15 +73,19 @@ bool CKeyEvent::sendEvent(SDL_Scancode numKey)
 {
     if (m_state[numKey])
     {
-        inputs[numKey]();
+        m_inputs[numKey]();
         return true;
     }
     return false;
 }
 
-void CKeyEvent::registerEvent(SDL_Scancode numKey, std::function<void ()> &handle)
+CKeyEvent *CKeyEvent::registerEvent(SDL_Scancode numKey, std::function<void (void)> handle)
 {
-    inputs[numKey] = handle;
+    if(m_inputs.find(numKey) == m_inputs.end())
+    {
+        m_inputs[numKey] = handle;
+    }
+    return this;
 }
 
 const SDL_Event &CKeyEvent::getEvent() const

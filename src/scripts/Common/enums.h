@@ -7,9 +7,9 @@ BEGIN_NAMESPACE(Script)
 enum MOVE_DIRECTION: char
 {
     MOVE_LEFT,
-    MOVE_TOP,
+    MOVE_UP,
     MOVE_RIGHT,
-    MOVE_BOTTOM
+    MOVE_DOWN
 };
 
 enum CTRL_SLOTS

@@ -22,9 +22,7 @@ void CCollisionSystem::update(std::vector<CEntity *> &entities, float dt)
     for(CEntity *entity: *m_entities)
     {
         bool hasPosition = entity->hasComponent<SPositionComponent>();
-        if(hasPosition)
-        {
-        }
+        if(!hasPosition) return;
     }
    
 }

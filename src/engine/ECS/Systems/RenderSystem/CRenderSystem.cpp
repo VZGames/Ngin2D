@@ -25,11 +25,10 @@ void CRenderSystem::update(std::vector<CEntity *> &entities, float dt)
     {
         bool hasPosition = entity->hasComponent<SPositionComponent>();
         bool hasSpriteSheet = entity->hasComponent<SSpriteComponent>();
-        if(hasPosition && hasSpriteSheet)
-        {
-            auto sprite = entity->getComponent<SSpriteComponent>();
-            sprite->col = (SDL_GetTicks() / sprite->frameSpeed) % sprite->frameCount;
-        }
+        if(!(hasPosition && hasSpriteSheet)) return;
+        auto sprite = entity->getComponent<SSpriteComponent>();
+        sprite->col = (SDL_GetTicks() / sprite->frameSpeed) % sprite->frameCount;
+
     }
 
 }
@@ -37,7 +36,7 @@ void CRenderSystem::update(std::vector<CEntity *> &entities, float dt)
 void CRenderSystem::render()
 {
 
-//     do update for each entity
+    //     do update for each entity
     for(CEntity *entity: *m_entities)
     {
         bool hasPosition = entity->hasComponent<SPositionComponent>();
