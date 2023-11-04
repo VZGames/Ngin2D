@@ -17,7 +17,7 @@ private:
     static CECSystemManager                   *s_instance;
     std::vector<AECSystem*>                   m_systems;
 
-    CCollisionSystem                          m_collision_system;
+    CCollisionSystem                           m_collision_system;
     CMovementSystem                            m_movement_system;
     CRenderSystem                              m_render_system;
 public:

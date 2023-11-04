@@ -17,17 +17,17 @@ void CCollisionSystem::update(std::vector<CEntity *> &entities, float dt)
     UNUSED(dt);
     m_mutex.lock();
     std::vector<CEntity *>::iterator it = entities.begin();
+    // do update for each entity
     while(it != entities.end())
     {
         bool hasPosition = (*it)->hasComponent<SPositionComponent>();
         if(hasPosition)
         {
-            // do update for each entity
-            MORGAN_DEBUG("do update COLLISION for each entity")
+            MORGAN_DEBUG("Update COLLISION for entity [%d]", (*it)->id())
         }
         ++it;
     }
-    m_mutex.lock();
+    m_mutex.unlock();
 }
 END_NAMESPACE
 

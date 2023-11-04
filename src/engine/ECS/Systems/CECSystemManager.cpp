@@ -1,6 +1,6 @@
 #include "CECSystemManager.h"
 #include "AECSystem.h"
-
+#include "LoggerDefines.h"
 BEGIN_NAMESPACE(GameNgin)
 CECSystemManager *CECSystemManager::s_instance = nullptr;
 CECSystemManager::CECSystemManager()
@@ -22,21 +22,22 @@ void CECSystemManager::init()
 
 void CECSystemManager::update(std::vector<CEntity *> &entities, float dt)
 {
-    std::vector<std::thread> _threads;
-    std::vector<AECSystem *>::iterator it = m_systems.begin();
-    while(it != m_systems.end())
+    do
     {
+        std::vector<std::thread> _threads;
+        for(auto &system: m_systems)
+        {
+            _threads.push_back(std::thread([&](){
+                system->update(entities, dt);
+            }));
+        }
 
-        _threads.push_back(std::thread([&]{
-            (*it)->update(entities, dt);
-        }));
-        ++it;
+        for(auto &thread:_threads)
+        {
+            thread.detach();
+        }
     }
-
-    for(auto &thread:_threads)
-    {
-        thread.detach();
-    }
+    while (0);
 }
 
 
