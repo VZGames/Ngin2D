@@ -9,11 +9,6 @@ class AScene
 {
 public:
     friend class CSceneManager;
-
-    virtual void init();
-    virtual void update(std::vector<GameNgin::CEntity*> &entities, float dt);
-    virtual void render();
-
     const char *id() const;
 
 private:

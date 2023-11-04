@@ -16,19 +16,33 @@ void CCollisionSystem::update(std::vector<CEntity *> &entities, float dt)
 {
     UNUSED(dt);
     m_mutex.lock();
-    std::vector<CEntity *>::iterator it = entities.begin();
+    m_entities = &entities;
     // do update for each entity
-    while(it != entities.end())
+    for(CEntity *entity: *m_entities)
     {
-        bool hasPosition = (*it)->hasComponent<SPositionComponent>();
+        bool hasPosition = entity->hasComponent<SPositionComponent>();
         if(hasPosition)
         {
-            MORGAN_DEBUG("Update COLLISION for entity [%d]", (*it)->id())
+            MORGAN_DEBUG("Update COLLISION for entity [%d]", entity->id())
         }
-        ++it;
+    }
+    m_mutex.unlock();
+}
+
+void CCollisionSystem::render()
+{
+    m_mutex.lock();
+    // do update for each entity
+    for(CEntity *entity: *m_entities)
+    {
+        bool hasPosition = entity->hasComponent<SPositionComponent>();
+        if(hasPosition)
+        {
+        }
     }
     m_mutex.unlock();
 }
 END_NAMESPACE
+
 
 

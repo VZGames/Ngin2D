@@ -10,19 +10,23 @@ class CNgin
 {
 private:
     CNgin();
-    static bool  s_running;
-    static CNgin *s_instance;
-    SDL_Renderer *m_renderer;
-    SDL_Window   *m_window;
-    CWorld       *m_world;
+    static bool             s_running;
+    static CNgin            *s_instance;
+    static SDL_Renderer     *s_renderer;
+    SDL_Window              *m_window;
+    CWorld                  *m_world;
 
-    int          m_win_width;
-    int          m_win_height;
+    int                     m_win_width;
+    int                     m_win_height;
 
 public:
     static CNgin *instance();
     static bool running();
     static void setRunning(bool);
+    static SDL_Renderer* renderer();
+
+
+public:
     bool initialize(Title, Width, Height, CWorld*);
     void loop();
     void clean();

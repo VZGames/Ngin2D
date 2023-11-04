@@ -7,14 +7,5 @@ CGameScene::CGameScene()
 {
     GameNgin::CSceneManager::instance()->createScene(__FUNCTION__, this);
 }
-
-void CGameScene::init()
-{
-
-}
-
-void CGameScene::render()
-{
-}
 END_NAMESPACE
 

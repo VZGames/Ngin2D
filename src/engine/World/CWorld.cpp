@@ -37,17 +37,16 @@ void CWorld::registerScenes(std::vector<AScene*> &scenes)
 void CWorld::init()
 {
     CECSystemManager::instance()->init();
-    CSceneManager::instance()->init();
 }
 
 void CWorld::update(float dt)
 {
-    CSceneManager::instance()->update(m_entities, dt);
+    CECSystemManager::instance()->update(m_entities, dt);
 }
 
 void CWorld::render()
 {
-    CSceneManager::instance()->render();
+    CECSystemManager::instance()->render();
 }
 END_NAMESPACE
 

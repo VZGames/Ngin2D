@@ -25,6 +25,7 @@ public:
 
     void init();
     void update(std::vector<CEntity*> &entities, float dt);
+    void render();
 };
 END_NAMESPACE
 

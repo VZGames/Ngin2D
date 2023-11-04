@@ -8,8 +8,8 @@ BEGIN_NAMESPACE(GameScript)
 CEnemy::CEnemy()
 {
     GameNgin::CEntityManager::instance()->createEntity(this);
-    this->addComponent<GameNgin::SPositionComponent>(0, 0)
+    this->addComponent<GameNgin::SPositionComponent>(500, 200)
         ->addComponent<GameNgin::SHealthComponent>(100)
-        ->addComponent<GameNgin::SSpriteComponent>("textureID", "source", 48, 48, 0, 0);
+        ->addComponent<GameNgin::SSpriteComponent>("Animal", "./Assets/Characters/Free Cow Sprites.png", 48, 48, 0, 0);
 }
 END_NAMESPACE

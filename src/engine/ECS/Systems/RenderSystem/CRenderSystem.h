@@ -14,6 +14,7 @@ public:
 public:
     virtual void update(float dt) override;
     virtual void update(std::vector<CEntity*> &entities, float dt) override;
+    virtual void render() override;
 
 };
 END_NAMESPACE

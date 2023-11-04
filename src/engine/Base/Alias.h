@@ -40,6 +40,7 @@ using TileCol = int;
 using Title = const char*;
 using Width = uint32_t;
 using Height = uint32_t;
+using Angle = float;
 
 END_NAMESPACE
 

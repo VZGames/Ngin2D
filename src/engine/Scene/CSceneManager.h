@@ -21,9 +21,6 @@ public:
     void createScene(const char*, AScene*);
     void loadScene(const char*, E_LOAD_SCENE_MODE);
     AScene* currentScene() const;
-    void init();
-    void update(std::vector<CEntity*> &, float);
-    void render();
 };
 END_NAMESPACE
 

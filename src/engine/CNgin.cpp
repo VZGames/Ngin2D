@@ -6,7 +6,9 @@
 
 BEGIN_NAMESPACE(GameNgin)
 CNgin *CNgin::s_instance = nullptr;
+SDL_Renderer  *CNgin::s_renderer = nullptr;
 bool  CNgin::s_running = false;
+
 CNgin::CNgin()
 {
 
@@ -25,6 +27,11 @@ bool CNgin::running()
 void CNgin::setRunning(bool running)
 {
     s_running = running;
+}
+
+SDL_Renderer* CNgin::renderer()
+{
+    return s_renderer;
 }
 
 bool CNgin::initialize(Title title, Width width, Height height, CWorld *world)
@@ -77,16 +84,16 @@ bool CNgin::initialize(Title title, Width width, Height height, CWorld *world)
     MORGAN_DEBUG("Window size: %d, %d", width, height);
 
     // [2] init renderer
-    m_renderer = SDL_CreateRenderer(m_window, -1, SDL_RENDERER_ACCELERATED);
-    if (m_renderer == nullptr)
+    s_renderer = SDL_CreateRenderer(m_window, -1, SDL_RENDERER_ACCELERATED);
+    if (s_renderer == nullptr)
     {
         MORGAN_DEBUG("Could not create renderer: %s", SDL_GetError());
         return 0;
     }
 
     // [3] Select the color for drawing.
-    SDL_RenderSetScale(m_renderer, 1, 1);
-    SDL_SetRenderDrawColor(m_renderer, 255, 255, 255, 255);
+    SDL_RenderSetScale(s_renderer, 1, 1);
+    SDL_SetRenderDrawColor(s_renderer, 255, 255, 255, 255);
 
     s_running = true;
     return 1;
@@ -135,7 +142,7 @@ void CNgin::clean()
 
     // Close and destroy the window and the renderer
     SDL_DestroyWindow(m_window);
-    SDL_DestroyRenderer(m_renderer);
+    SDL_DestroyRenderer(s_renderer);
 }
 
 void CNgin::quit()
@@ -148,9 +155,9 @@ void CNgin::quit()
 
 void CNgin::render()
 {
-//    SDL_RenderClear(m_renderer);
+    SDL_RenderClear(s_renderer);
     m_world->render();
-//    SDL_RenderPresent(m_renderer);
+    SDL_RenderPresent(s_renderer);
 }
 
 void CNgin::update(float dt)

@@ -9,9 +9,6 @@ class CGameScene: public GameNgin::AScene
 {
 public:
     CGameScene();
-
-    virtual void init() override;
-    virtual void render() override;
 };
 END_NAMESPACE
 

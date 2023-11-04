@@ -36,24 +36,6 @@ AScene *CSceneManager::currentScene() const
 {
     return m_scenes.at(m_current_scene_id);
 }
-
-void CSceneManager::init()
-{
-    for(std::pair<const char*, AScene*> scene: m_scenes)
-    {
-        scene.second->init();
-    }
-}
-
-void CSceneManager::update(std::vector<CEntity*> &entities, float dt)
-{
-    currentScene()->update(entities, dt);
-}
-
-void CSceneManager::render()
-{
-    currentScene()->render();
-}
 END_NAMESPACE
 
 

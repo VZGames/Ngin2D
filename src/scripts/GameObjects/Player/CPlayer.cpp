@@ -9,9 +9,9 @@ BEGIN_NAMESPACE(GameScript)
 CPlayer::CPlayer()
 {
     GameNgin::CEntityManager::instance()->createEntity(this);
-    this->addComponent<GameNgin::SPositionComponent>(0, 0)
+    this->addComponent<GameNgin::SPositionComponent>(200, 200)
         ->addComponent<GameNgin::SHealthComponent>(100)
-        ->addComponent<GameNgin::SSpriteComponent>("textureID", "source", 48, 48, 0, 0)
+        ->addComponent<GameNgin::SSpriteComponent>("Player", "./Assets/Characters/BunnySpriteSheet.png", 48, 48, 0, 0)
         ->addComponent<GameNgin::SCameraComponent>();
 }
 

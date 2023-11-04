@@ -40,8 +40,29 @@ void CECSystemManager::update(std::vector<CEntity *> &entities, float dt)
     while (0);
 }
 
+void CECSystemManager::render()
+{
+    do
+    {
+        std::vector<std::thread> _threads;
+        for(auto &system: m_systems)
+        {
+            system->render();
 
+            _threads.push_back(std::thread([&](){
+                system->render();
+            }));
+        }
+
+        for(auto &thread:_threads)
+        {
+            thread.detach();
+        }
+    }
+    while (0);
+}
 END_NAMESPACE
+
 
 
 
