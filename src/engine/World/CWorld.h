@@ -11,8 +11,8 @@ private:
     explicit CWorld();
     static CWorld *s_instance;
 
-    std::vector<CEntity*> m_entities;
-    std::vector<AScene*>  m_scenes;
+    std::vector<CEntity*> *m_entities;
+    std::vector<AScene*>  *m_scenes;
 
 public:
     static CWorld *instance();

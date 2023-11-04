@@ -27,7 +27,6 @@
 #define POPUP_z 1000
 #define NOTIFY_Z 1000000
 
-
 #define SIZE_OF_ARRAY(arr) sizeof(arr)/sizeof(*(arr))
 #define stringify(name) # name
 

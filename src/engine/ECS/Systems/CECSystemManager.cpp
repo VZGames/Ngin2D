@@ -22,44 +22,18 @@ void CECSystemManager::init()
 
 void CECSystemManager::update(std::vector<CEntity *> &entities, float dt)
 {
-    do
+    for(auto &system: m_systems)
     {
-        std::vector<std::thread> _threads;
-        for(auto &system: m_systems)
-        {
-            _threads.push_back(std::thread([&](){
-                system->update(entities, dt);
-            }));
-        }
-
-        for(auto &thread:_threads)
-        {
-            thread.detach();
-        }
+        system->update(entities, dt);
     }
-    while (0);
 }
 
 void CECSystemManager::render()
 {
-    do
+    for(auto &system: m_systems)
     {
-        std::vector<std::thread> _threads;
-        for(auto &system: m_systems)
-        {
-            system->render();
-
-            _threads.push_back(std::thread([&](){
-                system->render();
-            }));
-        }
-
-        for(auto &thread:_threads)
-        {
-            thread.detach();
-        }
+        system->render();
     }
-    while (0);
 }
 END_NAMESPACE
 

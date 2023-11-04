@@ -23,18 +23,19 @@ void CTexture2DManager::drawTile(TextureID id, Point2DI pos, TileWidth w, TileHe
     UNUSED(c);
 }
 
-void CTexture2DManager::drawFrame(TextureID id, Point2DI pos, FrameWidth w, FrameHeight h, FrameRow r, FrameCol c, Angle angle, SDL_RendererFlip flip)
+void CTexture2DManager::drawFrame(TextureID id, Point2DF pos, FrameWidth w, FrameHeight h, FrameRow r, FrameCol c, Angle angle, SDL_RendererFlip flip)
 {
     int frameX = w * c;
     int frameY = h * r;
     SDL_Rect srcRect = {frameX, frameY, w, h};
-    SDL_Rect destRect = {
+    SDL_FRect destRect = {
         pos.getX(),
         pos.getY(),
-        w,
-        h
+        (float)w,
+        (float)h
     };
-    SDL_RenderCopyEx(CNgin::renderer(), m_textures[id], &srcRect, &destRect, angle, nullptr, flip);
+
+    SDL_RenderCopyExF(CNgin::renderer(), m_textures[id], &srcRect, &destRect, angle, NULL, flip);
 }
 
 bool CTexture2DManager::loadTexture(TextureID id, TextureSource source)
@@ -47,10 +48,16 @@ bool CTexture2DManager::loadTexture(TextureID id, TextureSource source)
     else
     {
         MORGAN_DEBUG("TextureID: %s, Texture Path: %s", id, source);
-        if(CNgin::renderer() == nullptr) return false;
+        if(CNgin::renderer() == nullptr)
+        {
+            MORGAN_DEBUG("RENDERER NULL")
+            return false;
+        }
+
         SDL_Texture *texture = nullptr;
         SDL_Surface *surface = IMG_Load(source);
         if (!surface) {
+            MORGAN_DEBUG("Cant load IMG")
             return false;
         }
 

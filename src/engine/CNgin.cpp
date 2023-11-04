@@ -41,13 +41,13 @@ bool CNgin::initialize(Title title, Width width, Height height, CWorld *world)
     {
         MORGAN_DEBUG("Unable to initialize SDL: %s", SDL_GetError());
 
-        return 0;
+        return false;
     }
 
     if (!(IMG_Init(IMG_INIT_PNG | IMG_INIT_JPG)))
     {
         MORGAN_DEBUG("Unable to initialize SDL Image: %s", SDL_GetError());
-        return 0;
+        return false;
     }
 
     // [1] init SDL and create the Game Window
@@ -55,29 +55,15 @@ bool CNgin::initialize(Title title, Width width, Height height, CWorld *world)
     UNUSED(window_flags)
 
     m_window = SDL_CreateWindow(title, SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, width, height, 0);
-    m_world  = world;
 
     if (m_window == nullptr)
     {
         // In the case that the window could not be made...
         MORGAN_DEBUG("Could not create window: %s", SDL_GetError());
 
-        return 0;
+        return false;
     }
 
-    if(m_world == nullptr)
-    {
-        MORGAN_DEBUG("Could not create World");
-
-        return 0;
-    }
-    else
-    {
-        m_world->init();
-    }
-
-//    SDL_MaximizeWindow(m_window);
-//    SDL_SetWindowFullscreen(m_window, SDL_WINDOW_FULLSCREEN_DESKTOP);
 
     SDL_GetWindowSize(m_window, &m_win_width, &m_win_height);
 
@@ -88,15 +74,27 @@ bool CNgin::initialize(Title title, Width width, Height height, CWorld *world)
     if (s_renderer == nullptr)
     {
         MORGAN_DEBUG("Could not create renderer: %s", SDL_GetError());
-        return 0;
+        return false;
     }
 
     // [3] Select the color for drawing.
-    SDL_RenderSetScale(s_renderer, 1, 1);
     SDL_SetRenderDrawColor(s_renderer, 255, 255, 255, 255);
 
+    // [4] start game ngin
     s_running = true;
-    return 1;
+
+    // [5] init the world
+    m_world  = world;
+    if(m_world == nullptr)
+    {
+        MORGAN_DEBUG("Could not create World");
+
+        return false;
+    }
+
+    m_world->init();
+
+    return true;
 }
 
 void CNgin::loop()
@@ -122,9 +120,9 @@ void CNgin::loop()
 
         // [game logic]
         {
+            handle_events();
             update(deltaTime);
             render();
-            handle_events();
         }
         // [game logic]
 

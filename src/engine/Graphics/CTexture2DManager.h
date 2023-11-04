@@ -18,7 +18,7 @@ public:
     static CTexture2DManager *instance();
 
     void drawTile(TextureID, Point2DI, TileWidth, TileHeight, TileRow, TileCol);
-    void drawFrame(TextureID, Point2DI, FrameWidth, FrameHeight, FrameRow, FrameCol, Angle = 0.0f, SDL_RendererFlip flip = SDL_RendererFlip::SDL_FLIP_NONE);
+    void drawFrame(TextureID, Point2DF, FrameWidth, FrameHeight, FrameRow, FrameCol, Angle = 0.0f, SDL_RendererFlip flip = SDL_RendererFlip::SDL_FLIP_NONE);
 
 //    Implement ITextureManager Interfaces
 public:
