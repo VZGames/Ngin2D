@@ -33,7 +33,8 @@ public:
 
 //    Implement CEntity's Interface
 public:
-    virtual void motionUpdate(float) override;
+    virtual void init() override;
+    virtual void process(float) override;
     virtual void handleKeyInput() override;
 };
 END_NAMESPACE

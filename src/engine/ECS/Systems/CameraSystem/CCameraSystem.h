@@ -1,15 +1,16 @@
-#ifndef CKEYINPUTSYSTEM_H
-#define CKEYINPUTSYSTEM_H
+#ifndef CCAMERASYSTEM_H
+#define CCAMERASYSTEM_H
 
 #include "CommonDefine.h"
 #include "AECSystem.h"
 
 BEGIN_NAMESPACE(Ngin)
-class CKeyInputSystem: public AECSystem
+class CCameraSystem: public AECSystem
 {
 public:
-    CKeyInputSystem();
+    CCameraSystem();
 
+    //    Implement IECSystem Interfaces
 public:
     virtual void init() override;
     virtual void update(float dt) override;
@@ -17,4 +18,4 @@ public:
 };
 END_NAMESPACE
 
-#endif // CKEYINPUTSYSTEM_H
+#endif // CCAMERASYSTEM_H

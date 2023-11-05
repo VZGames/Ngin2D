@@ -3,3 +3,6 @@ HEADERS += \
 
 SOURCES += \
     $$PWD/CWorld.cpp
+
+INCLUDEPATH += \
+    $$PWD

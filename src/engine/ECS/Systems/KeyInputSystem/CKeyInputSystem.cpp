@@ -8,17 +8,29 @@ CKeyInputSystem::CKeyInputSystem()
 
 }
 
-void CKeyInputSystem::update(std::vector<CEntity*> &entities, float dt)
+void CKeyInputSystem::init()
+{
+
+
+}
+
+void CKeyInputSystem::update(float dt)
 {
     UNUSED(dt)
-    m_entities = &entities;
     // do update for each entity
-    for(CEntity *entity: *m_entities)
-    {
+    auto fn = [](CEntity* entity){
         bool hasKeyInputComp = entity->hasComponent<SKeyInputComponent>();
         if(!hasKeyInputComp) return;
         entity->handleKeyInput();
-    }
+    };
+    CWorld::forEachEntities(fn);
+}
+
+void CKeyInputSystem::render()
+{
+
 }
 END_NAMESPACE
+
+
 

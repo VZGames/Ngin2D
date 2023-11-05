@@ -9,58 +9,58 @@ BEGIN_NAMESPACE(Ngin)
 CRenderSystem::CRenderSystem()
 {}
 
+void CRenderSystem::init()
+{
+    auto fn = [](CEntity* entity){
+        bool hasSpriteSheet = entity->hasComponent<SSpriteComponent>();
+        if(hasSpriteSheet)
+        {
+            auto sprite = entity->getComponent<SSpriteComponent>();
+            CTexture2DManager::instance()->loadTexture(sprite->textureId, sprite->source);
+        }
+    };
+    CWorld::forEachEntities(fn);
+}
+
 void CRenderSystem::update(float dt)
 {
     UNUSED(dt);
-}
-
-void CRenderSystem::update(std::vector<CEntity *> &entities, float dt)
-{
-    UNUSED(dt);
-    m_entities = &entities;
-
-
     // do update for each entity
-    for(CEntity *entity: *m_entities)
-    {
+    auto fn = [](CEntity* entity){
         bool hasPosition = entity->hasComponent<SPositionComponent>();
         bool hasSpriteSheet = entity->hasComponent<SSpriteComponent>();
         if(!(hasPosition && hasSpriteSheet)) return;
         auto sprite = entity->getComponent<SSpriteComponent>();
         sprite->col = (SDL_GetTicks() / sprite->frameSpeed) % sprite->frameCount;
-
-    }
-
+    };
+    CWorld::forEachEntities(fn);
 }
 
 void CRenderSystem::render()
 {
 
     //     do update for each entity
-    for(CEntity *entity: *m_entities)
-    {
+    auto fn = [](CEntity* entity){
         bool hasPosition = entity->hasComponent<SPositionComponent>();
         bool hasSpriteSheet = entity->hasComponent<SSpriteComponent>();
         if(hasPosition && hasSpriteSheet)
         {
             auto sprite = entity->getComponent<SSpriteComponent>();
             auto position = entity->getComponent<SPositionComponent>();
+            CTexture2DManager::instance()->loadTexture(sprite->textureId, sprite->source);
+            CTexture2DManager::instance()->drawFrame(
+                sprite->textureId,
+                Point2DF(position->x,
+                         position->y),
+                sprite->frameWidth,
+                sprite->frameHeight,
+                sprite->row,
+                sprite->col
+                );
 
-            if(CTexture2DManager::instance()->loadTexture(sprite->textureId, sprite->source))
-            {
-                CTexture2DManager::instance()->drawFrame(
-                    sprite->textureId,
-                    Point2DF(position->x,
-                             position->y),
-                    sprite->frameWidth,
-                    sprite->frameHeight,
-                    sprite->row,
-                    sprite->col
-                    );
-            }
         }
-    }
-
+    };
+    CWorld::forEachEntities(fn);
 
 }
 END_NAMESPACE

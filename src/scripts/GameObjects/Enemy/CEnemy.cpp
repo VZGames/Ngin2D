@@ -8,21 +8,22 @@ BEGIN_NAMESPACE(Script)
 CEnemy::CEnemy()
 {
     Ngin::CEntityManager::instance()->createEntity(this);
-    this->addComponent<Ngin::SPositionComponent>(300 * this->id(), 200)
+    this->addComponent<Ngin::SPositionComponent>(100, 200)
         ->addComponent<Ngin::SHealthComponent>(100)
         ->addComponent<Ngin::SSpriteComponent>("Animal", "./debug/assets/Characters/Cow.png", 32, 32, 3, 200);
 }
 
-void CEnemy::motionUpdate(float dt)
+void CEnemy::init()
 {
-    UNUSED(dt)
     m_position = this->getComponent<Ngin::SPositionComponent>();
     m_sprite   = this->getComponent<Ngin::SSpriteComponent>();
+    m_health   = this->getComponent<Ngin::SHealthComponent>();
+}
 
-    Offset offset = Ngin::CCamera::instance()->offset();
-    m_position->x -= offset.getX();
-    m_position->y -= offset.getY();
-    MORGAN_DEBUG("%f %f ", m_position->x, m_position->y)
+void CEnemy::process(float dt)
+{
+    UNUSED(dt)
 }
 END_NAMESPACE
+
 

@@ -12,8 +12,8 @@ public:
 
     //    Implement IECSystem Interfaces
 public:
+    virtual void init() override;
     virtual void update(float dt) override;
-    virtual void update(std::vector<CEntity*> &entities, float dt) override;
     virtual void render() override;
 
 };

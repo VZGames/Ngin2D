@@ -20,7 +20,8 @@ public:
 
 //    Implement CEntity's Interface
 public:
-    virtual void motionUpdate(float) override;
+    virtual void init() override;
+    virtual void process(float) override;
 };
 END_NAMESPACE
 

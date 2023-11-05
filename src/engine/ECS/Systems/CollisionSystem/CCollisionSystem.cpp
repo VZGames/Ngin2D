@@ -7,37 +7,34 @@ BEGIN_NAMESPACE(Ngin)
 CCollisionSystem::CCollisionSystem()
 {}
 
+void CCollisionSystem::init()
+{
+
+
+}
+
 void CCollisionSystem::update(float dt)
 {
     UNUSED(dt);
-}
-
-void CCollisionSystem::update(std::vector<CEntity *> &entities, float dt)
-{
-    UNUSED(dt);
-    m_entities = &entities;
-
-    
     // do update for each entity
-    for(CEntity *entity: *m_entities)
-    {
+    auto fn = [](CEntity* entity){
         bool hasPosition = entity->hasComponent<SPositionComponent>();
         if(!hasPosition) return;
-    }
-   
+    };
+    CWorld::forEachEntities(fn);
 }
 
 void CCollisionSystem::render()
 {
     
     // do update for each entity
-    for(CEntity *entity: *m_entities)
-    {
+    auto fn = [](CEntity* entity){
         UNUSED(entity)
-    }
-   
+    };
+    CWorld::forEachEntities(fn);
 }
 END_NAMESPACE
+
 
 
 

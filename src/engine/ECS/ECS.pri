@@ -11,6 +11,7 @@ HEADERS += \
     $$PWD/Entity/CEntityManager.h \
     $$PWD/Systems/AECSystem.h \
     $$PWD/Systems/CECSystemManager.h \
+    $$PWD/Systems/CameraSystem/CCameraSystem.h \
     $$PWD/Systems/CollisionSystem/CCollisionSystem.h \
     $$PWD/Systems/KeyInputSystem/CKeyInputSystem.h \
     $$PWD/Systems/MovementSystem/CMovementSystem.h \
@@ -22,6 +23,7 @@ SOURCES += \
     $$PWD/Entity/CEntity.cpp \
     $$PWD/Entity/CEntityManager.cpp \
     $$PWD/Systems/CECSystemManager.cpp \
+    $$PWD/Systems/CameraSystem/CCameraSystem.cpp \
     $$PWD/Systems/CollisionSystem/CCollisionSystem.cpp \
     $$PWD/Systems/KeyInputSystem/CKeyInputSystem.cpp \
     $$PWD/Systems/MovementSystem/CMovementSystem.cpp \

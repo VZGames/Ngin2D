@@ -2,6 +2,7 @@
 #define CWORLD_H
 
 #include "CommonDefine.h"
+
 BEGIN_NAMESPACE(Ngin)
 class CEntity;
 class AScene;
@@ -11,14 +12,16 @@ private:
     explicit CWorld();
     static CWorld *s_instance;
 
-    std::vector<CEntity*> *m_entities;
-    std::vector<AScene*>  *m_scenes;
+    static std::vector<CEntity*> s_entities;
+    static std::vector<AScene*>  s_scenes;
 
 public:
     static CWorld *instance();
-    
-    void registerEntities(std::vector<CEntity*>&);
-    void registerScenes(std::vector<AScene*>&);
+    static void forEachEntities(void (*fn)(CEntity*));
+    static void forEachScenes(void (*fn)(AScene*));
+
+    CWorld * registerEntities(std::vector<CEntity*>&);
+    CWorld * registerScenes(std::vector<AScene*>&);
 
 
     void init();

@@ -35,14 +35,14 @@ int main(int argc, char *argv[])
             &settingScene
         };
 
-    CWorld *world = Ngin::CWorld::instance();
+    CWorld *world = Ngin::CWorld::instance()
+                        ->registerEntities(entities)
+                        ->registerScenes(scenes);
+
     CSceneManager::instance()->loadScene(gameScene.id(), E_LOAD_SCENE_MODE::SINGLE);
 
     if(Ngin::CNgin::instance()->initialize("Game Framework", 980, 620, world))
     {
-        world->registerEntities(entities);
-        world->registerScenes(scenes);
-
         Ngin::CNgin::instance()->loop();
         Ngin::CNgin::instance()->clean();
         Ngin::CNgin::instance()->quit();

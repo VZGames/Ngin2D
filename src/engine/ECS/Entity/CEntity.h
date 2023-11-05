@@ -6,7 +6,6 @@
 #include "Alias.h"
 #include "Component/CComponent.h"
 #include "Component/CComponentManager.h"
-#include "CCamera.h"
 
 #define COMP_MANAGER CComponentManager::instance()
 
@@ -26,7 +25,8 @@ public:
     EntityID id() const;
     void setId(const EntityID &newId);
     
-    virtual void motionUpdate(float dt) { UNUSED(dt) };
+    virtual void init() {};
+    virtual void process(float dt) { UNUSED(dt) };
     virtual void handleKeyInput() {};
 
     template<class T, typename ...TArgs>
