@@ -27,7 +27,6 @@ int main(int argc, char *argv[])
         {
             &player,
             &enemy,
-            &enemy2
         };
 
     std::vector<AScene*> scenes
