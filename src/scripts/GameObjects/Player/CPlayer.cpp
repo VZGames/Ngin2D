@@ -91,15 +91,13 @@ void CPlayer::init()
 void CPlayer::process(float dt)
 {
     UNUSED(dt)
-    Size2D<float> winSize = Ngin::CNgin::windowSize();
-    m_camera->offset.setX(m_position->x - (winSize.width/2 - m_sprite->frameWidth/2));
-    m_camera->offset.setY(m_position->y - (winSize.height/2 - m_sprite->frameHeight/2));
 
-    Ngin::CCamera::instance()->update(m_camera->offset);
 }
 
 void CPlayer::handleKeyInput()
 {
+    m_motion->velocity.Zeros();
+
     if (Ngin::CKeyEvent::instance()->sendEvent(SDL_SCANCODE_A))
     {
         walk(MOVE_DIRECTION::MOVE_LEFT);
