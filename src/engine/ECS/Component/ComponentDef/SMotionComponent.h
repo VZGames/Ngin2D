@@ -12,7 +12,8 @@ struct SMotionComponent: public CComponent
     {
         m_name = __FUNCTION__;
     }
-    float speed, direction;
+    float speed;
+    int direction;
     Vector2DF velocity;
     Vector2DF acceleration;
     bool running = 0;

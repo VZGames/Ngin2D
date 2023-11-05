@@ -25,9 +25,17 @@ void CCamera::update(Offset &newOffset)
     if(m_target == nullptr) return;
     if(!m_target->hasComponent<SPositionComponent>()) return;
     SPositionComponent *position = m_target->getComponent<SPositionComponent>();
-    position->toPoint2DF() -= newOffset;
+    m_offset = newOffset;
+    position->x -= m_offset.getX();
+    position->y -= m_offset.getY();
+}
+
+Offset CCamera::offset() const
+{
+    return m_offset;
 }
 END_NAMESPACE
+
 
 
 

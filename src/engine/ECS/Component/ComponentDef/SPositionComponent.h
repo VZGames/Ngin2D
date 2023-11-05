@@ -3,21 +3,19 @@
 
 #include "CommonDefine.h"
 #include "Component/CComponent.h"
-#include "point2D.h"
+#include "vector2d.h"
 BEGIN_NAMESPACE(Ngin)
-struct SPositionComponent: public CComponent
+struct SPositionComponent: public Vector2DF, public CComponent
 {
-    SPositionComponent(float x = 0.0f, float y = 0.0f): x(x), y(y)
+    SPositionComponent(float x = 0.0f, float y = 0.0f): Vector2DF(x, y)
     {
         m_name = __FUNCTION__;
     }
-    Point2DF toPoint2DF()
+
+    void update(Vector2DF vec)
     {
-        return Point2DF(x, y);
+        *this += vec;
     }
-    float x;
-    float y;
-    float lastX, lastY;
 };
 END_NAMESPACE
 

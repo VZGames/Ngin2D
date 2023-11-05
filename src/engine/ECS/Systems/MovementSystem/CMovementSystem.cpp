@@ -1,6 +1,10 @@
 #include "CMovementSystem.h"
 #include "LoggerDefines.h"
 #include "CEntity.h"
+#include "CCamera.h"
+#include "ComponentDef/SPositionComponent.h"
+#include "ComponentDef/SMotionComponent.h"
+#include "ComponentDef/SCameraComponent.h"
 
 BEGIN_NAMESPACE(Ngin)
 CMovementSystem::CMovementSystem()
@@ -32,7 +36,7 @@ void CMovementSystem::render()
     {
         UNUSED(entity)
     }
-   
+
 }
 END_NAMESPACE
 

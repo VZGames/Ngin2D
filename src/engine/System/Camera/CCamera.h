@@ -18,6 +18,7 @@ public:
     static CCamera *instance();
     void setTarget(CEntity*);
     void update(Offset&);
+    Offset offset() const;
 };
 END_NAMESPACE
 
