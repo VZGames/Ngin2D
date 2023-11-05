@@ -16,7 +16,7 @@ CECSystemManager *CECSystemManager::instance()
     return s_instance = (s_instance == nullptr)? new CECSystemManager(): s_instance;
 }
 
-void CECSystemManager::init(std::vector<CEntity*> &entities, std::vector<AScene*> &scenes)
+void CECSystemManager::init(std::vector<CEntity*> &entities)
 {
     m_systems.push_back(&m_collision_system);
     m_systems.push_back(&m_movement_system);

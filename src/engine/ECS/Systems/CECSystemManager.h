@@ -28,7 +28,7 @@ private:
 public:
     static CECSystemManager *instance();
 
-    void init(std::vector<CEntity*>&, std::vector<AScene*>&);
+    void init(std::vector<CEntity*>&);
     void update(float dt);
     void render();
 };

@@ -1,6 +1,10 @@
 #include "CMovementSystem.h"
 #include "LoggerDefines.h"
 #include "CEntity.h"
+#include "CCamera.h"
+#include "ComponentDef/SPositionComponent.h"
+#include "ComponentDef/SMotionComponent.h"
+
 BEGIN_NAMESPACE(Ngin)
 CMovementSystem::CMovementSystem()
 {}
@@ -17,7 +21,13 @@ void CMovementSystem::update(float dt)
     // do update for each entity
 
     auto fn = [](CEntity* entity){
-        UNUSED(entity)
+        bool hasPosition    = entity->hasComponent<SPositionComponent>();
+        bool hasMotion      = entity->hasComponent<SMotionComponent>();
+
+        if(!(hasPosition && hasMotion)) return;
+        auto *position = entity->getComponent<SPositionComponent>();
+        auto *motion   = entity->getComponent<SMotionComponent>();
+        position->update(motion->velocity);
     };
     CWorld::forEachEntities(fn);
 }

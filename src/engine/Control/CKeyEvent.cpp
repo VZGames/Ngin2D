@@ -67,22 +67,11 @@ void CKeyEvent::listen()
 
 bool CKeyEvent::sendEvent(SDL_Scancode numKey)
 {
-    if(m_inputs.find(numKey) == m_inputs.end()) return false;
     if (m_state[numKey])
     {
-        m_inputs[numKey]();
         return true;
     }
     return false;
-}
-
-CKeyEvent *CKeyEvent::registerEvent(SDL_Scancode numKey, std::function<void (void)> handle)
-{
-    if(m_inputs.find(numKey) == m_inputs.end())
-    {
-        m_inputs[numKey] = handle;
-    }
-    return this;
 }
 
 const SDL_Event &CKeyEvent::getEvent() const
@@ -97,7 +86,7 @@ bool CKeyEvent::isReleased() const
 
 bool CKeyEvent::isPressed() const
 {
-    return !m_released;
+    return m_pressed;
 }
 END_NAMESPACE
 

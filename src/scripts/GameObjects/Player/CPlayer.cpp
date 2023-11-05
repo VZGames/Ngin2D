@@ -13,13 +13,6 @@ CPlayer::CPlayer()
         ->addComponent<Ngin::SCameraComponent>(this)
         ->addComponent<Ngin::SMotionComponent>(0.6)
         ->addComponent<Ngin::SKeyInputComponent>();
-
-    //    key input map
-    Ngin::CKeyEvent::instance()
-        ->registerEvent(SDL_SCANCODE_A, std::bind(&CPlayer::walk, this, MOVE_DIRECTION::MOVE_LEFT))
-        ->registerEvent(SDL_SCANCODE_D, std::bind(&CPlayer::walk, this, MOVE_DIRECTION::MOVE_RIGHT))
-        ->registerEvent(SDL_SCANCODE_W, std::bind(&CPlayer::walk, this, MOVE_DIRECTION::MOVE_UP))
-        ->registerEvent(SDL_SCANCODE_S, std::bind(&CPlayer::walk, this, MOVE_DIRECTION::MOVE_DOWN));
 }
 
 void CPlayer::idle()
@@ -36,32 +29,49 @@ void CPlayer::walk(MOVE_DIRECTION direction)
 {
     switch (direction) {
     case MOVE_DIRECTION::MOVE_LEFT:
+    {
+        m_sprite->col = 2;
+        m_sprite->row = 2;
+        m_sprite->frameCount = 4;
         m_motion->direction = -1;
         m_motion->velocity = Vector2DF(m_motion->speed * (-5),0);
-        m_camera->offset += Offset(m_motion->velocity.x, 0);
+        m_camera->offset -= Offset(m_motion->velocity.x, 0);
         break;
+    }
     case MOVE_DIRECTION::MOVE_RIGHT:
+    {
+        m_sprite->col = 2;
+        m_sprite->row = 3;
+        m_sprite->frameCount = 4;
         m_motion->direction = 1;
         m_motion->velocity = Vector2DF(m_motion->speed * 5,0);
         m_camera->offset -= Offset(m_motion->velocity.x, 0);
         break;
+    }
     case MOVE_DIRECTION::MOVE_UP:
+    {
+        m_sprite->col = 2;
+        m_sprite->row = 1;
+        m_sprite->frameCount = 4;
         m_motion->direction = -1;
         m_motion->velocity = Vector2DF(0, m_motion->speed * (-5));
         m_camera->offset -= Offset(0, m_motion->velocity.y);
-
         break;
+    }
     case MOVE_DIRECTION::MOVE_DOWN:
+    {
+        m_sprite->col = 2;
+        m_sprite->row = 0;
+        m_sprite->frameCount = 4;
         m_motion->direction = 1;
         m_motion->velocity = Vector2DF(0, m_motion->speed * 5);
         m_camera->offset += Offset(0, m_motion->velocity.y);
         break;
+    }
     default:
-        m_motion->velocity = Vector2DF(0, 0);
+        m_motion->velocity.Zeros();
         break;
     }
-
-    m_position->update(m_motion->velocity);
 }
 
 void CPlayer::attach(CTRL_SLOTS slot)
@@ -76,7 +86,11 @@ void CPlayer::init()
     m_camera   = this->getComponent<Ngin::SCameraComponent>();
     m_sprite   = this->getComponent<Ngin::SSpriteComponent>();
     m_health   = this->getComponent<Ngin::SHealthComponent>();
+}
 
+void CPlayer::process(float dt)
+{
+    UNUSED(dt)
     Size2D<float> winSize = Ngin::CNgin::windowSize();
     m_camera->offset.setX(m_position->x - (winSize.width/2 - m_sprite->frameWidth/2));
     m_camera->offset.setY(m_position->y - (winSize.height/2 - m_sprite->frameHeight/2));
@@ -84,38 +98,23 @@ void CPlayer::init()
     Ngin::CCamera::instance()->update(m_camera->offset);
 }
 
-void CPlayer::process(float dt)
-{
-    UNUSED(dt)
-
-    idle();
-}
-
 void CPlayer::handleKeyInput()
 {
     if (Ngin::CKeyEvent::instance()->sendEvent(SDL_SCANCODE_A))
     {
-        m_sprite->col = 2;
-        m_sprite->row = 2;
-        m_sprite->frameCount = 4;
+        walk(MOVE_DIRECTION::MOVE_LEFT);
     }
     if (Ngin::CKeyEvent::instance()->sendEvent(SDL_SCANCODE_D))
     {
-        m_sprite->col = 2;
-        m_sprite->row = 3;
-        m_sprite->frameCount = 4;
+        walk(MOVE_DIRECTION::MOVE_RIGHT);
     }
     if (Ngin::CKeyEvent::instance()->sendEvent(SDL_SCANCODE_W))
     {
-        m_sprite->col = 2;
-        m_sprite->row = 1;
-        m_sprite->frameCount = 4;
+        walk(MOVE_DIRECTION::MOVE_UP);
     }
     if (Ngin::CKeyEvent::instance()->sendEvent(SDL_SCANCODE_S))
     {
-        m_sprite->col = 2;
-        m_sprite->row = 0;
-        m_sprite->frameCount = 4;
+        walk(MOVE_DIRECTION::MOVE_DOWN);
     }
 }
 END_NAMESPACE

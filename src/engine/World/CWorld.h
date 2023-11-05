@@ -17,8 +17,8 @@ private:
 
 public:
     static CWorld *instance();
-    static void forEachEntities(void (*fn)(CEntity*));
-    static void forEachScenes(void (*fn)(AScene*));
+    static void forEachEntities(std::function<void(CEntity*)>);
+    static void forEachScenes(std::function<void(AScene*)>);
 
     CWorld * registerEntities(std::vector<CEntity*>&);
     CWorld * registerScenes(std::vector<AScene*>&);

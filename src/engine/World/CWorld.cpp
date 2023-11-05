@@ -3,6 +3,8 @@
 #include "Scene/CSceneManager.h"
 #include "LoggerDefines.h"
 #include "CCamera.h"
+#include "AScene.h"
+#include "CEntity.h"
 
 BEGIN_NAMESPACE(Ngin)
 CWorld* CWorld::s_instance = nullptr;
@@ -31,7 +33,7 @@ CWorld *CWorld::registerScenes(std::vector<AScene*> &scenes)
     return this;
 }
 
-void CWorld::forEachEntities(void (*fn)(CEntity* entity))
+void CWorld::forEachEntities(std::function<void(CEntity*)> fn)
 {
     for(CEntity *entity: s_entities)
     {
@@ -39,7 +41,7 @@ void CWorld::forEachEntities(void (*fn)(CEntity* entity))
     }
 }
 
-void CWorld::forEachScenes(void (*fn)(AScene* scene))
+void CWorld::forEachScenes(std::function<void(AScene*)> fn)
 {
     for(AScene *scene: s_scenes)
     {
@@ -49,7 +51,11 @@ void CWorld::forEachScenes(void (*fn)(AScene* scene))
 
 void CWorld::init()
 {
-    CECSystemManager::instance()->init(s_entities, s_scenes);
+    CECSystemManager::instance()->init(s_entities);
+    for(AScene *scene: s_scenes)
+    {
+        scene->init();
+    }
 }
 
 void CWorld::update(float dt)

@@ -17,9 +17,10 @@ void CCollisionSystem::update(float dt)
 {
     UNUSED(dt);
     // do update for each entity
-    auto fn = [](CEntity* entity){
+    auto fn = [dt](CEntity* entity){
         bool hasPosition = entity->hasComponent<SPositionComponent>();
         if(!hasPosition) return;
+
     };
     CWorld::forEachEntities(fn);
 }

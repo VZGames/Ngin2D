@@ -26,19 +26,19 @@ void CRenderSystem::update(float dt)
 {
     UNUSED(dt);
     // do update for each entity
-    auto fn = [](CEntity* entity){
+    auto fn = [dt](CEntity* entity){
         bool hasPosition = entity->hasComponent<SPositionComponent>();
         bool hasSpriteSheet = entity->hasComponent<SSpriteComponent>();
         if(!(hasPosition && hasSpriteSheet)) return;
         auto sprite = entity->getComponent<SSpriteComponent>();
         sprite->col = (SDL_GetTicks() / sprite->frameSpeed) % sprite->frameCount;
+
     };
     CWorld::forEachEntities(fn);
 }
 
 void CRenderSystem::render()
 {
-
     //     do update for each entity
     auto fn = [](CEntity* entity){
         bool hasPosition = entity->hasComponent<SPositionComponent>();
