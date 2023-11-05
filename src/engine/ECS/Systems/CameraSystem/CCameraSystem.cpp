@@ -21,7 +21,7 @@ void CCameraSystem::update(float dt)
 {
     UNUSED(dt)
     // do update for each entity
-    auto fn = [dt](CEntity* entity){
+    auto fn = [](CEntity* entity){
         bool hasPosition    = entity->hasComponent<SPositionComponent>();
 
         if(!hasPosition) return;
@@ -29,7 +29,7 @@ void CCameraSystem::update(float dt)
         bool hasCamera      = entity->hasComponent<SCameraComponent>();
         bool hasSprite      = entity->hasComponent<SSpriteComponent>();
 
-        if(hasCamera)
+        if(hasCamera && hasSprite)
         {
             auto *camera = entity->getComponent<SCameraComponent>();
             auto *sprite = entity->getComponent<SSpriteComponent>();

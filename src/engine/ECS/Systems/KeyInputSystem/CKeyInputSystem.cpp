@@ -22,7 +22,6 @@ void CKeyInputSystem::update(float dt)
         bool hasKeyInputComp = entity->hasComponent<SKeyInputComponent>();
         if(!hasKeyInputComp) return;
         entity->handleKeyInput();
-
     };
     CWorld::forEachEntities(fn);
 }

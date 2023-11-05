@@ -32,7 +32,6 @@ void CRenderSystem::update(float dt)
         if(!(hasPosition && hasSpriteSheet)) return;
         auto sprite = entity->getComponent<SSpriteComponent>();
         sprite->col = (SDL_GetTicks() / sprite->frameSpeed) % sprite->frameCount;
-
     };
     CWorld::forEachEntities(fn);
 }
@@ -57,7 +56,6 @@ void CRenderSystem::render()
                 sprite->row,
                 sprite->col
                 );
-
         }
     };
     CWorld::forEachEntities(fn);

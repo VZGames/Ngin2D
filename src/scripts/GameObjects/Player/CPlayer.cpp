@@ -91,13 +91,10 @@ void CPlayer::init()
 void CPlayer::process(float dt)
 {
     UNUSED(dt)
-
 }
 
 void CPlayer::handleKeyInput()
 {
-    m_motion->velocity.Zeros();
-
     if (Ngin::CKeyEvent::instance()->sendEvent(SDL_SCANCODE_A))
     {
         walk(MOVE_DIRECTION::MOVE_LEFT);
@@ -110,10 +107,29 @@ void CPlayer::handleKeyInput()
     {
         walk(MOVE_DIRECTION::MOVE_UP);
     }
-    if (Ngin::CKeyEvent::instance()->sendEvent(SDL_SCANCODE_S))
-    {
-        walk(MOVE_DIRECTION::MOVE_DOWN);
-    }
+//    if (Ngin::CKeyEvent::instance()->sendEvent(SDL_SCANCODE_S))
+//    {
+//        walk(MOVE_DIRECTION::MOVE_DOWN);
+//    }
+//    if(m_position->x < 0)
+//    {
+//        m_position->x = 0;
+//    }
+
+//    if(m_position->y < 0)
+//    {
+//        m_position->y = 0;
+//    }
+
+//    if(m_position->x >  Ngin::CNgin::windowSize().width - m_sprite->frameWidth)
+//    {
+//        m_position->x =  Ngin::CNgin::windowSize().width - m_sprite->frameWidth;
+//    }
+
+//    if(m_position->y > Ngin::CNgin::windowSize().height - m_sprite->frameHeight)
+//    {
+//        m_position->y = Ngin::CNgin::windowSize().height - m_sprite->frameHeight;
+//    }
 }
 END_NAMESPACE
 
