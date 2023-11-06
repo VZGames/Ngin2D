@@ -14,7 +14,7 @@ private:
     CCamera();
     static CCamera  *s_instance;
     CEntity         *m_target = nullptr;
-    float           m_scale{1.0f};
+    float           m_scale{2.0f};
     Offset          m_offset{0.0f, 0.0f};
 public:
     static CCamera *instance();
@@ -22,7 +22,7 @@ public:
     void update(Offset&);
     Offset offset() const;
     float scale() const;
-    void zoom(E_CAMERA_ZOOM, const float&);
+    void zoom(E_CAMERA_ZOOM, const float& scale = 0.2);
 };
 END_NAMESPACE
 

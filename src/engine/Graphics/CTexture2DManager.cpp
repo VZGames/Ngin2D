@@ -1,6 +1,8 @@
 #include "CTexture2DManager.h"
 #include "LoggerDefines.h"
 #include "CNgin.h"
+#include "CCamera.h"
+
 BEGIN_NAMESPACE(Ngin)
 CTexture2DManager *CTexture2DManager::s_instance = nullptr;
 CTexture2DManager::CTexture2DManager()
@@ -27,12 +29,13 @@ void CTexture2DManager::drawFrame(TextureID id, Point2DF pos, FrameWidth w, Fram
 {
     int frameX = w * c;
     int frameY = h * r;
+    float scale = CCamera::instance()->scale();
     SDL_Rect srcRect = {frameX, frameY, w, h};
     SDL_FRect destRect = {
         pos.getX(),
         pos.getY(),
-        (float)w,
-        (float)h
+        (float)w * scale,
+        (float)h * scale
     };
 
     SDL_RenderCopyExF(CNgin::renderer(), m_textures[id], &srcRect, &destRect, angle, NULL, flip);

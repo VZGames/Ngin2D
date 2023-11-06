@@ -1,6 +1,8 @@
 #include "CKeyEvent.h"
 #include "CNgin.h"
 #include "LoggerDefines.h"
+#include "CCamera.h"
+
 BEGIN_NAMESPACE(Ngin)
 CKeyEvent *CKeyEvent::s_instance = nullptr;
 CKeyEvent::CKeyEvent()
@@ -44,19 +46,14 @@ void CKeyEvent::listen()
             break;
         case SDL_MOUSEWHEEL:
         {
-            float x = 1;
-            float y = 1;
             if(m_event.wheel.y > 0) // scroll up
             {
-                y = 1.6;
-                x = 1.6;
+                CCamera::instance()->zoom(E_CAMERA_ZOOM::ZOOM_OUT);
             }
             else if(m_event.wheel.y < 0) // scroll down
             {
-                y = 1;
-                x = 1;
+                CCamera::instance()->zoom(E_CAMERA_ZOOM::ZOOM_IN);
             }
-            SDL_RenderSetScale(CNgin::renderer(), x, y);
             break;
         }
         default:

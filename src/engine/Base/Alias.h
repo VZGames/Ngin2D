@@ -31,6 +31,8 @@ using FrameHeight = int;
 using FrameRow = int;
 using FrameCol = int;
 
+using Scale    = float;
+
 using TileWidth = int;
 using TileHeight = int;
 

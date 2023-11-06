@@ -36,9 +36,9 @@ void CCameraSystem::update(float dt)
             Size2D<float> winSize = CNgin::windowSize();
             float width  = winSize.width;
             float height = winSize.height;
-
-            camera->offset.setX(position->x - (width/2 - sprite->frameWidth/2));
-            camera->offset.setY(position->y - (height/2 - sprite->frameHeight/2));
+            float scale  = Ngin::CCamera::instance()->scale();
+            camera->offset.setX(position->x - (width/2 - (sprite->frameWidth * scale)/2));
+            camera->offset.setY(position->y - (height/2 - (sprite->frameHeight * scale)/2));
 
             Ngin::CCamera::instance()->update(camera->offset);
         }

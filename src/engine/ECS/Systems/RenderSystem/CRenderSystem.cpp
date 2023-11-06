@@ -4,7 +4,7 @@
 #include "CEntity.h"
 #include "ComponentDef/SPositionComponent.h"
 #include "ComponentDef/SSpriteComponent.h"
-
+#include "CCamera.h"
 BEGIN_NAMESPACE(Ngin)
 CRenderSystem::CRenderSystem()
 {}
