@@ -36,6 +36,7 @@ void CCameraSystem::update(float dt)
             Size2D<float> winSize = CNgin::windowSize();
             float width  = winSize.width;
             float height = winSize.height;
+
             camera->offset.setX(position->x - (width/2 - sprite->frameWidth/2));
             camera->offset.setY(position->y - (height/2 - sprite->frameHeight/2));
 
@@ -56,6 +57,10 @@ void CCameraSystem::update(float dt)
 
 void CCameraSystem::render()
 {
+    auto fn = [](CEntity* entity){
+
+    };
+    CWorld::forEachEntities(fn);
 }
 END_NAMESPACE
 

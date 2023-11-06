@@ -12,15 +12,17 @@ class CCamera
 {
 private:
     CCamera();
-    static CCamera *s_instance;
-    Offset m_offset{0.0f, 0.0f};
-    CEntity *m_target = nullptr;
+    static CCamera  *s_instance;
+    CEntity         *m_target = nullptr;
+    float           m_scale{1.0f};
+    Offset          m_offset{0.0f, 0.0f};
 public:
     static CCamera *instance();
     void setTarget(CEntity*);
     void update(Offset&);
     Offset offset() const;
-    void zoom(E_CAMERA_ZOOM, float);
+    float scale() const;
+    void zoom(E_CAMERA_ZOOM, const float&);
 };
 END_NAMESPACE
 

@@ -35,19 +35,24 @@ Offset CCamera::offset() const
     return m_offset;
 }
 
-void CCamera::zoom(E_CAMERA_ZOOM mode, float scale)
+float CCamera::scale() const
 {
-    if(E_CAMERA_ZOOM::ZOOM_IN)
-    {
+    return m_scale;
+}
 
+void CCamera::zoom(E_CAMERA_ZOOM mode, const float &scale)
+{
+    m_scale = scale;
+    if(mode == E_CAMERA_ZOOM::ZOOM_IN)
+    {
     }
-    else if(E_CAMERA_ZOOM::ZOOM_OUT)
+    else if(mode == E_CAMERA_ZOOM::ZOOM_OUT)
     {
-
     }
     return;
 }
 END_NAMESPACE
+
 
 
 
