@@ -1,7 +1,6 @@
 #include "CMovementSystem.h"
 #include "LoggerDefines.h"
 #include "CEntity.h"
-#include "CCamera.h"
 #include "ComponentDef/SPositionComponent.h"
 #include "ComponentDef/SMotionComponent.h"
 
@@ -34,13 +33,6 @@ void CMovementSystem::update(float dt)
 
 void CMovementSystem::render()
 {
-    
-    // do update for each entity
-    auto fn = [](CEntity* entity){
-        UNUSED(entity)
-    };
-    CWorld::forEachEntities(fn);
-
 }
 END_NAMESPACE
 

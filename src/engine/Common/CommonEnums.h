@@ -70,4 +70,10 @@ enum E_LOAD_SCENE_MODE
     ADDITIVE
 };
 
+enum E_CAMERA_ZOOM
+{
+    ZOOM_IN,
+    ZOOM_OUT
+};
+
 #endif // COMMONENUMS_H

@@ -18,7 +18,7 @@ void CKeyInputSystem::update(float dt)
 {
     UNUSED(dt)
     // do update for each entity
-    auto fn = [dt](CEntity* entity){
+    auto fn = [](CEntity* entity){
         bool hasKeyInputComp = entity->hasComponent<SKeyInputComponent>();
         if(!hasKeyInputComp) return;
         entity->handleKeyInput();
@@ -28,7 +28,6 @@ void CKeyInputSystem::update(float dt)
 
 void CKeyInputSystem::render()
 {
-
 }
 END_NAMESPACE
 

@@ -2,6 +2,7 @@
 #define CCAMERA_H
 
 #include "CommonDefine.h"
+#include "CommonEnums.h"
 #include "offset2D.h"
 
 BEGIN_NAMESPACE(Ngin)
@@ -19,6 +20,7 @@ public:
     void setTarget(CEntity*);
     void update(Offset&);
     Offset offset() const;
+    void zoom(E_CAMERA_ZOOM, float);
 };
 END_NAMESPACE
 

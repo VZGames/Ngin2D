@@ -26,7 +26,7 @@ void CRenderSystem::update(float dt)
 {
     UNUSED(dt);
     // do update for each entity
-    auto fn = [dt](CEntity* entity){
+    auto fn = [](CEntity* entity){
         bool hasPosition = entity->hasComponent<SPositionComponent>();
         bool hasSpriteSheet = entity->hasComponent<SSpriteComponent>();
         if(!(hasPosition && hasSpriteSheet)) return;
@@ -46,7 +46,6 @@ void CRenderSystem::render()
         {
             auto sprite = entity->getComponent<SSpriteComponent>();
             auto position = entity->getComponent<SPositionComponent>();
-            CTexture2DManager::instance()->loadTexture(sprite->textureId, sprite->source);
             CTexture2DManager::instance()->drawFrame(
                 sprite->textureId,
                 Point2DF(position->x,

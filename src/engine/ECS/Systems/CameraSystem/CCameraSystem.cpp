@@ -34,8 +34,10 @@ void CCameraSystem::update(float dt)
             auto *camera = entity->getComponent<SCameraComponent>();
             auto *sprite = entity->getComponent<SSpriteComponent>();
             Size2D<float> winSize = CNgin::windowSize();
-            camera->offset.setX(position->x - (winSize.width/2 - sprite->frameWidth/2));
-            camera->offset.setY(position->y - (winSize.height/2 - sprite->frameHeight/2));
+            float width  = winSize.width;
+            float height = winSize.height;
+            camera->offset.setX(position->x - (width/2 - sprite->frameWidth/2));
+            camera->offset.setY(position->y - (height/2 - sprite->frameHeight/2));
 
             Ngin::CCamera::instance()->update(camera->offset);
         }
@@ -54,7 +56,6 @@ void CCameraSystem::update(float dt)
 
 void CCameraSystem::render()
 {
-
 }
 END_NAMESPACE
 

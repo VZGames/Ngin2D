@@ -2,6 +2,7 @@
 #define CKEYEVENT_H
 
 #include "CommonDefine.h"
+#include "LoggerDefines.h"
 #include <SDL2/SDL_events.h>
 
 BEGIN_NAMESPACE(Ngin)
@@ -14,13 +15,27 @@ private:
     bool                                                        m_released{true};
     bool                                                        m_pressed{false};
     SDL_Event                                                   m_event;
+    std::unordered_map<SDL_Scancode, std::function<void(void)>> m_inputs;
+
 public:
     static CKeyEvent *instance();
     void listen();
 
     bool sendEvent(SDL_Scancode);
 
-    const SDL_Event &getEvent() const;
+    CKeyEvent *registerKeyInput(SDL_Scancode, std::function<void(void)>);
+
+    template<typename ...TArgs>
+    void handleEvent(SDL_Scancode numkey, TArgs ...args) const
+    {
+        try
+        {
+            m_inputs.at(numkey)(std::forward<TArgs>(args)...);
+        } catch (...)
+        {
+            MORGAN_DEBUG("This key has no defined behavior ")
+        }
+    }
 
     bool isReleased() const;
     bool isPressed() const;

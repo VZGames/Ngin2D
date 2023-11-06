@@ -1,7 +1,6 @@
 #include "CPlayer.h"
 #include "CKeyEvent.h"
 #include "Entity/CEntityManager.h"
-#include "CNgin.h"
 
 BEGIN_NAMESPACE(Script)
 CPlayer::CPlayer()
@@ -17,6 +16,7 @@ CPlayer::CPlayer()
 
 void CPlayer::idle()
 {
+    m_motion->velocity.Zeros();
     m_sprite->frameCount = 2;
 }
 
@@ -69,7 +69,6 @@ void CPlayer::walk(MOVE_DIRECTION direction)
         break;
     }
     default:
-        m_motion->velocity.Zeros();
         break;
     }
 }
@@ -86,6 +85,13 @@ void CPlayer::init()
     m_camera   = this->getComponent<Ngin::SCameraComponent>();
     m_sprite   = this->getComponent<Ngin::SSpriteComponent>();
     m_health   = this->getComponent<Ngin::SHealthComponent>();
+
+    //    key input map
+    Ngin::CKeyEvent::instance()
+        ->registerKeyInput(SDL_SCANCODE_A, std::bind(&CPlayer::walk, this, MOVE_DIRECTION::MOVE_LEFT))
+        ->registerKeyInput(SDL_SCANCODE_D, std::bind(&CPlayer::walk, this, MOVE_DIRECTION::MOVE_RIGHT))
+        ->registerKeyInput(SDL_SCANCODE_W, std::bind(&CPlayer::walk, this, MOVE_DIRECTION::MOVE_UP))
+        ->registerKeyInput(SDL_SCANCODE_S, std::bind(&CPlayer::walk, this, MOVE_DIRECTION::MOVE_DOWN));
 }
 
 void CPlayer::process(float dt)
@@ -95,41 +101,23 @@ void CPlayer::process(float dt)
 
 void CPlayer::handleKeyInput()
 {
+    idle();
     if (Ngin::CKeyEvent::instance()->sendEvent(SDL_SCANCODE_A))
     {
-        walk(MOVE_DIRECTION::MOVE_LEFT);
+        Ngin::CKeyEvent::instance()->handleEvent(SDL_SCANCODE_A);
     }
     if (Ngin::CKeyEvent::instance()->sendEvent(SDL_SCANCODE_D))
     {
-        walk(MOVE_DIRECTION::MOVE_RIGHT);
+        Ngin::CKeyEvent::instance()->handleEvent(SDL_SCANCODE_D);
     }
     if (Ngin::CKeyEvent::instance()->sendEvent(SDL_SCANCODE_W))
     {
-        walk(MOVE_DIRECTION::MOVE_UP);
+        Ngin::CKeyEvent::instance()->handleEvent(SDL_SCANCODE_W);
     }
-//    if (Ngin::CKeyEvent::instance()->sendEvent(SDL_SCANCODE_S))
-//    {
-//        walk(MOVE_DIRECTION::MOVE_DOWN);
-//    }
-//    if(m_position->x < 0)
-//    {
-//        m_position->x = 0;
-//    }
-
-//    if(m_position->y < 0)
-//    {
-//        m_position->y = 0;
-//    }
-
-//    if(m_position->x >  Ngin::CNgin::windowSize().width - m_sprite->frameWidth)
-//    {
-//        m_position->x =  Ngin::CNgin::windowSize().width - m_sprite->frameWidth;
-//    }
-
-//    if(m_position->y > Ngin::CNgin::windowSize().height - m_sprite->frameHeight)
-//    {
-//        m_position->y = Ngin::CNgin::windowSize().height - m_sprite->frameHeight;
-//    }
+    if (Ngin::CKeyEvent::instance()->sendEvent(SDL_SCANCODE_S))
+    {
+        Ngin::CKeyEvent::instance()->handleEvent(SDL_SCANCODE_S);
+    }
 }
 END_NAMESPACE
 

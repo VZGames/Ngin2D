@@ -74,9 +74,13 @@ bool CKeyEvent::sendEvent(SDL_Scancode numKey)
     return false;
 }
 
-const SDL_Event &CKeyEvent::getEvent() const
+CKeyEvent *CKeyEvent::registerKeyInput(SDL_Scancode numKey, std::function<void (void)> handle)
 {
-    return m_event;
+    if(m_inputs.find(numKey) == m_inputs.end())
+    {
+        m_inputs[numKey] = handle;
+    }
+    return this;
 }
 
 bool CKeyEvent::isReleased() const
