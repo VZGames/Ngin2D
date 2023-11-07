@@ -38,6 +38,13 @@ void CCameraSystem::update(float dt)
 
             Ngin::CCamera::instance()->update(camera->offset);
         }
+        else
+        {
+            Offset offset = Ngin::CCamera::instance()->offset();
+            MORGAN_DEBUG("%f %f", offset.getX(), offset.getY())
+            position->x -= offset.getX();
+            position->y -= offset.getY();
+        }
     };
     CWorld::forEachEntities(fn);
 }

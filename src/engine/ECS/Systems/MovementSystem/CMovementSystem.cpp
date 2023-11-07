@@ -23,20 +23,8 @@ void CMovementSystem::update(float dt)
     auto fn = [](CEntity* entity){
         auto *position = entity->getComponent<SPositionComponent>();
         auto *motion   = entity->getComponent<SMotionComponent>();
-        auto *camera   = entity->getComponent<SCameraComponent>();
-
         if(!(position && motion)) return;
-        if(camera)
-        {
-            position->update(motion->velocity);
-        }
-        else
-        {
-            Offset offset = Ngin::CCamera::instance()->offset();
-            MORGAN_DEBUG("%f %f", offset.getX(), offset.getY())
-            position->x -= offset.getX();
-            position->y -= offset.getY();
-        }
+        position->update(motion->velocity);
     };
     CWorld::forEachEntities(fn);
 }
