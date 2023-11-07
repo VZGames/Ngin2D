@@ -80,4 +80,7 @@ static const S_VIEW_INFORMATION NAME##_INFORMATION = { E_NOTIFY_ID::E_##NAME##_I
 #define BEGIN_NAMESPACE(N) namespace N {
 #define END_NAMESPACE }
 
+#define HANDLE_INPUT(KEY) \
+    if (Ngin::CKeyEvent::instance()->sendEvent(KEY)) Ngin::CKeyEvent::instance()->handleEvent(KEY);
+
 #endif // COMMONDEFINE_H

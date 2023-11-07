@@ -15,7 +15,7 @@ HEADERS += \
     $$PWD/Systems/CollisionSystem/CCollisionSystem.h \
     $$PWD/Systems/KeyInputSystem/CKeyInputSystem.h \
     $$PWD/Systems/MovementSystem/CMovementSystem.h \
-    $$PWD/Systems/RenderSystem/CRenderSystem.h
+    $$PWD/Systems/SpriteSystem/CSpriteSystem.h
 
 SOURCES += \
     $$PWD/Component/CComponent.cpp \
@@ -27,7 +27,7 @@ SOURCES += \
     $$PWD/Systems/CollisionSystem/CCollisionSystem.cpp \
     $$PWD/Systems/KeyInputSystem/CKeyInputSystem.cpp \
     $$PWD/Systems/MovementSystem/CMovementSystem.cpp \
-    $$PWD/Systems/RenderSystem/CRenderSystem.cpp
+    $$PWD/Systems/SpriteSystem/CSpriteSystem.cpp
 
 
 INCLUDEPATH += \

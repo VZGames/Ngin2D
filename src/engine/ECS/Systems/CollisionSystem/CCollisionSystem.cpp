@@ -18,16 +18,13 @@ void CCollisionSystem::update(float dt)
     UNUSED(dt);
     // do update for each entity
     auto fn = [](CEntity* entity){
-        bool hasPosition = entity->hasComponent<SPositionComponent>();
-        if(!hasPosition) return;
+        auto position = entity->getComponent<SPositionComponent>();
+        if(!position) return;
 
     };
     CWorld::forEachEntities(fn);
 }
 
-void CCollisionSystem::render()
-{
-}
 END_NAMESPACE
 
 

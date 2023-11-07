@@ -10,7 +10,6 @@ class AECSystem
 public:
     virtual void init() { };
     virtual void update(float dt){ UNUSED(dt) };
-    virtual void render() {};
 protected:
     std::mutex m_mutex;
 };

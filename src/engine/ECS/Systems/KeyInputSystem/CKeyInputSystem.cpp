@@ -19,16 +19,13 @@ void CKeyInputSystem::update(float dt)
     UNUSED(dt)
     // do update for each entity
     auto fn = [](CEntity* entity){
-        bool hasKeyInputComp = entity->hasComponent<SKeyInputComponent>();
-        if(!hasKeyInputComp) return;
+        auto keyInput = entity->getComponent<SKeyInputComponent>();
+        if(!keyInput) return;
         entity->handleKeyInput();
     };
     CWorld::forEachEntities(fn);
 }
 
-void CKeyInputSystem::render()
-{
-}
 END_NAMESPACE
 
 

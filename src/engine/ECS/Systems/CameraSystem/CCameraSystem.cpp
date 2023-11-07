@@ -22,17 +22,13 @@ void CCameraSystem::update(float dt)
     UNUSED(dt)
     // do update for each entity
     auto fn = [](CEntity* entity){
-        bool hasPosition    = entity->hasComponent<SPositionComponent>();
-
-        if(!hasPosition) return;
-        auto *position      = entity->getComponent<SPositionComponent>();
-        bool hasCamera      = entity->hasComponent<SCameraComponent>();
-        bool hasSprite      = entity->hasComponent<SSpriteComponent>();
-
-        if(hasCamera && hasSprite)
+        auto *position  = entity->getComponent<SPositionComponent>();
+        auto *camera    = entity->getComponent<SCameraComponent>();
+        auto *sprite    = entity->getComponent<SSpriteComponent>();
+        if(!(position && sprite)) return;
+        if(camera)
         {
-            auto *camera = entity->getComponent<SCameraComponent>();
-            auto *sprite = entity->getComponent<SSpriteComponent>();
+
             Size2D<float> winSize = CNgin::windowSize();
             float width  = winSize.width;
             float height = winSize.height;
@@ -42,26 +38,10 @@ void CCameraSystem::update(float dt)
 
             Ngin::CCamera::instance()->update(camera->offset);
         }
-        else
-        {
-            if(!(hasPosition)) return;
-            Offset offset = Ngin::CCamera::instance()->offset();
-            MORGAN_DEBUG("%f %f", offset.getX(), offset.getY())
-            position->x -= offset.getX();
-            position->y -= offset.getY();
-        }
-
     };
     CWorld::forEachEntities(fn);
 }
 
-void CCameraSystem::render()
-{
-    auto fn = [](CEntity* entity){
-
-    };
-    CWorld::forEachEntities(fn);
-}
 END_NAMESPACE
 
 

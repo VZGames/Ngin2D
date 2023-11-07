@@ -13,7 +13,6 @@ public:
 public:
     virtual void init() override;
     virtual void update(float dt) override;
-    virtual void render() override;
 };
 END_NAMESPACE
 

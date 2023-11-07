@@ -1,10 +1,10 @@
 #include "CWorld.h"
 #include "CECSystemManager.h"
-#include "Scene/CSceneManager.h"
+#include "CRender.h"
 #include "LoggerDefines.h"
-#include "CCamera.h"
 #include "AScene.h"
 #include "CEntity.h"
+#include "CNgin.h"
 
 BEGIN_NAMESPACE(Ngin)
 CWorld* CWorld::s_instance = nullptr;
@@ -52,10 +52,6 @@ void CWorld::forEachScenes(std::function<void(AScene*)> fn)
 void CWorld::init()
 {
     CECSystemManager::instance()->init(s_entities);
-    for(AScene *scene: s_scenes)
-    {
-        scene->init();
-    }
 }
 
 void CWorld::update(float dt)
@@ -65,7 +61,7 @@ void CWorld::update(float dt)
 
 void CWorld::render()
 {
-    CECSystemManager::instance()->render();
+    forEachEntities(std::bind(&CRender::drawEntity, CRender::instance(), std::placeholders::_1));
 }
 END_NAMESPACE
 

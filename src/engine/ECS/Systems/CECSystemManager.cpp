@@ -43,13 +43,6 @@ void CECSystemManager::update(float dt)
     }
 }
 
-void CECSystemManager::render()
-{
-    for(auto &system: m_systems)
-    {
-        system->render();
-    }
-}
 END_NAMESPACE
 
 

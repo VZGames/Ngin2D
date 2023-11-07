@@ -22,7 +22,7 @@ void CPlayer::idle()
 
 void CPlayer::jump()
 {
-
+    MORGAN_DEBUG("JUMP")
 }
 
 void CPlayer::walk(MOVE_DIRECTION direction)
@@ -71,6 +71,7 @@ void CPlayer::walk(MOVE_DIRECTION direction)
     default:
         break;
     }
+
 }
 
 void CPlayer::attach(CTRL_SLOTS slot)
@@ -91,7 +92,8 @@ void CPlayer::init()
         ->registerKeyInput(SDL_SCANCODE_A, std::bind(&CPlayer::walk, this, MOVE_DIRECTION::MOVE_LEFT))
         ->registerKeyInput(SDL_SCANCODE_D, std::bind(&CPlayer::walk, this, MOVE_DIRECTION::MOVE_RIGHT))
         ->registerKeyInput(SDL_SCANCODE_W, std::bind(&CPlayer::walk, this, MOVE_DIRECTION::MOVE_UP))
-        ->registerKeyInput(SDL_SCANCODE_S, std::bind(&CPlayer::walk, this, MOVE_DIRECTION::MOVE_DOWN));
+        ->registerKeyInput(SDL_SCANCODE_S, std::bind(&CPlayer::walk, this, MOVE_DIRECTION::MOVE_DOWN))
+        ->registerKeyInput(SDL_SCANCODE_SPACE, std::bind(&CPlayer::jump, this));
 }
 
 void CPlayer::process(float dt)
@@ -102,22 +104,11 @@ void CPlayer::process(float dt)
 void CPlayer::handleKeyInput()
 {
     idle();
-    if (Ngin::CKeyEvent::instance()->sendEvent(SDL_SCANCODE_A))
-    {
-        Ngin::CKeyEvent::instance()->handleEvent(SDL_SCANCODE_A);
-    }
-    if (Ngin::CKeyEvent::instance()->sendEvent(SDL_SCANCODE_D))
-    {
-        Ngin::CKeyEvent::instance()->handleEvent(SDL_SCANCODE_D);
-    }
-    if (Ngin::CKeyEvent::instance()->sendEvent(SDL_SCANCODE_W))
-    {
-        Ngin::CKeyEvent::instance()->handleEvent(SDL_SCANCODE_W);
-    }
-    if (Ngin::CKeyEvent::instance()->sendEvent(SDL_SCANCODE_S))
-    {
-        Ngin::CKeyEvent::instance()->handleEvent(SDL_SCANCODE_S);
-    }
+    HANDLE_INPUT(SDL_SCANCODE_A)
+    HANDLE_INPUT(SDL_SCANCODE_D)
+    HANDLE_INPUT(SDL_SCANCODE_W)
+    HANDLE_INPUT(SDL_SCANCODE_S)
+    HANDLE_INPUT(SDL_SCANCODE_SPACE)
 }
 END_NAMESPACE
 

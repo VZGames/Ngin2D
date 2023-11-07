@@ -58,7 +58,7 @@ public:
         const char *compName = typeid(T).name();
         if(m_components.find(compName) == m_components.end())
         {
-            MORGAN_DEBUG("Component [%s] does not exist", compName)
+//            MORGAN_DEBUG("Component [%s] does not exist", compName)
             return nullptr;
         }
         return (T*)m_components.at(compName);

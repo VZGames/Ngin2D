@@ -48,11 +48,11 @@ void CKeyEvent::listen()
         {
             if(m_event.wheel.y > 0) // scroll up
             {
-                CCamera::instance()->zoom(E_CAMERA_ZOOM::ZOOM_OUT);
+                CCamera::instance()->zoom(E_CAMERA_ZOOM::ZOOM_IN);
             }
             else if(m_event.wheel.y < 0) // scroll down
             {
-                CCamera::instance()->zoom(E_CAMERA_ZOOM::ZOOM_IN);
+                CCamera::instance()->zoom(E_CAMERA_ZOOM::ZOOM_OUT);
             }
             break;
         }

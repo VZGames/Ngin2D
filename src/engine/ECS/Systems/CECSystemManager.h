@@ -4,7 +4,7 @@
 #include "CommonDefine.h"
 #include "CollisionSystem/CCollisionSystem.h"
 #include "MovementSystem/CMovementSystem.h"
-#include "RenderSystem/CRenderSystem.h"
+#include "SpriteSystem/CSpriteSystem.h"
 #include "KeyInputSystem/CKeyInputSystem.h"
 #include "CameraSystem/CCameraSystem.h"
 
@@ -22,7 +22,7 @@ private:
 
     CCollisionSystem                           m_collision_system;
     CMovementSystem                            m_movement_system;
-    CRenderSystem                              m_render_system;
+    CSpriteSystem                              m_render_system;
     CKeyInputSystem                            m_keyinput_system;
     CCameraSystem                              m_camera_system;
 public:
@@ -30,7 +30,6 @@ public:
 
     void init(std::vector<CEntity*>&);
     void update(float dt);
-    void render();
 };
 END_NAMESPACE
 

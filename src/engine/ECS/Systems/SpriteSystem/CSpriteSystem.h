@@ -1,22 +1,20 @@
-#ifndef CRENDERSYSTEM_H
-#define CRENDERSYSTEM_H
+#ifndef CSPRITESYSTEM_H
+#define CSPRITESYSTEM_H
 
 #include "CommonDefine.h"
 #include "Systems/AECSystem.h"
 
 BEGIN_NAMESPACE(Ngin)
-class CRenderSystem: public AECSystem
+class CSpriteSystem: public AECSystem
 {
 public:
-    CRenderSystem();
+    CSpriteSystem();
 
     //    Implement IECSystem Interfaces
 public:
     virtual void init() override;
     virtual void update(float dt) override;
-    virtual void render() override;
-
 };
 END_NAMESPACE
 
-#endif // CRENDERSYSTEM_H
+#endif // CSPRITESYSTEM_H
