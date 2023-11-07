@@ -13,6 +13,7 @@ private:
     CTexture2DManager();
     static CTexture2DManager *s_instance;
     std::unordered_map<TextureID, SDL_Texture*> m_textures;
+    void renderFrameThread(void* data);
 
 public:
     static CTexture2DManager *instance();

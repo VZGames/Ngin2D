@@ -30,7 +30,10 @@ public:
     {
         try
         {
-            m_inputs.at(numkey)(std::forward<TArgs>(args)...);
+            auto fn = [&](){
+                m_inputs.at(numkey)(std::forward<TArgs>(args)...);
+            };
+            std::thread(fn).join();
         } catch (...)
         {
             MORGAN_DEBUG("This key has no defined behavior ")

@@ -17,6 +17,7 @@ CPlayer::CPlayer()
 void CPlayer::idle()
 {
     m_motion->velocity.Zeros();
+    m_motion->running = 0;
     m_sprite->frameCount = 2;
 }
 
@@ -27,12 +28,14 @@ void CPlayer::jump()
 
 void CPlayer::walk(MOVE_DIRECTION direction)
 {
+    m_sprite->frameCount = 4;
+    m_motion->running = 1;
+
     switch (direction) {
     case MOVE_DIRECTION::MOVE_LEFT:
     {
         m_sprite->col = 2;
         m_sprite->row = 2;
-        m_sprite->frameCount = 4;
         m_motion->direction = -1;
         m_motion->velocity = Vector2DF(m_motion->speed * (-5),0);
         m_camera->offset -= Offset(m_motion->velocity.x, 0);
@@ -42,7 +45,6 @@ void CPlayer::walk(MOVE_DIRECTION direction)
     {
         m_sprite->col = 2;
         m_sprite->row = 3;
-        m_sprite->frameCount = 4;
         m_motion->direction = 1;
         m_motion->velocity = Vector2DF(m_motion->speed * 5,0);
         m_camera->offset -= Offset(m_motion->velocity.x, 0);
@@ -52,7 +54,6 @@ void CPlayer::walk(MOVE_DIRECTION direction)
     {
         m_sprite->col = 2;
         m_sprite->row = 1;
-        m_sprite->frameCount = 4;
         m_motion->direction = -1;
         m_motion->velocity = Vector2DF(0, m_motion->speed * (-5));
         m_camera->offset -= Offset(0, m_motion->velocity.y);
@@ -62,7 +63,6 @@ void CPlayer::walk(MOVE_DIRECTION direction)
     {
         m_sprite->col = 2;
         m_sprite->row = 0;
-        m_sprite->frameCount = 4;
         m_motion->direction = 1;
         m_motion->velocity = Vector2DF(0, m_motion->speed * 5);
         m_camera->offset += Offset(0, m_motion->velocity.y);

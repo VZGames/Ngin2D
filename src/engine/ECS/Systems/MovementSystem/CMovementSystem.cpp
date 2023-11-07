@@ -23,8 +23,10 @@ void CMovementSystem::update(float dt)
     auto fn = [](CEntity* entity){
         auto *position = entity->getComponent<SPositionComponent>();
         auto *motion   = entity->getComponent<SMotionComponent>();
+//        auto *camera   = entity->getComponent<SCameraComponent>();
         if(!(position && motion)) return;
         position->update(motion->velocity);
+
     };
     CWorld::forEachEntities(fn);
 }

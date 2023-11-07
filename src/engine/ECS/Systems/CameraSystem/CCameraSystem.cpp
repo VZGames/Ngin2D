@@ -45,6 +45,7 @@ void CCameraSystem::update(float dt)
             position->x -= offset.getX();
             position->y -= offset.getY();
         }
+
     };
     CWorld::forEachEntities(fn);
 }

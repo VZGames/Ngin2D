@@ -15,6 +15,11 @@ CTexture2DManager *CTexture2DManager::instance()
     return s_instance = (s_instance == nullptr)? new CTexture2DManager() : s_instance;
 }
 
+void CTexture2DManager::renderFrameThread(void *data)
+{
+
+}
+
 void CTexture2DManager::drawTile(TextureID id, Point2DI pos, TileWidth w, TileHeight h, TileRow r, TileCol c)
 {
     UNUSED(id);
