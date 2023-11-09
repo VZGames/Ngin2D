@@ -8,12 +8,12 @@
 #include "ComponentDef/SPositionComponent.h"
 
 BEGIN_NAMESPACE(Script)
-class CEnemy: public Ngin::CEntity
+class CEnemy: public engine::CEntity
 {
 private:
-    Ngin::SSpriteComponent          *m_sprite;
-    Ngin::SHealthComponent          *m_health;
-    Ngin::SPositionComponent        *m_position;
+    engine::SSpriteComponent          *m_sprite;
+    engine::SHealthComponent          *m_health;
+    engine::SPositionComponent        *m_position;
 
 public:
     CEnemy();

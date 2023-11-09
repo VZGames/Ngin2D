@@ -2,7 +2,7 @@
 #include "CEntity.h"
 #include "ComponentDef/SPositionComponent.h"
 
-BEGIN_NAMESPACE(Ngin)
+BEGIN_NAMESPACE(engine)
 CCamera *CCamera::s_instance = nullptr;
 CCamera::CCamera()
 {

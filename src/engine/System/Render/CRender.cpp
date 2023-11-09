@@ -3,7 +3,7 @@
 #include "CTexture2DManager.h"
 #include "ComponentDef/SPositionComponent.h"
 #include "ComponentDef/SSpriteComponent.h"
-BEGIN_NAMESPACE(Ngin)
+BEGIN_NAMESPACE(engine)
 CRender *CRender::s_instance = nullptr;
 CRender::CRender()
 {

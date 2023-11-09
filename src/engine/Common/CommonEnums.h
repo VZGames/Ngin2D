@@ -2,7 +2,6 @@
 #define COMMONENUMS_H
 
 #include <cstdint>
-#include "CommonDefine.h"
 
 enum E_CACHE_STATUS : bool
 {
@@ -74,6 +73,13 @@ enum E_CAMERA_ZOOM
 {
     ZOOM_IN,
     ZOOM_OUT
+};
+
+enum E_BODY_TYPE
+{
+    STATIC = 0,
+    DYNAMIC,
+    KINEMATIC
 };
 
 #endif // COMMONENUMS_H

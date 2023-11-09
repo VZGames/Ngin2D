@@ -9,7 +9,7 @@
 
 #define COMP_MANAGER CComponentManager::instance()
 
-BEGIN_NAMESPACE(Ngin)
+BEGIN_NAMESPACE(engine)
 class CEntity
 {
 private:

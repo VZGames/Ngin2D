@@ -5,17 +5,15 @@
 #include "LoggerDefines.h"
 #include <SDL2/SDL_events.h>
 
-BEGIN_NAMESPACE(Ngin)
+BEGIN_NAMESPACE(engine)
 class CKeyEvent
 {
 private:
     CKeyEvent();
     static CKeyEvent                                            *s_instance;
     const Uint8                                                 *m_state;
-    bool                                                        m_released{true};
-    bool                                                        m_pressed{false};
+    static bool                                                 s_toggle_status;
     SDL_Event                                                   m_event;
-    std::unordered_map<SDL_Scancode, std::function<void(void)>> m_inputs;
 
 public:
     static CKeyEvent *instance();
@@ -23,26 +21,8 @@ public:
 
     bool sendEvent(SDL_Scancode);
 
-    CKeyEvent *registerKeyInput(SDL_Scancode, std::function<void(void)>);
-
-    template<typename ...TArgs>
-    void handleEvent(SDL_Scancode numkey, TArgs ...args) const
-    {
-        try
-        {
-            auto fn = [&](){
-                m_inputs.at(numkey)(std::forward<TArgs>(args)...);
-            };
-            std::thread(fn).join();
-        } catch (...)
-        {
-            MORGAN_DEBUG("This key has no defined behavior ")
-        }
-    }
-
-    bool isReleased() const;
-    bool isPressed() const;
-
+    static bool isPressed();
+    static bool isReleased();
 };
 END_NAMESPACE
 #endif // CKEYEVENT_H

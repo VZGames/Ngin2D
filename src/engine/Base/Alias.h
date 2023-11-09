@@ -6,7 +6,7 @@
 
 #include "CommonDefine.h"
 
-BEGIN_NAMESPACE(Ngin)
+BEGIN_NAMESPACE(engine)
 
 using EntityID      = uint32_t;
 using ComponentID   = uint32_t;

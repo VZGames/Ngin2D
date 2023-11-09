@@ -4,7 +4,7 @@
 #include "CommonDefine.h"
 #include "Alias.h"
 
-BEGIN_NAMESPACE(Ngin)
+BEGIN_NAMESPACE(engine)
 class ITextureManager
 {
 public:

@@ -3,7 +3,7 @@
 
 #include "CommonDefine.h"
 
-BEGIN_NAMESPACE(Ngin)
+BEGIN_NAMESPACE(engine)
 class CEntity;
 class CRender
 {

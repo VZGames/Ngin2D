@@ -7,17 +7,17 @@
 BEGIN_NAMESPACE(Script)
 CEnemy::CEnemy()
 {
-    Ngin::CEntityManager::instance()->createEntity(this);
-    this->addComponent<Ngin::SPositionComponent>(100, 200)
-        ->addComponent<Ngin::SHealthComponent>(100)
-        ->addComponent<Ngin::SSpriteComponent>("Animal", "./debug/assets/Characters/Cow.png", 32, 32, 3, 200);
+    engine::CEntityManager::instance()->createEntity(this);
+    this->addComponent<engine::SPositionComponent>(100, 200)
+        ->addComponent<engine::SHealthComponent>(100)
+        ->addComponent<engine::SSpriteComponent>("Animal", "./debug/assets/Characters/Cow.png", 32, 32, 3, 200);
 }
 
 void CEnemy::init()
 {
-    m_position = this->getComponent<Ngin::SPositionComponent>();
-    m_sprite   = this->getComponent<Ngin::SSpriteComponent>();
-    m_health   = this->getComponent<Ngin::SHealthComponent>();
+    m_position = this->getComponent<engine::SPositionComponent>();
+    m_sprite   = this->getComponent<engine::SSpriteComponent>();
+    m_health   = this->getComponent<engine::SHealthComponent>();
 }
 
 void CEnemy::process(float dt)

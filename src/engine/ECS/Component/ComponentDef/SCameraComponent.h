@@ -6,7 +6,7 @@
 #include "CCamera.h"
 #include "offset2D.h"
 
-BEGIN_NAMESPACE(Ngin)
+BEGIN_NAMESPACE(engine)
 class CEntity;
 struct SCameraComponent: public CComponent
 {

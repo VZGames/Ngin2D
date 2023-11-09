@@ -8,7 +8,7 @@
 #include "GameObjects/Player/CPlayer.h"
 #include "GameObjects/Enemy/CEnemy.h"
 
-using namespace Ngin;
+using namespace engine;
 
 int main(int argc, char *argv[])
 {
@@ -35,17 +35,17 @@ int main(int argc, char *argv[])
             &settingScene
         };
 
-    CWorld *world = Ngin::CWorld::instance()
+    CWorld *world = engine::CWorld::instance()
                         ->registerEntities(entities)
                         ->registerScenes(scenes);
 
     CSceneManager::instance()->loadScene(gameScene.id(), E_LOAD_SCENE_MODE::SINGLE);
 
-    if(Ngin::CNgin::instance()->initialize("Game Framework", 980, 620, world))
+    if(engine::CNgin::instance()->initialize("Game Framework", 980, 620, world))
     {
-        Ngin::CNgin::instance()->loop();
-        Ngin::CNgin::instance()->clean();
-        Ngin::CNgin::instance()->quit();
+        engine::CNgin::instance()->loop();
+        engine::CNgin::instance()->clean();
+        engine::CNgin::instance()->quit();
     }
     else
     {

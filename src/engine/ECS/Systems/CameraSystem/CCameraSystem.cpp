@@ -6,7 +6,7 @@
 #include "ComponentDef/SSpriteComponent.h"
 #include "size2D.h"
 #include "CNgin.h"
-BEGIN_NAMESPACE(Ngin)
+BEGIN_NAMESPACE(engine)
 CCameraSystem::CCameraSystem()
 {
 
@@ -32,20 +32,12 @@ void CCameraSystem::update(float dt)
             Size2D<float> winSize = CNgin::windowSize();
             float width  = winSize.width;
             float height = winSize.height;
-            float scale  = Ngin::CCamera::instance()->scale();
+            float scale  = engine::CCamera::instance()->scale();
             camera->offset.setX(position->x - (width/2 - (sprite->frameWidth * scale)/2));
             camera->offset.setY(position->y - (height/2 - (sprite->frameHeight * scale)/2));
 
-            Ngin::CCamera::instance()->update(camera->offset);
+            engine::CCamera::instance()->update(camera->offset);
         }
-        else
-        {
-            Offset offset = Ngin::CCamera::instance()->offset();
-            MORGAN_DEBUG("%f %f", offset.getX(), offset.getY())
-            position->x -= offset.getX();
-            position->y -= offset.getY();
-        }
-
     };
     CWorld::forEachEntities(fn);
 }

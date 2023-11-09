@@ -3,7 +3,6 @@
 
 #include "CommonDefine.h"
 #include "Entity/CEntity.h"
-#include "Common/enums.h"
 
 #include "ComponentDef/SSpriteComponent.h"
 #include "ComponentDef/SHealthComponent.h"
@@ -13,23 +12,25 @@
 #include "ComponentDef/SKeyInputComponent.h"
 
 BEGIN_NAMESPACE(Script)
-class CPlayer: public Ngin::CEntity
+class CPlayer: public engine::CEntity
 {
 private:
-    Ngin::SSpriteComponent          *m_sprite;
-    Ngin::SHealthComponent          *m_health;
-    Ngin::SPositionComponent        *m_position;
-    Ngin::SCameraComponent          *m_camera;
-    Ngin::SKeyInputComponent        *m_keyinput;
-    Ngin::SMotionComponent          *m_motion;
+    engine::SSpriteComponent          *m_sprite;
+    engine::SHealthComponent          *m_health;
+    engine::SPositionComponent        *m_position;
+    engine::SCameraComponent          *m_camera;
+    engine::SKeyInputComponent        *m_keyinput;
+    engine::SMotionComponent          *m_motion;
+
+
 
 public:
     CPlayer();
 
     void idle();
     void jump();
-    void walk(MOVE_DIRECTION);
-    void attach(CTRL_SLOTS);
+    void walk();
+    void attach();
 
 //    Implement CEntity's Interface
 public:

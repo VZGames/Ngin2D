@@ -4,7 +4,7 @@
 #include "CEntity.h"
 #include "AScene.h"
 
-BEGIN_NAMESPACE(Ngin)
+BEGIN_NAMESPACE(engine)
 CECSystemManager *CECSystemManager::s_instance = nullptr;
 CECSystemManager::CECSystemManager()
 {
@@ -18,10 +18,10 @@ CECSystemManager *CECSystemManager::instance()
 
 void CECSystemManager::init(std::vector<CEntity*> &entities)
 {
-    m_systems.push_back(&m_camera_system);
     m_systems.push_back(&m_keyinput_system);
-    m_systems.push_back(&m_collision_system);
+    m_systems.push_back(&m_camera_system);
     m_systems.push_back(&m_movement_system);
+    m_systems.push_back(&m_collision_system);
     m_systems.push_back(&m_render_system);
 
     for(auto &system: m_systems)

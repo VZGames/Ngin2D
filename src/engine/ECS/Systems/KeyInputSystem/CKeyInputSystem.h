@@ -4,7 +4,7 @@
 #include "CommonDefine.h"
 #include "AECSystem.h"
 
-BEGIN_NAMESPACE(Ngin)
+BEGIN_NAMESPACE(engine)
 class CKeyInputSystem: public AECSystem
 {
 public:

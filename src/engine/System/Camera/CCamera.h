@@ -5,7 +5,7 @@
 #include "CommonEnums.h"
 #include "offset2D.h"
 
-BEGIN_NAMESPACE(Ngin)
+BEGIN_NAMESPACE(engine)
 class CEntity;
 class AScene;
 class CCamera

@@ -5,7 +5,7 @@
 #include "Component/CComponent.h"
 #include "vector2d.h"
 
-BEGIN_NAMESPACE(Ngin)
+BEGIN_NAMESPACE(engine)
 struct SMotionComponent: public CComponent
 {
     SMotionComponent(float speed): speed(speed)

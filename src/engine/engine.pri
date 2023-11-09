@@ -7,6 +7,7 @@ include($$PWD/Scene/Scene.pri)
 include($$PWD/World/World.pri)
 include($$PWD/Control/Control.pri)
 include($$PWD/System/System.pri)
+include($$PWD/Adapters/Adapters.pri)
 
 
 INCLUDEPATH += \

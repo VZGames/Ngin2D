@@ -1,6 +1,6 @@
 #include "CComponent.h"
 
-BEGIN_NAMESPACE(Ngin)
+BEGIN_NAMESPACE(engine)
 CComponent::CComponent()
 {}
 

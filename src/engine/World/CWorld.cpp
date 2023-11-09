@@ -6,14 +6,14 @@
 #include "CEntity.h"
 #include "CNgin.h"
 
-BEGIN_NAMESPACE(Ngin)
+BEGIN_NAMESPACE(engine)
 CWorld* CWorld::s_instance = nullptr;
 std::vector<CEntity*> CWorld::s_entities{};
 std::vector<AScene*> CWorld::s_scenes{};
 
-CWorld::CWorld()
+CWorld::CWorld(): b2World(m_gravity)
 {
-
+    m_gravity.SetZero();
 }
 
 CWorld* CWorld::instance()

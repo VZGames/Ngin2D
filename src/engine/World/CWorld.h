@@ -2,11 +2,12 @@
 #define CWORLD_H
 
 #include "CommonDefine.h"
+#include <Box2D/box2d.h>
 
-BEGIN_NAMESPACE(Ngin)
+BEGIN_NAMESPACE(engine)
 class CEntity;
 class AScene;
-class CWorld
+class CWorld: public b2World
 {
 private:
     explicit CWorld();
@@ -14,6 +15,8 @@ private:
 
     static std::vector<CEntity*> s_entities;
     static std::vector<AScene*>  s_scenes;
+
+    b2Vec2 m_gravity;
 
 public:
     static CWorld *instance();

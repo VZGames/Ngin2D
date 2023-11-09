@@ -1,0 +1,4 @@
+#ifndef BOX2DADAPTER_H
+#define BOX2DADAPTER_H
+
+#endif // BOX2DADAPTER_H

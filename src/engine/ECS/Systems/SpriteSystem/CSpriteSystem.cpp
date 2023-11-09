@@ -5,7 +5,7 @@
 #include "ComponentDef/SPositionComponent.h"
 #include "ComponentDef/SSpriteComponent.h"
 
-BEGIN_NAMESPACE(Ngin)
+BEGIN_NAMESPACE(engine)
 CSpriteSystem::CSpriteSystem()
 {}
 

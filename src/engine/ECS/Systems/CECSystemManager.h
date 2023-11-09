@@ -8,7 +8,7 @@
 #include "KeyInputSystem/CKeyInputSystem.h"
 #include "CameraSystem/CCameraSystem.h"
 
-BEGIN_NAMESPACE(Ngin)
+BEGIN_NAMESPACE(engine)
 class CEntity;
 class AScene;
 class AECSystem;

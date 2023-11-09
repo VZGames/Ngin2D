@@ -1,7 +1,7 @@
 #include "AScene.h"
 #include "CECSystemManager.h"
 
-BEGIN_NAMESPACE(Ngin)
+BEGIN_NAMESPACE(engine)
 
 const char *AScene::id() const
 {

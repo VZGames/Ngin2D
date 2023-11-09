@@ -1,6 +1,6 @@
 #include "CTexture3DManager.h"
 
-BEGIN_NAMESPACE(Ngin)
+BEGIN_NAMESPACE(engine)
 CTexture3DManager::CTexture3DManager()
 {
 

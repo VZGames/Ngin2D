@@ -4,7 +4,7 @@
 //#include "CSceneManager.h"
 #include "CWorld.h"
 
-BEGIN_NAMESPACE(Ngin)
+BEGIN_NAMESPACE(engine)
 CNgin *CNgin::s_instance = nullptr;
 SDL_Renderer  *CNgin::s_renderer = nullptr;
 bool  CNgin::s_running = false;
@@ -86,7 +86,7 @@ bool CNgin::initialize(Title title, Width width, Height height, CWorld *world)
     // [3] Select the color for drawing.
     SDL_SetRenderDrawColor(s_renderer, 255, 255, 255, 255);
 
-    // [4] start game ngin
+    // [4] start game engine
     s_running = true;
 
     // [5] init the world

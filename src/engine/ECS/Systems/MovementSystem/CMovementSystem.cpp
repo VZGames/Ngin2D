@@ -5,7 +5,7 @@
 #include "ComponentDef/SMotionComponent.h"
 #include "ComponentDef/SCameraComponent.h"
 #include "CCamera.h"
-BEGIN_NAMESPACE(Ngin)
+BEGIN_NAMESPACE(engine)
 CMovementSystem::CMovementSystem()
 {}
 
@@ -23,10 +23,18 @@ void CMovementSystem::update(float dt)
     auto fn = [](CEntity* entity){
         auto *position = entity->getComponent<SPositionComponent>();
         auto *motion   = entity->getComponent<SMotionComponent>();
-//        auto *camera   = entity->getComponent<SCameraComponent>();
-        if(!(position && motion)) return;
-        position->update(motion->velocity);
-
+        auto *camera   = entity->getComponent<SCameraComponent>();
+        if(!position) return;
+        if(camera && motion)
+        {
+            position->update(motion->velocity);
+        }
+        else
+        {
+            Offset offset = engine::CCamera::instance()->offset();
+            position->x -= offset.getX();
+            position->y -= offset.getY();
+        }
     };
     CWorld::forEachEntities(fn);
 }

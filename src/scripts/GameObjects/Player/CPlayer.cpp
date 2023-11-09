@@ -5,13 +5,13 @@
 BEGIN_NAMESPACE(Script)
 CPlayer::CPlayer()
 {
-    Ngin::CEntityManager::instance()->createEntity(this);
-    this->addComponent<Ngin::SPositionComponent>(200, 200)
-        ->addComponent<Ngin::SHealthComponent>(100)
-        ->addComponent<Ngin::SSpriteComponent>("Player", "./debug/assets/Characters/BasicCharakterSpritesheet.png", 48, 48, 2, 200)
-        ->addComponent<Ngin::SCameraComponent>(this)
-        ->addComponent<Ngin::SMotionComponent>(0.6)
-        ->addComponent<Ngin::SKeyInputComponent>();
+    engine::CEntityManager::instance()->createEntity(this);
+    this->addComponent<engine::SPositionComponent>(200, 200)
+        ->addComponent<engine::SHealthComponent>(100)
+        ->addComponent<engine::SSpriteComponent>("Player", "./debug/assets/Characters/BasicCharakterSpritesheet.png", 48, 48, 2, 200)
+        ->addComponent<engine::SCameraComponent>(this)
+        ->addComponent<engine::SMotionComponent>(0.6)
+        ->addComponent<engine::SKeyInputComponent>();
 }
 
 void CPlayer::idle()
@@ -23,77 +23,74 @@ void CPlayer::idle()
 
 void CPlayer::jump()
 {
-    MORGAN_DEBUG("JUMP")
+    if (engine::CKeyEvent::instance()->sendEvent(SDL_SCANCODE_SPACE))
+    {
+        MORGAN_DEBUG("JUMP")
+    }
 }
 
-void CPlayer::walk(MOVE_DIRECTION direction)
+void CPlayer::walk()
 {
-    m_sprite->frameCount = 4;
-    m_motion->running = 1;
-
-    switch (direction) {
-    case MOVE_DIRECTION::MOVE_LEFT:
+    if (engine::CKeyEvent::instance()->sendEvent(SDL_SCANCODE_A))
     {
         m_sprite->col = 2;
         m_sprite->row = 2;
+        m_sprite->frameCount = 4;
+        m_motion->running = 1;
         m_motion->direction = -1;
         m_motion->velocity = Vector2DF(m_motion->speed * (-5),0);
         m_camera->offset -= Offset(m_motion->velocity.x, 0);
-        break;
     }
-    case MOVE_DIRECTION::MOVE_RIGHT:
+
+    if (engine::CKeyEvent::instance()->sendEvent(SDL_SCANCODE_D))
     {
         m_sprite->col = 2;
         m_sprite->row = 3;
+        m_sprite->frameCount = 4;
+        m_motion->running = 1;
         m_motion->direction = 1;
         m_motion->velocity = Vector2DF(m_motion->speed * 5,0);
         m_camera->offset -= Offset(m_motion->velocity.x, 0);
-        break;
     }
-    case MOVE_DIRECTION::MOVE_UP:
+
+    if (engine::CKeyEvent::instance()->sendEvent(SDL_SCANCODE_W))
     {
         m_sprite->col = 2;
         m_sprite->row = 1;
+        m_sprite->frameCount = 4;
+        m_motion->running = 1;
         m_motion->direction = -1;
         m_motion->velocity = Vector2DF(0, m_motion->speed * (-5));
         m_camera->offset -= Offset(0, m_motion->velocity.y);
-        break;
     }
-    case MOVE_DIRECTION::MOVE_DOWN:
+
+    if (engine::CKeyEvent::instance()->sendEvent(SDL_SCANCODE_S))
     {
         m_sprite->col = 2;
         m_sprite->row = 0;
+        m_sprite->frameCount = 4;
+        m_motion->running = 1;
         m_motion->direction = 1;
         m_motion->velocity = Vector2DF(0, m_motion->speed * 5);
         m_camera->offset += Offset(0, m_motion->velocity.y);
-        break;
     }
-    default:
-        break;
-    }
-
 }
 
-void CPlayer::attach(CTRL_SLOTS slot)
+void CPlayer::attach()
 {
-    UNUSED(slot)
+    if (engine::CKeyEvent::instance()->sendEvent(SDL_SCANCODE_E))
+    {
+        MORGAN_DEBUG("ATTACK")
+    }
 }
 
 void CPlayer::init()
 {
-    m_position = this->getComponent<Ngin::SPositionComponent>();
-    m_motion   = this->getComponent<Ngin::SMotionComponent>();
-    m_camera   = this->getComponent<Ngin::SCameraComponent>();
-    m_sprite   = this->getComponent<Ngin::SSpriteComponent>();
-    m_health   = this->getComponent<Ngin::SHealthComponent>();
-
-    //    key input map
-    Ngin::CKeyEvent::instance()
-        ->registerKeyInput(SDL_SCANCODE_A, std::bind(&CPlayer::walk, this, MOVE_DIRECTION::MOVE_LEFT))
-        ->registerKeyInput(SDL_SCANCODE_D, std::bind(&CPlayer::walk, this, MOVE_DIRECTION::MOVE_RIGHT))
-        ->registerKeyInput(SDL_SCANCODE_W, std::bind(&CPlayer::walk, this, MOVE_DIRECTION::MOVE_UP))
-        ->registerKeyInput(SDL_SCANCODE_S, std::bind(&CPlayer::walk, this, MOVE_DIRECTION::MOVE_DOWN))
-        ->registerKeyInput(SDL_SCANCODE_SPACE, std::bind(&CPlayer::jump, this));
+    m_position = this->getComponent<engine::SPositionComponent>();
+    m_motion   = this->getComponent<engine::SMotionComponent>();
+    m_camera   = this->getComponent<engine::SCameraComponent>();
+    m_sprite   = this->getComponent<engine::SSpriteComponent>();
+    m_health   = this->getComponent<engine::SHealthComponent>();
 }
 
 void CPlayer::process(float dt)
@@ -104,11 +101,9 @@ void CPlayer::process(float dt)
 void CPlayer::handleKeyInput()
 {
     idle();
-    HANDLE_INPUT(SDL_SCANCODE_A)
-    HANDLE_INPUT(SDL_SCANCODE_D)
-    HANDLE_INPUT(SDL_SCANCODE_W)
-    HANDLE_INPUT(SDL_SCANCODE_S)
-    HANDLE_INPUT(SDL_SCANCODE_SPACE)
+    walk();
+    jump();
+    attach();
 }
 END_NAMESPACE
 

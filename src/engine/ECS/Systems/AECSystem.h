@@ -4,7 +4,7 @@
 #include "CommonDefine.h"
 #include "CWorld.h"
 
-BEGIN_NAMESPACE(Ngin)
+BEGIN_NAMESPACE(engine)
 class AECSystem
 {
 public:

@@ -5,7 +5,7 @@
 #include "AScene.h"
 
 BEGIN_NAMESPACE(Script)
-class CGameScene: public Ngin::AScene
+class CGameScene: public engine::AScene
 {
 public:
     CGameScene();

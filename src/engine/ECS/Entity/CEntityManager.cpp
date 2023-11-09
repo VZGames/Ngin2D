@@ -1,7 +1,7 @@
 #include "CEntityManager.h"
 #include "LoggerDefines.h"
 
-BEGIN_NAMESPACE(Ngin)
+BEGIN_NAMESPACE(engine)
 CEntityManager *CEntityManager::s_instance = nullptr;
 CEntityManager::CEntityManager()
 {

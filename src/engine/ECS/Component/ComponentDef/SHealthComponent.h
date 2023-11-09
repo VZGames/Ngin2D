@@ -4,7 +4,7 @@
 #include "CommonDefine.h"
 #include "Component/CComponent.h"
 
-BEGIN_NAMESPACE(Ngin)
+BEGIN_NAMESPACE(engine)
 struct SHealthComponent: public CComponent
 {
     SHealthComponent(float max): max(max)

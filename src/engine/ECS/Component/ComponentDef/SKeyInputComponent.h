@@ -4,7 +4,7 @@
 #include "CommonDefine.h"
 #include "CComponent.h"
 
-BEGIN_NAMESPACE(Ngin)
+BEGIN_NAMESPACE(engine)
 struct SKeyInputComponent: public CComponent
 {
     SKeyInputComponent() {}

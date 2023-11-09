@@ -4,7 +4,7 @@
 #include "CommonDefine.h"
 #include "Systems/AECSystem.h"
 
-BEGIN_NAMESPACE(Ngin)
+BEGIN_NAMESPACE(engine)
 class CSpriteSystem: public AECSystem
 {
 public:

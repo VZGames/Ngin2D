@@ -3,8 +3,9 @@
 #include "LoggerDefines.h"
 #include "CCamera.h"
 
-BEGIN_NAMESPACE(Ngin)
+BEGIN_NAMESPACE(engine)
 CKeyEvent *CKeyEvent::s_instance = nullptr;
+bool CKeyEvent::s_toggle_status = false;
 CKeyEvent::CKeyEvent()
 {
     m_state = SDL_GetKeyboardState(nullptr);
@@ -25,12 +26,10 @@ void CKeyEvent::listen()
             CNgin::setRunning(false);
             break;
         case SDL_KEYDOWN:
-            m_released = false;
-            m_pressed  = true;
+            s_toggle_status = true;
             break;
         case SDL_KEYUP:
-            m_released = true;
-            m_pressed  = false;
+            s_toggle_status = false;
             break;
         case SDL_WINDOWEVENT:
             switch (m_event.window.event) {
@@ -71,25 +70,16 @@ bool CKeyEvent::sendEvent(SDL_Scancode numKey)
     return false;
 }
 
-CKeyEvent *CKeyEvent::registerKeyInput(SDL_Scancode numKey, std::function<void (void)> handle)
+bool CKeyEvent::isPressed()
 {
-    if(m_inputs.find(numKey) == m_inputs.end())
-    {
-        m_inputs[numKey] = handle;
-    }
-    return this;
+    return s_toggle_status == SDL_PRESSED;
 }
-
-bool CKeyEvent::isReleased() const
+bool CKeyEvent::isReleased()
 {
-    return m_released;
-}
-
-bool CKeyEvent::isPressed() const
-{
-    return m_pressed;
+    return s_toggle_status == SDL_RELEASED;
 }
 END_NAMESPACE
+
 
 
 

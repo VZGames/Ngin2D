@@ -3,7 +3,7 @@
 #include "CNgin.h"
 #include "CCamera.h"
 
-BEGIN_NAMESPACE(Ngin)
+BEGIN_NAMESPACE(engine)
 CTexture2DManager *CTexture2DManager::s_instance = nullptr;
 CTexture2DManager::CTexture2DManager()
 {
@@ -20,14 +20,21 @@ void CTexture2DManager::renderFrameThread(void *data)
 
 }
 
-void CTexture2DManager::drawTile(TextureID id, Point2DI pos, TileWidth w, TileHeight h, TileRow r, TileCol c)
+void CTexture2DManager::drawTile(TextureID id, Point2DF pos, TileWidth w, TileHeight h, TileRow r, TileCol c, Angle angle, SDL_RendererFlip flip)
 {
-    UNUSED(id);
-    UNUSED(pos);
-    UNUSED(w);
-    UNUSED(h);
-    UNUSED(r);
-    UNUSED(c);
+    int frameX = w  * c;
+    int frameY = h  * r;
+
+    float scale = CCamera::instance()->scale();
+    SDL_Rect srcRect = {frameX, frameY, w, h};
+    SDL_FRect destRect = {
+        pos.getX(),
+        pos.getY(),
+        (float)w * scale,
+        (float)h * scale
+    };
+
+    SDL_RenderCopyExF(CNgin::renderer(), m_textures[id], &srcRect, &destRect, angle, NULL, flip);
 }
 
 void CTexture2DManager::drawFrame(TextureID id, Point2DF pos, FrameWidth w, FrameHeight h, FrameRow r, FrameCol c, Angle angle, SDL_RendererFlip flip)

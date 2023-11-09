@@ -6,7 +6,7 @@
 #include "ITextureManager.h"
 #include "Math/point2D.h"
 
-BEGIN_NAMESPACE(Ngin)
+BEGIN_NAMESPACE(engine)
 class CTexture2DManager: public ITextureManager
 {
 private:
@@ -18,8 +18,8 @@ private:
 public:
     static CTexture2DManager *instance();
 
-    void drawTile(TextureID, Point2DI, TileWidth, TileHeight, TileRow, TileCol);
-    void drawFrame(TextureID, Point2DF, FrameWidth, FrameHeight, FrameRow, FrameCol, Angle = 0.0f, SDL_RendererFlip flip = SDL_RendererFlip::SDL_FLIP_NONE);
+    void drawTile(TextureID, Point2DF, TileWidth, TileHeight, TileRow, TileCol, Angle angle = 0.0f, SDL_RendererFlip flip = SDL_RendererFlip::SDL_FLIP_NONE);
+    void drawFrame(TextureID, Point2DF, FrameWidth, FrameHeight, FrameRow, FrameCol, Angle angle = 0.0f, SDL_RendererFlip flip = SDL_RendererFlip::SDL_FLIP_NONE);
 
 //    Implement ITextureManager Interfaces
 public:

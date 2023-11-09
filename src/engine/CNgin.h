@@ -5,7 +5,7 @@
 #include "Alias.h"
 #include "size2D.h"
 
-BEGIN_NAMESPACE(Ngin)
+BEGIN_NAMESPACE(engine)
 class CWorld;
 class CNgin
 {
