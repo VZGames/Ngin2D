@@ -82,4 +82,12 @@ enum E_BODY_TYPE
     KINEMATIC
 };
 
+enum E_SHAPE
+{
+    CIRCLE,
+    POLYGON,
+    EDGE,
+    CHAIN
+};
+
 #endif // COMMONENUMS_H

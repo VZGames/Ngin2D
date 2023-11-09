@@ -10,6 +10,7 @@
 #include "ComponentDef/SCameraComponent.h"
 #include "ComponentDef/SMotionComponent.h"
 #include "ComponentDef/SKeyInputComponent.h"
+#include "ComponentDef/SBodyComponent.h"
 
 BEGIN_NAMESPACE(Script)
 class CPlayer: public engine::CEntity
@@ -21,6 +22,7 @@ private:
     engine::SCameraComponent          *m_camera;
     engine::SKeyInputComponent        *m_keyinput;
     engine::SMotionComponent          *m_motion;
+    engine::SBodyComponent            *m_body;
 
 
 

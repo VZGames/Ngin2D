@@ -6,7 +6,8 @@ BEGIN_NAMESPACE(Script)
 CPlayer::CPlayer()
 {
     engine::CEntityManager::instance()->createEntity(this);
-    this->addComponent<engine::SPositionComponent>(200, 200)
+    this->addComponent<engine::SBodyComponent>(b2BodyType::b2_kinematicBody, new b2PolygonShape())
+        ->addComponent<engine::SPositionComponent>(200, 200)
         ->addComponent<engine::SHealthComponent>(100)
         ->addComponent<engine::SSpriteComponent>("Player", "./debug/assets/Characters/BasicCharakterSpritesheet.png", 48, 48, 2, 200)
         ->addComponent<engine::SCameraComponent>(this)
@@ -86,11 +87,15 @@ void CPlayer::attach()
 
 void CPlayer::init()
 {
+    m_body     = this->getComponent<engine::SBodyComponent>();
     m_position = this->getComponent<engine::SPositionComponent>();
     m_motion   = this->getComponent<engine::SMotionComponent>();
     m_camera   = this->getComponent<engine::SCameraComponent>();
     m_sprite   = this->getComponent<engine::SSpriteComponent>();
     m_health   = this->getComponent<engine::SHealthComponent>();
+
+    b2PolygonShape *shape = (b2PolygonShape *)m_body->fixtureDef.shape;
+    shape->SetAsBox(m_sprite->frameWidth/2, m_sprite->frameHeight/2);
 }
 
 void CPlayer::process(float dt)
