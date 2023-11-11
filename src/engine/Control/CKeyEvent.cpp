@@ -33,14 +33,17 @@ void CKeyEvent::processEvents(CEventDispatcher *dispatcher)
         case SDL_QUIT:
         {
             CNgin::setRunning(false);
+            DBG("Quit event")
             break;
         }
         case SDL_KEYDOWN:
         {
+            DBG("Key Down")
             break;
         }
         case SDL_KEYUP:
         {
+            DBG("Key Up")
             break;
         }
         default:

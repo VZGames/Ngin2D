@@ -175,17 +175,15 @@ void CNgin::handle_events()
 {
 
     CEventDispatcher::instance()->listen();
-    std::thread keyEventThread(std::bind(
+
+    std::thread(std::bind(
         &CKeyEvent::processEvents,
         CKeyEvent::instance(),
-        CEventDispatcher::instance()));
-    std::thread mouseEventThread(std::bind(
+        CEventDispatcher::instance())).detach();
+    std::thread(std::bind(
         &CMouseEvent::processEvents,
         CMouseEvent::instance(),
-        CEventDispatcher::instance()));
-
-    keyEventThread.detach();
-    mouseEventThread.detach();
+        CEventDispatcher::instance())).detach();
 }
 END_NAMESPACE
 
