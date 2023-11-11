@@ -2,10 +2,10 @@
 #define CTEXTURE3DMANAGER_H
 
 #include "CommonDefine.h"
-#include "ITextureManager.h"
+#include "ATextureManager.h"
 
 BEGIN_NAMESPACE(engine)
-class CTexture3DManager: public ITextureManager
+class CTexture3DManager: public ATextureManager
 {
 public:
     CTexture3DManager();

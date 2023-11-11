@@ -3,11 +3,11 @@
 
 #include "CommonDefine.h"
 #include "Alias.h"
-#include "ITextureManager.h"
+#include "ATextureManager.h"
 #include "Math/point2D.h"
 
 BEGIN_NAMESPACE(engine)
-class CTexture2DManager: public ITextureManager
+class CTexture2DManager: public ATextureManager
 {
 private:
     CTexture2DManager();
