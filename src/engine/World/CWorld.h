@@ -2,7 +2,7 @@
 #define CWORLD_H
 
 #include "CommonDefine.h"
-#include <Box2D/box2d.h>
+#include "ContactListener/CMyContactListener.h"
 
 BEGIN_NAMESPACE(engine)
 class CEntity;
@@ -15,9 +15,13 @@ private:
 
     static std::vector<CEntity*> s_entities;
     static std::vector<AScene*>  s_scenes;
+    float m_timeStep = 1.0f / 60.0f;
     int32 m_velocity_iterations = 6;
     int32 m_position_iterations = 2;
     b2Vec2 m_gravity;
+
+    // contact listener
+    CMyContactListener  m_my_contact;
 
 public:
     static CWorld *instance();

@@ -12,15 +12,11 @@ private:
     CKeyEvent();
     static CKeyEvent                                            *s_instance;
     const Uint8                                                 *m_state;
-    static bool                                                 s_toggle_status;
 
 public:
     static CKeyEvent *instance();
 
     bool sendEvent(SDL_Scancode);
-
-    static bool isPressed();
-    static bool isReleased();
 
 public:
     virtual void processEvents(CEventDispatcher*) override;

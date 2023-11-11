@@ -4,25 +4,26 @@
 #include "CommonDefine.h"
 #include "CComponent.h"
 #include "CWorld.h"
-#include <Box2D/box2d.h>
-
 
 BEGIN_NAMESPACE(engine)
 struct SBodyComponent: public CComponent
 {
-    SBodyComponent(b2BodyType type, b2Shape *shape): CComponent(__FUNCTION__)
+    SBodyComponent(float x, float y, b2BodyType type): CComponent(__FUNCTION__)
     {
         define.type = type;
-        define.position.Set(0, 0);
+        define.position.Set(x, y);
 
-        fixtureDef.shape = shape;
-        fixtureDef.density = 1.0f;
-        fixtureDef.friction = 0.3f;
-        itself->CreateFixture(&fixtureDef);
+        itself = CWorld::instance()->CreateBody(&define);
     }
+
+    template<typename ...TArgs>
+    void createFixture(TArgs...args)
+    {
+        itself->CreateFixture(std::forward<TArgs>(args)...);
+    }
+
     b2BodyDef define;
-    b2FixtureDef fixtureDef;
-    b2Body    *itself = CWorld::instance()->CreateBody(&define);;
+    b2Body    *itself = nullptr;
 
 };
 END_NAMESPACE

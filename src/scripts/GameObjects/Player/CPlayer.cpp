@@ -5,14 +5,25 @@
 BEGIN_NAMESPACE(Script)
 CPlayer::CPlayer()
 {
+    float x = 200;
+    float y = 200;
     engine::CEntityManager::instance()->createEntity(this);
-    this->addComponent<engine::SBodyComponent>(b2BodyType::b2_kinematicBody, new b2PolygonShape())
-        ->addComponent<engine::SPositionComponent>(200, 200)
+    this->addComponent<engine::SBodyComponent>(x, y, b2BodyType::b2_kinematicBody)
+        ->addComponent<engine::SPositionComponent>(x, y)
         ->addComponent<engine::SHealthComponent>(100)
         ->addComponent<engine::SSpriteComponent>("Player", "./debug/assets/Characters/BasicCharakterSpritesheet.png", 48, 48, 2, 200)
         ->addComponent<engine::SCameraComponent>(this)
         ->addComponent<engine::SMotionComponent>(0.6)
-        ->addComponent<engine::SKeyInputComponent>();
+        ->addComponent<engine::SKeyInputComponent>()
+        ->addComponent<engine::SBox2DComponent>(
+            x,
+            y,
+            std::vector<b2Vec2>{
+                {0,0},
+                {48, 0},
+                {48, 48},
+                {0, 48}
+            });
 }
 
 void CPlayer::idle()
@@ -34,7 +45,6 @@ void CPlayer::walk()
 {
     if (engine::CKeyEvent::instance()->sendEvent(SDL_SCANCODE_A))
     {
-        DBG("A")
         m_sprite->col = 2;
         m_sprite->row = 2;
         m_sprite->frameCount = 4;
@@ -44,9 +54,8 @@ void CPlayer::walk()
         m_camera->offset -= Offset(m_motion->velocity.x, 0);
     }
 
-    if (engine::CKeyEvent::instance()->sendEvent(SDL_SCANCODE_D))
+    else if (engine::CKeyEvent::instance()->sendEvent(SDL_SCANCODE_D))
     {
-        DBG("D")
         m_sprite->col = 2;
         m_sprite->row = 3;
         m_sprite->frameCount = 4;
@@ -58,7 +67,6 @@ void CPlayer::walk()
 
     if (engine::CKeyEvent::instance()->sendEvent(SDL_SCANCODE_W))
     {
-        DBG("W")
         m_sprite->col = 2;
         m_sprite->row = 1;
         m_sprite->frameCount = 4;
@@ -70,7 +78,6 @@ void CPlayer::walk()
 
     if (engine::CKeyEvent::instance()->sendEvent(SDL_SCANCODE_S))
     {
-        DBG("S")
         m_sprite->col = 2;
         m_sprite->row = 0;
         m_sprite->frameCount = 4;
@@ -97,18 +104,10 @@ void CPlayer::init()
     m_camera   = this->getComponent<engine::SCameraComponent>();
     m_sprite   = this->getComponent<engine::SSpriteComponent>();
     m_health   = this->getComponent<engine::SHealthComponent>();
+    m_box2D    = this->getComponent<engine::SBox2DComponent>();
 
-    m_body->define.position.Set(m_position->x, m_position->y);
+    m_body->createFixture(&m_box2D->fixtureDef);
 
-    b2PolygonShape *shape = (b2PolygonShape *)m_body->fixtureDef.shape;
-    b2Vec2 vertices[4];
-    vertices[0].Set(0,0);
-    vertices[1].Set(m_sprite->frameWidth, 0);
-    vertices[2].Set(m_sprite->frameWidth, m_sprite->frameHeight);
-    vertices[3].Set(0,m_sprite->frameHeight);
-
-    shape->Set(vertices, 4);
-    shape->SetAsBox(m_sprite->frameWidth/2, m_sprite->frameHeight/2);
 }
 
 void CPlayer::process(float dt)

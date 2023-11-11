@@ -14,6 +14,9 @@ std::vector<AScene*> CWorld::s_scenes{};
 CWorld::CWorld(): b2World(m_gravity)
 {
     m_gravity.SetZero();
+
+    // Set the contact listener for the world
+    SetContactListener(&m_my_contact);
 }
 
 CWorld* CWorld::instance()
@@ -56,7 +59,7 @@ void CWorld::init()
 
 void CWorld::update(float dt)
 {
-    Step(dt, m_velocity_iterations, m_position_iterations);
+    Step(m_timeStep, m_velocity_iterations, m_position_iterations);
     CECSystemManager::instance()->update(dt);
 }
 

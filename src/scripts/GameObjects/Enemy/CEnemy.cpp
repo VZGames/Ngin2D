@@ -4,11 +4,22 @@
 BEGIN_NAMESPACE(Script)
 CEnemy::CEnemy()
 {
+    float x = 100;
+    float y = 200;
     engine::CEntityManager::instance()->createEntity(this);
-    this->addComponent<engine::SBodyComponent>(b2BodyType::b2_dynamicBody, new b2PolygonShape())
-        ->addComponent<engine::SPositionComponent>(100, 200)
-        ->addComponent<engine::SHealthComponent>(100)
-        ->addComponent<engine::SSpriteComponent>("Animal", "./debug/assets/Characters/Cow.png", 32, 32, 3, 200);
+    this->addComponent<engine::SBodyComponent>(x, y, b2BodyType::b2_dynamicBody)
+        ->addComponent<engine::SPositionComponent>(x, y)
+        ->addComponent<engine::SHealthComponent>(x)
+        ->addComponent<engine::SSpriteComponent>("Animal", "./debug/assets/Characters/Cow.png", 32, 32, 3, 200)
+        ->addComponent<engine::SBox2DComponent>(
+            x,
+            y,
+            std::vector<b2Vec2>{
+            {0,0},
+            {32, 0},
+            {32, 32},
+            {0, 32}
+        });
 }
 
 void CEnemy::init()
@@ -17,18 +28,9 @@ void CEnemy::init()
     m_position = this->getComponent<engine::SPositionComponent>();
     m_sprite   = this->getComponent<engine::SSpriteComponent>();
     m_health   = this->getComponent<engine::SHealthComponent>();
+    m_box2D    = this->getComponent<engine::SBox2DComponent>();
 
-    m_body->define.position.Set(m_position->x, m_position->y);
-
-    b2PolygonShape *shape = (b2PolygonShape *)m_body->fixtureDef.shape;
-    b2Vec2 vertices[4];
-    vertices[0].Set(0,0);
-    vertices[1].Set(m_sprite->frameWidth, 0);
-    vertices[2].Set(m_sprite->frameWidth, m_sprite->frameHeight);
-    vertices[3].Set(0,m_sprite->frameHeight);
-
-    shape->Set(vertices, 4);
-    shape->SetAsBox(m_sprite->frameWidth/2, m_sprite->frameHeight/2);
+    m_body->createFixture(&m_box2D->fixtureDef);
 }
 
 void CEnemy::process(float dt)

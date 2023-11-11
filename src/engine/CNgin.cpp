@@ -184,8 +184,8 @@ void CNgin::handle_events()
         CMouseEvent::instance(),
         CEventDispatcher::instance()));
 
-    keyEventThread.join();
-    mouseEventThread.join();
+    keyEventThread.detach();
+    mouseEventThread.detach();
 }
 END_NAMESPACE
 

@@ -3,33 +3,24 @@
 
 #include "CommonDefine.h"
 #include "CComponent.h"
-//#include "CWorld.h"
-#include <Box2D/box2d.h>
 
 BEGIN_NAMESPACE(engine)
 struct SBox2DComponent: public CComponent
 {
-    SBox2DComponent(uint32_t type, std::vector<b2Vec2> vecs): CComponent(__FUNCTION__)
+    SBox2DComponent(float x, float y, std::vector<b2Vec2> vecs): CComponent(__FUNCTION__)
     {
         int32 count = vecs.size();
         b2Vec2 vertices[count];
         std::copy(vecs.begin(), vecs.end(), vertices);
+        shape.Set(vertices, count);
+        shape.SetAsBox(x, y);
 
-        if(((uint32_t)b2Shape::Type::e_polygon & type) == (uint32_t)b2Shape::Type::e_polygon)
-        {
-            b2PolygonShape *polygon = new b2PolygonShape();
-            polygon->Set(vertices, count);
-            shape = polygon;
-        }
-        else if(((uint32_t)b2Shape::Type::e_chain & type) == (uint32_t)b2Shape::Type::e_chain)
-        {
-            b2ChainShape *chain = new b2ChainShape();
-            chain->CreateLoop(vertices, count);
-            shape = chain;
-        }
+        fixtureDef.shape = &shape;
+        fixtureDef.density = 1.0f;
     }
 
-    b2Shape *shape = nullptr;
+    b2FixtureDef   fixtureDef;
+    b2PolygonShape shape;
 };
 END_NAMESPACE
 

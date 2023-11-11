@@ -18,10 +18,8 @@ CMouseEvent *CMouseEvent::instance()
 void CMouseEvent::processEvents(CEventDispatcher *dispatcher)
 {
     std::lock_guard<std::mutex> lock(m_mtx);
-//    std::unique_lock<std::mutex> lock(m_mtx);
     if (dispatcher->getNextEvent(m_event))
     {
-        DBG("")
         switch (m_event.type)
         {
         case SDL_QUIT:
@@ -31,21 +29,29 @@ void CMouseEvent::processEvents(CEventDispatcher *dispatcher)
         }
         case SDL_MOUSEBUTTONDOWN:
         {
+            int mouseX = m_event.button.x;
+            int mouseY = m_event.button.y;
             if (m_event.button.button == SDL_BUTTON_LEFT) {
-                int mouseX = m_event.button.x;
-                int mouseY = m_event.button.y;
                 // Handle left mouse button down event
                 DBG("Left mouse button down at (%d, %d)", mouseX, mouseY);
+            }
+            else if (m_event.button.button == SDL_BUTTON_RIGHT)
+            {
+                DBG("Right mouse button down at (%d, %d)", mouseX, mouseY);
             }
             break;
         }
         case SDL_MOUSEBUTTONUP:
         {
+            int mouseX = m_event.button.x;
+            int mouseY = m_event.button.y;
             if (m_event.button.button == SDL_BUTTON_LEFT) {
-                int mouseX = m_event.button.x;
-                int mouseY = m_event.button.y;
                 // Handle left mouse button up event
                 DBG("Left mouse button up at (%d, %d)", mouseX, mouseY);
+            }
+            else if(m_event.button.button == SDL_BUTTON_RIGHT)
+            {
+                DBG("Right mouse button up at (%d, %d)", mouseX, mouseY);
             }
             break;
         }
@@ -85,7 +91,6 @@ void CMouseEvent::processEvents(CEventDispatcher *dispatcher)
             break;
         }
     }
-//    lock.unlock();
 }
 
 END_NAMESPACE
