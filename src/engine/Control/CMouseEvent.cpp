@@ -1,5 +1,7 @@
 #include "CMouseEvent.h"
 #include "CCamera.h"
+#include "CNgin.h"
+#include "Logger/LoggerDefines.h"
 
 BEGIN_NAMESPACE(engine)
 CMouseEvent *CMouseEvent::s_instance = nullptr;
@@ -13,14 +15,20 @@ CMouseEvent *CMouseEvent::instance()
     return s_instance = (s_instance == nullptr)? new CMouseEvent():s_instance;
 }
 
-void CMouseEvent::listen()
+void CMouseEvent::processEvents(CEventDispatcher *dispatcher)
 {
-//    std::lock_guard<std::mutex> lck(m_mtx);
-    while (SDL_PollEvent(&m_event))
+    std::lock_guard<std::mutex> lock(m_mtx);
+//    std::unique_lock<std::mutex> lock(m_mtx);
+    if (dispatcher->getNextEvent(m_event))
     {
+        MORGAN_DEBUG("")
         switch (m_event.type)
         {
-            // Mouse events
+        case SDL_QUIT:
+        {
+            CNgin::setRunning(false);
+            break;
+        }
         case SDL_MOUSEBUTTONDOWN:
         {
             if (m_event.button.button == SDL_BUTTON_LEFT) {
@@ -43,7 +51,6 @@ void CMouseEvent::listen()
         }
         case SDL_MOUSEMOTION:
         {
-
             int mouseX = m_event.motion.x;
             int mouseY = m_event.motion.y;
             // Handle mouse motion event
@@ -62,12 +69,25 @@ void CMouseEvent::listen()
             }
             break;
         }
+        case SDL_WINDOWEVENT:
+            switch (m_event.window.event) {
+            case SDL_WINDOWEVENT_RESIZED:
+                break;
+            case SDL_WINDOWEVENT_CLOSE:
+                break;
+            case SDL_WINDOWEVENT_MINIMIZED:
+                break;
+            case SDL_WINDOWEVENT_MAXIMIZED:
+                break;
+            }
+            break;
         default:
             break;
         }
     }
-
+//    lock.unlock();
 }
+
 END_NAMESPACE
 
 

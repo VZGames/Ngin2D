@@ -2,17 +2,19 @@
 #define AEVENT_H
 
 #include "CommonDefine.h"
-#include <SDL2/SDL_events.h>
-#include <mutex>
+#include "CEventDispatcher.h"
 
 BEGIN_NAMESPACE(engine)
 class AEvent
 {
 protected:
-    SDL_Event  m_event;
-    std::mutex m_mtx;
+    SDL_Event   m_event;
+    std::mutex  m_mtx;
+
+    std::condition_variable m_c;
+
 public:
-    virtual void listen() = 0;
+    virtual void processEvents(CEventDispatcher*) = 0;
 };
 END_NAMESPACE
 

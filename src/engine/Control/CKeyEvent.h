@@ -23,7 +23,7 @@ public:
     static bool isReleased();
 
 public:
-    virtual void listen() override;
+    virtual void processEvents(CEventDispatcher*) override;
 };
 END_NAMESPACE
 #endif // CKEYEVENT_H

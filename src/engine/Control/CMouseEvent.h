@@ -15,7 +15,7 @@ public:
     static CMouseEvent *instance();
 
 public:
-    virtual void listen() override;
+    virtual void processEvents(CEventDispatcher*) override;
 };
 END_NAMESPACE
 

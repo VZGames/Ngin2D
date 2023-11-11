@@ -18,7 +18,7 @@ private:
     static SDL_Renderer     *s_renderer;
     SDL_Window              *m_window;
     CWorld                  *m_world;
-
+    static std::mutex       s_mutex;
 
 public:
     static CNgin *instance();

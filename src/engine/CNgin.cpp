@@ -1,5 +1,6 @@
 #include "CNgin.h"
 #include "Logger/LoggerDefines.h"
+#include "CEventDispatcher.h"
 #include "CKeyEvent.h"
 #include "CMouseEvent.h"
 #include "CWorld.h"
@@ -8,6 +9,7 @@ BEGIN_NAMESPACE(engine)
 CNgin *CNgin::s_instance = nullptr;
 SDL_Renderer  *CNgin::s_renderer = nullptr;
 bool  CNgin::s_running = false;
+std::mutex CNgin::s_mutex;
 int CNgin::s_win_width = 0;
 int CNgin::s_win_height = 0;
 CNgin::CNgin()
@@ -22,11 +24,13 @@ CNgin *CNgin::instance()
 
 bool CNgin::running()
 {
+    std::lock_guard<std::mutex> lck(s_mutex);
     return s_running;
 }
 
 void CNgin::setRunning(bool running)
 {
+    std::lock_guard<std::mutex> lck(s_mutex);
     s_running = running;
 }
 
@@ -114,7 +118,6 @@ void CNgin::loop()
     Uint32 lastTime = SDL_GetTicks();
 
     while (s_running) {
-
         // current time
         Uint32 currentTime = SDL_GetTicks();
 
@@ -170,10 +173,23 @@ void CNgin::update(float dt)
 }
 void CNgin::handle_events()
 {
-    std::thread(&CKeyEvent::listen, CKeyEvent::instance()).join();
-    std::thread(&CMouseEvent::listen, CMouseEvent::instance()).join();
+
+    CEventDispatcher::instance()->listen();
+    std::thread keyEventThread(std::bind(
+        &CKeyEvent::processEvents,
+        CKeyEvent::instance(),
+        CEventDispatcher::instance()));
+    std::thread mouseEventThread(std::bind(
+        &CMouseEvent::processEvents,
+        CMouseEvent::instance(),
+        CEventDispatcher::instance()));
+
+    keyEventThread.join();
+    mouseEventThread.join();
 }
 END_NAMESPACE
+
+
 
 
 
