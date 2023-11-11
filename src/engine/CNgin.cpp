@@ -1,7 +1,7 @@
 #include "CNgin.h"
 #include "Logger/LoggerDefines.h"
 #include "CKeyEvent.h"
-//#include "CSceneManager.h"
+#include "CMouseEvent.h"
 #include "CWorld.h"
 
 BEGIN_NAMESPACE(engine)
@@ -170,7 +170,8 @@ void CNgin::update(float dt)
 }
 void CNgin::handle_events()
 {
-    CKeyEvent::instance()->listen();
+    std::thread(&CKeyEvent::listen, CKeyEvent::instance()).join();
+    std::thread(&CMouseEvent::listen, CMouseEvent::instance()).join();
 }
 END_NAMESPACE
 

@@ -7,7 +7,7 @@
 BEGIN_NAMESPACE(engine)
 struct SKeyInputComponent: public CComponent
 {
-    SKeyInputComponent() {}
+    SKeyInputComponent(): CComponent(__FUNCTION__) {}
 };
 END_NAMESPACE
 

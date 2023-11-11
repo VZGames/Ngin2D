@@ -1,7 +1,7 @@
 #include "CComponent.h"
 
 BEGIN_NAMESPACE(engine)
-CComponent::CComponent()
+CComponent::CComponent(const char*name): m_name(name)
 {}
 
 ComponentID CComponent::id() const

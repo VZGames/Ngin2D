@@ -15,7 +15,8 @@ private:
 
     static std::vector<CEntity*> s_entities;
     static std::vector<AScene*>  s_scenes;
-
+    int32 m_velocity_iterations = 6;
+    int32 m_position_iterations = 2;
     b2Vec2 m_gravity;
 
 public:

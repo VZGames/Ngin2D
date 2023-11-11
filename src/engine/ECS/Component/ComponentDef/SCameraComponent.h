@@ -10,9 +10,8 @@ BEGIN_NAMESPACE(engine)
 class CEntity;
 struct SCameraComponent: public CComponent
 {
-    SCameraComponent(CEntity *target)
+    SCameraComponent(CEntity *target): CComponent(__FUNCTION__)
     {
-        m_name = __FUNCTION__;
         CCamera::instance()->setTarget(target);
     }
 

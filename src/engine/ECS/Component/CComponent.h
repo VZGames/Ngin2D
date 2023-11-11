@@ -9,12 +9,10 @@ class CComponent
 {
 private:
     ComponentID                 m_id{MIN_COMPONENT_ID};
-
-protected:
     const char                  *m_name = nullptr;
 
 public:
-    CComponent();
+    CComponent(const char*);
 
     ComponentID id() const;
     void setId(const ComponentID &newId);

@@ -8,6 +8,7 @@ BEGIN_NAMESPACE(engine)
 struct SSpriteComponent: public  CComponent
 {
     SSpriteComponent(const char *textureId, const char *source, float width, float height, int frameCount, int frameSpeed = 200):
+        CComponent(__FUNCTION__),
         textureId(textureId),
         source(source),
         frameWidth(width),
@@ -15,7 +16,6 @@ struct SSpriteComponent: public  CComponent
         frameCount(frameCount),
         frameSpeed(frameSpeed)
     {
-        m_name = __FUNCTION__;
     }
     const char *textureId;
     const char *source;

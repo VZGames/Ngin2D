@@ -56,6 +56,7 @@ void CWorld::init()
 
 void CWorld::update(float dt)
 {
+    Step(dt, m_velocity_iterations, m_position_iterations);
     CECSystemManager::instance()->update(dt);
 }
 

@@ -7,9 +7,8 @@
 BEGIN_NAMESPACE(engine)
 struct SPositionComponent: public Vector2DF, public CComponent
 {
-    SPositionComponent(float x = 0.0f, float y = 0.0f): Vector2DF(x, y)
+    SPositionComponent(float x = 0.0f, float y = 0.0f): Vector2DF(x, y), CComponent(__FUNCTION__)
     {
-        m_name = __FUNCTION__;
     }
 
     void update(Vector2DF vec)

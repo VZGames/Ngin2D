@@ -10,22 +10,19 @@
 BEGIN_NAMESPACE(engine)
 struct SBodyComponent: public CComponent
 {
-    SBodyComponent(b2BodyType type, b2Shape *shape)
+    SBodyComponent(b2BodyType type, b2Shape *shape): CComponent(__FUNCTION__)
     {
-        m_name = __FUNCTION__;
         define.type = type;
         define.position.Set(0, 0);
 
         fixtureDef.shape = shape;
         fixtureDef.density = 1.0f;
         fixtureDef.friction = 0.3f;
-
-        itself = CWorld::instance()->CreateBody(&define);
         itself->CreateFixture(&fixtureDef);
     }
     b2BodyDef define;
     b2FixtureDef fixtureDef;
-    b2Body    *itself;
+    b2Body    *itself = CWorld::instance()->CreateBody(&define);;
 
 };
 END_NAMESPACE

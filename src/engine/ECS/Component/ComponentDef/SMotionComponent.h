@@ -8,9 +8,8 @@
 BEGIN_NAMESPACE(engine)
 struct SMotionComponent: public CComponent
 {
-    SMotionComponent(float speed): speed(speed)
+    SMotionComponent(float speed): CComponent(__FUNCTION__), speed(speed)
     {
-        m_name = __FUNCTION__;
     }
     float speed;
     int direction;

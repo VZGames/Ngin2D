@@ -7,9 +7,8 @@
 BEGIN_NAMESPACE(engine)
 struct SHealthComponent: public CComponent
 {
-    SHealthComponent(float max): max(max)
+    SHealthComponent(float max): CComponent(__FUNCTION__), max(max)
     {
-        m_name = __FUNCTION__;
     }
     float current, max;
 };
