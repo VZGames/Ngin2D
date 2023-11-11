@@ -26,7 +26,7 @@ void CPlayer::jump()
 {
     if (engine::CKeyEvent::instance()->sendEvent(SDL_SCANCODE_SPACE))
     {
-        MORGAN_DEBUG("JUMP")
+        DBG("JUMP")
     }
 }
 
@@ -34,6 +34,7 @@ void CPlayer::walk()
 {
     if (engine::CKeyEvent::instance()->sendEvent(SDL_SCANCODE_A))
     {
+        DBG("A")
         m_sprite->col = 2;
         m_sprite->row = 2;
         m_sprite->frameCount = 4;
@@ -45,6 +46,7 @@ void CPlayer::walk()
 
     if (engine::CKeyEvent::instance()->sendEvent(SDL_SCANCODE_D))
     {
+        DBG("D")
         m_sprite->col = 2;
         m_sprite->row = 3;
         m_sprite->frameCount = 4;
@@ -56,6 +58,7 @@ void CPlayer::walk()
 
     if (engine::CKeyEvent::instance()->sendEvent(SDL_SCANCODE_W))
     {
+        DBG("W")
         m_sprite->col = 2;
         m_sprite->row = 1;
         m_sprite->frameCount = 4;
@@ -67,6 +70,7 @@ void CPlayer::walk()
 
     if (engine::CKeyEvent::instance()->sendEvent(SDL_SCANCODE_S))
     {
+        DBG("S")
         m_sprite->col = 2;
         m_sprite->row = 0;
         m_sprite->frameCount = 4;
@@ -81,7 +85,7 @@ void CPlayer::attach()
 {
     if (engine::CKeyEvent::instance()->sendEvent(SDL_SCANCODE_E))
     {
-        MORGAN_DEBUG("ATTACK")
+        DBG("ATTACK")
     }
 }
 

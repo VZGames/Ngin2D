@@ -28,7 +28,7 @@ bool CEntityManager::createEntity(CEntity *newEntity)
 
     m_available_ids.pop();
 
-    MORGAN_DEBUG("Created Entity has ID %d", id)
+    DBG("Created Entity has ID %d", id)
     return true;
 }
 

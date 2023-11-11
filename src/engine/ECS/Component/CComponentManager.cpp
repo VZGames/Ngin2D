@@ -37,7 +37,7 @@ bool CComponentManager::createComponent(CComponent *newComponent)
         m_available_ids.pop();
     }
 
-    MORGAN_DEBUG("Created Component %s has ID %d", compName,  _id)
+    DBG("Created Component %s has ID %d", compName,  _id)
     return true;
 }
 END_NAMESPACE

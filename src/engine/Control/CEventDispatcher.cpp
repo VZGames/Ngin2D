@@ -16,7 +16,7 @@ void CEventDispatcher::listen()
 {
     SDL_Event event;
     while (SDL_PollEvent(&event)) {
-        MORGAN_DEBUG("")
+        DBG("")
         // Push the event to the queue
 //        std::lock_guard<std::mutex> lock(m_mutex);
         m_events.push(event);

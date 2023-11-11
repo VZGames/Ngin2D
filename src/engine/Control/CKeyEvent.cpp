@@ -40,7 +40,7 @@ void CKeyEvent::processEvents(CEventDispatcher *dispatcher)
 //    std::unique_lock<std::mutex> lock(m_mtx);
     if (dispatcher->getNextEvent(m_event))
     {
-        MORGAN_DEBUG("")
+        DBG("")
         switch (m_event.type)
         {
         case SDL_QUIT:

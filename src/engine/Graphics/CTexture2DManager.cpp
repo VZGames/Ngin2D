@@ -62,17 +62,17 @@ bool CTexture2DManager::loadTexture(TextureID id, TextureSource source)
     }
     else
     {
-        MORGAN_DEBUG("TextureID: %s, Texture Path: %s", id, source);
+        DBG("TextureID: %s, Texture Path: %s", id, source);
         if(CNgin::renderer() == nullptr)
         {
-            MORGAN_DEBUG("RENDERER NULL")
+            DBG("RENDERER NULL")
             return false;
         }
 
         SDL_Texture *texture = nullptr;
         SDL_Surface *surface = IMG_Load(source);
         if (!surface) {
-            MORGAN_DEBUG("Cant load IMG")
+            DBG("Cant load IMG")
             return false;
         }
 

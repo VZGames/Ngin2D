@@ -21,7 +21,7 @@ void CMouseEvent::processEvents(CEventDispatcher *dispatcher)
 //    std::unique_lock<std::mutex> lock(m_mtx);
     if (dispatcher->getNextEvent(m_event))
     {
-        MORGAN_DEBUG("")
+        DBG("")
         switch (m_event.type)
         {
         case SDL_QUIT:
@@ -35,7 +35,7 @@ void CMouseEvent::processEvents(CEventDispatcher *dispatcher)
                 int mouseX = m_event.button.x;
                 int mouseY = m_event.button.y;
                 // Handle left mouse button down event
-                SDL_Log("Left mouse button down at (%d, %d)", mouseX, mouseY);
+                DBG("Left mouse button down at (%d, %d)", mouseX, mouseY);
             }
             break;
         }
@@ -45,7 +45,7 @@ void CMouseEvent::processEvents(CEventDispatcher *dispatcher)
                 int mouseX = m_event.button.x;
                 int mouseY = m_event.button.y;
                 // Handle left mouse button up event
-                SDL_Log("Left mouse button up at (%d, %d)", mouseX, mouseY);
+                DBG("Left mouse button up at (%d, %d)", mouseX, mouseY);
             }
             break;
         }
@@ -54,7 +54,7 @@ void CMouseEvent::processEvents(CEventDispatcher *dispatcher)
             int mouseX = m_event.motion.x;
             int mouseY = m_event.motion.y;
             // Handle mouse motion event
-            SDL_Log("Mouse moved to (%d, %d)", mouseX, mouseY);
+            DBG("Mouse moved to (%d, %d)", mouseX, mouseY);
             break;
         }
         case SDL_MOUSEWHEEL:

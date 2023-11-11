@@ -49,7 +49,7 @@ int main(int argc, char *argv[])
     }
     else
     {
-        MORGAN_DEBUG("Can't initialize Game Game");
+        DBG("Can't initialize Game Game");
     }
     return 0;
 }

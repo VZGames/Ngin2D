@@ -46,17 +46,17 @@ Size2D<float> CNgin::windowSize()
 
 bool CNgin::initialize(Title title, Width width, Height height, CWorld *world)
 {
-    MORGAN_DEBUG("Game Init");
+    DBG("Game Init");
     if (SDL_Init(SDL_INIT_EVERYTHING) != 0)
     {
-        MORGAN_DEBUG("Unable to initialize SDL: %s", SDL_GetError());
+        DBG("Unable to initialize SDL: %s", SDL_GetError());
 
         return false;
     }
 
     if (!(IMG_Init(IMG_INIT_PNG | IMG_INIT_JPG)))
     {
-        MORGAN_DEBUG("Unable to initialize SDL Image: %s", SDL_GetError());
+        DBG("Unable to initialize SDL Image: %s", SDL_GetError());
         return false;
     }
 
@@ -69,7 +69,7 @@ bool CNgin::initialize(Title title, Width width, Height height, CWorld *world)
     if (m_window == nullptr)
     {
         // In the case that the window could not be made...
-        MORGAN_DEBUG("Could not create window: %s", SDL_GetError());
+        DBG("Could not create window: %s", SDL_GetError());
 
         return false;
     }
@@ -77,13 +77,13 @@ bool CNgin::initialize(Title title, Width width, Height height, CWorld *world)
 
     SDL_GetWindowSize(m_window, &s_win_width, &s_win_height);
 
-    MORGAN_DEBUG("Window size: %d, %d", width, height);
+    DBG("Window size: %d, %d", width, height);
 
     // [2] init renderer
     s_renderer = SDL_CreateRenderer(m_window, -1, SDL_RENDERER_ACCELERATED);
     if (s_renderer == nullptr)
     {
-        MORGAN_DEBUG("Could not create renderer: %s", SDL_GetError());
+        DBG("Could not create renderer: %s", SDL_GetError());
         return false;
     }
 
@@ -97,7 +97,7 @@ bool CNgin::initialize(Title title, Width width, Height height, CWorld *world)
     m_world  = world;
     if(m_world == nullptr)
     {
-        MORGAN_DEBUG("Could not create World");
+        DBG("Could not create World");
 
         return false;
     }
@@ -145,7 +145,7 @@ void CNgin::loop()
 
 void CNgin::clean()
 {
-    MORGAN_DEBUG("Game Release Resource");
+    DBG("Game Release Resource");
 
     // Close and destroy the window and the renderer
     SDL_DestroyWindow(m_window);
@@ -157,7 +157,7 @@ void CNgin::quit()
 
     SDL_Quit();
     IMG_Quit();
-    MORGAN_DEBUG("Game Quit");
+    DBG("Game Quit");
 }
 
 void CNgin::render()
