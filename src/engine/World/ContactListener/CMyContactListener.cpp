@@ -16,8 +16,8 @@ void CMyContactListener::BeginContact(b2Contact *contact)
     b2Body* bodyA = fixtureA->GetBody();
     b2Body* bodyB = fixtureB->GetBody();
 
-    DBG("%f %f", bodyA->GetPosition().x, bodyA->GetPosition().y)
-    DBG("%f %f", bodyB->GetPosition().x, bodyB->GetPosition().y)
+    DBG("A %f %f", bodyA->GetPosition().x, bodyA->GetPosition().y)
+    DBG("B %f %f", bodyB->GetPosition().x, bodyB->GetPosition().y)
 
 }
 
@@ -30,8 +30,8 @@ void CMyContactListener::EndContact(b2Contact *contact)
     b2Body* bodyA = fixtureA->GetBody();
     b2Body* bodyB = fixtureB->GetBody();
 
-    DBG("%f %f", bodyA->GetPosition().x, bodyA->GetPosition().y)
-    DBG("%f %f", bodyB->GetPosition().x, bodyB->GetPosition().y)
+    DBG("A %f %f", bodyA->GetPosition().x, bodyA->GetPosition().y)
+    DBG("B %f %f", bodyB->GetPosition().x, bodyB->GetPosition().y)
 }
 
 void CMyContactListener::PreSolve(b2Contact *contact, const b2Manifold *oldManifold)

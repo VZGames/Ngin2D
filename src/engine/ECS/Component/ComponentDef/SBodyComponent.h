@@ -8,10 +8,10 @@
 BEGIN_NAMESPACE(engine)
 struct SBodyComponent: public CComponent
 {
-    SBodyComponent(float x, float y, b2BodyType type): CComponent(__FUNCTION__)
+    SBodyComponent(b2BodyType type): CComponent(__FUNCTION__)
     {
         define.type = type;
-        define.position.Set(x, y);
+        define.position.Set(0.0f, 0.0f);
 
         itself = CWorld::instance()->CreateBody(&define);
     }
@@ -25,6 +25,11 @@ struct SBodyComponent: public CComponent
     void SetTransform(const b2Vec2 &newposition, float angle = 0.0f)
     {
         itself->SetTransform(newposition, angle);
+    }
+
+    void SetLinearVelocity(const b2Vec2 &velocity)
+    {
+        itself->SetLinearVelocity(velocity);
     }
 
     b2BodyDef define;

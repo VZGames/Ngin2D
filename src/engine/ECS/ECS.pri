@@ -16,6 +16,7 @@ HEADERS += \
     $$PWD/Systems/CameraSystem/CCameraSystem.h \
     $$PWD/Systems/CollisionSystem/CCollisionSystem.h \
     $$PWD/Systems/KeyInputSystem/CKeyInputSystem.h \
+    $$PWD/Systems/MotionSystem/CMotionSystem.h \
     $$PWD/Systems/MovementSystem/CMovementSystem.h \
     $$PWD/Systems/SpriteSystem/CSpriteSystem.h
 
@@ -28,6 +29,7 @@ SOURCES += \
     $$PWD/Systems/CameraSystem/CCameraSystem.cpp \
     $$PWD/Systems/CollisionSystem/CCollisionSystem.cpp \
     $$PWD/Systems/KeyInputSystem/CKeyInputSystem.cpp \
+    $$PWD/Systems/MotionSystem/CMotionSystem.cpp \
     $$PWD/Systems/MovementSystem/CMovementSystem.cpp \
     $$PWD/Systems/SpriteSystem/CSpriteSystem.cpp
 

@@ -1,13 +1,13 @@
 #include "CMovementSystem.h"
 #include "LoggerDefines.h"
+#include "CCamera.h"
 #include "CEntity.h"
+#include "Adapters/Box2DAdapter.h"
 #include "ComponentDef/SPositionComponent.h"
 #include "ComponentDef/SMotionComponent.h"
 #include "ComponentDef/SCameraComponent.h"
 #include "ComponentDef/SBodyComponent.h"
-#include "ComponentDef/SBox2DComponent.h"
 
-#include "CCamera.h"
 BEGIN_NAMESPACE(engine)
 CMovementSystem::CMovementSystem()
 {}
@@ -32,6 +32,7 @@ void CMovementSystem::update(float dt)
         if(camera && motion)
         {
             position->update(motion->velocity);
+            body->SetLinearVelocity(vec2Ftob2Vec2(motion->velocity));
         }
         else
         {

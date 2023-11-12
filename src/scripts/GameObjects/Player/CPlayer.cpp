@@ -5,25 +5,23 @@
 BEGIN_NAMESPACE(script)
 CPlayer::CPlayer()
 {
-    float x = 200;
-    float y = 200;
     engine::CEntityManager::instance()->createEntity(this);
-    this->addComponent<engine::SBodyComponent>(x, y, b2BodyType::b2_kinematicBody)
-        ->addComponent<engine::SPositionComponent>(x, y)
+    this->addComponent<engine::SBodyComponent>(b2BodyType::b2_kinematicBody)
+        ->addComponent<engine::SPositionComponent>(200, 200)
         ->addComponent<engine::SHealthComponent>(100)
-        ->addComponent<engine::SSpriteComponent>("Player", "./debug/assets/Characters/BasicCharakterSpritesheet.png", 48, 48, 2, 200)
+        ->addComponent<engine::SSpriteComponent>(__FUNCTION__,
+                                                 "./debug/assets/Characters/BasicCharakterSpritesheet.png",
+                                                 48,
+                                                 48,
+                                                 2,
+                                                 200)
         ->addComponent<engine::SCameraComponent>(this)
         ->addComponent<engine::SMotionComponent>(0.6)
         ->addComponent<engine::SKeyInputComponent>()
         ->addComponent<engine::SBox2DComponent>(
-            24,
-            24,
-            std::vector<b2Vec2>{
-                {0,0},
-                {48, 0},
-                {48, 48},
-                {0, 48}
-            });
+            48,
+            48,
+            std::vector<b2Vec2>{{0,0},{48, 0},{48, 48},{0, 48}});
 }
 
 void CPlayer::idle()
@@ -54,7 +52,7 @@ void CPlayer::walk()
         m_camera->offset -= Offset(m_motion->velocity.x, 0);
     }
 
-    else if (engine::CKeyEvent::instance()->sendEvent(SDL_SCANCODE_D))
+    if (engine::CKeyEvent::instance()->sendEvent(SDL_SCANCODE_D))
     {
         m_sprite->col = 2;
         m_sprite->row = 3;
@@ -116,7 +114,6 @@ void CPlayer::process(float dt)
 
 void CPlayer::handleKeyInput()
 {
-    LOCK_GUARD(m_mutex)
     idle();
     walk();
     jump();

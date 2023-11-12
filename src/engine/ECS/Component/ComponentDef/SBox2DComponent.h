@@ -15,9 +15,8 @@ struct SBox2DComponent: public CComponent
         shape.Set(vertices, count);
         shape.SetAsBox(width/2.0f, height/2.0f);
 
-        fixtureDef.shape = &shape;
-        fixtureDef.density = 1.0f;
-        fixtureDef.friction = 0.3f;
+        fixtureDef.shape    = &shape;
+        fixtureDef.density  = 1.0f;
     }
 
     b2Vec2         *vertices;
