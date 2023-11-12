@@ -16,6 +16,9 @@ private:
     EntityID                                         m_id;
     std::unordered_map<const char*, CComponent*>     m_components;
 
+protected:
+    std::mutex                                       m_mutex;
+
 public:
     CEntity();
 

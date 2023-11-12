@@ -25,6 +25,7 @@ void CSpriteSystem::init()
 void CSpriteSystem::update(float dt)
 {
     UNUSED(dt);
+    LOCK_GUARD(m_mutex);
     // do update for each entity
     auto fn = [](CEntity* entity){
         bool hasPosition = entity->hasComponent<SPositionComponent>();
@@ -32,10 +33,12 @@ void CSpriteSystem::update(float dt)
         if((hasPosition && hasSpriteSheet))
         {
             auto sprite = entity->getComponent<SSpriteComponent>();
-            sprite->col = (SDL_GetTicks() / sprite->frameSpeed) % sprite->frameCount;
+            sprite->col =  (SDL_GetTicks()/ sprite->frameSpeed) % sprite->frameCount;
         }
     };
     CWorld::forEachEntities(fn);
+
+
 }
 
 END_NAMESPACE

@@ -47,4 +47,6 @@
 #define BEGIN_NAMESPACE(N) namespace N {
 #define END_NAMESPACE }
 
+#define LOCK_GUARD(mtx) std::lock_guard<std::mutex> lock(mtx);
+
 #endif // COMMONDEFINE_H

@@ -20,6 +20,7 @@ void CCameraSystem::init()
 void CCameraSystem::update(float dt)
 {
     UNUSED(dt)
+    LOCK_GUARD(m_mutex);
     // do update for each entity
     auto fn = [](CEntity* entity){
         auto *position  = entity->getComponent<SPositionComponent>();
@@ -28,7 +29,6 @@ void CCameraSystem::update(float dt)
         if(!(position && sprite)) return;
         if(camera)
         {
-
             Size2D<float> winSize = CNgin::windowSize();
             float width  = winSize.width;
             float height = winSize.height;
@@ -36,7 +36,7 @@ void CCameraSystem::update(float dt)
             camera->offset.setX(position->x - (width/2 - (sprite->frameWidth * scale)/2));
             camera->offset.setY(position->y - (height/2 - (sprite->frameHeight * scale)/2));
 
-            engine::CCamera::instance()->update(camera->offset);
+            CCamera::instance()->update(camera->offset);
         }
     };
     CWorld::forEachEntities(fn);

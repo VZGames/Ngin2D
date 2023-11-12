@@ -42,7 +42,7 @@ void CTexture2DManager::drawFrame(TextureID id, Point2DF pos, FrameWidth w, Fram
 
     auto fn = [&]()
     {
-        std::lock_guard<std::mutex> lock(m_mutex);
+        LOCK_GUARD(m_mutex);
         int frameX = w * c;
         int frameY = h * r;
         float scale = CCamera::instance()->scale();

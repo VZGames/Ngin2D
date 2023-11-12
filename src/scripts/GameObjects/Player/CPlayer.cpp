@@ -16,8 +16,8 @@ CPlayer::CPlayer()
         ->addComponent<engine::SMotionComponent>(0.6)
         ->addComponent<engine::SKeyInputComponent>()
         ->addComponent<engine::SBox2DComponent>(
-            x,
-            y,
+            24,
+            24,
             std::vector<b2Vec2>{
                 {0,0},
                 {48, 0},
@@ -98,16 +98,15 @@ void CPlayer::attach()
 
 void CPlayer::init()
 {
-    m_body     = this->getComponent<engine::SBodyComponent>();
     m_position = this->getComponent<engine::SPositionComponent>();
     m_motion   = this->getComponent<engine::SMotionComponent>();
     m_camera   = this->getComponent<engine::SCameraComponent>();
     m_sprite   = this->getComponent<engine::SSpriteComponent>();
     m_health   = this->getComponent<engine::SHealthComponent>();
+    m_body     = this->getComponent<engine::SBodyComponent>();
     m_box2D    = this->getComponent<engine::SBox2DComponent>();
 
     m_body->createFixture(&m_box2D->fixtureDef);
-
 }
 
 void CPlayer::process(float dt)
@@ -117,6 +116,7 @@ void CPlayer::process(float dt)
 
 void CPlayer::handleKeyInput()
 {
+    LOCK_GUARD(m_mutex)
     idle();
     walk();
     jump();

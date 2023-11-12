@@ -16,6 +16,7 @@ void CCollisionSystem::init()
 void CCollisionSystem::update(float dt)
 {
     UNUSED(dt);
+    LOCK_GUARD(m_mutex);
     // do update for each entity
     auto fn = [](CEntity* entity){
         auto position = entity->getComponent<SPositionComponent>();

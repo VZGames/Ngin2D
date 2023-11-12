@@ -1,6 +1,6 @@
 #include "CGameScene.h"
 #include "CSceneManager.h"
-#include "Logger/LoggerDefines.h"
+#include "LoggerDefines.h"
 
 BEGIN_NAMESPACE(Script)
 CGameScene::CGameScene()

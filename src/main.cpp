@@ -25,8 +25,10 @@ int main(int argc, char *argv[])
 
     std::vector<CEntity*> entities
         {
-            &player,
             &enemy,
+            &enemy2,
+            &enemy3,
+            &player,
         };
 
     std::vector<AScene*> scenes

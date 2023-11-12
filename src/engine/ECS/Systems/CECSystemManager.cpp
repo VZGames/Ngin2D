@@ -39,7 +39,7 @@ void CECSystemManager::update(float dt)
 {
     for(auto &system: m_systems)
     {
-        system->update(dt);
+        std::thread(std::bind(&AECSystem::update, system, dt)).join();
     }
 }
 

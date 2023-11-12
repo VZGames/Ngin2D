@@ -1,7 +1,7 @@
 #include "CMouseEvent.h"
 #include "CCamera.h"
 #include "CNgin.h"
-#include "Logger/LoggerDefines.h"
+#include "LoggerDefines.h"
 
 BEGIN_NAMESPACE(engine)
 CMouseEvent *CMouseEvent::s_instance = nullptr;
@@ -17,7 +17,7 @@ CMouseEvent *CMouseEvent::instance()
 
 void CMouseEvent::processEvents(CEventDispatcher *dispatcher)
 {
-    std::lock_guard<std::mutex> lock(m_mtx);
+    LOCK_GUARD(m_mtx);
     if (dispatcher->getNextEvent(m_event))
     {
         switch (m_event.type)

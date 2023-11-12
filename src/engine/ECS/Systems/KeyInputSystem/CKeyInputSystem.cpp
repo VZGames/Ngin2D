@@ -17,20 +17,14 @@ void CKeyInputSystem::init()
 void CKeyInputSystem::update(float dt)
 {
     UNUSED(dt)
-    std::vector<std::thread> threads;
+    LOCK_GUARD(m_mutex);
     // do update for each entity
     auto fn = [&](CEntity* entity){
         auto keyInput = entity->getComponent<SKeyInputComponent>();
         if(!keyInput) return;
-        threads.push_back(std::thread(std::bind(&CEntity::handleKeyInput, entity)));
+        entity->handleKeyInput();
     };
     CWorld::forEachEntities(fn);
-
-
-    for(std::thread &thread: threads)
-    {
-        thread.detach();
-    }
 }
 
 END_NAMESPACE

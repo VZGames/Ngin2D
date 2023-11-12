@@ -3,6 +3,7 @@
 
 #include "CommonDefine.h"
 #include "CComponent.h"
+#include "LoggerDefines.h"
 
 BEGIN_NAMESPACE(engine)
 struct SBox2DComponent: public CComponent
@@ -12,6 +13,10 @@ struct SBox2DComponent: public CComponent
         int32 count = vecs.size();
         b2Vec2 vertices[count];
         std::copy(vecs.begin(), vecs.end(), vertices);
+
+        for (int i = 0; i < count; ++i) {
+            DBG("vertice %d at (%f, %f)", i, vertices[i].x, vertices[i].y)
+        }
         shape.Set(vertices, count);
         shape.SetAsBox(x, y);
 

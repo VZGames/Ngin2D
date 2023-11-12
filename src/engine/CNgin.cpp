@@ -1,5 +1,5 @@
 #include "CNgin.h"
-#include "Logger/LoggerDefines.h"
+#include "LoggerDefines.h"
 #include "CEventDispatcher.h"
 #include "CKeyEvent.h"
 #include "CMouseEvent.h"
@@ -24,13 +24,13 @@ CNgin *CNgin::instance()
 
 bool CNgin::running()
 {
-    std::lock_guard<std::mutex> lck(s_mutex);
+    LOCK_GUARD(s_mutex);
     return s_running;
 }
 
 void CNgin::setRunning(bool running)
 {
-    std::lock_guard<std::mutex> lck(s_mutex);
+    LOCK_GUARD(s_mutex);
     s_running = running;
 }
 
