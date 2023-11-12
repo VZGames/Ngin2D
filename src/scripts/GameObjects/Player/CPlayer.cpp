@@ -2,7 +2,7 @@
 #include "CKeyEvent.h"
 #include "Entity/CEntityManager.h"
 
-BEGIN_NAMESPACE(Script)
+BEGIN_NAMESPACE(script)
 CPlayer::CPlayer()
 {
     float x = 200;

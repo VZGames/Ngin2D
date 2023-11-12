@@ -4,7 +4,6 @@
 #include "LoggerDefines.h"
 #include "AScene.h"
 #include "CEntity.h"
-#include "CNgin.h"
 
 BEGIN_NAMESPACE(engine)
 CWorld* CWorld::s_instance = nullptr;
@@ -13,6 +12,7 @@ std::vector<AScene*> CWorld::s_scenes{};
 
 CWorld::CWorld(): b2World(m_gravity)
 {
+//    m_gravity.Set(0.0f, -9.8f);
     m_gravity.SetZero();
 
     // Set the contact listener for the world
@@ -59,8 +59,8 @@ void CWorld::init()
 
 void CWorld::update(float dt)
 {
-    CECSystemManager::instance()->update(dt);
     Step(m_timeStep, m_velocity_iterations, m_position_iterations);
+    CECSystemManager::instance()->update(dt);
 }
 
 void CWorld::render()

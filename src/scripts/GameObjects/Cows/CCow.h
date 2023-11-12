@@ -1,5 +1,5 @@
-#ifndef CENEMY_H
-#define CENEMY_H
+#ifndef CCOW_H
+#define CCOW_H
 
 #include "CommonDefine.h"
 #include "Entity/CEntity.h"
@@ -10,7 +10,7 @@
 #include "ComponentDef/SBox2DComponent.h"
 
 BEGIN_NAMESPACE(script)
-class CEnemy: public engine::CEntity
+class CCow: public engine::CEntity
 {
 private:
     engine::SSpriteComponent          *m_sprite;
@@ -20,13 +20,13 @@ private:
     engine::SBox2DComponent           *m_box2D;
 
 public:
-    CEnemy(float, float);
+    CCow(float x, float y);
 
-//    Implement CEntity's Interface
+    //    Implement CEntity's Interface
 public:
     virtual void init() override;
     virtual void process(float) override;
 };
 END_NAMESPACE
 
-#endif // CENEMY_H
+#endif // CCOW_H

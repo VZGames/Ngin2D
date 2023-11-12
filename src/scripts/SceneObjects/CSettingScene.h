@@ -3,7 +3,7 @@
 
 #include "AScene.h"
 
-BEGIN_NAMESPACE(Script)
+BEGIN_NAMESPACE(script)
 class CSettingScene : public engine::AScene
 {
 public:

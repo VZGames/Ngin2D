@@ -4,7 +4,7 @@
 #include "CommonDefine.h"
 #include "AScene.h"
 
-BEGIN_NAMESPACE(Script)
+BEGIN_NAMESPACE(script)
 class CGameScene: public engine::AScene
 {
 public:

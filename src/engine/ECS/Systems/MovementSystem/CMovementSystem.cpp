@@ -5,6 +5,7 @@
 #include "ComponentDef/SMotionComponent.h"
 #include "ComponentDef/SCameraComponent.h"
 #include "ComponentDef/SBodyComponent.h"
+#include "ComponentDef/SBox2DComponent.h"
 
 #include "CCamera.h"
 BEGIN_NAMESPACE(engine)
@@ -26,7 +27,7 @@ void CMovementSystem::update(float dt)
         auto *position = entity->getComponent<SPositionComponent>();
         auto *motion   = entity->getComponent<SMotionComponent>();
         auto *camera   = entity->getComponent<SCameraComponent>();
-        auto *body    = entity->getComponent<SBodyComponent>();
+        auto *body     = entity->getComponent<SBodyComponent>();
         if(!position || !body) return;
         if(camera && motion)
         {
@@ -39,7 +40,7 @@ void CMovementSystem::update(float dt)
             position->y -= offset.getY();
         }
 
-        body->itself->SetTransform(b2Vec2(position->x, position->y), 0.0f);
+        body->SetTransform(b2Vec2(position->x, position->y), 0.0f);
     };
     CWorld::forEachEntities(fn);
 }

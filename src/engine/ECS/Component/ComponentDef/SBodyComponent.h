@@ -22,6 +22,11 @@ struct SBodyComponent: public CComponent
         itself->CreateFixture(std::forward<TArgs>(args)...);
     }
 
+    void SetTransform(const b2Vec2 &newposition, float angle = 0.0f)
+    {
+        itself->SetTransform(newposition, angle);
+    }
+
     b2BodyDef define;
     b2Body    *itself = nullptr;
 

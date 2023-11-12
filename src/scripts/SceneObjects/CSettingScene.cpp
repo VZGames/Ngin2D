@@ -2,7 +2,7 @@
 #include "CSceneManager.h"
 #include "LoggerDefines.h"
 
-BEGIN_NAMESPACE(Script)
+BEGIN_NAMESPACE(script)
 CSettingScene::CSettingScene()
 {
     engine::CSceneManager::instance()->createScene(__FUNCTION__, this);

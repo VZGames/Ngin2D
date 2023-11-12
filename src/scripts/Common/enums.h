@@ -3,7 +3,7 @@
 
 #include "CommonDefine.h"
 
-BEGIN_NAMESPACE(Script)
+BEGIN_NAMESPACE(script)
 enum MOVE_DIRECTION: char
 {
     MOVE_LEFT,

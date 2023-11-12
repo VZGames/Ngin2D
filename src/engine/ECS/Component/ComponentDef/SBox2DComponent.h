@@ -8,22 +8,20 @@
 BEGIN_NAMESPACE(engine)
 struct SBox2DComponent: public CComponent
 {
-    SBox2DComponent(float x, float y, std::vector<b2Vec2> vecs): CComponent(__FUNCTION__)
+    SBox2DComponent(float width, float height, std::vector<b2Vec2> vecs): CComponent(__FUNCTION__)
     {
-        int32 count = vecs.size();
-        b2Vec2 vertices[count];
-        std::copy(vecs.begin(), vecs.end(), vertices);
-
-        for (int i = 0; i < count; ++i) {
-            DBG("vertice %d at (%f, %f)", i, vertices[i].x, vertices[i].y)
-        }
+        count = vecs.size();
+        vertices = vecs.data();
         shape.Set(vertices, count);
-        shape.SetAsBox(x, y);
+        shape.SetAsBox(width/2.0f, height/2.0f);
 
         fixtureDef.shape = &shape;
         fixtureDef.density = 1.0f;
+        fixtureDef.friction = 0.3f;
     }
 
+    b2Vec2         *vertices;
+    int32          count = 0;
     b2FixtureDef   fixtureDef;
     b2PolygonShape shape;
 };

@@ -13,7 +13,7 @@
 #include "ComponentDef/SBodyComponent.h"
 #include "ComponentDef/SBox2DComponent.h"
 
-BEGIN_NAMESPACE(Script)
+BEGIN_NAMESPACE(script)
 class CPlayer: public engine::CEntity
 {
 private:
