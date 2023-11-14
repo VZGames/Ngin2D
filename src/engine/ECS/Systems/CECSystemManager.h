@@ -2,6 +2,7 @@
 #define CECSYSTEMMANAGER_H
 
 #include "CommonDefine.h"
+#include "ThreadPool/CThreadPool.h"
 #include "CollisionSystem/CCollisionSystem.h"
 #include "MovementSystem/CMovementSystem.h"
 #include "SpriteSystem/CSpriteSystem.h"
@@ -19,6 +20,7 @@ class CECSystemManager
 private:
     CECSystemManager();
     static CECSystemManager                    *s_instance;
+    CThreadPool                                *m_threadPool;
     std::vector<AECSystem*>                    m_systems;
 
     CCollisionSystem                           m_collision_system;

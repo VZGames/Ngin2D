@@ -21,7 +21,7 @@ CPlayer::CPlayer()
         ->addComponent<engine::SBox2DComponent>(
             48,
             48,
-            std::vector<b2Vec2>{{0,0},{48, 0},{48, 48},{0, 48}});
+            std::vector<b2Vec2>{{16,16},{32, 16},{32, 32},{16, 32}});
 }
 
 void CPlayer::idle()

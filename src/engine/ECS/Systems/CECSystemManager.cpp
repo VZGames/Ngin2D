@@ -17,16 +17,22 @@ CECSystemManager *CECSystemManager::instance()
 
 void CECSystemManager::init(std::vector<CEntity*> &entities)
 {
-    m_systems.emplace_back(&m_keyinput_system);
-    m_systems.emplace_back(&m_camera_system);
-    m_systems.emplace_back(&m_movement_system);
-    m_systems.emplace_back(&m_collision_system);
-    m_systems.emplace_back(&m_render_system);
-    m_systems.emplace_back(&m_motion_system);
+    m_systems.push_back(&m_keyinput_system);
+    m_systems.push_back(&m_camera_system);
+    m_systems.push_back(&m_movement_system);
+    m_systems.push_back(&m_collision_system);
+    m_systems.push_back(&m_render_system);
+    m_systems.push_back(&m_motion_system);
+
+
+    m_threadPool = new CThreadPool(static_cast<int>(m_systems.size()));
+    m_threadPool->init();
 
     for(auto &system: m_systems)
     {
-        system->init();
+        m_threadPool->submit([&](){
+            system->init();
+        });
     }
 
     for(CEntity *entity: entities)
@@ -39,7 +45,9 @@ void CECSystemManager::update(float dt)
 {
     for(auto &system: m_systems)
     {
-        std::thread(std::bind(&AECSystem::update, system, dt)).join();
+        m_threadPool->submit([&](){
+            system->update(dt);
+        });
     }
 }
 

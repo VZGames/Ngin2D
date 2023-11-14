@@ -10,9 +10,9 @@ CCow::CCow(float x, float y)
         ->addComponent<engine::SHealthComponent>(100)
         ->addComponent<engine::SSpriteComponent>(__FUNCTION__, "./debug/assets/Characters/Cow.png", 32, 32, 3, 200)
         ->addComponent<engine::SBox2DComponent>(
-            32,
-            32,
-            std::vector<b2Vec2>{{0,0},{32, 0},{32, 32},{0, 32}}
+            16,
+            12,
+            std::vector<b2Vec2>{{8,24},{40, 24},{40, 24},{40, 24}}
             );
 }
 

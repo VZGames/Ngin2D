@@ -1,13 +1,13 @@
-#ifndef CMYCONTACTLISTENER_H
-#define CMYCONTACTLISTENER_H
+#ifndef CCUSTOMCONTACTLISTENER_H
+#define CCUSTOMCONTACTLISTENER_H
 
 #include "CommonDefine.h"
 
 BEGIN_NAMESPACE(engine)
-class CMyContactListener: public b2ContactListener
+class CCustomContactListener: public b2ContactListener
 {
 public:
-    CMyContactListener();
+    CCustomContactListener();
 
     // b2ContactListener interface
 public:
@@ -18,4 +18,4 @@ public:
 };
 END_NAMESPACE
 
-#endif // CMYCONTACTLISTENER_H
+#endif // CCUSTOMCONTACTLISTENER_H

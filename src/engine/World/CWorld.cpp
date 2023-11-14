@@ -12,7 +12,7 @@ std::vector<AScene*> CWorld::s_scenes{};
 
 CWorld::CWorld(): b2World(m_gravity)
 {
-//    m_gravity.Set(0.0f, -9.8f);
+    //    m_gravity.Set(0.0f, -9.8f);
     m_gravity.SetZero();
 
     // Set the contact listener for the world
@@ -65,7 +65,10 @@ void CWorld::update(float dt)
 
 void CWorld::render()
 {
-    forEachEntities(std::bind(&CRender::drawEntity, CRender::instance(), std::placeholders::_1));
+    for(CEntity *entity: s_entities)
+    {
+        CRender::instance()->drawEntity(entity);
+    }
 }
 END_NAMESPACE
 
