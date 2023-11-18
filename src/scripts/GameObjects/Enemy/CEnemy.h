@@ -21,6 +21,8 @@ private:
 
 public:
     CEnemy(float, float);
+
+    void kill();
 };
 END_NAMESPACE
 

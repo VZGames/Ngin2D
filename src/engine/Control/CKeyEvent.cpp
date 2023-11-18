@@ -32,28 +32,14 @@ void CKeyEvent::processEvents(CEventDispatcher *dispatcher)
 {
     if (dispatcher->getNextEvent(m_event))
     {
-        switch (m_event.type)
+        if (m_event.type == SDL_KEYDOWN)
         {
-        case SDL_QUIT:
-        {
-            CNgin::setRunning(false);
-            DBG("Quit event")
-            break;
-        }
-        case SDL_KEYDOWN:
-        {
-            DBG("Key Down")
+            std::lock_guard<std::mutex> lock(m_mtx);
             keyDown();
-            break;
         }
-        case SDL_KEYUP:
+        if (m_event.type == SDL_KEYUP)
         {
-            DBG("Key Up")
             keyUp();
-            break;
-        }
-        default:
-            break;
         }
     }
 }
@@ -61,25 +47,18 @@ void CKeyEvent::processEvents(CEventDispatcher *dispatcher)
 
 void CKeyEvent::keyDown()
 {
+    DBG("Key Down")
     SDL_Scancode numKey = m_event.key.keysym.scancode;
     if(sendEvent(numKey))
     {
         m_inputs[numKey]();
     }
-    else
-    {
-        m_inputs[SDL_SCANCODE_UNKNOWN]();
-    }
 }
 
 void CKeyEvent::keyUp()
 {
-    m_event.type = SDL_KEYDOWN;
-    m_event.key.keysym.scancode = SDL_SCANCODE_UNKNOWN;
-    m_event.key.keysym.sym = SDLK_UNKNOWN;
-    m_event.key.keysym.mod = KMOD_NONE;
+    DBG("Key Up");
 
-    SDL_PushEvent(&m_event);
 }
 
 END_NAMESPACE

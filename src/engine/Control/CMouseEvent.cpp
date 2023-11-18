@@ -19,50 +19,31 @@ void CMouseEvent::processEvents(CEventDispatcher *dispatcher)
 {
     if (dispatcher->getNextEvent(m_event))
     {
-        switch (m_event.type)
-        {
-        case SDL_QUIT:
+        if (m_event.type == SDL_QUIT)
         {
             CNgin::setRunning(false);
-            break;
         }
-        case SDL_MOUSEBUTTONDOWN:
+        if (m_event.type == SDL_MOUSEBUTTONDOWN)
+        {
+            std::lock_guard<std::mutex> lock(m_mtx);
+            int mouseX = m_event.button.x;
+            int mouseY = m_event.button.y;
+            pressed(mouseX, mouseY);
+        }
+        if (m_event.type == SDL_MOUSEBUTTONUP)
         {
             int mouseX = m_event.button.x;
             int mouseY = m_event.button.y;
-            if (m_event.button.button == SDL_BUTTON_LEFT) {
-                // Handle left mouse button down event
-                DBG("Left mouse button down at (%d, %d)", mouseX, mouseY);
-            }
-            else if (m_event.button.button == SDL_BUTTON_RIGHT)
-            {
-                DBG("Right mouse button down at (%d, %d)", mouseX, mouseY);
-            }
-            break;
+            released(mouseX, mouseY);
         }
-        case SDL_MOUSEBUTTONUP:
-        {
-            int mouseX = m_event.button.x;
-            int mouseY = m_event.button.y;
-            if (m_event.button.button == SDL_BUTTON_LEFT) {
-                // Handle left mouse button up event
-                DBG("Left mouse button up at (%d, %d)", mouseX, mouseY);
-            }
-            else if(m_event.button.button == SDL_BUTTON_RIGHT)
-            {
-                DBG("Right mouse button up at (%d, %d)", mouseX, mouseY);
-            }
-            break;
-        }
-        case SDL_MOUSEMOTION:
+        if (m_event.type == SDL_MOUSEMOTION)
         {
             int mouseX = m_event.motion.x;
             int mouseY = m_event.motion.y;
             // Handle mouse motion event
             DBG("Mouse moved to (%d, %d)", mouseX, mouseY);
-            break;
         }
-        case SDL_MOUSEWHEEL:
+        if (m_event.type == SDL_MOUSEWHEEL)
         {
             if(m_event.wheel.y > 0) // scroll up
             {
@@ -72,9 +53,9 @@ void CMouseEvent::processEvents(CEventDispatcher *dispatcher)
             {
                 CCamera::instance()->zoom(E_CAMERA_ZOOM::ZOOM_OUT);
             }
-            break;
         }
-        case SDL_WINDOWEVENT:
+        if (m_event.type == SDL_WINDOWEVENT)
+        {
             switch (m_event.window.event) {
             case SDL_WINDOWEVENT_RESIZED:
                 break;
@@ -84,14 +65,39 @@ void CMouseEvent::processEvents(CEventDispatcher *dispatcher)
                 break;
             case SDL_WINDOWEVENT_MAXIMIZED:
                 break;
+            default:
+                break;
             }
-            break;
-        default:
-            break;
         }
     }
 }
 
+void CMouseEvent::pressed(int x, int y)
+{
+    if (m_event.button.button == SDL_BUTTON_LEFT) {
+        // Handle left mouse button down event
+        DBG("Left mouse button down at (%d, %d)", x, y);
+    }
+    else if (m_event.button.button == SDL_BUTTON_RIGHT)
+    {
+        DBG("Right mouse button down at (%d, %d)", x, y);
+    }
+}
+
+void CMouseEvent::released(int x, int y)
+{
+    if (m_event.button.button == SDL_BUTTON_LEFT) {
+        // Handle left mouse button up event
+        DBG("Left mouse button up at (%d, %d)", x, y);
+    }
+    else if(m_event.button.button == SDL_BUTTON_RIGHT)
+    {
+        DBG("Right mouse button up at (%d, %d)", x, y);
+    }
+}
 END_NAMESPACE
+
+
+
 
 

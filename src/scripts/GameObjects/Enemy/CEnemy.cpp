@@ -1,4 +1,5 @@
 #include "CEnemy.h"
+#include "CMouseEvent.h"
 #include "Entity/CEntityManager.h"
 
 BEGIN_NAMESPACE(script)
@@ -25,8 +26,19 @@ CEnemy::CEnemy(float x, float y)
             std::vector<b2Vec2>{{8,16},{24, 16},{24, 24},{8, 24}}
             );
     }
+
+
+    {
+        engine::CMouseEvent::instance()->registerMouse(E_MOUSE_EVENT::MOUSE_CLICKED, &CEnemy::kill, this);
+    }
+}
+
+void CEnemy::kill()
+{
+
 }
 
 END_NAMESPACE
+
 
 
