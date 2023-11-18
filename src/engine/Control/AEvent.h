@@ -11,8 +11,6 @@ protected:
     SDL_Event   m_event;
     std::mutex  m_mtx;
 
-    std::condition_variable m_c;
-
 public:
     virtual void processEvents(CEventDispatcher*) = 0;
 };

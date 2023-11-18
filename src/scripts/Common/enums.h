@@ -4,15 +4,16 @@
 #include "CommonDefine.h"
 
 BEGIN_NAMESPACE(script)
-enum MOVE_DIRECTION: char
+enum E_MOVE_DIRECTION: char
 {
+    MOVE_NONE,
     MOVE_LEFT,
     MOVE_UP,
     MOVE_RIGHT,
     MOVE_DOWN
 };
 
-enum CTRL_SLOTS
+enum E_CTRL_SLOTS
 {
     CTRL_SLOTS_0,
     CTRL_SLOTS_1,

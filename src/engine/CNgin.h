@@ -4,6 +4,7 @@
 #include "CommonDefine.h"
 #include "Alias.h"
 #include "size2D.h"
+#include "ThreadPool/CThreadPool.h"
 
 BEGIN_NAMESPACE(engine)
 class CWorld;
@@ -11,6 +12,7 @@ class CNgin
 {
 private:
     CNgin();
+    ~CNgin();
     static bool             s_running;
     static CNgin            *s_instance;
     static int              s_win_width;
@@ -19,6 +21,9 @@ private:
     SDL_Window              *m_window;
     CWorld                  *m_world;
     static std::mutex       s_mutex;
+
+    CThreadPool             m_key_evt_pool;
+
 
 public:
     static CNgin *instance();

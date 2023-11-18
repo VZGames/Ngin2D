@@ -2,7 +2,6 @@
 #define CECSYSTEMMANAGER_H
 
 #include "CommonDefine.h"
-#include "ThreadPool/CThreadPool.h"
 #include "CollisionSystem/CCollisionSystem.h"
 #include "MovementSystem/CMovementSystem.h"
 #include "SpriteSystem/CSpriteSystem.h"

@@ -16,6 +16,7 @@
 #include <mutex>
 #include <future>
 #include <condition_variable>
+#include <memory>
 
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_events.h>

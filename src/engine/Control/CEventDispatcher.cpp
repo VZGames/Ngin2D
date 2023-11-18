@@ -16,6 +16,7 @@ void CEventDispatcher::listen()
 {
     SDL_Event event;
     while (SDL_PollEvent(&event)) {
+//        LOCK_GUARD(m_mutex)
         // Push the event to the queue
         m_events.push(event);
     }
@@ -23,6 +24,7 @@ void CEventDispatcher::listen()
 
 bool CEventDispatcher::getNextEvent(SDL_Event &event)
 {
+//    LOCK_GUARD(m_mutex)
     if (!m_events.empty()) {
         event = m_events.front();
         m_events.pop();

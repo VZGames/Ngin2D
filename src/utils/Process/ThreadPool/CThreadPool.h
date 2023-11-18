@@ -34,17 +34,19 @@ public:
     void shutdown();
 
     // Submit a function to be executed asynchronously by the pool
-    template<typename Fn, typename ...TArgs>
-    auto submit(Fn&& fn, TArgs&&... args) -> std::future<decltype(fn(args...))>
+    template<typename _Func, typename ..._Args>
+    std::future<std::result_of_t<_Func(_Args...)>> submit(_Func&& fn, _Args&&... args)
     {
-        // Create a function with bounded parameters ready to execute
-        std::function<decltype(fn(args...))()> func = std::bind(std::forward<Fn>(fn), std::forward<TArgs>(args)...);
-        // Encapsulate it into a shared ptr in order to be able to copy construct / assign
-        auto task_ptr = std::make_shared<std::packaged_task<decltype(fn(args...))()>>(func);
+        /* The return type of task `F` */
+        using return_type = std::result_of_t<_Func(_Args...)>;
+
+        /* wrapper for no arguments */
+        auto task = std::make_shared<std::packaged_task<return_type()>>(
+            std::bind(std::forward<_Func>(fn), std::forward<_Args>(args)...));
 
         // Wrap packaged task into void function
-        std::function<void()> wrapper_func = [task_ptr]() {
-            (*task_ptr)();
+        std::function<void()> wrapper_func = [task]() {
+            (*task)();
         };
 
         // Enqueue generic wrapper function
@@ -54,7 +56,7 @@ public:
         m_conditional_lock.notify_one();
 
         // Return future from promise
-        return task_ptr->get_future();
+        return task->get_future();
     }
 };
 

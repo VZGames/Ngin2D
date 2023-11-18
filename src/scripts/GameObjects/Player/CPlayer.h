@@ -2,8 +2,9 @@
 #define CPLAYER_H
 
 #include "CommonDefine.h"
-#include "Entity/CEntity.h"
+#include "Common/enums.h"
 
+#include "Entity/CEntity.h"
 #include "ComponentDef/SSpriteComponent.h"
 #include "ComponentDef/SHealthComponent.h"
 #include "ComponentDef/SPositionComponent.h"
@@ -31,7 +32,7 @@ public:
 
     void idle();
     void jump();
-    void walk();
+    void walk(E_MOVE_DIRECTION);
     void attach();
 };
 END_NAMESPACE

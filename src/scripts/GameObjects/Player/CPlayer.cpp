@@ -10,21 +10,32 @@ CPlayer::CPlayer()
     m_position  = this->addComponent<engine::SPositionComponent>(200, 200);
     m_health    = this->addComponent<engine::SHealthComponent>(100);
     m_sprite    = this->addComponent<engine::SSpriteComponent>(__FUNCTION__,
-                                                 "./debug/assets/Characters/BasicCharakterSpritesheet.png",
-                                                 48,
-                                                 48,
-                                                 2,
-                                                 200);
+                                                            "./debug/assets/Characters/BasicCharakterSpritesheet.png",
+                                                            48,
+                                                            48,
+                                                            2,
+                                                            200);
     m_camera    = this->addComponent<engine::SCameraComponent>(this);
     m_motion    = this->addComponent<engine::SMotionComponent>(0.6);
     m_box2D     = this->addComponent<engine::SBox2DComponent>(
         36,
         24,
         std::vector<b2Vec2>{{16,24},{32, 24},{32, 32},{16, 32}});
+
+
+    engine::CKeyEvent::instance()->registerKey(SDL_SCANCODE_UNKNOWN, &CPlayer::idle, this);
+    engine::CKeyEvent::instance()->registerKey(SDL_SCANCODE_E, &CPlayer::attach, this);
+    engine::CKeyEvent::instance()->registerKey(SDL_SCANCODE_SPACE, &CPlayer::jump, this);
+    engine::CKeyEvent::instance()->registerKey(SDL_SCANCODE_A, &CPlayer::walk, this, E_MOVE_DIRECTION::MOVE_LEFT);
+    engine::CKeyEvent::instance()->registerKey(SDL_SCANCODE_D, &CPlayer::walk, this, E_MOVE_DIRECTION::MOVE_RIGHT);
+    engine::CKeyEvent::instance()->registerKey(SDL_SCANCODE_W, &CPlayer::walk, this, E_MOVE_DIRECTION::MOVE_UP);
+    engine::CKeyEvent::instance()->registerKey(SDL_SCANCODE_S, &CPlayer::walk, this, E_MOVE_DIRECTION::MOVE_DOWN);
+
 }
 
 void CPlayer::idle()
 {
+    DBG("IDLE")
     m_motion->velocity.Zeros();
     m_motion->running = 0;
     m_sprite->frameCount = 2;
@@ -38,9 +49,10 @@ void CPlayer::jump()
     }
 }
 
-void CPlayer::walk()
+void CPlayer::walk(E_MOVE_DIRECTION direction)
 {
-    if (engine::CKeyEvent::instance()->sendEvent(SDL_SCANCODE_A))
+    DBG("WALK")
+    if (direction == E_MOVE_DIRECTION::MOVE_LEFT)
     {
         m_sprite->col = 2;
         m_sprite->row = 2;
@@ -51,7 +63,7 @@ void CPlayer::walk()
         m_camera->offset -= Offset(m_motion->velocity.x, 0);
     }
 
-    if (engine::CKeyEvent::instance()->sendEvent(SDL_SCANCODE_D))
+    if (direction == E_MOVE_DIRECTION::MOVE_RIGHT)
     {
         m_sprite->col = 2;
         m_sprite->row = 3;
@@ -62,7 +74,7 @@ void CPlayer::walk()
         m_camera->offset -= Offset(m_motion->velocity.x, 0);
     }
 
-    if (engine::CKeyEvent::instance()->sendEvent(SDL_SCANCODE_W))
+    if (direction == E_MOVE_DIRECTION::MOVE_UP)
     {
         m_sprite->col = 2;
         m_sprite->row = 1;
@@ -73,7 +85,7 @@ void CPlayer::walk()
         m_camera->offset -= Offset(0, m_motion->velocity.y);
     }
 
-    if (engine::CKeyEvent::instance()->sendEvent(SDL_SCANCODE_S))
+    if (direction == E_MOVE_DIRECTION::MOVE_DOWN)
     {
         m_sprite->col = 2;
         m_sprite->row = 0;
