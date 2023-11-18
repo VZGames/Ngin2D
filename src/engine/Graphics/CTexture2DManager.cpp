@@ -54,6 +54,7 @@ void CTexture2DManager::drawFrame(TextureID id, Point2DF pos, FrameWidth w, Fram
             (float)h * scale
         };
 
+        SDL_RenderDrawRectF(CNgin::renderer(), &destRect);
         SDL_RenderCopyExF(CNgin::renderer(), m_textures[id], &srcRect, &destRect, angle, NULL, flip);
     };
 

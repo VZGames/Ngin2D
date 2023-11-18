@@ -5,33 +5,28 @@ BEGIN_NAMESPACE(script)
 CEnemy::CEnemy(float x, float y)
 {
     engine::CEntityManager::instance()->createEntity(this);
-    this->addComponent<engine::SBodyComponent>(b2BodyType::b2_dynamicBody)
-        ->addComponent<engine::SPositionComponent>(x, y)
-        ->addComponent<engine::SHealthComponent>(100)
-        ->addComponent<engine::SSpriteComponent>(__FUNCTION__, "./debug/assets/Characters/slime.png", 32, 32, 7, 200)
-        ->addComponent<engine::SBox2DComponent>(
-            16,
-            16,
-            std::vector<b2Vec2>{{0,0},{32, 0},{32, 20},{0, 20}}
-            );
-}
-
-void CEnemy::init()
-{
-    m_body     = this->getComponent<engine::SBodyComponent>();
-    m_position = this->getComponent<engine::SPositionComponent>();
-    m_sprite   = this->getComponent<engine::SSpriteComponent>();
-    m_health   = this->getComponent<engine::SHealthComponent>();
-    m_box2D    = this->getComponent<engine::SBox2DComponent>();
-
-    m_sprite->row = 2;
-    m_body->createFixture(&m_box2D->fixtureDef);
-}
-
-void CEnemy::process(float dt)
     {
-        UNUSED(dt)
+        m_body      = this->addComponent<engine::SBodyComponent>(b2BodyType::b2_dynamicBody);
     }
+    {
+        m_position  = this->addComponent<engine::SPositionComponent>(x, y);
+    }
+    {
+        m_health    = this->addComponent<engine::SHealthComponent>(100);
+    }
+    {
+        m_sprite    = this->addComponent<engine::SSpriteComponent>(__FUNCTION__, "./debug/assets/Characters/slime.png", 32, 32, 7, 200);
+        m_sprite->row = 2;
+    }
+    {
+        m_box2D     = this->addComponent<engine::SBox2DComponent>(
+            16,
+            16,
+            std::vector<b2Vec2>{{8,16},{24, 16},{24, 24},{8, 24}}
+            );
+    }
+}
+
 END_NAMESPACE
 
 

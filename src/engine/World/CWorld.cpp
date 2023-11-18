@@ -54,7 +54,7 @@ void CWorld::forEachScenes(std::function<void(AScene*)> fn)
 
 void CWorld::init()
 {
-    CECSystemManager::instance()->init(s_entities);
+    CECSystemManager::instance()->init();
 }
 
 void CWorld::update(float dt)
@@ -65,10 +65,7 @@ void CWorld::update(float dt)
 
 void CWorld::render()
 {
-    for(CEntity *entity: s_entities)
-    {
-        CRender::instance()->drawEntity(entity);
-    }
+    forEachEntities(std::bind(&CRender::drawEntity, CRender::instance(), std::placeholders::_1));
 }
 END_NAMESPACE
 

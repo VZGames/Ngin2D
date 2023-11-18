@@ -29,13 +29,9 @@ public:
 
     EntityID id() const;
     void setId(const EntityID &newId);
-    
-    virtual void init() {};
-    virtual void process(float dt) { UNUSED(dt) };
-    virtual void handleKeyInput() {};
 
     template<class T, typename ...TArgs>
-    CEntity *addComponent(TArgs&&...args)
+    T *addComponent(TArgs&&...args)
     {
         const char *compName = typeid(T).name();
         assert(m_components.find(compName) == m_components.end() && "Adding component more than once.");
@@ -43,7 +39,7 @@ public:
         T *c = new T(std::forward<TArgs>(args)...);
         COMP_MANAGER->createComponent(c);
         m_components[compName] = std::move(c);
-        return this;
+        return static_cast<T*>(m_components[compName]);
     }
 
     template<class T>

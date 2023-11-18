@@ -1,19 +1,19 @@
-#ifndef CKEYINPUTSYSTEM_H
-#define CKEYINPUTSYSTEM_H
+#ifndef CSPAWNSYSTEM_H
+#define CSPAWNSYSTEM_H
 
 #include "CommonDefine.h"
 #include "AECSystem.h"
 
 BEGIN_NAMESPACE(engine)
-class CKeyInputSystem: public AECSystem
+class CSpawnSystem: public AECSystem
 {
 public:
-    CKeyInputSystem();
-
+    CSpawnSystem();
+    //    Implement IECSystem Interfaces
 public:
     virtual void init() override;
     virtual void update(float dt) override;
 };
 END_NAMESPACE
 
-#endif // CKEYINPUTSYSTEM_H
+#endif // CSPAWNSYSTEM_H

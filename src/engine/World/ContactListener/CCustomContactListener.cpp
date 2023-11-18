@@ -16,8 +16,8 @@ void CCustomContactListener::BeginContact(b2Contact *contact)
     b2Body* bodyA = fixtureA->GetBody();
     b2Body* bodyB = fixtureB->GetBody();
 
-//    DBG("A %f %f", bodyA->GetPosition().x, bodyA->GetPosition().y)
-//    DBG("B %f %f", bodyB->GetPosition().x, bodyB->GetPosition().y)
+    DBG("A %f %f", bodyA->GetPosition().x, bodyA->GetPosition().y)
+    DBG("B %f %f", bodyB->GetPosition().x, bodyB->GetPosition().y)
 }
 
 void CCustomContactListener::EndContact(b2Contact *contact)
@@ -29,8 +29,8 @@ void CCustomContactListener::EndContact(b2Contact *contact)
     b2Body* bodyA = fixtureA->GetBody();
     b2Body* bodyB = fixtureB->GetBody();
 
-//    DBG("A %f %f", bodyA->GetPosition().x, bodyA->GetPosition().y)
-//    DBG("B %f %f", bodyB->GetPosition().x, bodyB->GetPosition().y)
+    DBG("A %f %f", bodyA->GetPosition().x, bodyA->GetPosition().y)
+    DBG("B %f %f", bodyB->GetPosition().x, bodyB->GetPosition().y)
 
 }
 

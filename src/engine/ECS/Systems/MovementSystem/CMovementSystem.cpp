@@ -14,13 +14,12 @@ CMovementSystem::CMovementSystem()
 
 void CMovementSystem::init()
 {
-    
 }
 
 void CMovementSystem::update(float dt)
 {
     UNUSED(dt);
-    LOCK_GUARD(m_mutex);
+    // LOCK_GUARD(m_mutex);
     // do update for each entity
 
     auto fn = [](CEntity* entity){

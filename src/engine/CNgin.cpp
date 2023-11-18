@@ -163,7 +163,9 @@ void CNgin::quit()
 void CNgin::render()
 {
     SDL_RenderClear(s_renderer);
+    SDL_SetRenderDrawColor(CNgin::renderer(), 255, 0, 0, 255);
     m_world->render();
+    SDL_SetRenderDrawColor(s_renderer, 255, 255, 255, 255);
     SDL_RenderPresent(s_renderer);
 }
 
@@ -177,13 +179,13 @@ void CNgin::handle_events()
     CEventDispatcher::instance()->listen();
 
     std::thread(std::bind(
-        &CKeyEvent::processEvents,
-        CKeyEvent::instance(),
-        CEventDispatcher::instance())).detach();
+                    &CKeyEvent::processEvents,
+                    CKeyEvent::instance(),
+                    CEventDispatcher::instance())).detach();
     std::thread(std::bind(
-        &CMouseEvent::processEvents,
-        CMouseEvent::instance(),
-        CEventDispatcher::instance())).detach();
+                    &CMouseEvent::processEvents,
+                    CMouseEvent::instance(),
+                    CEventDispatcher::instance())).detach();
 }
 END_NAMESPACE
 

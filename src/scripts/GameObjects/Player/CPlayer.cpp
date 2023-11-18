@@ -6,22 +6,21 @@ BEGIN_NAMESPACE(script)
 CPlayer::CPlayer()
 {
     engine::CEntityManager::instance()->createEntity(this);
-    this->addComponent<engine::SBodyComponent>(b2BodyType::b2_kinematicBody)
-        ->addComponent<engine::SPositionComponent>(200, 200)
-        ->addComponent<engine::SHealthComponent>(100)
-        ->addComponent<engine::SSpriteComponent>(__FUNCTION__,
+    m_body      = this->addComponent<engine::SBodyComponent>(b2BodyType::b2_kinematicBody);
+    m_position  = this->addComponent<engine::SPositionComponent>(200, 200);
+    m_health    = this->addComponent<engine::SHealthComponent>(100);
+    m_sprite    = this->addComponent<engine::SSpriteComponent>(__FUNCTION__,
                                                  "./debug/assets/Characters/BasicCharakterSpritesheet.png",
                                                  48,
                                                  48,
                                                  2,
-                                                 200)
-        ->addComponent<engine::SCameraComponent>(this)
-        ->addComponent<engine::SMotionComponent>(0.6)
-        ->addComponent<engine::SKeyInputComponent>()
-        ->addComponent<engine::SBox2DComponent>(
-            48,
-            48,
-            std::vector<b2Vec2>{{16,16},{32, 16},{32, 32},{16, 32}});
+                                                 200);
+    m_camera    = this->addComponent<engine::SCameraComponent>(this);
+    m_motion    = this->addComponent<engine::SMotionComponent>(0.6);
+    m_box2D     = this->addComponent<engine::SBox2DComponent>(
+        36,
+        24,
+        std::vector<b2Vec2>{{16,24},{32, 24},{32, 32},{16, 32}});
 }
 
 void CPlayer::idle()
@@ -94,31 +93,6 @@ void CPlayer::attach()
     }
 }
 
-void CPlayer::init()
-{
-    m_position = this->getComponent<engine::SPositionComponent>();
-    m_motion   = this->getComponent<engine::SMotionComponent>();
-    m_camera   = this->getComponent<engine::SCameraComponent>();
-    m_sprite   = this->getComponent<engine::SSpriteComponent>();
-    m_health   = this->getComponent<engine::SHealthComponent>();
-    m_body     = this->getComponent<engine::SBodyComponent>();
-    m_box2D    = this->getComponent<engine::SBox2DComponent>();
-
-    m_body->createFixture(&m_box2D->fixtureDef);
-}
-
-void CPlayer::process(float dt)
-{
-    UNUSED(dt)
-}
-
-void CPlayer::handleKeyInput()
-{
-    idle();
-    walk();
-    jump();
-    attach();
-}
 END_NAMESPACE
 
 

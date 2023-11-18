@@ -21,11 +21,6 @@ private:
 
 public:
     CEnemy(float, float);
-
-//    Implement CEntity's Interface
-public:
-    virtual void init() override;
-    virtual void process(float) override;
 };
 END_NAMESPACE
 

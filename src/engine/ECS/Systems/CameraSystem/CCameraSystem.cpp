@@ -14,13 +14,12 @@ CCameraSystem::CCameraSystem()
 
 void CCameraSystem::init()
 {
-
 }
 
 void CCameraSystem::update(float dt)
 {
     UNUSED(dt)
-    LOCK_GUARD(m_mutex);
+    // LOCK_GUARD(m_mutex);
     // do update for each entity
     auto fn = [](CEntity* entity){
         auto *position  = entity->getComponent<SPositionComponent>();
