@@ -12,19 +12,20 @@
 #include "ComponentDef/SMotionComponent.h"
 #include "ComponentDef/SBodyComponent.h"
 #include "ComponentDef/SBox2DComponent.h"
+#include "ComponentDef/SKeyInputComponent.h"
 
 BEGIN_NAMESPACE(script)
 class CPlayer: public engine::CEntity
 {
 private:
-    engine::SSpriteComponent          *m_sprite;
-    engine::SHealthComponent          *m_health;
-    engine::SPositionComponent        *m_position;
-    engine::SCameraComponent          *m_camera;
-    engine::SMotionComponent          *m_motion;
-    engine::SBodyComponent            *m_body;
-    engine::SBox2DComponent           *m_box2D;
-
+    engine::SSpriteComponent                        *m_sprite;
+    engine::SHealthComponent                        *m_health;
+    engine::SPositionComponent                      *m_position;
+    engine::SCameraComponent                        *m_camera;
+    engine::SMotionComponent                        *m_motion;
+    engine::SBodyComponent                          *m_body;
+    engine::SBox2DComponent                         *m_box2D;
+    engine::SKeyInputComponent                      *m_keyInput;
 
 
 public:

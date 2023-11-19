@@ -12,18 +12,11 @@ private:
     CKeyEvent();
     static CKeyEvent                                            *s_instance;
     const Uint8                                                 *m_state;
-    std::map<SDL_Scancode, std::function<void(void)>>           m_inputs;
+    std::map<uint32_t, std::function<void(void)>>               m_inputs;
 
 private:
-    void keyDown();
-    void keyUp();
-
-public:
-    static CKeyEvent *instance();
-
-    bool sendEvent(SDL_Scancode);
     template<typename _Func,  typename ..._Args>
-    void registerKey(SDL_Scancode code, _Func&& fn, _Args&&... args)
+    void pushKeyInput(uint32_t code, _Func&& fn, _Args&&... args)
     {
         if (m_inputs.find(code) != m_inputs.end()) {
             return;
@@ -40,6 +33,25 @@ public:
 
         // Add the function to the map
         m_inputs[code] = func;
+    }
+    void keyDown();
+    void keyUp();
+
+public:
+    static CKeyEvent *instance();
+
+    bool sendEvent(uint32_t);
+
+    template<typename _Func,  typename ..._Args>
+    void registerKey(SDL_Scancode code, _Func&& fn, _Args&&... args)
+    {
+        pushKeyInput(code, fn, args...);
+    };
+
+    template<typename _Func,  typename ..._Args>
+    void registerKey(SDL_EventType type, _Func&& fn, _Args&&... args)
+    {
+        pushKeyInput(type, fn, args...);
     };
 
 public:

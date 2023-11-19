@@ -7,6 +7,7 @@
 #include "SpriteSystem/CSpriteSystem.h"
 #include "CameraSystem/CCameraSystem.h"
 #include "MotionSystem/CMotionSystem.h"
+#include "KeyInputSystem/CKeyInputSystem.h"
 
 BEGIN_NAMESPACE(engine)
 class CEntity;
@@ -25,6 +26,7 @@ private:
     CMotionSystem                              m_motion_system;
     CCollisionSystem                           m_collision_system;
     CSpriteSystem                              m_render_system;
+    CKeyInputSystem                            m_key_input_system;
 
 public:
     static CECSystemManager *instance();

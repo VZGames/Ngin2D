@@ -21,9 +21,20 @@ CPlayer::CPlayer()
         36,
         24,
         std::vector<b2Vec2>{{16,24},{32, 24},{32, 32},{16, 32}});
+
+    m_keyInput  = this->addComponent<engine::SKeyInputComponent>();
+    m_keyInput->registerKey(
+        SDL_KEYUP,
+        SDL_SCANCODE_E,
+        SDL_SCANCODE_SPACE,
+        SDL_SCANCODE_A,
+        SDL_SCANCODE_D,
+        SDL_SCANCODE_W,
+        SDL_SCANCODE_S
+        );
     
     
-    engine::CKeyEvent::instance()->registerKey(SDL_SCANCODE_UNKNOWN, &CPlayer::idle, this);
+    engine::CKeyEvent::instance()->registerKey(SDL_KEYUP, &CPlayer::idle, this);
     engine::CKeyEvent::instance()->registerKey(SDL_SCANCODE_E, &CPlayer::attach, this);
     engine::CKeyEvent::instance()->registerKey(SDL_SCANCODE_SPACE, &CPlayer::jump, this);
     engine::CKeyEvent::instance()->registerKey(SDL_SCANCODE_A, &CPlayer::walk, this, E_MOVE_DIRECTION::MOVE_LEFT);
@@ -43,10 +54,7 @@ void CPlayer::idle()
 
 void CPlayer::jump()
 {
-    if (engine::CKeyEvent::instance()->sendEvent(SDL_SCANCODE_SPACE))
-    {
-        DBG("JUMP")
-    }
+    DBG("JUMP")
 }
 
 void CPlayer::walk(E_MOVE_DIRECTION direction)
@@ -99,10 +107,7 @@ void CPlayer::walk(E_MOVE_DIRECTION direction)
 
 void CPlayer::attach()
 {
-    if (engine::CKeyEvent::instance()->sendEvent(SDL_SCANCODE_E))
-    {
-        DBG("ATTACK")
-    }
+    DBG("ATTACK");
 }
 
 END_NAMESPACE

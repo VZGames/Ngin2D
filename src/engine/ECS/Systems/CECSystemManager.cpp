@@ -17,6 +17,7 @@ CECSystemManager *CECSystemManager::instance()
 
 void CECSystemManager::init()
 {
+    m_systems.push_back(&m_key_input_system);
     m_systems.push_back(&m_movement_system);
     m_systems.push_back(&m_camera_system);
     m_systems.push_back(&m_motion_system);

@@ -25,7 +25,6 @@ void CMouseEvent::processEvents(CEventDispatcher *dispatcher)
         }
         if (m_event.type == SDL_MOUSEBUTTONDOWN)
         {
-            std::lock_guard<std::mutex> lock(m_mtx);
             int mouseX = m_event.button.x;
             int mouseY = m_event.button.y;
             pressed(mouseX, mouseY);
