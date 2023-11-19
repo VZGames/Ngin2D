@@ -10,13 +10,8 @@ CWorld* CWorld::s_instance = nullptr;
 std::vector<CEntity*> CWorld::s_entities{};
 std::vector<AScene*> CWorld::s_scenes{};
 
-CWorld::CWorld(): b2World(m_gravity)
+CWorld::CWorld()
 {
-    //    m_gravity.Set(0.0f, -9.8f);
-    m_gravity.SetZero();
-
-    // Set the contact listener for the world
-    SetContactListener(&m_my_contact);
 }
 
 CWorld* CWorld::instance()
@@ -59,7 +54,6 @@ void CWorld::init()
 
 void CWorld::update(float dt)
 {
-    Step(m_timeStep, m_velocity_iterations, m_position_iterations);
     CECSystemManager::instance()->update(dt);
 }
 

@@ -1,10 +1,8 @@
 HEADERS += \
-    $$PWD/CWorld.h \
-    $$PWD/ContactListener/CCustomContactListener.h
+    $$PWD/CWorld.h
 
 SOURCES += \
-    $$PWD/CWorld.cpp \
-    $$PWD/ContactListener/CCustomContactListener.cpp
+    $$PWD/CWorld.cpp
 
 INCLUDEPATH += \
     $$PWD

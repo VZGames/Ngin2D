@@ -22,9 +22,6 @@
 #include <SDL2/SDL_events.h>
 #include <SDL2/SDL_image.h>
 
-#include <Box2D/box2d.h>
-
-
 #define ONE_SEC 1000
 
 #define SCREEN_Z 1

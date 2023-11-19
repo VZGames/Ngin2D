@@ -6,7 +6,6 @@ BEGIN_NAMESPACE(script)
 CPlayer::CPlayer()
 {
     engine::CEntityManager::instance()->createEntity(this);
-    m_body      = this->addComponent<engine::SBodyComponent>(b2BodyType::b2_kinematicBody);
     m_position  = this->addComponent<engine::SPositionComponent>(200, 200);
     m_health    = this->addComponent<engine::SHealthComponent>(100);
     m_sprite    = this->addComponent<engine::SSpriteComponent>(__FUNCTION__,
@@ -17,10 +16,6 @@ CPlayer::CPlayer()
                                                             200);
     m_camera    = this->addComponent<engine::SCameraComponent>(this);
     m_motion    = this->addComponent<engine::SMotionComponent>(0.6);
-    m_box2D     = this->addComponent<engine::SBox2DComponent>(
-        36,
-        24,
-        std::vector<b2Vec2>{{16,24},{32, 24},{32, 32},{16, 32}});
 
     m_keyInput  = this->addComponent<engine::SKeyInputComponent>();
     m_keyInput->registerKey(

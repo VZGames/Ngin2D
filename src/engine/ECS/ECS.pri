@@ -1,8 +1,6 @@
 HEADERS += \
     $$PWD/Component/CComponent.h \
     $$PWD/Component/CComponentManager.h \
-    $$PWD/Component/ComponentDef/SBodyComponent.h \
-    $$PWD/Component/ComponentDef/SBox2DComponent.h \
     $$PWD/Component/ComponentDef/SCameraComponent.h \
     $$PWD/Component/ComponentDef/SHealthComponent.h \
     $$PWD/Component/ComponentDef/SKeyInputComponent.h \

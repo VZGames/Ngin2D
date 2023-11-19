@@ -18,8 +18,6 @@ private:
 
 protected:
     std::mutex                                       m_mutex;
-    b2BodyDef                                        m_define;
-    b2Body                                           *m_body = nullptr;
 
 public:
     CEntity();
