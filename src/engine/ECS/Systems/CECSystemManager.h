@@ -8,6 +8,7 @@
 #include "CameraSystem/CCameraSystem.h"
 #include "MotionSystem/CMotionSystem.h"
 #include "KeyInputSystem/CKeyInputSystem.h"
+#include "SpawnSystem/CSpawnSystem.h"
 
 BEGIN_NAMESPACE(engine)
 class CEntity;
@@ -27,6 +28,7 @@ private:
     CCollisionSystem                           m_collision_system;
     CSpriteSystem                              m_render_system;
     CKeyInputSystem                            m_key_input_system;
+    CSpawnSystem                               m_spawn_system;
 
 public:
     static CECSystemManager *instance();

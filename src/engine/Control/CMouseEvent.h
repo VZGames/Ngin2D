@@ -13,8 +13,10 @@ private:
     static CMouseEvent *s_instance;
     std::map<E_MOUSE_EVENT, std::function<void(void)>>           m_callback_funcs;
 
-    void pressed(int x, int y);
-    void released(int x, int y);
+    void pressed();
+    void released();
+    void wheel();
+    void windowEvent();
 
 public:
     static CMouseEvent *instance();
