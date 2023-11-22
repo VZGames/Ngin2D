@@ -25,6 +25,7 @@ public:
 
 
 public:
+    virtual std::pair<float, float>  projection(Vector2DF axis) { (void)axis; return std::make_pair(0,0); }
     virtual float perimeter() { return 0.0f; };
     virtual float acreage() { return 0.0f; };
 };

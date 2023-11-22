@@ -23,7 +23,13 @@ void CCollisionSystem::update(float dt)
         if(!position || !box) return;
         else
         {
+//            std::pair<float, float> projectionA = box->shape.projection(axis);
+//            std::pair<float, float> projectionB = box->shape.projection(axis);
 
+//            // Check for overlap
+//            if (projectionA.second < projectionB.first || projectionB.second < projectionA.first) {
+//                // No overlap on this axis, so shapes are not colliding
+//            }
         }
 
     };

@@ -22,13 +22,12 @@ struct SBoxComponent: public CComponent
     template<typename ..._Vertex>
     void setVertices(_Vertex&&...vertex)
     {
-        (vertices.push_back(std::forward<_Vertex>(vertex)), ...);
+        (shape.pushVertex(std::forward<_Vertex>(vertex)), ...);
     }
 
     Size2D<float> size;
     Point2DF position;
     CPolygonShape shape;
-    std::vector<Vector2DF> vertices;
 };
 END_NAMESPACE
 

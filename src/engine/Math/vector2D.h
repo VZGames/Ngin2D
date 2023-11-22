@@ -182,6 +182,12 @@ public:
         return *this;
     }
 
+    Vector2D<T> normalize() const
+    {
+        // normalize vector  = 1/|v|
+        return Vector2D<T>(x/magnitude(), y/magnitude());
+    }
+
     float magnitude() const
     {
         return static_cast<float>(std::sqrt(std::pow(x,2) + std::pow(y,2)));
