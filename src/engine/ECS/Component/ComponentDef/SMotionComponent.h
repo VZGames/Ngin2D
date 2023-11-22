@@ -3,7 +3,7 @@
 
 #include "CommonDefine.h"
 #include "Component/CComponent.h"
-#include "vector2d.h"
+#include "vector2D.h"
 
 BEGIN_NAMESPACE(engine)
 struct SMotionComponent: public CComponent

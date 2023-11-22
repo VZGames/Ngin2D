@@ -2,6 +2,7 @@
 #define CWORLD_H
 
 #include "CommonDefine.h"
+#include "vector2D.h"
 
 BEGIN_NAMESPACE(engine)
 class CEntity;
@@ -13,6 +14,7 @@ private:
     ~CWorld();
     static CWorld *s_instance;
 
+    Vector2DF m_gravity;
     static std::vector<CEntity*> s_entities;
     static std::vector<AScene*>  s_scenes;
 

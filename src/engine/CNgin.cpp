@@ -28,11 +28,13 @@ CNgin *CNgin::instance()
 
 bool CNgin::running()
 {
+    LOCK_GUARD(s_mutex)
     return s_running;
 }
 
 void CNgin::setRunning(bool running)
 {
+    LOCK_GUARD(s_mutex)
     s_running = running;
 }
 
@@ -181,8 +183,8 @@ void CNgin::update(float dt)
 void CNgin::handle_events()
 {
     CEventDispatcher::instance()->listen();
-    m_key_evt_pool.submit(&CKeyEvent::processEvents, CKeyEvent::instance(), CEventDispatcher::instance()).get();
     m_key_evt_pool.submit(&CMouseEvent::processEvents, CMouseEvent::instance(), CEventDispatcher::instance()).get();
+    m_key_evt_pool.submit(&CKeyEvent::processEvents, CKeyEvent::instance(), CEventDispatcher::instance()).get();
 }
 END_NAMESPACE
 

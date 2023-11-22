@@ -13,6 +13,7 @@ private:
     static CMouseEvent *s_instance;
     std::map<E_MOUSE_EVENT, std::function<void(void)>>           m_callback_funcs;
 
+    void quit();
     void pressed();
     void released();
     void wheel();

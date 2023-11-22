@@ -28,6 +28,7 @@ void CCamera::update(Offset &newOffset)
     m_offset = newOffset;
     position->x -= m_offset.getX();
     position->y -= m_offset.getY();
+
 }
 
 Offset CCamera::offset() const

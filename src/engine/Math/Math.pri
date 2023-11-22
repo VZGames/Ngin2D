@@ -1,16 +1,19 @@
 HEADERS += \
+    $$PWD/Geometry/AShape.h \
+    $$PWD/Geometry/CCircleShape.h \
+    $$PWD/Geometry/CPolygonShape.h \
     $$PWD/math2D.h \
     $$PWD/matrix2D.h \
     $$PWD/offset2D.h \
     $$PWD/point2D.h \
-    $$PWD/projection2D.h \
     $$PWD/size2D.h \
-    $$PWD/vector2d.h
+    $$PWD/vector2D.h
 
 SOURCES += \
-    $$PWD/projection2D.cpp
+    $$PWD/Geometry/CCircleShape.cpp \
+    $$PWD/Geometry/CPolygonShape.cpp
 
 
 INCLUDEPATH += \
-    $$PWD/Shape \
+    $$PWD/Geometry \
     $$PWD

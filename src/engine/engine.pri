@@ -8,7 +8,7 @@ include($$PWD/World/World.pri)
 include($$PWD/Control/Control.pri)
 include($$PWD/System/System.pri)
 include($$PWD/Adapters/Adapters.pri)
-
+include($$PWD/Physics/Physics.pri)
 
 INCLUDEPATH += \
     $$PWD/Base \
@@ -27,3 +27,4 @@ HEADERS += \
 
 SOURCES += \
     $$PWD/CNgin.cpp
+

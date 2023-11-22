@@ -21,7 +21,6 @@ void CMouseEvent::processEvents(CEventDispatcher *dispatcher)
     {
         switch (m_event.type) {
         case SDL_QUIT:
-            CNgin::setRunning(false);
             break;
         case SDL_MOUSEBUTTONDOWN:
             pressed();
@@ -39,6 +38,11 @@ void CMouseEvent::processEvents(CEventDispatcher *dispatcher)
             break;
         }
     }
+}
+
+void CMouseEvent::quit()
+{
+    CNgin::setRunning(false);
 }
 
 void CMouseEvent::pressed()
@@ -87,6 +91,7 @@ void CMouseEvent::windowEvent()
     case SDL_WINDOWEVENT_RESIZED:
         break;
     case SDL_WINDOWEVENT_CLOSE:
+        quit();
         break;
     case SDL_WINDOWEVENT_MINIMIZED:
         break;
@@ -97,6 +102,7 @@ void CMouseEvent::windowEvent()
     }
 }
 END_NAMESPACE
+
 
 
 
