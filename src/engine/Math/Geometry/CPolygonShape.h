@@ -12,6 +12,8 @@ private:
 public:
     CPolygonShape();
 
+    Vector2DF &vertexAt(int index);
+    std::vector<Vector2DF> vertices() const;
     void setVertices(std::vector<Vector2DF> &vertices);
     void pushVertex(Vector2DF vertex);
 

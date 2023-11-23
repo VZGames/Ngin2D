@@ -5,6 +5,16 @@ CPolygonShape::CPolygonShape()
 
 }
 
+Vector2DF &CPolygonShape::vertexAt(int index)
+{
+    return m_vertices[index];
+}
+
+std::vector<Vector2DF> CPolygonShape::vertices() const
+{
+    return m_vertices;
+}
+
 void CPolygonShape::setVertices(std::vector<Vector2DF> &vertices)
 {
     std::copy(vertices.begin(), vertices.end(), std::back_inserter(m_vertices));

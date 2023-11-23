@@ -4,6 +4,7 @@
 #include <iostream>
 #include <cmath>
 #include <vector>
+#include "Utils.h"
 
 template <typename T>
 class Vector2D

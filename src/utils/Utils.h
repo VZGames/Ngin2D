@@ -96,4 +96,11 @@ std::string classNameOf() {
     return name; // mostly primitive types
 }
 
+template <class T>
+inline void swap ( T& a, T& b )
+{
+    T c(a); a=b; b=c;
+}
+
+
 #endif // UTILS_H
