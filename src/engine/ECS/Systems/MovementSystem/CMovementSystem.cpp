@@ -5,6 +5,7 @@
 #include "ComponentDef/SPositionComponent.h"
 #include "ComponentDef/SMotionComponent.h"
 #include "ComponentDef/SCameraComponent.h"
+#include "ComponentDef/SBoxComponent.h"
 
 BEGIN_NAMESPACE(engine)
 CMovementSystem::CMovementSystem()
@@ -21,13 +22,15 @@ void CMovementSystem::update(float dt)
     // do update for each entity
 
     auto fn = [](CEntity* entity){
-        auto *position = entity->getComponent<SPositionComponent>();
-        auto *motion   = entity->getComponent<SMotionComponent>();
-        auto *camera   = entity->getComponent<SCameraComponent>();
+        auto position = entity->getComponent<SPositionComponent>();
+        auto motion   = entity->getComponent<SMotionComponent>();
+        auto camera   = entity->getComponent<SCameraComponent>();
+        auto box      = entity->getComponent<SBoxComponent>();
         if(!position) return;
         if(camera && motion)
         {
             position->update(motion->velocity);
+
         }
         else
         {
@@ -35,6 +38,8 @@ void CMovementSystem::update(float dt)
             position->x -= offset.getX();
             position->y -= offset.getY();
         }
+
+        if(box) box->update(position->x, position->y);
 
     };
     CWorld::forEachEntities(fn);

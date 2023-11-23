@@ -10,6 +10,11 @@ Vector2DF &CPolygonShape::vertexAt(int index)
     return m_vertices[index];
 }
 
+void CPolygonShape::setVertexAt(int index, Vector2DF vertex)
+{
+    m_vertices[index] = vertex;
+}
+
 std::vector<Vector2DF> CPolygonShape::vertices() const
 {
     return m_vertices;
@@ -32,7 +37,7 @@ std::pair<float, float> CPolygonShape::projection(Vector2DF axis)
 
     for (Vector2DF &vertex: m_vertices)
     {
-        float dotProduct = vertex.dotProduct(axis);
+        float dotProduct = axis.dotProduct(Vector2D<float>(m_x, m_y) + vertex);
         min = std::min(min, dotProduct);
         max = std::max(max, dotProduct);
     }

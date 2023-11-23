@@ -24,14 +24,14 @@ int main(int argc, char *argv[])
     script::CEnemy  enemy2(100, 300);
     script::CEnemy  enemy3(500, 260);
     script::CCow    cow(100, 50);
-    script::CCow    cow2(50, 20);
+    script::CCow    cow2(700, 420);
     script::CCow    cow3(300, 400);
 
     std::vector<CEntity*> entities
         {
-            &enemy,
-            &enemy2,
-            &enemy3,
+//            &enemy,
+//            &enemy2,
+//            &enemy3,
             &cow,
             &cow2,
             &cow3,

@@ -6,14 +6,11 @@
 
 BEGIN_NAMESPACE(engine)
 CCollisionSystem::CCollisionSystem()
-    :m_pool(2)
 {
-    m_pool.init();
 }
 
 CCollisionSystem::~CCollisionSystem()
 {
-    m_pool.shutdown();
 }
 
 void CCollisionSystem::init()
@@ -44,9 +41,15 @@ void CCollisionSystem::update(float dt)
         {
             for (AShape *obj: m_boxes)
             {
-                if(isCollision(&box->shape, obj))
+                if(obj == &box->shape) continue;
+                if(checkCollision(&box->shape, obj))
                 {
                     DBG("IS COLLISION")
+                }
+                else
+                {
+                    DBG("IS NOT COLLISION")
+
                 }
             }
         }
@@ -55,43 +58,19 @@ void CCollisionSystem::update(float dt)
     CWorld::forEachEntities(fn);
 }
 
-bool CCollisionSystem::isCollision(AShape *A, AShape *B)
+bool CCollisionSystem::checkCollision(AShape *A, AShape *B)
 {
-    int Ok{0};
-    m_pool.submit([&](){
-              for (Vector2DF &axis: A->axes()) {
-                  std::pair<float, float> projectionA = A->projection(axis);
-                  std::pair<float, float> projectionB = B->projection(axis);
+    for (Vector2DF &axis: A->axes()) {
+        std::pair<float, float> projectionA = A->projection(axis);
+        std::pair<float, float> projectionB = B->projection(axis);
 
-                  // Check for overlap
-                  if (projectionA.first < projectionB.second && projectionA.second > projectionB.first) {
-                      Ok *= 1;
-                      return;
-                  }
-                  else
-                  {
-                      Ok = 0;
-                  }
-              }
-          }).get();
-
-    m_pool.submit([&](){
-              for (Vector2DF &axis: B->axes()) {
-                  std::pair<float, float> projectionA = A->projection(axis);
-                  std::pair<float, float> projectionB = B->projection(axis);
-
-                  // Check for overlap
-                  if (projectionA.first < projectionB.second && projectionA.second > projectionB.first) {
-                      Ok *= 1;
-                      return;
-                  }
-                  else
-                  {
-                      Ok = 0;
-                  }
-              }
-          }).get();
-    return Ok;
+        // Check for overlap
+        if (overlap(projectionA.first, projectionA.second, projectionB.first, projectionA.second))
+        {
+            return true;
+        }
+    }
+    return false;
 }
 
 END_NAMESPACE

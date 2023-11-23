@@ -183,6 +183,7 @@ public:
         return *this;
     }
 
+    // like toUnit();
     Vector2D<T> normalize() const
     {
         // normalize vector  = 1/|v|
@@ -212,7 +213,7 @@ public:
 
     void print()
     {
-        std::cout << x << ", " << y << std::endl;
+        std::cout << "magnitude: " << magnitude() << ", Value(" << x << ", " << y << ")" << std::endl;
     }
 };
 

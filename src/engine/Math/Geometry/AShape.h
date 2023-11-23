@@ -21,6 +21,7 @@ public:
     void setY(float y) { m_x = y; }
     void setWidth(float width) { m_width = width; }
     void setHeight(float height) { m_height = height; }
+    void clearAxis() { m_axes.clear(); }
     void pushAxis(Vector2DF axis) { m_axes.emplace_back(axis); }
     std::vector<Vector2DF> axes() const { return m_axes; }
 

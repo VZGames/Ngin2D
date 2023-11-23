@@ -17,7 +17,7 @@ CTexture2DManager *CTexture2DManager::instance()
 
 void CTexture2DManager::renderFrameThread(void *data)
 {
-
+    UNUSED(data)
 }
 
 void CTexture2DManager::drawTile(TextureID id, Point2DF pos, TileWidth w, TileHeight h, TileRow r, TileCol c, Angle angle, SDL_RendererFlip flip)
