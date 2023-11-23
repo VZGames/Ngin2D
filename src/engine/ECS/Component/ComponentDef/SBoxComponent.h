@@ -12,8 +12,9 @@ BEGIN_NAMESPACE(engine)
 class CEntity;
 struct SBoxComponent: public CComponent
 {
-    SBoxComponent(float x, float y, float width, float height):
+    SBoxComponent(E_BODY_TYPE bodyType, float x, float y, float width, float height):
         CComponent(__FUNCTION__),
+        body(bodyType),
         size{width, height}
     {
         shape.setX(x);
@@ -38,10 +39,12 @@ struct SBoxComponent: public CComponent
             Vector2DF vertexB = shape.vertexAt(i);
             Vector2DF edge =  static_cast<Vector2D<float>>(vertexB) - static_cast<Vector2D<float>>(vertexA);
             Vector2DF normal = edge.normalize().perp();
-//            normal.print();
+            normal.print();
             shape.pushAxis(normal);
         }
     }
+
+    E_BODY_TYPE body;
     Size2D<float> size;
     CPolygonShape shape;
 };
