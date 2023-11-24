@@ -18,7 +18,7 @@ public:
     float width() const { return m_width; }
     float height() const { return m_height; }
     void setX(float x) { m_x = x; }
-    void setY(float y) { m_x = y; }
+    void setY(float y) { m_y = y; }
     void setWidth(float width) { m_width = width; }
     void setHeight(float height) { m_height = height; }
     void clearAxis() { m_axes.clear(); }

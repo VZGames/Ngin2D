@@ -18,12 +18,10 @@ CPlayer::CPlayer()
     m_motion    = this->addComponent<engine::SMotionComponent>(0.6);
 
     m_box       = this->addComponent<engine::SBoxComponent>(E_BODY_TYPE::KINEMATIC, m_position->x, m_position->y, m_sprite->frameWidth, m_sprite->frameHeight);
-    m_box->setVertices(
-        Vector2DF(16, 24),
-        Vector2DF(32, 24),
-        Vector2DF(32, 32),
-        Vector2DF(16, 32)
-        );
+    m_box->setVertex(Vector2DF(16, 24));
+    m_box->setVertex(Vector2DF(32, 24));
+    m_box->setVertex(Vector2DF(32, 32));
+    m_box->setVertex(Vector2DF(16, 32));
 
     m_keyInput  = this->addComponent<engine::SKeyInputComponent>();
     m_keyInput->registerKey(

@@ -21,23 +21,32 @@ struct SBoxComponent: public CComponent
         shape.setY(y);
     }
 
-    template<typename ..._Vertex>
-    void setVertices(_Vertex&&...vertex)
+    void setVertex(Vector2DF vertex)
     {
-        (shape.pushVertex(std::forward<_Vertex>(vertex)), ...);
+        vertex.x += shape.x();
+        vertex.y += shape.y();
+        shape.pushVertex(vertex);
     }
 
+    void updateVertex(Vector2DF &vertex)
+    {
+        vertex.x += shape.x();
+        vertex.y += shape.y();
+    }
     void update(float x, float y)
     {
+        shape.clearAxis();
         shape.setX(x);
         shape.setY(y);
-        shape.clearAxis();
         int count = static_cast<int>(shape.vertices().size());
         for(int i = 0; i < count - 1; i++)
         {
             Vector2DF vertexA = shape.vertexAt((i + 1) % count);
             Vector2DF vertexB = shape.vertexAt(i);
-            Vector2DF edge =  static_cast<Vector2D<float>>(vertexB) - static_cast<Vector2D<float>>(vertexA);
+            updateVertex(vertexA);
+            updateVertex(vertexB);
+
+            Vector2DF edge =  static_cast<Vector2D<float>>(vertexA) - static_cast<Vector2D<float>>(vertexB);
             Vector2DF normal = edge.normalize().perp();
             normal.print();
             shape.pushAxis(normal);

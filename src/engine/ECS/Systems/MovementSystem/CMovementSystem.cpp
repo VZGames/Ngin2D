@@ -39,6 +39,7 @@ void CMovementSystem::update(float dt)
             position->y -= offset.getY();
         }
 
+//        DBG("POSITION %f %f", position->x, position->y)
         if(box) box->update(position->x, position->y);
 
     };
