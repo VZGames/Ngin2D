@@ -46,6 +46,10 @@ void CCollisionSystem::update(float dt)
                 {
                     DBG("IS COLLISION")
                 }
+                else
+                {
+//                    DBG("IS NOT COLLISION")
+                }
             }
         }
 
@@ -71,8 +75,8 @@ bool CCollisionSystem::checkCollision(AShape *A, AShape *B)
     }
 
     for (auto &axis: B->axes()) {
-        std::pair<float, float> projectionA = B->projection(axis);
-        std::pair<float, float> projectionB = A->projection(axis);
+        std::pair<float, float> projectionA = A->projection(axis);
+        std::pair<float, float> projectionB = B->projection(axis);
 
         // Check for overlap
         float overlapLenght = gap(projectionA.first, projectionA.second, projectionB.first, projectionA.second);

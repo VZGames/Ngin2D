@@ -20,9 +20,9 @@ struct SBoxComponent: public CComponent
         shape.setY(y);
     }
 
-    void setVertex(Vector2DF vertex)
+    void setVertex(float x, float y)
     {
-        shape.pushVertex(vertex);
+        shape.pushVertex(x, y);
     }
 
     std::vector<Vector2DF> vertices()
@@ -32,7 +32,7 @@ struct SBoxComponent: public CComponent
 
     void setAxes()
     {
-        float scale = engine::CCamera::instance()->scale();
+        shape.clearAxis();
         int count = static_cast<int>(shape.vertices().size());
         for(int i = 0; i < count - 1; i++)
         {
@@ -47,6 +47,7 @@ struct SBoxComponent: public CComponent
     void update(Vector2DF *position)
     {
         shape.updatePosition(position->x, position->y);
+        setAxes();
     }
 
     E_BODY_TYPE body;

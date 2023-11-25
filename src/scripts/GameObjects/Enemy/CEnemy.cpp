@@ -19,10 +19,10 @@ CEnemy::CEnemy(float x, float y)
 
     {
         m_box       = this->addComponent<engine::SBoxComponent>(E_BODY_TYPE::DYNAMIC, m_position->x, m_position->y);
-        m_box->setVertex(Vector2DF(8, 16));
-        m_box->setVertex(Vector2DF(24, 16));
-        m_box->setVertex(Vector2DF(24, 25));
-        m_box->setVertex(Vector2DF(8, 25));
+        m_box->setVertex(8, 16);
+        m_box->setVertex(24, 16);
+        m_box->setVertex(24, 25);
+        m_box->setVertex(8, 25);
         m_box->setAxes();
     }
     {

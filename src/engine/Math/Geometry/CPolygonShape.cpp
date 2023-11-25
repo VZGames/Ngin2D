@@ -7,28 +7,24 @@ CPolygonShape::CPolygonShape()
 
 Vector2DF &CPolygonShape::vertexAt(int index)
 {
-    return m_vertices_origin[index];
+    return m_vertices[index];
 }
 
 void CPolygonShape::setVertexAt(int index, Vector2DF vertex)
 {
-    m_vertices_origin[index] = vertex;
+    m_vertices[index] = vertex;
 }
 
 std::vector<Vector2DF> CPolygonShape::vertices() const
 {
-    if(m_vertices.size() > 0) return m_vertices;
-    return m_vertices_origin;
+    return m_vertices;
 }
 
-void CPolygonShape::setVertices(std::vector<Vector2DF> &vertices)
+void CPolygonShape::pushVertex(float x, float y)
 {
-    std::copy(vertices.begin(), vertices.end(), std::back_inserter(m_vertices_origin));
-}
-
-void CPolygonShape::pushVertex(Vector2DF vertex)
-{
-    m_vertices_origin.emplace_back(vertex);
+    float scale = engine::CCamera::instance()->scale();
+    m_vertices_origin.emplace_back(Vector2DF(x, y));
+    m_vertices.emplace_back(Vector2DF(x * scale + m_x, y * scale + m_y));
 }
 
 std::pair<float, float> CPolygonShape::projection(Vector2DF axis)
@@ -38,7 +34,7 @@ std::pair<float, float> CPolygonShape::projection(Vector2DF axis)
 
     for (const Vector2DF &vertex: m_vertices)
     {
-        float dotProduct = axis.dotProduct(Vector2D<float>(m_x, m_y) + vertex);
+        float dotProduct = axis.dotProduct(vertex);
         min = std::min(min, dotProduct);
         max = std::max(max, dotProduct);
     }
@@ -51,8 +47,6 @@ void CPolygonShape::updatePosition(float X, float Y)
     m_y = Y;
     {
         float scale = engine::CCamera::instance()->scale();
-        m_vertices.clear();
-        std::copy(m_vertices_origin.begin(), m_vertices_origin.end(), std::back_inserter(m_vertices));
         for (int i = 0; i < static_cast<int>(m_vertices.size()); i++)
         {
             m_vertices[i].x = (m_vertices_origin[i].x * scale) + m_x;

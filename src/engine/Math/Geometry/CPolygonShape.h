@@ -16,8 +16,7 @@ public:
     Vector2DF &vertexAt(int index);
     void setVertexAt(int index, Vector2DF vertex);
     std::vector<Vector2DF> vertices() const;
-    void setVertices(std::vector<Vector2DF> &vertices);
-    void pushVertex(Vector2DF vertex);
+    void pushVertex(float x, float y);
 
     // AShape interface
 public:
