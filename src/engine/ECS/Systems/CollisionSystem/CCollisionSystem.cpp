@@ -44,7 +44,7 @@ void CCollisionSystem::update(float dt)
                 if(obj == &box->shape) continue;
                 if(checkCollision(&box->shape, obj))
                 {
-                    DBG("IS COLLISION")
+//                    DBG("IS COLLISION")
                 }
                 else
                 {
