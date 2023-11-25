@@ -10,10 +10,14 @@ CCow::CCow(float x, float y)
     m_sprite        = this->addComponent<engine::SSpriteComponent>(__FUNCTION__, "./debug/assets/Characters/Cow.png", 32, 32, 3, 200);
     m_box           = this->addComponent<engine::SBoxComponent>(E_BODY_TYPE::DYNAMIC, m_position->x, m_position->y);
 
-    m_box->setVertex(Vector2DF(4, 20));
-    m_box->setVertex(Vector2DF(24, 20));
-    m_box->setVertex(Vector2DF(24, 28));
-    m_box->setVertex(Vector2DF(4, 28));
+    m_box->setVertex(Vector2DF(4, 22));
+    m_box->setVertex(Vector2DF(6, 20));
+    m_box->setVertex(Vector2DF(22, 20));
+    m_box->setVertex(Vector2DF(24, 22));
+    m_box->setVertex(Vector2DF(24, 26));
+    m_box->setVertex(Vector2DF(22, 30));
+    m_box->setVertex(Vector2DF(6, 30));
+    m_box->setVertex(Vector2DF(4, 26));
     m_box->setAxes();
 }
 
