@@ -24,7 +24,7 @@ void CPolygonShape::pushVertex(float x, float y)
 {
     float scale = engine::CCamera::instance()->scale();
     m_vertices_origin.emplace_back(Vector2DF(x, y));
-    m_vertices.emplace_back(Vector2DF(x * scale + m_x, y * scale + m_y));
+    m_vertices.emplace_back(Vector2DF((x * scale) + m_x, (y * scale) + m_y));
 }
 
 std::pair<float, float> CPolygonShape::projection(Vector2DF axis)

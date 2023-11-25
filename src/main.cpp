@@ -29,9 +29,9 @@ int main(int argc, char *argv[])
 
     std::vector<CEntity*> entities
         {
-            &enemy,
-            &enemy2,
-            &enemy3,
+//            &enemy,
+//            &enemy2,
+//            &enemy3,
             &cow,
             &cow2,
             &cow3,

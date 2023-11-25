@@ -42,10 +42,12 @@ void CCamera::zoom(E_CAMERA_ZOOM mode, const float &scale)
     if(mode == E_CAMERA_ZOOM::ZOOM_IN)
     {
         m_scale += scale;
+        if(m_scale > 2) m_scale = 2;
     }
     else if(mode == E_CAMERA_ZOOM::ZOOM_OUT)
     {
         m_scale -= scale;
+        if(m_scale < 1) m_scale = 1;
     }
     return;
 }

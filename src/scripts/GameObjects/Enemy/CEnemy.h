@@ -20,7 +20,7 @@ private:
 public:
     CEnemy(float, float);
 
-    void kill();
+    void die();
 };
 END_NAMESPACE
 

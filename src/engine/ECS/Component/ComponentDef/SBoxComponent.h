@@ -6,7 +6,6 @@
 #include "CPolygonShape.h"
 #include "vector2D.h"
 #include "LoggerDefines.h"
-#include "CCamera.h"
 
 BEGIN_NAMESPACE(engine)
 class CEntity;
