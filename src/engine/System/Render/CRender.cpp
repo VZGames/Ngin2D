@@ -24,19 +24,19 @@ void CRender::drawEntity(CEntity *entity)
     auto box = entity->getComponent<SBoxComponent>();
     if((position && sprite))
     {
-        if(box)
-        {
-            CTexture2DManager::instance()->drawPolygon(box->vertices());
-        }
         CTexture2DManager::instance()->drawFrame(
             sprite->textureId,
-            Point2DF(position->x,
-                     position->y),
+            Point2DF(position->x, position->y),
             sprite->frameWidth,
             sprite->frameHeight,
             sprite->row,
             sprite->col
             );
+
+        if(box)
+        {
+            CTexture2DManager::instance()->drawPolygon(box->vertices());
+        }
     }
 
 }

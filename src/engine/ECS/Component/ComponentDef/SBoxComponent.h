@@ -5,29 +5,22 @@
 #include "Component/CComponent.h"
 #include "CPolygonShape.h"
 #include "vector2D.h"
-#include "size2D.h"
 #include "LoggerDefines.h"
-#include "CCamera.h"
-#include "offset2D.h"
 
 BEGIN_NAMESPACE(engine)
 class CEntity;
 struct SBoxComponent: public CComponent
 {
-    SBoxComponent(E_BODY_TYPE bodyType, float x, float y, float width, float height):
+    SBoxComponent(E_BODY_TYPE bodyType, float x, float y):
         CComponent(__FUNCTION__),
         body(bodyType)
     {
-        float scale = CCamera::instance()->scale();
-        size = {width * scale, height * scale};
         shape.setX(x);
         shape.setY(y);
     }
 
     void setVertex(Vector2DF vertex)
     {
-//        vertex.x += shape.x();
-//        vertex.y += shape.y();
         shape.pushVertex(vertex);
     }
 
@@ -55,7 +48,6 @@ struct SBoxComponent: public CComponent
     }
 
     E_BODY_TYPE body;
-    Size2D<float> size;
     CPolygonShape shape;
 };
 END_NAMESPACE

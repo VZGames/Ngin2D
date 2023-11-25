@@ -17,7 +17,14 @@ CEnemy::CEnemy(float x, float y)
         m_sprite->row = 2;
     }
 
-
+    {
+        m_box       = this->addComponent<engine::SBoxComponent>(E_BODY_TYPE::DYNAMIC, m_position->x, m_position->y);
+        m_box->setVertex(Vector2DF(8, 16));
+        m_box->setVertex(Vector2DF(24, 16));
+        m_box->setVertex(Vector2DF(24, 25));
+        m_box->setVertex(Vector2DF(8, 25));
+        m_box->setAxes();
+    }
     {
         engine::CMouseEvent::instance()->registerMouse(E_MOUSE_EVENT::MOUSE_CLICKED, &CEnemy::kill, this);
     }
