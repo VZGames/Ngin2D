@@ -44,7 +44,7 @@ void CCollisionSystem::update(float dt)
                 if(obj == &box->shape) continue;
                 if(checkCollision(&box->shape, obj))
                 {
-//                    DBG("IS COLLISION")
+                    DBG("IS COLLISION")
                 }
                 else
                 {
@@ -59,6 +59,8 @@ void CCollisionSystem::update(float dt)
 
 bool CCollisionSystem::checkCollision(AShape *A, AShape *B)
 {
+    float minOverlap = std::numeric_limits<float>::infinity();
+
     for (auto &axis: A->axes()) {
         std::pair<float, float> projectionA = A->projection(axis);
         std::pair<float, float> projectionB = B->projection(axis);
@@ -71,6 +73,10 @@ bool CCollisionSystem::checkCollision(AShape *A, AShape *B)
         }
         else
         {
+            if(overlapLenght < minOverlap)
+            {
+                minOverlap = overlapLenght;
+            }
         }
     }
 
@@ -86,6 +92,10 @@ bool CCollisionSystem::checkCollision(AShape *A, AShape *B)
         }
         else
         {
+            if(overlapLenght < minOverlap)
+            {
+                minOverlap = overlapLenght;
+            }
         }
     }
     return true;
