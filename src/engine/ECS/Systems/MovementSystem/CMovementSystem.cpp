@@ -34,6 +34,11 @@ void CMovementSystem::update(float dt)
         }
         position->x -= offset.getX();
         position->y -= offset.getY();
+
+        if(box)
+        {
+            box->update(position);
+        }
     };
     CWorld::forEachEntities(fn);
 }

@@ -8,6 +8,7 @@ class CPolygonShape: public AShape
 {
 private:
     std::vector<Vector2DF> m_vertices;
+    std::vector<Vector2DF> m_vertices_tmp;
 
 public:
     CPolygonShape();
@@ -21,7 +22,7 @@ public:
     // AShape interface
 public:
     virtual std::pair<float, float> projection(Vector2DF axes) override;
-    virtual void updatePosition(float offsetX, float offsetY) override;
+    virtual void updatePosition(float X, float Y) override;
 };
 
 #endif // CPOLYGONSHAPE_H

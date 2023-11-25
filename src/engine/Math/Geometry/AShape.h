@@ -2,6 +2,7 @@
 #define ASHAPE_H
 
 #include "vector2D.h"
+#include "CCamera.h"
 #include "LoggerDefines.h"
 
 class AShape

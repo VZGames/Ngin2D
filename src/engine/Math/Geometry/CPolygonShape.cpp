@@ -17,7 +17,7 @@ void CPolygonShape::setVertexAt(int index, Vector2DF vertex)
 
 std::vector<Vector2DF> CPolygonShape::vertices() const
 {
-    return m_vertices;
+    return m_vertices_tmp;
 }
 
 void CPolygonShape::setVertices(std::vector<Vector2DF> &vertices)
@@ -44,13 +44,18 @@ std::pair<float, float> CPolygonShape::projection(Vector2DF axis)
     return std::make_pair(min, max);
 }
 
-void CPolygonShape::updatePosition(float offsetX, float offsetY)
+void CPolygonShape::updatePosition(float X, float Y)
 {
-    m_x -= offsetX;
-    m_y -= offsetY;
-    for (Vector2DF &vertex: m_vertices)
+    float scale = engine::CCamera::instance()->scale();
+    m_x = X;
+    m_y = Y;
     {
-//        vertex.x = m_x;
-//        vertex.y = m_y;
+        m_vertices_tmp.clear();
+        std::copy(m_vertices.begin(), m_vertices.end(), std::back_inserter(m_vertices_tmp));
+        for (int i = 0; i < static_cast<int>(m_vertices_tmp.size()); i++)
+        {
+            m_vertices_tmp[i].x = (m_vertices[i].x * scale) + m_x;
+            m_vertices_tmp[i].y = (m_vertices[i].y * scale) + m_y;
+        }
     }
 }

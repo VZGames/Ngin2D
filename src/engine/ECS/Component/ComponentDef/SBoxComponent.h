@@ -26,8 +26,8 @@ struct SBoxComponent: public CComponent
 
     void setVertex(Vector2DF vertex)
     {
-        vertex.x += shape.x();
-        vertex.y += shape.y();
+//        vertex.x += shape.x();
+//        vertex.y += shape.y();
         shape.pushVertex(vertex);
     }
 
@@ -49,9 +49,9 @@ struct SBoxComponent: public CComponent
         }
     }
 
-    void update(Offset offset)
+    void update(Vector2DF *position)
     {
-        shape.updatePosition(offset.getX(), offset.getY());
+        shape.updatePosition(position->x, position->y);
     }
 
     E_BODY_TYPE body;
