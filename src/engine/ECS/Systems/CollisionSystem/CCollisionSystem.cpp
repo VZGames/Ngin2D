@@ -31,7 +31,7 @@ void CCollisionSystem::init()
 void CCollisionSystem::update(float dt)
 {
     UNUSED(dt);
-    // LOCK_GUARD(m_mutex);
+
     // do update for each entity
     auto fn = [&](CEntity* entity){
         auto position = entity->getComponent<SPositionComponent>();
@@ -46,11 +46,6 @@ void CCollisionSystem::update(float dt)
                 {
                     DBG("IS COLLISION")
                 }
-                else
-                {
-                    DBG("IS NOT COLLISION")
-
-                }
             }
         }
 
@@ -60,17 +55,36 @@ void CCollisionSystem::update(float dt)
 
 bool CCollisionSystem::checkCollision(AShape *A, AShape *B)
 {
-    for (Vector2DF &axis: A->axes()) {
+    for (auto &axis: A->axes()) {
         std::pair<float, float> projectionA = A->projection(axis);
         std::pair<float, float> projectionB = B->projection(axis);
 
         // Check for overlap
-        if (overlap(projectionA.first, projectionA.second, projectionB.first, projectionA.second))
+        float overlapLenght = gap(projectionA.first, projectionA.second, projectionB.first, projectionA.second);
+        if(overlapLenght == 0.0f)
         {
-            return true;
+            return false;
+        }
+        else
+        {
         }
     }
-    return false;
+
+    for (auto &axis: B->axes()) {
+        std::pair<float, float> projectionA = B->projection(axis);
+        std::pair<float, float> projectionB = A->projection(axis);
+
+        // Check for overlap
+        float overlapLenght = gap(projectionA.first, projectionA.second, projectionB.first, projectionA.second);
+        if(overlapLenght == 0.0f)
+        {
+            return false;
+        }
+        else
+        {
+        }
+    }
+    return true;
 }
 
 END_NAMESPACE

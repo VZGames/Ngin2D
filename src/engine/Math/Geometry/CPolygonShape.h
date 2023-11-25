@@ -21,6 +21,7 @@ public:
     // AShape interface
 public:
     virtual std::pair<float, float> projection(Vector2DF axes) override;
+    virtual void updatePosition(float offsetX, float offsetY) override;
 };
 
 #endif // CPOLYGONSHAPE_H

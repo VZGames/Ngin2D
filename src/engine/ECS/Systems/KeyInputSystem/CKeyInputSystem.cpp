@@ -20,7 +20,7 @@ void CKeyInputSystem::init()
 void CKeyInputSystem::update(float dt)
 {
     UNUSED(dt)
-    // LOCK_GUARD(m_mutex);
+    
     // do update for each entity
     auto fn = [](CEntity* entity){
         auto *keyInput = entity->getComponent<SKeyInputComponent>();

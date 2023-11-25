@@ -3,6 +3,8 @@
 #include "CTexture2DManager.h"
 #include "ComponentDef/SPositionComponent.h"
 #include "ComponentDef/SSpriteComponent.h"
+#include "ComponentDef/SBoxComponent.h"
+
 BEGIN_NAMESPACE(engine)
 CRender *CRender::s_instance = nullptr;
 CRender::CRender()
@@ -17,13 +19,15 @@ CRender *CRender::instance()
 
 void CRender::drawEntity(CEntity *entity)
 {
-    bool hasPosition = entity->hasComponent<SPositionComponent>();
-    bool hasSpriteSheet = entity->hasComponent<SSpriteComponent>();
-    if((hasPosition && hasSpriteSheet))
+    auto sprite = entity->getComponent<SSpriteComponent>();
+    auto position = entity->getComponent<SPositionComponent>();
+    auto box = entity->getComponent<SBoxComponent>();
+    if((position && sprite))
     {
-        auto sprite = entity->getComponent<SSpriteComponent>();
-        auto position = entity->getComponent<SPositionComponent>();
-
+        if(box)
+        {
+            CTexture2DManager::instance()->drawPolygon(box->vertices());
+        }
         CTexture2DManager::instance()->drawFrame(
             sprite->textureId,
             Point2DF(position->x,

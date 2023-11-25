@@ -7,6 +7,8 @@
 #include "vector2D.h"
 #include "size2D.h"
 #include "LoggerDefines.h"
+#include "CCamera.h"
+#include "offset2D.h"
 
 BEGIN_NAMESPACE(engine)
 class CEntity;
@@ -14,9 +16,10 @@ struct SBoxComponent: public CComponent
 {
     SBoxComponent(E_BODY_TYPE bodyType, float x, float y, float width, float height):
         CComponent(__FUNCTION__),
-        body(bodyType),
-        size{width, height}
+        body(bodyType)
     {
+        float scale = CCamera::instance()->scale();
+        size = {width * scale, height * scale};
         shape.setX(x);
         shape.setY(y);
     }
@@ -28,29 +31,27 @@ struct SBoxComponent: public CComponent
         shape.pushVertex(vertex);
     }
 
-    void updateVertex(Vector2DF &vertex)
+    std::vector<Vector2DF> vertices()
     {
-        vertex.x += shape.x();
-        vertex.y += shape.y();
+        return shape.vertices();
     }
-    void update(float x, float y)
+
+    void setAxes()
     {
-        shape.clearAxis();
-        shape.setX(x);
-        shape.setY(y);
         int count = static_cast<int>(shape.vertices().size());
         for(int i = 0; i < count - 1; i++)
         {
-            Vector2DF vertexA = shape.vertexAt((i + 1) % count);
-            Vector2DF vertexB = shape.vertexAt(i);
-            updateVertex(vertexA);
-            updateVertex(vertexB);
-
-            Vector2DF edge =  static_cast<Vector2D<float>>(vertexA) - static_cast<Vector2D<float>>(vertexB);
+            Vector2DF vertexA = shape.vertexAt(i);
+            Vector2DF vertexB = shape.vertexAt((i + 1) % count);
+            Vector2DF edge =  static_cast<Vector2D<float>>(vertexB) - static_cast<Vector2D<float>>(vertexA);
             Vector2DF normal = edge.normalize().perp();
-            normal.print();
             shape.pushAxis(normal);
         }
+    }
+
+    void update(Offset offset)
+    {
+        shape.updatePosition(offset.getX(), offset.getY());
     }
 
     E_BODY_TYPE body;

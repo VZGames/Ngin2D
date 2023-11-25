@@ -30,6 +30,7 @@ bool CKeyEvent::sendEvent(uint32_t key)
 
 void CKeyEvent::processEvents(CEventDispatcher *dispatcher)
 {
+    LOCK_GUARD(m_mtx)
     if (dispatcher->getNextEvent(m_event))
     {
         if (m_event.type == SDL_KEYDOWN)

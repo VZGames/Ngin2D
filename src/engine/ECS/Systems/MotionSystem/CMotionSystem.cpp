@@ -15,7 +15,7 @@ void CMotionSystem::init()
 void CMotionSystem::update(float dt)
 {
     UNUSED(dt)
-    // LOCK_GUARD(m_mutex);
+    
     // do update for each entity
 
     auto fn = [](CEntity* entity){

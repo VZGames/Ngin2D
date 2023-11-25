@@ -12,10 +12,9 @@ CSpriteSystem::CSpriteSystem()
 void CSpriteSystem::init()
 {
     auto fn = [](CEntity* entity){
-        bool hasSpriteSheet = entity->hasComponent<SSpriteComponent>();
-        if(hasSpriteSheet)
+        auto sprite = entity->getComponent<SSpriteComponent>();
+        if(sprite)
         {
-            auto sprite = entity->getComponent<SSpriteComponent>();
             CTexture2DManager::instance()->loadTexture(sprite->textureId, sprite->source);
         }
     };
@@ -25,14 +24,13 @@ void CSpriteSystem::init()
 void CSpriteSystem::update(float dt)
 {
     UNUSED(dt);
-    // LOCK_GUARD(m_mutex);
+    
     // do update for each entity
     auto fn = [](CEntity* entity){
-        bool hasPosition = entity->hasComponent<SPositionComponent>();
-        bool hasSpriteSheet = entity->hasComponent<SSpriteComponent>();
-        if((hasPosition && hasSpriteSheet))
+        bool position   = entity->getComponent<SPositionComponent>();
+        auto sprite     = entity->getComponent<SSpriteComponent>();
+        if((position && sprite))
         {
-            auto sprite = entity->getComponent<SSpriteComponent>();
             sprite->col =  (SDL_GetTicks()/ sprite->frameSpeed) % sprite->frameCount;
         }
     };

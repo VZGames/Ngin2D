@@ -17,6 +17,7 @@ CMouseEvent *CMouseEvent::instance()
 
 void CMouseEvent::processEvents(CEventDispatcher *dispatcher)
 {
+    LOCK_GUARD(m_mtx)
     if (dispatcher->getNextEvent(m_event))
     {
         switch (m_event.type) {

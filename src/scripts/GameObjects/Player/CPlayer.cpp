@@ -22,6 +22,7 @@ CPlayer::CPlayer()
     m_box->setVertex(Vector2DF(32, 24));
     m_box->setVertex(Vector2DF(32, 32));
     m_box->setVertex(Vector2DF(16, 32));
+    m_box->setAxes();
 
     m_keyInput  = this->addComponent<engine::SKeyInputComponent>();
     m_keyInput->registerKey(

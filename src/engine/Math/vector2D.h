@@ -211,9 +211,9 @@ public:
         return out;
     }
 
-    void print()
+    void print(const char* message = "")
     {
-        std::cout << "magnitude: " << magnitude() << ", Value(" << x << ", " << y << ")" << std::endl;
+        std::cout << "[" << message << "]" << "magnitude: " << magnitude() << ", Value(" << x << ", " << y << ")" << std::endl;
     }
 };
 

@@ -53,8 +53,6 @@ void CTexture2DManager::drawFrame(TextureID id, Point2DF pos, FrameWidth w, Fram
             (float)w * scale,
             (float)h * scale
         };
-
-        SDL_RenderDrawRectF(CNgin::renderer(), &destRect);
         SDL_RenderCopyExF(CNgin::renderer(), m_textures[id], &srcRect, &destRect, angle, NULL, flip);
     };
 
@@ -94,7 +92,37 @@ bool CTexture2DManager::loadTexture(TextureID id, TextureSource source)
 
     return true;
 }
+
+void CTexture2DManager::drawRect(Point2DF pos, FrameWidth w, FrameHeight h)
+{
+    float scale = CCamera::instance()->scale();
+    SDL_FRect destRect = {
+        pos.getX(),
+        pos.getY(),
+        (float)w * scale,
+        (float)h * scale
+    };
+
+    SDL_RenderDrawRectF(CNgin::renderer(), &destRect);
+}
+void CTexture2DManager::drawPolygon(std::vector<Vector2DF> vertices)
+{
+    SDL_FPoint points[vertices.size() + 1];
+    int count = static_cast<int>(vertices.size());
+    float scale = CCamera::instance()->scale();
+    for (int i = 0; i <= count; i++)
+    {
+        vertices[i].x *= scale;
+        vertices[i].y *= scale;
+        if(i == count) points[i] = {vertices[0].x, vertices[0].y};
+        points[i] = {vertices[i].x, vertices[i].y};
+    }
+
+    SDL_RenderDrawLinesF(CNgin::renderer(), points, count);
+}
 END_NAMESPACE
+
+
 
 
 

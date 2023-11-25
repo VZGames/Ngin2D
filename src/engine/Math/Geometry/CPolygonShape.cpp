@@ -43,3 +43,14 @@ std::pair<float, float> CPolygonShape::projection(Vector2DF axis)
     }
     return std::make_pair(min, max);
 }
+
+void CPolygonShape::updatePosition(float offsetX, float offsetY)
+{
+    m_x -= offsetX;
+    m_y -= offsetY;
+    for (Vector2DF &vertex: m_vertices)
+    {
+//        vertex.x = m_x;
+//        vertex.y = m_y;
+    }
+}
