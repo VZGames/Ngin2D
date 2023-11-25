@@ -7,8 +7,8 @@
 class CPolygonShape: public AShape
 {
 private:
+    std::vector<Vector2DF> m_vertices_origin;
     std::vector<Vector2DF> m_vertices;
-    std::vector<Vector2DF> m_vertices_tmp;
 
 public:
     CPolygonShape();

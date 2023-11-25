@@ -7,27 +7,28 @@ CPolygonShape::CPolygonShape()
 
 Vector2DF &CPolygonShape::vertexAt(int index)
 {
-    return m_vertices[index];
+    return m_vertices_origin[index];
 }
 
 void CPolygonShape::setVertexAt(int index, Vector2DF vertex)
 {
-    m_vertices[index] = vertex;
+    m_vertices_origin[index] = vertex;
 }
 
 std::vector<Vector2DF> CPolygonShape::vertices() const
 {
-    return m_vertices_tmp;
+    if(m_vertices.size() > 0) return m_vertices;
+    return m_vertices_origin;
 }
 
 void CPolygonShape::setVertices(std::vector<Vector2DF> &vertices)
 {
-    std::copy(vertices.begin(), vertices.end(), std::back_inserter(m_vertices));
+    std::copy(vertices.begin(), vertices.end(), std::back_inserter(m_vertices_origin));
 }
 
 void CPolygonShape::pushVertex(Vector2DF vertex)
 {
-    m_vertices.emplace_back(vertex);
+    m_vertices_origin.emplace_back(vertex);
 }
 
 std::pair<float, float> CPolygonShape::projection(Vector2DF axis)
@@ -46,16 +47,16 @@ std::pair<float, float> CPolygonShape::projection(Vector2DF axis)
 
 void CPolygonShape::updatePosition(float X, float Y)
 {
-    float scale = engine::CCamera::instance()->scale();
     m_x = X;
     m_y = Y;
     {
-        m_vertices_tmp.clear();
-        std::copy(m_vertices.begin(), m_vertices.end(), std::back_inserter(m_vertices_tmp));
-        for (int i = 0; i < static_cast<int>(m_vertices_tmp.size()); i++)
+        float scale = engine::CCamera::instance()->scale();
+        m_vertices.clear();
+        std::copy(m_vertices_origin.begin(), m_vertices_origin.end(), std::back_inserter(m_vertices));
+        for (int i = 0; i < static_cast<int>(m_vertices.size()); i++)
         {
-            m_vertices_tmp[i].x = (m_vertices[i].x * scale) + m_x;
-            m_vertices_tmp[i].y = (m_vertices[i].y * scale) + m_y;
+            m_vertices[i].x = (m_vertices_origin[i].x * scale) + m_x;
+            m_vertices[i].y = (m_vertices_origin[i].y * scale) + m_y;
         }
     }
 }

@@ -6,6 +6,7 @@
 #include "CPolygonShape.h"
 #include "vector2D.h"
 #include "LoggerDefines.h"
+#include "CCamera.h"
 
 BEGIN_NAMESPACE(engine)
 class CEntity;
@@ -31,6 +32,7 @@ struct SBoxComponent: public CComponent
 
     void setAxes()
     {
+        float scale = engine::CCamera::instance()->scale();
         int count = static_cast<int>(shape.vertices().size());
         for(int i = 0; i < count - 1; i++)
         {
