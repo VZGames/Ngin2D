@@ -109,13 +109,15 @@ void CTexture2DManager::drawPolygon(std::vector<Vector2DF> vertices)
 {
     SDL_FPoint points[vertices.size() + 1];
     int count = static_cast<int>(vertices.size());
-    for (int i = 0; i <= count; i++)
+    for (int i = 0; i < count; i++)
     {
-        if(i == count) points[i] = {vertices[0].x, vertices[0].y};
         points[i] = {vertices[i].x, vertices[i].y};
     }
 
-    SDL_RenderDrawLinesF(CNgin::renderer(), points, count);
+    points[vertices.size()] = points[0];
+
+
+    SDL_RenderDrawLinesF(CNgin::renderer(), points, sizeof(points)/sizeof(SDL_FPoint));
 }
 END_NAMESPACE
 
