@@ -59,7 +59,7 @@ void CWorld::update(float dt)
 
 void CWorld::render()
 {
-    forEachEntities(std::bind(&CRender::drawEntity, CRender::instance(), std::placeholders::_1));
+    forEachEntities(std::bind(&CRender::drawFrame, CRender::instance(), std::placeholders::_1));
 }
 END_NAMESPACE
 

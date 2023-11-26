@@ -22,7 +22,7 @@ public:
     void update(Offset&);
     Offset offset() const;
     float scale() const;
-    void zoom(E_CAMERA_ZOOM, const float& scale = 0.2);
+    float zoom(E_CAMERA_ZOOM, const float& scale = 0.2);
 };
 END_NAMESPACE
 

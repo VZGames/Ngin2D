@@ -162,8 +162,8 @@ void CNgin::clean()
 void CNgin::quit()
 {
 
-    SDL_Quit();
     IMG_Quit();
+    SDL_Quit();
     DBG("Game Quit");
 }
 

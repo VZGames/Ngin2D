@@ -10,8 +10,13 @@ class CMouseEvent: public AEvent
 {
 private:
     CMouseEvent();
+    ~CMouseEvent();
     static CMouseEvent *s_instance;
     std::map<E_MOUSE_EVENT, std::function<void(void)>>           m_callback_funcs;
+    SDL_Surface *m_surface;
+    SDL_Surface *m_newSurface;
+    SDL_Cursor  *m_cursor;
+    SDL_Rect    m_cursor_rect;
 
     void quit();
     void pressed();

@@ -37,7 +37,7 @@ float CCamera::scale() const
     return m_scale;
 }
 
-void CCamera::zoom(E_CAMERA_ZOOM mode, const float &scale)
+float CCamera::zoom(E_CAMERA_ZOOM mode, const float &scale)
 {
     if(mode == E_CAMERA_ZOOM::ZOOM_IN)
     {
@@ -49,7 +49,7 @@ void CCamera::zoom(E_CAMERA_ZOOM mode, const float &scale)
         m_scale -= scale;
         if(m_scale < 1) m_scale = 1;
     }
-    return;
+    return m_scale;
 }
 END_NAMESPACE
 

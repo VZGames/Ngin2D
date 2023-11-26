@@ -6,7 +6,6 @@
 #include "SceneObjects/CGameScene.h"
 #include "SceneObjects/CSettingScene.h"
 #include "GameObjects/Player/CPlayer.h"
-#include "GameObjects/Enemy/CEnemy.h"
 #include "GameObjects/Cows/CCow.h"
 
 using namespace engine;
@@ -20,22 +19,17 @@ int main(int argc, char *argv[])
     script::CGameScene gameScene;
     script::CSettingScene settingScene;
     script::CPlayer player;
-    script::CEnemy  enemy(300, 70);
-    script::CEnemy  enemy2(100, 300);
-    script::CEnemy  enemy3(500, 260);
     script::CCow    cow(100, 50);
     script::CCow    cow2(100, 420);
     script::CCow    cow3(300, 200);
 
     std::vector<CEntity*> entities
         {
-//            &enemy,
-//            &enemy2,
-//            &enemy3,
             &cow,
             &cow2,
             &cow3,
             &player,
+
         };
 
     std::vector<AScene*> scenes

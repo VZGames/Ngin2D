@@ -13,7 +13,7 @@ private:
 public:
     static CRender *instance();
 
-    void drawEntity(CEntity*);
+    void drawFrame(CEntity*);
 };
 END_NAMESPACE
 

@@ -40,3 +40,5 @@ INCLUDEPATH += \
     $$INCLUDE_DIR \
     $$PWD
 
+HEADERS +=
+

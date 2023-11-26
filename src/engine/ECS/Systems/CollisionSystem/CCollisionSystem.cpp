@@ -69,6 +69,7 @@ bool CCollisionSystem::checkCollision(AShape *A, AShape *B, Vector2DF& mtv)
         float overlapLenght = gap(projectionA.first, projectionA.second, projectionB.first, projectionA.second);
         if(overlapLenght == 0.0f)
         {
+            mtv.Zeros();
             return false;
         }
         else
@@ -89,6 +90,7 @@ bool CCollisionSystem::checkCollision(AShape *A, AShape *B, Vector2DF& mtv)
         float overlapLenght = gap(projectionA.first, projectionA.second, projectionB.first, projectionA.second);
         if(overlapLenght == 0.0f)
         {
+            mtv.Zeros();
             return false;
         }
         else
@@ -104,6 +106,8 @@ bool CCollisionSystem::checkCollision(AShape *A, AShape *B, Vector2DF& mtv)
     // need to reverse MTV if center offset and overlap are not pointing in the same direction
     bool notPointingInTheSameDirection = Vector2DF::dotProduct(A->center() - B->center(), mtv) < 0;
     if (notPointingInTheSameDirection) { mtv = mtv.reverse(); }
+
+
 
     return true;
 }

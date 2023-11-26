@@ -19,9 +19,10 @@ void CCameraSystem::init()
 void CCameraSystem::update(float dt)
 {
     UNUSED(dt)
+    float scale  = engine::CCamera::instance()->scale();
     
     // do update for each entity
-    auto fn = [](CEntity* entity){
+    auto fn = [scale](CEntity* entity){
         auto position  = entity->getComponent<SPositionComponent>();
         auto camera    = entity->getComponent<SCameraComponent>();
         auto sprite    = entity->getComponent<SSpriteComponent>();
@@ -31,7 +32,6 @@ void CCameraSystem::update(float dt)
             Size2D<float> winSize = CNgin::windowSize();
             float width  = winSize.width;
             float height = winSize.height;
-            float scale  = engine::CCamera::instance()->scale();
             camera->offset.setX(position->x - (width/2 - (sprite->frameWidth * scale)/2));
             camera->offset.setY(position->y - (height/2 - (sprite->frameHeight * scale)/2));
             CCamera::instance()->update(camera->offset);

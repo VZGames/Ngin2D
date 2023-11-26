@@ -27,18 +27,21 @@ void CMovementSystem::update(float dt)
         auto camera   = entity->getComponent<SCameraComponent>();
         auto box      = entity->getComponent<SBoxComponent>();
         if(!position || !box || !motion) return;
-        if(camera && motion)
-        {
-            if(box->shape.collided())
-            {
-                position->x += motion->mtv.x;
-                position->y += motion->mtv.y;
-            }
-            position->update(motion->velocity);
-        }
 
         position->x -= offset.getX();
         position->y -= offset.getY();
+
+        if(camera && motion)
+        {
+            position->update(motion->velocity);
+
+//            if(box->shape.collided())
+//            {
+//            }
+        }
+
+        position->x += motion->mtv.x;
+        position->y += motion->mtv.y;
 
         box->update(position);
     };

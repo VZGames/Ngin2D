@@ -7,7 +7,39 @@ BEGIN_NAMESPACE(engine)
 CMouseEvent *CMouseEvent::s_instance = nullptr;
 CMouseEvent::CMouseEvent()
 {
+    LOCK_GUARD(m_mtx)
+    float scale = CCamera::instance()->scale();
+    float width = 16 * scale;
+    float height = 16 * scale;
+    m_surface = IMG_Load("./debug/assets/widgets/select.png");
+    m_newSurface = SDL_CreateRGBSurface(0, width, height,
+                                                   m_surface->format->BitsPerPixel,
+                                                   m_surface->format->Rmask,
+                                                   m_surface->format->Gmask,
+                                                   m_surface->format->Bmask,
+                                                   m_surface->format->Amask);
+    if (m_surface == NULL) {
+        DBG("Failed to load custom cursor image: %s\n", IMG_GetError())
+    }
+    else
+    {
+        m_cursor_rect.x = 0;
+        m_cursor_rect.y = 0;
+        m_cursor_rect.w = width;
+        m_cursor_rect.h = height;
 
+        SDL_BlitScaled(m_surface, NULL, m_newSurface, &m_cursor_rect);
+
+        m_cursor = SDL_CreateColorCursor(m_newSurface, 0, 0);
+        SDL_SetCursor(m_cursor);
+    }
+}
+
+CMouseEvent::~CMouseEvent()
+{
+    SDL_FreeCursor(m_cursor);
+    SDL_FreeSurface(m_newSurface);
+    SDL_FreeSurface(m_surface);
 }
 
 CMouseEvent *CMouseEvent::instance()
@@ -17,7 +49,6 @@ CMouseEvent *CMouseEvent::instance()
 
 void CMouseEvent::processEvents(CEventDispatcher *dispatcher)
 {
-    LOCK_GUARD(m_mtx)
     if (dispatcher->getNextEvent(m_event))
     {
         switch (m_event.type) {
@@ -76,14 +107,30 @@ void CMouseEvent::released()
 
 void CMouseEvent::wheel()
 {
+    float scale{0.0f};
     if(m_event.wheel.y > 0) // scroll up
     {
-        CCamera::instance()->zoom(E_CAMERA_ZOOM::ZOOM_IN);
+        scale = CCamera::instance()->zoom(E_CAMERA_ZOOM::ZOOM_IN);
     }
     else if(m_event.wheel.y < 0) // scroll down
     {
-        CCamera::instance()->zoom(E_CAMERA_ZOOM::ZOOM_OUT);
+        scale = CCamera::instance()->zoom(E_CAMERA_ZOOM::ZOOM_OUT);
     }
+    m_cursor_rect.w = 16 * scale;
+    m_cursor_rect.h = 16 * scale;
+    m_newSurface = SDL_CreateRGBSurface(0,m_cursor_rect.w, m_cursor_rect.h,
+                                        m_surface->format->BitsPerPixel,
+                                        m_surface->format->Rmask,
+                                        m_surface->format->Gmask,
+                                        m_surface->format->Bmask,
+                                        m_surface->format->Amask);
+
+    m_newSurface->w = m_cursor_rect.w;
+    m_newSurface->h = m_cursor_rect.h;
+    SDL_BlitScaled(m_surface, NULL, m_newSurface, &m_cursor_rect);
+    m_cursor = SDL_CreateColorCursor(m_newSurface, 0, 0);
+    SDL_SetCursor(m_cursor);
+
 }
 
 void CMouseEvent::windowEvent()
@@ -103,6 +150,9 @@ void CMouseEvent::windowEvent()
     }
 }
 END_NAMESPACE
+
+
+
 
 
 
