@@ -22,12 +22,16 @@ int main(int argc, char *argv[])
     script::CCow    cow(100, 50);
     script::CCow    cow2(100, 420);
     script::CCow    cow3(300, 200);
+    script::CCow    cow4(200, 500);
+    script::CCow    cow5(30, 200);
 
     std::vector<CEntity*> entities
         {
             &cow,
             &cow2,
             &cow3,
+            &cow4,
+            &cow5,
             &player,
 
         };
