@@ -16,6 +16,7 @@ struct SMotionComponent: public CComponent
     Vector2DF velocity;
     Vector2DF acceleration;
     bool running = 0;
+    Vector2DF mtv;
 };
 END_NAMESPACE
 

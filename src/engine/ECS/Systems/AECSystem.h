@@ -12,6 +12,7 @@ public:
     virtual void update(float dt){ UNUSED(dt) };
 protected:
     std::mutex m_mutex;
+    CWorld      *world;
 };
 END_NAMESPACE
 

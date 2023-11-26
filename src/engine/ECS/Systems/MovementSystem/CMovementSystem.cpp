@@ -22,7 +22,6 @@ void CMovementSystem::update(float dt)
 
     // do update for each entity
     auto fn = [offset](CEntity* entity){
-
         auto position = entity->getComponent<SPositionComponent>();
         auto motion   = entity->getComponent<SMotionComponent>();
         auto camera   = entity->getComponent<SCameraComponent>();
@@ -32,6 +31,7 @@ void CMovementSystem::update(float dt)
         {
             position->update(motion->velocity);
         }
+
         position->x -= offset.getX();
         position->y -= offset.getY();
 
@@ -39,6 +39,8 @@ void CMovementSystem::update(float dt)
         {
             box->update(position);
         }
+
+
     };
     CWorld::forEachEntities(fn);
 }

@@ -22,6 +22,7 @@ public:
 public:
     virtual std::pair<float, float> projection(Vector2DF axes) override;
     virtual void updatePosition(float X, float Y) override;
+    virtual Vector2DF center() override;
 };
 
 #endif // CPOLYGONSHAPE_H

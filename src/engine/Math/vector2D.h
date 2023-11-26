@@ -190,6 +190,12 @@ public:
         return Vector2D<T>(x/magnitude(), y/magnitude());
     }
 
+    Vector2D<T> &reverse()
+    {
+        *this *= -1;
+        return *this;
+    }
+
     float magnitude() const
     {
         return static_cast<float>(std::sqrt(std::pow(x,2) + std::pow(y,2)));

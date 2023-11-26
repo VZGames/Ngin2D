@@ -5,6 +5,7 @@ CONFIG -= app_bundle qt
 include(src/engine/engine.pri)
 include(src/utils/utils.pri)
 include(src/scripts/scripts.pri)
+include(src/ui/ui.pri)
 
 SOURCES += \
     src/main.cpp

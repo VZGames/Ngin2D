@@ -4,15 +4,16 @@
 #include "CommonDefine.h"
 #include "Systems/AECSystem.h"
 #include "AShape.h"
+#include "ThreadPool/CThreadPool.h"
 
 BEGIN_NAMESPACE(engine)
 class CCollisionSystem: public AECSystem
 {
 private:
     std::vector<AShape*> m_boxes;
-
+    CThreadPool          m_collision_pool;
 private:
-    bool checkCollision(AShape*, AShape*);
+    bool checkCollision(AShape*, AShape*, Vector2DF&);
 
     bool overlap(float A0, float A1, float B0, float B1)
     {

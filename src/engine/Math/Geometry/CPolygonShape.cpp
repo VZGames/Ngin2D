@@ -54,3 +54,17 @@ void CPolygonShape::updatePosition(float X, float Y)
         }
     }
 }
+
+Vector2DF CPolygonShape::center()
+{
+    Vector2DF G;
+    for (const Vector2DF &vertex: m_vertices)
+    {
+        G.x += vertex.x;
+        G.y += vertex.y;
+    }
+
+    G.x /= m_vertices.size();
+    G.y /= m_vertices.size();
+    return G;
+}

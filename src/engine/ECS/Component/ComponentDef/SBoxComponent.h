@@ -17,6 +17,7 @@ struct SBoxComponent: public CComponent
     {
         shape.setX(x);
         shape.setY(y);
+        shape.setBox();
     }
 
     void setVertex(float x, float y)
@@ -48,7 +49,6 @@ struct SBoxComponent: public CComponent
         shape.updatePosition(position->x, position->y);
         setAxes();
     }
-
     E_BODY_TYPE body;
     CPolygonShape shape;
 };

@@ -3,14 +3,18 @@
 #include "CEntity.h"
 #include "ComponentDef/SPositionComponent.h"
 #include "ComponentDef/SBoxComponent.h"
+#include "ComponentDef/SMotionComponent.h"
 
 BEGIN_NAMESPACE(engine)
 CCollisionSystem::CCollisionSystem()
+    :m_collision_pool(2)
 {
+    m_collision_pool.init();
 }
 
 CCollisionSystem::~CCollisionSystem()
 {
+    m_collision_pool.shutdown();
 }
 
 void CCollisionSystem::init()
@@ -35,20 +39,24 @@ void CCollisionSystem::update(float dt)
     // do update for each entity
     auto fn = [&](CEntity* entity){
         auto position = entity->getComponent<SPositionComponent>();
+        auto motion   = entity->getComponent<SMotionComponent>();
         auto box      = entity->getComponent<SBoxComponent>();
-        if(!position || !box) return;
+        if(!position || !motion || !box) return;
         else
         {
             for (AShape *obj: m_boxes)
             {
                 if(obj == &box->shape) continue;
-                if(checkCollision(&box->shape, obj))
+
+                if(checkCollision(&box->shape, obj, motion->mtv))
                 {
-                    DBG("IS COLLISION")
+                    box->shape.setCollided(true);
+                    obj->setCollided(true);
                 }
                 else
                 {
-//                    DBG("IS NOT COLLISION")
+                    box->shape.setCollided(false);
+                    obj->setCollided(false);
                 }
             }
         }
@@ -57,8 +65,9 @@ void CCollisionSystem::update(float dt)
     CWorld::forEachEntities(fn);
 }
 
-bool CCollisionSystem::checkCollision(AShape *A, AShape *B)
+bool CCollisionSystem::checkCollision(AShape *A, AShape *B, Vector2DF& mtv)
 {
+    mtv.Zeros();
     float minOverlap = std::numeric_limits<float>::infinity();
 
     for (auto &axis: A->axes()) {
@@ -76,6 +85,7 @@ bool CCollisionSystem::checkCollision(AShape *A, AShape *B)
             if(overlapLenght < minOverlap)
             {
                 minOverlap = overlapLenght;
+                mtv = axis * minOverlap;
             }
         }
     }
@@ -95,9 +105,15 @@ bool CCollisionSystem::checkCollision(AShape *A, AShape *B)
             if(overlapLenght < minOverlap)
             {
                 minOverlap = overlapLenght;
+                mtv = axis * minOverlap;
             }
         }
     }
+
+    // need to reverse MTV if center offset and overlap are not pointing in the same direction
+    bool notPointingInTheSameDirection = Vector2DF::dotProduct(A->center() - B->center(), mtv) < 0;
+    if (notPointingInTheSameDirection) { mtv = mtv.reverse(); }
+
     return true;
 }
 
