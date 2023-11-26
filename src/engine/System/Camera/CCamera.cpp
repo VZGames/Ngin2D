@@ -16,7 +16,7 @@ CCamera *CCamera::instance()
 
 void CCamera::setTarget(CEntity *entity)
 {
-    m_offset.zero();
+    m_offset.Zeros();
     m_target = entity;
 }
 

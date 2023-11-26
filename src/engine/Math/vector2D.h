@@ -206,6 +206,11 @@ public:
         return this->x * static_cast<T>(vec.x) + this->y * static_cast<T>(vec.y);
     }
 
+    double distance(const Vector2D<T> &other)
+    {
+        return std::sqrt(std::pow(other.x - this->x, 2) + std::pow(other.y - this->y, 2));
+    }
+
     static float dotProduct(const Vector2D<T> &A, const Vector2D<T> &B)
     {
         return A.x * B.x + A.y * B.y;

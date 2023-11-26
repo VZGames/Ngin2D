@@ -32,8 +32,8 @@ void CCameraSystem::update(float dt)
             Size2D<float> winSize = CNgin::windowSize();
             float width  = winSize.width;
             float height = winSize.height;
-            camera->offset.setX(position->x - (width/2 - (sprite->frameWidth * scale)/2));
-            camera->offset.setY(position->y - (height/2 - (sprite->frameHeight * scale)/2));
+            camera->offset.x = position->x - (width/2 - (sprite->frameWidth * scale)/2);
+            camera->offset.y = position->y - (height/2 - (sprite->frameHeight * scale)/2);
             CCamera::instance()->update(camera->offset);
         }
 

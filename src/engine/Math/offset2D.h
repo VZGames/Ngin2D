@@ -1,15 +1,10 @@
 #ifndef OFFSET2D_H
 #define OFFSET2D_H
 
-#include "point2D.h"
+#include "vector2D.h"
 
-struct Offset: public Point2DF
+struct Offset: public Vector2DF
 {
-    Offset(float x, float y): Point2DF(x, y){}
-    void zero()
-    {
-        setX(0.0f);
-        setY(0.0f);
-    }
+    Offset(float x, float y): Vector2DF(x, y){}
 };
 #endif // OFFSET2D_H
