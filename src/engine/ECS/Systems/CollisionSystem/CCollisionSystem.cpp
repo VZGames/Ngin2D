@@ -47,7 +47,7 @@ void CCollisionSystem::update(float dt)
             for (AShape *obj: m_boxes)
             {
                 if(obj == &box->shape) continue;
-                if(box->shape.center().distance(obj->center()) > 72) continue;
+                if(box->shape.center().distance(obj->center()) >= 64) continue;
                 bool collided = checkCollision(&box->shape, obj, motion->mtv);
                 box->shape.setCollided(collided);
                 obj->setCollided(collided);
