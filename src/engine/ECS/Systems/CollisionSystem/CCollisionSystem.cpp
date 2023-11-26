@@ -47,17 +47,9 @@ void CCollisionSystem::update(float dt)
             for (AShape *obj: m_boxes)
             {
                 if(obj == &box->shape) continue;
-
-                if(checkCollision(&box->shape, obj, motion->mtv))
-                {
-                    box->shape.setCollided(true);
-                    obj->setCollided(true);
-                }
-                else
-                {
-                    box->shape.setCollided(false);
-                    obj->setCollided(false);
-                }
+                bool collided = checkCollision(&box->shape, obj, motion->mtv);
+                box->shape.setCollided(collided);
+                obj->setCollided(collided);
             }
         }
 
@@ -67,7 +59,6 @@ void CCollisionSystem::update(float dt)
 
 bool CCollisionSystem::checkCollision(AShape *A, AShape *B, Vector2DF& mtv)
 {
-    mtv.Zeros();
     float minOverlap = std::numeric_limits<float>::infinity();
 
     for (auto &axis: A->axes()) {
