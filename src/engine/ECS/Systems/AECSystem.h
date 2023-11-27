@@ -5,14 +5,18 @@
 #include "CWorld.h"
 
 BEGIN_NAMESPACE(engine)
+class CEntity;
 class AECSystem
 {
-public:
-    virtual void init() { };
-    virtual void update(float dt){ UNUSED(dt) };
+private:
+    CWorld     *m_world(void);
+
 protected:
     std::mutex m_mutex;
-    CWorld      *world;
+
+public:
+    virtual void init() = 0;
+    virtual void update(CEntity *entity, float dt) = 0;
 };
 END_NAMESPACE
 

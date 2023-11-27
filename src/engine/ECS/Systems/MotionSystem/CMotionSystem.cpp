@@ -12,14 +12,9 @@ void CMotionSystem::init()
 {
 }
 
-void CMotionSystem::update(float dt)
+void CMotionSystem::update(CEntity *entity, float dt)
 {
+    UNUSED(entity)
     UNUSED(dt)
-    
-    // do update for each entity
-
-    auto fn = [](CEntity* entity){
-    };
-    CWorld::forEachEntities(fn);
 }
 END_NAMESPACE

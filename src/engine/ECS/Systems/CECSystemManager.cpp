@@ -1,6 +1,7 @@
 #include "CECSystemManager.h"
 #include "LoggerDefines.h"
 #include "AECSystem.h"
+#include "CWorld.h"
 
 BEGIN_NAMESPACE(engine)
 CECSystemManager *CECSystemManager::s_instance = nullptr;
@@ -34,7 +35,11 @@ void CECSystemManager::update(float dt)
 {
     for(auto &system: m_systems)
     {
-        system->update(dt);
+        // do update for each entity
+        auto fn = [&](CEntity* entity){
+            system->update(entity, dt);
+        };
+        CWorld::forEachEntities(fn);
     }
 }
 

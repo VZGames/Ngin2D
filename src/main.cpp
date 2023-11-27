@@ -20,8 +20,8 @@ int main(int argc, char *argv[])
     script::CSettingScene settingScene;
     script::CPlayer player;
     script::CCow    cow(100, 50);
-    script::CCow    cow2(100, 420);
-    script::CCow    cow3(300, 200);
+    script::CCow    cow2(100, 80);
+    script::CCow    cow3(150, 200);
     script::CCow    cow4(200, 500);
     script::CCow    cow5(30, 200);
 

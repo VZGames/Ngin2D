@@ -12,15 +12,10 @@ void CSpawnSystem::init()
 
 }
 
-void CSpawnSystem::update(float dt)
+void CSpawnSystem::update(CEntity *entity, float dt)
 {
+    UNUSED(entity);
     UNUSED(dt);
-    
-    // do update for each entity
-    auto fn = [](CEntity* entity){
-        UNUSED(entity)
-    };
-    CWorld::forEachEntities(fn);
 }
 END_NAMESPACE
 

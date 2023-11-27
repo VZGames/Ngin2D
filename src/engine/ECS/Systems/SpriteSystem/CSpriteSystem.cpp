@@ -21,22 +21,15 @@ void CSpriteSystem::init()
     CWorld::forEachEntities(fn);
 }
 
-void CSpriteSystem::update(float dt)
+void CSpriteSystem::update(CEntity *entity, float dt)
 {
     UNUSED(dt);
-    
-    // do update for each entity
-    auto fn = [](CEntity* entity){
-        bool position   = entity->getComponent<SPositionComponent>();
-        auto sprite     = entity->getComponent<SSpriteComponent>();
-        if((position && sprite))
-        {
-            sprite->col =  (SDL_GetTicks()/ sprite->frameSpeed) % sprite->frameCount;
-        }
-    };
-    CWorld::forEachEntities(fn);
-
-
+    bool position   = entity->getComponent<SPositionComponent>();
+    auto sprite     = entity->getComponent<SSpriteComponent>();
+    if((position && sprite))
+    {
+        sprite->col =  (SDL_GetTicks()/ sprite->frameSpeed) % sprite->frameCount;
+    }
 }
 
 END_NAMESPACE

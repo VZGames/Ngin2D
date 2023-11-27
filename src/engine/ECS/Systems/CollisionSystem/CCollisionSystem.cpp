@@ -7,14 +7,12 @@
 
 BEGIN_NAMESPACE(engine)
 CCollisionSystem::CCollisionSystem()
-    :m_collision_pool(2)
 {
-    m_collision_pool.init();
 }
 
 CCollisionSystem::~CCollisionSystem()
 {
-    m_collision_pool.shutdown();
+    m_collision_pool->shutdown();
 }
 
 void CCollisionSystem::init()
@@ -30,32 +28,33 @@ void CCollisionSystem::init()
 
     };
     CWorld::forEachEntities(fn);
+
+    m_collision_pool = new CThreadPool(static_cast<int>(m_boxes.size()));
+    m_collision_pool->init();
 }
 
-void CCollisionSystem::update(float dt)
+void CCollisionSystem::update(CEntity *entity, float dt)
 {
     UNUSED(dt);
-
-    // do update for each entity
-    auto fn = [&](CEntity* entity){
-        auto position = entity->getComponent<SPositionComponent>();
-        auto motion   = entity->getComponent<SMotionComponent>();
-        auto box      = entity->getComponent<SBoxComponent>();
-        if(!position || !motion || !box) return;
-        else
+    auto position = entity->getComponent<SPositionComponent>();
+    auto motion   = entity->getComponent<SMotionComponent>();
+    auto box      = entity->getComponent<SBoxComponent>();
+    if(!position || !motion || !box) return;
+    else
+    {
+        for (AShape *obj: m_boxes)
         {
-            for (AShape *obj: m_boxes)
+            if(obj == &box->shape) continue;
+            if(box->shape.center().distance(obj->center()) > 64) continue;
+            bool collided = checkCollision(&box->shape, obj, motion->mtv);
+            box->shape.setCollided(collided);
+            obj->setCollided(collided);
+            if(collided)
             {
-                if(obj == &box->shape) continue;
-                if(box->shape.center().distance(obj->center()) >= 64) continue;
-                bool collided = checkCollision(&box->shape, obj, motion->mtv);
-                box->shape.setCollided(collided);
-                obj->setCollided(collided);
+                break;
             }
         }
-
-    };
-    CWorld::forEachEntities(fn);
+    }
 }
 
 bool CCollisionSystem::checkCollision(AShape *A, AShape *B, Vector2DF& mtv)

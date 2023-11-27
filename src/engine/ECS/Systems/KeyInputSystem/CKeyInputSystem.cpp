@@ -17,19 +17,15 @@ void CKeyInputSystem::init()
 
 }
 
-void CKeyInputSystem::update(float dt)
+void CKeyInputSystem::update(CEntity *entity, float dt)
 {
     UNUSED(dt)
-    
-    // do update for each entity
-    auto fn = [](CEntity* entity){
-        auto *keyInput = entity->getComponent<SKeyInputComponent>();
-        if(keyInput)
-        {
-            keyInput->listen();
-        }
-    };
-    CWorld::forEachEntities(fn);
+
+    auto *keyInput = entity->getComponent<SKeyInputComponent>();
+    if(keyInput)
+    {
+        keyInput->listen();
+    }
 }
 END_NAMESPACE
 

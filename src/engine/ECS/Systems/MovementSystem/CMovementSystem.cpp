@@ -15,36 +15,31 @@ void CMovementSystem::init()
 {
 }
 
-void CMovementSystem::update(float dt)
+void CMovementSystem::update(CEntity *entity, float dt)
 {
     UNUSED(dt);
     Offset offset = CCamera::instance()->offset();
+    auto position = entity->getComponent<SPositionComponent>();
+    auto motion   = entity->getComponent<SMotionComponent>();
+    auto camera   = entity->getComponent<SCameraComponent>();
+    auto box      = entity->getComponent<SBoxComponent>();
+    if(!position || !box || !motion) return;
 
-    // do update for each entity
-    auto fn = [offset](CEntity* entity){
-        auto position = entity->getComponent<SPositionComponent>();
-        auto motion   = entity->getComponent<SMotionComponent>();
-        auto camera   = entity->getComponent<SCameraComponent>();
-        auto box      = entity->getComponent<SBoxComponent>();
-        if(!position || !box || !motion) return;
+    position->x -= offset.x;
+    position->y -= offset.y;
 
-        position->x -= offset.x;
-        position->y -= offset.y;
+    if(camera && motion)
+    {
+        position->update(motion->velocity);
+    }
 
-        if(camera && motion)
-        {
-            position->update(motion->velocity);
-        }
+    if(motion->running)
+    {
+        position->x += motion->mtv.x;
+        position->y += motion->mtv.y;
+    }
 
-        if(motion->running)
-        {
-            position->x += motion->mtv.x;
-            position->y += motion->mtv.y;
-        }
-
-        box->update(position);
-    };
-    CWorld::forEachEntities(fn);
+    box->update(position);
 }
 
 END_NAMESPACE
