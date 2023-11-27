@@ -7,9 +7,9 @@ CSpawnSystem::CSpawnSystem()
 
 }
 
-void CSpawnSystem::init()
+void CSpawnSystem::init(CEntity *entity)
 {
-
+    UNUSED(entity)
 }
 
 void CSpawnSystem::update(CEntity *entity, float dt)

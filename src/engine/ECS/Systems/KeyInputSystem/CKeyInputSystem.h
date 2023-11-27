@@ -14,7 +14,7 @@ public:
 
     //    Implement IECSystem Interfaces
 public:
-    virtual void init() override;
+    virtual void init(CEntity *entity) override;
     virtual void update(CEntity *entity, float dt) override;
 };
 END_NAMESPACE

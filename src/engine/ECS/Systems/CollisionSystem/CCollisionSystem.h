@@ -4,14 +4,12 @@
 #include "CommonDefine.h"
 #include "Systems/AECSystem.h"
 #include "AShape.h"
-#include "ThreadPool/CThreadPool.h"
 
 BEGIN_NAMESPACE(engine)
 class CCollisionSystem: public AECSystem
 {
 private:
     std::vector<AShape*> m_boxes;
-    CThreadPool          *m_collision_pool;
 private:
     bool checkCollision(AShape*, AShape*, Vector2DF&);
 
@@ -32,7 +30,7 @@ public:
 
 //    Implement IECSystem Interfaces
 public:
-    virtual void init() override;
+    virtual void init(CEntity *entity) override;
     virtual void update(CEntity *entity, float dt) override;
 };
 END_NAMESPACE

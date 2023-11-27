@@ -8,8 +8,9 @@ CMotionSystem::CMotionSystem()
 
 }
 
-void CMotionSystem::init()
+void CMotionSystem::init(CEntity *entity)
 {
+    UNUSED(entity)
 }
 
 void CMotionSystem::update(CEntity *entity, float dt)

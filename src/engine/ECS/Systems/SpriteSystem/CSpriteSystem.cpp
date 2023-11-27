@@ -9,16 +9,13 @@ BEGIN_NAMESPACE(engine)
 CSpriteSystem::CSpriteSystem()
 {}
 
-void CSpriteSystem::init()
+void CSpriteSystem::init(CEntity *entity)
 {
-    auto fn = [](CEntity* entity){
-        auto sprite = entity->getComponent<SSpriteComponent>();
-        if(sprite)
-        {
-            CTexture2DManager::instance()->loadTexture(sprite->textureId, sprite->source);
-        }
-    };
-    CWorld::forEachEntities(fn);
+    auto sprite = entity->getComponent<SSpriteComponent>();
+    if(sprite)
+    {
+        CTexture2DManager::instance()->loadTexture(sprite->textureId, sprite->source);
+    }
 }
 
 void CSpriteSystem::update(CEntity *entity, float dt)

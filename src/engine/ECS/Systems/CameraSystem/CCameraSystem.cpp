@@ -12,8 +12,9 @@ CCameraSystem::CCameraSystem()
 
 }
 
-void CCameraSystem::init()
+void CCameraSystem::init(CEntity *entity)
 {
+    UNUSED(entity)
 }
 
 void CCameraSystem::update(CEntity *entity, float dt)

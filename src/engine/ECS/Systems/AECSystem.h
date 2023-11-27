@@ -15,7 +15,7 @@ protected:
     std::mutex m_mutex;
 
 public:
-    virtual void init() = 0;
+    virtual void init(CEntity *entity) = 0;
     virtual void update(CEntity *entity, float dt) = 0;
 };
 END_NAMESPACE

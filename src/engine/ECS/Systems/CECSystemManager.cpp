@@ -27,7 +27,10 @@ void CECSystemManager::init()
 
     for(auto &system: m_systems)
     {
-        system->init();
+        auto fn = [&](CEntity* entity){
+            system->init(entity);
+        };
+        CWorld::forEachEntities(fn);
     }
 }
 

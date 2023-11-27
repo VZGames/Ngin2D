@@ -11,8 +11,9 @@ BEGIN_NAMESPACE(engine)
 CMovementSystem::CMovementSystem()
 {}
 
-void CMovementSystem::init()
+void CMovementSystem::init(CEntity *entity)
 {
+    UNUSED(entity)
 }
 
 void CMovementSystem::update(CEntity *entity, float dt)

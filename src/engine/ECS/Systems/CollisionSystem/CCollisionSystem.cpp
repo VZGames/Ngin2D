@@ -12,25 +12,17 @@ CCollisionSystem::CCollisionSystem()
 
 CCollisionSystem::~CCollisionSystem()
 {
-    m_collision_pool->shutdown();
 }
 
-void CCollisionSystem::init()
+void CCollisionSystem::init(CEntity *entity)
 {
-    auto fn = [&](CEntity* entity){
-        auto position = entity->getComponent<SPositionComponent>();
-        auto box      = entity->getComponent<SBoxComponent>();
-        if(!position || !box) return;
-        else
-        {
-            m_boxes.push_back(&box->shape);
-        }
-
-    };
-    CWorld::forEachEntities(fn);
-
-    m_collision_pool = new CThreadPool(static_cast<int>(m_boxes.size()));
-    m_collision_pool->init();
+    auto position = entity->getComponent<SPositionComponent>();
+    auto box      = entity->getComponent<SBoxComponent>();
+    if(!position || !box) return;
+    else
+    {
+        m_boxes.push_back(&box->shape);
+    }
 }
 
 void CCollisionSystem::update(CEntity *entity, float dt)

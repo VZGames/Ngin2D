@@ -12,9 +12,9 @@ CKeyInputSystem::~CKeyInputSystem()
 
 }
 
-void CKeyInputSystem::init()
+void CKeyInputSystem::init(CEntity *entity)
 {
-
+    UNUSED(entity)
 }
 
 void CKeyInputSystem::update(CEntity *entity, float dt)
