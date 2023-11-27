@@ -3,7 +3,7 @@
 
 #include "CommonDefine.h"
 #include "Component/CComponent.h"
-#include "CCamera.h"
+#include "CCameraSys.h"
 #include "offset2D.h"
 
 BEGIN_NAMESPACE(engine)
@@ -12,7 +12,7 @@ struct SCameraComponent: public CComponent
 {
     SCameraComponent(CEntity *target): CComponent(__FUNCTION__)
     {
-        CCamera::instance()->setTarget(target);
+        CCameraSys::instance()->setTarget(target);
     }
 
     Offset offset{0.0f, 0.0f};

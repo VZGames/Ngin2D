@@ -1,6 +1,6 @@
 #include "CMovementSystem.h"
 #include "LoggerDefines.h"
-#include "CCamera.h"
+#include "CCameraSys.h"
 #include "CEntity.h"
 #include "ComponentDef/SPositionComponent.h"
 #include "ComponentDef/SMotionComponent.h"
@@ -19,7 +19,7 @@ void CMovementSystem::init(CEntity *entity)
 void CMovementSystem::update(CEntity *entity, float dt)
 {
     UNUSED(dt);
-    Offset offset = CCamera::instance()->offset();
+    Offset offset = CCameraSys::instance()->offset();
     auto position = entity->getComponent<SPositionComponent>();
     auto motion   = entity->getComponent<SMotionComponent>();
     auto camera   = entity->getComponent<SCameraComponent>();

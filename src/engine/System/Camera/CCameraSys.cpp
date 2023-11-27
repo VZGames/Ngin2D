@@ -1,43 +1,43 @@
-#include "CCamera.h"
+#include "CCameraSys.h"
 #include "CEntity.h"
 #include "ComponentDef/SPositionComponent.h"
 
 BEGIN_NAMESPACE(engine)
-CCamera *CCamera::s_instance = nullptr;
-CCamera::CCamera()
+CCameraSys *CCameraSys::s_instance = nullptr;
+CCameraSys::CCameraSys()
 {
 
 }
 
-CCamera *CCamera::instance()
+CCameraSys *CCameraSys::instance()
 {
-    return s_instance = (s_instance == nullptr)? new CCamera():s_instance;
+    return s_instance = (s_instance == nullptr)? new CCameraSys():s_instance;
 }
 
-void CCamera::setTarget(CEntity *entity)
+void CCameraSys::setTarget(CEntity *entity)
 {
     m_offset.Zeros();
     m_target = entity;
 }
 
-void CCamera::update(Offset &newOffset)
+void CCameraSys::update(Offset &newOffset)
 {
     if(m_target == nullptr) return;
     if(!m_target->hasComponent<SPositionComponent>()) return;
     m_offset = newOffset;
 }
 
-Offset CCamera::offset() const
+Offset CCameraSys::offset() const
 {
     return m_offset;
 }
 
-float CCamera::scale() const
+float CCameraSys::scale() const
 {
     return m_scale;
 }
 
-float CCamera::zoom(E_CAMERA_ZOOM mode, const float &scale)
+float CCameraSys::zoom(E_CAMERA_ZOOM mode, const float &scale)
 {
     if(mode == E_CAMERA_ZOOM::ZOOM_IN)
     {

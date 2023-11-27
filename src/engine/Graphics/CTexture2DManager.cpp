@@ -1,7 +1,7 @@
 #include "CTexture2DManager.h"
 #include "LoggerDefines.h"
 #include "CNgin.h"
-#include "CCamera.h"
+#include "CCameraSys.h"
 
 BEGIN_NAMESPACE(engine)
 CTexture2DManager *CTexture2DManager::s_instance = nullptr;
@@ -24,8 +24,8 @@ void CTexture2DManager::drawTile(TextureID id, Point2DF pos, TileWidth w, TileHe
 {
     int frameX = w  * c;
     int frameY = h  * r;
-
-    float scale = CCamera::instance()->scale();
+    
+    float scale = CCameraSys::instance()->scale();
     SDL_Rect srcRect = {frameX, frameY, w, h};
     SDL_FRect destRect = {
         pos.getX(),
@@ -45,7 +45,7 @@ void CTexture2DManager::drawFrame(TextureID id, Point2DF pos, FrameWidth w, Fram
         LOCK_GUARD(m_mutex);
         int frameX = w * c;
         int frameY = h * r;
-        float scale = CCamera::instance()->scale();
+        float scale = CCameraSys::instance()->scale();
         SDL_Rect srcRect = {frameX, frameY, w, h};
         SDL_FRect destRect = {
             pos.getX(),
@@ -95,7 +95,7 @@ bool CTexture2DManager::loadTexture(TextureID id, TextureSource source)
 
 void CTexture2DManager::drawRect(Point2DF pos, FrameWidth w, FrameHeight h)
 {
-    float scale = CCamera::instance()->scale();
+    float scale = CCameraSys::instance()->scale();
     SDL_FRect destRect = {
         pos.getX(),
         pos.getY(),

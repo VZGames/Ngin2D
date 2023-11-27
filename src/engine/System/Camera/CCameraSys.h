@@ -1,5 +1,5 @@
-#ifndef CCAMERA_H
-#define CCAMERA_H
+#ifndef CCAMERASYS_H
+#define CCAMERASYS_H
 
 #include "CommonDefine.h"
 #include "CommonEnums.h"
@@ -8,16 +8,16 @@
 BEGIN_NAMESPACE(engine)
 class CEntity;
 class AScene;
-class CCamera
+class CCameraSys
 {
 private:
-    CCamera();
-    static CCamera  *s_instance;
+    CCameraSys();
+    static CCameraSys  *s_instance;
     CEntity         *m_target = nullptr;
     float           m_scale{2.0f};
     Offset          m_offset{0.0f, 0.0f};
 public:
-    static CCamera *instance();
+    static CCameraSys *instance();
     void setTarget(CEntity*);
     void update(Offset&);
     Offset offset() const;
@@ -26,4 +26,4 @@ public:
 };
 END_NAMESPACE
 
-#endif // CCAMERA_H
+#endif // CCAMERASYS_H

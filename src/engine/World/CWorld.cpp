@@ -1,6 +1,6 @@
 #include "CWorld.h"
 #include "CECSystemManager.h"
-#include "CRender.h"
+#include "CRenderSys.h"
 #include "LoggerDefines.h"
 #include "AScene.h"
 #include "CEntity.h"
@@ -59,7 +59,7 @@ void CWorld::update(float dt)
 
 void CWorld::render()
 {
-    forEachEntities(std::bind(&CRender::drawFrame, CRender::instance(), std::placeholders::_1));
+    forEachEntities(std::bind(&CRenderSys::drawFrame, CRenderSys::instance(), std::placeholders::_1));
 }
 END_NAMESPACE
 

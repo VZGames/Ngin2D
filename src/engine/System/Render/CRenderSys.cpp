@@ -1,4 +1,4 @@
-#include "CRender.h"
+#include "CRenderSys.h"
 #include "CEntity.h"
 #include "CTexture2DManager.h"
 #include "ComponentDef/SPositionComponent.h"
@@ -6,18 +6,18 @@
 #include "ComponentDef/SBoxComponent.h"
 
 BEGIN_NAMESPACE(engine)
-CRender *CRender::s_instance = nullptr;
-CRender::CRender()
+CRenderSys *CRenderSys::s_instance = nullptr;
+CRenderSys::CRenderSys()
 {
 
 }
 
-CRender *CRender::instance()
+CRenderSys *CRenderSys::instance()
 {
-    return s_instance = (s_instance == nullptr)? new CRender(): s_instance;
+    return s_instance = (s_instance == nullptr)? new CRenderSys(): s_instance;
 }
 
-void CRender::drawFrame(CEntity *entity)
+void CRenderSys::drawFrame(CEntity *entity)
 {
     auto sprite = entity->getComponent<SSpriteComponent>();
     auto position = entity->getComponent<SPositionComponent>();

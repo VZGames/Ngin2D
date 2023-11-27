@@ -1,5 +1,5 @@
 #include "CMouseEvent.h"
-#include "CCamera.h"
+#include "CCameraSys.h"
 #include "CNgin.h"
 #include "LoggerDefines.h"
 
@@ -8,7 +8,7 @@ CMouseEvent *CMouseEvent::s_instance = nullptr;
 CMouseEvent::CMouseEvent()
 {
     LOCK_GUARD(m_mtx)
-    float scale = CCamera::instance()->scale();
+    float scale = CCameraSys::instance()->scale();
     float width = 16 * scale;
     float height = 16 * scale;
     m_surface = IMG_Load("./debug/assets/widgets/select.png");
@@ -110,11 +110,11 @@ void CMouseEvent::wheel()
     float scale{0.0f};
     if(m_event.wheel.y > 0) // scroll up
     {
-        scale = CCamera::instance()->zoom(E_CAMERA_ZOOM::ZOOM_IN);
+        scale = CCameraSys::instance()->zoom(E_CAMERA_ZOOM::ZOOM_IN);
     }
     else if(m_event.wheel.y < 0) // scroll down
     {
-        scale = CCamera::instance()->zoom(E_CAMERA_ZOOM::ZOOM_OUT);
+        scale = CCameraSys::instance()->zoom(E_CAMERA_ZOOM::ZOOM_OUT);
     }
     m_cursor_rect.w = 16 * scale;
     m_cursor_rect.h = 16 * scale;

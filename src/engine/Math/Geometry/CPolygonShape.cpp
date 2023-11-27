@@ -22,7 +22,7 @@ std::vector<Vector2DF> CPolygonShape::vertices() const
 
 void CPolygonShape::pushVertex(float x, float y)
 {
-    float scale = engine::CCamera::instance()->scale();
+    float scale = engine::CCameraSys::instance()->scale();
     m_vertices_origin.emplace_back(Vector2DF(x, y));
     m_vertices.emplace_back(Vector2DF((x * scale) + m_x, (y * scale) + m_y));
 }
@@ -46,7 +46,7 @@ void CPolygonShape::updatePosition(float X, float Y)
     m_x = X;
     m_y = Y;
     {
-        float scale = engine::CCamera::instance()->scale();
+        float scale = engine::CCameraSys::instance()->scale();
         for (int i = 0; i < static_cast<int>(m_vertices.size()); i++)
         {
             m_vertices[i].x = (m_vertices_origin[i].x * scale) + m_x;

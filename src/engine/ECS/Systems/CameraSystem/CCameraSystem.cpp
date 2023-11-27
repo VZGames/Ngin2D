@@ -1,6 +1,6 @@
 #include "CCameraSystem.h"
 #include "CEntity.h"
-#include "CCamera.h"
+#include "CCameraSys.h"
 #include "ComponentDef/SPositionComponent.h"
 #include "ComponentDef/SCameraComponent.h"
 #include "ComponentDef/SSpriteComponent.h"
@@ -20,7 +20,7 @@ void CCameraSystem::init(CEntity *entity)
 void CCameraSystem::update(CEntity *entity, float dt)
 {
     UNUSED(dt)
-    float scale  = engine::CCamera::instance()->scale();
+    float scale  = engine::CCameraSys::instance()->scale();
 
     auto position  = entity->getComponent<SPositionComponent>();
     auto camera    = entity->getComponent<SCameraComponent>();
@@ -33,7 +33,7 @@ void CCameraSystem::update(CEntity *entity, float dt)
         float height = winSize.height;
         camera->offset.x = position->x - (width/2 - (sprite->frameWidth * scale)/2);
         camera->offset.y = position->y - (height/2 - (sprite->frameHeight * scale)/2);
-        CCamera::instance()->update(camera->offset);
+        CCameraSys::instance()->update(camera->offset);
     }
 }
 
