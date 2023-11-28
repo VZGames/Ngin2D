@@ -23,8 +23,8 @@ public:
     static void forEachEntities(std::function<void(CEntity*)>);
     static void forEachScenes(std::function<void(AScene*)>);
 
-    CWorld * registerEntities(std::vector<CEntity*>&);
-    CWorld * registerScenes(std::vector<AScene*>&);
+    CWorld *registerEntities(std::vector<CEntity*>);
+    CWorld *registerScenes(std::vector<AScene*>);
 
 
     void init();

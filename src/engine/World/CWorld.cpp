@@ -1,5 +1,5 @@
 #include "CWorld.h"
-#include "CECSystemManager.h"
+#include "CSceneManager.h"
 #include "CRenderSys.h"
 #include "LoggerDefines.h"
 #include "AScene.h"
@@ -19,15 +19,15 @@ CWorld* CWorld::instance()
     return s_instance = (s_instance == nullptr)? new CWorld():s_instance;
 }
 
-CWorld *CWorld::registerEntities(std::vector<CEntity*> &entities)
+CWorld *CWorld::registerEntities(std::vector<CEntity*> entities)
 {
-    s_entities = std::move(entities);
+    std::copy(entities.begin(), entities.end(), std::back_inserter(s_entities));
     return this;
 }
 
-CWorld *CWorld::registerScenes(std::vector<AScene*> &scenes)
+CWorld *CWorld::registerScenes(std::vector<AScene *> scenes)
 {
-    s_scenes = std::move(scenes);
+    std::copy(scenes.begin(), scenes.end(), std::back_inserter(s_scenes));
     return this;
 }
 
@@ -49,12 +49,12 @@ void CWorld::forEachScenes(std::function<void(AScene*)> fn)
 
 void CWorld::init()
 {
-    CECSystemManager::instance()->init();
+    CSceneManager::instance()->currentScene()->init();
 }
 
 void CWorld::update(float dt)
 {
-    CECSystemManager::instance()->update(dt);
+    CSceneManager::instance()->currentScene()->update(dt);
 }
 
 void CWorld::render()

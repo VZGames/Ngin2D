@@ -21,26 +21,26 @@ CECSystemManager *CECSystemManager::instance()
     return s_instance = (s_instance == nullptr)? new CECSystemManager(): s_instance;
 }
 
-void CECSystemManager::init()
+void CECSystemManager::init(std::vector<CEntity*> entities)
 {
     for(auto &system: m_systems)
     {
-        auto fn = [&](CEntity* entity){
+        for(CEntity *entity: entities)
+        {
             system->init(entity);
-        };
-        CWorld::forEachEntities(fn);
+        }
     }
 }
 
-void CECSystemManager::update(float dt)
+void CECSystemManager::update(std::vector<CEntity*> entities, float dt)
 {
     for(auto &system: m_systems)
     {
         // do update for each entity
-        auto fn = [&](CEntity* entity){
+        for(CEntity *entity: entities)
+        {
             system->update(entity, dt);
-        };
-        CWorld::forEachEntities(fn);
+        }
     }
 }
 

@@ -5,9 +5,6 @@
 #include "CSceneManager.h"
 #include "SceneObjects/CGameScene.h"
 #include "SceneObjects/CSettingScene.h"
-#include "GameObjects/Player/CPlayer.h"
-#include "GameObjects/Cows/CCow.h"
-
 using namespace engine;
 
 int main(int argc, char *argv[])
@@ -18,37 +15,10 @@ int main(int argc, char *argv[])
     // Script
     script::CGameScene gameScene;
     script::CSettingScene settingScene;
-    script::CPlayer player;
-    script::CCow    cow(100, 50);
-    script::CCow    cow2(100, 80);
-    script::CCow    cow3(150, 200);
-    script::CCow    cow4(200, 500);
-    script::CCow    cow5(30, 200);
-
-    std::vector<CEntity*> entities
-        {
-            &cow,
-            &cow2,
-            &cow3,
-            &cow4,
-            &cow5,
-            &player,
-
-        };
-
-    std::vector<AScene*> scenes
-        {
-            &gameScene,
-            &settingScene
-        };
-
-    CWorld *world = engine::CWorld::instance()
-                        ->registerEntities(entities)
-                        ->registerScenes(scenes);
 
     CSceneManager::instance()->loadScene(gameScene.id(), E_LOAD_SCENE_MODE::SINGLE);
 
-    if(engine::CNgin::instance()->initialize("Game Framework", 980, 620, world))
+    if(engine::CNgin::instance()->initialize("Game Framework", 980, 620, engine::CWorld::instance()))
     {
         engine::CNgin::instance()->loop();
         engine::CNgin::instance()->clean();

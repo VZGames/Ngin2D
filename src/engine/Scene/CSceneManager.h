@@ -18,8 +18,9 @@ private:
 public:
     static CSceneManager* instance();
     static int sceneCount();
-    void createScene(const char*, AScene*);
+    AScene* createScene(const char*, AScene*);
     void loadScene(const char*, E_LOAD_SCENE_MODE);
+    void transition(const char*);
     AScene* currentScene() const;
 };
 END_NAMESPACE

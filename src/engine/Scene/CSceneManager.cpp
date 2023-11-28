@@ -19,10 +19,16 @@ int CSceneManager::sceneCount()
     return s_scene_count;
 }
 
-void CSceneManager::createScene(const char *id, AScene *scene)
+AScene* CSceneManager::createScene(const char *id, AScene *scene)
 {
-    scene->m_id = id;
-    m_scenes[id] = scene;
+    if(scene == nullptr) return nullptr;
+    if(m_scenes.find(id) != m_scenes.end()) return nullptr;
+    else
+    {
+        scene->m_id = id;
+        m_scenes[id] = scene;
+    }
+    return m_scenes[id];
 }
 
 void CSceneManager::loadScene(const char *id, E_LOAD_SCENE_MODE mode)
@@ -36,7 +42,14 @@ AScene *CSceneManager::currentScene() const
 {
     return m_scenes.at(m_current_scene_id);
 }
+
+void CSceneManager::transition(const char *)
+{
+
+}
+
 END_NAMESPACE
+
 
 
 

@@ -6,13 +6,15 @@
 BEGIN_NAMESPACE(engine)
 class AScene
 {
+private:
+    const char* m_id;
+
 public:
     friend class CSceneManager;
     const char *id() const;
 
     virtual void init(){};
-private:
-    const char* m_id;
+    virtual void update(float) {};
 };
 END_NAMESPACE
 

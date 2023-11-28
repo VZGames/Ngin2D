@@ -33,8 +33,8 @@ private:
 public:
     static CECSystemManager *instance();
 
-    void init();
-    void update(float dt);
+    void init(std::vector<CEntity*> entities);
+    void update(std::vector<CEntity*> entities, float dt);
 };
 END_NAMESPACE
 

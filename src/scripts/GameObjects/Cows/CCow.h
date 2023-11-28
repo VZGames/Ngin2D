@@ -20,7 +20,7 @@ private:
     engine::SBoxComponent             *m_box;
 
 public:
-    CCow(float x, float y);
+    CCow(float x = 0.0f, float y = 0.0f);
 };
 END_NAMESPACE
 
