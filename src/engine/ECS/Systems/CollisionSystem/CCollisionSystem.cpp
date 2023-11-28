@@ -4,6 +4,7 @@
 #include "ComponentDef/SPositionComponent.h"
 #include "ComponentDef/SBoxComponent.h"
 #include "ComponentDef/SMotionComponent.h"
+#include "ComponentDef/SSpriteComponent.h"
 
 BEGIN_NAMESPACE(engine)
 CCollisionSystem::CCollisionSystem()
@@ -31,18 +32,21 @@ void CCollisionSystem::update(CEntity *entity, float dt)
     auto position = entity->getComponent<SPositionComponent>();
     auto motion   = entity->getComponent<SMotionComponent>();
     auto box      = entity->getComponent<SBoxComponent>();
+    auto sprite   = entity->getComponent<SSpriteComponent>();
     if(!position || !motion || !box) return;
     else
     {
         for (AShape *obj: m_boxes)
         {
             if(obj == &box->shape) continue;
-            if(box->shape.center().distance(obj->center()) > 64) continue;
+//            float centerDistance = box->shape.center().distance(obj->center());
             bool collided = checkCollision(&box->shape, obj, motion->mtv);
             box->shape.setCollided(collided);
             obj->setCollided(collided);
             if(collided)
             {
+                if(box->shape.y() > obj->y()) { sprite->onTop = true; }
+                else { sprite->onTop = false; }
                 break;
             }
         }

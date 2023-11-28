@@ -6,10 +6,14 @@
 BEGIN_NAMESPACE(engine)
 class CLevelManager
 {
-public:
+private:
     CLevelManager();
+    static CLevelManager* s_instance;
 
+public:
+    static CLevelManager* instance();
     void loadLevel(const char* id);
+    void update(float dt);
 };
 END_NAMESPACE
 

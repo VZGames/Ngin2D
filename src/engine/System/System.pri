@@ -17,4 +17,6 @@ SOURCES += \
 INCLUDEPATH += \
     $$PWD/Camera \
     $$PWD/Render \
+    $$PWD/Level \
+    $$PWD/Particle \
     $$PWD
