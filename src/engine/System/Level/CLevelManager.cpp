@@ -1,4 +1,5 @@
 #include "CLevelManager.h"
+#include "LoggerDefines.h"
 
 BEGIN_NAMESPACE(engine)
 CLevelManager* CLevelManager::s_instance = nullptr;
@@ -20,7 +21,6 @@ void CLevelManager::loadLevel(const char *id)
 
 void CLevelManager::update(float dt)
 {
-
 }
 END_NAMESPACE
 

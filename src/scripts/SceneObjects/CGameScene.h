@@ -14,6 +14,9 @@ class CGameScene: public engine::AScene
 private:
     CPlayer player;
     CCow    cow;
+    CCow    cow2;
+    CCow    cow3;
+
     std::vector<engine::CEntity*> m_entities;
 
 public:

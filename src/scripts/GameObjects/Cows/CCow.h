@@ -21,6 +21,7 @@ private:
 
 public:
     CCow(float x = 0.0f, float y = 0.0f);
+    void setPosition(float x, float y);
 };
 END_NAMESPACE
 

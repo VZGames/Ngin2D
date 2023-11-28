@@ -22,4 +22,10 @@ CCow::CCow(float x, float y)
     m_box->setAxes();
 }
 
+void CCow::setPosition(float x, float y)
+{
+    m_position->x = x;
+    m_position->y = y;
+}
 END_NAMESPACE
+
