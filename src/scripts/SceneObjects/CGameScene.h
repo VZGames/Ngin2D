@@ -2,7 +2,6 @@
 #define CGAMESCENE_H
 
 #include "CommonDefine.h"
-#include "Alias.h"
 #include "AScene.h"
 #include "CEntity.h"
 #include "GameObjects/Cows/CCow.h"
@@ -26,6 +25,7 @@ public:
 public:
     virtual void init() override;
     virtual void update(float) override;
+    virtual void render() override;
 };
 END_NAMESPACE
 

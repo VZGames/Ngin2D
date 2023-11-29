@@ -17,7 +17,7 @@ CRenderSys *CRenderSys::instance()
     return s_instance = (s_instance == nullptr)? new CRenderSys(): s_instance;
 }
 
-void CRenderSys::drawFrame(CEntity *entity)
+void CRenderSys::drawEntity(CEntity *entity)
 {
     auto sprite = entity->getComponent<SSpriteComponent>();
     auto position = entity->getComponent<SPositionComponent>();

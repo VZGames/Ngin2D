@@ -12,8 +12,8 @@ private:
     static CRenderSys *s_instance;
 public:
     static CRenderSys *instance();
-
-    void drawFrame(CEntity*);
+    
+    void drawEntity(CEntity*);
 };
 END_NAMESPACE
 

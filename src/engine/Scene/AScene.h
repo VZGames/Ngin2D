@@ -15,6 +15,7 @@ public:
 
     virtual void init(){};
     virtual void update(float) {};
+    virtual void render() {};
 };
 END_NAMESPACE
 

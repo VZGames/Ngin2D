@@ -3,6 +3,7 @@
 #include "LoggerDefines.h"
 #include "CECSystemManager.h"
 #include "CLevelManager.h"
+#include "CRenderSys.h"
 
 BEGIN_NAMESPACE(script)
 CGameScene::CGameScene()
@@ -33,6 +34,16 @@ void CGameScene::update(float dt)
     std::thread([dt](){engine::CLevelManager::instance()->update(dt);}).join();
     std::thread([&, dt](){engine::CECSystemManager::instance()->update(m_entities, dt);}).join();
 }
+
+void CGameScene::render()
+{
+    for(engine::CEntity *entity: m_entities)
+    {
+        engine::CRenderSys::instance()->drawEntity(entity);
+    }
+}
+
 END_NAMESPACE
+
 
 

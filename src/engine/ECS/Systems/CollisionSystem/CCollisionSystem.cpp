@@ -47,19 +47,17 @@ void CCollisionSystem::update(CEntity *entity, float dt)
             boxB->shape.setCollided(collided);
             if(collided)
             {
+                int minLayer = std::min(sprite->id(), spriteB->id());
+                int maxLayer = std::max(sprite->id(), spriteB->id());
                 if(boxB->shape.y() > box->shape.y())
                 {
-                    int minLayer = std::min(sprite->id(), spriteB->id());
-                    int maxLayer = std::max(sprite->id(), spriteB->id());
                     sprite->layer  = maxLayer;
-                    spriteB->layer   = minLayer;
+                    spriteB->layer = minLayer;
                 }
                 else
                 {
-                    int minLayer = std::min(sprite->id(), spriteB->id());
-                    int maxLayer = std::max(sprite->id(), spriteB->id());
                     sprite->layer  = minLayer;
-                    spriteB->layer   = maxLayer;
+                    spriteB->layer = maxLayer;
                 }
                 break;
             }
