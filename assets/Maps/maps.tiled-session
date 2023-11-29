@@ -1,0 +1,60 @@
+{
+    "Map/SizeTest": {
+        "height": 4300,
+        "width": 2
+    },
+    "activeFile": "PhuHoa.tmx",
+    "expandedProjectPaths": [
+        "."
+    ],
+    "fileStates": {
+        "PhuHoa.tmx": {
+            "scale": 1.5,
+            "selectedLayer": 1,
+            "viewCenter": {
+                "x": 270.33333333333326,
+                "y": 212
+            }
+        },
+        "PhuHoa.tmx#Dirt": {
+            "scaleInDock": 2
+        },
+        "PhuHoa.tmx#Grass": {
+            "scaleInDock": 1
+        },
+        "PhuHoa.tmx#Grass_hill_tiles_v2": {
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        },
+        "PhuHoa.tmx#Grass_tiles_v2": {
+            "scaleInDock": 1
+        },
+        "PhuHoa.tmx#Hills": {
+            "scaleInDock": 1
+        },
+        "PhuHoa.tmx#Tall_Grass_hill_tilesv2": {
+            "scaleInDock": 1
+        },
+        "PhuHoa.tmx#Water": {
+            "scaleInDock": 1
+        }
+    },
+    "last.imagePath": "D:/Projects/O/QT_Projects/GameFramework/assets/Tilesets/ground_tiles/new_tiles",
+    "map.height": 50,
+    "map.lastUsedFormat": "tmx",
+    "map.tileHeight": 16,
+    "map.tileWidth": 16,
+    "map.width": 90,
+    "openFiles": [
+        "PhuHoa.tmx"
+    ],
+    "project": "maps.tiled-project",
+    "recentFiles": [
+        "PhuHoa.tmx"
+    ],
+    "tileset.embedInMap": true,
+    "tileset.tileSize": {
+        "height": 16,
+        "width": 16
+    }
+}

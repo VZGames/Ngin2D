@@ -4,6 +4,7 @@
 #include "CECSystemManager.h"
 #include "CLevelManager.h"
 #include "CRenderSys.h"
+#include "ComponentDef/SSpriteComponent.h"
 
 BEGIN_NAMESPACE(script)
 CGameScene::CGameScene()
@@ -37,6 +38,12 @@ void CGameScene::update(float dt)
 
 void CGameScene::render()
 {
+    std::sort(m_entities.begin(), m_entities.end(), [](const engine::CEntity *A, const engine::CEntity *B){
+        auto spriteA     = A->getComponent<engine::SSpriteComponent>();
+        auto spriteB     = B->getComponent<engine::SSpriteComponent>();
+        return spriteA->layer > spriteB->layer;
+    });
+
     for(engine::CEntity *entity: m_entities)
     {
         engine::CRenderSys::instance()->drawEntity(entity);

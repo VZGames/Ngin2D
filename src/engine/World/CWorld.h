@@ -15,14 +15,11 @@ private:
     static CWorld *s_instance;
 
     Vector2DF m_gravity;
-    static std::vector<CEntity*> s_entities;
-    static std::vector<AScene*>  s_scenes;
+    std::vector<CEntity*> m_entities;
+    std::vector<AScene*>  m_scenes;
 
 public:
     static CWorld *instance();
-    static void forEachEntities(std::function<void(CEntity*)>);
-    static void forEachScenes(std::function<void(AScene*)>);
-
     CWorld *registerEntities(std::vector<CEntity*>);
     CWorld *registerScene(AScene*);
 
