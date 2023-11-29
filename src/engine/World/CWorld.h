@@ -24,7 +24,7 @@ public:
     static void forEachScenes(std::function<void(AScene*)>);
 
     CWorld *registerEntities(std::vector<CEntity*>);
-    CWorld *registerScenes(std::vector<AScene*>);
+    CWorld *registerScene(AScene*);
 
 
     void init();

@@ -1,5 +1,6 @@
 #include "CSceneManager.h"
 #include "AScene.h"
+#include "CWorld.h"
 
 BEGIN_NAMESPACE(engine)
 CSceneManager *CSceneManager::s_instance = nullptr;
@@ -27,6 +28,7 @@ AScene* CSceneManager::createScene(const char *id, AScene *scene)
     {
         scene->m_id = id;
         m_scenes[id] = scene;
+        CWorld::instance()->registerScene(m_scenes[id]);
     }
     return m_scenes[id];
 }

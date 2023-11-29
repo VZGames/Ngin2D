@@ -9,7 +9,7 @@ BEGIN_NAMESPACE(engine)
 class CCollisionSystem: public AECSystem
 {
 private:
-    std::vector<AShape*> m_boxes;
+    std::vector<CEntity*> m_entities;
 private:
     bool checkCollision(AShape*, AShape*, Vector2DF&);
 

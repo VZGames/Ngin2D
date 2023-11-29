@@ -16,11 +16,12 @@ CLevelManager* CLevelManager::instance()
 
 void CLevelManager::loadLevel(const char *id)
 {
-
+    UNUSED(id)
 }
 
 void CLevelManager::update(float dt)
 {
+    UNUSED(dt)
 }
 END_NAMESPACE
 

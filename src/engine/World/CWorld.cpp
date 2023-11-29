@@ -4,6 +4,7 @@
 #include "LoggerDefines.h"
 #include "AScene.h"
 #include "CEntity.h"
+#include "ComponentDef/SSpriteComponent.h"
 
 BEGIN_NAMESPACE(engine)
 CWorld* CWorld::s_instance = nullptr;
@@ -25,14 +26,20 @@ CWorld *CWorld::registerEntities(std::vector<CEntity*> entities)
     return this;
 }
 
-CWorld *CWorld::registerScenes(std::vector<AScene *> scenes)
+CWorld *CWorld::registerScene(AScene *scene)
 {
-    std::copy(scenes.begin(), scenes.end(), std::back_inserter(s_scenes));
+    s_scenes.push_back(scene);
     return this;
 }
 
 void CWorld::forEachEntities(std::function<void(CEntity*)> fn)
 {
+    std::sort(s_entities.begin(), s_entities.end(), [](const CEntity *A, const CEntity *B){
+        auto spriteA     = A->getComponent<SSpriteComponent>();
+        auto spriteB     = B->getComponent<SSpriteComponent>();
+        return spriteA->layer > spriteB->layer;
+    });
+
     for(CEntity *entity: s_entities)
     {
         fn(entity);
@@ -49,7 +56,10 @@ void CWorld::forEachScenes(std::function<void(AScene*)> fn)
 
 void CWorld::init()
 {
-    CSceneManager::instance()->currentScene()->init();
+    for(AScene *scene: s_scenes)
+    {
+        scene->init();
+    }
 }
 
 void CWorld::update(float dt)

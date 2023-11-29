@@ -25,7 +25,7 @@ struct SSpriteComponent: public  CComponent
     int row = 0;
     int frameSpeed;
     float scale = 1;
-    float onTop{false};
+    int layer = 0;
 };
 END_NAMESPACE
 

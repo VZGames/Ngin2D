@@ -22,7 +22,7 @@ void CCollisionSystem::init(CEntity *entity)
     if(!position || !box) return;
     else
     {
-        m_boxes.push_back(&box->shape);
+        m_entities.push_back(entity);
     }
 }
 
@@ -36,17 +36,31 @@ void CCollisionSystem::update(CEntity *entity, float dt)
     if(!position || !motion || !box) return;
     else
     {
-        for (AShape *obj: m_boxes)
+        for (CEntity *other: m_entities)
         {
-            if(obj == &box->shape) continue;
-//            float centerDistance = box->shape.center().distance(obj->center());
-            bool collided = checkCollision(&box->shape, obj, motion->mtv);
+            auto boxB       = other->getComponent<SBoxComponent>();
+            auto spriteB     = other->getComponent<SSpriteComponent>();
+
+            if(&boxB->shape == &box->shape) continue;
+            bool collided = checkCollision(&box->shape, &boxB->shape, motion->mtv);
             box->shape.setCollided(collided);
-            obj->setCollided(collided);
+            boxB->shape.setCollided(collided);
             if(collided)
             {
-                if(box->shape.y() > obj->y()) { sprite->onTop = true; }
-                else { sprite->onTop = false; }
+                if(boxB->shape.y() > box->shape.y())
+                {
+                    int minLayer = std::min(sprite->id(), spriteB->id());
+                    int maxLayer = std::max(sprite->id(), spriteB->id());
+                    sprite->layer  = maxLayer;
+                    spriteB->layer   = minLayer;
+                }
+                else
+                {
+                    int minLayer = std::min(sprite->id(), spriteB->id());
+                    int maxLayer = std::max(sprite->id(), spriteB->id());
+                    sprite->layer  = minLayer;
+                    spriteB->layer   = maxLayer;
+                }
                 break;
             }
         }
