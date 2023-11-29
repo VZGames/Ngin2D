@@ -16,6 +16,8 @@ int main(int argc, char *argv[])
     UNUSED(argv)
 
     // Script
+    float scale = CCameraSys::instance()->scale();
+
     CXmlParser parser;
     parser.loadFile("./debug/assets/Maps/PhuHoa.tmx");
 
@@ -29,7 +31,7 @@ int main(int argc, char *argv[])
 
     CSceneManager::instance()->loadScene(gameScene.id(), E_LOAD_SCENE_MODE::SINGLE);
 
-    if(engine::CNgin::instance()->initialize("Game Framework", (cols * tilewidth), (rows * tileheight), engine::CWorld::instance()))
+    if(engine::CNgin::instance()->initialize("Game Framework", (cols * tilewidth * scale), (rows * tileheight * scale), engine::CWorld::instance()))
     {
         engine::CNgin::instance()->loop();
         engine::CNgin::instance()->clean();

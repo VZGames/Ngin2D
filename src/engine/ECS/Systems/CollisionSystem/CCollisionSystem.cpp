@@ -40,25 +40,25 @@ void CCollisionSystem::update(CEntity *entity, float dt)
         {
             auto boxB       = other->getComponent<SBoxComponent>();
             auto spriteB     = other->getComponent<SSpriteComponent>();
+            auto positionB = entity->getComponent<SPositionComponent>();
 
             if(&boxB->shape == &box->shape) continue;
             bool collided = checkCollision(&box->shape, &boxB->shape, motion->mtv);
             box->shape.setCollided(collided);
             boxB->shape.setCollided(collided);
 
-            int minLayer = std::min(sprite->id(), spriteB->id());
-            int maxLayer = std::max(sprite->id(), spriteB->id());
-
-            if(boxB->shape.y() > box->shape.y())
-            {
-                sprite->layer  = maxLayer;
-                spriteB->layer = minLayer;
-            }
-            else
-            {
-                sprite->layer  = minLayer;
-                spriteB->layer = maxLayer;
-            }
+//            if(positionB->y + spriteB->frameHeight < position->y + sprite->frameHeight)
+//            {
+//                // A front B
+//                sprite->layer  = static_cast<int>(MAX_ENTITY_ID);
+//                spriteB->layer = other->id();
+//            }
+//            else
+//            {
+//                // A back B
+//                sprite->layer  = -1;
+//                spriteB->layer = other->id();
+//            }
 
             if(collided)
             {

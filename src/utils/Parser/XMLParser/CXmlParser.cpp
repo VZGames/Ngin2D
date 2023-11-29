@@ -12,17 +12,10 @@ bool CXmlParser::loadFile(const char *file)
         m_root = m_document.RootElement();
         for(TiXmlElement *e = m_root->FirstChildElement(); e != nullptr; e = e->NextSiblingElement())
         {
-            m_nodes[e->Value()] = e;
+            m_nodes[e->Value()].emplace_back(e);
         }
         return true;
     }
-    return false;
-}
-
-bool CXmlParser::parse(const char *tag)
-{
-
-    m_nodes.at(tag);
     return false;
 }
 

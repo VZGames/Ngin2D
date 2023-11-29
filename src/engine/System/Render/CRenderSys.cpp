@@ -33,6 +33,7 @@ void CRenderSys::drawEntity(CEntity *entity)
             sprite->col
             );
 
+//        CTexture2DManager::instance()->drawRect(Point2DF(position->x, position->y), sprite->frameWidth, sprite->frameHeight);
         if(box)
         {
             CTexture2DManager::instance()->drawPolygon(box->vertices());
