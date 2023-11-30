@@ -3,6 +3,7 @@ HEADERS += \
     $$PWD/Logger/LoggerDefines.h \
     $$PWD/Memory/LFUCache/CLFUCache.h \
     $$PWD/Memory/LRUCache/CLRUCache.h \
+    $$PWD/Parser/JsonParser/CJsonParser.h \
     $$PWD/Parser/XMLParser/CXmlParser.h \
     $$PWD/Process/CSafeQueue.h \
     $$PWD/Process/ThreadPool/CThreadPool.h \
@@ -13,6 +14,7 @@ SOURCES += \
     $$PWD/Logger/CLogger.cpp \
     $$PWD/Memory/LFUCache/CLFUCache.cpp \
     $$PWD/Memory/LRUCache/CLRUCache.cpp \
+    $$PWD/Parser/JsonParser/CJsonParser.cpp \
     $$PWD/Parser/XMLParser/CXmlParser.cpp \
     $$PWD/Process/ThreadPool/CThreadPool.cpp \
     $$PWD/Process/ThreadPool/CThreadWorker.cpp

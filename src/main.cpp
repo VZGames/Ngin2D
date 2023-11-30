@@ -20,7 +20,9 @@ int main(int argc, char *argv[])
 
     CXmlParser parser;
     parser.loadFile("./debug/assets/Maps/PhuHoa.tmx");
+    const char* txt = parser.parseTagWith(3, "tileset.image", "source");
 
+    DBG("%s", txt);
     int tilewidth = std::stoi(parser.rootAttribute("tilewidth"));
     int tileheight = std::stoi(parser.rootAttribute("tileheight"));
     int cols = std::stoi(parser.rootAttribute("width"));
