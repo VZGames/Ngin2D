@@ -16,8 +16,6 @@ private:
     CCow    cow2;
     CCow    cow3;
 
-    std::vector<engine::CEntity*> m_entities;
-
 public:
     CGameScene();
 

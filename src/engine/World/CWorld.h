@@ -20,7 +20,7 @@ private:
 
 public:
     static CWorld *instance();
-    CWorld *registerEntities(std::vector<CEntity*>);
+    CWorld *registerEntity(CEntity*);
     CWorld *registerScene(AScene*);
 
 

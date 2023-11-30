@@ -15,15 +15,15 @@ CWorld* CWorld::instance()
     return s_instance = (s_instance == nullptr)? new CWorld():s_instance;
 }
 
-CWorld *CWorld::registerEntities(std::vector<CEntity*> entities)
+CWorld *CWorld::registerEntity(CEntity* entity)
 {
-    std::copy(entities.begin(), entities.end(), std::back_inserter(m_entities));
+    m_entities.emplace_back(entity);
     return this;
 }
 
 CWorld *CWorld::registerScene(AScene *scene)
 {
-    m_scenes.push_back(scene);
+    m_scenes.emplace_back(scene);
     return this;
 }
 
