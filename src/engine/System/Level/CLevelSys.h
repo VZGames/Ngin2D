@@ -6,8 +6,12 @@
 BEGIN_NAMESPACE(engine)
 class CLevelSys
 {
-public:
+private:
     CLevelSys();
+    static CLevelSys* s_instance;
+public:
+    static CLevelSys* instance();
+    void update(float dt);
 };
 END_NAMESPACE
 

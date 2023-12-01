@@ -1,5 +1,4 @@
 #include "AScene.h"
-#include "CECSystemManager.h"
 
 BEGIN_NAMESPACE(engine)
 

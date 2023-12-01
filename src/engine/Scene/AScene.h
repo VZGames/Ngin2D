@@ -5,6 +5,7 @@
 
 BEGIN_NAMESPACE(engine)
 class CEntity;
+class ALevel;
 class AScene
 {
 private:
@@ -12,6 +13,7 @@ private:
 
 protected:
     std::vector<CEntity*>   m_entities;
+    std::vector<ALevel*>    m_levels;
 
 public:
     friend class CSceneManager;

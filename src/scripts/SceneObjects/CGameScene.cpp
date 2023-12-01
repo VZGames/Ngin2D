@@ -2,7 +2,7 @@
 #include "CSceneManager.h"
 #include "LoggerDefines.h"
 #include "CECSystemManager.h"
-#include "CLevelManager.h"
+#include "CLevelSys.h"
 #include "CRenderSys.h"
 #include "ComponentDef/SSpriteComponent.h"
 
@@ -16,17 +16,17 @@ CGameScene::CGameScene()
     cow2.setPosition(320, 100);
     cow3.setPosition(140, 80);
 
-    engine::CWorld::instance()->registerEntity(&player);
-    engine::CWorld::instance()->registerEntity(&cow);
-    engine::CWorld::instance()->registerEntity(&cow2);
-    engine::CWorld::instance()->registerEntity(&cow3);
-
-
     m_entities.emplace_back(&player);
     m_entities.emplace_back(&cow);
     m_entities.emplace_back(&cow2);
     m_entities.emplace_back(&cow3);
 
+    m_levels.emplace_back(&originLv);
+
+    engine::CWorld::instance()->registerEntity(&player);
+    engine::CWorld::instance()->registerEntity(&cow);
+    engine::CWorld::instance()->registerEntity(&cow2);
+    engine::CWorld::instance()->registerEntity(&cow3);
 }
 
 void CGameScene::init()
@@ -36,7 +36,7 @@ void CGameScene::init()
 
 void CGameScene::update(float dt)
 {
-    std::thread([dt](){engine::CLevelManager::instance()->update(dt);}).join();
+    std::thread([dt](){engine::CLevelSys::instance()->update(dt);}).join();
     std::thread([&, dt](){engine::CECSystemManager::instance()->update(m_entities, dt);}).join();
 }
 
@@ -52,6 +52,8 @@ void CGameScene::render()
     {
         engine::CRenderSys::instance()->drawEntity(entity);
     }
+
+
 }
 
 END_NAMESPACE

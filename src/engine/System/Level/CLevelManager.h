@@ -17,8 +17,6 @@ private:
 public:
     static CLevelManager* instance();
     void loadLevel(const char* id);
-    void update(float dt);
-    void render();
 };
 END_NAMESPACE
 

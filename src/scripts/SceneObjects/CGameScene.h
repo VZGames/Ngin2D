@@ -3,18 +3,23 @@
 
 #include "CommonDefine.h"
 #include "AScene.h"
-#include "CEntity.h"
 #include "GameObjects/Cows/CCow.h"
 #include "GameObjects/Player/CPlayer.h"
+#include "Levels/COriginLevel.h"
 
 BEGIN_NAMESPACE(script)
 class CGameScene: public engine::AScene
 {
+    // game objects/entities
 private:
     CPlayer player;
     CCow    cow;
     CCow    cow2;
     CCow    cow3;
+
+    // game maps
+private:
+    COriginLevel    originLv;
 
 public:
     CGameScene();

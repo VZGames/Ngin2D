@@ -19,15 +19,6 @@ void CLevelManager::loadLevel(const char *id)
     UNUSED(id)
 }
 
-void CLevelManager::update(float dt)
-{
-    UNUSED(dt)
-}
-
-void CLevelManager::render()
-{
-
-}
 END_NAMESPACE
 
 
