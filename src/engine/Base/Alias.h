@@ -31,7 +31,7 @@ using FrameHeight = int;
 using FrameRow = int;
 using FrameCol = int;
 
-using Scale    = float;
+using _Scale    = float;
 
 using TileWidth = int;
 using TileHeight = int;
@@ -39,10 +39,10 @@ using TileHeight = int;
 using TileRow = int;
 using TileCol = int;
 
-using Title = const char*;
-using Width = uint32_t;
-using Height = uint32_t;
-using Angle = float;
+using _Title = const char*;
+using _Width = uint32_t;
+using _Height = uint32_t;
+using _Angle = float;
 
 END_NAMESPACE
 

@@ -1,6 +1,6 @@
 #include "CTexture2DManager.h"
 #include "LoggerDefines.h"
-#include "CNgin.h"
+#include "CRenderSys.h"
 #include "CCameraSys.h"
 
 BEGIN_NAMESPACE(engine)
@@ -20,7 +20,7 @@ void CTexture2DManager::renderFrameThread(void *data)
     UNUSED(data)
 }
 
-void CTexture2DManager::drawTile(TextureID id, Point2DF pos, TileWidth w, TileHeight h, TileRow r, TileCol c, Angle angle, SDL_RendererFlip flip)
+void CTexture2DManager::drawTile(TextureID id, Point2DF pos, TileWidth w, TileHeight h, TileRow r, TileCol c, _Angle angle, SDL_RendererFlip flip)
 {
     int frameX = w  * c;
     int frameY = h  * r;
@@ -34,10 +34,10 @@ void CTexture2DManager::drawTile(TextureID id, Point2DF pos, TileWidth w, TileHe
         (float)h * scale
     };
 
-    SDL_RenderCopyExF(CNgin::renderer(), m_textures[id], &srcRect, &destRect, angle, NULL, flip);
+    SDL_RenderCopyExF(CRenderSys::renderer(), m_textures[id], &srcRect, &destRect, angle, NULL, flip);
 }
 
-void CTexture2DManager::drawFrame(TextureID id, Point2DF pos, FrameWidth w, FrameHeight h, FrameRow r, FrameCol c, Angle angle, SDL_RendererFlip flip)
+void CTexture2DManager::drawFrame(TextureID id, Point2DF pos, FrameWidth w, FrameHeight h, FrameRow r, FrameCol c, _Angle angle, SDL_RendererFlip flip)
 {
 
     auto fn = [&]()
@@ -53,7 +53,7 @@ void CTexture2DManager::drawFrame(TextureID id, Point2DF pos, FrameWidth w, Fram
             (float)w * scale,
             (float)h * scale
         };
-        SDL_RenderCopyExF(CNgin::renderer(), m_textures[id], &srcRect, &destRect, angle, NULL, flip);
+        SDL_RenderCopyExF(CRenderSys::renderer(), m_textures[id], &srcRect, &destRect, angle, NULL, flip);
     };
 
     std::thread(fn).join();
@@ -69,7 +69,7 @@ bool CTexture2DManager::loadTexture(TextureID id, TextureSource source)
     else
     {
         DBG("TextureID: %s, Texture Path: %s", id, source);
-        if(CNgin::renderer() == nullptr)
+        if(CRenderSys::renderer() == nullptr)
         {
             DBG("RENDERER NULL")
             return false;
@@ -82,7 +82,7 @@ bool CTexture2DManager::loadTexture(TextureID id, TextureSource source)
             return false;
         }
 
-        texture = SDL_CreateTextureFromSurface(CNgin::renderer(), surface);
+        texture = SDL_CreateTextureFromSurface(CRenderSys::renderer(), surface);
         SDL_FreeSurface(surface);
 
 
@@ -103,7 +103,7 @@ void CTexture2DManager::drawRect(Point2DF pos, FrameWidth w, FrameHeight h)
         (float)h * scale
     };
 
-    SDL_RenderDrawRectF(CNgin::renderer(), &destRect);
+    SDL_RenderDrawRectF(CRenderSys::renderer(), &destRect);
 }
 void CTexture2DManager::drawPolygon(std::vector<Vector2DF> vertices)
 {
@@ -117,7 +117,7 @@ void CTexture2DManager::drawPolygon(std::vector<Vector2DF> vertices)
     points[vertices.size()] = points[0];
 
 
-    SDL_RenderDrawLinesF(CNgin::renderer(), points, sizeof(points)/sizeof(SDL_FPoint));
+    SDL_RenderDrawLinesF(CRenderSys::renderer(), points, sizeof(points)/sizeof(SDL_FPoint));
 }
 END_NAMESPACE
 

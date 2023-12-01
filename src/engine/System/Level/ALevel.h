@@ -7,8 +7,6 @@ BEGIN_NAMESPACE(engine)
 class ALevel
 {
 public:
-    ALevel();
-
 //    void loadFile();
 };
 END_NAMESPACE

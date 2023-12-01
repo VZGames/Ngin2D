@@ -23,6 +23,12 @@ void CLevelManager::update(float dt)
 {
     UNUSED(dt)
 }
+
+void CLevelManager::render()
+{
+
+}
 END_NAMESPACE
+
 
 
