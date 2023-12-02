@@ -65,8 +65,10 @@ bool CNgin::initialize(_Title title, _Width width, _Height height, CWorld *world
         s_win_width = width;
         s_win_height = height;
         // [2] init renderer
-        CRenderSys::instance()->initRenderer();
-
+        if(!CRenderSys::instance()->initRenderer())
+        {
+            return false;
+        }
     }
 
     // [3] start game engine

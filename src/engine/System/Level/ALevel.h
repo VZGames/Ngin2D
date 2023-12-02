@@ -6,8 +6,14 @@
 BEGIN_NAMESPACE(engine)
 class ALevel
 {
+protected:
+    const char* m_name;
+
 public:
-//    void loadFile();
+    const char* name() const;
+public:
+    virtual void update(float) {};
+    virtual void render() {};
 };
 END_NAMESPACE
 

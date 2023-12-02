@@ -27,10 +27,10 @@ bool CXmlParser::loadFile(const char *file)
     {
         m_root = m_document.RootElement();
         iterateAllTags(m_root);
-//        for(auto node: m_nodes)
-//        {
-//            std::cout << node.first << std::endl;
-//        }
+        for(auto node: m_nodes)
+        {
+            std::cout << node.first << std::endl;
+        }
         return true;
     }
 

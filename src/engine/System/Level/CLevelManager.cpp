@@ -14,12 +14,24 @@ CLevelManager* CLevelManager::instance()
     return s_instance = (s_instance == nullptr)? new CLevelManager(): s_instance;
 }
 
+void CLevelManager::createLevel(const char *id, ALevel *level)
+{
+    m_levels[id] = level;
+}
+
 void CLevelManager::loadLevel(const char *id)
 {
-    UNUSED(id)
+    m_current_level_id = id;
+}
+
+ALevel *CLevelManager::currentLevel() const
+{
+    return m_levels.at(m_current_level_id);
 }
 
 END_NAMESPACE
+
+
 
 
 

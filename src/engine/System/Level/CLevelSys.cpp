@@ -1,4 +1,6 @@
 #include "CLevelSys.h"
+#include "CLevelManager.h"
+#include "ALevel.h"
 
 BEGIN_NAMESPACE(engine)
 CLevelSys *CLevelSys::s_instance = nullptr;
@@ -14,7 +16,7 @@ CLevelSys *CLevelSys::instance()
 
 void CLevelSys::update(float dt)
 {
-
+    CLevelManager::instance()->currentLevel()->update(dt);
 }
 END_NAMESPACE
 

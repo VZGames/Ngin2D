@@ -2,6 +2,7 @@
 #include "CSceneManager.h"
 #include "LoggerDefines.h"
 #include "CECSystemManager.h"
+#include "CLevelManager.h"
 #include "CLevelSys.h"
 #include "CRenderSys.h"
 #include "ComponentDef/SSpriteComponent.h"
@@ -23,6 +24,8 @@ CGameScene::CGameScene()
 
     m_levels.emplace_back(&originLv);
 
+    engine::CLevelManager::instance()->createLevel(originLv.name(), m_levels.back());
+
     engine::CWorld::instance()->registerEntity(&player);
     engine::CWorld::instance()->registerEntity(&cow);
     engine::CWorld::instance()->registerEntity(&cow2);
@@ -31,6 +34,7 @@ CGameScene::CGameScene()
 
 void CGameScene::init()
 {
+    engine::CLevelManager::instance()->loadLevel(originLv.name());
     engine::CECSystemManager::instance()->init(m_entities);
 }
 
@@ -48,11 +52,14 @@ void CGameScene::render()
         return spriteA->layer > spriteB->layer;
     });
 
+    // [1] create new thread for render map
+
     for(engine::CEntity *entity: m_entities)
     {
         engine::CRenderSys::instance()->drawEntity(entity);
     }
 
+    // [2] wait for all finished
 
 }
 

@@ -22,6 +22,7 @@ public:
     bool openWindow(_Title, _Width&, _Height&);
     bool initRenderer();
     void drawEntity(CEntity*);
+//    void drawTilemap();
     void beginDraw();
     void endDraw();
     bool destroyWindow();
