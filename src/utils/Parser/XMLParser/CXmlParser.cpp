@@ -27,10 +27,10 @@ bool CXmlParser::loadFile(const char *file)
     {
         m_root = m_document.RootElement();
         iterateAllTags(m_root);
-        for(auto node: m_nodes)
-        {
-            std::cout << node.first << std::endl;
-        }
+//        for(auto node: m_nodes)
+//        {
+//            std::cout << node.first << std::endl;
+//        }
         return true;
     }
 
@@ -44,6 +44,7 @@ const char *CXmlParser::rootAttribute(const char *attribute)
 
 int CXmlParser::count(const char *tag)
 {
+    if(m_nodes.find(tag) == m_nodes.end()) return 0;
     return static_cast<int>(m_nodes[tag].size());
 }
 

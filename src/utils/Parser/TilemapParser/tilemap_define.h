@@ -13,6 +13,7 @@ typedef struct s_tmx_map
 {
     const char*             version;
     const char*             tiled_version;
+    const char*             orientation;
     const char*             render_order;
     int                     width;
     int                     height;

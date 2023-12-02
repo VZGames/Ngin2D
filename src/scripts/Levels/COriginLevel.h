@@ -3,6 +3,7 @@
 
 #include "CommonDefine.h"
 #include "ALevel.h"
+#include "matrix2D.h"
 #include "TilemapParser/CTilemapParser.h"
 
 BEGIN_NAMESPACE(script)
@@ -10,6 +11,7 @@ class COriginLevel: public engine::ALevel
 {
 private:
     CTilemapParser                  m_parser;
+    std::vector<Matrix2D<int>>      m_layers;
 
 public:
     COriginLevel();
