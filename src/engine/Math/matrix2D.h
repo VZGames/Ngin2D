@@ -49,12 +49,17 @@ public:
 
     T &at(int y, int x)
     {
-        return this->m_data[(y  *m_columns) + x];
+        return this->m_data[(y  * m_columns) + x];
     }
 
     T &at(int pos)
     {
         return this->m_data[pos];
+    }
+
+    void setValueAt(int pos, T value)
+    {
+        this->m_data[pos] = value;
     }
 
     int rows() const

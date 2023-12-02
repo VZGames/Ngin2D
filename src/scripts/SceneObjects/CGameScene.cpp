@@ -3,11 +3,10 @@
 #include "LoggerDefines.h"
 #include "CECSystemManager.h"
 #include "CRenderSys.h"
-#include "ComponentDef/SSpriteComponent.h"
-
+#include "ComponentDef/SPositionComponent.h"
 BEGIN_NAMESPACE(script)
 CGameScene::CGameScene()
-    :m_layout(0,0)
+    :m_layout(100,100)
 {
     engine::CSceneManager::instance()->createScene(__FUNCTION__, this);
 
@@ -23,6 +22,9 @@ CGameScene::CGameScene()
 
     for(auto &entity: m_entities)
     {
+        auto position = entity->getComponent<engine::SPositionComponent>();
+        if(position == nullptr) continue;
+        m_layout.insertEntity(entity->id(), position->x, position->y);
         engine::CWorld::instance()->registerEntity(entity);
     }
 }
@@ -39,14 +41,7 @@ void CGameScene::update(float dt)
 
 void CGameScene::render()
 {
-//    std::sort(m_entities.begin(), m_entities.end(), [](const engine::CEntity *A, const engine::CEntity *B){
-//        auto spriteA     = A->getComponent<engine::SSpriteComponent>();
-//        auto spriteB     = B->getComponent<engine::SSpriteComponent>();
-//        return spriteA->layer > spriteB->layer;
-//    });
-
     // [1] create new thread for render map
-
     for(engine::CEntity *entity: m_entities)
     {
         engine::CRenderSys::instance()->drawEntity(entity);

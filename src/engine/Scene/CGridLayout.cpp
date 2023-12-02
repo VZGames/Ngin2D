@@ -7,16 +7,28 @@ CGridLayout::CGridLayout(int rows, int columns)
 
 }
 
-void CGridLayout::insertEntity(CEntity *entity)
-{
 
+int CGridLayout::hash(int x, int y)
+{
+    int hashX = x % columns();
+    int hashY = y % rows();
+    return (hashY * columns()) + hashX;
 }
 
-void CGridLayout::removeEntity(CEntity *entity)
+void CGridLayout::insertEntity(uint32_t id, float x, float y)
+{
+    int pos = hash(static_cast<int>(x), static_cast<int>(y));
+    this->setValueAt(pos, static_cast<int>(id));
+
+    this->print();
+}
+
+void CGridLayout::removeEntity(uint32_t id)
 {
 
 }
 END_NAMESPACE
+
 
 
 
