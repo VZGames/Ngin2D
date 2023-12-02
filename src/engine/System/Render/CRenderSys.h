@@ -18,11 +18,11 @@ private:
 public:
     static CRenderSys *instance();
     static SDL_Renderer* renderer();
-
+    bool isReady();
     bool openWindow(_Title, _Width&, _Height&);
-    bool initRenderer();
+    bool createRenderer();
     void drawEntity(CEntity*);
-//    void drawTilemap();
+//    void drawTile();
     void beginDraw();
     void endDraw();
     bool destroyWindow();

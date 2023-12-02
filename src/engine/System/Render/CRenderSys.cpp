@@ -23,6 +23,25 @@ SDL_Renderer *CRenderSys::renderer()
     return s_renderer;
 }
 
+bool CRenderSys::isReady()
+{
+    DBG("Game Init");
+    if (SDL_Init(SDL_INIT_EVERYTHING) != 0)
+    {
+        DBG("Unable to initialize SDL: %s", SDL_GetError());
+
+        return false;
+    }
+
+    if (!(IMG_Init(IMG_INIT_PNG | IMG_INIT_JPG)))
+    {
+        DBG("Unable to initialize SDL Image: %s", SDL_GetError());
+        return false;
+    }
+
+    return true;
+}
+
 bool CRenderSys::openWindow(_Title title, _Width &width, _Height &height)
 {
     SDL_WindowFlags window_flags = (SDL_WindowFlags)(SDL_WINDOW_RESIZABLE | SDL_WINDOW_ALLOW_HIGHDPI);
@@ -42,7 +61,7 @@ bool CRenderSys::openWindow(_Title title, _Width &width, _Height &height)
     return true;
 }
 
-bool CRenderSys::initRenderer()
+bool CRenderSys::createRenderer()
 {
     s_renderer = SDL_CreateRenderer(m_window, -1, SDL_RENDERER_ACCELERATED);
     if (s_renderer == nullptr)
@@ -76,8 +95,8 @@ void CRenderSys::drawEntity(CEntity *entity)
             CTexture2DManager::instance()->drawPolygon(box->vertices());
         }
     }
-
 }
+
 
 void CRenderSys::beginDraw()
 {

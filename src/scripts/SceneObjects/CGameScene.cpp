@@ -2,13 +2,12 @@
 #include "CSceneManager.h"
 #include "LoggerDefines.h"
 #include "CECSystemManager.h"
-#include "CLevelManager.h"
-#include "CLevelSys.h"
 #include "CRenderSys.h"
 #include "ComponentDef/SSpriteComponent.h"
 
 BEGIN_NAMESPACE(script)
 CGameScene::CGameScene()
+    :m_layout(0,0)
 {
     engine::CSceneManager::instance()->createScene(__FUNCTION__, this);
 
@@ -22,35 +21,29 @@ CGameScene::CGameScene()
     m_entities.emplace_back(&cow2);
     m_entities.emplace_back(&cow3);
 
-    m_levels.emplace_back(&originLv);
-
-    engine::CLevelManager::instance()->createLevel(originLv.name(), m_levels.back());
-
-    engine::CWorld::instance()->registerEntity(&player);
-    engine::CWorld::instance()->registerEntity(&cow);
-    engine::CWorld::instance()->registerEntity(&cow2);
-    engine::CWorld::instance()->registerEntity(&cow3);
+    for(auto &entity: m_entities)
+    {
+        engine::CWorld::instance()->registerEntity(entity);
+    }
 }
 
 void CGameScene::init()
 {
-    engine::CLevelManager::instance()->loadLevel(originLv.name());
     engine::CECSystemManager::instance()->init(m_entities);
 }
 
 void CGameScene::update(float dt)
 {
-    std::thread([dt](){engine::CLevelSys::instance()->update(dt);}).join();
     std::thread([&, dt](){engine::CECSystemManager::instance()->update(m_entities, dt);}).join();
 }
 
 void CGameScene::render()
 {
-    std::sort(m_entities.begin(), m_entities.end(), [](const engine::CEntity *A, const engine::CEntity *B){
-        auto spriteA     = A->getComponent<engine::SSpriteComponent>();
-        auto spriteB     = B->getComponent<engine::SSpriteComponent>();
-        return spriteA->layer > spriteB->layer;
-    });
+//    std::sort(m_entities.begin(), m_entities.end(), [](const engine::CEntity *A, const engine::CEntity *B){
+//        auto spriteA     = A->getComponent<engine::SSpriteComponent>();
+//        auto spriteB     = B->getComponent<engine::SSpriteComponent>();
+//        return spriteA->layer > spriteB->layer;
+//    });
 
     // [1] create new thread for render map
 

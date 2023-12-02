@@ -21,7 +21,13 @@ void CLevelManager::createLevel(const char *id, ALevel *level)
 
 void CLevelManager::loadLevel(const char *id)
 {
+    // Load map data, entities, etc.
     m_current_level_id = id;
+}
+
+void CLevelManager::unLoadLevel()
+{
+    // Unload map data, entities, etc.
 }
 
 ALevel *CLevelManager::currentLevel() const
@@ -30,6 +36,7 @@ ALevel *CLevelManager::currentLevel() const
 }
 
 END_NAMESPACE
+
 
 
 

@@ -18,6 +18,7 @@ public:
     static CLevelManager* instance();
     void createLevel(const char* id, ALevel* level);
     void loadLevel(const char* id);
+    void unLoadLevel();
     ALevel* currentLevel() const;
 };
 END_NAMESPACE

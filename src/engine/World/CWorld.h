@@ -21,7 +21,9 @@ private:
 public:
     static CWorld *instance();
     CWorld *registerEntity(CEntity*);
+    void unRegisterEntity(CEntity*);
     CWorld *registerScene(AScene*);
+    void unRegisterScene(AScene*);
 
 
     void init();

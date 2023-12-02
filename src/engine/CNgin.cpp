@@ -45,19 +45,7 @@ Size2D<float> CNgin::windowSize()
 
 bool CNgin::initialize(_Title title, _Width width, _Height height, CWorld *world)
 {
-    DBG("Game Init");
-    if (SDL_Init(SDL_INIT_EVERYTHING) != 0)
-    {
-        DBG("Unable to initialize SDL: %s", SDL_GetError());
-
-        return false;
-    }
-
-    if (!(IMG_Init(IMG_INIT_PNG | IMG_INIT_JPG)))
-    {
-        DBG("Unable to initialize SDL Image: %s", SDL_GetError());
-        return false;
-    }
+    if(!CRenderSys::instance()->isReady()) return false;
 
     // [1] init SDL and create the Game Window
     if(CRenderSys::instance()->openWindow(title, width, height))
@@ -65,7 +53,7 @@ bool CNgin::initialize(_Title title, _Width width, _Height height, CWorld *world
         s_win_width = width;
         s_win_height = height;
         // [2] init renderer
-        if(!CRenderSys::instance()->initRenderer())
+        if(!CRenderSys::instance()->createRenderer())
         {
             return false;
         }
