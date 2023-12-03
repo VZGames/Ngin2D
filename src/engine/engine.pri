@@ -9,6 +9,7 @@ include($$PWD/Control/Control.pri)
 include($$PWD/System/System.pri)
 include($$PWD/Adapters/Adapters.pri)
 include($$PWD/Physics/Physics.pri)
+include($$PWD/Tilemap/Tilemap.pri)
 
 INCLUDEPATH += \
     $$PWD/Base \
