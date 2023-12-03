@@ -28,12 +28,12 @@ void CGameScene::init()
         engine::CWorld::instance()->registerEntity(entity);
 
         auto position = entity->getComponent<engine::SPositionComponent>();
+
         if(position == nullptr) continue;
         engine::CBroadPhaseCulling::instance(255, 30, 30)->insert(entity->id(), position->x, position->y);
     }
 
     engine::CECSystemManager::instance()->init(m_entities);
-
 }
 
 void CGameScene::update(float dt)

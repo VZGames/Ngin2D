@@ -43,7 +43,7 @@ void CMovementSystem::update(CEntity *entity, float dt)
 
     box->update(position);
 
-    CBroadPhaseCulling::instance(entity->id(), position->x, position->y);
+    CBroadPhaseCulling::instance()->insert(entity->id(), position->x, position->y);
 }
 
 END_NAMESPACE

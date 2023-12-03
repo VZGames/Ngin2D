@@ -26,9 +26,6 @@ private:
         return std::min(A1, B1) - std::max(A0, B0);
     }
 
-    void gridClean();
-    void gridInsert(uint32_t id, float x, float y);
-
 public:
     CCollisionSystem();
     ~CCollisionSystem();

@@ -51,11 +51,13 @@ public:
 
     T &at(int y, int x)
     {
+        assert((x < m_rows && y < m_columns) && "Index invalid");
         return this->m_data[(y  * m_columns) + x];
     }
 
     T &at(int pos)
     {
+        assert((pos < (m_rows * m_columns)) && "Index invalid");
         return this->m_data[pos];
     }
 
