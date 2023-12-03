@@ -30,7 +30,7 @@ void CGameScene::init()
         auto position = entity->getComponent<engine::SPositionComponent>();
 
         if(position == nullptr) continue;
-        engine::CBroadPhaseCulling::instance(255, 30, 30)->insert(entity->id(), position->x, position->y);
+        engine::CBroadPhaseCulling::instance(1020, 30, 30)->insert(entity->id(), position->x, position->y);
     }
 
     engine::CECSystemManager::instance()->init(m_entities);
