@@ -61,9 +61,12 @@ public:
         return this->m_data[pos];
     }
 
-    void setValueAt(int pos, T value)
+    void resize(int rows, int columns)
     {
-        this->m_data[pos] = value;
+        delete []m_data;
+        m_data = new T[rows  *columns];
+        m_rows = rows;
+        m_columns = columns;
     }
 
     int rows() const

@@ -7,13 +7,15 @@
 #include "ComponentDef/SPositionComponent.h"
 BEGIN_NAMESPACE(script)
 CGameScene::CGameScene()
-    :m_layout(255, 30, 30)
+    :m_layout(16, 30, 30)
 {
     engine::CSceneManager::instance()->createScene(__FUNCTION__, this);
 }
 
 void CGameScene::init()
 {
+    m_layout.resize(50, 50);
+
     cow.setPosition(200, 50);
     cow2.setPosition(320, 100);
     cow3.setPosition(640, 80);
