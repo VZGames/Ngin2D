@@ -16,8 +16,8 @@ private:
     CCow    cow;
     CCow    cow2;
     CCow    cow3;
-
     std::vector<engine::CEntity*>    m_entities;
+
     engine::CGridLayout m_layout;
 
 public:

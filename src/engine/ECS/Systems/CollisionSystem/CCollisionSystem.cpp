@@ -37,7 +37,6 @@ void CCollisionSystem::update(CEntity *entity, float dt)
     {
         CBroadPhaseCulling *ins = CBroadPhaseCulling::instance();
         int currentCell = ins->hash(position->x, position->y);
-        DBG("%d", currentCell)
         for (CEntity *other: m_entities)
         {
             if(ins->at(currentCell).find(other->id()) == ins->at(currentCell).end()) continue;
@@ -56,7 +55,6 @@ void CCollisionSystem::update(CEntity *entity, float dt)
             }
 
         }
-
     }
 }
 
