@@ -13,7 +13,7 @@ public:
     CGridLayout(float cellwith, int rows, int columns);
 
 
-    void insertLayerCell(int tileId, float x, float y);
+    void insertTileForLayer(int tileId, float x, float y);
 };
 END_NAMESPACE
 

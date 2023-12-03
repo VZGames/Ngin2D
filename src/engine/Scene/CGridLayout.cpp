@@ -6,7 +6,7 @@ CGridLayout::CGridLayout(float cellwith, int rows, int columns)
 {
 }
 
-void CGridLayout::insertLayerCell(int tileId, float x, float y)
+void CGridLayout::insertTileForLayer(int tileId, float x, float y)
 {
     int position = hash(x, y);;
     this->at(position).push(tileId);

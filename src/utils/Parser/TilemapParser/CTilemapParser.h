@@ -16,6 +16,8 @@ public:
     ~CTilemapParser();
     void loadFile(const char* file);
     int countWith(const char* tag);
+
+    TmxMap map() const;
     void parse(int index, TmxTileSet&tileset);
     void parse(int index, TmxLayer  &layer);
 

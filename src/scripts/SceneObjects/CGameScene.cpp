@@ -5,37 +5,81 @@
 #include "CRenderSys.h"
 #include "CBroadPhaseCulling.h"
 #include "ComponentDef/SPositionComponent.h"
+#include "TilemapParser/CTilemapParser.h"
+
+
 BEGIN_NAMESPACE(script)
 CGameScene::CGameScene()
-    :m_layout(16, 30, 30)
+    :m_grid_layout(16, 30, 30)
 {
     engine::CSceneManager::instance()->createScene(__FUNCTION__, this);
 }
 
 void CGameScene::init()
 {
-    m_layout.resize(50, 50);
-
-    cow.setPosition(200, 50);
-    cow2.setPosition(320, 100);
-    cow3.setPosition(640, 80);
-
-    m_entities.emplace_back(&player);
-    m_entities.emplace_back(&cow);
-    m_entities.emplace_back(&cow2);
-    m_entities.emplace_back(&cow3);
-
-    for(auto &entity: m_entities)
+    // space init entities
     {
-        engine::CWorld::instance()->registerEntity(entity);
+        cow.setPosition(200, 50);
+        cow2.setPosition(320, 100);
+        cow3.setPosition(640, 80);
 
-        auto position = entity->getComponent<engine::SPositionComponent>();
+        m_entities.emplace_back(&player);
+        m_entities.emplace_back(&cow);
+        m_entities.emplace_back(&cow2);
+        m_entities.emplace_back(&cow3);
 
-        if(position == nullptr) continue;
-        engine::CBroadPhaseCulling::instance()->insert(entity->id(), position->x, position->y);
+        for(auto &entity: m_entities)
+        {
+            engine::CWorld::instance()->registerEntity(entity);
+
+            auto position = entity->getComponent<engine::SPositionComponent>();
+
+            if(position == nullptr) continue;
+            engine::CBroadPhaseCulling::instance()->insert(entity->id(), position->x, position->y);
+        }
+
+        engine::CECSystemManager::instance()->init(m_entities);
     }
 
-    engine::CECSystemManager::instance()->init(m_entities);
+
+    // space init map/level
+    {
+        CTilemapParser parser;
+        parser.loadFile("./debug/assets/Maps/PhuHoa.tmx");
+
+        int mapWidth = parser.map().width;
+        int mapHeight = parser.map().height;
+
+        m_grid_layout.resize(mapHeight, mapWidth);
+
+        std::vector<TmxTileSet>         tilesets(parser.countWith("tileset"));
+        std::vector<TmxLayer>           layers(parser.countWith("layer"));
+
+        TmxTileSet tileset;
+        TmxLayer layer;
+
+        for(int i = 0; i < static_cast<int>(tilesets.size()); i++)
+        {
+            parser.parse(i, tileset);
+            tilesets[i] = std::move(tileset);
+        }
+
+        for(int i = 0; i < static_cast<int>(layers.size()); i++)
+        {
+            parser.parse(i, layer);
+            layers[i] = std::move(layer);
+
+            Matrix2D<int> matrix = Matrix2D<int>::fromString(layers[i].data->content, layer.height, layer.width);
+
+            for(int r = 0; r < layer.height; r++)
+            {
+                for(int c = 0; c < layer.width; c++)
+                {
+                    m_grid_layout.insertTileForLayer(matrix.at(r, c), layer.x, layer.y);
+                }
+            }
+        }
+    }
 }
 
 void CGameScene::update(float dt)

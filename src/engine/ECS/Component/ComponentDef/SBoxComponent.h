@@ -49,6 +49,7 @@ struct SBoxComponent: public CComponent
         shape.updatePosition(position->x, position->y);
         setAxes();
     }
+
     E_BODY_TYPE body;
     CPolygonShape shape;
 };

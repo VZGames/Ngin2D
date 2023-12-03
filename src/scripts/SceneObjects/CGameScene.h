@@ -18,7 +18,7 @@ private:
     CCow    cow3;
     std::vector<engine::CEntity*>    m_entities;
 
-    engine::CGridLayout m_layout;
+    engine::CGridLayout m_grid_layout;
 
 public:
     CGameScene();

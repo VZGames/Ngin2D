@@ -17,6 +17,15 @@ public:
         this->m_data = new T[rows  *columns];
     }
 
+    ~Matrix2D()
+    {
+        if(this->m_data != NULL)
+        {
+            delete[] this->m_data;
+            this->m_data = NULL;
+        }
+    }
+
     // copy constructor
     Matrix2D(const Matrix2D<T> &copy)
     {

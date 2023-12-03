@@ -35,6 +35,11 @@ int CTilemapParser::countWith(const char *tag)
     return m_xmlparser.count(tag);
 }
 
+TmxMap CTilemapParser::map() const
+{
+    return m_map;
+}
+
 void CTilemapParser::parse(int index, TmxTileSet &tileset)
 {
     const char* tag = "tileset";

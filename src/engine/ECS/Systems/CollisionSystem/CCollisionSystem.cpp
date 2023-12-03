@@ -42,7 +42,7 @@ void CCollisionSystem::update(CEntity *entity, float dt)
             if(ins->at(currentCell).find(other->id()) == ins->at(currentCell).end()) continue;
             else
             {
-                auto boxB       = other->getComponent<SBoxComponent>();
+                auto boxB = other->getComponent<SBoxComponent>();
                 if(&boxB->shape == &box->shape) continue;
                 bool collided = checkCollision(&box->shape, &boxB->shape, motion->mtv);
                 box->shape.setCollided(collided);
