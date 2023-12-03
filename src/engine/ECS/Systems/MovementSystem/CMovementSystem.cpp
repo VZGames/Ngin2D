@@ -2,6 +2,7 @@
 #include "LoggerDefines.h"
 #include "CCameraSys.h"
 #include "CEntity.h"
+#include "CBroadPhaseCulling.h"
 #include "ComponentDef/SPositionComponent.h"
 #include "ComponentDef/SMotionComponent.h"
 #include "ComponentDef/SCameraComponent.h"
@@ -41,6 +42,8 @@ void CMovementSystem::update(CEntity *entity, float dt)
     }
 
     box->update(position);
+
+    CBroadPhaseCulling::instance(entity->id(), position->x, position->y);
 }
 
 END_NAMESPACE

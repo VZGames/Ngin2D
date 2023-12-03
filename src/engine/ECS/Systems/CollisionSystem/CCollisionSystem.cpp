@@ -4,7 +4,7 @@
 #include "ComponentDef/SPositionComponent.h"
 #include "ComponentDef/SBoxComponent.h"
 #include "ComponentDef/SMotionComponent.h"
-#include "ComponentDef/SSpriteComponent.h"
+//#include "ComponentDef/SSpriteComponent.h"
 
 BEGIN_NAMESPACE(engine)
 CCollisionSystem::CCollisionSystem()
@@ -32,39 +32,31 @@ void CCollisionSystem::update(CEntity *entity, float dt)
     auto position = entity->getComponent<SPositionComponent>();
     auto motion   = entity->getComponent<SMotionComponent>();
     auto box      = entity->getComponent<SBoxComponent>();
-    auto sprite   = entity->getComponent<SSpriteComponent>();
     if(!position || !motion || !box) return;
     else
     {
+        CBroadPhaseCulling *ins = CBroadPhaseCulling::instance();
+        int currentCell = ins->hash(position->x, position->y);
+        DBG("%d", currentCell)
         for (CEntity *other: m_entities)
         {
-            auto boxB       = other->getComponent<SBoxComponent>();
-            auto spriteB     = other->getComponent<SSpriteComponent>();
-            auto positionB = entity->getComponent<SPositionComponent>();
-
-            if(&boxB->shape == &box->shape) continue;
-            bool collided = checkCollision(&box->shape, &boxB->shape, motion->mtv);
-            box->shape.setCollided(collided);
-            boxB->shape.setCollided(collided);
-
-//            if(positionB->y + spriteB->frameHeight < position->y + sprite->frameHeight)
-//            {
-//                // A front B
-//                sprite->layer  = static_cast<int>(MAX_ENTITY_ID);
-//                spriteB->layer = other->id();
-//            }
-//            else
-//            {
-//                // A back B
-//                sprite->layer  = -1;
-//                spriteB->layer = other->id();
-//            }
-
-            if(collided)
+            if(ins->at(currentCell).find(other->id()) == ins->at(currentCell).end()) continue;
+            else
             {
-                break;
+                auto boxB       = other->getComponent<SBoxComponent>();
+                if(&boxB->shape == &box->shape) continue;
+                bool collided = checkCollision(&box->shape, &boxB->shape, motion->mtv);
+                box->shape.setCollided(collided);
+                boxB->shape.setCollided(collided);
+
+                if(collided)
+                {
+                    break;
+                }
             }
+
         }
+
     }
 }
 
@@ -122,8 +114,6 @@ bool CCollisionSystem::checkCollision(AShape *A, AShape *B, Vector2DF& mtv)
 
     return true;
 }
-
 END_NAMESPACE
-
 
 

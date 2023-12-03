@@ -3,17 +3,20 @@
 #include "LoggerDefines.h"
 #include "CECSystemManager.h"
 #include "CRenderSys.h"
+#include "CBroadPhaseCulling.h"
 #include "ComponentDef/SPositionComponent.h"
 BEGIN_NAMESPACE(script)
 CGameScene::CGameScene()
-    :m_layout(100,100)
+    :m_layout(255, 30, 30)
 {
     engine::CSceneManager::instance()->createScene(__FUNCTION__, this);
+}
 
-
+void CGameScene::init()
+{
     cow.setPosition(200, 50);
     cow2.setPosition(320, 100);
-    cow3.setPosition(140, 80);
+    cow3.setPosition(640, 80);
 
     m_entities.emplace_back(&player);
     m_entities.emplace_back(&cow);
@@ -22,21 +25,21 @@ CGameScene::CGameScene()
 
     for(auto &entity: m_entities)
     {
+        engine::CWorld::instance()->registerEntity(entity);
+
         auto position = entity->getComponent<engine::SPositionComponent>();
         if(position == nullptr) continue;
-        m_layout.insertEntity(entity->id(), position->x, position->y);
-        engine::CWorld::instance()->registerEntity(entity);
+        engine::CBroadPhaseCulling::instance(255, 30, 30)->insert(entity->id(), position->x, position->y);
     }
-}
 
-void CGameScene::init()
-{
     engine::CECSystemManager::instance()->init(m_entities);
+
 }
 
 void CGameScene::update(float dt)
 {
-    std::thread([&, dt](){engine::CECSystemManager::instance()->update(m_entities, dt);}).join();
+    engine::CBroadPhaseCulling::instance()->clean();
+    engine::CECSystemManager::instance()->update(m_entities, dt);
 }
 
 void CGameScene::render()

@@ -12,12 +12,12 @@ class CGameScene: public engine::AScene
 {
     // game objects/entities
 private:
-    std::vector<engine::CEntity*>    m_entities;
     CPlayer player;
     CCow    cow;
     CCow    cow2;
     CCow    cow3;
 
+    std::vector<engine::CEntity*>    m_entities;
     engine::CGridLayout m_layout;
 
 public:

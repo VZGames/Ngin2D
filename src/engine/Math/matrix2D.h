@@ -5,6 +5,7 @@
 #include <sstream>
 #include <iostream>
 #include <algorithm>
+#include <assert.h>
 
 template<typename T>
 class Matrix2D
@@ -12,6 +13,7 @@ class Matrix2D
 public:
     explicit Matrix2D(int rows, int columns) : m_rows(rows),m_columns(columns)
     {
+        assert((rows  *columns > 0) && "Matrix size invalid");
         this->m_data = new T[rows  *columns];
     }
 

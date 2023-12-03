@@ -1,20 +1,16 @@
 #ifndef CGRIDLAYOUT_H
 #define CGRIDLAYOUT_H
 
+#include <unordered_set>
 #include "CommonDefine.h"
-#include "matrix2D.h"
+#include "DataStructs/Grid/CGrid.h"
 
 BEGIN_NAMESPACE(engine)
 class CEntity;
-class CGridLayout: public Matrix2D<int>
+class CGridLayout: public CGrid<int>
 {
-private:
-    int hash(int x, int y);
 public:
-    CGridLayout(int rows, int columns);
-
-    void insertEntity(uint32_t id, float x, float y);
-    void removeEntity(uint32_t id);
+    CGridLayout(float cellwith, int rows, int columns);
 };
 END_NAMESPACE
 

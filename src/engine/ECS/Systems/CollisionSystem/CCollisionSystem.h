@@ -4,6 +4,8 @@
 #include "CommonDefine.h"
 #include "Systems/AECSystem.h"
 #include "AShape.h"
+#include "DataStructs/Grid/CGrid.h"
+#include "CBroadPhaseCulling.h"
 
 BEGIN_NAMESPACE(engine)
 class CCollisionSystem: public AECSystem
@@ -23,6 +25,9 @@ private:
         if (!overlap(A0, A1, B0, B1)) { return 0.0f; }
         return std::min(A1, B1) - std::max(A0, B0);
     }
+
+    void gridClean();
+    void gridInsert(uint32_t id, float x, float y);
 
 public:
     CCollisionSystem();
