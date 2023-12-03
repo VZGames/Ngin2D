@@ -1,10 +1,11 @@
 #include "CCollisionSystem.h"
 #include "LoggerDefines.h"
 #include "CEntity.h"
+#include "CBroadPhaseCulling.h"
 #include "ComponentDef/SPositionComponent.h"
 #include "ComponentDef/SBoxComponent.h"
 #include "ComponentDef/SMotionComponent.h"
-//#include "ComponentDef/SSpriteComponent.h"
+#include "ComponentDef/SSpriteComponent.h"
 
 BEGIN_NAMESPACE(engine)
 CCollisionSystem::CCollisionSystem()
@@ -30,18 +31,35 @@ void CCollisionSystem::update(CEntity *entity, float dt)
 {
     UNUSED(dt);
     auto position = entity->getComponent<SPositionComponent>();
+    auto sprite   = entity->getComponent<SSpriteComponent>();
     auto motion   = entity->getComponent<SMotionComponent>();
     auto box      = entity->getComponent<SBoxComponent>();
     if(!position || !motion || !box) return;
     else
     {
-        CBroadPhaseCulling *ins = CBroadPhaseCulling::instance();
-        int currentCell = ins->hash(position->x, position->y);
+        CBroadPhaseCulling *bpc = CBroadPhaseCulling::instance();
+        int currentCell = bpc->hash(position->x, position->y);
+
         for (CEntity *other: m_entities)
         {
-            if(ins->at(currentCell).find(other->id()) == ins->at(currentCell).end()) continue;
+            if(bpc->at(currentCell).find(other->id()) == bpc->at(currentCell).end()) continue;
             else
             {
+                auto positionB = other->getComponent<SPositionComponent>();
+                auto spriteB   = other->getComponent<SSpriteComponent>();
+                if(positionB->y + spriteB->frameHeight < position->y + sprite->frameHeight)
+                {
+                    // A front B
+                    sprite->zOrder  = 1;
+                    spriteB->zOrder = 0;
+                }
+                else
+                {
+                    // A back B
+                    sprite->zOrder  = 0;
+                    spriteB->zOrder = 1;
+                }
+
                 auto boxB = other->getComponent<SBoxComponent>();
                 if(&boxB->shape == &box->shape) continue;
                 bool collided = checkCollision(&box->shape, &boxB->shape, motion->mtv);

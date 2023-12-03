@@ -90,6 +90,11 @@ void CGameScene::update(float dt)
 
 void CGameScene::render()
 {
+    std::sort(m_entities.begin(), m_entities.end(), [](const engine::CEntity *A, const engine::CEntity *B){
+        auto spriteA     = A->getComponent<engine::SSpriteComponent>();
+        auto spriteB     = B->getComponent<engine::SSpriteComponent>();
+        return spriteA->zOrder < spriteB->zOrder;
+    });
     // [1] create new thread for render map
     for(engine::CEntity *entity: m_entities)
     {

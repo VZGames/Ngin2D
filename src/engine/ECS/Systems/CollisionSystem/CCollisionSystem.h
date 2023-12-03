@@ -4,8 +4,6 @@
 #include "CommonDefine.h"
 #include "Systems/AECSystem.h"
 #include "AShape.h"
-#include "DataStructs/Grid/CGrid.h"
-#include "CBroadPhaseCulling.h"
 
 BEGIN_NAMESPACE(engine)
 class CCollisionSystem: public AECSystem

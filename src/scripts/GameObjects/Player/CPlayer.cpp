@@ -14,6 +14,9 @@ CPlayer::CPlayer()
                                                             48,
                                                             2,
                                                             200);
+    m_sprite->zOrder = 1;
+
+
     m_camera    = this->addComponent<engine::SCameraComponent>(this);
     m_motion    = this->addComponent<engine::SMotionComponent>(0.6);
 

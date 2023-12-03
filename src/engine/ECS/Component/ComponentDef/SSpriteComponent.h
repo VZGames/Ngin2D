@@ -25,6 +25,7 @@ struct SSpriteComponent: public  CComponent
     int row = 0;
     int frameSpeed;
     float scale = 1;
+    int zOrder = 0;
 };
 END_NAMESPACE
 
