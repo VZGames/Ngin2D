@@ -11,6 +11,10 @@ template<typename T>
 class Matrix2D
 {
 public:
+    explicit Matrix2D(): m_rows(10), m_columns(10)
+    {
+
+    }
     explicit Matrix2D(int rows, int columns) : m_rows(rows),m_columns(columns)
     {
         assert((rows  *columns > 0) && "Matrix size invalid");

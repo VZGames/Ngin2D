@@ -6,6 +6,9 @@
 BEGIN_NAMESPACE(engine)
 class CTileset
 {
+private:
+
+    
 public:
     CTileset();
 };

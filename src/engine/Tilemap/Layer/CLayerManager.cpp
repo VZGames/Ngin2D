@@ -5,4 +5,10 @@ CLayerManager::CLayerManager()
 {
 
 }
+
+void CLayerManager::push(CLayer layer)
+{
+    m_layer.push(layer);
+}
 END_NAMESPACE
+
