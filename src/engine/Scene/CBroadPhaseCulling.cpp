@@ -2,15 +2,15 @@
 
 BEGIN_NAMESPACE(engine)
 CBroadPhaseCulling* CBroadPhaseCulling::s_instance = nullptr;
-CBroadPhaseCulling::CBroadPhaseCulling(float cellsize, int rows, int columns)
-    :CGrid<std::unordered_set<uint32_t>>(cellsize, cellsize, rows, columns)
+CBroadPhaseCulling::CBroadPhaseCulling(float cellWidth, float cellHeight, int rows, int columns)
+    :CGrid<std::unordered_set<uint32_t>>(cellWidth, cellHeight, rows, columns)
 {
 
 }
 
-CBroadPhaseCulling *CBroadPhaseCulling::instance(float cellsize, int rows, int columns)
+CBroadPhaseCulling *CBroadPhaseCulling::instance(float cellWidth, float cellHeight, int rows, int columns)
 {
-    return s_instance = (s_instance == nullptr)? new CBroadPhaseCulling(cellsize, rows, columns): s_instance;
+    return s_instance = (s_instance == nullptr)? new CBroadPhaseCulling(cellWidth, cellHeight, rows, columns): s_instance;
 }
 
 void CBroadPhaseCulling::insert(uint32_t id, float x, float y)

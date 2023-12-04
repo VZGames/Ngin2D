@@ -21,7 +21,7 @@ void CGameScene::init()
     {
         cow.setPosition(200, 50);
         cow2.setPosition(320, 100);
-        cow3.setPosition(640, 80);
+        cow3.setPosition(640, 400);
 
         m_entities.emplace_back(&player);
         m_entities.emplace_back(&cow);
@@ -35,7 +35,7 @@ void CGameScene::init()
             auto position = entity->getComponent<engine::SPositionComponent>();
 
             if(position == nullptr) continue;
-            engine::CBroadPhaseCulling::instance()->insert(entity->id(), position->x, position->y);
+            engine::CBroadPhaseCulling::instance()->insert(entity->id(),position->x, position->y);
         }
 
         engine::CECSystemManager::instance()->init(m_entities);

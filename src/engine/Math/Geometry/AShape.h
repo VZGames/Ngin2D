@@ -41,7 +41,7 @@ public:
             return;
         }
         m_collided = collided;
-        DBG("IS COLLISION")
+//        DBG("IS COLLISION")
     }
     bool collided()
     {

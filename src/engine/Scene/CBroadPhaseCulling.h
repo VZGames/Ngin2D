@@ -10,9 +10,9 @@ class CBroadPhaseCulling: public CGrid<std::unordered_set<uint32_t>>
 {
 private:
     static CBroadPhaseCulling* s_instance;
-    CBroadPhaseCulling(float cellsize, int rows, int columns);
+    CBroadPhaseCulling(float cellWidth, float cellHeight, int rows, int columns);
 public:
-    static CBroadPhaseCulling* instance(float cellsize = 16, int rows = 30, int columns = 30);
+    static CBroadPhaseCulling* instance(float cellWidth = 16, float cellHeight = 16, int rows = 30, int columns = 30);
     void insert(uint32_t, float x, float y);
     void clean();
 };
