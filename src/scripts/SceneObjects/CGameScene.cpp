@@ -44,6 +44,8 @@ void CGameScene::init()
 
     // space init map/level
     {
+        m_tilemap.loadMap("./debug/assets/Maps/PhuHoa.tmx");
+
         CTilemapParser parser;
         parser.loadFile("./debug/assets/Maps/PhuHoa.tmx");
 

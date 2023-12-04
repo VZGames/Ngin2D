@@ -7,7 +7,7 @@
 #include "TilemapParser/CTilemapParser.h"
 
 BEGIN_NAMESPACE(engine)
-class CTilemap: public CGrid<std::stack<int>>
+class CTilemap: private CGrid<std::stack<int>>
 {
 private:
     CTilemapParser m_parser;

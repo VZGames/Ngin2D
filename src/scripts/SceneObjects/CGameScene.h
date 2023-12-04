@@ -6,6 +6,7 @@
 #include "GameObjects/Cows/CCow.h"
 #include "GameObjects/Player/CPlayer.h"
 #include "CGridLayout.h"
+#include "CTilemap.h"
 
 BEGIN_NAMESPACE(script)
 class CGameScene: public engine::AScene
@@ -19,6 +20,7 @@ private:
     std::vector<engine::CEntity*>    m_entities;
 
     engine::CGridLayout m_grid_layout;
+    engine::CTilemap    m_tilemap;
 
 public:
     CGameScene();
