@@ -19,7 +19,6 @@ private:
     CCow    cow3;
     std::vector<engine::CEntity*>    m_entities;
 
-    engine::CGridLayout m_grid_layout;
     engine::CTilemap    m_tilemap;
 
 public:
