@@ -1,5 +1,6 @@
 #include "CLayerManager.h"
 #include "matrix2D.h"
+#include "LoggerDefines.h"
 
 BEGIN_NAMESPACE(engine)
 CLayerManager::CLayerManager()
@@ -29,8 +30,8 @@ void CLayerManager::render()
         {
             for(int c = 0; c < matrix.columns(); c++)
             {
+                int tileID = matrix.at(r, c);
 
-                //                m_grid_layout.insertTileForLayer(matrix.at(r, c), layer.x, layer.y);
             }
         }
     }

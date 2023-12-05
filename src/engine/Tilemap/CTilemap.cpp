@@ -33,13 +33,13 @@ void CTilemap::loadMap(const char *file)
 
 void CTilemap::update(float dt)
 {
-
+    m_layer_manager.update(dt);
 }
 
 
 void CTilemap::render()
 {
-
+    m_layer_manager.render();
 }
 
 END_NAMESPACE
