@@ -42,6 +42,7 @@ void CECSystemManager::update(std::vector<CEntity*> entities, float dt)
             system->update(entity, dt);
         }
     }
+    DBG("END_UPDATE")
 }
 
 END_NAMESPACE
