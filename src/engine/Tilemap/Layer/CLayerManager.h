@@ -10,11 +10,13 @@ BEGIN_NAMESPACE(engine)
 class CLayerManager
 {
 private:
-    std::stack<TmxLayer> m_layer;
+    std::vector<TmxLayer> m_layers;
 public:
     CLayerManager();
 
     void push(TmxLayer&&);
+    void update(float);
+    void render();
 };
 END_NAMESPACE
 

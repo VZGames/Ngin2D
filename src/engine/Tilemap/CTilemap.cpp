@@ -28,20 +28,19 @@ void CTilemap::loadMap(const char *file)
         TmxLayer tmxLayer;
         m_parser.parse(i, tmxLayer);
         m_layer_manager.push(std::move(tmxLayer));
-
-//        Matrix2D<int> matrix = Matrix2D<int>::fromString(layers[i].data->content, tmxLayer.height, tmxLayer.width);
-
-//        for(int r = 0; r < matrix.rows(); r++)
-//        {
-//            for(int c = 0; c < matrix.columns(); c++)
-//            {
-////                m_grid_layout.insertTileForLayer(matrix.at(r, c), layer.x, layer.y);
-//            }
-//        }
     }
+}
 
+void CTilemap::update(float dt)
+{
 
 }
-END_NAMESPACE
 
+
+void CTilemap::render()
+{
+
+}
+
+END_NAMESPACE
 

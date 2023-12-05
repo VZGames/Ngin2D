@@ -5,7 +5,6 @@
 #include "CRenderSys.h"
 #include "CBroadPhaseCulling.h"
 #include "ComponentDef/SPositionComponent.h"
-#include "TilemapParser/CTilemapParser.h"
 
 
 BEGIN_NAMESPACE(script)
@@ -51,6 +50,7 @@ void CGameScene::update(float dt)
 {
     engine::CBroadPhaseCulling::instance()->clean();
     engine::CECSystemManager::instance()->update(m_entities, dt);
+    m_tilemap.update(dt);
 
 
     std::sort(m_entities.begin(), m_entities.end(), [](const engine::CEntity *A, const engine::CEntity *B){
@@ -63,6 +63,8 @@ void CGameScene::update(float dt)
 void CGameScene::render()
 {
     // [1] create new threads for render
+    m_tilemap.render();
+
     for(engine::CEntity *entity: m_entities)
     {
         engine::CRenderSys::instance()->drawEntity(entity);

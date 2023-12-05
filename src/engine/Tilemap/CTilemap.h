@@ -19,6 +19,8 @@ public:
     CTilemap();
 
     void loadMap(const char* file);
+    void update(float dt);
+    void render();
 };
 END_NAMESPACE
 
