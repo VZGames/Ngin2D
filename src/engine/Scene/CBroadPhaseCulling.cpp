@@ -15,7 +15,8 @@ CBroadPhaseCulling *CBroadPhaseCulling::instance(float cellWidth, float cellHeig
 
 void CBroadPhaseCulling::insert(uint32_t id, float x, float y)
 {
-    int position = hash(x, y);;
+    int position = hash(x, y);
+    if(position >= this->cells()) return;
     if(this->at(position).find(id) == this->at(position).end())
     {
         this->at(position).insert(id);

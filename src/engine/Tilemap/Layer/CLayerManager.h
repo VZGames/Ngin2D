@@ -3,17 +3,18 @@
 
 #include <stack>
 #include "CommonDefine.h"
-#include "CLayer.h"
+#include "TilemapParser/tilemap_define.h"
+
 
 BEGIN_NAMESPACE(engine)
 class CLayerManager
 {
 private:
-    std::stack<CLayer> m_layer;
+    std::stack<TmxLayer> m_layer;
 public:
     CLayerManager();
 
-    void push(CLayer);
+    void push(TmxLayer&&);
 };
 END_NAMESPACE
 

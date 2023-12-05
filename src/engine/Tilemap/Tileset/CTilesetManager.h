@@ -2,17 +2,17 @@
 #define CTILESETMANAGER_H
 
 #include "CommonDefine.h"
-#include "CTileset.h"
+#include "TilemapParser/tilemap_define.h"
 
 BEGIN_NAMESPACE(engine)
 class CTilesetManager
 {
 private:
-    std::vector<CTileset>  m_tiles;
+    std::vector<TmxTileSet>  m_tilesets;
 public:
     CTilesetManager();
 
-    void insert();
+    void insert(TmxTileSet&&);
 };
 END_NAMESPACE
 

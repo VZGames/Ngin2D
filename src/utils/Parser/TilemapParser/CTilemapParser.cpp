@@ -58,7 +58,7 @@ void CTilemapParser::parse(int index, TmxTileSet &tileset)
         tileset.image->height   = std::stoi(m_xmlparser.parseTagWith(index, tag, "height"));
     }
 
-    *(m_map.tilesets + index)   = tileset;
+    *(m_map.tilesets + index)   = std::move(tileset);
 }
 
 void CTilemapParser::parse(int index, TmxLayer &layer)
@@ -75,4 +75,6 @@ void CTilemapParser::parse(int index, TmxLayer &layer)
         layer.data->encoding    = m_xmlparser.parseTagWith(index, tag, "encoding");
         layer.data->content     = m_xmlparser.extractTagContentWith(index, tag);
     }
+
+    *(m_map.layers + index) = std::move(layer);
 }

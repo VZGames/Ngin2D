@@ -8,6 +8,8 @@ class CGrid: public Matrix2D<T>
 {
 private:
     int m_cells;
+    float m_x;
+    float m_y;
     float m_cell_width;
     float m_cell_height;
 
@@ -27,6 +29,11 @@ public:
     {
         int hashX = x / m_cell_width;
         int hashY = y / m_cell_height;
+        if(hashX < 0) hashX = 0;
+        if(hashX > this->columns()) hashX = this->columns() - 1;
+        if(hashY < 0) hashY = 0;
+        if(hashY > this->rows()) hashY = this->rows() - 1;
+
         return (hashY * this->columns()) + hashX;
     }
     int hash(float x, float y)

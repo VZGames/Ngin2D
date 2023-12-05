@@ -6,7 +6,7 @@ CLayerManager::CLayerManager()
 
 }
 
-void CLayerManager::push(CLayer layer)
+void CLayerManager::push(TmxLayer &&layer)
 {
     m_layer.push(layer);
 }
