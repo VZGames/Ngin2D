@@ -13,6 +13,7 @@ public:
     CTilesetManager();
 
     void insert(TmxTileSet&&);
+    std::vector<TmxTileSet> tilesets() const;
 };
 END_NAMESPACE
 

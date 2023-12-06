@@ -2,6 +2,9 @@
 #define TMXFORMAT_H
 
 #include <stdint.h>
+#include <unordered_map>
+#include <optional>
+#include "matrix2D.h"
 
 struct s_tmx_map;
 struct s_tmx_image;
@@ -83,6 +86,9 @@ typedef struct s_tmx_data
     const char* encoding;
     const char* compression;
     const char* content;
+
+    std::unordered_map<int, std::optional<const char*>> tileMark;
+    Matrix2D<int> matrix;
 } TmxData;
 
 

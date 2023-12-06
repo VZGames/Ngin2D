@@ -6,6 +6,7 @@
 #include "TilemapParser/CTilemapParser.h"
 #include "CTilesetManager.h"
 #include "CLayerManager.h"
+#include "CLayerRenderer.h"
 
 BEGIN_NAMESPACE(engine)
 class CTilemap
@@ -14,6 +15,7 @@ private:
     CTilemapParser  m_parser;
     CTilesetManager m_tileset_manager;
     CLayerManager   m_layer_manager;
+    CLayerRenderer  m_layer_renderer;
 
 public:
     CTilemap();

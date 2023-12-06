@@ -76,7 +76,10 @@ public:
 
     void resize(int rows, int columns)
     {
-        delete []m_data;
+        if(m_data != nullptr)
+        {
+            delete []m_data;
+        }
         m_data = new T[rows  *columns];
         m_rows = rows;
         m_columns = columns;

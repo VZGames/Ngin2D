@@ -15,8 +15,7 @@ public:
     CLayerManager();
 
     void push(TmxLayer&&);
-    void update(float);
-    void render();
+    std::vector<TmxLayer> layers() const;
 };
 END_NAMESPACE
 

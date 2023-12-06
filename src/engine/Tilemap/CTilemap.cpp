@@ -37,13 +37,15 @@ void CTilemap::loadMap(const char *file)
 
 void CTilemap::update(float dt)
 {
-    m_layer_manager.update(dt);
 }
 
 
 void CTilemap::render()
 {
-    m_layer_manager.render();
+    for(TmxLayer &layer: m_layer_manager.layers())
+    {
+        m_layer_renderer.render(layer);
+    }
 }
 
 END_NAMESPACE

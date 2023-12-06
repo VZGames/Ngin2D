@@ -12,15 +12,15 @@
             "scale": 5.5,
             "selectedLayer": 1,
             "viewCenter": {
-                "x": 325.54545454545456,
-                "y": 144.72727272727275
+                "x": 325.3636363636364,
+                "y": 144.54545454545456
             }
         },
         "PhuHoa.tmx#Dirt": {
             "scaleInDock": 2
         },
         "PhuHoa.tmx#Grass": {
-            "scaleInDock": 1
+            "scaleInDock": 0.75
         },
         "PhuHoa.tmx#Grass_hill_tiles_v2": {
             "scaleInDock": 1,
