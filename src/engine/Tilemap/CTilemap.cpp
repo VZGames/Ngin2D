@@ -1,4 +1,5 @@
 #include "CTilemap.h"
+#include "CTexture2DManager.h"
 
 BEGIN_NAMESPACE(engine)
 CTilemap::CTilemap()
@@ -20,6 +21,9 @@ void CTilemap::loadMap(const char *file)
     {
         TmxTileSet tmxTileset;
         m_parser.parse(i, tmxTileset);
+
+        CTexture2DManager::instance()->loadTexture(tmxTileset.name, tmxTileset.image->source);
+
         m_tileset_manager.insert(std::move(tmxTileset));
     }
 

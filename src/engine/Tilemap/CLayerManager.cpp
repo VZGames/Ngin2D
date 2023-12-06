@@ -31,6 +31,7 @@ void CLayerManager::render()
         {
             for(int c = 0; c < matrix.columns(); c++)
             {
+                int firstgid = 0;
                 int tileID = matrix.at(r, c);
 
 //                CRenderSys::instance()->drawTile();
