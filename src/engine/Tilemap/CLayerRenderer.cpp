@@ -1,7 +1,7 @@
 #include "CLayerRenderer.h"
 #include "matrix2D.h"
 #include "LoggerDefines.h"
-#include "CRenderSys.h"
+#include "CTexture2DManager.h"
 
 BEGIN_NAMESPACE(engine)
 CLayerRenderer::CLayerRenderer()
@@ -19,8 +19,7 @@ void CLayerRenderer::render(TmxLayer& layer)
             int tileId = layer.data->matrix.at(r, c);
             if(!layer.data->tileMark[tileId].has_value()) continue;
             const char* tilesetName = layer.data->tileMark[tileId].value();
-
-//            CRenderSys::instance()->drawTile(tilesetName, "");
+            CTexture2DManager::instance()->drawTile(tilesetName, Point2DF(layer.x, layer.y), 32, 32, r, c);
         }
     }
 

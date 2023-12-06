@@ -5,7 +5,6 @@
 #include "AScene.h"
 #include "GameObjects/Cows/CCow.h"
 #include "GameObjects/Player/CPlayer.h"
-#include "CGridLayout.h"
 #include "CTilemap.h"
 
 BEGIN_NAMESPACE(script)
