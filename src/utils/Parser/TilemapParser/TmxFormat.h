@@ -1,5 +1,5 @@
-#ifndef TILEMAP_DEFINE_H
-#define TILEMAP_DEFINE_H
+#ifndef TMXFORMAT_H
+#define TMXFORMAT_H
 
 #include <stdint.h>
 
@@ -8,6 +8,7 @@ struct s_tmx_image;
 struct s_tmx_data;
 struct s_tmx_layer;
 struct s_tmx_tileset;
+struct s_tmx_tile;
 
 typedef struct s_tmx_map
 {
@@ -27,6 +28,16 @@ typedef struct s_tmx_map
 
 } TmxMap;
 
+typedef struct s_tmx_tile
+{
+    int id;
+    const char* type;
+    int x;
+    int y;
+    int width;
+    int height;
+} TmxTile;
+
 typedef struct s_tmx_tileset
 {
     int         first_global_id;
@@ -37,7 +48,9 @@ typedef struct s_tmx_tileset
     int         margin;
     int         spacing;
     int         columns;
+    int         rows;
     s_tmx_image *image;
+    s_tmx_tile  *tiles;
 
 } TmxTileSet;
 
@@ -74,4 +87,4 @@ typedef struct s_tmx_data
 
 
 
-#endif // TILEMAP_DEFINE_H
+#endif // TMXFORMAT_H

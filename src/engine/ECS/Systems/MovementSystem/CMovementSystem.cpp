@@ -27,9 +27,6 @@ void CMovementSystem::update(CEntity *entity, float dt)
     auto box      = entity->getComponent<SBoxComponent>();
     if(!position || !box || !motion) return;
 
-    position->x -= offset.x;
-    position->y -= offset.y;
-
     if(camera && motion)
     {
         position->update(motion->velocity);
@@ -37,13 +34,18 @@ void CMovementSystem::update(CEntity *entity, float dt)
 
     if(motion->running)
     {
-        position->x += motion->mtv.x;
-        position->y += motion->mtv.y;
+        position->update(motion->mtv);
     }
+
+
+    position->x -= offset.x;
+    position->y -= offset.y;
 
     box->update(position);
 
-    CBroadPhaseCulling::instance()->insert(entity->id(), box->shape.center().x, box->shape.center().y);
+    CBroadPhaseCulling::instance()->insert(entity->id(),
+                                           box->shape.center().x,
+                                           box->shape.center().y);
 }
 
 END_NAMESPACE

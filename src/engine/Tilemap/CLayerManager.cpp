@@ -1,6 +1,7 @@
 #include "CLayerManager.h"
 #include "matrix2D.h"
 #include "LoggerDefines.h"
+#include "CRenderSys.h"
 
 BEGIN_NAMESPACE(engine)
 CLayerManager::CLayerManager()
@@ -32,6 +33,7 @@ void CLayerManager::render()
             {
                 int tileID = matrix.at(r, c);
 
+//                CRenderSys::instance()->drawTile();
             }
         }
     }

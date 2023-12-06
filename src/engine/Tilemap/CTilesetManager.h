@@ -2,7 +2,7 @@
 #define CTILESETMANAGER_H
 
 #include "CommonDefine.h"
-#include "TilemapParser/tilemap_define.h"
+#include "TilemapParser/TmxFormat.h"
 
 BEGIN_NAMESPACE(engine)
 class CTilesetManager

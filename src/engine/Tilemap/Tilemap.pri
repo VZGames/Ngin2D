@@ -1,12 +1,12 @@
 HEADERS += \
     $$PWD/CTilemap.h \
-    $$PWD/Layer/CLayerManager.h \
-    $$PWD/Tileset/CTilesetManager.h
+    $$PWD/CLayerManager.h \
+    $$PWD/CTilesetManager.h
 
 SOURCES += \
     $$PWD/CTilemap.cpp \
-    $$PWD/Layer/CLayerManager.cpp \
-    $$PWD/Tileset/CTilesetManager.cpp
+    $$PWD/CLayerManager.cpp \
+    $$PWD/CTilesetManager.cpp
 
 INCLUDEPATH += \
     $$PWD

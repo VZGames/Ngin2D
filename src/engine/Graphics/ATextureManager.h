@@ -10,7 +10,7 @@ class ATextureManager
 protected:
     std::mutex  m_mutex;
 public:
-    virtual bool loadTexture(TextureID, TextureSource) = 0;
+    virtual bool loadTexture(_TextureID, _TextureSource) = 0;
 };
 END_NAMESPACE
 

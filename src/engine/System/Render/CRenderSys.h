@@ -22,7 +22,7 @@ public:
     bool openWindow(_Title, _Width&, _Height&);
     bool createRenderer();
     void drawEntity(CEntity*);
-    void drawTile();
+//    void drawTile(float, float, STmxTile&&);
     void beginDraw();
     void endDraw();
     bool destroyWindow();

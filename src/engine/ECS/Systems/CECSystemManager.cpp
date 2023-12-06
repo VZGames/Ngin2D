@@ -34,6 +34,7 @@ void CECSystemManager::init(std::vector<CEntity*> entities)
 
 void CECSystemManager::update(std::vector<CEntity*> entities, float dt)
 {
+    DBG("START_UPDATE")
     for(auto &system: m_systems)
     {
         // do update for each entity

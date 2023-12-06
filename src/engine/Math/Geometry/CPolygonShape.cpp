@@ -67,8 +67,5 @@ Vector2DF CPolygonShape::center()
     G.x /= m_vertices.size();
     G.y /= m_vertices.size();
 
-    G.x += m_x;
-    G.y += m_y;
-
     return G;
 }

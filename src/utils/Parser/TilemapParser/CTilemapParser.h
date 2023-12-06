@@ -3,7 +3,7 @@
 
 #include <vector>
 #include "XMLParser/CXmlParser.h"
-#include "tilemap_define.h"
+#include "TmxFormat.h"
 
 class CTilemapParser
 {

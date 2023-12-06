@@ -12,7 +12,7 @@ public:
 
     //    Implement ITextureManager Interfaces
 public:
-    virtual bool loadTexture(TextureID, TextureSource) override;
+    virtual bool loadTexture(_TextureID, _TextureSource) override;
 };
 END_NAMESPACE
 

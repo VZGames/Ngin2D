@@ -4,8 +4,8 @@
 #include <stack>
 #include "CommonDefine.h"
 #include "TilemapParser/CTilemapParser.h"
-#include "Tileset/CTilesetManager.h"
-#include "Layer/CLayerManager.h"
+#include "CTilesetManager.h"
+#include "CLayerManager.h"
 
 BEGIN_NAMESPACE(engine)
 class CTilemap

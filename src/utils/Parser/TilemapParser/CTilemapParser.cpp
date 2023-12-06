@@ -8,9 +8,10 @@ CTilemapParser::CTilemapParser()
 
 CTilemapParser::~CTilemapParser()
 {
-//    safeRelease(m_map.tilesets->image);
-//    safeRelease(m_map.layers->data);
+    safeRelease(m_map.tilesets->image);
+    safeRelease(m_map.tilesets->tiles);
     safeRelease(m_map.tilesets);
+    safeRelease(m_map.layers->data);
     safeRelease(m_map.layers);
 }
 
@@ -45,10 +46,27 @@ void CTilemapParser::parse(int index, TmxTileSet &tileset)
     const char* tag = "tileset";
     tileset.name            = m_xmlparser.parseTagWith(index, tag, "name");
     tileset.first_global_id = std::stoi(m_xmlparser.parseTagWith(index, tag, "firstgid"));
-    tileset.columns         = std::stoi(m_xmlparser.parseTagWith(index, tag, "columns"));
     tileset.tile_count      = std::stoi(m_xmlparser.parseTagWith(index, tag, "tilecount"));
+    tileset.columns         = std::stoi(m_xmlparser.parseTagWith(index, tag, "columns"));
+    tileset.rows            = tileset.tile_count/tileset.columns;
     tileset.tile_width      = std::stoi(m_xmlparser.parseTagWith(index, tag, "tilewidth"));
     tileset.tile_height     = std::stoi(m_xmlparser.parseTagWith(index, tag, "tileheight"));
+
+    {
+        tileset.tiles           = new TmxTile[tileset.tile_count];
+        printf("%s\n", tileset.name);
+        for(int r = 0; r < tileset.rows; r++)
+        {
+            for(int c = 0; c < tileset.columns; c++)
+            {
+                int index = (r * tileset.columns) + c;
+                tileset.tiles[index].id = tileset.first_global_id + index;
+                printf("%d ", tileset.tiles[index].id);
+            }
+            printf("\n");
+        }
+        printf("\n");
+    }
 
     {
         const char* tag = "tileset.image";

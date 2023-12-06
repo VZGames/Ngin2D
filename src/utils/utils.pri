@@ -5,7 +5,7 @@ HEADERS += \
     $$PWD/Memory/LRUCache/CLRUCache.h \
     $$PWD/Parser/JsonParser/CJsonParser.h \
     $$PWD/Parser/TilemapParser/CTilemapParser.h \
-    $$PWD/Parser/TilemapParser/tilemap_define.h \
+    $$PWD/Parser/TilemapParser/TmxFormat.h \
     $$PWD/Parser/XMLParser/CXmlParser.h \
     $$PWD/Process/CSafeQueue.h \
     $$PWD/Process/ThreadPool/CThreadPool.h \

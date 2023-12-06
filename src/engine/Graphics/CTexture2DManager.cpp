@@ -20,7 +20,7 @@ void CTexture2DManager::renderFrameThread(void *data)
     UNUSED(data)
 }
 
-void CTexture2DManager::drawTile(TextureID id, Point2DF pos, TileWidth w, TileHeight h, TileRow r, TileCol c, _Angle angle, SDL_RendererFlip flip)
+void CTexture2DManager::drawTile(_TextureID id, Point2DF pos, _TileWidth w, _TileHeight h, TileRow r, TileCol c, _Angle angle, SDL_RendererFlip flip)
 {
     int frameX = w  * c;
     int frameY = h  * r;
@@ -37,7 +37,7 @@ void CTexture2DManager::drawTile(TextureID id, Point2DF pos, TileWidth w, TileHe
     SDL_RenderCopyExF(CRenderSys::renderer(), m_textures[id], &srcRect, &destRect, angle, NULL, flip);
 }
 
-void CTexture2DManager::drawFrame(TextureID id, Point2DF pos, FrameWidth w, FrameHeight h, FrameRow r, FrameCol c, _Angle angle, SDL_RendererFlip flip)
+void CTexture2DManager::drawFrame(_TextureID id, Point2DF pos, _FrameWidth w, _FrameHeight h, _FrameRow r, _FrameCol c, _Angle angle, SDL_RendererFlip flip)
 {
 
     auto fn = [&]()
@@ -59,7 +59,7 @@ void CTexture2DManager::drawFrame(TextureID id, Point2DF pos, FrameWidth w, Fram
     std::thread(fn).join();
 }
 
-bool CTexture2DManager::loadTexture(TextureID id, TextureSource source)
+bool CTexture2DManager::loadTexture(_TextureID id, _TextureSource source)
 {
 
     if(m_textures.find(id) != m_textures.end())
@@ -93,7 +93,7 @@ bool CTexture2DManager::loadTexture(TextureID id, TextureSource source)
     return true;
 }
 
-void CTexture2DManager::drawRect(Point2DF pos, FrameWidth w, FrameHeight h)
+void CTexture2DManager::drawRect(Point2DF pos, _FrameWidth w, _FrameHeight h)
 {
     float scale = CCameraSys::instance()->scale();
     SDL_FRect destRect = {

@@ -22,19 +22,19 @@ const ComponentID MAX_COMPONENT_ID          = 32; // maximum components per enti
 using ComponentSet = std::bitset<MAX_COMPONENT_ID>; // 00000000000000000000000000000000
 
 
-using TextureID = const char*;
-using TextureSource = const char*;
+using _TextureID = const char*;
+using _TextureSource = const char*;
 
-using FrameWidth = int;
-using FrameHeight = int;
+using _FrameWidth = int;
+using _FrameHeight = int;
 
-using FrameRow = int;
-using FrameCol = int;
+using _FrameRow = int;
+using _FrameCol = int;
 
 using _Scale    = float;
 
-using TileWidth = int;
-using TileHeight = int;
+using _TileWidth = int;
+using _TileHeight = int;
 
 using TileRow = int;
 using TileCol = int;

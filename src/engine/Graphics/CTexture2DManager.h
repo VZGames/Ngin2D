@@ -12,19 +12,35 @@ class CTexture2DManager: public ATextureManager
 private:
     CTexture2DManager();
     static CTexture2DManager *s_instance;
-    std::unordered_map<TextureID, SDL_Texture*> m_textures;
+    std::unordered_map<_TextureID, SDL_Texture*> m_textures;
     void renderFrameThread(void* data);
 
 public:
     static CTexture2DManager *instance();
     
-    void drawTile(TextureID, Point2DF, TileWidth, TileHeight, TileRow, TileCol, _Angle angle = 0.0f, SDL_RendererFlip flip = SDL_RendererFlip::SDL_FLIP_NONE);
-    void drawFrame(TextureID, Point2DF, FrameWidth, FrameHeight, FrameRow, FrameCol, _Angle angle = 0.0f, SDL_RendererFlip flip = SDL_RendererFlip::SDL_FLIP_NONE);
-    void drawRect(Point2DF, FrameWidth, FrameHeight);
+    void drawTile(_TextureID,
+                  Point2DF,
+                  _TileWidth,
+                  _TileHeight,
+                  _FrameRow,
+                  _FrameCol,
+                  _Angle angle = 0.0f,
+                  SDL_RendererFlip flip = SDL_RendererFlip::SDL_FLIP_NONE);
+
+    void drawFrame(_TextureID,
+                   Point2DF,
+                   _FrameWidth,
+                   _FrameHeight,
+                   _FrameRow,
+                   _FrameCol,
+                   _Angle angle = 0.0f,
+                   SDL_RendererFlip flip = SDL_RendererFlip::SDL_FLIP_NONE);
+
+    void drawRect(Point2DF, _FrameWidth, _FrameHeight);
     void drawPolygon(std::vector<Vector2DF>);
 //    Implement ITextureManager Interfaces
 public:
-    virtual bool loadTexture(TextureID, TextureSource) override;
+    virtual bool loadTexture(_TextureID, _TextureSource) override;
 };
 END_NAMESPACE
 

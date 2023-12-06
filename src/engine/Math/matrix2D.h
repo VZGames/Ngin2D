@@ -17,7 +17,7 @@ public:
     }
     explicit Matrix2D(int rows, int columns) : m_rows(rows),m_columns(columns)
     {
-        assert((rows  *columns > 0) && "Matrix size invalid");
+        assert((rows  * columns > 0) && "Matrix size invalid");
         this->m_data = new T[rows  *columns];
     }
 
