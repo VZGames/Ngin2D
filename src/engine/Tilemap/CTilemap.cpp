@@ -47,8 +47,8 @@ void CTilemap::update(float dt)
     Offset offset = CCameraSys::instance()->offset();
     for(auto &data: m_layer_manager.layers())
     {
-        data.first.x -= offset.x;
-        data.first.y -= offset.y;
+        //        data.first.x -= offset.x;
+        //        data.first.y -= offset.y;
     }
 }
 
@@ -57,9 +57,7 @@ void CTilemap::render()
 {
     for(auto &data: m_layer_manager.layers())
     {
-        m_pool->submit([&](){
-            m_layer_renderer.render(m_tileset_manager.tilesets(), data.first, std::move(data.second));
-        }).get();
+        m_layer_renderer.render(m_tileset_manager.tilesets(), data.first, std::move(data.second));
     }
 }
 
