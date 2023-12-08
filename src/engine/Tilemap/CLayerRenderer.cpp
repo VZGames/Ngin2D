@@ -40,7 +40,7 @@ void CLayerRenderer::render(const std::unordered_map<const char*, TmxTileSet> &t
             TmxTileSet tileset;
             for(auto pair: tilesetMap)
             {
-                if(!(tileID >= pair.second.first_global_id && tileID <= pair.second.first_global_id + pair.second.tile_count)) continue;
+                if(!(tileID >= pair.second.first_global_id && tileID < pair.second.first_global_id + pair.second.tile_count)) continue;
                 tileset = pair.second;
             }
 
@@ -49,8 +49,8 @@ void CLayerRenderer::render(const std::unordered_map<const char*, TmxTileSet> &t
             tileY = (tileID / tileset.columns);
 
             float x, y;
-            x = col * tileset.tile_width * 2;
-            y = row * tileset.tile_height * 2;
+            x = col * tileset.tile_width;
+            y = row * tileset.tile_height;
 
             CTexture2DManager::instance()->drawTile(tileset.name, Point2DF(x,  y), tileset.tile_width, tileset.tile_height, tileX, tileY);
         }
