@@ -7,6 +7,7 @@
 #include "CTilesetManager.h"
 #include "CLayerManager.h"
 #include "CLayerRenderer.h"
+#include "ThreadPool/CThreadPool.h"
 
 BEGIN_NAMESPACE(engine)
 class CTilemap
@@ -16,9 +17,11 @@ private:
     CTilesetManager m_tileset_manager;
     CLayerManager   m_layer_manager;
     CLayerRenderer  m_layer_renderer;
+    CThreadPool     *m_pool;
 
 public:
     CTilemap();
+    ~CTilemap();
 
     void loadMap(const char* file);
     void update(float dt);

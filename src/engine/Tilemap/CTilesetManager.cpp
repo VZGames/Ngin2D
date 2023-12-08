@@ -1,4 +1,5 @@
 #include "CTilesetManager.h"
+#include "CTexture2DManager.h"
 
 BEGIN_NAMESPACE(engine)
 CTilesetManager::CTilesetManager()
@@ -6,12 +7,13 @@ CTilesetManager::CTilesetManager()
 
 }
 
-void CTilesetManager::insert(TmxTileSet&& tileset)
+void CTilesetManager::insert(const char* name, TmxTileSet&& tileset)
 {
-    m_tilesets.push_back(tileset);
+    m_tilesets[name] = tileset;
+    CTexture2DManager::instance()->loadTexture(name, tileset.image->source);
 }
 
-std::vector<TmxTileSet> CTilesetManager::tilesets() const
+std::unordered_map<const char*, TmxTileSet> CTilesetManager::tilesets() const
 {
     return m_tilesets;
 }

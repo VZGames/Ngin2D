@@ -92,35 +92,6 @@ void CTilemapParser::parse(int index, TmxLayer &layer)
         layer.data              = new TmxData;
         layer.data->encoding    = m_xmlparser.parseTagWith(index, tag, "encoding");
         layer.data->content     = m_xmlparser.extractTagContentWith(index, tag);
-
-        std::string str(layer.data->content);
-        std::istringstream ss(str);
-        layer.data->matrix = Matrix2D<int>(layer.height, layer.width );
-
-        // read rows
-        for (int row = 0; row < layer.height; row++)
-        {
-            // read lines
-            std::string line;
-            for (int col = 0; col < layer.width; col++)
-            {
-                std::getline(ss, line, ',');
-                int value = std::stoi(line);
-                int numOfTileset = m_xmlparser.count("tileset");
-                for(int i = 0; i < numOfTileset; i++)
-                {
-                    TmxTileSet tileset = *(m_map.tilesets + i);
-                    if(std::string(tileset.name).empty()) break;
-                    if(value >= tileset.first_global_id && value < tileset.first_global_id + tileset.columns)
-                    {
-                        if(layer.data->tileMark.find(value) != layer.data->tileMark.end()) break;
-                        layer.data->tileMark[value] = (m_map.tilesets + i)->name;
-                        break;
-                    }
-                }
-                layer.data->matrix.at(row, col) = value;
-            }
-        }
     }
 
     *(m_map.layers + index) = std::move(layer);

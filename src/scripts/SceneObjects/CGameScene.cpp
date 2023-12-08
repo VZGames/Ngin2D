@@ -4,7 +4,7 @@
 #include "CECSystemManager.h"
 #include "CRenderSys.h"
 #include "CBroadPhaseCulling.h"
-#include "ComponentDef/SPositionComponent.h"
+#include "ComponentDef/SBoxComponent.h"
 
 
 BEGIN_NAMESPACE(script)
@@ -30,10 +30,10 @@ void CGameScene::init()
         {
             engine::CWorld::instance()->registerEntity(entity);
 
-            auto position = entity->getComponent<engine::SPositionComponent>();
+            auto box = entity->getComponent<engine::SBoxComponent>();
 
-            if(position == nullptr) continue;
-            engine::CBroadPhaseCulling::instance()->insert(entity->id(),position->x, position->y);
+            if(box == nullptr) continue;
+            engine::CBroadPhaseCulling::instance()->insert(entity->id(),box->shape.center().x, box->shape.center().y);
         }
 
         engine::CECSystemManager::instance()->init(m_entities);

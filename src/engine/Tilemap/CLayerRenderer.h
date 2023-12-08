@@ -2,9 +2,9 @@
 #define CLAYERRENDERER_H
 
 #include <stack>
+#include <unordered_map>
 #include "CommonDefine.h"
 #include "TilemapParser/TmxFormat.h"
-
 
 BEGIN_NAMESPACE(engine)
 class CLayerRenderer
@@ -12,7 +12,7 @@ class CLayerRenderer
 public:
     CLayerRenderer();
 
-    void render(TmxLayer&);
+    void render(const std::unordered_map<const char*, TmxTileSet> &, TmxLayer &, Matrix2D<int>&&);
 };
 END_NAMESPACE
 

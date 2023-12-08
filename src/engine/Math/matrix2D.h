@@ -13,7 +13,7 @@ class Matrix2D
 public:
     explicit Matrix2D(): m_rows(10), m_columns(10)
     {
-
+        this->m_data = new T[m_rows  *m_columns];
     }
     explicit Matrix2D(int rows, int columns) : m_rows(rows),m_columns(columns)
     {
@@ -21,12 +21,12 @@ public:
         this->m_data = new T[rows  *columns];
     }
 
-    ~Matrix2D()
+    virtual ~Matrix2D()
     {
-        if(this->m_data != NULL)
+        if(this->m_data != nullptr)
         {
-            delete[] this->m_data;
-            this->m_data = NULL;
+            delete []this->m_data;
+            this->m_data = nullptr;
         }
     }
 
@@ -35,13 +35,21 @@ public:
     {
         this->m_columns = copy.m_columns;
         this->m_rows = copy.m_rows;
-        this->m_data = copy.m_data;
+
+        if(this->m_data != nullptr)
+        {
+            delete []this->m_data;
+        }
+
+        this->m_data = new T[m_rows * m_columns];
+        std::copy(copy.m_data, copy.m_data + (m_rows * m_columns), this->m_data);
     }
 
     // move constructor
     Matrix2D(Matrix2D<T> &&copy) noexcept
     {
         swap(*this, copy);
+        copy.m_data = nullptr;
     }
 
     // Copy assignment operator
@@ -135,7 +143,7 @@ public:
     }
 private:
     int m_rows, m_columns;
-    T *m_data;
+    T *m_data = nullptr;
 };
 
 using Matrix2DI = Matrix2D<int>;

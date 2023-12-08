@@ -86,9 +86,6 @@ typedef struct s_tmx_data
     const char* encoding;
     const char* compression;
     const char* content;
-
-    std::unordered_map<int, std::optional<const char*>> tileMark;
-    Matrix2D<int> matrix;
 } TmxData;
 
 

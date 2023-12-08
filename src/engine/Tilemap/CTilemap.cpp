@@ -1,10 +1,14 @@
 #include "CTilemap.h"
-#include "CTexture2DManager.h"
+#include "Camera/CCameraSys.h"
 
 BEGIN_NAMESPACE(engine)
 CTilemap::CTilemap()
 {
+}
 
+CTilemap::~CTilemap()
+{
+    m_pool->shutdown();
 }
 
 void CTilemap::loadMap(const char *file)
@@ -17,14 +21,14 @@ void CTilemap::loadMap(const char *file)
     tilesetNum = m_parser.countWith("tileset");
     layerNum   = m_parser.countWith("layer");
 
+    m_pool = new CThreadPool(layerNum);
+    m_pool->init();
+
     for(int i = 0; i < tilesetNum; i++)
     {
         TmxTileSet tmxTileset;
         m_parser.parse(i, tmxTileset);
-
-        CTexture2DManager::instance()->loadTexture(tmxTileset.name, tmxTileset.image->source);
-
-        m_tileset_manager.insert(std::move(tmxTileset));
+        m_tileset_manager.insert(tmxTileset.name, std::move(tmxTileset));
     }
 
     for(int i = 0; i < layerNum; i++)
@@ -33,20 +37,32 @@ void CTilemap::loadMap(const char *file)
         m_parser.parse(i, tmxLayer);
         m_layer_manager.push(std::move(tmxLayer));
     }
+
 }
 
 void CTilemap::update(float dt)
 {
+    UNUSED(dt)
+
+    Offset offset = CCameraSys::instance()->offset();
+    for(auto &data: m_layer_manager.layers())
+    {
+        data.first.x -= offset.x;
+        data.first.y -= offset.y;
+    }
 }
 
 
 void CTilemap::render()
 {
-    for(TmxLayer &layer: m_layer_manager.layers())
+    for(auto &data: m_layer_manager.layers())
     {
-        m_layer_renderer.render(layer);
+        m_pool->submit([&](){
+            m_layer_renderer.render(m_tileset_manager.tilesets(), data.first, std::move(data.second));
+        }).get();
     }
 }
 
 END_NAMESPACE
+
 
