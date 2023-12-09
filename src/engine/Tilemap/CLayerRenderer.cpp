@@ -15,6 +15,7 @@ void CLayerRenderer::render(const std::unordered_map<const char*, TmxTileSet> &t
 {
     std::mutex m;
     std::vector<std::thread> threads;
+
     float scale = CCameraSys::instance()->scale();
     Offset offset = CCameraSys::instance()->offset();
 
@@ -64,11 +65,8 @@ void CLayerRenderer::render(const std::unordered_map<const char*, TmxTileSet> &t
             x = layer.x + col * tileset->tile_width;
             y = layer.y + row * tileset->tile_height;
 
-            x -= offset.x;
-            y -= offset.y;
-
             CTexture2DManager::instance()->drawTile(tileset->name,
-                                                    Point2DF(x,  y),
+                                                    Point2DF(x - offset.x,  y - offset.y),
                                                     tileset->tile_width,
                                                     tileset->tile_height,
                                                     tileY,

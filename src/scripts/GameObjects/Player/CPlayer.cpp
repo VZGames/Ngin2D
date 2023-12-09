@@ -6,7 +6,7 @@ BEGIN_NAMESPACE(script)
 CPlayer::CPlayer()
 {
     engine::CEntityManager::instance()->createEntity(this);
-    m_position  = this->addComponent<engine::SPositionComponent>(200, 200);
+    m_position  = this->addComponent<engine::SPositionComponent>(320, 244);
     m_health    = this->addComponent<engine::SHealthComponent>(100);
     m_sprite    = this->addComponent<engine::SSpriteComponent>(__FUNCTION__,
                                                             "./debug/assets/Characters/BasicCharakterSpritesheet.png",
@@ -18,7 +18,7 @@ CPlayer::CPlayer()
 
 
     m_camera    = this->addComponent<engine::SCameraComponent>(this);
-    m_motion    = this->addComponent<engine::SMotionComponent>(0.6);
+    m_motion    = this->addComponent<engine::SMotionComponent>(0.3);
 
     m_box       = this->addComponent<engine::SBoxComponent>(E_BODY_TYPE::KINEMATIC, m_position->x, m_position->y);
     m_box->setVertex(20, 28);

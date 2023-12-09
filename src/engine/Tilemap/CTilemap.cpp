@@ -44,13 +44,12 @@ void CTilemap::update(float dt)
 {
     UNUSED(dt)
 
-    float scale = CCameraSys::instance()->scale();
-    Offset offset = CCameraSys::instance()->offset();
-    for(auto &data: m_layer_manager.layers())
-    {
-        data.first.x -= offset.x;
-        data.first.y -= offset.y;
-    }
+
+//    for(auto &data: m_layer_manager.layers())
+//    {
+//        data.first.x = 0;
+//        data.first.y = 0;
+//    }
 }
 
 

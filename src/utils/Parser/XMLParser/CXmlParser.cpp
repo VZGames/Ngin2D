@@ -56,7 +56,7 @@ const char *CXmlParser::extractTagContentWith(int index, const char *tag)
 
 const char* CXmlParser::parseTagWith(int index, const char *tag, const char *attribute)
 {
-    if(m_nodes.find(tag) == m_nodes.end()) return "Empty";
+    if(m_nodes.find(tag) == m_nodes.end()) return "0";
     return m_nodes[tag].at(index)->Attribute(attribute);
 }
 
