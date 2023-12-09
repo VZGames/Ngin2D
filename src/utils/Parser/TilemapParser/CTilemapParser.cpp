@@ -83,8 +83,8 @@ void CTilemapParser::parse(int index, TmxLayer &layer)
 {
     const char* tag = "layer";
     layer.name              = m_xmlparser.parseTagWith(index, tag, "name");
-    layer.x                 = 1;
-    layer.y                 = 1;
+    layer.x                 = std::stoi(m_xmlparser.parseTagWith(index, tag, "x"));
+    layer.y                 = std::stoi(m_xmlparser.parseTagWith(index, tag, "y"));
     layer.width             = std::stoi(m_xmlparser.parseTagWith(index, tag, "width"));
     layer.height            = std::stoi(m_xmlparser.parseTagWith(index, tag, "height"));
     layer.visible           = static_cast<bool>(m_xmlparser.parseTagWith(index, tag, "visible"));
@@ -93,7 +93,7 @@ void CTilemapParser::parse(int index, TmxLayer &layer)
         const char* tag = "layer.data";
         layer.data              = new TmxData;
         layer.data->encoding    = m_xmlparser.parseTagWith(index, tag, "encoding");
-        layer.data->content     = m_xmlparser.extractTagContentWith(index, tag);
+        layer.data->content     = m_xmlparser.tagContentWith(index, tag);
     }
 
     *(m_map.layers + index) = std::move(layer);

@@ -4,7 +4,6 @@
 #include <stdint.h>
 #include <unordered_map>
 #include <optional>
-#include "matrix2D.h"
 
 struct s_tmx_map;
 struct s_tmx_image;
@@ -15,77 +14,77 @@ struct s_tmx_tile;
 
 typedef struct s_tmx_map
 {
-    const char*             version;
-    const char*             tiled_version;
-    const char*             orientation;
-    const char*             render_order;
-    int                     width;
-    int                     height;
-    int                     tile_width;
-    int                     tile_height;
-    int                     next_layer_id;
-    int                     next_object_id;
-    bool                    infinite;
-    s_tmx_tileset           *tilesets;
-    s_tmx_layer             *layers;
+    const char*             version{""};
+    const char*             tiled_version{""};
+    const char*             orientation{""};
+    const char*             render_order{""};
+    int                     width{0};
+    int                     height{0};
+    int                     tile_width{0};
+    int                     tile_height{0};
+    int                     next_layer_id{0};
+    int                     next_object_id{0};
+    bool                    infinite{false};
+    s_tmx_tileset           *tilesets{nullptr};
+    s_tmx_layer             *layers{nullptr};
 
 } TmxMap;
 
 typedef struct s_tmx_tile
 {
-    int id;
-    const char* type;
-    int x;
-    int y;
-    int width;
-    int height;
+    int id{0};
+    const char* type{""};
+    int x{0};
+    int y{0};
+    int width{0};
+    int height{0};
 } TmxTile;
 
 typedef struct s_tmx_tileset
 {
-    int         first_global_id;
-    const char* name;
-    int         tile_count;
-    int       tile_width;
-    int       tile_height;
-    int         margin;
-    int         spacing;
-    int         columns;
-    int         rows;
-    s_tmx_image *image;
-    s_tmx_tile  *tiles;
+    int         first_global_id{0};
+    const char* name{""};
+    int         tile_count{0};
+    int         tile_width{0};
+    int         tile_height{0};
+    int         margin{0};
+    int         spacing{0};
+    int         columns{0};
+    int         rows{0};
+    s_tmx_image *image{nullptr};
+    s_tmx_tile  *tiles{nullptr};
 
 } TmxTileSet;
 
 typedef struct s_tmx_image
 {
-    const char* format;
-    const char* source;
-    int         width;
-    int         height;
+    const char* format{""};
+    const char* source{""};
+    int         width{0};
+    int         height{0};
 } TmxImage;
 
 
 typedef struct s_tmx_layer
 {
-    int                     id;
-    const char*             name;
-    int                     x;
-    int                     y;
-    int                     width;
-    int                     height;
-    float                   opacity;
-    bool                    visible;
-    int                     offset_x;
-    int                     offset_y;
-    s_tmx_data              *data;
+    int                     id{0};
+    const char*             name{""};
+    int                     x{0};
+    int                     y{0};
+    int                     width{0};
+    int                     height{0};
+    float                   opacity{1};
+    bool                    visible{true};
+    int                     offset_x{0};
+    int                     offset_y{0};
+    s_tmx_data              *data{nullptr};
 } TmxLayer;
 
 typedef struct s_tmx_data
 {
-    const char* encoding;
-    const char* compression;
-    const char* content;
+    const char* encoding{""};
+    const char* compression{""};
+    const char* content{""};
 } TmxData;
 
 

@@ -43,13 +43,11 @@ void CTilemap::loadMap(const char *file)
 void CTilemap::update(float dt)
 {
     UNUSED(dt)
-
-
-//    for(auto &data: m_layer_manager.layers())
-//    {
-//        data.first.x = 0;
-//        data.first.y = 0;
-//    }
+    for(auto &data: m_layer_manager.layers())
+    {
+        data.first.x = 0;
+        data.first.y = 0;
+    }
 }
 
 
