@@ -16,43 +16,56 @@ void CLayerRenderer::render(const std::unordered_map<const char*, TmxTileSet> &t
     std::vector<std::thread> threads;
     int CORES = 5;
 
+//    matrix.print();
+//    printf("\n");
+
     auto painter = [&](int begin, int end){
         m.lock();
 
-        int i = begin;
+        int index = begin;
         int col, row;
 
         // cross all cell in the current segment
-        for (; i < end; i++)
+        for (; index < end; index++)
         {
             // position next tile (x,y)
-            col = (i % layer.width); // column
-            row = (i / layer.width); // row
+            col = (index % layer.width); // column
+            row = (index / layer.width); // row
 
-            int tileID = matrix.at(i);
+            int tileID = matrix.at(index);
+            int tileIdx = 0;
 
             // tileID <= 0 (not tile)
-            if(tileID <= 0)
+            if(tileID == 0)
             {
                 continue;
             }
 
-            TmxTileSet tileset;
-            for(auto pair: tilesetMap)
+            const TmxTileSet *tileset;
+            for(auto &pair: tilesetMap)
             {
-                if(!(tileID >= pair.second.first_global_id && tileID < pair.second.first_global_id + pair.second.tile_count)) continue;
-                tileset = pair.second;
+                if(tileID >= pair.second.first_global_id && tileID < pair.second.first_global_id + pair.second.tile_count)
+                {
+                    tileset = &pair.second;
+                    tileIdx = (tileID - tileset->first_global_id);
+                    break;
+                }
             }
 
             int tileX, tileY;
-            tileX = (tileID % tileset.columns);
-            tileY = (tileID / tileset.columns);
+            tileX = (tileIdx % tileset->columns);
+            tileY = (tileIdx / tileset->columns);
 
             float x, y;
-            x = col * tileset.tile_width;
-            y = row * tileset.tile_height;
+            x = col * tileset->tile_width;
+            y = row * tileset->tile_height;
 
-            CTexture2DManager::instance()->drawTile(tileset.name, Point2DF(x,  y), tileset.tile_width, tileset.tile_height, tileX, tileY);
+            CTexture2DManager::instance()->drawTile(tileset->name,
+                                                    Point2DF(x,  y),
+                                                    tileset->tile_width,
+                                                    tileset->tile_height,
+                                                    tileY,
+                                                    tileX);
         }
         m.unlock();
     };
@@ -73,6 +86,7 @@ void CLayerRenderer::render(const std::unordered_map<const char*, TmxTileSet> &t
 
         threads.push_back(std::thread(painter, start, end));
     }
+
 
     for(auto &thread:threads)
     {
