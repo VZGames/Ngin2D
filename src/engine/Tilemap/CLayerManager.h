@@ -15,7 +15,7 @@ public:
     CLayerManager();
 
     void push(TmxLayer&&);
-    std::vector<std::pair<TmxLayer, Matrix2D<int>>> layers() const;
+    std::vector<std::pair<TmxLayer, Matrix2D<int>>> &layers();
 };
 END_NAMESPACE
 

@@ -13,7 +13,7 @@ void CLayerManager::push(TmxLayer &&layer)
     m_layers.push_back(std::make_pair(layer, matrix));
 }
 
-std::vector<std::pair<TmxLayer, Matrix2D<int>>> CLayerManager::layers() const
+std::vector<std::pair<TmxLayer, Matrix2D<int>>> &CLayerManager::layers()
 {
     return m_layers;
 }

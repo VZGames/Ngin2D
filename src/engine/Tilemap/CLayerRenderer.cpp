@@ -2,6 +2,7 @@
 #include "matrix2D.h"
 #include "LoggerDefines.h"
 #include "CTexture2DManager.h"
+#include "CCameraSys.h"
 
 BEGIN_NAMESPACE(engine)
 CLayerRenderer::CLayerRenderer()
@@ -14,6 +15,9 @@ void CLayerRenderer::render(const std::unordered_map<const char*, TmxTileSet> &t
 {
     std::mutex m;
     std::vector<std::thread> threads;
+    float scale = CCameraSys::instance()->scale();
+    Offset offset = CCameraSys::instance()->offset();
+
     int CORES = 5;
 
 //    matrix.print();
@@ -57,8 +61,11 @@ void CLayerRenderer::render(const std::unordered_map<const char*, TmxTileSet> &t
             tileY = (tileIdx / tileset->columns);
 
             float x, y;
-            x = col * tileset->tile_width;
-            y = row * tileset->tile_height;
+            x = layer.x + col * tileset->tile_width;
+            y = layer.y + row * tileset->tile_height;
+
+            x -= offset.x;
+            y -= offset.y;
 
             CTexture2DManager::instance()->drawTile(tileset->name,
                                                     Point2DF(x,  y),

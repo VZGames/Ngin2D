@@ -24,12 +24,12 @@ void CTexture2DManager::drawTile(_TextureID id, Point2DF pos, _TileWidth w, _Til
 {
     int frameX = w  * c;
     int frameY = h  * r;
-    
+
     float scale = CCameraSys::instance()->scale();
     SDL_Rect srcRect = {frameX, frameY, w, h};
     SDL_FRect destRect = {
-        pos.getX(),
-        pos.getY(),
+        pos.getX() * scale,
+        pos.getY() * scale,
         (float)w * scale,
         (float)h * scale
     };
@@ -40,23 +40,18 @@ void CTexture2DManager::drawTile(_TextureID id, Point2DF pos, _TileWidth w, _Til
 void CTexture2DManager::drawFrame(_TextureID id, Point2DF pos, _FrameWidth w, _FrameHeight h, _FrameRow r, _FrameCol c, _Angle angle, SDL_RendererFlip flip)
 {
 
-    auto fn = [&]()
-    {
-        LOCK_GUARD(m_mutex);
-        int frameX = w * c;
-        int frameY = h * r;
-        float scale = CCameraSys::instance()->scale();
-        SDL_Rect srcRect = {frameX, frameY, w, h};
-        SDL_FRect destRect = {
-            pos.getX(),
-            pos.getY(),
-            (float)w * scale,
-            (float)h * scale
-        };
-        SDL_RenderCopyExF(CRenderSys::renderer(), m_textures[id], &srcRect, &destRect, angle, NULL, flip);
+    int frameX = w * c;
+    int frameY = h * r;
+    float scale = CCameraSys::instance()->scale();
+    SDL_Rect srcRect = {frameX, frameY, w, h};
+    SDL_FRect destRect = {
+        pos.getX(),
+        pos.getY(),
+        (float)w * scale,
+        (float)h * scale
     };
+    SDL_RenderCopyExF(CRenderSys::renderer(), m_textures[id], &srcRect, &destRect, angle, NULL, flip);
 
-    std::thread(fn).join();
 }
 
 bool CTexture2DManager::loadTexture(_TextureID id, _TextureSource source)

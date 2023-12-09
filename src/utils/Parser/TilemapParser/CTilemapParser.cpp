@@ -48,7 +48,7 @@ void CTilemapParser::parse(int index, TmxTileSet &tileset)
     tileset.first_global_id = std::stoi(m_xmlparser.parseTagWith(index, tag, "firstgid"));
     tileset.tile_count      = std::stoi(m_xmlparser.parseTagWith(index, tag, "tilecount"));
     tileset.columns         = std::stoi(m_xmlparser.parseTagWith(index, tag, "columns"));
-    tileset.rows            = tileset.tile_count/tileset.columns;
+    tileset.rows            = tileset.tile_count / tileset.columns;
     tileset.tile_width      = std::stoi(m_xmlparser.parseTagWith(index, tag, "tilewidth"));
     tileset.tile_height     = std::stoi(m_xmlparser.parseTagWith(index, tag, "tileheight"));
 
@@ -71,7 +71,7 @@ void CTilemapParser::parse(int index, TmxTileSet &tileset)
     {
         const char* tag = "tileset.image";
         tileset.image           = new TmxImage;
-        tileset.image->source   = m_xmlparser.parseTagWith(0, tag, "source");
+        tileset.image->source   = m_xmlparser.parseTagWith(index, tag, "source");
         tileset.image->width    = std::stoi(m_xmlparser.parseTagWith(index, tag, "width"));
         tileset.image->height   = std::stoi(m_xmlparser.parseTagWith(index, tag, "height"));
     }

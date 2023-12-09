@@ -46,8 +46,8 @@ typedef struct s_tmx_tileset
     int         first_global_id;
     const char* name;
     int         tile_count;
-    int         tile_width;
-    int         tile_height;
+    int       tile_width;
+    int       tile_height;
     int         margin;
     int         spacing;
     int         columns;

@@ -36,6 +36,9 @@ using _Scale    = float;
 using _TileWidth = int;
 using _TileHeight = int;
 
+using _TileWidthF = float;
+using _TileHeightF = float;
+
 using TileRow = int;
 using TileCol = int;
 
