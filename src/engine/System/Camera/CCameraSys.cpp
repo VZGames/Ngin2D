@@ -14,15 +14,14 @@ CCameraSys *CCameraSys::instance()
     return s_instance = (s_instance == nullptr)? new CCameraSys():s_instance;
 }
 
-void CCameraSys::setTarget(CEntity *entity)
+void CCameraSys::setTarget(Vector2D<float> &&target)
 {
     m_offset.Zeros();
-    m_target = entity;
+    m_target = target;
 }
 
 void CCameraSys::update(Offset &newOffset)
 {
-    if(m_target == nullptr) return;
     m_offset = newOffset;
 }
 

@@ -26,6 +26,8 @@ void CMovementSystem::update(CEntity *entity, float dt)
 {
     UNUSED(dt);
     Offset offset = CCameraSys::instance()->offset();
+    float scale = CCameraSys::instance()->scale();
+
     auto position = entity->getComponent<SPositionComponent>();
     auto motion   = entity->getComponent<SMotionComponent>();
     auto camera   = entity->getComponent<SCameraComponent>();
@@ -33,7 +35,10 @@ void CMovementSystem::update(CEntity *entity, float dt)
     auto box      = entity->getComponent<SBoxComponent>();
     if(!position || !box || !motion) return;
 
-    if(camera && motion)
+    position->x -= offset.x;
+    position->y -= offset.y;
+
+    if(camera)
     {
         position->update(motion->velocity);
     }
@@ -43,38 +48,28 @@ void CMovementSystem::update(CEntity *entity, float dt)
         position->update(motion->mtv);
     }
 
-
-    position->x -= offset.x;
-    position->y -= offset.y;
-
-    char msg[100];
-
-    sprintf(&msg[0], "Entity %d", entity->id());
-    offset.print();
-    position->print(msg);
-
-    // if x > window_width/2 - sprite_with/2
-    // if x + window_width/2 - sprite_with/2 > window_width
     box->update(position);
 
     const Rect<float> *boundaryLimit = CSceneManager::instance()->currentScene()->boundaryLimit();
 
-    if(position->x < boundaryLimit->top_left.x)
+    if(position->x < boundaryLimit->top_left.x * scale)
     {
-        position->x = boundaryLimit->top_left.x;
-    }
-    else if(position->x > boundaryLimit->bottom_right.x - sprite->frameWidth)
-    {
-        position->x = boundaryLimit->bottom_right.x - sprite->frameWidth;
+        position->x = boundaryLimit->top_left.x * scale;
     }
 
-    if(position->y < boundaryLimit->top_left.x)
+    if(position->y < (boundaryLimit->top_left.y * scale))
     {
-        position->y = boundaryLimit->top_left.x;
+        position->y = (boundaryLimit->top_left.y * scale);
     }
-    else if(position->y > boundaryLimit->bottom_right.y - sprite->frameHeight)
+
+    if(position->x > (boundaryLimit->bottom_right.x * scale) - sprite->frameWidth)
     {
-        position->y = boundaryLimit->bottom_right.y - sprite->frameHeight;
+        position->x = (boundaryLimit->bottom_right.x * scale) - sprite->frameWidth;
+    }
+
+    if(position->y > (boundaryLimit->bottom_right.y * scale) - sprite->frameHeight)
+    {
+        position->y = (boundaryLimit->bottom_right.y * scale) - sprite->frameHeight;
     }
 
     CBroadPhaseCulling::instance()->insert(entity->id(),

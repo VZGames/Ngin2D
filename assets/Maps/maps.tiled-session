@@ -10,10 +10,10 @@
     "fileStates": {
         "PhuHoa.tmx": {
             "scale": 1.5,
-            "selectedLayer": -1,
+            "selectedLayer": 4,
             "viewCenter": {
-                "x": 287.6666666666667,
-                "y": 217.33333333333334
+                "x": 287,
+                "y": 216.66666666666669
             }
         },
         "PhuHoa.tmx#Dirt": {
