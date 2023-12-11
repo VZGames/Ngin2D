@@ -43,6 +43,8 @@ void CGameScene::init()
     // space init map/level
     {
         m_tilemap.loadMap("./debug/assets/Maps/PhuHoa.tmx");
+
+        this->setBoundaryLimit(0, 0, m_tilemap.map()->width, m_tilemap.map()->height);
     }
 }
 

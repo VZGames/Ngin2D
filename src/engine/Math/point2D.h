@@ -12,77 +12,77 @@ template<typename T>
 class Point2D
 {
 public:
-    Point2D(T x, T y): x(x),y(y){}
+    Point2D(T x, T y): m_x(x),m_y(y){}
 
-    Point2D(): x(0), y(0){}
+    Point2D(): m_x(0), m_y(0){}
 
     Point2D(const Point2D &copy)
     {
-        this->x = copy.x;
-        this->y = copy.y;
+        this->m_x = copy.m_x;
+        this->m_y = copy.m_y;
     }
 
     Point2D<T> &operator=(const Point2D<T> &other)
     {
-        this->x = other.x;
-        this->y = other.y;
+        this->m_x = other.m_x;
+        this->m_y = other.m_y;
         return *this;
     }
 
     bool operator==(Point2D<T> other)
     {
-        return this->x == other.x && this->y == other.y;;
+        return this->m_x == other.m_x && this->m_y == other.m_y;;
     }
 
     Point2D<T> &operator-=(const Point2D<T> &other)
     {
-        this->x -= other.x;
-        this->y -= other.y;
+        this->m_x -= other.m_x;
+        this->m_y -= other.m_y;
         return *this;
     }
 
     Point2D<T> &operator+=(const Point2D<T> &other)
     {
-        this->x += other.x;
-        this->y += other.y;
+        this->m_x += other.m_x;
+        this->m_y += other.m_y;
         return *this;
     }
 
 
     Point2D<T> &operator*=(const T scale)
     {
-        this->x *= scale;
-        this->y *= scale;
+        this->m_x *= scale;
+        this->m_y *= scale;
         return *this;
     }
 
     Point2D<T> &operator/=(const T scale)
     {
-        this->x /= scale;
-        this->y /= scale;
+        this->m_x /= scale;
+        this->m_y /= scale;
         return *this;
     }
 
     Point2D<T> operator+(const Point2D<T> &other)
     {
         Point2D<T> point = *this;
-        point.x += other.x;
-        point.y += other.y;
+        point.m_x += other.m_x;
+        point.m_y += other.m_y;
         return point;
     }
 
     Point2D<T> operator-(const Point2D<T> &other)
     {
         Point2D<T> point = *this;
-        point.x -= other.x;
-        point.y -= other.y;
+        point.m_x -= other.m_x;
+        point.m_y -= other.m_y;
         return point;
     }
 
     Point2D<T> &operator*(const T scale)
     {
-        this->x *= scale;
-        this->y *= scale;
+        this->m_x *= scale;
+        this->m_y *= scale;
         return *this;
     }
 
@@ -90,49 +90,49 @@ public:
 
     Point2D<T> &updateX(const T &x)
     {
-        this->x += x;
+        this->m_x += x;
         return *this;
     }
     Point2D<T> &updateY(const T &y)
     {
-        this->y += y;
+        this->m_y += y;
         return *this;
     }
 
     const char *toString()
     {
-         std::string &res = std::to_string(x) + ", " + std::to_string(y);
+        std::string &res = std::to_string(m_x) + ", " + std::to_string(m_y);
          return res.c_str();
     }
 
     double distance(const Point2D<T> &other)
     {
-        return std::sqrt(std::pow(other.x - this->x, 2) + std::pow(other.y - this->y, 2));
+         return std::sqrt(std::pow(other.m_x - this->m_x, 2) + std::pow(other.m_y - this->m_y, 2));
     }
 
-    T getX() const
+    T x() const
     {
-        return x;
+         return m_x;
     }
 
     void setX(T newX)
     {
-        x = newX;
+         m_x = newX;
     }
 
-    T getY() const
+    T y() const
     {
-        return y;
+        return m_y;
     }
 
     void setY(T newY)
     {
-        y = newY;
+        m_y = newY;
     }
 
     Vector2D<T> toVector()
     {
-        return Vector2D<T>(x, y);
+        return Vector2D<T>(m_x, m_y);
     }
 
     Point2D<T> closestPoint(std::vector<Point2D<T>> points)
@@ -157,12 +157,12 @@ public:
     // log
     friend std::ostream &operator<<(std::ostream &out, const Point2D<T> &val)
     {
-        out << " (" << val.x << ", " << val.y << ") \n";
+        out << " (" << val.m_x << ", " << val.m_y << ") \n";
         return out;
     }
 
 private:
-    T x,y;
+    T m_x,m_y;
 };
 
 using Point2DI = Point2D<int>;

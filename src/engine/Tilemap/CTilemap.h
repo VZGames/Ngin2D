@@ -17,6 +17,7 @@ private:
     CTilesetManager m_tileset_manager;
     CLayerManager   m_layer_manager;
     CLayerRenderer  m_layer_renderer;
+    TmxMap          *m_map;
     CThreadPool     *m_pool;
 
 public:
@@ -26,6 +27,8 @@ public:
     void loadMap(const char* file);
     void update(float dt);
     void render();
+
+    TmxMap *map() const;
 };
 END_NAMESPACE
 

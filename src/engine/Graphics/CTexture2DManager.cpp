@@ -28,8 +28,8 @@ void CTexture2DManager::drawTile(_TextureID id, Point2DF pos, _TileWidth w, _Til
     float scale = CCameraSys::instance()->scale();
     SDL_Rect srcRect = {frameX, frameY, w, h};
     SDL_FRect destRect = {
-        pos.getX() * scale,
-        pos.getY() * scale,
+        pos.x() * scale,
+        pos.y() * scale,
         (float)w * scale,
         (float)h * scale
     };
@@ -45,8 +45,8 @@ void CTexture2DManager::drawFrame(_TextureID id, Point2DF pos, _FrameWidth w, _F
     float scale = CCameraSys::instance()->scale();
     SDL_Rect srcRect = {frameX, frameY, w, h};
     SDL_FRect destRect = {
-        pos.getX(),
-        pos.getY(),
+        pos.x(),
+        pos.y(),
         (float)w * scale,
         (float)h * scale
     };
@@ -92,8 +92,8 @@ void CTexture2DManager::drawRect(Point2DF pos, _FrameWidth w, _FrameHeight h)
 {
     float scale = CCameraSys::instance()->scale();
     SDL_FRect destRect = {
-        pos.getX(),
-        pos.getY(),
+        pos.x(),
+        pos.y(),
         (float)w * scale,
         (float)h * scale
     };

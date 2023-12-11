@@ -6,6 +6,7 @@ HEADERS += \
     $$PWD/matrix2D.h \
     $$PWD/offset2D.h \
     $$PWD/point2D.h \
+    $$PWD/rect.h \
     $$PWD/size2D.h \
     $$PWD/vector2D.h
 

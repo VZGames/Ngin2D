@@ -14,6 +14,7 @@ CTilemap::~CTilemap()
 void CTilemap::loadMap(const char *file)
 {
     m_parser.loadFile(file);
+    m_map = &m_parser.map();
 
     int tilesetNum = 0;
     int layerNum   = 0;
@@ -43,10 +44,17 @@ void CTilemap::loadMap(const char *file)
 void CTilemap::update(float dt)
 {
     UNUSED(dt)
+
+    Offset offset = CCameraSys::instance()->offset();
+
     for(auto &data: m_layer_manager.layers())
     {
-        data.first.x = 0;
-        data.first.y = 0;
+        data.first.offset_x = offset.x;
+        data.first.offset_y = offset.y;
+
+
+        data.first.x -= data.first.offset_x;
+        data.first.y -= data.first.offset_y;
     }
 }
 
@@ -61,6 +69,11 @@ void CTilemap::render()
     }
 }
 
+TmxMap *CTilemap::map() const
+{
+    return m_map;
+}
 END_NAMESPACE
+
 
 

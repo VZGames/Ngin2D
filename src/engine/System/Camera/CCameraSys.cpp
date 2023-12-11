@@ -23,7 +23,6 @@ void CCameraSys::setTarget(CEntity *entity)
 void CCameraSys::update(Offset &newOffset)
 {
     if(m_target == nullptr) return;
-    if(!m_target->hasComponent<SPositionComponent>()) return;
     m_offset = newOffset;
 }
 

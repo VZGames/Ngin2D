@@ -17,7 +17,7 @@ public:
     void loadFile(const char* file);
     int countWith(const char* tag);
 
-    TmxMap map() const;
+    TmxMap &map();
     void parse(int index, TmxTileSet&tileset);
     void parse(int index, TmxLayer  &layer);
 

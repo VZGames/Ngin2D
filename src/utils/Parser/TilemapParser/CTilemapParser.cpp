@@ -36,7 +36,7 @@ int CTilemapParser::countWith(const char *tag)
     return m_xmlparser.count(tag);
 }
 
-TmxMap CTilemapParser::map() const
+TmxMap &CTilemapParser::map()
 {
     return m_map;
 }
