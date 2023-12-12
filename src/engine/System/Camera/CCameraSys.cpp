@@ -1,6 +1,4 @@
 #include "CCameraSys.h"
-#include "CEntity.h"
-#include "ComponentDef/SPositionComponent.h"
 
 BEGIN_NAMESPACE(engine)
 CCameraSys *CCameraSys::s_instance = nullptr;
