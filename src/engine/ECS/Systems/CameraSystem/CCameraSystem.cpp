@@ -28,11 +28,18 @@ void CCameraSystem::update(CEntity *entity, float dt)
     if(!(position && sprite)) return;
     if(camera)
     {
-        Size2D<float> winSize = CNgin::windowSize();
-        float width  = winSize.width;
-        float height = winSize.height;
+        SViewPort* viewport = CCameraSys::instance()->viewport();
+        float width  = viewport->width;
+        float height = viewport->height;
+
+        viewport->x  = ((position->x + (sprite->frameWidth * scale)) - width/2);
+        viewport->y  = ((position->y + (sprite->frameHeight * scale)) - height/2);
+
         camera->offset.x = position->x - (width/2 - (sprite->frameWidth * scale)/2);
         camera->offset.y = position->y - (height/2 - (sprite->frameHeight * scale)/2);
+
+
+        CCameraSys::instance()->update();
         CCameraSys::instance()->update(camera->offset);
     }
 }

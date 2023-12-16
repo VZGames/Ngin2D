@@ -52,8 +52,8 @@ void CTilemap::update(float dt)
         data.first.offset_x = offset.x;
         data.first.offset_y = offset.y;
 
-        data.first.offset_x *= dt;
-        data.first.offset_y *= dt;
+//        data.first.offset_x *= dt;
+//        data.first.offset_y *= dt;
 
         data.first.x -= data.first.offset_x;
         data.first.y -= data.first.offset_y;

@@ -100,7 +100,7 @@ void CTexture2DManager::drawRect(Point2DF pos, _FrameWidth w, _FrameHeight h)
 
     SDL_RenderDrawRectF(CRenderSys::renderer(), &destRect);
 }
-void CTexture2DManager::drawPolygon(std::vector<Vector2DF> vertices)
+void CTexture2DManager::drawPolygon(std::vector<Vector2D<float>> vertices)
 {
     SDL_FPoint points[vertices.size() + 1];
     int count = static_cast<int>(vertices.size());

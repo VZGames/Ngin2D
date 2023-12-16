@@ -149,7 +149,7 @@ public:
     }
 
 
-    static Point2D<T> fromVector(const Vector2DF &vec)
+    static Point2D<T> fromVector(const Vector2D<float> &vec)
     {
         return Point2D<T>(vec.x, vec.y);
     }

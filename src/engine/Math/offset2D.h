@@ -3,8 +3,8 @@
 
 #include "vector2D.h"
 
-struct Offset: public Vector2DF
+struct Offset: public Vector2D<float>
 {
-    Offset(float x, float y): Vector2DF(x, y){}
+    Offset(float x, float y): Vector2D<float>(x, y){}
 };
 #endif // OFFSET2D_H

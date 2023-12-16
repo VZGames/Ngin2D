@@ -25,7 +25,7 @@ struct SBoxComponent: public CComponent
         shape.pushVertex(x, y);
     }
 
-    std::vector<Vector2DF> vertices()
+    std::vector<Vector2D<float>> vertices()
     {
         return shape.vertices();
     }
@@ -36,15 +36,15 @@ struct SBoxComponent: public CComponent
         int count = static_cast<int>(shape.vertices().size());
         for(int i = 0; i < count - 1; i++)
         {
-            Vector2DF vertexA = shape.vertexAt(i);
-            Vector2DF vertexB = shape.vertexAt((i + 1) % count);
-            Vector2DF edge =  static_cast<Vector2D<float>>(vertexB) - static_cast<Vector2D<float>>(vertexA);
-            Vector2DF normal = edge.normalize().perp();
+            Vector2D<float> vertexA = shape.vertexAt(i);
+            Vector2D<float> vertexB = shape.vertexAt((i + 1) % count);
+            Vector2D<float> edge =  static_cast<Vector2D<float>>(vertexB) - static_cast<Vector2D<float>>(vertexA);
+            Vector2D<float> normal = edge.normalize().perp();
             shape.pushAxis(normal);
         }
     }
 
-    void update(Vector2DF *position)
+    void update(Vector2D<float> *position)
     {
         shape.updatePosition(position->x, position->y);
         setAxes();

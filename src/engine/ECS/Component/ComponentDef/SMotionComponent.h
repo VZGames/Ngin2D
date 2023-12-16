@@ -13,10 +13,10 @@ struct SMotionComponent: public CComponent
     }
     float speed;
     int direction;
-    Vector2DF velocity;
-    Vector2DF acceleration;
+    Vector2D<float> velocity;
+    Vector2D<float> acceleration;
     bool running = 0;
-    Vector2DF mtv;
+    Vector2D<float> mtv;
 };
 END_NAMESPACE
 

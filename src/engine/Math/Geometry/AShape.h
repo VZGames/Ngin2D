@@ -17,7 +17,7 @@ protected:
     float m_y;
     float m_width;
     float m_height;
-    std::vector<Vector2DF> m_axes;
+    std::vector<Vector2D<float>> m_axes;
 
 
 public:
@@ -30,8 +30,8 @@ public:
     void setWidth(float width) { m_width = width; }
     void setHeight(float height) { m_height = height; }
     void clearAxis() { m_axes.clear(); }
-    void pushAxis(Vector2DF axis) { m_axes.emplace_back(axis); }
-    std::vector<Vector2DF> axes() const { return m_axes; }
+    void pushAxis(Vector2D<float> axis) { m_axes.emplace_back(axis); }
+    std::vector<Vector2D<float>> axes() const { return m_axes; }
     bool isBox() const { return m_is_box; }
     void setBox(bool isBox = true) { m_is_box = isBox; }
     void setCollided(bool collided)
@@ -54,9 +54,9 @@ public:
 
 
 public:
-    virtual Vector2DF center() { return Vector2DF(); }
+    virtual Vector2D<float> center() { return Vector2D<float>(); }
     virtual void updatePosition(float x, float y) { setX(x); setY(y); };
-    virtual std::pair<float, float>  projection(Vector2DF axis) { (void)axis; return std::make_pair(0,0); }
+    virtual std::pair<float, float>  projection(Vector2D<float> axis) { (void)axis; return std::make_pair(0,0); }
     virtual float perimeter() { return 0.0f; };
     virtual float acreage() { return 0.0f; };
 };

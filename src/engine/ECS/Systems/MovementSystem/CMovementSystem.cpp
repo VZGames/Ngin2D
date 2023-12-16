@@ -50,27 +50,27 @@ void CMovementSystem::update(CEntity *entity, float dt)
 
     box->update(position);
 
-    const Rect<float> *boundaryLimit = CSceneManager::instance()->currentScene()->boundaryLimit();
+//    const Rect<float> *boundaryLimit = CSceneManager::instance()->currentScene()->boundaryLimit();
 
-    if(position->x < boundaryLimit->top_left.x * scale)
-    {
-        position->x = boundaryLimit->top_left.x * scale;
-    }
+//    if(position->x < boundaryLimit->top_left.x * scale)
+//    {
+//        position->x = boundaryLimit->top_left.x * scale;
+//    }
 
-    if(position->y < (boundaryLimit->top_left.y * scale))
-    {
-        position->y = (boundaryLimit->top_left.y * scale);
-    }
+//    if(position->y < (boundaryLimit->top_left.y * scale))
+//    {
+//        position->y = (boundaryLimit->top_left.y * scale);
+//    }
 
-    if(position->x > (boundaryLimit->bottom_right.x * scale) - sprite->frameWidth)
-    {
-        position->x = (boundaryLimit->bottom_right.x * scale) - sprite->frameWidth;
-    }
+//    if(position->x > (boundaryLimit->bottom_right.x * scale) - sprite->frameWidth)
+//    {
+//        position->x = (boundaryLimit->bottom_right.x * scale) - sprite->frameWidth;
+//    }
 
-    if(position->y > (boundaryLimit->bottom_right.y * scale) - sprite->frameHeight)
-    {
-        position->y = (boundaryLimit->bottom_right.y * scale) - sprite->frameHeight;
-    }
+//    if(position->y > (boundaryLimit->bottom_right.y * scale) - sprite->frameHeight)
+//    {
+//        position->y = (boundaryLimit->bottom_right.y * scale) - sprite->frameHeight;
+//    }
 
     CBroadPhaseCulling::instance()->insert(entity->id(),
                                            box->shape.center().x,

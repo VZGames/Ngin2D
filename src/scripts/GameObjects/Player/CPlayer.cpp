@@ -73,8 +73,7 @@ void CPlayer::walk(E_MOVE_DIRECTION direction)
         m_sprite->row = 2;
         m_motion->direction = -1;
         m_motion->velocity.x = m_motion->speed * m_motion->direction * 5;
-        m_motion->velocity = Vector2DF(m_motion->speed * (-5),0);
-        m_camera->offset -= Offset(m_motion->velocity.x, 0);
+        m_motion->velocity = Vector2D<float>(m_motion->speed * (-5),0);
     }
 
     if (direction == E_MOVE_DIRECTION::MOVE_RIGHT)
@@ -83,7 +82,6 @@ void CPlayer::walk(E_MOVE_DIRECTION direction)
         m_sprite->row = 3;
         m_motion->direction = 1;
         m_motion->velocity.x = m_motion->speed * m_motion->direction * 5;
-        m_camera->offset -= Offset(m_motion->velocity.x, 0);
     }
 
     if (direction == E_MOVE_DIRECTION::MOVE_UP)
@@ -92,7 +90,6 @@ void CPlayer::walk(E_MOVE_DIRECTION direction)
         m_sprite->row = 1;
         m_motion->direction = -1;
         m_motion->velocity.y = m_motion->speed * m_motion->direction * 5;
-        m_camera->offset -= Offset(0, m_motion->velocity.y);
     }
 
     if (direction == E_MOVE_DIRECTION::MOVE_DOWN)
@@ -101,7 +98,6 @@ void CPlayer::walk(E_MOVE_DIRECTION direction)
         m_sprite->row = 0;
         m_motion->direction = 1;
         m_motion->velocity.y = m_motion->speed * m_motion->direction * 5;
-        m_camera->offset += Offset(0, m_motion->velocity.y);
     }
 }
 

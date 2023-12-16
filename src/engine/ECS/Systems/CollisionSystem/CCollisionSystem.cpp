@@ -79,7 +79,7 @@ void CCollisionSystem::update(CEntity *entity, float dt)
     }
 }
 
-bool CCollisionSystem::checkCollision(AShape *A, AShape *B, Vector2DF& mtv)
+bool CCollisionSystem::checkCollision(AShape *A, AShape *B, Vector2D<float>& mtv)
 {
     float minOverlap = std::numeric_limits<float>::infinity();
 
@@ -126,7 +126,7 @@ bool CCollisionSystem::checkCollision(AShape *A, AShape *B, Vector2DF& mtv)
     }
 
     // need to reverse MTV if center offset and overlap are not pointing in the same direction
-    bool notPointingInTheSameDirection = Vector2DF::dotProduct(A->center() - B->center(), mtv) < 0;
+    bool notPointingInTheSameDirection = Vector2D<float>::dotProduct(A->center() - B->center(), mtv) < 0;
     if (notPointingInTheSameDirection) { mtv = mtv.reverse(); }
 
 

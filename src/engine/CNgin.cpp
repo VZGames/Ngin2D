@@ -79,7 +79,8 @@ bool CNgin::initialize(_Title title, _Width width, _Height height, CWorld *world
 
 void CNgin::loop()
 {
-    const int frameDelay = 1000 / 60;
+    const int fps = 60;
+    const int frameDelay = 1000 / fps;
 
     // time between 2 frames
     float deltaTime = 0.0f;

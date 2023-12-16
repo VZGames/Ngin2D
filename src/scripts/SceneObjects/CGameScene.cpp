@@ -5,7 +5,7 @@
 #include "CRenderSys.h"
 #include "CBroadPhaseCulling.h"
 #include "ComponentDef/SBoxComponent.h"
-
+#include "CNgin.h"
 
 BEGIN_NAMESPACE(script)
 CGameScene::CGameScene()
@@ -22,9 +22,9 @@ void CGameScene::init()
         cow3.setPosition(640, 400);
 
         m_entities.emplace_back(&player);
-        m_entities.emplace_back(&cow);
-        m_entities.emplace_back(&cow2);
-        m_entities.emplace_back(&cow3);
+//        m_entities.emplace_back(&cow);
+//        m_entities.emplace_back(&cow2);
+//        m_entities.emplace_back(&cow3);
 
         for(auto &entity: m_entities)
         {
@@ -43,6 +43,13 @@ void CGameScene::init()
     // space init map/level
     {
         m_tilemap.loadMap("./debug/assets/Maps/PhuHoa.tmx");
+
+        Size2D<float> winSize = engine::CNgin::windowSize();
+        float width  = winSize.width;
+        float height = winSize.height;
+
+        engine::CCameraSys::instance()->viewport()->width = width;
+        engine::CCameraSys::instance()->viewport()->height = height;
 
         this->setBoundaryLimit(0,
                                0,

@@ -11,7 +11,7 @@ class CCollisionSystem: public AECSystem
 private:
     std::vector<CEntity*> m_entities;
 private:
-    bool checkCollision(AShape*, AShape*, Vector2DF&);
+    bool checkCollision(AShape*, AShape*, Vector2D<float>&);
 
     bool overlap(float A0, float A1, float B0, float B1)
     {
