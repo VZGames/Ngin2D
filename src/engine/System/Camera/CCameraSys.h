@@ -22,9 +22,7 @@ private:
 public:
     static CCameraSys *instance();
     void setTarget(Vector2D<float>&&);
-    void update(Offset);
-    void update();
-    Offset offset() const;
+    Offset *offset();
     float scale() const;
     float zoom(E_CAMERA_ZOOM, const float& scale = 0.2);
     SViewPort* viewport();

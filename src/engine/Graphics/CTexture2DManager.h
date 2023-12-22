@@ -20,24 +20,26 @@ public:
     
     void drawTile(_TextureID,
                   Point2DF,
-                  _TileWidth,
-                  _TileHeight,
+                  _TileWidthF,
+                  _TileHeightF,
                   _FrameRow,
                   _FrameCol,
+                  _Scale,
                   _Angle angle = 0.0f,
                   SDL_RendererFlip flip = SDL_RendererFlip::SDL_FLIP_NONE);
 
     void drawFrame(_TextureID,
                    Point2DF,
-                   _FrameWidth,
-                   _FrameHeight,
+                   _FrameWidthF,
+                   _FrameHeightF,
                    _FrameRow,
                    _FrameCol,
+                   _Scale,
                    _Angle angle = 0.0f,
                    SDL_RendererFlip flip = SDL_RendererFlip::SDL_FLIP_NONE);
 
-    void drawRect(Point2DF, _FrameWidth, _FrameHeight);
-    void drawPolygon(std::vector<Vector2D<float>>);
+    void drawRect(Point2DF, _FrameWidthF, _FrameHeightF, _Scale);
+    void drawPolygon(std::vector<Vector2D<float>>, _Scale);
 //    Implement ITextureManager Interfaces
 public:
     virtual bool loadTexture(_TextureID, _TextureSource) override;

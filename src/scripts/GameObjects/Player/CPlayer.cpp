@@ -18,7 +18,7 @@ CPlayer::CPlayer()
 
 
     m_camera    = this->addComponent<engine::SCameraComponent>(*m_position);
-    m_motion    = this->addComponent<engine::SMotionComponent>(0.3);
+    m_motion    = this->addComponent<engine::SMotionComponent>(3.5);
 
     m_box       = this->addComponent<engine::SBoxComponent>(E_BODY_TYPE::KINEMATIC, m_position->x, m_position->y);
     m_box->setVertex(20, 28);
@@ -72,8 +72,7 @@ void CPlayer::walk(E_MOVE_DIRECTION direction)
         m_sprite->col = 2;
         m_sprite->row = 2;
         m_motion->direction = -1;
-        m_motion->velocity.x = m_motion->speed * m_motion->direction * 5;
-        m_motion->velocity = Vector2D<float>(m_motion->speed * (-5),0);
+        m_motion->velocity.x = m_motion->speed * m_motion->direction;
     }
 
     if (direction == E_MOVE_DIRECTION::MOVE_RIGHT)
@@ -81,7 +80,7 @@ void CPlayer::walk(E_MOVE_DIRECTION direction)
         m_sprite->col = 2;
         m_sprite->row = 3;
         m_motion->direction = 1;
-        m_motion->velocity.x = m_motion->speed * m_motion->direction * 5;
+        m_motion->velocity.x = m_motion->speed * m_motion->direction;
     }
 
     if (direction == E_MOVE_DIRECTION::MOVE_UP)
@@ -89,7 +88,7 @@ void CPlayer::walk(E_MOVE_DIRECTION direction)
         m_sprite->col = 2;
         m_sprite->row = 1;
         m_motion->direction = -1;
-        m_motion->velocity.y = m_motion->speed * m_motion->direction * 5;
+        m_motion->velocity.y = m_motion->speed * m_motion->direction;
     }
 
     if (direction == E_MOVE_DIRECTION::MOVE_DOWN)
@@ -97,7 +96,7 @@ void CPlayer::walk(E_MOVE_DIRECTION direction)
         m_sprite->col = 2;
         m_sprite->row = 0;
         m_motion->direction = 1;
-        m_motion->velocity.y = m_motion->speed * m_motion->direction * 5;
+        m_motion->velocity.y = m_motion->speed * m_motion->direction;
     }
 }
 

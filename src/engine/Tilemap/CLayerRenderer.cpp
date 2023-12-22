@@ -13,6 +13,8 @@ CLayerRenderer::CLayerRenderer()
 
 void CLayerRenderer::render(const std::unordered_map<const char*, TmxTileSet> &tilesetMap,TmxLayer &layer, Matrix2D<int>&& matrix)
 {
+    float scale = CCameraSys::instance()->scale();
+
     std::mutex m;
     std::vector<std::thread> threads;
 
@@ -67,7 +69,8 @@ void CLayerRenderer::render(const std::unordered_map<const char*, TmxTileSet> &t
                                                     tileset->tile_width,
                                                     tileset->tile_height,
                                                     tileY,
-                                                    tileX);
+                                                    tileX,
+                                                    scale);
         }
         m.unlock();
     };

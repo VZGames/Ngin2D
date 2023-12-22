@@ -1,6 +1,5 @@
-#include "CLogger.h"
 #include "CommonDefine.h"
-
+#include "CLogger.h"
 
 #define __LOG_INFO__    qInfo()
 #define __LOG_WARN__    qWarning()

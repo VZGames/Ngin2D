@@ -28,6 +28,9 @@ using _TextureSource = const char*;
 using _FrameWidth = int;
 using _FrameHeight = int;
 
+using _FrameWidthF = float;
+using _FrameHeightF = float;
+
 using _FrameRow = int;
 using _FrameCol = int;
 

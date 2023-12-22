@@ -1,9 +1,11 @@
 #include "CRenderSys.h"
 #include "CEntity.h"
+#include "CCameraSys.h"
 #include "CTexture2DManager.h"
 #include "ComponentDef/SPositionComponent.h"
 #include "ComponentDef/SSpriteComponent.h"
 #include "ComponentDef/SBoxComponent.h"
+#include "ComponentDef/SCameraComponent.h"
 
 BEGIN_NAMESPACE(engine)
 SDL_Renderer  *CRenderSys::s_renderer = nullptr;
@@ -75,25 +77,36 @@ bool CRenderSys::createRenderer()
 
 void CRenderSys::drawEntity(CEntity *entity)
 {
+    Offset *offset = CCameraSys::instance()->offset();
+    float scale = CCameraSys::instance()->scale();
+
     auto sprite = entity->getComponent<SSpriteComponent>();
     auto position = entity->getComponent<SPositionComponent>();
-    auto box = entity->getComponent<SBoxComponent>();
+//    auto box = entity->getComponent<SBoxComponent>();
+
     if((position && sprite))
     {
+        float x = position->x - offset->x;
+        float y = position->y - offset->y;
+
         CTexture2DManager::instance()->drawFrame(
             sprite->textureId,
-            Point2DF(position->x, position->y),
+            Point2DF(x, y),
             sprite->frameWidth,
             sprite->frameHeight,
             sprite->row,
-            sprite->col
-            );
+            sprite->col,
+            scale);
 
-        CTexture2DManager::instance()->drawRect(Point2DF(position->x, position->y), sprite->frameWidth, sprite->frameHeight);
-        if(box)
-        {
-            CTexture2DManager::instance()->drawPolygon(box->vertices());
-        }
+        CTexture2DManager::instance()->drawRect(Point2DF(x, y),
+                                                sprite->frameWidth,
+                                                sprite->frameHeight,
+                                                scale);
+
+//        if(box)
+//        {
+//            CTexture2DManager::instance()->drawPolygon(box->vertices(), scale);
+//        }
     }
 }
 

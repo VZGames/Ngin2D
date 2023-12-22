@@ -20,35 +20,33 @@ void CTexture2DManager::renderFrameThread(void *data)
     UNUSED(data)
 }
 
-void CTexture2DManager::drawTile(_TextureID id, Point2DF pos, _TileWidth w, _TileHeight h, TileRow r, TileCol c, _Angle angle, SDL_RendererFlip flip)
+void CTexture2DManager::drawTile(_TextureID id, Point2DF pos, _TileWidthF w, _TileHeightF h, TileRow r, TileCol c, _Scale scale, _Angle angle, SDL_RendererFlip flip)
 {
     int frameX = w  * c;
     int frameY = h  * r;
 
-    float scale = CCameraSys::instance()->scale();
-    SDL_Rect srcRect = {frameX, frameY, w, h};
+    SDL_Rect srcRect = {frameX, frameY, (int)w, (int)h};
     SDL_FRect destRect = {
         pos.x() * scale,
         pos.y() * scale,
-        (float)w * scale,
-        (float)h * scale
+        w * scale,
+        h * scale
     };
 
     SDL_RenderCopyExF(CRenderSys::renderer(), m_textures[id], &srcRect, &destRect, angle, NULL, flip);
 }
 
-void CTexture2DManager::drawFrame(_TextureID id, Point2DF pos, _FrameWidth w, _FrameHeight h, _FrameRow r, _FrameCol c, _Angle angle, SDL_RendererFlip flip)
+void CTexture2DManager::drawFrame(_TextureID id, Point2DF pos, _FrameWidthF w, _FrameHeightF h, _FrameRow r, _FrameCol c, _Scale scale, _Angle angle, SDL_RendererFlip flip)
 {
 
     int frameX = w * c;
     int frameY = h * r;
-    float scale = CCameraSys::instance()->scale();
-    SDL_Rect srcRect = {frameX, frameY, w, h};
+    SDL_Rect srcRect = {frameX, frameY, (int)w, (int)h};
     SDL_FRect destRect = {
         pos.x(),
         pos.y(),
-        (float)w * scale,
-        (float)h * scale
+        w * scale,
+        h * scale
     };
     SDL_RenderCopyExF(CRenderSys::renderer(), m_textures[id], &srcRect, &destRect, angle, NULL, flip);
 
@@ -88,25 +86,24 @@ bool CTexture2DManager::loadTexture(_TextureID id, _TextureSource source)
     return true;
 }
 
-void CTexture2DManager::drawRect(Point2DF pos, _FrameWidth w, _FrameHeight h)
+void CTexture2DManager::drawRect(Point2DF pos, _FrameWidthF w, _FrameHeightF h, _Scale scale)
 {
-    float scale = CCameraSys::instance()->scale();
     SDL_FRect destRect = {
         pos.x(),
         pos.y(),
-        (float)w * scale,
-        (float)h * scale
+        w * scale,
+        h * scale
     };
 
     SDL_RenderDrawRectF(CRenderSys::renderer(), &destRect);
 }
-void CTexture2DManager::drawPolygon(std::vector<Vector2D<float>> vertices)
+void CTexture2DManager::drawPolygon(std::vector<Vector2D<float>> vertices, _Scale scale)
 {
     SDL_FPoint points[vertices.size() + 1];
     int count = static_cast<int>(vertices.size());
     for (int i = 0; i < count; i++)
     {
-        points[i] = {vertices[i].x, vertices[i].y};
+        points[i] = {vertices[i].x * scale, vertices[i].y * scale};
     }
 
     points[vertices.size()] = points[0];

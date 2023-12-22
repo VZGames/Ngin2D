@@ -19,27 +19,9 @@ void CCameraSys::setTarget(Vector2D<float> &&target)
     m_target = target;
 }
 
-void CCameraSys::update(Offset newOffset)
+Offset *CCameraSys::offset()
 {
-    m_offset = newOffset;
-}
-
-void CCameraSys::update()
-{
-    if(m_viewport.x < 0)
-    {
-        m_viewport.x = 0;
-    }
-
-    if(m_viewport.y < 0)
-    {
-        m_viewport.y = 0;
-    }
-}
-
-Offset CCameraSys::offset() const
-{
-    return m_offset;
+    return &m_offset;
 }
 
 float CCameraSys::scale() const

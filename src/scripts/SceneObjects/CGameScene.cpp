@@ -9,6 +9,7 @@
 
 BEGIN_NAMESPACE(script)
 CGameScene::CGameScene()
+    :m_tilemap(engine::CTilemap::instance())
 {
     engine::CSceneManager::instance()->createScene(__FUNCTION__, this);
 }
@@ -22,7 +23,7 @@ void CGameScene::init()
         cow3.setPosition(640, 400);
 
         m_entities.emplace_back(&player);
-//        m_entities.emplace_back(&cow);
+        m_entities.emplace_back(&cow);
 //        m_entities.emplace_back(&cow2);
 //        m_entities.emplace_back(&cow3);
 
@@ -42,19 +43,13 @@ void CGameScene::init()
 
     // space init map/level
     {
-        m_tilemap.loadMap("./debug/assets/Maps/PhuHoa.tmx");
-
+        m_tilemap->loadMap("./debug/assets/Maps/PhuHoa.tmx");
         Size2D<float> winSize = engine::CNgin::windowSize();
         float width  = winSize.width;
         float height = winSize.height;
 
         engine::CCameraSys::instance()->viewport()->width = width;
         engine::CCameraSys::instance()->viewport()->height = height;
-
-        this->setBoundaryLimit(0,
-                               0,
-                               m_tilemap.map()->width * m_tilemap.map()->tile_width,
-                               m_tilemap.map()->height * m_tilemap.map()->tile_height);
     }
 }
 
@@ -62,7 +57,7 @@ void CGameScene::update(float dt)
 {
     engine::CBroadPhaseCulling::instance()->clean();
     engine::CECSystemManager::instance()->update(m_entities, dt);
-    m_tilemap.update(dt);
+    m_tilemap->update(dt);
 
 
     std::sort(m_entities.begin(), m_entities.end(), [](const engine::CEntity *A, const engine::CEntity *B){
@@ -75,7 +70,7 @@ void CGameScene::update(float dt)
 void CGameScene::render()
 {
     // [1] create new threads for render
-    m_tilemap.render();
+    m_tilemap->render();
 
     for(engine::CEntity *entity: m_entities)
     {

@@ -18,7 +18,7 @@ private:
     CCow    cow3;
     std::vector<engine::CEntity*>    m_entities;
 
-    engine::CTilemap    m_tilemap;
+    engine::CTilemap    *m_tilemap = nullptr;
 
 public:
     CGameScene();

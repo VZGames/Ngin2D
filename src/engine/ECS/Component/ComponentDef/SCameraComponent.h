@@ -4,7 +4,6 @@
 #include "CommonDefine.h"
 #include "Component/CComponent.h"
 #include "CCameraSys.h"
-#include "offset2D.h"
 #include "vector2D.h"
 
 BEGIN_NAMESPACE(engine)
@@ -15,8 +14,6 @@ struct SCameraComponent: public CComponent
     {
         CCameraSys::instance()->setTarget(std::move(target));
     }
-
-    Offset offset{0.0f, 0.0f};
 };
 END_NAMESPACE
 

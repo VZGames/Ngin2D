@@ -8,6 +8,7 @@
 #include "CLayerManager.h"
 #include "CLayerRenderer.h"
 #include "ThreadPool/CThreadPool.h"
+#include "vector2D.h"
 
 BEGIN_NAMESPACE(engine)
 class CTilemap
@@ -20,15 +21,21 @@ private:
     TmxMap          *m_map;
     CThreadPool     *m_pool;
 
-public:
+    Vector2D<float> m_coord_limit;
+
+private:
     CTilemap();
     ~CTilemap();
+    static CTilemap *s_instance;
 
+public:
+    static CTilemap *instance();
     void loadMap(const char* file);
     void update(float dt);
     void render();
 
     TmxMap *map() const;
+    Vector2D<float> coord_limit() const;
 };
 END_NAMESPACE
 

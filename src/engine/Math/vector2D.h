@@ -118,6 +118,12 @@ public:
         return vec.Multiply(B);
     }
 
+    Vector2D<T> operator*(T &&i)
+    {
+        Vector2D<T> vec = *this;
+        return vec *= i;
+    }
+
     Vector2D<T> operator*(const T &i)
     {
         Vector2D<T> vec = *this;
