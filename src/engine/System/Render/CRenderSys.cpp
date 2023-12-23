@@ -82,7 +82,7 @@ void CRenderSys::drawEntity(CEntity *entity)
 
     auto sprite = entity->getComponent<SSpriteComponent>();
     auto position = entity->getComponent<SPositionComponent>();
-//    auto box = entity->getComponent<SBoxComponent>();
+    auto box = entity->getComponent<SBoxComponent>();
 
     if((position && sprite))
     {
@@ -103,10 +103,10 @@ void CRenderSys::drawEntity(CEntity *entity)
                                                 sprite->frameHeight,
                                                 scale);
 
-//        if(box)
-//        {
-//            CTexture2DManager::instance()->drawPolygon(box->vertices(), scale);
-//        }
+        if(box)
+        {
+            CTexture2DManager::instance()->drawPolygon(box->vertices(), std::move(*offset));
+        }
     }
 }
 

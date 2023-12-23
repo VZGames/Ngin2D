@@ -97,13 +97,13 @@ void CTexture2DManager::drawRect(Point2DF pos, _FrameWidthF w, _FrameHeightF h, 
 
     SDL_RenderDrawRectF(CRenderSys::renderer(), &destRect);
 }
-void CTexture2DManager::drawPolygon(std::vector<Vector2D<float>> vertices, _Scale scale)
+void CTexture2DManager::drawPolygon(std::vector<Vector2D<float>> vertices, Vector2D<float> &&offset)
 {
     SDL_FPoint points[vertices.size() + 1];
     int count = static_cast<int>(vertices.size());
     for (int i = 0; i < count; i++)
     {
-        points[i] = {vertices[i].x * scale, vertices[i].y * scale};
+        points[i] = {(vertices[i].x - offset.x), (vertices[i].y - offset.y)};
     }
 
     points[vertices.size()] = points[0];

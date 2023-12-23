@@ -58,33 +58,12 @@ void CTilemap::update(float dt)
     m_coord_limit.y = m_map->height * m_map->tile_height;
     // -------------------------------------
 
-    Offset *camera_offset = CCameraSys::instance()->offset();
-    Offset map_offset(camera_offset->x, camera_offset->y);
-
-//    if(camera_offset->x < 0)
-//    {
-//        map_offset.x = 0;
-//    }
-//    if(camera_offset->y < 0)
-//    {
-//        map_offset.y = 0;
-//    }
-//    if(camera_offset->x > m_coord_limit.x  - 640)
-//    {
-//        map_offset.x = m_coord_limit.x - 640;
-//    }
-//    if(camera_offset->y > m_coord_limit.y - 640)
-//    {
-//        map_offset.y = m_coord_limit.y - 640;
-//    }
+    Offset *offset = CCameraSys::instance()->offset();
 
     for(auto &data: m_layer_manager.layers())
     {
-//        data.first.offset_x = map_offset.x;
-//        data.first.offset_y = map_offset.y;
-
-//        data.first.x -= data.first.offset_x;
-//        data.first.y -= data.first.offset_y;
+        data.first.offset_x = offset->x;
+        data.first.offset_y = offset->y;
     }
 }
 

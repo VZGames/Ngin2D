@@ -50,6 +50,9 @@ void CGameScene::init()
 
         engine::CCameraSys::instance()->viewport()->width = width;
         engine::CCameraSys::instance()->viewport()->height = height;
+
+
+        this->setBoundary(m_tilemap->coord_limit());
     }
 }
 

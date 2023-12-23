@@ -2,7 +2,7 @@
 #define ASCENE_H
 
 #include "CommonDefine.h"
-#include "rect.h"
+#include "vector2D.h"
 
 BEGIN_NAMESPACE(engine)
 class CEntity;
@@ -11,14 +11,18 @@ class AScene
 {
 private:
     const char* m_id;
-    Rect<float> m_boundaryLimit;
+    Vector2D<float> m_boundary;
 
 public:
     friend class CSceneManager;
     const char *id() const;
+
     virtual void init(){};
     virtual void update(float) {};
     virtual void render() {};
+
+    const Vector2D<float> &boundary() const;
+    void setBoundary(const Vector2D<float> &newBoundary);
 };
 END_NAMESPACE
 

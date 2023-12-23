@@ -228,9 +228,9 @@ public:
         return out;
     }
 
-    void print(const char* message = "")
+    void print(const char* message = "") const
     {
-        std::cout << "[" << message << "]" << "magnitude: " << magnitude() << ", Value(" << x << ", " << y << ")" << std::endl;
+        printf("[%s] magnitude: %f, Value(%f, %f)\n", message, magnitude(), x, y);
     }
 };
 

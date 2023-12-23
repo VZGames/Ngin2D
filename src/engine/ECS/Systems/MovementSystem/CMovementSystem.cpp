@@ -7,7 +7,8 @@
 #include "ComponentDef/SBoxComponent.h"
 #include "ComponentDef/SSpriteComponent.h"
 #include "ComponentDef/SCameraComponent.h"
-#include "CTilemap.h"
+#include "CSceneManager.h"
+#include "AScene.h"
 
 BEGIN_NAMESPACE(engine)
 CMovementSystem::CMovementSystem()
@@ -29,12 +30,13 @@ void CMovementSystem::update(CEntity *entity, float dt)
 
     if(!position || !box || !motion) return;
 
+    const Vector2D<float> &boundary = CSceneManager::instance()->currentScene()->boundary();
+
     if(motion->running)
     {
         motion->velocity += motion->mtv;
         position->update(motion->velocity, dt);
     }
-
 
     if(camera)
     {
@@ -46,15 +48,16 @@ void CMovementSystem::update(CEntity *entity, float dt)
         {
             position->y = 0;
         }
-        if(position->x > CTilemap::instance()->coord_limit().x - sprite->frameWidth)
+        if(position->x > boundary.x - sprite->frameWidth)
         {
-            position->x = CTilemap::instance()->coord_limit().x - sprite->frameWidth;
+            position->x = boundary.x - sprite->frameWidth;
         }
-        if(position->y > CTilemap::instance()->coord_limit().y - sprite->frameHeight)
+        if(position->y > boundary.y - sprite->frameHeight)
         {
-            position->y = CTilemap::instance()->coord_limit().y - sprite->frameHeight;
+            position->y = boundary.y - sprite->frameHeight;
         }
     }
+
 
     box->update(position);
     CBroadPhaseCulling::instance()->insert(entity->id(),

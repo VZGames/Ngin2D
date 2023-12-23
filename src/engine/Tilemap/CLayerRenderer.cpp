@@ -60,12 +60,13 @@ void CLayerRenderer::render(const std::unordered_map<const char*, TmxTileSet> &t
             tileX = (tileIdx % tileset->columns);
             tileY = (tileIdx / tileset->columns);
 
-            float x, y;
-            x = layer.x + (col * tileset->tile_width);
-            y = layer.y + (row * tileset->tile_height);
+            float frameX, frameY;
+            frameX = col * tileset->tile_width;
+            frameY = row * tileset->tile_height;
 
             CTexture2DManager::instance()->drawTile(tileset->name,
-                                                    Point2DF(x,  y),
+                                                    Point2DF(frameX - layer.offset_x,
+                                                             frameY - layer.offset_y),
                                                     tileset->tile_width,
                                                     tileset->tile_height,
                                                     tileY,
