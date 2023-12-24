@@ -136,18 +136,11 @@ public:
         return vec /= i;
     }
 
-    Vector2D<T> &operator*=(T i)
+    Vector2D<T> &operator*=(const T &i)
     {
         this->x *= static_cast<T>(i);
         this->y *= static_cast<T>(i);
         return *this;
-    }
-
-    Vector2D<T> &operator*=(T &i)
-    {
-        this->x *= static_cast<T>(i);
-        this->y *= static_cast<T>(i);
-        return this * i;
     }
 
     Vector2D<T> &operator/=(T &i)

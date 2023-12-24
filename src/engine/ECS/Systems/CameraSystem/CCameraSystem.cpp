@@ -36,34 +36,44 @@ void CCameraSystem::update(CEntity *entity, float dt)
         float height = CCameraSys::instance()->viewport()->height;
 
 
-        offset->x = (position->x + (sprite->frameWidth/2) - (width/2)) * dt;
-        offset->y = (position->y + (sprite->frameHeight/2) - (height/2)) * dt;
+        offset->x = (position->x + (sprite->frameWidth/2) - (width/2));
+        offset->y = (position->y + (sprite->frameHeight/2) - (height/2));
+
+        float boundaryX = (boundary.x > width)
+                              ? boundary.x - width
+                              : width - boundary.x;
+        float boundaryY = (boundary.y > height)
+                              ? boundary.y - height
+                              : height - boundary.y;
+
 
         if(offset->x < 0)
         {
             offset->x = 0;
         }
-        else if(offset->x > boundary.x  - width)
-        {
-            offset->x = boundary.x - width;
-        }
 
+        else if(offset->x > boundaryX)
+        {
+            offset->x = boundaryX;
+        }
 
         if(offset->y < 0)
         {
             offset->y = 0;
         }
-        else if(offset->y > boundary.y - height)
+
+        else if(offset->y > boundaryY)
         {
-            offset->y = boundary.y - height;
+            offset->y = boundaryY;
         }
 
 
+//        *offset *= dt;
 
-        offset->print("OFFSET");
-        boundary.print("BOUNDARY");
-        DBG(" boundary.x  - width = %f, boundary.y - height = %f",
-            (boundary.x  - width), (boundary.y - height))
+//        offset->print("OFFSET");
+//        boundary.print("BOUNDARY");
+//        DBG(" boundary.x  - width = %f, boundary.y - height = %f",
+//            boundaryX, boundaryY)
 
     }
 }

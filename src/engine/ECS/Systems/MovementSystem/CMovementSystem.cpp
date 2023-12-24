@@ -32,6 +32,15 @@ void CMovementSystem::update(CEntity *entity, float dt)
 
     const Vector2D<float> &boundary = CSceneManager::instance()->currentScene()->boundary();
 
+    float width = CCameraSys::instance()->viewport()->width;
+    float height = CCameraSys::instance()->viewport()->height;
+
+    float boundaryX = (boundary.x > width)
+                          ? boundary.x - sprite->frameWidth
+                          : width - sprite->frameWidth;
+    float boundaryY= (boundary.y > height)
+                          ? boundary.y - sprite->frameHeight
+                          : height - sprite->frameHeight;
     if(motion->running)
     {
         motion->velocity += motion->mtv;
@@ -44,18 +53,26 @@ void CMovementSystem::update(CEntity *entity, float dt)
         {
             position->x = 0;
         }
+
         if(position->y < 0)
         {
             position->y = 0;
         }
-        if(position->x > boundary.x - sprite->frameWidth)
+
+        if(position->x > boundaryX)
         {
-            position->x = boundary.x - sprite->frameWidth;
+            position->x = boundaryX;
         }
-        if(position->y > boundary.y - sprite->frameHeight)
+
+        if(position->y > boundaryY)
         {
-            position->y = boundary.y - sprite->frameHeight;
+            position->y = boundaryY;
         }
+
+
+        position->print("POSITION");
+        DBG(" boundary.x  - width = %f, boundary.y - height = %f",
+            boundaryX, boundaryY)
     }
 
 
