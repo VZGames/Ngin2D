@@ -19,7 +19,7 @@ int main(int argc, char *argv[])
 
     CSceneManager::instance()->loadScene(gameScene.id(), E_LOAD_SCENE_MODE::SINGLE);
 
-    if(engine::CNgin::instance()->initialize("Game Framework", 640, 640, engine::CWorld::instance()))
+    if(engine::CNgin::instance()->initialize("Game Framework", 920, 640, engine::CWorld::instance()))
     {
         engine::CNgin::instance()->loop();
         engine::CNgin::instance()->clean();

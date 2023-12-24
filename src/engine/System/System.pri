@@ -1,6 +1,5 @@
 HEADERS += \
     $$PWD/Camera/CCameraSys.h \
-    $$PWD/Camera/SViewPort.h \
     $$PWD/Particle/CParticleSys.h \
     $$PWD/Render/CRenderSys.h
 

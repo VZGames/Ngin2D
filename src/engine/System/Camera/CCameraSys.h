@@ -5,7 +5,6 @@
 #include "CommonEnums.h"
 #include "offset2D.h"
 #include "vector2D.h"
-#include "SViewPort.h"
 
 BEGIN_NAMESPACE(engine)
 class AScene;
@@ -15,8 +14,9 @@ private:
     CCameraSys();
     static CCameraSys   *s_instance;
     Vector2D<float>     m_target;
-    SViewPort           m_viewport{0, 0, 0, 0};
     float               m_scale{2.0f};
+    float               m_view_port_width{0};
+    float               m_view_port_height{0};
     Offset              m_offset{0.0f, 0.0f};
 
 public:
@@ -25,7 +25,8 @@ public:
     Offset *offset();
     float scale() const;
     float zoom(E_CAMERA_ZOOM, const float& scale = 0.2);
-    SViewPort* viewport();
+    void viewport(float &, float &);
+    void setViewport(float, float);
 };
 END_NAMESPACE
 

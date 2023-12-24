@@ -32,49 +32,16 @@ void CCameraSystem::update(CEntity *entity, float dt)
     {
         Offset* offset = CCameraSys::instance()->offset();
         const Vector2D<float> &boundary = CSceneManager::instance()->currentScene()->boundary();
-        float width = CCameraSys::instance()->viewport()->width;
-        float height = CCameraSys::instance()->viewport()->height;
-
+        float width = 0.0f;
+        float height = 0.0f;
+        CCameraSys::instance()->viewport(width, height);
 
         offset->x = (position->x + (sprite->frameWidth/2) - (width/2));
         offset->y = (position->y + (sprite->frameHeight/2) - (height/2));
 
-        float boundaryX = (boundary.x > width)
-                              ? boundary.x - width
-                              : width - boundary.x;
-        float boundaryY = (boundary.y > height)
-                              ? boundary.y - height
-                              : height - boundary.y;
 
-
-        if(offset->x < 0)
-        {
-            offset->x = 0;
-        }
-
-        else if(offset->x > boundaryX)
-        {
-            offset->x = boundaryX;
-        }
-
-        if(offset->y < 0)
-        {
-            offset->y = 0;
-        }
-
-        else if(offset->y > boundaryY)
-        {
-            offset->y = boundaryY;
-        }
-
-
-//        *offset *= dt;
-
-//        offset->print("OFFSET");
-//        boundary.print("BOUNDARY");
-//        DBG(" boundary.x  - width = %f, boundary.y - height = %f",
-//            boundaryX, boundaryY)
-
+        offset->x = std::max(0.0f, std::min(offset->x, boundary.x - width));
+        offset->y = std::max(0.0f, std::min(offset->y, boundary.y - height));
     }
 }
 

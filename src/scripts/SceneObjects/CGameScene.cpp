@@ -48,8 +48,7 @@ void CGameScene::init()
         float width  = winSize.width;
         float height = winSize.height;
 
-        engine::CCameraSys::instance()->viewport()->width = width;
-        engine::CCameraSys::instance()->viewport()->height = height;
+        engine::CCameraSys::instance()->setViewport(width, height);
 
 
         this->setBoundary(m_tilemap->coord_limit());

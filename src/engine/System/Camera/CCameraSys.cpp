@@ -44,12 +44,19 @@ float CCameraSys::zoom(E_CAMERA_ZOOM mode, const float &scale)
     return m_scale;
 }
 
-SViewPort* CCameraSys::viewport()
+void CCameraSys::viewport(float &width, float &height)
 {
-    return &m_viewport;
+    width = m_view_port_width;
+    height = m_view_port_height;
 }
 
+void CCameraSys::setViewport(float width, float height)
+{
+    m_view_port_width = width;
+    m_view_port_height = height;
+}
 END_NAMESPACE
+
 
 
 
