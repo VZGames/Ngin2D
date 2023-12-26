@@ -38,11 +38,11 @@
             "scaleInDock": 1
         },
         "PhuHoa.tmx": {
-            "scale": 0.5,
-            "selectedLayer": 1,
+            "scale": 2,
+            "selectedLayer": 4,
             "viewCenter": {
-                "x": 717,
-                "y": 314
+                "x": 289.75,
+                "y": 263
             }
         },
         "PhuHoa.tmx#Dirt": {
