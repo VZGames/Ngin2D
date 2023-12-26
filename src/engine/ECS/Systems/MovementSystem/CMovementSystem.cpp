@@ -30,10 +30,6 @@ void CMovementSystem::update(CEntity *entity, float dt)
 
     if(!position || !box || !motion) return;
 
-
-
-
-
     if(motion->running)
     {
         motion->velocity += motion->mtv;

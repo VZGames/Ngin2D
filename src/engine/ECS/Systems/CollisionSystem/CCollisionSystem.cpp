@@ -41,8 +41,8 @@ void CCollisionSystem::update(CEntity *entity, float dt)
         int currentCell = m_broad_phase_culling->hash(box->shape.center().x, box->shape.center().y);
         if(currentCell >= m_broad_phase_culling->cells()) return;
 
-        m_pool.submit(std::bind(&CCollisionSystem::calculateEntityCollision, this, entity, currentCell));
-        m_pool.submit(std::bind(&CCollisionSystem::calculateMapCollision, this));
+        m_pool.submit(std::bind(&CCollisionSystem::calculateEntityCollision, this, entity, currentCell)).get();
+        m_pool.submit(std::bind(&CCollisionSystem::calculateMapCollision, this)).get();
 
     }
 }
@@ -105,13 +105,11 @@ bool CCollisionSystem::checkCollision(AShape *A, AShape *B, Vector2D<float>& mtv
 
 void CCollisionSystem::calculateMapCollision()
 {
-    DBG("")
 }
 
 
 void CCollisionSystem::calculateEntityCollision(CEntity *entity, int cell)
 {
-    DBG("")
     auto sprite   = entity->getComponent<SSpriteComponent>();
     auto position = entity->getComponent<SPositionComponent>();
     auto motion   = entity->getComponent<SMotionComponent>();

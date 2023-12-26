@@ -66,8 +66,8 @@ void CTilemap::update(float dt)
 
     for(auto &data: m_layer_manager.layers())
     {
-        data.first.offset_x = offset->x;
-        data.first.offset_y = offset->y;
+        data.first.offset_x = offset->x + dt;
+        data.first.offset_y = offset->y + dt;
     }
 }
 
