@@ -5,5 +5,4 @@ CNotifyEventManager::CNotifyEventManager()
 {
 
 }
-
 END_NAMESPACE

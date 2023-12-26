@@ -8,7 +8,7 @@ CSceneManager *CSceneManager::s_instance = nullptr;
 int CSceneManager::s_scene_count = 0;
 CSceneManager::CSceneManager()
 {
-    CBroadPhaseCulling::instance(128, 128, 30, 30);
+    CBroadPhaseCulling::instance(512, 512, 30, 30);
 }
 
 CSceneManager *CSceneManager::instance()
