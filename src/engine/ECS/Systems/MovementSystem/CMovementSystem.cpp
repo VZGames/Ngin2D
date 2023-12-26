@@ -23,19 +23,16 @@ void CMovementSystem::update(CEntity *entity, float dt)
 {
     UNUSED(dt);
     auto position = entity->getComponent<SPositionComponent>();
-    auto sprite = entity->getComponent<SSpriteComponent>();
+    auto sprite   = entity->getComponent<SSpriteComponent>();
     auto motion   = entity->getComponent<SMotionComponent>();
-    auto camera      = entity->getComponent<SCameraComponent>();
+    auto camera   = entity->getComponent<SCameraComponent>();
     auto box      = entity->getComponent<SBoxComponent>();
 
     if(!position || !box || !motion) return;
 
-    const Vector2D<float> &boundary = CSceneManager::instance()->currentScene()->boundary();
 
-    float width = 0.0f;
-    float height = 0.0f;
 
-    CCameraSys::instance()->viewport(width, height);
+
 
     if(motion->running)
     {
@@ -45,11 +42,16 @@ void CMovementSystem::update(CEntity *entity, float dt)
 
     if(camera)
     {
+        float width = 0.0f;
+        float height = 0.0f;
+        CCameraSys::instance()->viewport(width, height);
 
-        position->x = std::max(0.0f, std::min(position->x, boundary.x - sprite->frameWidth));
-        position->y = std::max(0.0f, std::min(position->y, boundary.y - sprite->frameHeight));
+        float scale = CCameraSys::instance()->scale();
+        const Vector2D<float> &boundary = CSceneManager::instance()->currentScene()->boundary();
+
+        position->x = std::max(0.0f, std::min(position->x, boundary.x - (sprite->frameWidth * scale)));
+        position->y = std::max(0.0f, std::min(position->y, boundary.y - (sprite->frameHeight * scale)));
     }
-
 
     box->update(position);
     CBroadPhaseCulling::instance()->insert(entity->id(),

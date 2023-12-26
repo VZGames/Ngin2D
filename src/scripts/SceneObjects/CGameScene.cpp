@@ -44,12 +44,8 @@ void CGameScene::init()
     // space init map/level
     {
         m_tilemap->loadMap("./debug/assets/Maps/PhuHoa.tmx");
-        Size2D<float> winSize = engine::CNgin::windowSize();
-        float width  = winSize.width;
-        float height = winSize.height;
-
-        engine::CCameraSys::instance()->setViewport(width, height);
-
+        engine::CCameraSys::instance()->setViewport(engine::CNgin::windowSize().width,
+                                                    engine::CNgin::windowSize().height);
 
         this->setBoundary(m_tilemap->coord_limit());
     }

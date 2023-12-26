@@ -22,8 +22,10 @@ void CTilemap::loadMap(const char *file)
     m_parser.loadFile(file);
     m_map = &m_parser.map();
 
-    m_coord_limit.x = m_map->width * m_map->tile_width;
-    m_coord_limit.y = m_map->height * m_map->tile_height;
+    float scale = CCameraSys::instance()->scale();
+
+    m_coord_limit.x = m_map->width * m_map->tile_width * scale;
+    m_coord_limit.y = m_map->height * m_map->tile_height * scale;
 
     int tilesetNum = 0;
     int layerNum   = 0;
@@ -53,9 +55,11 @@ void CTilemap::loadMap(const char *file)
 void CTilemap::update(float dt)
 {
     UNUSED(dt)
+    float scale = CCameraSys::instance()->scale();
+
     // update coord_limit if scale changed
-    m_coord_limit.x = m_map->width * m_map->tile_width;
-    m_coord_limit.y = m_map->height * m_map->tile_height;
+    m_coord_limit.x = m_map->width * m_map->tile_width * scale;
+    m_coord_limit.y = m_map->height * m_map->tile_height * scale;
     // -------------------------------------
 
     Offset *offset = CCameraSys::instance()->offset();

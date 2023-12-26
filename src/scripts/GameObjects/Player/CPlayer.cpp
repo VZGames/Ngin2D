@@ -18,7 +18,7 @@ CPlayer::CPlayer()
 
 
     m_camera    = this->addComponent<engine::SCameraComponent>(*m_position);
-    m_motion    = this->addComponent<engine::SMotionComponent>(3.5);
+    m_motion    = this->addComponent<engine::SMotionComponent>(6);
 
     m_box       = this->addComponent<engine::SBoxComponent>(E_BODY_TYPE::KINEMATIC, m_position->x, m_position->y);
     m_box->setVertex(20, 28);

@@ -31,17 +31,23 @@ void CCameraSystem::update(CEntity *entity, float dt)
     if(camera)
     {
         Offset* offset = CCameraSys::instance()->offset();
-        const Vector2D<float> &boundary = CSceneManager::instance()->currentScene()->boundary();
+
         float width = 0.0f;
         float height = 0.0f;
         CCameraSys::instance()->viewport(width, height);
-
-        offset->x = (position->x + (sprite->frameWidth/2) - (width/2));
-        offset->y = (position->y + (sprite->frameHeight/2) - (height/2));
+        float scale = engine::CCameraSys::instance()->scale();
 
 
-        offset->x = std::max(0.0f, std::min(offset->x, boundary.x - width));
-        offset->y = std::max(0.0f, std::min(offset->y, boundary.y - height));
+        offset->x = (position->x + (sprite->frameWidth / 2) - (width / 2));
+        offset->y = (position->y + (sprite->frameHeight / 2) - (height / 2));
+
+        const Vector2D<float> &boundary = CSceneManager::instance()->currentScene()->boundary();
+
+        offset->x = std::max(0.0f, std::min(offset->x * scale, boundary.x - width)) / scale;
+        offset->y = std::max(0.0f, std::min(offset->y * scale, boundary.y - height)) / scale;
+
+        offset->print("OFFSET");
+        boundary.print("BOUNDARY");
     }
 }
 

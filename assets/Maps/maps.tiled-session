@@ -8,12 +8,41 @@
         "."
     ],
     "fileStates": {
-        "PhuHoa.tmx": {
-            "scale": 1.5,
+        "D:/Projects/Build/QT_APP/build-GameFramework-Desktop_Qt_6_5_1_MinGW_64_bit/debug/assets/Maps/PhuHoa.tmx": {
+            "scale": 0.091064453125,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 285,
-                "y": 214.66666666666669
+                "x": 2399.3994638069707,
+                "y": 2399.3994638069707
+            }
+        },
+        "D:/Projects/Build/QT_APP/build-GameFramework-Desktop_Qt_6_5_1_MinGW_64_bit/debug/assets/Maps/PhuHoa.tmx#Dirt": {
+            "scaleInDock": 1
+        },
+        "D:/Projects/Build/QT_APP/build-GameFramework-Desktop_Qt_6_5_1_MinGW_64_bit/debug/assets/Maps/PhuHoa.tmx#Grass": {
+            "scaleInDock": 1
+        },
+        "D:/Projects/Build/QT_APP/build-GameFramework-Desktop_Qt_6_5_1_MinGW_64_bit/debug/assets/Maps/PhuHoa.tmx#Grass_hill_tiles_v2": {
+            "scaleInDock": 1
+        },
+        "D:/Projects/Build/QT_APP/build-GameFramework-Desktop_Qt_6_5_1_MinGW_64_bit/debug/assets/Maps/PhuHoa.tmx#Grass_tiles_v2": {
+            "scaleInDock": 1
+        },
+        "D:/Projects/Build/QT_APP/build-GameFramework-Desktop_Qt_6_5_1_MinGW_64_bit/debug/assets/Maps/PhuHoa.tmx#Hills": {
+            "scaleInDock": 1
+        },
+        "D:/Projects/Build/QT_APP/build-GameFramework-Desktop_Qt_6_5_1_MinGW_64_bit/debug/assets/Maps/PhuHoa.tmx#Tall_Grass_hill_tilesv2": {
+            "scaleInDock": 1
+        },
+        "D:/Projects/Build/QT_APP/build-GameFramework-Desktop_Qt_6_5_1_MinGW_64_bit/debug/assets/Maps/PhuHoa.tmx#Water": {
+            "scaleInDock": 1
+        },
+        "PhuHoa.tmx": {
+            "scale": 0.5,
+            "selectedLayer": 1,
+            "viewCenter": {
+                "x": 717,
+                "y": 314
             }
         },
         "PhuHoa.tmx#Dirt": {
@@ -50,7 +79,8 @@
     ],
     "project": "maps.tiled-project",
     "recentFiles": [
-        "PhuHoa.tmx"
+        "PhuHoa.tmx",
+        "D:/Projects/Build/QT_APP/build-GameFramework-Desktop_Qt_6_5_1_MinGW_64_bit/debug/assets/Maps/PhuHoa.tmx"
     ],
     "tileset.embedInMap": true,
     "tileset.tileSize": {
