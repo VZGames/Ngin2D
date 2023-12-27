@@ -29,9 +29,11 @@ void CTilemap::loadMap(const char *file)
 
     int tilesetNum = 0;
     int layerNum   = 0;
+    int objectNum  = 0;
 
     tilesetNum = m_parser.countWith("tileset");
     layerNum   = m_parser.countWith("layer");
+    objectNum  = m_parser.countWith("objectgroup.object");
 
     m_pool = new CThreadPool(layerNum);
     m_pool->init();
@@ -50,6 +52,12 @@ void CTilemap::loadMap(const char *file)
         m_layer_manager.push(std::move(tmxLayer));
     }
 
+    for(int i = 0; i < objectNum; i++)
+    {
+        TmxObject tmxObject;
+        m_parser.parse(i, tmxObject);
+    }
+
 }
 
 void CTilemap::update(float dt)
@@ -66,8 +74,8 @@ void CTilemap::update(float dt)
 
     for(auto &data: m_layer_manager.layers())
     {
-        data.first.offset_x = offset->x + dt;
-        data.first.offset_y = offset->y + dt;
+        data.first.offset_x = offset->x;
+        data.first.offset_y = offset->y;
     }
 }
 

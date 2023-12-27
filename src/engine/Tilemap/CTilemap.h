@@ -9,6 +9,7 @@
 #include "CLayerRenderer.h"
 #include "ThreadPool/CThreadPool.h"
 #include "vector2D.h"
+#include "AShape.h"
 
 BEGIN_NAMESPACE(engine)
 class CTilemap
@@ -20,6 +21,8 @@ private:
     CLayerRenderer  m_layer_renderer;
     TmxMap          *m_map;
     CThreadPool     *m_pool;
+
+    std::vector<AShape*> m_impact_area;
 
     Vector2D<float> m_coord_limit;
 
