@@ -52,6 +52,19 @@ public:
         }
     }
 
+public:
+    static bool checkCollision(AShape*, AShape*, Vector2D<float>&);
+
+    static bool overlap(float A0, float A1, float B0, float B1)
+    {
+        return A0 <= B1 && A1 >= B0;
+    }
+
+    static float gap(float A0, float A1, float B0, float B1)
+    {
+        if (!overlap(A0, A1, B0, B1)) { return 0.0f; }
+        return std::min(A1, B1) - std::max(A0, B0);
+    }
 
 public:
     virtual Vector2D<float> center() { return Vector2D<float>(); }

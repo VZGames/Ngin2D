@@ -5,6 +5,7 @@
 #include "ComponentDef/SPositionComponent.h"
 #include "ComponentDef/SCameraComponent.h"
 #include "ComponentDef/SSpriteComponent.h"
+#include "ComponentDef/SMotionComponent.h"
 #include "CSceneManager.h"
 #include "AScene.h"
 
@@ -25,9 +26,9 @@ void CCameraSystem::update(CEntity *entity, float dt)
     auto position  = entity->getComponent<SPositionComponent>();
     auto camera    = entity->getComponent<SCameraComponent>();
     auto sprite    = entity->getComponent<SSpriteComponent>();
-    if(!(position && sprite)) return;
+    auto motion    = entity->getComponent<SMotionComponent>();
+    if(!(position && sprite && motion)) return;
 
-    // this is stupid code [optimize later]
     if(camera)
     {
         Offset* offset = CCameraSys::instance()->offset();
@@ -38,13 +39,20 @@ void CCameraSystem::update(CEntity *entity, float dt)
         float scale = engine::CCameraSys::instance()->scale();
 
 
-        offset->x = (position->x + (sprite->frameWidth / 2) - (width / 2));
-        offset->y = (position->y + (sprite->frameHeight / 2) - (height / 2));
+        if(!motion->running)
+        {
+            return;
+        }
+        else
+        {
+            offset->x = (position->x + (sprite->frameWidth / 2) - (width / 2));
+            offset->y = (position->y + (sprite->frameHeight / 2) - (height / 2));
 
-        const Vector2D<float> &boundary = CSceneManager::instance()->currentScene()->boundary();
+            const Vector2D<float> &boundary = CSceneManager::instance()->currentScene()->boundary();
 
-        offset->x = std::max(0.0f, std::min(offset->x * scale, boundary.x - width)) / scale;
-        offset->y = std::max(0.0f, std::min(offset->y * scale, boundary.y - height)) / scale;
+            offset->x = std::max(0.0f, std::min(offset->x * scale, boundary.x - width)) / scale;
+            offset->y = std::max(0.0f, std::min(offset->y * scale, boundary.y - height)) / scale;
+        }
     }
 }
 

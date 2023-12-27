@@ -11,6 +11,7 @@ HEADERS += \
     $$PWD/vector2D.h
 
 SOURCES += \
+    $$PWD/Geometry/AShape.cpp \
     $$PWD/Geometry/CCircleShape.cpp \
     $$PWD/Geometry/CPolygonShape.cpp
 
