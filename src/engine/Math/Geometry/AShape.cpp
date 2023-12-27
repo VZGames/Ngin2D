@@ -9,17 +9,17 @@ bool AShape::checkCollision(AShape *A, AShape *B, Vector2D<float> &mtv)
         std::pair<float, float> projectionB = B->projection(axis);
 
         // Check for overlap
-        float overlapLenght = gap(projectionA.first, projectionA.second, projectionB.first, projectionA.second);
-        if(overlapLenght == 0.0f)
+        float overlapLength = gap(projectionA.first, projectionA.second, projectionB.first, projectionA.second);
+        if(overlapLength == 0.0f)
         {
             mtv.Zeros();
             return false;
         }
         else
         {
-            if(overlapLenght < minOverlap)
+            if(overlapLength < minOverlap)
             {
-                minOverlap = overlapLenght;
+                minOverlap = overlapLength;
                 mtv = axis * minOverlap;
             }
         }
@@ -30,17 +30,17 @@ bool AShape::checkCollision(AShape *A, AShape *B, Vector2D<float> &mtv)
         std::pair<float, float> projectionB = B->projection(axis);
 
         // Check for overlap
-        float overlapLenght = gap(projectionA.first, projectionA.second, projectionB.first, projectionA.second);
-        if(overlapLenght == 0.0f)
+        float overlapLength = gap(projectionA.first, projectionA.second, projectionB.first, projectionA.second);
+        if(overlapLength == 0.0f)
         {
             mtv.Zeros();
             return false;
         }
         else
         {
-            if(overlapLenght < minOverlap)
+            if(overlapLength < minOverlap)
             {
-                minOverlap = overlapLenght;
+                minOverlap = overlapLength;
                 mtv = axis * minOverlap;
             }
         }
