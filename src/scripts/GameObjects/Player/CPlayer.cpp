@@ -18,7 +18,7 @@ CPlayer::CPlayer()
 
 
     m_camera    = this->addComponent<engine::SCameraComponent>(*m_position);
-    m_motion    = this->addComponent<engine::SMotionComponent>(2);
+    m_motion    = this->addComponent<engine::SMotionComponent>(3);
 
     m_box       = this->addComponent<engine::SBoxComponent>(E_BODY_TYPE::KINEMATIC, m_position->x, m_position->y);
     m_box->setVertex(20, 28);
@@ -72,11 +72,11 @@ void CPlayer::walk(E_MOVE_DIRECTION direction)
     {
         m_sprite->frameCount = 4;
         m_motion->running = 1;
-//        m_motion->speed = 2;
+        m_motion->speed = 3;
     }
     else
     {
-//        m_motion->speed /= 2;
+        m_motion->speed /= 2;
     }
     if (direction == E_MOVE_DIRECTION::MOVE_LEFT)
     {

@@ -41,9 +41,8 @@ void CCollisionSystem::update(CEntity *entity, float dt)
         int currentCell = m_broad_phase_culling->hash(box->shape.center().x, box->shape.center().y);
         if(currentCell >= m_broad_phase_culling->cells()) return;
 
-        m_pool.submit(std::bind(&CCollisionSystem::calculateEntityCollision, this, entity, currentCell)).get();
+        m_pool.submit(std::bind(&CCollisionSystem::calculateEntityCollision, this, currentCell, motion, box)).get();
         m_pool.submit(std::bind(&CCollisionSystem::calculateMapCollision, this)).get();
-
     }
 }
 
@@ -108,33 +107,13 @@ void CCollisionSystem::calculateMapCollision()
 }
 
 
-void CCollisionSystem::calculateEntityCollision(CEntity *entity, int cell)
+void CCollisionSystem::calculateEntityCollision(int cell, SMotionComponent *motion, SBoxComponent *box)
 {
-    auto sprite   = entity->getComponent<SSpriteComponent>();
-    auto position = entity->getComponent<SPositionComponent>();
-    auto motion   = entity->getComponent<SMotionComponent>();
-    auto box      = entity->getComponent<SBoxComponent>();
-
     for (CEntity *other: m_entities)
     {
         if(m_broad_phase_culling->at(cell).find(other->id()) == m_broad_phase_culling->at(cell).end()) continue;
         else
         {
-            auto positionB = other->getComponent<SPositionComponent>();
-            auto spriteB   = other->getComponent<SSpriteComponent>();
-            if(positionB->y + spriteB->frameHeight < position->y + sprite->frameHeight)
-            {
-                // A front B
-                sprite->zOrder  = 1;
-                spriteB->zOrder = 0;
-            }
-            else
-            {
-                // A back B
-                sprite->zOrder  = 0;
-                spriteB->zOrder = 1;
-            }
-
             auto boxB = other->getComponent<SBoxComponent>();
             if(&boxB->shape == &box->shape) continue;
             bool collided = checkCollision(&box->shape, &boxB->shape, motion->mtv);

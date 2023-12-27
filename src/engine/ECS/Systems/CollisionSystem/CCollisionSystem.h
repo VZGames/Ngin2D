@@ -8,6 +8,8 @@
 #include "ThreadPool/CThreadPool.h"
 
 BEGIN_NAMESPACE(engine)
+struct SMotionComponent;
+struct SBoxComponent;
 class CCollisionSystem: public AECSystem
 {
 private:
@@ -29,7 +31,7 @@ private:
     }
 
     void calculateMapCollision();
-    void calculateEntityCollision(CEntity *entity, int cell);
+    void calculateEntityCollision(int cell, SMotionComponent *motion, SBoxComponent *box);
 
 public:
     CCollisionSystem();

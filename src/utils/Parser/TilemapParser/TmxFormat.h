@@ -11,6 +11,7 @@ struct s_tmx_data;
 struct s_tmx_layer;
 struct s_tmx_tileset;
 struct s_tmx_tile;
+struct s_tmx_objectgroup;
 
 typedef struct s_tmx_map
 {
@@ -27,6 +28,7 @@ typedef struct s_tmx_map
     bool                    infinite{false};
     s_tmx_tileset           *tilesets{nullptr};
     s_tmx_layer             *layers{nullptr};
+    s_tmx_objectgroup       *objectgroups{nullptr};
 
 } TmxMap;
 
@@ -87,6 +89,20 @@ typedef struct s_tmx_data
     const char* content{""};
 } TmxData;
 
+typedef struct s_tmx_object
+{
+    int id;
+    int x, y;
+    int width, height;
+} TmxObject;
 
+typedef struct s_tmx_objectgroup
+{
+    int id;
+    int x, y;
+    int width, height;
+    const char *name;
+    TmxObject  *object{nullptr};
+} TmxObjectGroup;
 
 #endif // TMXFORMAT_H

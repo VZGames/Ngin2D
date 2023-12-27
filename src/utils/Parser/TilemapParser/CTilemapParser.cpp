@@ -8,6 +8,8 @@ CTilemapParser::CTilemapParser()
 
 CTilemapParser::~CTilemapParser()
 {
+    safeRelease(m_map.objectgroups->object);
+    safeRelease(m_map.objectgroups);
     safeRelease(m_map.tilesets->image);
     safeRelease(m_map.tilesets->tiles);
     safeRelease(m_map.tilesets);
@@ -29,6 +31,7 @@ void CTilemapParser::loadFile(const char *file)
     m_map.next_object_id    = std::stoi(m_xmlparser.rootAttribute("nextobjectid"));
     m_map.tilesets          = new TmxTileSet[m_xmlparser.count("tileset")];
     m_map.layers            = new TmxLayer[m_xmlparser.count("layer")];
+    m_map.objectgroups      = new TmxObjectGroup[m_xmlparser.count("objectgroup")];
 }
 
 int CTilemapParser::countWith(const char *tag)
@@ -98,3 +101,26 @@ void CTilemapParser::parse(int index, TmxLayer &layer)
 
     *(m_map.layers + index) = std::move(layer);
 }
+
+void CTilemapParser::parse(int index, TmxObjectGroup &objectgroup)
+{
+    const char* tag = "objectgroup";
+    objectgroup.name             =  m_xmlparser.parseTagWith(index, tag, "name");
+    objectgroup.id               = std::stoi(m_xmlparser.parseTagWith(index, tag, "id"));
+    objectgroup.x                = std::stoi(m_xmlparser.parseTagWith(index, tag, "x"));
+    objectgroup.y                = std::stoi(m_xmlparser.parseTagWith(index, tag, "y"));
+    objectgroup.width            = std::stoi(m_xmlparser.parseTagWith(index, tag, "width"));
+    objectgroup.height           = std::stoi(m_xmlparser.parseTagWith(index, tag, "height"));
+    objectgroup.object           = new TmxObject[m_xmlparser.count("objectgroup.object")];
+}
+
+void CTilemapParser::parse(int index, TmxObject &object)
+{
+    const char* tag = "objectgroup.object";
+    object.id               = std::stoi(m_xmlparser.parseTagWith(index, tag, "id"));
+    object.x                = std::stoi(m_xmlparser.parseTagWith(index, tag, "x"));
+    object.y                = std::stoi(m_xmlparser.parseTagWith(index, tag, "y"));
+    object.width            = std::stoi(m_xmlparser.parseTagWith(index, tag, "width"));
+    object.height           = std::stoi(m_xmlparser.parseTagWith(index, tag, "height"));
+}
+

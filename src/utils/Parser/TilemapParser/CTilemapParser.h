@@ -20,6 +20,8 @@ public:
     TmxMap &map();
     void parse(int index, TmxTileSet&tileset);
     void parse(int index, TmxLayer  &layer);
+    void parse(int index, TmxObjectGroup &objectgroup);
+    void parse(int index, TmxObject &object);
 
 };
 
