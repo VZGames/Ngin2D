@@ -9,8 +9,8 @@ CECSystemManager::CECSystemManager()
 {
     m_systems.push_back(&m_spawn_system);
     m_systems.push_back(&m_key_input_system);
-    m_systems.push_back(&m_camera_system);
     m_systems.push_back(&m_movement_system);
+    m_systems.push_back(&m_camera_system);
     m_systems.push_back(&m_collision_system);
     m_systems.push_back(&m_motion_system);
     m_systems.push_back(&m_render_system);
@@ -34,6 +34,7 @@ void CECSystemManager::init(std::vector<CEntity*> entities)
 
 void CECSystemManager::update(std::vector<CEntity*> entities, float dt)
 {
+//    DBG("START_UPDATE")
     for(auto &system: m_systems)
     {
         // do update for each entity
@@ -42,6 +43,7 @@ void CECSystemManager::update(std::vector<CEntity*> entities, float dt)
             system->update(entity, dt);
         }
     }
+//    DBG("END_UPDATE")
 }
 
 END_NAMESPACE

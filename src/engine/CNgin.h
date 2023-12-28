@@ -15,10 +15,8 @@ private:
     ~CNgin();
     static bool             s_running;
     static CNgin            *s_instance;
-    static int              s_win_width;
-    static int              s_win_height;
-    static SDL_Renderer     *s_renderer;
-    SDL_Window              *m_window;
+    static uint32_t         s_win_width;
+    static uint32_t         s_win_height;
     CWorld                  *m_world;
     static std::mutex       s_mutex;
 
@@ -29,12 +27,11 @@ public:
     static CNgin *instance();
     static bool running();
     static void setRunning(bool);
-    static SDL_Renderer* renderer();
     static Size2D<float> windowSize();
 
 
 public:
-    bool initialize(Title, Width, Height, CWorld*);
+    bool initialize(_Title, _Width, _Height, CWorld*);
     void loop();
     void clean();
     void quit();

@@ -17,6 +17,7 @@ public:
     template<typename ...TArgs>
     void log(const E_LOGGER_LEVEL& level, const char* file, const char* fn, const uint32_t& line, const char* fm, TArgs... args)
     {
+        std::unique_lock<std::mutex> lock(m_mutex);
         std::string lv  = dec64ToASCII(level);
         time_t now = time(nullptr);
         tm *localTime = localtime(&now);

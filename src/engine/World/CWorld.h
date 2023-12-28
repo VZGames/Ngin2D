@@ -14,14 +14,16 @@ private:
     ~CWorld();
     static CWorld *s_instance;
 
-    Vector2DF m_gravity;
+    Vector2D<float> m_gravity;
     std::vector<CEntity*> m_entities;
     std::vector<AScene*>  m_scenes;
 
 public:
     static CWorld *instance();
     CWorld *registerEntity(CEntity*);
+    void unRegisterEntity(CEntity*);
     CWorld *registerScene(AScene*);
+    void unRegisterScene(AScene*);
 
 
     void init();

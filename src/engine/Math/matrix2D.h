@@ -1,41 +1,149 @@
 #ifndef MATRIX2D_H
 #define MATRIX2D_H
 
+#include <string>
+#include <sstream>
+#include <iostream>
+#include <algorithm>
+#include <assert.h>
+
 template<typename T>
 class Matrix2D
 {
 public:
-    explicit Matrix2D(int height, int width) : height(height),width(width)
+    explicit Matrix2D(): m_rows(10), m_columns(10)
     {
-        this->matrix = new T[height  *width];
+        this->m_data = new T[m_rows  *m_columns];
+    }
+    explicit Matrix2D(int rows, int columns) : m_rows(rows),m_columns(columns)
+    {
+        assert((rows  * columns > 0) && "Matrix size invalid");
+        this->m_data = new T[rows  *columns];
     }
 
-    Matrix2D(const Matrix2D<T> &copy) {
-        this->matrix = copy.matrix;
+    virtual ~Matrix2D()
+    {
+        if(this->m_data != nullptr)
+        {
+            delete []this->m_data;
+            this->m_data = nullptr;
+        }
+    }
+
+    // copy constructor
+    Matrix2D(const Matrix2D<T> &copy)
+    {
+        this->m_columns = copy.m_columns;
+        this->m_rows = copy.m_rows;
+
+        if(this->m_data != nullptr)
+        {
+            delete []this->m_data;
+        }
+
+        this->m_data = new T[m_rows * m_columns];
+        std::copy(copy.m_data, copy.m_data + (m_rows * m_columns), this->m_data);
+    }
+
+    // move constructor
+    Matrix2D(Matrix2D<T> &&copy) noexcept
+    {
+        swap(*this, copy);
+        copy.m_data = nullptr;
+    }
+
+    // Copy assignment operator
+    Matrix2D<T> &operator=(const Matrix2D<T> &copy)
+    {
+        if (this != &copy)
+        {
+            Matrix2D<T> tmp(copy);
+            swap(*this, tmp);
+        }
+        return *this;
+    }
+
+    // Move assignment operator
+    Matrix2D<T>& operator=(Matrix2D<T>&& other) noexcept
+    {
+        swap(*this, other);
+        return *this;
     }
 
     T &at(int y, int x)
     {
-        return this->matrix[(y  *width) + x];
+        assert((x < m_columns && y < m_rows) && "Index invalid");
+        return this->m_data[(y  * m_columns) + x];
     }
 
     T &at(int pos)
     {
-        return this->matrix[pos];
+        assert((pos < (m_rows * m_columns)) && "Index invalid");
+        return this->m_data[pos];
     }
 
-    int getHeight() const
+    void resize(int rows, int columns)
     {
-        return height;
-    }
-    int getWidth() const
-    {
-        return width;
+        if(m_data != nullptr)
+        {
+            delete []m_data;
+        }
+        m_data = new T[rows  *columns];
+        m_rows = rows;
+        m_columns = columns;
     }
 
+    int rows() const
+    {
+        return m_rows;
+    }
+    int columns() const
+    {
+        return m_columns;
+    }
+
+    void print()
+    {
+        for (int row = 0; row < m_rows; row++)
+        {
+            // read line
+            for (int col = 0; col < m_columns; col++)
+            {
+                std::cout << at(row, col) << " ";
+            }
+            std::cout << "\n";
+        }
+    }
+    static Matrix2D<T> fromString(const char *cstr, int rows, int columns)
+    {
+        std::string str(cstr);
+        std::istringstream ss(str);
+        Matrix2D<T> data(rows, columns);
+
+        // read rows
+        for (int row = 0; row < rows; row++)
+        {
+            // read lines
+            std::string line;
+            for (int col = 0; col < columns; col++)
+            {
+                std::getline(ss, line, ',');
+                data.at(row, col) = std::stoi(line);
+            }
+        }
+        return data;
+    }
+
+    friend void swap(Matrix2D<T>& first, Matrix2D<T>& second) noexcept {
+        using std::swap;
+
+        swap(first.m_rows, second.m_rows);
+        swap(first.m_columns, second.m_columns);
+        swap(first.m_data, second.m_data);
+    }
 private:
-    int height, width;
-    T *matrix;
+    int m_rows, m_columns;
+    T *m_data = nullptr;
 };
 
 using Matrix2DI = Matrix2D<int>;

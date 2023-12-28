@@ -6,15 +6,15 @@
 #include "vector2D.h"
 
 BEGIN_NAMESPACE(engine)
-struct SPositionComponent: public Vector2DF, public CComponent
+struct SPositionComponent: public Vector2D<float>, public CComponent
 {
-    SPositionComponent(float x = 0.0f, float y = 0.0f): Vector2DF(x, y), CComponent(__FUNCTION__)
+    SPositionComponent(float x = 0.0f, float y = 0.0f): Vector2D<float>(x, y), CComponent(__FUNCTION__)
     {
     }
 
-    void update(Vector2DF vec)
+    void update(Vector2D<float> vec, float dt)
     {
-        *this += vec;
+        *this += vec + dt;
     }
 };
 END_NAMESPACE

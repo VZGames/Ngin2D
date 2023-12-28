@@ -17,14 +17,42 @@ CWorld* CWorld::instance()
 
 CWorld *CWorld::registerEntity(CEntity* entity)
 {
-    m_entities.emplace_back(entity);
+    m_entities.push_back(entity);
     return this;
+}
+
+void CWorld::unRegisterEntity(CEntity* entity)
+{
+    std::vector<CEntity*>::iterator it = m_entities.begin();
+    while(it != m_entities.end())
+    {
+        if((*it)->id() == entity->id())
+        {
+            m_entities.erase(it);
+            break;
+        }
+        it++;
+    }
 }
 
 CWorld *CWorld::registerScene(AScene *scene)
 {
-    m_scenes.emplace_back(scene);
+    m_scenes.push_back(scene);
     return this;
+}
+
+void CWorld::unRegisterScene(AScene *scene)
+{
+    std::vector<AScene*>::iterator it = m_scenes.begin();
+    while(it != m_scenes.end())
+    {
+        if((*it)->id() == scene->id())
+        {
+            m_scenes.erase(it);
+            break;
+        }
+        it++;
+    }
 }
 
 void CWorld::init()
@@ -45,4 +73,7 @@ void CWorld::render()
     CSceneManager::instance()->currentScene()->render();
 }
 END_NAMESPACE
+
+
+
 

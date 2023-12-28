@@ -2,56 +2,81 @@
 #include "CSceneManager.h"
 #include "LoggerDefines.h"
 #include "CECSystemManager.h"
-#include "CLevelManager.h"
 #include "CRenderSys.h"
-#include "ComponentDef/SSpriteComponent.h"
+#include "CBroadPhaseCulling.h"
+#include "ComponentDef/SBoxComponent.h"
+#include "CNgin.h"
 
 BEGIN_NAMESPACE(script)
 CGameScene::CGameScene()
+    :m_tilemap(engine::CTilemap::instance())
 {
     engine::CSceneManager::instance()->createScene(__FUNCTION__, this);
-
-
-    cow.setPosition(200, 50);
-    cow2.setPosition(320, 100);
-    cow3.setPosition(140, 80);
-
-    engine::CWorld::instance()->registerEntity(&player);
-    engine::CWorld::instance()->registerEntity(&cow);
-    engine::CWorld::instance()->registerEntity(&cow2);
-    engine::CWorld::instance()->registerEntity(&cow3);
-
-
-    m_entities.emplace_back(&player);
-    m_entities.emplace_back(&cow);
-    m_entities.emplace_back(&cow2);
-    m_entities.emplace_back(&cow3);
-
 }
 
 void CGameScene::init()
 {
-    engine::CECSystemManager::instance()->init(m_entities);
+    // space init entities
+    {
+        cow.setPosition(320, 300);
+        cow2.setPosition(768, 144);
+        cow3.setPosition(640, 400);
+
+        m_entities.emplace_back(&player);
+        m_entities.emplace_back(&cow);
+        m_entities.emplace_back(&cow2);
+        m_entities.emplace_back(&cow3);
+
+        for(auto &entity: m_entities)
+        {
+            engine::CWorld::instance()->registerEntity(entity);
+
+            auto box = entity->getComponent<engine::SBoxComponent>();
+
+            if(box == nullptr) continue;
+            engine::CBroadPhaseCulling::instance()->insert(entity->id(),box->shape.center().x, box->shape.center().y);
+        }
+
+        engine::CECSystemManager::instance()->init(m_entities);
+    }
+
+
+    // space init map/level
+    {
+        m_tilemap->loadMap("./debug/assets/Maps/PhuHoa.tmx");
+        engine::CCameraSys::instance()->setViewport(engine::CNgin::windowSize().width,
+                                                    engine::CNgin::windowSize().height);
+
+        this->setBoundary(m_tilemap->coord_limit());
+    }
 }
 
 void CGameScene::update(float dt)
 {
-    std::thread([dt](){engine::CLevelManager::instance()->update(dt);}).join();
-    std::thread([&, dt](){engine::CECSystemManager::instance()->update(m_entities, dt);}).join();
+    engine::CBroadPhaseCulling::instance()->clean();
+    engine::CECSystemManager::instance()->update(m_entities, dt);
+    m_tilemap->update(dt);
+
+
+    std::sort(m_entities.begin(), m_entities.end(), [](const engine::CEntity *A, const engine::CEntity *B){
+        auto spriteA     = A->getComponent<engine::SSpriteComponent>();
+        auto spriteB     = B->getComponent<engine::SSpriteComponent>();
+        return spriteA->zOrder < spriteB->zOrder;
+    });
 }
 
 void CGameScene::render()
 {
-    std::sort(m_entities.begin(), m_entities.end(), [](const engine::CEntity *A, const engine::CEntity *B){
-        auto spriteA     = A->getComponent<engine::SSpriteComponent>();
-        auto spriteB     = B->getComponent<engine::SSpriteComponent>();
-        return spriteA->layer > spriteB->layer;
-    });
+    // [1] create new threads for render
+    m_tilemap->render();
 
     for(engine::CEntity *entity: m_entities)
     {
         engine::CRenderSys::instance()->drawEntity(entity);
     }
+
+    // [2] wait for all finished
+
 }
 
 END_NAMESPACE

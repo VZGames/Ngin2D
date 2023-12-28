@@ -4,14 +4,14 @@
 #include "CMouseEvent.h"
 #include "CKeyEvent.h"
 #include "CWorld.h"
+#include "CRenderSys.h"
 
 BEGIN_NAMESPACE(engine)
 CNgin *CNgin::s_instance = nullptr;
-SDL_Renderer  *CNgin::s_renderer = nullptr;
 bool  CNgin::s_running = false;
 std::mutex CNgin::s_mutex;
-int CNgin::s_win_width = 0;
-int CNgin::s_win_height = 0;
+uint32_t CNgin::s_win_width = 0;
+uint32_t CNgin::s_win_height = 0;
 CNgin::CNgin(): m_key_evt_pool(2)
 {
 }
@@ -38,66 +38,31 @@ void CNgin::setRunning(bool running)
     s_running = running;
 }
 
-SDL_Renderer* CNgin::renderer()
-{
-    return s_renderer;
-}
-
 Size2D<float> CNgin::windowSize()
 {
     return Size2D<float>{(float)s_win_width, (float)s_win_height};
 }
 
-bool CNgin::initialize(Title title, Width width, Height height, CWorld *world)
+bool CNgin::initialize(_Title title, _Width width, _Height height, CWorld *world)
 {
-    DBG("Game Init");
-    if (SDL_Init(SDL_INIT_EVERYTHING) != 0)
-    {
-        DBG("Unable to initialize SDL: %s", SDL_GetError());
-
-        return false;
-    }
-
-    if (!(IMG_Init(IMG_INIT_PNG | IMG_INIT_JPG)))
-    {
-        DBG("Unable to initialize SDL Image: %s", SDL_GetError());
-        return false;
-    }
+    if(!CRenderSys::instance()->isReady()) return false;
 
     // [1] init SDL and create the Game Window
-    SDL_WindowFlags window_flags = (SDL_WindowFlags)(SDL_WINDOW_RESIZABLE | SDL_WINDOW_ALLOW_HIGHDPI);
-    UNUSED(window_flags)
-
-    m_window = SDL_CreateWindow(title, SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, width, height, 0);
-
-    if (m_window == nullptr)
+    if(CRenderSys::instance()->openWindow(title, width, height))
     {
-        // In the case that the window could not be made...
-        DBG("Could not create window: %s", SDL_GetError());
-
-        return false;
+        s_win_width = width;
+        s_win_height = height;
+        // [2] init renderer
+        if(!CRenderSys::instance()->createRenderer())
+        {
+            return false;
+        }
     }
 
-
-    SDL_GetWindowSize(m_window, &s_win_width, &s_win_height);
-
-    DBG("Window size: %d, %d", width, height);
-
-    // [2] init renderer
-    s_renderer = SDL_CreateRenderer(m_window, -1, SDL_RENDERER_ACCELERATED);
-    if (s_renderer == nullptr)
-    {
-        DBG("Could not create renderer: %s", SDL_GetError());
-        return false;
-    }
-
-    // [3] Select the color for drawing.
-    SDL_SetRenderDrawColor(s_renderer, 255, 255, 255, 255);
-
-    // [4] start game engine
+    // [3] start game engine
     s_running = true;
 
-    // [5] init the world
+    // [4 init the world
     m_world  = world;
     if(m_world == nullptr)
     {
@@ -114,7 +79,8 @@ bool CNgin::initialize(Title title, Width width, Height height, CWorld *world)
 
 void CNgin::loop()
 {
-    const int frameDelay = 1000 / 60;
+    const int fps = 60;
+    const int frameDelay = 1000 / fps;
 
     // time between 2 frames
     float deltaTime = 0.0f;
@@ -155,8 +121,8 @@ void CNgin::clean()
     DBG("Game Release Resource");
 
     // Close and destroy the window and the renderer
-    SDL_DestroyWindow(m_window);
-    SDL_DestroyRenderer(s_renderer);
+    CRenderSys::instance()->destroyWindow();
+    CRenderSys::instance()->destroyRenderer();
 }
 
 void CNgin::quit()
@@ -169,11 +135,10 @@ void CNgin::quit()
 
 void CNgin::render()
 {
-    SDL_RenderClear(s_renderer);
-    SDL_SetRenderDrawColor(CNgin::renderer(), 255, 0, 0, 255);
+    CRenderSys::instance()->beginDraw();
     m_world->render();
-    SDL_SetRenderDrawColor(s_renderer, 255, 255, 255, 255);
-    SDL_RenderPresent(s_renderer);
+    CRenderSys::instance()->endDraw();
+
 }
 
 void CNgin::update(float dt)

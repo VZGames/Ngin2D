@@ -6,6 +6,7 @@
 #include <iostream>
 #include <typeinfo>
 #include <string>
+#include <stdint.h>
 
 template<class T>
 inline void safeRelease(T* ptr)
@@ -17,7 +18,7 @@ inline void safeRelease(T* ptr)
 
 // function to convert decimal to hexadecimal
 template<typename T>
-inline std::string decToHexa(T n)
+inline std::string decToHex(T n)
 {
     // ans string to store hexadecimal number
     std::string ans = "";
@@ -76,12 +77,15 @@ inline std::string hexToASCII(std::string hex)
 
 inline std::string dec64ToASCII(uint64_t dec)
 {
-    std::string hex = decToHexa<uint64_t>(dec);
+    std::string hex = decToHex<uint64_t>(dec);
     std::string str = hexToASCII(hex);
     return str;
 }
 
-inline const char* qstrTochars(std::string &str)
+/// @brief 
+/// @param str 
+/// @return 
+inline const char* strToChars(std::string &str)
 {
     return str.c_str();
 }

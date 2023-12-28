@@ -1,6 +1,5 @@
 #include "CCameraSys.h"
-#include "CEntity.h"
-#include "ComponentDef/SPositionComponent.h"
+#include "LoggerDefines.h"
 
 BEGIN_NAMESPACE(engine)
 CCameraSys *CCameraSys::s_instance = nullptr;
@@ -14,22 +13,15 @@ CCameraSys *CCameraSys::instance()
     return s_instance = (s_instance == nullptr)? new CCameraSys():s_instance;
 }
 
-void CCameraSys::setTarget(CEntity *entity)
+void CCameraSys::setTarget(Vector2D<float> &&target)
 {
     m_offset.Zeros();
-    m_target = entity;
+    m_target = target;
 }
 
-void CCameraSys::update(Offset &newOffset)
+Offset *CCameraSys::offset()
 {
-    if(m_target == nullptr) return;
-    if(!m_target->hasComponent<SPositionComponent>()) return;
-    m_offset = newOffset;
-}
-
-Offset CCameraSys::offset() const
-{
-    return m_offset;
+    return &m_offset;
 }
 
 float CCameraSys::scale() const
@@ -51,7 +43,22 @@ float CCameraSys::zoom(E_CAMERA_ZOOM mode, const float &scale)
     }
     return m_scale;
 }
+
+void CCameraSys::viewport(float &width, float &height)
+{
+    width = m_view_port_width;
+    height = m_view_port_height;
+}
+
+void CCameraSys::setViewport(float width, float height)
+{
+    m_view_port_width = width;
+    m_view_port_height = height;
+}
 END_NAMESPACE
+
+
+
 
 
 

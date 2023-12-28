@@ -1,11 +1,14 @@
 #include "CCameraSystem.h"
+#include "LoggerDefines.h"
 #include "CEntity.h"
 #include "CCameraSys.h"
 #include "ComponentDef/SPositionComponent.h"
 #include "ComponentDef/SCameraComponent.h"
 #include "ComponentDef/SSpriteComponent.h"
-#include "size2D.h"
-#include "CNgin.h"
+#include "ComponentDef/SMotionComponent.h"
+#include "CSceneManager.h"
+#include "AScene.h"
+
 BEGIN_NAMESPACE(engine)
 CCameraSystem::CCameraSystem()
 {
@@ -20,20 +23,36 @@ void CCameraSystem::init(CEntity *entity)
 void CCameraSystem::update(CEntity *entity, float dt)
 {
     UNUSED(dt)
-    float scale  = engine::CCameraSys::instance()->scale();
-
     auto position  = entity->getComponent<SPositionComponent>();
     auto camera    = entity->getComponent<SCameraComponent>();
     auto sprite    = entity->getComponent<SSpriteComponent>();
-    if(!(position && sprite)) return;
+    auto motion    = entity->getComponent<SMotionComponent>();
+    if(!(position && sprite && motion)) return;
+
     if(camera)
     {
-        Size2D<float> winSize = CNgin::windowSize();
-        float width  = winSize.width;
-        float height = winSize.height;
-        camera->offset.x = position->x - (width/2 - (sprite->frameWidth * scale)/2);
-        camera->offset.y = position->y - (height/2 - (sprite->frameHeight * scale)/2);
-        CCameraSys::instance()->update(camera->offset);
+        Offset* offset = CCameraSys::instance()->offset();
+
+        float width = 0.0f;
+        float height = 0.0f;
+        CCameraSys::instance()->viewport(width, height);
+        float scale = engine::CCameraSys::instance()->scale();
+
+
+        if(!motion->running)
+        {
+            return;
+        }
+        else
+        {
+            offset->x = (position->x + (sprite->frameWidth / 2) - (width / 2));
+            offset->y = (position->y + (sprite->frameHeight / 2) - (height / 2));
+
+            const Vector2D<float> &boundary = CSceneManager::instance()->currentScene()->boundary();
+
+            offset->x = std::max(0.0f, std::min(offset->x * scale, boundary.x - width)) / scale;
+            offset->y = std::max(0.0f, std::min(offset->y * scale, boundary.y - height)) / scale;
+        }
     }
 }
 

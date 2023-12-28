@@ -8,19 +8,48 @@
         "."
     ],
     "fileStates": {
-        "PhuHoa.tmx": {
-            "scale": 1.5,
-            "selectedLayer": 1,
+        "D:/Projects/Build/QT_APP/build-GameFramework-Desktop_Qt_6_5_1_MinGW_64_bit/debug/assets/Maps/PhuHoa.tmx": {
+            "scale": 0.091064453125,
+            "selectedLayer": 0,
             "viewCenter": {
-                "x": 270.33333333333326,
-                "y": 212
+                "x": 2399.3994638069707,
+                "y": 2399.3994638069707
+            }
+        },
+        "D:/Projects/Build/QT_APP/build-GameFramework-Desktop_Qt_6_5_1_MinGW_64_bit/debug/assets/Maps/PhuHoa.tmx#Dirt": {
+            "scaleInDock": 1
+        },
+        "D:/Projects/Build/QT_APP/build-GameFramework-Desktop_Qt_6_5_1_MinGW_64_bit/debug/assets/Maps/PhuHoa.tmx#Grass": {
+            "scaleInDock": 1
+        },
+        "D:/Projects/Build/QT_APP/build-GameFramework-Desktop_Qt_6_5_1_MinGW_64_bit/debug/assets/Maps/PhuHoa.tmx#Grass_hill_tiles_v2": {
+            "scaleInDock": 1
+        },
+        "D:/Projects/Build/QT_APP/build-GameFramework-Desktop_Qt_6_5_1_MinGW_64_bit/debug/assets/Maps/PhuHoa.tmx#Grass_tiles_v2": {
+            "scaleInDock": 1
+        },
+        "D:/Projects/Build/QT_APP/build-GameFramework-Desktop_Qt_6_5_1_MinGW_64_bit/debug/assets/Maps/PhuHoa.tmx#Hills": {
+            "scaleInDock": 1
+        },
+        "D:/Projects/Build/QT_APP/build-GameFramework-Desktop_Qt_6_5_1_MinGW_64_bit/debug/assets/Maps/PhuHoa.tmx#Tall_Grass_hill_tilesv2": {
+            "scaleInDock": 1
+        },
+        "D:/Projects/Build/QT_APP/build-GameFramework-Desktop_Qt_6_5_1_MinGW_64_bit/debug/assets/Maps/PhuHoa.tmx#Water": {
+            "scaleInDock": 1
+        },
+        "PhuHoa.tmx": {
+            "scale": 2,
+            "selectedLayer": 4,
+            "viewCenter": {
+                "x": 289.25,
+                "y": 262.5
             }
         },
         "PhuHoa.tmx#Dirt": {
             "scaleInDock": 2
         },
         "PhuHoa.tmx#Grass": {
-            "scaleInDock": 1
+            "scaleInDock": 0.75
         },
         "PhuHoa.tmx#Grass_hill_tiles_v2": {
             "scaleInDock": 1,
@@ -50,7 +79,8 @@
     ],
     "project": "maps.tiled-project",
     "recentFiles": [
-        "PhuHoa.tmx"
+        "PhuHoa.tmx",
+        "D:/Projects/Build/QT_APP/build-GameFramework-Desktop_Qt_6_5_1_MinGW_64_bit/debug/assets/Maps/PhuHoa.tmx"
     ],
     "tileset.embedInMap": true,
     "tileset.tileSize": {

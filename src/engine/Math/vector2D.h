@@ -118,6 +118,20 @@ public:
         return vec.Multiply(B);
     }
 
+    Vector2D<T> operator+(const T &i)
+    {
+        Vector2D<T> vec = *this;
+        vec.x += static_cast<T>(i);
+        vec.y += static_cast<T>(i);
+        return vec;
+    }
+
+    Vector2D<T> operator*(T &&i)
+    {
+        Vector2D<T> vec = *this;
+        return vec *= i;
+    }
+
     Vector2D<T> operator*(const T &i)
     {
         Vector2D<T> vec = *this;
@@ -130,18 +144,11 @@ public:
         return vec /= i;
     }
 
-    Vector2D<T> &operator*=(T i)
+    Vector2D<T> &operator*=(const T &i)
     {
         this->x *= static_cast<T>(i);
         this->y *= static_cast<T>(i);
         return *this;
-    }
-
-    Vector2D<T> &operator*=(T &i)
-    {
-        this->x *= static_cast<T>(i);
-        this->y *= static_cast<T>(i);
-        return this * i;
     }
 
     Vector2D<T> &operator/=(T &i)
@@ -222,9 +229,9 @@ public:
         return out;
     }
 
-    void print(const char* message = "")
+    void print(const char* message = "") const
     {
-        std::cout << "[" << message << "]" << "magnitude: " << magnitude() << ", Value(" << x << ", " << y << ")" << std::endl;
+        printf("[%s] magnitude: %f, Value(%f, %f)\n", message, magnitude(), x, y);
     }
 };
 

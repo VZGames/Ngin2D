@@ -1,5 +1,6 @@
 #include "CXmlParser.h"
 #include <iostream>
+#include <assert.h>
 
 CXmlParser::CXmlParser()
 {
@@ -44,18 +45,29 @@ const char *CXmlParser::rootAttribute(const char *attribute)
 
 int CXmlParser::count(const char *tag)
 {
+    if(m_nodes.find(tag) == m_nodes.end()) return 0;
     return static_cast<int>(m_nodes[tag].size());
 }
 
-const char *CXmlParser::extractTagContentWith(int index, const char *tag)
+const char* CXmlParser::tagContentWith(int index, const char *tag)
 {
-    if(m_nodes.find(tag) == m_nodes.end()) return "Empty";
-    return m_nodes[tag].at(index)->GetText();
+    assert(m_nodes.find(tag) != m_nodes.end() && "Xml Tag not found!");
+    const char *result = m_nodes[tag].at(index)->GetText();
+    if(result == NULL)
+    {
+        return "";
+    }
+    return result;
 }
 
 const char* CXmlParser::parseTagWith(int index, const char *tag, const char *attribute)
 {
-    if(m_nodes.find(tag) == m_nodes.end()) return "Empty";
-    return m_nodes[tag].at(index)->Attribute(attribute);
+    assert(m_nodes.find(tag) != m_nodes.end() && "Xml Tag not found!");
+    const char *result = m_nodes[tag].at(index)->Attribute(attribute);
+    if(result == NULL)
+    {
+        return "0";
+    }
+    return result;
 }
 

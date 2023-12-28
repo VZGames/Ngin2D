@@ -7,22 +7,22 @@
 class CPolygonShape: public AShape
 {
 private:
-    std::vector<Vector2DF> m_vertices_origin;
-    std::vector<Vector2DF> m_vertices;
+    std::vector<Vector2D<float>> m_vertices_origin;
+    std::vector<Vector2D<float>> m_vertices;
 
 public:
     CPolygonShape();
 
-    Vector2DF &vertexAt(int index);
-    void setVertexAt(int index, Vector2DF vertex);
-    std::vector<Vector2DF> vertices() const;
+    Vector2D<float> &vertexAt(int index);
+    void setVertexAt(int index, Vector2D<float> vertex);
+    std::vector<Vector2D<float>> vertices() const;
     void pushVertex(float x, float y);
 
     // AShape interface
 public:
-    virtual std::pair<float, float> projection(Vector2DF axes) override;
+    virtual std::pair<float, float> projection(Vector2D<float> axes) override;
     virtual void updatePosition(float X, float Y) override;
-    virtual Vector2DF center() override;
+    virtual Vector2D<float> center() override;
 };
 
 #endif // CPOLYGONSHAPE_H

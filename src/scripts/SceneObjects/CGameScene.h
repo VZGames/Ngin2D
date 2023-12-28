@@ -3,18 +3,22 @@
 
 #include "CommonDefine.h"
 #include "AScene.h"
-#include "CEntity.h"
 #include "GameObjects/Cows/CCow.h"
 #include "GameObjects/Player/CPlayer.h"
+#include "CTilemap.h"
 
 BEGIN_NAMESPACE(script)
 class CGameScene: public engine::AScene
 {
+    // game objects/entities
 private:
     CPlayer player;
     CCow    cow;
     CCow    cow2;
     CCow    cow3;
+    std::vector<engine::CEntity*>    m_entities;
+
+    engine::CTilemap    *m_tilemap = nullptr;
 
 public:
     CGameScene();

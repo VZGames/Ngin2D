@@ -5,8 +5,9 @@
 #include <vector>
 #include <string>
 #include <TinyXML2/tinyxml.h>
+#include <optional>
 
-class CXmlParser
+class   CXmlParser
 {
 private:
     TiXmlElement                                        *m_root;
@@ -22,7 +23,7 @@ public:
     bool loadFile(const char* file);
     const char* rootAttribute(const char* attribute);
     int count(const char* tag);
-    const char* extractTagContentWith(int index, const char* tag);
+    const char* tagContentWith(int index, const char* tag);
     const char* parseTagWith(int index, const char* tag, const char* attribute);
 
 };

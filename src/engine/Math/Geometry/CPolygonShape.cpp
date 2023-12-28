@@ -5,17 +5,17 @@ CPolygonShape::CPolygonShape()
 
 }
 
-Vector2DF &CPolygonShape::vertexAt(int index)
+Vector2D<float> &CPolygonShape::vertexAt(int index)
 {
     return m_vertices[index];
 }
 
-void CPolygonShape::setVertexAt(int index, Vector2DF vertex)
+void CPolygonShape::setVertexAt(int index, Vector2D<float> vertex)
 {
     m_vertices[index] = vertex;
 }
 
-std::vector<Vector2DF> CPolygonShape::vertices() const
+std::vector<Vector2D<float>> CPolygonShape::vertices() const
 {
     return m_vertices;
 }
@@ -23,16 +23,16 @@ std::vector<Vector2DF> CPolygonShape::vertices() const
 void CPolygonShape::pushVertex(float x, float y)
 {
     float scale = engine::CCameraSys::instance()->scale();
-    m_vertices_origin.emplace_back(Vector2DF(x, y));
-    m_vertices.emplace_back(Vector2DF((x * scale) + m_x, (y * scale) + m_y));
+    m_vertices_origin.emplace_back(Vector2D<float>(x, y));
+    m_vertices.emplace_back(Vector2D<float>((x * scale) + m_x, (y * scale) + m_y));
 }
 
-std::pair<float, float> CPolygonShape::projection(Vector2DF axis)
+std::pair<float, float> CPolygonShape::projection(Vector2D<float> axis)
 {
     float min = std::numeric_limits<float>::infinity();
     float max = -std::numeric_limits<float>::infinity();
 
-    for (const Vector2DF &vertex: m_vertices)
+    for (const Vector2D<float> &vertex: m_vertices)
     {
         float dotProduct = axis.dotProduct(vertex);
         min = std::min(min, dotProduct);
@@ -55,10 +55,10 @@ void CPolygonShape::updatePosition(float X, float Y)
     }
 }
 
-Vector2DF CPolygonShape::center()
+Vector2D<float> CPolygonShape::center()
 {
-    Vector2DF G;
-    for (const Vector2DF &vertex: m_vertices)
+    Vector2D<float> G;
+    for (const Vector2D<float> &vertex: m_vertices)
     {
         G.x += vertex.x;
         G.y += vertex.y;
@@ -66,5 +66,6 @@ Vector2DF CPolygonShape::center()
 
     G.x /= m_vertices.size();
     G.y /= m_vertices.size();
+
     return G;
 }

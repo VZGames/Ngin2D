@@ -1,13 +1,14 @@
 #include "CSceneManager.h"
 #include "AScene.h"
 #include "CWorld.h"
+#include "CBroadPhaseCulling.h"
 
 BEGIN_NAMESPACE(engine)
 CSceneManager *CSceneManager::s_instance = nullptr;
 int CSceneManager::s_scene_count = 0;
 CSceneManager::CSceneManager()
 {
-
+    CBroadPhaseCulling::instance(256, 256, 30, 30);
 }
 
 CSceneManager *CSceneManager::instance()
