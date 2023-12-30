@@ -13,6 +13,7 @@
 #include "Geometry/AShape.h"
 
 BEGIN_NAMESPACE(engine)
+class CEntity;
 class CTilemap
 {
 private:
@@ -36,7 +37,7 @@ private:
 public:
     static CTilemap *instance();
     void loadMap(const char* file);
-    void update(float dt);
+    void update(std::vector<CEntity*> &, float dt);
     void render();
 
     TmxMap *map() const;

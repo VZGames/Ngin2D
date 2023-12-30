@@ -60,7 +60,7 @@ void CTilemap::loadMap(const char *file)
     }
 }
 
-void CTilemap::update(float dt)
+void CTilemap::update(std::vector<CEntity*> &entities, float dt)
 {
     UNUSED(dt)
     float scale = CCameraSys::instance()->scale();

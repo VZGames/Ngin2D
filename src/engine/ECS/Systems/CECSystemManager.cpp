@@ -21,7 +21,7 @@ CECSystemManager *CECSystemManager::instance()
     return s_instance = (s_instance == nullptr)? new CECSystemManager(): s_instance;
 }
 
-void CECSystemManager::init(std::vector<CEntity*> entities)
+void CECSystemManager::init(std::vector<CEntity*> &entities)
 {
     for(auto &system: m_systems)
     {
@@ -32,7 +32,7 @@ void CECSystemManager::init(std::vector<CEntity*> entities)
     }
 }
 
-void CECSystemManager::update(std::vector<CEntity*> entities, float dt)
+void CECSystemManager::update(std::vector<CEntity*> &entities, float dt)
 {
 //    DBG("START_UPDATE")
     for(auto &system: m_systems)

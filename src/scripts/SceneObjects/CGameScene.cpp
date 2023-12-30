@@ -55,7 +55,7 @@ void CGameScene::update(float dt)
 {
     engine::CBroadPhaseCulling::instance()->clean();
     engine::CECSystemManager::instance()->update(m_entities, dt);
-    m_tilemap->update(dt);
+    m_tilemap->update(m_entities, dt);
 
 
     std::sort(m_entities.begin(), m_entities.end(), [](const engine::CEntity *A, const engine::CEntity *B){
