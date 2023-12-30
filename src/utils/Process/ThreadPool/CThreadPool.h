@@ -37,10 +37,10 @@ public:
 
     // Submit a function to be executed asynchronously by the pool
     template <typename _Func, typename... _Args>
-    std::future<std::invoke_result<_Func(_Args...)>> submit(_Func &&fn, _Args &&...args)
+    std::future<std::result_of_t<_Func(_Args...)>> submit(_Func &&fn, _Args &&...args)
     {
         /* The return type of task `F` */
-        using return_type = std::invoke_result<decltype(fn)&(_Args...)>;
+        using return_type = std::result_of_t<decltype(fn)&(_Args...)>;
 
         /* wrapper for no arguments */
         auto task = std::make_shared<std::packaged_task<return_type()>>(

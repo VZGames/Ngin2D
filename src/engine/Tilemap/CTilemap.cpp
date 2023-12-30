@@ -56,6 +56,7 @@ void CTilemap::loadMap(const char *file)
     {
         TmxObject tmxObject;
         m_parser.parse(i, tmxObject);
+        m_object_layer_manager.push(std::move(tmxObject));
     }
 }
 
@@ -80,12 +81,12 @@ void CTilemap::update(float dt)
 
 void CTilemap::render()
 {
-//    for (auto &data : m_layer_manager.layers())
-//    {
-//        m_pool->submit([&]()
-//                       { m_layer_renderer.render(m_tileset_manager.tilesets(), data.first, std::move(data.second)); })
-//            .get();
-//    }
+    for (auto &data : m_layer_manager.layers())
+    {
+        m_pool->submit([&]()
+                       { m_layer_renderer.render(m_tileset_manager.tilesets(), data.first, std::move(data.second)); })
+            .get();
+    }
 }
 
 TmxMap *CTilemap::map() const

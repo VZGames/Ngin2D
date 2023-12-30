@@ -6,6 +6,7 @@
 #include "TilemapParser/CTilemapParser.h"
 #include "CTilesetManager.h"
 #include "CLayerManager.h"
+#include "CObjectLayerManager.h"
 #include "CLayerRenderer.h"
 #include "ThreadPool/CThreadPool.h"
 #include "vector2D.h"
@@ -15,12 +16,13 @@ BEGIN_NAMESPACE(engine)
 class CTilemap
 {
 private:
-    CTilemapParser  m_parser;
-    CTilesetManager m_tileset_manager;
-    CLayerManager   m_layer_manager;
-    CLayerRenderer  m_layer_renderer;
-    TmxMap          *m_map;
-    CThreadPool     *m_pool;
+    CTilemapParser      m_parser;
+    CTilesetManager     m_tileset_manager;
+    CLayerManager       m_layer_manager;
+    CObjectLayerManager m_object_layer_manager;
+    CLayerRenderer      m_layer_renderer;
+    TmxMap              *m_map;
+    CThreadPool         *m_pool;
 
     std::vector<AShape*> m_impact_area;
 
