@@ -1,5 +1,5 @@
 #include "CMouseEvent.h"
-#include "CCameraSys.h"
+#include "Camera/CCameraSys.h"
 #include "CNgin.h"
 #include "LoggerDefines.h"
 

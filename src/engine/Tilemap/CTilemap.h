@@ -9,7 +9,7 @@
 #include "CLayerRenderer.h"
 #include "ThreadPool/CThreadPool.h"
 #include "vector2D.h"
-#include "AShape.h"
+#include "Geometry/AShape.h"
 
 BEGIN_NAMESPACE(engine)
 class CTilemap

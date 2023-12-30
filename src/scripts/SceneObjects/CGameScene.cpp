@@ -2,7 +2,7 @@
 #include "CSceneManager.h"
 #include "LoggerDefines.h"
 #include "CECSystemManager.h"
-#include "CRenderSys.h"
+#include "Render/CRenderSys.h"
 #include "CBroadPhaseCulling.h"
 #include "ComponentDef/SBoxComponent.h"
 #include "CNgin.h"

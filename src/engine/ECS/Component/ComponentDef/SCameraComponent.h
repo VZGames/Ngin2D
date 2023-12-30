@@ -3,7 +3,7 @@
 
 #include "CommonDefine.h"
 #include "Component/CComponent.h"
-#include "CCameraSys.h"
+#include "Camera/CCameraSys.h"
 #include "vector2D.h"
 
 BEGIN_NAMESPACE(engine)

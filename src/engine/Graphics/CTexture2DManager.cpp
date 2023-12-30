@@ -1,7 +1,7 @@
 #include "CTexture2DManager.h"
 #include "LoggerDefines.h"
-#include "CRenderSys.h"
-#include "CCameraSys.h"
+#include "Render/CRenderSys.h"
+#include "Camera/CCameraSys.h"
 
 BEGIN_NAMESPACE(engine)
 CTexture2DManager *CTexture2DManager::s_instance = nullptr;

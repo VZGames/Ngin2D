@@ -4,15 +4,15 @@
 #include "CMouseEvent.h"
 #include "CKeyEvent.h"
 #include "CWorld.h"
-#include "CRenderSys.h"
+#include "Render/CRenderSys.h"
 
 BEGIN_NAMESPACE(engine)
 CNgin *CNgin::s_instance = nullptr;
-bool  CNgin::s_running = false;
+bool CNgin::s_running = false;
 std::mutex CNgin::s_mutex;
 uint32_t CNgin::s_win_width = 0;
 uint32_t CNgin::s_win_height = 0;
-CNgin::CNgin(): m_key_evt_pool(2)
+CNgin::CNgin() : m_key_evt_pool(2)
 {
 }
 
@@ -23,7 +23,7 @@ CNgin::~CNgin()
 
 CNgin *CNgin::instance()
 {
-    return s_instance = (s_instance == nullptr)? new CNgin(): s_instance;
+    return s_instance = (s_instance == nullptr) ? new CNgin() : s_instance;
 }
 
 bool CNgin::running()
@@ -45,15 +45,16 @@ Size2D<float> CNgin::windowSize()
 
 bool CNgin::initialize(_Title title, _Width width, _Height height, CWorld *world)
 {
-    if(!CRenderSys::instance()->isReady()) return false;
+    if (!CRenderSys::instance()->isReady())
+        return false;
 
     // [1] init SDL and create the Game Window
-    if(CRenderSys::instance()->openWindow(title, width, height))
+    if (CRenderSys::instance()->openWindow(title, width, height))
     {
         s_win_width = width;
         s_win_height = height;
         // [2] init renderer
-        if(!CRenderSys::instance()->createRenderer())
+        if (!CRenderSys::instance()->createRenderer())
         {
             return false;
         }
@@ -63,8 +64,8 @@ bool CNgin::initialize(_Title title, _Width width, _Height height, CWorld *world
     s_running = true;
 
     // [4 init the world
-    m_world  = world;
-    if(m_world == nullptr)
+    m_world = world;
+    if (m_world == nullptr)
     {
         DBG("Could not create World");
 
@@ -88,12 +89,13 @@ void CNgin::loop()
     // time at start
     Uint32 lastTime = SDL_GetTicks();
 
-    while (s_running) {
+    while (s_running)
+    {
         // current time
         Uint32 currentTime = SDL_GetTicks();
 
         // calculate deltatime
-        deltaTime = (float)(currentTime - lastTime)/1000.0f;
+        deltaTime = (float)(currentTime - lastTime) / 1000.0f;
 
         // update lastTime
         lastTime = currentTime;
@@ -111,10 +113,7 @@ void CNgin::loop()
             SDL_Delay(frameDelay - deltaTime);
         }
     }
-
-
 }
-
 
 void CNgin::clean()
 {
@@ -138,7 +137,6 @@ void CNgin::render()
     CRenderSys::instance()->beginDraw();
     m_world->render();
     CRenderSys::instance()->endDraw();
-
 }
 
 void CNgin::update(float dt)
@@ -152,15 +150,3 @@ void CNgin::handle_events()
     m_key_evt_pool.submit(&CKeyEvent::processEvents, CKeyEvent::instance(), CEventDispatcher::instance()).get();
 }
 END_NAMESPACE
-
-
-
-
-
-
-
-
-
-
-
-

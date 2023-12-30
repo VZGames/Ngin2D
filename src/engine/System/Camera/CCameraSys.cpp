@@ -1,4 +1,4 @@
-#include "CCameraSys.h"
+#include "Camera/CCameraSys.h"
 #include "LoggerDefines.h"
 
 BEGIN_NAMESPACE(engine)

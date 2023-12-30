@@ -8,7 +8,7 @@ CTexture3DManager::CTexture3DManager()
 
 bool CTexture3DManager::loadTexture(_TextureID, _TextureSource)
 {
-
+    return false;
 }
 END_NAMESPACE
 

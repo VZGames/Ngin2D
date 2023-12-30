@@ -1,5 +1,5 @@
-#ifndef CLOGGER_H
-#define CLOGGER_H
+#ifndef CLOGGER_H_
+#define CLOGGER_H_
 
 #include <string>
 #include <sstream>
@@ -8,17 +8,16 @@
 #include "Utils.h"
 #include "CommonEnums.h"
 
-
 class CLogger
 {
 public:
     static CLogger *instance();
 
-    template<typename ...TArgs>
-    void log(const E_LOGGER_LEVEL& level, const char* file, const char* fn, const uint32_t& line, const char* fm, TArgs... args)
+    template <typename... TArgs>
+    void log(const E_LOGGER_LEVEL &level, const char *file, const char *fn, const uint32_t &line, const char *fm, TArgs... args)
     {
         std::unique_lock<std::mutex> lock(m_mutex);
-        std::string lv  = dec64ToASCII(level);
+        std::string lv = dec64ToASCII(level);
         time_t now = time(nullptr);
         tm *localTime = localtime(&now);
         char time_str[100];
@@ -36,9 +35,8 @@ private:
     ~CLogger();
 
 private:
-    static CLogger                 *s_instance;
-    std::mutex                      m_mutex;
+    static CLogger *s_instance;
+    std::mutex m_mutex;
 };
 
-
-#endif // CLOGGER_H
+#endif // CLOGGER_H_

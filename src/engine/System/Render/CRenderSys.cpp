@@ -1,6 +1,6 @@
-#include "CRenderSys.h"
+#include "Render/CRenderSys.h"
 #include "CEntity.h"
-#include "CCameraSys.h"
+#include "Camera/CCameraSys.h"
 #include "CTexture2DManager.h"
 #include "ComponentDef/SPositionComponent.h"
 #include "ComponentDef/SSpriteComponent.h"

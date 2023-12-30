@@ -3,7 +3,7 @@
 
 #include "vector2D.h"
 #include "LoggerDefines.h"
-#include "CCameraSys.h"
+#include "Camera/CCameraSys.h"
 
 class AShape
 {

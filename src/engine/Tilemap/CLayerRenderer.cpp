@@ -2,7 +2,7 @@
 #include "matrix2D.h"
 #include "LoggerDefines.h"
 #include "CTexture2DManager.h"
-#include "CCameraSys.h"
+#include "Camera/CCameraSys.h"
 
 BEGIN_NAMESPACE(engine)
 CLayerRenderer::CLayerRenderer()

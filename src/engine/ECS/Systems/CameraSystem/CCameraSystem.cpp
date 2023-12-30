@@ -1,7 +1,7 @@
 #include "CCameraSystem.h"
 #include "LoggerDefines.h"
 #include "CEntity.h"
-#include "CCameraSys.h"
+#include "Camera/CCameraSys.h"
 #include "ComponentDef/SPositionComponent.h"
 #include "ComponentDef/SCameraComponent.h"
 #include "ComponentDef/SSpriteComponent.h"

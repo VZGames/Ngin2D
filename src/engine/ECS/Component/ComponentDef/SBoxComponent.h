@@ -3,7 +3,7 @@
 
 #include "CommonDefine.h"
 #include "Component/CComponent.h"
-#include "CPolygonShape.h"
+#include "Geometry/CPolygonShape.h"
 #include "vector2D.h"
 #include "LoggerDefines.h"
 

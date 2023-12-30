@@ -1,5 +1,5 @@
-#ifndef UTILS_H
-#define UTILS_H
+#ifndef UTILS_H_
+#define UTILS_H_
 
 #include <string>
 #include <algorithm>
@@ -8,22 +8,24 @@
 #include <string>
 #include <stdint.h>
 
-template<class T>
-inline void safeRelease(T* ptr)
+template <class T>
+inline void safeRelease(T *ptr)
 {
-    if(ptr == nullptr) return;
+    if (ptr == nullptr)
+        return;
     delete ptr;
     ptr = nullptr;
 }
 
 // function to convert decimal to hexadecimal
-template<typename T>
+template <typename T>
 inline std::string decToHex(T n)
 {
     // ans string to store hexadecimal number
     std::string ans = "";
 
-    while (n != 0) {
+    while (n != 0)
+    {
         // remainder variable to store remainder
         int rem = 0;
 
@@ -33,10 +35,12 @@ inline std::string decToHex(T n)
         rem = n % 16;
 
         // check if temp < 10
-        if (rem < 10) {
+        if (rem < 10)
+        {
             ch = rem + 48;
         }
-        else {
+        else
+        {
             ch = rem + 55;
         }
 
@@ -47,7 +51,7 @@ inline std::string decToHex(T n)
 
     // reversing the ans string to get the final result
     int i = 0, j = ans.size() - 1;
-    while(i <= j)
+    while (i <= j)
     {
         std::swap(ans[i], ans[j]);
         i++;
@@ -82,29 +86,32 @@ inline std::string dec64ToASCII(uint64_t dec)
     return str;
 }
 
-/// @brief 
-/// @param str 
-/// @return 
-inline const char* strToChars(std::string &str)
+/// @brief
+/// @param str
+/// @return
+inline const char *strToChars(std::string &str)
 {
     return str.c_str();
 }
 
-template<typename T>
-std::string classNameOf() {
+template <typename T>
+std::string classNameOf()
+{
     std::string name = typeid(T).name();
     size_t spacePosition = name.find_first_of(" ");
-    if (spacePosition != std::string::npos) {
+    if (spacePosition != std::string::npos)
+    {
         return name.substr(spacePosition + 1, name.length());
     }
     return name; // mostly primitive types
 }
 
 template <class T>
-inline void swap ( T& a, T& b )
+inline void swap(T &a, T &b)
 {
-    T c(a); a=b; b=c;
+    T c(a);
+    a = b;
+    b = c;
 }
 
-
-#endif // UTILS_H
+#endif // UTILS_H_
