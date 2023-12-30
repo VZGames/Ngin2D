@@ -4,6 +4,7 @@
 CThreadPool::CThreadPool(const int &n_threads)
 :m_threads(std::vector<std::thread>(n_threads))
 {
+
 }
 
 void CThreadPool::init()

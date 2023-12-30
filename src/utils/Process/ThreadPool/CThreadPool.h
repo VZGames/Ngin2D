@@ -16,7 +16,7 @@ private:
     friend class CThreadWorker;
     std::vector<std::thread> m_threads;
     CSafeQueue<std::function<void()>> m_queue;
-    std::mutex m_conditional_mutex;
+    std::mutex m_queue_mutex;
     std::condition_variable m_conditional_lock;
     bool m_shutdown{false};
 
@@ -37,10 +37,10 @@ public:
 
     // Submit a function to be executed asynchronously by the pool
     template <typename _Func, typename... _Args>
-    std::future<std::result_of_t<_Func(_Args...)>> submit(_Func &&fn, _Args &&...args)
+    std::future<std::result_of<_Func(_Args...)>> submit(_Func &&fn, _Args &&...args)
     {
         /* The return type of task `F` */
-        using return_type = std::result_of_t<_Func(_Args...)>;
+        using return_type = std::result_of<decltype(fn)&(_Args...)>;
 
         /* wrapper for no arguments */
         auto task = std::make_shared<std::packaged_task<return_type()>>(
