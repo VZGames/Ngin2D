@@ -43,7 +43,7 @@ void CGameScene::init()
 
     // space init map/level
     {
-        m_tilemap->loadMap("./debug/assets/Maps/PhuHoa.tmx");
+        m_tilemap->loadMap("./assets/Maps/PhuHoa.tmx");
         engine::CCameraSys::instance()->setViewport(engine::CNgin::windowSize().width,
                                                     engine::CNgin::windowSize().height);
 

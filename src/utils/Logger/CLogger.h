@@ -6,7 +6,7 @@
 #include <mutex>
 #include <thread>
 #include "Utils.h"
-#include "CommonEnums.h"
+#include "../../engine/Common/CommonEnums.h"
 
 class CLogger
 {

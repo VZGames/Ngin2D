@@ -72,8 +72,8 @@ bool CNgin::initialize(_Title title, _Width width, _Height height, CWorld *world
         return false;
     }
 
-    m_world->init();
     m_key_evt_pool.init();
+    m_world->init();
 
     return true;
 }
