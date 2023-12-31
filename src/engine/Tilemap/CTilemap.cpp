@@ -83,9 +83,9 @@ void CTilemap::render()
 {
 //    for (auto &data : m_layer_manager.layers())
 //    {
-//        m_pool->submit([&]()
-//                       { m_layer_renderer.render(m_tileset_manager.tilesets(), data.first, std::move(data.second)); })
-//            .get();
+//        m_pool->submit([&](){
+//            m_layer_renderer.render(m_tileset_manager.tilesets(), data.first, std::move(data.second));
+//        });
 //    }
 }
 

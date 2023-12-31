@@ -10,7 +10,7 @@ target_link_libraries(utils_module PRIVATE TinyXML2)
 
 add_subdirectory(engine)
 target_link_libraries(${PROJECT_NAME} PRIVATE engine_module)
-target_link_libraries(engine_module PRIVATE utils_module SDL2)
+target_link_libraries(engine_module PRIVATE  SDL2main SDL2 SDL2_image utils_module)
 
 add_subdirectory(scripts)
 target_link_libraries(${PROJECT_NAME} PRIVATE scripts_module)

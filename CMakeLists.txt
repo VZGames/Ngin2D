@@ -4,13 +4,13 @@ cmake_minimum_required(VERSION 3.28.0)
 project(Bee2D VERSION 0.1.0 DESCRIPTION "Game engine from BeeStudio" LANGUAGES C CXX)
 
 # specify the C++ standard
-set(CMAKE_CXX_STANDARD 11)
+set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_EXTENSIONS OFF)
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR})
 set(LIBRARY_DIR "${CMAKE_SOURCE_DIR}/libs")
 set(INCLUDE_DIR "${CMAKE_SOURCE_DIR}/include")
-set(LINKER_LIBRARY "-lmingw32 -lSDL2main -lSDL2 -lSDL2_image")
+set(LINKER_LIBRARY "-lmingw32")
 
 message("SOURCE: ${CMAKE_SOURCE_DIR}")
 message("Output: ${CMAKE_BINARY_DIR}")
@@ -35,4 +35,4 @@ add_subdirectory(src)
 
 target_link_libraries(${PROJECT_NAME} PRIVATE ${LINKER_LIBRARY})
 
-target_compile_features(${PROJECT_NAME} PRIVATE cxx_std_11)
+target_compile_features(${PROJECT_NAME} PRIVATE cxx_std_20)
