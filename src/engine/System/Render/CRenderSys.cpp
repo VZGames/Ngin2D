@@ -5,7 +5,9 @@
 #include "ComponentDef/SPositionComponent.h"
 #include "ComponentDef/SSpriteComponent.h"
 #include "ComponentDef/SBoxComponent.h"
-#include "ComponentDef/SCameraComponent.h"
+//#include "ComponentDef/SCameraComponent.h"
+#include <SDL2/SDL.h>
+#include <SDL2/SDL_image.h>
 
 BEGIN_NAMESPACE(engine)
 SDL_Renderer  *CRenderSys::s_renderer = nullptr;

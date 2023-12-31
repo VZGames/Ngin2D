@@ -1,7 +1,7 @@
 #ifndef CCOW_H
 #define CCOW_H
 
-#include "CommonDefine.h"
+#include <CommonDefine.h>
 #include "Entity/CEntity.h"
 #include "ComponentDef/SSpriteComponent.h"
 #include "ComponentDef/SHealthComponent.h"

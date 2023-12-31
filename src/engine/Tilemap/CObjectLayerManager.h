@@ -1,7 +1,7 @@
 #ifndef COBJECTLAYERMANAGER_H
 #define COBJECTLAYERMANAGER_H
 
-#include "CommonDefine.h"
+#include <CommonDefine.h>
 #include "TilemapParser/TmxFormat.h"
 #include "Geometry/CPolygonShape.h"
 

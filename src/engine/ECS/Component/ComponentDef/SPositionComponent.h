@@ -1,7 +1,7 @@
 #ifndef SPOSITIONCOMPONENT_H
 #define SPOSITIONCOMPONENT_H
 
-#include "CommonDefine.h"
+#include <CommonDefine.h>
 #include "Component/CComponent.h"
 #include "vector2D.h"
 

@@ -1,7 +1,7 @@
 #ifndef SBOXCOMPONENT_H
 #define SBOXCOMPONENT_H
 
-#include "CommonDefine.h"
+#include <CommonDefine.h>
 #include "Component/CComponent.h"
 #include "Geometry/CPolygonShape.h"
 #include "vector2D.h"

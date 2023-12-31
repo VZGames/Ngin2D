@@ -1,7 +1,7 @@
 #ifndef SCAMERACOMPONENT_H
 #define SCAMERACOMPONENT_H
 
-#include "CommonDefine.h"
+#include <CommonDefine.h>
 #include "Component/CComponent.h"
 #include "Camera/CCameraSys.h"
 #include "vector2D.h"

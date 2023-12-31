@@ -1,9 +1,11 @@
 #ifndef CRENDERSYS_H
 #define CRENDERSYS_H
 
-#include "CommonDefine.h"
+#include <CommonDefine.h>
 #include "Alias.h"
 
+class SDL_Renderer;
+class SDL_Window;
 BEGIN_NAMESPACE(engine)
 class CEntity;
 class CRenderSys

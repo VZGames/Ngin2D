@@ -1,7 +1,7 @@
 #ifndef CNOTIFYEVENTSYS_H
 #define CNOTIFYEVENTSYS_H
 
-#include "CommonDefine.h"
+#include <CommonDefine.h>
 
 BEGIN_NAMESPACE(engine)
 class CNotifyEventSys

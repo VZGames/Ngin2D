@@ -1,7 +1,7 @@
 #ifndef AECSYSTEM_H
 #define AECSYSTEM_H
 
-#include "CommonDefine.h"
+#include <CommonDefine.h>
 #include "CWorld.h"
 
 BEGIN_NAMESPACE(engine)

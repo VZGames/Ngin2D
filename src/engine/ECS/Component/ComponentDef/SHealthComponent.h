@@ -1,7 +1,7 @@
 #ifndef SHEALTHCOMPONENT_H
 #define SHEALTHCOMPONENT_H
 
-#include "CommonDefine.h"
+#include <CommonDefine.h>
 #include "Component/CComponent.h"
 
 BEGIN_NAMESPACE(engine)

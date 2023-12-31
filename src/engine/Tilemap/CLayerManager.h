@@ -2,7 +2,7 @@
 #define CLAYERMANAGER_H
 
 #include <stack>
-#include "CommonDefine.h"
+#include <CommonDefine.h>
 #include "TilemapParser/TmxFormat.h"
 #include "matrix2D.h"
 

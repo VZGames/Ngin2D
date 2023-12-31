@@ -1,7 +1,7 @@
 #ifndef SKEYINPUTCOMPONENT_H
 #define SKEYINPUTCOMPONENT_H
 
-#include "CommonDefine.h"
+#include <CommonDefine.h>
 #include "CComponent.h"
 #include "CKeyEvent.h"
 

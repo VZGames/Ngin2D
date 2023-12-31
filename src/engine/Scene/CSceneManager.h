@@ -1,8 +1,8 @@
 #ifndef CSCENEMANAGER_H
 #define CSCENEMANAGER_H
 
-#include "CommonDefine.h"
-#include "CommonEnums.h"
+#include <CommonDefine.h>
+#include <CommonEnums.h>
 
 BEGIN_NAMESPACE(engine)
 class AScene;

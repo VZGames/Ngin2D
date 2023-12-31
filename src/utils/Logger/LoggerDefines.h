@@ -1,4 +1,4 @@
-#include "../../engine/Common/CommonDefine.h"
+#include <CommonDefine.h>
 #include "CLogger.h"
 
 #define __LOG_INFO__    qInfo()

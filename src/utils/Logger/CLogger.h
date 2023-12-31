@@ -5,8 +5,8 @@
 #include <sstream>
 #include <mutex>
 #include <thread>
-#include "Utils.h"
-#include "../../engine/Common/CommonEnums.h"
+#include <Utils.h>
+#include <CommonEnums.h>
 
 class CLogger
 {

@@ -1,7 +1,7 @@
 #ifndef AEVENT_H
 #define AEVENT_H
 
-#include "CommonDefine.h"
+#include <CommonDefine.h>
 #include "CEventDispatcher.h"
 
 BEGIN_NAMESPACE(engine)

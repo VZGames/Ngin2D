@@ -1,7 +1,8 @@
 #ifndef CEVENTDISPATCHER_H
 #define CEVENTDISPATCHER_H
 
-#include "CommonDefine.h"
+#include <CommonDefine.h>
+#include <SDL2/SDL_events.h>
 
 BEGIN_NAMESPACE(engine)
 class CEventDispatcher

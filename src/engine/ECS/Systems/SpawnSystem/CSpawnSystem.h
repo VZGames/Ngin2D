@@ -1,7 +1,7 @@
 #ifndef CSPAWNSYSTEM_H
 #define CSPAWNSYSTEM_H
 
-#include "CommonDefine.h"
+#include <CommonDefine.h>
 #include "AECSystem.h"
 
 BEGIN_NAMESPACE(engine)

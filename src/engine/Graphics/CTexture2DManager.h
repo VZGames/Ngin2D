@@ -1,7 +1,9 @@
 #ifndef CTEXTURE2DMANAGER_H
 #define CTEXTURE2DMANAGER_H
 
-#include "CommonDefine.h"
+#include <CommonDefine.h>
+#include <SDL2/SDL_render.h>
+
 #include "Alias.h"
 #include "ATextureManager.h"
 #include "Math/point2D.h"

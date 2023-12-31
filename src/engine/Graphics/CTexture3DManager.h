@@ -1,7 +1,7 @@
 #ifndef CTEXTURE3DMANAGER_H
 #define CTEXTURE3DMANAGER_H
 
-#include "CommonDefine.h"
+#include <CommonDefine.h>
 #include "ATextureManager.h"
 
 BEGIN_NAMESPACE(engine)

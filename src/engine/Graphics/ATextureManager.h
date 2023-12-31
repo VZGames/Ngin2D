@@ -1,7 +1,7 @@
 #ifndef ATEXTUREMANAGER_H
 #define ATEXTUREMANAGER_H
 
-#include "CommonDefine.h"
+#include <CommonDefine.h>
 #include "Alias.h"
 
 BEGIN_NAMESPACE(engine)

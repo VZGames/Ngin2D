@@ -1,6 +1,6 @@
 #ifndef CMOTIONSYSTEM_H
 #define CMOTIONSYSTEM_H
-#include "CommonDefine.h"
+#include <CommonDefine.h>
 #include "Systems/AECSystem.h"
 
 BEGIN_NAMESPACE(engine)

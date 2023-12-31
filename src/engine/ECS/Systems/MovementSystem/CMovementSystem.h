@@ -1,7 +1,7 @@
 #ifndef CMOVEMENTSYSTEM_H
 #define CMOVEMENTSYSTEM_H
 
-#include "CommonDefine.h"
+#include <CommonDefine.h>
 #include "Systems/AECSystem.h"
 
 BEGIN_NAMESPACE(engine)

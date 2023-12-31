@@ -3,8 +3,8 @@
 
 #include <unordered_map>
 #include <list>
-#include "../../engine/Common/CommonDefine.h"
-#include "../../engine/Common/CommonEnums.h"
+#include <CommonDefine.h>
+#include <CommonEnums.h>
 
 BEGIN_NAMESPACE(HmiNgin)
 template<class T>

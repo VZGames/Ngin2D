@@ -1,7 +1,7 @@
 #ifndef CECSYSTEMMANAGER_H
 #define CECSYSTEMMANAGER_H
 
-#include "CommonDefine.h"
+#include <CommonDefine.h>
 #include "CollisionSystem/CCollisionSystem.h"
 #include "MovementSystem/CMovementSystem.h"
 #include "SpriteSystem/CSpriteSystem.h"

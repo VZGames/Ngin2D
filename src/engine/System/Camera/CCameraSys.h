@@ -1,8 +1,8 @@
 #ifndef CCAMERASYS_H
 #define CCAMERASYS_H
 
-#include "CommonDefine.h"
-#include "CommonEnums.h"
+#include <CommonDefine.h>
+#include <CommonEnums.h>
 #include "offset2D.h"
 #include "vector2D.h"
 

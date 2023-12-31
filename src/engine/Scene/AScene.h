@@ -1,7 +1,7 @@
 #ifndef ASCENE_H
 #define ASCENE_H
 
-#include "CommonDefine.h"
+#include <CommonDefine.h>
 #include "vector2D.h"
 
 BEGIN_NAMESPACE(engine)

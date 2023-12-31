@@ -1,7 +1,7 @@
 #ifndef CKEYEVENT_H
 #define CKEYEVENT_H
 
-#include "CommonDefine.h"
+#include <CommonDefine.h>
 #include "LoggerDefines.h"
 #include "AEvent.h"
 

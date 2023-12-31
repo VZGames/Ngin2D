@@ -1,7 +1,7 @@
 #ifndef CCAMERASYSTEM_H
 #define CCAMERASYSTEM_H
 
-#include "CommonDefine.h"
+#include <CommonDefine.h>
 #include "AECSystem.h"
 
 BEGIN_NAMESPACE(engine)

@@ -4,7 +4,7 @@
 #include <stdint.h>
 #include <bitset>
 
-#include "CommonDefine.h"
+#include <CommonDefine.h>
 
 BEGIN_NAMESPACE(engine)
 

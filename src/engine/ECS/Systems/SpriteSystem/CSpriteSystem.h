@@ -1,7 +1,7 @@
 #ifndef CSPRITESYSTEM_H
 #define CSPRITESYSTEM_H
 
-#include "CommonDefine.h"
+#include <CommonDefine.h>
 #include "Systems/AECSystem.h"
 
 BEGIN_NAMESPACE(engine)

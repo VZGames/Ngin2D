@@ -1,7 +1,7 @@
 #ifndef CCOLLISIONSYSTEM_H
 #define CCOLLISIONSYSTEM_H
 
-#include "CommonDefine.h"
+#include <CommonDefine.h>
 #include "Systems/AECSystem.h"
 #include "CBroadPhaseCulling.h"
 #include "ThreadPool/CThreadPool.h"

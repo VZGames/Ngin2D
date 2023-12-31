@@ -1,7 +1,7 @@
 #ifndef CNGIN_H
 #define CNGIN_H
 
-#include "CommonDefine.h"
+#include <CommonDefine.h>
 #include "Alias.h"
 #include "size2D.h"
 #include "ThreadPool/CThreadPool.h"

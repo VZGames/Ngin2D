@@ -1,7 +1,7 @@
 #ifndef SMOTIONCOMPONENT_H
 #define SMOTIONCOMPONENT_H
 
-#include "CommonDefine.h"
+#include <CommonDefine.h>
 #include "Component/CComponent.h"
 #include "vector2D.h"
 

@@ -4,6 +4,7 @@
 #include "CEntity.h"
 #include "ComponentDef/SPositionComponent.h"
 #include "ComponentDef/SSpriteComponent.h"
+#include <SDL2/SDL_timer.h>
 
 BEGIN_NAMESPACE(engine)
 CSpriteSystem::CSpriteSystem()

@@ -2,7 +2,7 @@
 #define CKEYINPUTSYSTEM_H
 
 
-#include "CommonDefine.h"
+#include <CommonDefine.h>
 #include "AECSystem.h"
 
 BEGIN_NAMESPACE(engine)

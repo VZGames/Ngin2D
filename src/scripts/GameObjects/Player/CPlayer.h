@@ -1,8 +1,8 @@
 #ifndef CPLAYER_H
 #define CPLAYER_H
 
-#include "CommonDefine.h"
-#include "Common/enums.h"
+#include <CommonDefine.h>
+#include "./enums.h"
 
 #include "Entity/CEntity.h"
 #include "ComponentDef/SSpriteComponent.h"

@@ -1,7 +1,7 @@
 #ifndef CGAMESCENE_H
 #define CGAMESCENE_H
 
-#include "CommonDefine.h"
+#include <CommonDefine.h>
 #include "AScene.h"
 #include "GameObjects/Cows/CCow.h"
 #include "GameObjects/Player/CPlayer.h"

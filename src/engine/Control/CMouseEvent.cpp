@@ -2,6 +2,7 @@
 #include "Camera/CCameraSys.h"
 #include "CNgin.h"
 #include "LoggerDefines.h"
+#include <SDL2/SDL_image.h>
 
 BEGIN_NAMESPACE(engine)
 CMouseEvent *CMouseEvent::s_instance = nullptr;

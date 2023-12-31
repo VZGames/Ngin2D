@@ -2,7 +2,7 @@
 #define CGRIDLAYOUT_H
 
 #include <stack>
-#include "CommonDefine.h"
+#include <CommonDefine.h>
 #include "DataStructs/Grid/CGrid.h"
 
 BEGIN_NAMESPACE(engine)

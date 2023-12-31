@@ -1,7 +1,7 @@
 #ifndef SSPRITECOMPONENT_H
 #define SSPRITECOMPONENT_H
 
-#include "CommonDefine.h"
+#include <CommonDefine.h>
 #include "Component/CComponent.h"
 
 BEGIN_NAMESPACE(engine)

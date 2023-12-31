@@ -1,7 +1,7 @@
 #ifndef CPARTICLESYS_H
 #define CPARTICLESYS_H
 
-#include "CommonDefine.h"
+#include <CommonDefine.h>
 
 BEGIN_NAMESPACE(engine)
 class CParticleSys

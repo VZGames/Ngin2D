@@ -1,8 +1,8 @@
 #ifndef CMOUSEEVENT_H
 #define CMOUSEEVENT_H
 
-#include "CommonDefine.h"
-#include "CommonEnums.h"
+#include <CommonDefine.h>
+#include <CommonEnums.h>
 #include "AEvent.h"
 
 BEGIN_NAMESPACE(engine)

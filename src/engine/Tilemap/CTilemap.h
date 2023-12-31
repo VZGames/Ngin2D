@@ -2,7 +2,7 @@
 #define CTILEMAP_H
 
 #include <stack>
-#include "CommonDefine.h"
+#include <CommonDefine.h>
 #include "TilemapParser/CTilemapParser.h"
 #include "CTilesetManager.h"
 #include "CLayerManager.h"

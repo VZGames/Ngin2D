@@ -1,8 +1,8 @@
 #ifndef CCOMPONENT_H
 #define CCOMPONENT_H
 
-#include "CommonDefine.h"
-#include "Alias.h"
+#include <CommonDefine.h>
+#include <Alias.h>
 
 BEGIN_NAMESPACE(engine)
 class CComponent

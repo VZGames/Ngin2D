@@ -5,6 +5,8 @@
 #include "CKeyEvent.h"
 #include "CWorld.h"
 #include "Render/CRenderSys.h"
+#include <SDL2/SDL.h>
+#include <SDL2/SDL_image.h>
 
 BEGIN_NAMESPACE(engine)
 CNgin *CNgin::s_instance = nullptr;
