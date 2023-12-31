@@ -81,12 +81,12 @@ void CTilemap::update(std::vector<CEntity*> &entities, float dt)
 
 void CTilemap::render()
 {
-    for (auto &data : m_layer_manager.layers())
-    {
-        m_pool->submit([&]()
-                       { m_layer_renderer.render(m_tileset_manager.tilesets(), data.first, std::move(data.second)); })
-            .get();
-    }
+//    for (auto &data : m_layer_manager.layers())
+//    {
+//        m_pool->submit([&]()
+//                       { m_layer_renderer.render(m_tileset_manager.tilesets(), data.first, std::move(data.second)); })
+//            .get();
+//    }
 }
 
 TmxMap *CTilemap::map() const

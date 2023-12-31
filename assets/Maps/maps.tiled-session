@@ -3,7 +3,7 @@
         "height": 4300,
         "width": 2
     },
-    "activeFile": "",
+    "activeFile": "PhuHoa.tmx",
     "expandedProjectPaths": [
         "."
     ],
@@ -41,8 +41,8 @@
             "scale": 2,
             "selectedLayer": 4,
             "viewCenter": {
-                "x": 288.75,
-                "y": 262
+                "x": 288.25,
+                "y": 261.5
             }
         },
         "PhuHoa.tmx#Dirt": {
@@ -75,6 +75,7 @@
     "map.tileWidth": 16,
     "map.width": 90,
     "openFiles": [
+        "PhuHoa.tmx"
     ],
     "project": "maps.tiled-project",
     "recentFiles": [

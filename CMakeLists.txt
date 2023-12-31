@@ -1,5 +1,5 @@
 set(CMAKE_VERBOSE_MAKEFILE ON)
-cmake_minimum_required(VERSION 3.27.6)
+cmake_minimum_required(VERSION 3.28.0)
 
 project(Bee2D VERSION 0.1.0 DESCRIPTION "Game engine from BeeStudio" LANGUAGES C CXX)
 
@@ -10,18 +10,17 @@ set(CMAKE_CXX_EXTENSIONS OFF)
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR})
 set(LIBRARY_DIR "${CMAKE_SOURCE_DIR}/libs")
 set(INCLUDE_DIR "${CMAKE_SOURCE_DIR}/include")
+set(LINKER_LIBRARY "-lmingw32 -lSDL2main -lSDL2 -lSDL2_image -lTinyXML2")
 
 message("SOURCE: ${CMAKE_SOURCE_DIR}")
 message("Output: ${CMAKE_BINARY_DIR}")
 
-set(LINKER_LIBRARY "-lmingw32 -lSDL2main -lSDL2 -lSDL2_image -lTinyXML2")
 
 
 # copy dynamic libraries
 file(COPY
     "${CMAKE_SOURCE_DIR}/bin/SDL2.dll"
     "${CMAKE_SOURCE_DIR}/bin/SDL2_image.dll"
-    "${CMAKE_SOURCE_DIR}/bin/TinyXML2.dll"
     DESTINATION ${CMAKE_BINARY_DIR})
 
 # copy game assets into build/assets directory

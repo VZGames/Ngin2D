@@ -10,7 +10,7 @@ CKeyEvent::CKeyEvent()
 
 CKeyEvent *CKeyEvent::instance()
 {
-    return s_instance = (s_instance == nullptr)? new CKeyEvent():s_instance;
+    return s_instance = (s_instance == nullptr) ? new CKeyEvent() : s_instance;
 }
 
 bool CKeyEvent::sendEvent(uint32_t key)
@@ -20,7 +20,7 @@ bool CKeyEvent::sendEvent(uint32_t key)
         return false;
     }
 
-    if (m_state[key] ||  m_event.type == key)
+    if (m_state[key] || m_event.type == key)
     {
         m_inputs.at(key)();
         return true;
@@ -54,8 +54,3 @@ void CKeyEvent::keyUp()
 }
 
 END_NAMESPACE
-
-
-
-
-

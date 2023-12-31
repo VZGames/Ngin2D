@@ -36,31 +36,31 @@ public:
     void shutdown();
 
     // Submit a function to be executed asynchronously by the pool
-    template <typename _Func, typename... _Args>
-    std::future<std::result_of_t<_Func(_Args...)>> submit(_Func &&fn, _Args &&...args)
-    {
-        /* The return type of task `F` */
-        using return_type = std::result_of_t<decltype(fn)&(_Args...)>;
+//    template <typename _Func, typename... _Args>
+//    std::future<std::result_of_t<_Func(_Args...)>> submit(_Func &&fn, _Args &&...args)
+//    {
+//        /* The return type of task `F` */
+//        using return_type = std::result_of_t<decltype(fn)&(_Args...)>;
 
-        /* wrapper for no arguments */
-        auto task = std::make_shared<std::packaged_task<return_type()>>(
-            std::bind(std::forward<_Func>(fn), std::forward<_Args>(args)...));
+//        /* wrapper for no arguments */
+//        auto task = std::make_shared<std::packaged_task<return_type()>>(
+//            std::bind(std::forward<_Func>(fn), std::forward<_Args>(args)...));
 
-        // Wrap packaged task into void function
-        std::function<void()> wrapper_func = [task]()
-        {
-            (*task)();
-        };
+//        // Wrap packaged task into void function
+//        std::function<void()> wrapper_func = [task]()
+//        {
+//            (*task)();
+//        };
 
-        // Enqueue generic wrapper function
-        m_queue.enqueue(wrapper_func);
+//        // Enqueue generic wrapper function
+//        m_queue.enqueue(wrapper_func);
 
-        // Wake up one thread if its waiting
-        m_conditional_lock.notify_one();
+//        // Wake up one thread if its waiting
+//        m_conditional_lock.notify_one();
 
-        // Return future from promise
-        return task->get_future();
-    }
+//        // Return future from promise
+//        return task->get_future();
+//    }
 };
 
 #endif // CTHREADPOOL_H

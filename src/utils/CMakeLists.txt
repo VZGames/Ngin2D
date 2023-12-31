@@ -12,3 +12,4 @@ target_include_directories(utils_module PUBLIC
     ${CMAKE_CURRENT_SOURCE_DIR}/Parser
     ${CMAKE_CURRENT_SOURCE_DIR}/Template
 )
+

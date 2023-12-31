@@ -6,28 +6,27 @@ BEGIN_NAMESPACE(script)
 CPlayer::CPlayer()
 {
     engine::CEntityManager::instance()->createEntity(this);
-    m_position  = this->addComponent<engine::SPositionComponent>(320, 244);
-    m_health    = this->addComponent<engine::SHealthComponent>(100);
-    m_sprite    = this->addComponent<engine::SSpriteComponent>(__FUNCTION__,
-                                                            "./debug/assets/Characters/BasicCharakterSpritesheet.png",
+    m_position = this->addComponent<engine::SPositionComponent>(320, 244);
+    m_health = this->addComponent<engine::SHealthComponent>(100);
+    m_sprite = this->addComponent<engine::SSpriteComponent>(__FUNCTION__,
+                                                            "./assets/Characters/BasicCharakterSpritesheet.png",
                                                             48,
                                                             48,
                                                             2,
                                                             200);
     m_sprite->zOrder = 1;
 
+    m_camera = this->addComponent<engine::SCameraComponent>(*m_position);
+    m_motion = this->addComponent<engine::SMotionComponent>(3);
 
-    m_camera    = this->addComponent<engine::SCameraComponent>(*m_position);
-    m_motion    = this->addComponent<engine::SMotionComponent>(3);
-
-    m_box       = this->addComponent<engine::SBoxComponent>(E_BODY_TYPE::KINEMATIC, m_position->x, m_position->y);
+    m_box = this->addComponent<engine::SBoxComponent>(E_BODY_TYPE::KINEMATIC, m_position->x, m_position->y);
     m_box->setVertex(20, 28);
     m_box->setVertex(28, 28);
     m_box->setVertex(28, 32);
     m_box->setVertex(20, 32);
     m_box->setAxes();
 
-    m_keyInput  = this->addComponent<engine::SKeyInputComponent>();
+    m_keyInput = this->addComponent<engine::SKeyInputComponent>();
     m_keyInput->registerKey(
         SDL_KEYUP,
         SDL_SCANCODE_E,
@@ -35,10 +34,8 @@ CPlayer::CPlayer()
         SDL_SCANCODE_A,
         SDL_SCANCODE_D,
         SDL_SCANCODE_W,
-        SDL_SCANCODE_S
-        );
-    
-    
+        SDL_SCANCODE_S);
+
     engine::CKeyEvent::instance()->registerKey(SDL_KEYUP, &CPlayer::idle, this);
     engine::CKeyEvent::instance()->registerKey(SDL_SCANCODE_E, &CPlayer::attach, this);
     engine::CKeyEvent::instance()->registerKey(SDL_SCANCODE_SPACE, &CPlayer::jump, this);
@@ -46,13 +43,12 @@ CPlayer::CPlayer()
     engine::CKeyEvent::instance()->registerKey(SDL_SCANCODE_D, &CPlayer::walk, this, E_MOVE_DIRECTION::MOVE_RIGHT);
     engine::CKeyEvent::instance()->registerKey(SDL_SCANCODE_W, &CPlayer::walk, this, E_MOVE_DIRECTION::MOVE_UP);
     engine::CKeyEvent::instance()->registerKey(SDL_SCANCODE_S, &CPlayer::walk, this, E_MOVE_DIRECTION::MOVE_DOWN);
-
 }
 
 void CPlayer::idle()
 {
     //    DBG("IDLE")
-    if(m_motion->running)
+    if (m_motion->running)
     {
         m_motion->velocity.Zeros();
         m_motion->running = 0;
@@ -68,7 +64,7 @@ void CPlayer::jump()
 void CPlayer::walk(E_MOVE_DIRECTION direction)
 {
     //    DBG("WALK")
-    if(!m_motion->running)
+    if (!m_motion->running)
     {
         m_sprite->frameCount = 4;
         m_motion->running = 1;
@@ -117,8 +113,3 @@ void CPlayer::attach()
 }
 
 END_NAMESPACE
-
-
-
-
-
