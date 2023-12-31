@@ -1,5 +1,5 @@
-#ifndef CTHREADPOOL_H
-#define CTHREADPOOL_H
+#ifndef CTHREAD_POOL_H
+#define CTHREAD_POOL_H
 
 #include <condition_variable>
 #include <functional>
@@ -7,6 +7,7 @@
 #include <vector>
 #include <future>
 #include <type_traits>
+#include <assert.h>
 #include "../CSafeQueue.h"
 
 class CThreadWorker;
@@ -36,31 +37,37 @@ public:
     void shutdown();
 
     // Submit a function to be executed asynchronously by the pool
-//    template <typename _Func, typename... _Args>
-//    std::future<typename std::result_of<_Func(_Args...)>::type> submit(_Func &&fn, _Args &&...args)
-//    {
-//        /* The return type of task `F` */
-//        using return_type = typename std::result_of<decltype(fn)&(_Args...)>::type;
+    template <typename _Func, typename... _Args>
+    std::future<std::invoke_result_t<_Func, _Args...>> submit(_Func &&fn, _Args &&...args)
+    {
+        /* The return type of task `F` */
+        using return_type = std::invoke_result_t<_Func, _Args...>;
 
-//        /* wrapper for no arguments */
-//        auto task = std::make_shared<std::packaged_task<return_type()>>(
-//            std::bind(std::forward<_Func>(fn), std::forward<_Args>(args)...));
+        /* wrapper for no arguments */
+        auto task = std::make_shared<std::packaged_task<return_type()>>(
+            std::bind(std::forward<_Func>(fn), std::forward<_Args>(args)...));
 
-//        // Wrap packaged task into void function
-//        std::function<void()> wrapper_func = [task]()
-//        {
-//            (*task)();
-//        };
+        
+        assert(task != nullptr && "Task is NULL!!!");
 
-//        // Enqueue generic wrapper function
-//        m_queue.enqueue(wrapper_func);
+        // Wrap packaged task into void function
+        std::function<void()> wrapper_func = [task]()
+        {
+            (*task)();
+        };
 
-//        // Wake up one thread if its waiting
-//        m_conditional_lock.notify_one();
+        // Enqueue generic wrapper function
+        m_queue.enqueue(wrapper_func);
 
-//        // Return future from promise
-//        return task->get_future();
-//    }
+        // Wake up one thread if its waiting
+        m_conditional_lock.notify_one();
+
+        // Return future from promise
+        return task->get_future();
+    }
+
+    #define WRAP_SUBMIT(FUNC) submit<decltype(&FUNC), &FUNC>
+
 };
 
-#endif // CTHREADPOOL_H
+#endif // CTHREAD_POOL_H

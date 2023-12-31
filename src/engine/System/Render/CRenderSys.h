@@ -1,5 +1,5 @@
-#ifndef CRENDERSYS_H
-#define CRENDERSYS_H
+#ifndef C_RENDER_SYS_H
+#define C_RENDER_SYS_H
 
 #include <CommonDefine.h>
 #include "Alias.h"
@@ -32,4 +32,4 @@ public:
 };
 END_NAMESPACE
 
-#endif // CRENDERSYS_H
+#endif // C_RENDER_SYS_H
