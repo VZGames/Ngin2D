@@ -3,6 +3,8 @@
 #include "CNgin.h"
 #include "LoggerDefines.h"
 #include <SDL2/SDL_image.h>
+#include <SDL2/SDL_events.h>
+#include <SDL2/SDL_surface.h>
 
 BEGIN_NAMESPACE(engine)
 CMouseEvent *CMouseEvent::s_instance = nullptr;
