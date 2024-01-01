@@ -5,6 +5,7 @@
 #include <SDL2/SDL_image.h>
 #include <SDL2/SDL_events.h>
 #include <SDL2/SDL_surface.h>
+#include "Define/Assets/DefineWidgets.h"
 
 BEGIN_NAMESPACE(engine)
 CMouseEvent *CMouseEvent::s_instance = nullptr;
@@ -14,7 +15,7 @@ CMouseEvent::CMouseEvent()
     float scale = CCameraSys::instance()->scale();
     float width = 16 * scale;
     float height = 16 * scale;
-    m_surface = IMG_Load("./assets/widgets/select.png");
+    m_surface = IMG_Load(SQUARE_MOUSE_SELECT);
     m_newSurface = SDL_CreateRGBSurface(0, width, height,
                                                    m_surface->format->BitsPerPixel,
                                                    m_surface->format->Rmask,

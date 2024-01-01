@@ -1,6 +1,7 @@
 #include "CPlayer.h"
 #include "CKeyEvent.h"
 #include "Entity/CEntityManager.h"
+#include "Define/Assets/DefineCharacters.h"
 
 BEGIN_NAMESPACE(script)
 CPlayer::CPlayer()
@@ -9,7 +10,7 @@ CPlayer::CPlayer()
     m_position = this->addComponent<engine::SPositionComponent>(320, 244);
     m_health = this->addComponent<engine::SHealthComponent>(100);
     m_sprite = this->addComponent<engine::SSpriteComponent>(__FUNCTION__,
-                                                            "./assets/Characters/BasicCharakterSpritesheet.png",
+                                                            BASIC_BUNNY,
                                                             48,
                                                             48,
                                                             2,

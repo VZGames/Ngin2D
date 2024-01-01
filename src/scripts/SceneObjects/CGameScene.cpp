@@ -6,6 +6,7 @@
 #include "CBroadPhaseCulling.h"
 #include "ComponentDef/SBoxComponent.h"
 #include "CNgin.h"
+#include "Define/Assets/DefineMaps.h"
 
 BEGIN_NAMESPACE(script)
 CGameScene::CGameScene()
@@ -43,7 +44,7 @@ void CGameScene::init()
 
     // space init map/level
     {
-        m_tilemap->loadMap("./assets/Maps/PhuHoa.tmx");
+        m_tilemap->loadMap(PHU_HOA);
         engine::CCameraSys::instance()->setViewport(engine::CNgin::windowSize().width,
                                                     engine::CNgin::windowSize().height);
 
