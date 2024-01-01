@@ -42,6 +42,8 @@ public:
 
     TmxMap *map() const;
     Vector2D<float> coord_limit() const;
+
+    void test();
 };
 END_NAMESPACE
 

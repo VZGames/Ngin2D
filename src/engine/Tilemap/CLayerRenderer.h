@@ -13,7 +13,7 @@ class CLayerRenderer
 public:
     CLayerRenderer();
 
-    void render(const std::unordered_map<const char*, TmxTileSet> &, TmxLayer &, Matrix2D<int>&&);
+    void render(const std::unordered_map<const char*, TmxTileSet> &, TmxLayer &, Matrix2D<int>&);
 };
 END_NAMESPACE
 

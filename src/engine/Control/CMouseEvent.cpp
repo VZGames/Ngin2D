@@ -14,7 +14,7 @@ CMouseEvent::CMouseEvent()
     float scale = CCameraSys::instance()->scale();
     float width = 16 * scale;
     float height = 16 * scale;
-    m_surface = IMG_Load("./debug/assets/widgets/select.png");
+    m_surface = IMG_Load("./assets/widgets/select.png");
     m_newSurface = SDL_CreateRGBSurface(0, width, height,
                                                    m_surface->format->BitsPerPixel,
                                                    m_surface->format->Rmask,
@@ -52,6 +52,7 @@ CMouseEvent *CMouseEvent::instance()
 
 void CMouseEvent::processEvents(CEventDispatcher *dispatcher)
 {
+    LOCK_GUARD(m_mtx)
     if (dispatcher->getNextEvent(m_event))
     {
         switch (m_event.type) {

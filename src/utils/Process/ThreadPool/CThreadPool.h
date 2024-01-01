@@ -8,6 +8,7 @@
 #include <future>
 #include <type_traits>
 #include <assert.h>
+#include <memory>
 #include "../CSafeQueue.h"
 
 class CThreadWorker;
@@ -36,18 +37,16 @@ public:
     // Waits until threads finish their current task and shutdowns the pool
     void shutdown();
 
+#ifdef __cpp_lib_is_invocable
     // Submit a function to be executed asynchronously by the pool
     template <typename _Func,
-              typename... _Args,
-              /* The return type of task `_Func` */
-              typename _Ret = std::invoke_result_t<_Func, _Args...>>
-    std::future<_Ret> submit(_Func &&fn, _Args &&...args)
+             typename... _Args,
+             typename _Ret = std::invoke_result_t<_Func, _Args...>>
+    std::future<_Ret> submit(_Func &&fn, _Args &&...args) noexcept
     {
-        // Check if the function returns void
-        static_assert(!std::is_same_v<_Ret, void>, "Function returns void.");
-
-            /* wrapper for no arguments */
-        auto task = std::make_shared<std::packaged_task<_Ret>>(std::invoke(std::forward<_Func>(fn), std::forward<_Args>(args)...));
+        // Encapsulate it into a shared ptr in order to be able to copy construct / assign
+        auto task = std::make_shared<std::packaged_task<_Ret()>>(
+            std::bind(std::forward<_Func>(fn), std::forward<_Args>(args)...));
 
         // Wrap packaged task into void function
         std::function<void()> wrapper_func = [task]()
@@ -64,6 +63,6 @@ public:
         // Return future from promise
         return task->get_future();
     }
+#endif
 };
-
 #endif // CTHREAD_POOL_H

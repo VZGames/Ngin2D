@@ -29,6 +29,7 @@ file(COPY
 include_directories(${INCLUDE_DIR})
 link_directories(${LIBRARY_DIR})
 
+add_compile_options("-O0")
 add_subdirectory(src)
 
 # SDL2MAIN_LIBRARY is needed for Windows specific main function.
