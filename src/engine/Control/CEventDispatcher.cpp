@@ -1,6 +1,6 @@
 #include "CEventDispatcher.h"
 #include "LoggerDefines.h"
-BEGIN_NAMESPACE(engine)
+using namespace engine;
 CEventDispatcher *CEventDispatcher::s_instance = nullptr;
 CEventDispatcher::CEventDispatcher()
 {
@@ -33,5 +33,5 @@ bool CEventDispatcher::getNextEvent(SDL_Event &event)
     return false;
 }
 
-END_NAMESPACE
+
 

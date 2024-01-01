@@ -9,7 +9,7 @@
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_image.h>
 
-BEGIN_NAMESPACE(engine)
+using namespace engine;
 SDL_Renderer  *CRenderSys::s_renderer = nullptr;
 CRenderSys *CRenderSys::s_instance = nullptr;
 CRenderSys::CRenderSys()
@@ -151,5 +151,5 @@ bool CRenderSys::destroyRenderer()
     SDL_DestroyRenderer(s_renderer);
     return s_renderer == nullptr;
 }
-END_NAMESPACE
+
 

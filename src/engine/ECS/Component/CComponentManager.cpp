@@ -1,7 +1,7 @@
 #include "CComponentManager.h"
 #include "LoggerDefines.h"
 
-BEGIN_NAMESPACE(engine)
+using namespace engine;
 CComponentManager *CComponentManager::s_instance = nullptr;
 CComponentManager::CComponentManager()
 {
@@ -40,6 +40,6 @@ bool CComponentManager::createComponent(CComponent *newComponent)
     DBG("Created Component %s has ID %d", compName,  _id)
     return true;
 }
-END_NAMESPACE
+
 
 

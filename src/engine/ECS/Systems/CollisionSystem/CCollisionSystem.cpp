@@ -5,7 +5,7 @@
 #include "ComponentDef/SBoxComponent.h"
 #include "ComponentDef/SMotionComponent.h"
 
-BEGIN_NAMESPACE(engine)
+using namespace engine;
 CCollisionSystem::CCollisionSystem()
     :m_pool(2),m_broad_phase_culling(CBroadPhaseCulling::instance())
 {
@@ -63,5 +63,5 @@ void CCollisionSystem::update(CEntity *entity, float dt)
 }
 
 
-END_NAMESPACE
+
 

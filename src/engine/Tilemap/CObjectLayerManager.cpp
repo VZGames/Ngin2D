@@ -2,7 +2,7 @@
 #include "CBroadPhaseCulling.h"
 #include "Alias.h"
 
-BEGIN_NAMESPACE(engine)
+using namespace engine;
 CObjectLayerManager::CObjectLayerManager()
 {
 
@@ -29,7 +29,7 @@ const std::vector<CPolygonShape> *CObjectLayerManager::box() const
 {
     return &m_box;
 }
-END_NAMESPACE
+
 
 
 

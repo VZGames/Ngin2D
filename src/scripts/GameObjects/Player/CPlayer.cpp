@@ -3,7 +3,7 @@
 #include "Entity/CEntityManager.h"
 #include "Define/Assets/DefineCharacters.h"
 
-BEGIN_NAMESPACE(script)
+using namespace script;
 CPlayer::CPlayer()
 {
     engine::CEntityManager::instance()->createEntity(this);
@@ -113,4 +113,4 @@ void CPlayer::attach()
     //    DBG("ATTACK");
 }
 
-END_NAMESPACE
+

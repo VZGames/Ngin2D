@@ -1,8 +1,8 @@
 #include "CNotifyEventManager.h"
 
-BEGIN_NAMESPACE(engine)
+using namespace engine;
 CNotifyEventManager::CNotifyEventManager()
 {
 
 }
-END_NAMESPACE
+

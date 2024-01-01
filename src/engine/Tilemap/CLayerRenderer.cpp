@@ -4,7 +4,7 @@
 #include "CTexture2DManager.h"
 #include "Camera/CCameraSys.h"
 
-BEGIN_NAMESPACE(engine)
+using namespace engine;
 CLayerRenderer::CLayerRenderer()
 {
 
@@ -101,7 +101,7 @@ void CLayerRenderer::render(const std::unordered_map<const char*, TmxTileSet> &t
 
     threads.clear();
 }
-END_NAMESPACE
+
 
 
 

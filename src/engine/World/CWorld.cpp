@@ -4,7 +4,7 @@
 #include "AScene.h"
 #include "CEntity.h"
 
-BEGIN_NAMESPACE(engine)
+using namespace engine;
 CWorld* CWorld::s_instance = nullptr;
 CWorld::CWorld()
 {
@@ -72,7 +72,7 @@ void CWorld::render()
 {
     CSceneManager::instance()->currentScene()->render();
 }
-END_NAMESPACE
+
 
 
 

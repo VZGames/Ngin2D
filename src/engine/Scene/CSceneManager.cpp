@@ -3,7 +3,7 @@
 #include "CWorld.h"
 #include "CBroadPhaseCulling.h"
 
-BEGIN_NAMESPACE(engine)
+using namespace engine;
 CSceneManager *CSceneManager::s_instance = nullptr;
 int CSceneManager::s_scene_count = 0;
 CSceneManager::CSceneManager()
@@ -51,7 +51,7 @@ void CSceneManager::transition(const char *)
 
 }
 
-END_NAMESPACE
+
 
 
 

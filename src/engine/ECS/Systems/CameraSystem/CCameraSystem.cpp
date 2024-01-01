@@ -9,7 +9,7 @@
 #include "CSceneManager.h"
 #include "AScene.h"
 
-BEGIN_NAMESPACE(engine)
+using namespace engine;
 CCameraSystem::CCameraSystem()
 {
 
@@ -56,6 +56,6 @@ void CCameraSystem::update(CEntity *entity, float dt)
     }
 }
 
-END_NAMESPACE
+
 
 

@@ -8,7 +8,7 @@
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_image.h>
 
-BEGIN_NAMESPACE(engine)
+using namespace engine;
 CNgin *CNgin::s_instance = nullptr;
 bool CNgin::s_running = false;
 std::mutex CNgin::s_mutex;
@@ -151,4 +151,4 @@ void CNgin::handle_events()
      m_key_evt_pool.submit(&CMouseEvent::processEvents, CMouseEvent::instance(), CEventDispatcher::instance()).get();
      m_key_evt_pool.submit(&CKeyEvent::processEvents, CKeyEvent::instance(), CEventDispatcher::instance()).get();
 }
-END_NAMESPACE
+

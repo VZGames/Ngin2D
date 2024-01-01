@@ -1,6 +1,6 @@
 #include "CLRUCache.h"
 
-BEGIN_NAMESPACE(HmiNgin)
+using namespace engine;
 template<class T>
 CLRUCache<T>::CLRUCache()
 {
@@ -32,4 +32,3 @@ void CLRUCache<T>::put(uint32_t key, T* value)
     {
     }
 }
-END_NAMESPACE

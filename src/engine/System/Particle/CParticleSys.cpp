@@ -1,8 +1,8 @@
 #include "CParticleSys.h"
 
-BEGIN_NAMESPACE(engine)
+using namespace engine;
 CParticleSys::CParticleSys()
 {
 
 }
-END_NAMESPACE
+

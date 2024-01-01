@@ -1,7 +1,7 @@
 #include "CTilesetManager.h"
 #include "CTexture2DManager.h"
 
-BEGIN_NAMESPACE(engine)
+using namespace engine;
 CTilesetManager::CTilesetManager()
 {
 
@@ -17,6 +17,6 @@ std::unordered_map<const char*, TmxTileSet> CTilesetManager::tilesets() const
 {
     return m_tilesets;
 }
-END_NAMESPACE
+
 
 

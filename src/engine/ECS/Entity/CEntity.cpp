@@ -1,6 +1,6 @@
 #include "CEntity.h"
 
-BEGIN_NAMESPACE(engine)
+using namespace engine;
 CEntity::CEntity()
 {
 }
@@ -14,7 +14,7 @@ void CEntity::setId(const EntityID &newId)
 {
     m_id = newId;
 }
-END_NAMESPACE
+
 
 
 

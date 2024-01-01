@@ -1,7 +1,7 @@
 #include "CLayerManager.h"
 #include "LoggerDefines.h"
 
-BEGIN_NAMESPACE(engine)
+using namespace engine;
 CLayerManager::CLayerManager()
 {
 
@@ -17,7 +17,7 @@ std::vector<std::pair<TmxLayer, Matrix2D<int>>> &CLayerManager::layers()
 {
     return m_layers;
 }
-END_NAMESPACE
+
 
 
 

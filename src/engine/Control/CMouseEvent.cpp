@@ -7,7 +7,7 @@
 #include <SDL2/SDL_surface.h>
 #include "Define/Assets/DefineWidgets.h"
 
-BEGIN_NAMESPACE(engine)
+using namespace engine;
 CMouseEvent *CMouseEvent::s_instance = nullptr;
 CMouseEvent::CMouseEvent()
 {
@@ -154,7 +154,7 @@ void CMouseEvent::windowEvent()
         break;
     }
 }
-END_NAMESPACE
+
 
 
 

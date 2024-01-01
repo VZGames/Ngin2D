@@ -8,7 +8,7 @@
 #include "CNgin.h"
 #include "Define/Assets/DefineMaps.h"
 
-BEGIN_NAMESPACE(script)
+using namespace script;
 CGameScene::CGameScene()
     :m_tilemap(engine::CTilemap::instance())
 {
@@ -80,7 +80,7 @@ void CGameScene::render()
 
 }
 
-END_NAMESPACE
+
 
 
 

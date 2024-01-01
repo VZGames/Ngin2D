@@ -1,8 +1,7 @@
 #include "AScene.h"
 #include "LoggerDefines.h"
 
-BEGIN_NAMESPACE(engine)
-
+using namespace engine;
 const char *AScene::id() const
 {
     return m_id;
@@ -17,7 +16,7 @@ void AScene::setBoundary(const Vector2D<float> &newBoundary)
 {
     m_boundary = newBoundary;
 }
-END_NAMESPACE
+
 
 
 

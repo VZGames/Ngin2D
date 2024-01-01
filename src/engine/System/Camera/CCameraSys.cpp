@@ -1,7 +1,7 @@
 #include "Camera/CCameraSys.h"
 #include "LoggerDefines.h"
 
-BEGIN_NAMESPACE(engine)
+using namespace engine;
 CCameraSys *CCameraSys::s_instance = nullptr;
 CCameraSys::CCameraSys()
 {
@@ -55,7 +55,7 @@ void CCameraSys::setViewport(float width, float height)
     m_view_port_width = width;
     m_view_port_height = height;
 }
-END_NAMESPACE
+
 
 
 

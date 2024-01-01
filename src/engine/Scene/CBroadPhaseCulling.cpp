@@ -1,6 +1,6 @@
 #include "CBroadPhaseCulling.h"
 
-BEGIN_NAMESPACE(engine)
+using namespace engine;
 CBroadPhaseCulling* CBroadPhaseCulling::s_instance = nullptr;
 CBroadPhaseCulling::CBroadPhaseCulling(float cellWidth, float cellHeight, int rows, int columns)
     :CGrid<std::unordered_set<uint32_t>>(cellWidth, cellHeight, rows, columns)
@@ -36,7 +36,7 @@ void CBroadPhaseCulling::clean()
 
 
 
-END_NAMESPACE
+
 
 
 

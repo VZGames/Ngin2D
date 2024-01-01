@@ -10,7 +10,7 @@
 #include "CSceneManager.h"
 #include "AScene.h"
 
-BEGIN_NAMESPACE(engine)
+using namespace engine;
 CMovementSystem::CMovementSystem()
 {}
 
@@ -55,7 +55,7 @@ void CMovementSystem::update(CEntity *entity, float dt)
                                            box->shape.center().y);
 }
 
-END_NAMESPACE
+
 
 
 

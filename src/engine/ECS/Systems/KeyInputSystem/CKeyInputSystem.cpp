@@ -2,7 +2,7 @@
 #include "CEntity.h"
 #include "ComponentDef/SKeyInputComponent.h"
 
-BEGIN_NAMESPACE(engine)
+using namespace engine;
 CKeyInputSystem::CKeyInputSystem()
 {
 }
@@ -27,6 +27,6 @@ void CKeyInputSystem::update(CEntity *entity, float dt)
         keyInput->listen();
     }
 }
-END_NAMESPACE
+
 
 

@@ -1,7 +1,7 @@
 #include "CTilemap.h"
 #include "Camera/CCameraSys.h"
 
-BEGIN_NAMESPACE(engine)
+using namespace engine;
 CTilemap *CTilemap::s_instance = nullptr;
 CTilemap::CTilemap()
 {
@@ -97,9 +97,4 @@ Vector2D<float> CTilemap::coord_limit() const
     return m_coord_limit;
 }
 
-void CTilemap::test()
-{
-
-}
-END_NAMESPACE
 

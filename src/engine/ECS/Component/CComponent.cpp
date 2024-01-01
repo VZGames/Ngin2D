@@ -1,6 +1,6 @@
 #include "CComponent.h"
 
-BEGIN_NAMESPACE(engine)
+using namespace engine;
 CComponent::CComponent(const char*name): m_name(name)
 {}
 
@@ -18,7 +18,7 @@ const char *CComponent::name() const
 {
     return m_name;
 }
-END_NAMESPACE
+
 
 
 

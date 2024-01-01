@@ -6,7 +6,7 @@
 #include <CommonDefine.h>
 #include <CommonEnums.h>
 
-BEGIN_NAMESPACE(HmiNgin)
+BEGIN_NAMESPACE(engine)
 template<class T>
 class CLRUCache
 {

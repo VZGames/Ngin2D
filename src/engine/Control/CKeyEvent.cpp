@@ -1,7 +1,7 @@
 #include "CKeyEvent.h"
 #include "LoggerDefines.h"
 
-BEGIN_NAMESPACE(engine)
+using namespace engine;
 CKeyEvent *CKeyEvent::s_instance = nullptr;
 CKeyEvent::CKeyEvent()
 {
@@ -54,4 +54,4 @@ void CKeyEvent::keyUp()
     DBG("Key Up");
 }
 
-END_NAMESPACE
+

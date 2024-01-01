@@ -1,7 +1,7 @@
 #include "CEntityManager.h"
 #include "LoggerDefines.h"
 
-BEGIN_NAMESPACE(engine)
+using namespace engine;
 CEntityManager *CEntityManager::s_instance = nullptr;
 CEntityManager::CEntityManager()
 {
@@ -51,7 +51,7 @@ std::vector<CEntity *> CEntityManager::entities() const
 {
     return m_entities;
 }
-END_NAMESPACE
+
 
 
 

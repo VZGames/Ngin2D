@@ -5,7 +5,7 @@
 #include <SDL2/SDL_render.h>
 #include <SDL2/SDL_image.h>
 
-BEGIN_NAMESPACE(engine)
+using namespace engine;
 CTexture2DManager *CTexture2DManager::s_instance = nullptr;
 CTexture2DManager::CTexture2DManager()
 {
@@ -113,7 +113,7 @@ void CTexture2DManager::drawPolygon(std::vector<Vector2D<float>> vertices, Vecto
 
     SDL_RenderDrawLinesF(CRenderSys::renderer(), points, sizeof(points)/sizeof(SDL_FPoint));
 }
-END_NAMESPACE
+
 
 
 

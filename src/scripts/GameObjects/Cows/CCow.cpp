@@ -2,7 +2,7 @@
 #include "CEntityManager.h"
 #include "Define/Assets/DefineCharacters.h"
 
-BEGIN_NAMESPACE(script)
+using namespace script;
 CCow::CCow(float x, float y)
 {
     engine::CEntityManager::instance()->createEntity(this);
@@ -30,4 +30,4 @@ void CCow::setPosition(float x, float y)
     m_position->x = x;
     m_position->y = y;
 }
-END_NAMESPACE
+

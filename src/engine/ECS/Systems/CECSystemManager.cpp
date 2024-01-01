@@ -3,7 +3,7 @@
 #include "AECSystem.h"
 #include "CWorld.h"
 
-BEGIN_NAMESPACE(engine)
+using namespace engine;
 CECSystemManager *CECSystemManager::s_instance = nullptr;
 CECSystemManager::CECSystemManager()
 {
@@ -46,7 +46,7 @@ void CECSystemManager::update(std::vector<CEntity*> &entities, float dt)
 //    DBG("END_UPDATE")
 }
 
-END_NAMESPACE
+
 
 
 

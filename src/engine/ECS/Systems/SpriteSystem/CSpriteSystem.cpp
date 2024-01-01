@@ -6,7 +6,7 @@
 #include "ComponentDef/SSpriteComponent.h"
 #include <SDL2/SDL_timer.h>
 
-BEGIN_NAMESPACE(engine)
+using namespace engine;
 CSpriteSystem::CSpriteSystem()
 {}
 
@@ -30,6 +30,6 @@ void CSpriteSystem::update(CEntity *entity, float dt)
     }
 }
 
-END_NAMESPACE
+
 
 
