@@ -1,5 +1,5 @@
 #include "AScene.h"
-#include "LoggerDefines.h"
+#include <LoggerDefines.h>
 
 using namespace engine;
 const char *AScene::id() const

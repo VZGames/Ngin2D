@@ -1,5 +1,5 @@
 #include "CMotionSystem.h"
-#include "LoggerDefines.h"
+#include <LoggerDefines.h>
 #include "CEntity.h"
 
 using namespace engine;

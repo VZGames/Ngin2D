@@ -1,7 +1,7 @@
 #include "CMouseEvent.h"
 #include "Camera/CCameraSys.h"
 #include "CNgin.h"
-#include "LoggerDefines.h"
+#include <LoggerDefines.h>
 #include <SDL2/SDL_image.h>
 #include <SDL2/SDL_events.h>
 #include <SDL2/SDL_surface.h>

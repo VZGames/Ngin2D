@@ -91,23 +91,26 @@ void CRenderSys::drawEntity(CEntity *entity)
         float x = position->x - offset->x;
         float y = position->y - offset->y;
 
-        CTexture2DManager::instance()->drawFrame(
-            sprite->textureId,
-            Point2DF(x, y),
-            sprite->frameWidth,
-            sprite->frameHeight,
-            sprite->row,
-            sprite->col,
-            scale);
+        Point2DF pos(x, y);
 
-        CTexture2DManager::instance()->drawRect(Point2DF(x, y),
+        CTexture2DManager::instance()
+            ->drawFrame(
+                sprite->textureId,
+                pos,
+                sprite->frameWidth,
+                sprite->frameHeight,
+                sprite->row,
+                sprite->col,
+                scale);
+
+        CTexture2DManager::instance()->drawRect(pos,
                                                 sprite->frameWidth,
                                                 sprite->frameHeight,
                                                 scale);
 
         if(box)
         {
-            CTexture2DManager::instance()->drawPolygon(box->vertices(), std::move(*offset));
+            CTexture2DManager::instance()->drawPolygon(pos, box->vertices(), scale);
         }
     }
 }

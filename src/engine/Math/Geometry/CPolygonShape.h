@@ -7,7 +7,6 @@
 class CPolygonShape: public AShape
 {
 private:
-    std::vector<Vector2D<float>> m_vertices_origin;
     std::vector<Vector2D<float>> m_vertices;
 
 public:

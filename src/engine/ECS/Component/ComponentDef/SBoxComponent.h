@@ -5,7 +5,7 @@
 #include "Component/CComponent.h"
 #include "Geometry/CPolygonShape.h"
 #include "vector2D.h"
-#include "LoggerDefines.h"
+#include <LoggerDefines.h>
 
 BEGIN_NAMESPACE(engine)
 class CEntity;

@@ -1,5 +1,5 @@
 #include "CComponentManager.h"
-#include "LoggerDefines.h"
+#include <LoggerDefines.h>
 
 using namespace engine;
 CComponentManager *CComponentManager::s_instance = nullptr;

@@ -1,5 +1,5 @@
 #include "CTexture2DManager.h"
-#include "LoggerDefines.h"
+#include <LoggerDefines.h>
 #include "Render/CRenderSys.h"
 #include <SDL2/SDL_video.h>
 #include <SDL2/SDL_render.h>
@@ -99,13 +99,13 @@ void CTexture2DManager::drawRect(Point2DF pos, _FrameWidthF w, _FrameHeightF h, 
 
     SDL_RenderDrawRectF(CRenderSys::renderer(), &destRect);
 }
-void CTexture2DManager::drawPolygon(std::vector<Vector2D<float>> vertices, Vector2D<float> &&offset)
+void CTexture2DManager::drawPolygon(Point2DF pos, std::vector<Vector2D<float>> vertices, _Scale scale)
 {
     SDL_FPoint points[vertices.size() + 1];
     int count = static_cast<int>(vertices.size());
     for (int i = 0; i < count; i++)
     {
-        points[i] = {(vertices[i].x - offset.x), (vertices[i].y - offset.y)};
+        points[i] = {(vertices[i].x * scale + pos.x()), (vertices[i].y * scale + pos.y())};
     }
 
     points[vertices.size()] = points[0];

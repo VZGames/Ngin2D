@@ -3,12 +3,10 @@
 
 #include "vector2D.h"
 #include "LoggerDefines.h"
-#include "Camera/CCameraSys.h"
 
 class AShape
 {
 private:
-    engine::CCameraSys *m_camera(void);
     bool  m_is_box{false};
     bool  m_collided{false};
 

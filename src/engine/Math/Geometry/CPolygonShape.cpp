@@ -22,9 +22,7 @@ std::vector<Vector2D<float>> CPolygonShape::vertices() const
 
 void CPolygonShape::pushVertex(float x, float y)
 {
-    float scale = engine::CCameraSys::instance()->scale();
-    m_vertices_origin.emplace_back(Vector2D<float>(x, y));
-    m_vertices.emplace_back(Vector2D<float>((x * scale) + m_x, (y * scale) + m_y));
+    m_vertices.emplace_back(x, y);
 }
 
 std::pair<float, float> CPolygonShape::projection(Vector2D<float> axis)
@@ -34,7 +32,8 @@ std::pair<float, float> CPolygonShape::projection(Vector2D<float> axis)
 
     for (const Vector2D<float> &vertex: m_vertices)
     {
-        float dotProduct = axis.dotProduct(vertex);
+        Vector2D<float> vertex_tmp(vertex.x + m_x, vertex.y + m_y);
+        float dotProduct = axis.dotProduct(vertex_tmp);
         min = std::min(min, dotProduct);
         max = std::max(max, dotProduct);
     }
@@ -45,14 +44,6 @@ void CPolygonShape::updatePosition(float X, float Y)
 {
     m_x = X;
     m_y = Y;
-    {
-        float scale = engine::CCameraSys::instance()->scale();
-        for (int i = 0; i < static_cast<int>(m_vertices.size()); i++)
-        {
-            m_vertices[i].x = (m_vertices_origin[i].x * scale) + m_x;
-            m_vertices[i].y = (m_vertices_origin[i].y * scale) + m_y;
-        }
-    }
 }
 
 Vector2D<float> CPolygonShape::center()

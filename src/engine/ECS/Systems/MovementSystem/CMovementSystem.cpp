@@ -1,5 +1,5 @@
 #include "CMovementSystem.h"
-#include "LoggerDefines.h"
+#include <LoggerDefines.h>
 #include "CEntity.h"
 #include "CBroadPhaseCulling.h"
 #include "ComponentDef/SPositionComponent.h"
@@ -22,6 +22,9 @@ void CMovementSystem::init(CEntity *entity)
 void CMovementSystem::update(CEntity *entity, float dt)
 {
     UNUSED(dt);
+    
+    float scale = CCameraSys::instance()->scale();
+
     auto position = entity->getComponent<SPositionComponent>();
     auto sprite   = entity->getComponent<SSpriteComponent>();
     auto motion   = entity->getComponent<SMotionComponent>();
@@ -42,7 +45,6 @@ void CMovementSystem::update(CEntity *entity, float dt)
         float height = 0.0f;
         CCameraSys::instance()->viewport(width, height);
 
-        float scale = CCameraSys::instance()->scale();
         const Vector2D<float> &boundary = CSceneManager::instance()->currentScene()->boundary();
 
         position->x = std::max(0.0f, std::min(position->x, boundary.x - (sprite->frameWidth * scale)));

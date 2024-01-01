@@ -1,5 +1,5 @@
 #include "CSpriteSystem.h"
-#include "LoggerDefines.h"
+#include <LoggerDefines.h>
 #include "CTexture2DManager.h"
 #include "CEntity.h"
 #include "ComponentDef/SPositionComponent.h"

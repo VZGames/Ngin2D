@@ -1,5 +1,5 @@
 #include "CEntityManager.h"
-#include "LoggerDefines.h"
+#include <LoggerDefines.h>
 
 using namespace engine;
 CEntityManager *CEntityManager::s_instance = nullptr;

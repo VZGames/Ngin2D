@@ -41,8 +41,8 @@ public:
                    SDL_RendererFlip flip = SDL_RendererFlip::SDL_FLIP_NONE);
 
     void drawRect(Point2DF, _FrameWidthF, _FrameHeightF, _Scale);
-    void drawPolygon(std::vector<Vector2D<float>>, Vector2D<float>&&);
-//    Implement ITextureManager Interfaces
+    void drawPolygon(Point2DF, std::vector<Vector2D<float>>, _Scale);
+    //    Implement ITextureManager Interfaces
 public:
     virtual bool loadTexture(_TextureID, _TextureSource) override;
 };

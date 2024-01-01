@@ -1,5 +1,5 @@
 #include "CLogger.h"
-#include "LoggerDefines.h"
+#include <LoggerDefines.h>
 
 CLogger *CLogger::s_instance = nullptr;
 CLogger *CLogger::instance()

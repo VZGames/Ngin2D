@@ -1,7 +1,7 @@
 #ifndef CENTITY_H
 #define CENTITY_H
 
-#include "LoggerDefines.h"
+#include <LoggerDefines.h>
 #include <CommonDefine.h>
 #include "Alias.h"
 #include "Component/CComponent.h"
