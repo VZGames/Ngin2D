@@ -1,5 +1,5 @@
-#ifndef CTHREADWORKER_H
-#define CTHREADWORKER_H
+#ifndef CTHREAD_WORKER_H
+#define CTHREAD_WORKER_H
 
 #include <functional>
 #include <mutex>
@@ -18,4 +18,4 @@ public:
 };
 
 
-#endif // CTHREADWORKER_H
+#endif // CTHREAD_WORKER_H
