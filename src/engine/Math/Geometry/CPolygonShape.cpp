@@ -5,7 +5,7 @@ CPolygonShape::CPolygonShape()
 
 }
 
-Vector2D<float> &CPolygonShape::vertexAt(int index)
+const Vector2D<float> &CPolygonShape::vertexAt(int index) const
 {
     return m_vertices[index];
 }
@@ -51,8 +51,8 @@ Vector2D<float> CPolygonShape::center()
     Vector2D<float> G;
     for (const Vector2D<float> &vertex: m_vertices)
     {
-        G.x += vertex.x;
-        G.y += vertex.y;
+        G.x += (vertex.x + m_x);
+        G.y += (vertex.y + m_y);
     }
 
     G.x /= m_vertices.size();

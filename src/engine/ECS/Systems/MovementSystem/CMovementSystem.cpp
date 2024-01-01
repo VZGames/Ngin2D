@@ -52,6 +52,7 @@ void CMovementSystem::update(CEntity *entity, float dt)
     }
 
     box->update(position);
+    
     CBroadPhaseCulling::instance()->insert(entity->id(),
                                            box->shape.center().x,
                                            box->shape.center().y);

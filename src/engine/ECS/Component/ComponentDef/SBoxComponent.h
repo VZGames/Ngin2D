@@ -38,7 +38,7 @@ struct SBoxComponent: public CComponent
         {
             Vector2D<float> vertexA = shape.vertexAt(i);
             Vector2D<float> vertexB = shape.vertexAt((i + 1) % count);
-            Vector2D<float> edge =  static_cast<Vector2D<float>>(vertexB) - static_cast<Vector2D<float>>(vertexA);
+            Vector2D<float> edge =  static_cast<Vector2D<float>>(vertexB) - vertexA;
             Vector2D<float> normal = edge.normalize().perp();
             shape.pushAxis(normal);
         }

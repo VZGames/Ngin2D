@@ -43,11 +43,19 @@ void CCollisionSystem::update(CEntity *entity, float dt)
 
         for (CEntity *other: m_entities)
         {
-            if(m_broad_phase_culling->at(currentCell).find(other->id()) == m_broad_phase_culling->at(currentCell).end()) continue;
+            if(m_broad_phase_culling->at(currentCell).find(other->id()) == m_broad_phase_culling->at(currentCell).end())
+            {
+                continue;
+            }
             else
             {
                 auto boxB = other->getComponent<SBoxComponent>();
-                if(&boxB->shape == &box->shape) continue;
+
+                if(&boxB->shape == &box->shape) 
+                {
+                    continue;
+                }
+
                 bool collided = AShape::checkCollision(&box->shape, &boxB->shape, motion->mtv);
                 box->shape.setCollided(collided);
                 boxB->shape.setCollided(collided);

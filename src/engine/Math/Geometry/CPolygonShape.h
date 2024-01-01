@@ -12,7 +12,7 @@ private:
 public:
     CPolygonShape();
 
-    Vector2D<float> &vertexAt(int index);
+    const Vector2D<float> &vertexAt(int index) const;
     void setVertexAt(int index, Vector2D<float> vertex);
     std::vector<Vector2D<float>> vertices() const;
     void pushVertex(float x, float y);
