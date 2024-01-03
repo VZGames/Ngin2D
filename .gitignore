@@ -3,7 +3,7 @@
 
 *~
 *.autosave
-*.a
+# *.a
 *.core
 *.moc
 *.o
@@ -69,8 +69,8 @@ CMakeLists.txt.user*
 
 # Binaries
 # --------
-*.dll
-*.exe
+# *.dll
+# *.exe
 
 *build
 */node_modules
