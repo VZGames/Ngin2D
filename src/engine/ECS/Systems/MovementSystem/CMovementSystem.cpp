@@ -23,7 +23,7 @@ void CMovementSystem::update(CEntity *entity, float dt)
 {
     UNUSED(dt);
     
-    float scale = CCameraSys::instance()->scale();
+    const float scale = CCameraSys::instance()->scale();
 
     auto position = entity->getComponent<SPositionComponent>();
     auto sprite   = entity->getComponent<SSpriteComponent>();
@@ -51,8 +51,8 @@ void CMovementSystem::update(CEntity *entity, float dt)
         position->y = std::max(0.0f, std::min(position->y, boundary.y - (sprite->frameHeight * scale)));
     }
 
-    box->update(position);
-    
+    box->update(*position);
+
     CBroadPhaseCulling::instance()->insert(entity->id(),
                                            box->shape.center().x,
                                            box->shape.center().y);
