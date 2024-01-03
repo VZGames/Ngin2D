@@ -32,8 +32,8 @@ std::pair<float, float> CPolygonShape::projection(Vector2D<float> axis)
 
     for (const Vector2D<float> &vertex: m_vertices)
     {
-        Vector2D<float> vertex_tmp(vertex.x + m_x, vertex.y + m_y);
-        float dotProduct = axis.dotProduct(vertex_tmp);
+        Vector2D<float> actual_vertex(vertex.x + m_x, vertex.y + m_y);
+        float dotProduct = axis.dotProduct(actual_vertex);
         min = std::min(min, dotProduct);
         max = std::max(max, dotProduct);
     }

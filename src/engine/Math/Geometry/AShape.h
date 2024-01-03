@@ -2,7 +2,7 @@
 #define ASHAPE_H
 
 #include "vector2D.h"
-#include "LoggerDefines.h"
+#include <LoggerDefines.h>
 
 class AShape
 {

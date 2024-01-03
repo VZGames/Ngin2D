@@ -110,7 +110,7 @@ void CRenderSys::drawEntity(CEntity *entity)
 
         if(box)
         {
-            CTexture2DManager::instance()->drawPolygon(pos, box->vertices(), scale);
+            CTexture2DManager::instance()->drawPolygon(pos, box->vertices(), 1);
         }
     }
 }
