@@ -44,9 +44,9 @@ struct SBoxComponent: public CComponent
         }
     }
 
-    void update(Vector2D<float> *position)
+    void update(Vector2D<float> position)
     {
-        shape.updatePosition(position->x, position->y);
+        shape.updatePosition(position.x, position.y);
         setAxes();
     }
 

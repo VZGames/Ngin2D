@@ -24,7 +24,7 @@ Offset *CCameraSys::offset()
     return &m_offset;
 }
 
-float CCameraSys::scale() const
+const float CCameraSys::scale() const
 {
     return m_scale;
 }
