@@ -24,9 +24,9 @@ void CGameScene::init()
         cow3.setPosition(640, 400);
 
         m_entities.emplace_back(&player);
-        m_entities.emplace_back(&cow);
-        m_entities.emplace_back(&cow2);
-        m_entities.emplace_back(&cow3);
+        // m_entities.emplace_back(&cow);
+        // m_entities.emplace_back(&cow2);
+        // m_entities.emplace_back(&cow3);
 
         for(auto &entity: m_entities)
         {

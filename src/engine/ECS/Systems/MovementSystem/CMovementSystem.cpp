@@ -41,17 +41,14 @@ void CMovementSystem::update(CEntity *entity, float dt)
 
     if(camera)
     {
-        float width = 0.0f;
-        float height = 0.0f;
-        CCameraSys::instance()->viewport(width, height);
-
         const Vector2D<float> &boundary = CSceneManager::instance()->currentScene()->boundary();
 
-        position->x = std::max(0.0f, std::min(position->x, boundary.x - (sprite->frameWidth * scale)));
-        position->y = std::max(0.0f, std::min(position->y, boundary.y - (sprite->frameHeight * scale)));
+        position->x = std::max(0.0f, std::min(position->x, (boundary.x - sprite->frameWidth) * scale));
+        position->y = std::max(0.0f, std::min(position->y, (boundary.y - sprite->frameHeight) * scale));
     }
 
-    box->update(*position);
+    
+    box->update((*position) / scale);
 
     CBroadPhaseCulling::instance()->insert(entity->id(),
                                            box->shape.center().x,
