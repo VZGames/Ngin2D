@@ -53,6 +53,9 @@ bool CRenderSys::openWindow(_Title title, _Width &width, _Height &height)
 
     m_window = SDL_CreateWindow(title, SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, width, height, 0);
 
+    // m_window = SDL_CreateWindow(title, SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, width, height, SDL_WINDOW_FULLSCREEN_DESKTOP);
+    // SDL_SetWindowBordered(m_window, SDL_TRUE);
+    
     if (m_window == nullptr)
     {
         // In the case that the window could not be made...

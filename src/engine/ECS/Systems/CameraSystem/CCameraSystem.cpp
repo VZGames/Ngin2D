@@ -50,8 +50,8 @@ void CCameraSystem::update(CEntity *entity, float dt)
 
             const Vector2D<float> &boundary = CSceneManager::instance()->currentScene()->boundary();
 
-            offset->x = std::max(0.0f, std::min(offset->x, boundary.x * scale - width));
-            offset->y = std::max(0.0f, std::min(offset->y, boundary.y * scale - height));
+            offset->x = std::max(0.0f, std::min(offset->x, boundary.x - width / scale));
+            offset->y = std::max(0.0f, std::min(offset->y, boundary.y - height / scale));
         }
     }
 }

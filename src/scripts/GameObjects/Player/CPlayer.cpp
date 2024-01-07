@@ -73,7 +73,7 @@ void CPlayer::walk(E_MOVE_DIRECTION direction)
     }
     else
     {
-        m_motion->speed /= 2;
+        m_motion->speed = 2;
     }
     if (direction == E_MOVE_DIRECTION::MOVE_LEFT)
     {

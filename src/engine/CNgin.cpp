@@ -148,7 +148,7 @@ void CNgin::update(float dt)
 void CNgin::handle_events()
 {
      CEventDispatcher::instance()->listen();
-     m_key_evt_pool.submit(&CMouseEvent::processEvents, CMouseEvent::instance(), CEventDispatcher::instance()).get();
-     m_key_evt_pool.submit(&CKeyEvent::processEvents, CKeyEvent::instance(), CEventDispatcher::instance()).get();
+     m_key_evt_pool.submit(&CMouseEvent::processEvents, CMouseEvent::instance(), CEventDispatcher::instance());
+     m_key_evt_pool.submit(&CKeyEvent::processEvents, CKeyEvent::instance(), CEventDispatcher::instance());
 }
 

@@ -1,5 +1,6 @@
 #include "CKeyEvent.h"
 #include <LoggerDefines.h>
+#include "CNgin.h"
 
 using namespace engine;
 CKeyEvent *CKeyEvent::s_instance = nullptr;
@@ -33,13 +34,16 @@ void CKeyEvent::processEvents(CEventDispatcher *dispatcher)
     LOCK_GUARD(m_mtx)
     if (dispatcher->getNextEvent(m_event))
     {
-        if (m_event.type == SDL_KEYDOWN)
+        switch (m_event.type)
         {
+        case SDL_KEYDOWN:
             keyDown();
-        }
-        if (m_event.type == SDL_KEYUP)
-        {
+            break;
+        case SDL_KEYUP:
             keyUp();
+            break;
+        default:
+            break;
         }
     }
 }
@@ -51,6 +55,10 @@ void CKeyEvent::keyDown()
 
 void CKeyEvent::keyUp()
 {
+    if (m_event.key.keysym.sym == SDLK_ESCAPE)
+    {
+        CNgin::setRunning(false);
+    }
     DBG("Key Up");
 }
 
