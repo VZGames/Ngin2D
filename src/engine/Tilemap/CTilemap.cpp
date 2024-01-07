@@ -1,5 +1,8 @@
 #include "CTilemap.h"
 #include "Camera/CCameraSys.h"
+#include "CEntity.h"
+#include "ComponentDef/SBoxComponent.h"
+#include "ComponentDef/SMotionComponent.h"
 
 using namespace engine;
 CTilemap *CTilemap::s_instance = nullptr;
@@ -69,6 +72,18 @@ void CTilemap::update(std::vector<CEntity*> &entities, float dt)
         data.first.offset_x = offset->x + dt;
         data.first.offset_y = offset->y + dt;
     }
+
+    for (CEntity *entity: entities)
+    {
+        checkCollision(entity);
+    }
+}
+
+void CTilemap::checkCollision(CEntity *entity)
+{
+    auto motion = entity->getComponent<SMotionComponent>();
+    auto box = entity->getComponent<SBoxComponent>();
+    m_object_layer_manager.checkCollision(&box->shape, motion->mtv);
 }
 
 void CTilemap::render()

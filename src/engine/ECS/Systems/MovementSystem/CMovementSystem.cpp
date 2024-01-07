@@ -47,8 +47,8 @@ void CMovementSystem::update(CEntity *entity, float dt)
 
         const Vector2D<float> &boundary = CSceneManager::instance()->currentScene()->boundary();
 
-        // position->x = std::max(0.0f, std::min(position->x, boundary.x - (sprite->frameWidth) * scale));
-        // position->y = std::max(0.0f, std::min(position->y, boundary.y - (sprite->frameHeight) * scale));
+        position->x = std::max(0.0f, std::min(position->x, (boundary.x - sprite->frameWidth) * scale));
+        position->y = std::max(0.0f, std::min(position->y, (boundary.y - sprite->frameHeight) * scale));
     }
 
     

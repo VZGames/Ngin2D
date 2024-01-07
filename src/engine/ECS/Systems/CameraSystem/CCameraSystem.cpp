@@ -45,13 +45,13 @@ void CCameraSystem::update(CEntity *entity, float dt)
         }
         else
         {
-            offset->x = (position->x + (sprite->frameWidth * scale) / 2) - (width / 2);
-            offset->y = (position->y + (sprite->frameHeight * scale) / 2) - (height / 2);
+            float offset_x = (position->x + (sprite->frameWidth * scale) / 2 - (width / 2));
+            float offset_y = (position->y + (sprite->frameHeight * scale) / 2 - (height / 2));
 
             const Vector2D<float> &boundary = CSceneManager::instance()->currentScene()->boundary();
 
-            offset->x = std::max(0.0f, std::min(offset->x, boundary.x - width / scale));
-            offset->y = std::max(0.0f, std::min(offset->y, boundary.y - height / scale));
+            offset->x = std::max(0.0f, std::min(offset_x, boundary.x - width));
+            offset->y = std::max(0.0f, std::min(offset_y, boundary.y - height));
         }
     }
 }

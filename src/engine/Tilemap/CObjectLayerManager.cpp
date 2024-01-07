@@ -30,6 +30,19 @@ const std::vector<CPolygonShape> *CObjectLayerManager::box() const
     return &m_box;
 }
 
+bool CObjectLayerManager::checkCollision(AShape *other, Vector2D<float> &mtv)
+{
+    for(CPolygonShape &box: m_box)
+    {
+        bool collided = AShape::checkCollision(&box, other, mtv);
+        if(collided)
+        {
+            return true;
+        }
+    }
+    return false;
+}
+
 
 
 

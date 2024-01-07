@@ -9,14 +9,15 @@ BEGIN_NAMESPACE(engine)
 class CObjectLayerManager
 {
 private:
-    std::vector<TmxObject> m_objects;
-    std::vector<CPolygonShape> m_box;
+    std::vector<TmxObject>          m_objects;
+    std::vector<CPolygonShape>      m_box;
 public:
     CObjectLayerManager();
 
     void push(TmxObject&&);
     const std::vector<TmxObject> *objects() const;
     const std::vector<CPolygonShape> *box() const;
+    bool checkCollision(AShape*, Vector2D<float> &);
 };
 END_NAMESPACE
 

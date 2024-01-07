@@ -22,12 +22,9 @@ private:
     CLayerManager       m_layer_manager;
     CObjectLayerManager m_object_layer_manager;
     CLayerRenderer      m_layer_renderer;
+    Vector2D<float>     m_coord_limit;
     TmxMap              *m_map;
     CThreadPool         *m_pool;
-
-    std::vector<AShape*> m_impact_area;
-
-    Vector2D<float> m_coord_limit;
 
 private:
     CTilemap();
@@ -38,6 +35,7 @@ public:
     static CTilemap *instance();
     void loadMap(const char* file);
     void update(std::vector<CEntity*> &, float dt);
+    void checkCollision(CEntity*);
     void render();
 
     TmxMap *map() const;
