@@ -5,7 +5,7 @@
 using namespace engine;
 CObjectLayerManager::CObjectLayerManager()
 {
-
+    m_broad_phase_culling = CBroadPhaseCulling::instance();
 }
 
 void CObjectLayerManager::push(TmxObject &&object)
@@ -17,7 +17,9 @@ void CObjectLayerManager::push(TmxObject &&object)
     m_box.push_back(std::move(shape));
     m_objects.push_back(object);
 
-    CBroadPhaseCulling::instance()->insert(MAX_ENTITY_ID + object.id, object.x, object.y);
+    m_broad_phase_culling->insert(object.id + MAX_ENTITY_ID, object.x, object.x);
+    int currentCell = m_broad_phase_culling->hash(object.x, object.x);
+    DBG("%d", currentCell)
 }
 
 const std::vector<TmxObject> *CObjectLayerManager::objects() const
@@ -32,13 +34,24 @@ const std::vector<CPolygonShape> *CObjectLayerManager::box() const
 
 bool CObjectLayerManager::checkCollision(AShape *other, Vector2D<float> &mtv)
 {
-    for(CPolygonShape &box: m_box)
+    int currentCell = m_broad_phase_culling->hash(other->center().x, other->center().y);
+    if (currentCell >= m_broad_phase_culling->cells()) return false;
+
+    for (int i = 0; i < static_cast<int>(m_objects.size()); i++)
     {
-        bool collided = AShape::checkCollision(&box, other, mtv);
-        if(collided)
+        if (m_broad_phase_culling->at(currentCell).find(m_objects.at(i).id + MAX_ENTITY_ID) == m_broad_phase_culling->at(currentCell).end())
         {
-            return true;
+            continue;
         }
+        else
+        {
+            bool collided = AShape::checkCollision(&m_box[i], other, mtv);
+            if(collided)
+            {
+                return true;
+            }
+        }
+        
     }
     return false;
 }

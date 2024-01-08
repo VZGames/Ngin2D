@@ -6,13 +6,14 @@
 #include "Geometry/CPolygonShape.h"
 
 BEGIN_NAMESPACE(engine)
+class CBroadPhaseCulling;
 class CObjectLayerManager
 {
 private:
     std::vector<TmxObject>          m_objects;
     std::vector<CPolygonShape>      m_box;
-public:
-    CObjectLayerManager();
+    CBroadPhaseCulling              *m_broad_phase_culling;
+    public : CObjectLayerManager();
 
     void push(TmxObject&&);
     const std::vector<TmxObject> *objects() const;
