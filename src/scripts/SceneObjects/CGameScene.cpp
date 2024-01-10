@@ -72,7 +72,7 @@ void CGameScene::update(float dt)
 void CGameScene::render()
 {
     // [1] create new threads for render
-    m_tilemap->render();
+    // m_tilemap->render();
 
     engine::CRenderSys::instance()->draw();
     

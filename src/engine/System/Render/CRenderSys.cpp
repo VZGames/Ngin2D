@@ -135,9 +135,10 @@ void CRenderSys::drawEntity(CEntity *entity)
 
 void CRenderSys::draw()
 {
+    float scale = CCameraSys::instance()->scale();
     for(ARenderer *renderer: m_renderer)
     {
-        m_pool->submit([&](){ for(void *item: m_items) renderer->render(item);});
+        m_pool->submit([&](){ for(void *item: m_items) renderer->render(item, scale);});
     }
 }
 
