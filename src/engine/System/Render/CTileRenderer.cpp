@@ -13,7 +13,7 @@ CTileRenderer::CTileRenderer()
 void CTileRenderer::render(void *data, float scale)
 {
     using _type = std::pair<TmxLayer, Matrix2D<int>>;
-    _type *pair = dynamic_cast<_type *>(static_cast<_type *>(data));
+    _type *pair = reinterpret_cast<_type*>(data);
 
     if (pair == nullptr)
     {
