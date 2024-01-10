@@ -9,11 +9,16 @@ BEGIN_NAMESPACE(engine)
 class CTilesetManager
 {
 private:
-    std::unordered_map<const char*, TmxTileSet>  m_tilesets;
-public:
     CTilesetManager();
+    static CTilesetManager *s_instance;
 
+private:
+    std::unordered_map<const char*, TmxTileSet>  m_tilesets;
+
+public:
+    static CTilesetManager *instance();
     void insert(const char*, TmxTileSet&&);
+    void clear();
     std::unordered_map<const char*, TmxTileSet> tilesets() const;
 };
 END_NAMESPACE

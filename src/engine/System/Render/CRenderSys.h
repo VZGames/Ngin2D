@@ -6,7 +6,7 @@
 
 class SDL_Renderer;
 class SDL_Window;
-
+class CThreadPool;
 BEGIN_NAMESPACE(engine)
 class CEntity;
 class ARenderer;
@@ -15,11 +15,13 @@ class CRenderSys
 private:
     static SDL_Renderer     *s_renderer;
     SDL_Window              *m_window;
+    CThreadPool             *m_pool;
     std::vector<ARenderer*> m_renderer;
     std::vector<void*>      m_items;
 
 private:
     CRenderSys();
+    ~CRenderSys();
     static CRenderSys *s_instance;
 public:
     static CRenderSys *instance();
@@ -35,7 +37,9 @@ public:
         m_items.emplace_back(data);
     }
 
+    void clearItems();
     void drawEntity(CEntity*);
+    void draw();
 //    void drawTile(float, float, STmxTile&&);
     void beginDraw();
     void endDraw();

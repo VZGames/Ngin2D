@@ -1,4 +1,6 @@
 #include "CTilemap.h"
+#include "CTilesetManager.h"
+#include "CLayerManager.h"
 #include "Camera/CCameraSys.h"
 #include "CEntity.h"
 #include "ComponentDef/SBoxComponent.h"
@@ -8,11 +10,14 @@ using namespace engine;
 CTilemap *CTilemap::s_instance = nullptr;
 CTilemap::CTilemap()
 {
+    m_tileset_manager   = CTilesetManager::instance();
+    m_layer_manager     = CLayerManager::instance();
 }
 
 CTilemap::~CTilemap()
 {
     m_pool->shutdown();
+    safeRelease(m_tileset_manager);
 }
 
 CTilemap *CTilemap::instance()
@@ -39,18 +44,22 @@ void CTilemap::loadMap(const char *file)
     m_pool = new CThreadPool(layerNum);
     m_pool->init();
 
+    m_tileset_manager->clear();
+
     for (int i = 0; i < tilesetNum; i++)
     {
         TmxTileSet tmxTileset;
         m_parser.parse(i, tmxTileset);
-        m_tileset_manager.insert(tmxTileset.name, std::move(tmxTileset));
+        m_tileset_manager->insert(tmxTileset.name, std::move(tmxTileset));
     }
+
+    m_layer_manager->clear();
 
     for (int i = 0; i < layerNum; i++)
     {
         TmxLayer tmxLayer;
         m_parser.parse(i, tmxLayer);
-        m_layer_manager.push(std::move(tmxLayer));
+        m_layer_manager->push(std::move(tmxLayer));
     }
 
     for (int i = 0; i < objectNum; i++)
@@ -67,7 +76,7 @@ void CTilemap::update(std::vector<CEntity*> &entities, float dt)
 
     Offset *offset = CCameraSys::instance()->offset();
 
-    for (auto &data : m_layer_manager.layers())
+    for (auto &data : m_layer_manager->layers())
     {
         data.first.offset_x = offset->x + dt;
         data.first.offset_y = offset->y + dt;
@@ -88,10 +97,10 @@ void CTilemap::checkCollision(CEntity *entity)
 
 void CTilemap::render()
 {
-   for (auto &data : m_layer_manager.layers())
-   {
-        m_pool->submit(&CLayerRenderer::render, &m_layer_renderer, m_tileset_manager.tilesets(), data.first, data.second).get();
-   }
+//    for (auto &data : m_layer_manager.layers())
+//    {
+//         m_pool->submit(&CLayerRenderer::render, &m_layer_renderer, m_tileset_manager.tilesets(), data.first, data.second).get();
+//    }
 }
 
 TmxMap *CTilemap::map() const

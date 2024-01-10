@@ -29,7 +29,8 @@ void CGameScene::init()
         // m_entities.emplace_back(&cow2);
         // m_entities.emplace_back(&cow3);
 
-        for(auto &entity: m_entities)
+        engine::CRenderSys::instance()->clearItems();
+        for (auto &entity : m_entities)
         {
             engine::CRenderSys::instance()->addItem<engine::CEntity*>(&entity);
             engine::CWorld::instance()->registerEntity(entity);
@@ -73,11 +74,8 @@ void CGameScene::render()
     // [1] create new threads for render
     m_tilemap->render();
 
-    for(engine::CEntity *entity: m_entities)
-    {
-        engine::CRenderSys::instance()->drawEntity(entity);
-    }
-
+    engine::CRenderSys::instance()->draw();
+    
     // [2] wait for all finished
 
 }

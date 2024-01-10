@@ -4,8 +4,6 @@
 #include <stack>
 #include <CommonDefine.h>
 #include "TilemapParser/CTilemapParser.h"
-#include "CTilesetManager.h"
-#include "CLayerManager.h"
 #include "CObjectLayerManager.h"
 #include "CLayerRenderer.h"
 #include "ThreadPool/CThreadPool.h"
@@ -14,15 +12,17 @@
 
 BEGIN_NAMESPACE(engine)
 class CEntity;
+class CTilesetManager;
+class CLayerManager;
 class CTilemap
 {
 private:
     CTilemapParser      m_parser;
-    CTilesetManager     m_tileset_manager;
-    CLayerManager       m_layer_manager;
     CObjectLayerManager m_object_layer_manager;
     CLayerRenderer      m_layer_renderer;
     Vector2D<float>     m_coord_limit;
+    CLayerManager       *m_layer_manager;
+    CTilesetManager     *m_tileset_manager;
     TmxMap              *m_map;
     CThreadPool         *m_pool;
 

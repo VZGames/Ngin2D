@@ -11,7 +11,7 @@ public:
     CEntityRenderer();
 
 public:
-    virtual void render(void *);
+    virtual void render(void *, float) override;
 };
 END_NAMESPACE
 

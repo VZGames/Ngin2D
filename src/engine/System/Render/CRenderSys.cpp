@@ -1,10 +1,13 @@
 #include "Render/CRenderSys.h"
+#include "ARenderer.h"
 #include "CEntity.h"
 #include "Camera/CCameraSys.h"
 #include "CTexture2DManager.h"
 #include "ComponentDef/SPositionComponent.h"
 #include "ComponentDef/SSpriteComponent.h"
 #include "ComponentDef/SBoxComponent.h"
+
+#include <ThreadPool/CThreadPool.h>
 //#include "ComponentDef/SCameraComponent.h"
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_image.h>
@@ -14,7 +17,14 @@ SDL_Renderer  *CRenderSys::s_renderer = nullptr;
 CRenderSys *CRenderSys::s_instance = nullptr;
 CRenderSys::CRenderSys()
 {
+    m_pool = new CThreadPool(2);
+    m_pool->init();
+}
 
+CRenderSys::~CRenderSys()
+{
+    m_pool->shutdown();
+    safeRelease(m_pool);
 }
 
 CRenderSys *CRenderSys::instance()
@@ -80,6 +90,11 @@ bool CRenderSys::createRenderer()
     return true;
 }
 
+void CRenderSys::clearItems()
+{
+    m_items.clear();
+}
+
 void CRenderSys::drawEntity(CEntity *entity)
 {
     Offset *offset = CCameraSys::instance()->offset();
@@ -115,6 +130,14 @@ void CRenderSys::drawEntity(CEntity *entity)
         {
             CTexture2DManager::instance()->drawPolygon(pos, box->vertices(), scale);
         }
+    }
+}
+
+void CRenderSys::draw()
+{
+    for(ARenderer *renderer: m_renderer)
+    {
+        m_pool->submit([&](){ for(void *item: m_items) renderer->render(item);});
     }
 }
 
