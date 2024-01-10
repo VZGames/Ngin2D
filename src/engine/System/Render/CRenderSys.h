@@ -6,13 +6,17 @@
 
 class SDL_Renderer;
 class SDL_Window;
+
 BEGIN_NAMESPACE(engine)
 class CEntity;
+class ARenderer;
 class CRenderSys
 {
 private:
     static SDL_Renderer     *s_renderer;
     SDL_Window              *m_window;
+    std::vector<ARenderer*> m_renderer;
+    std::vector<void*>      m_items;
 
 private:
     CRenderSys();
@@ -23,6 +27,14 @@ public:
     bool isReady();
     bool openWindow(_Title, _Width&, _Height&);
     bool createRenderer();
+
+    template<class T>
+    void addItem(T* item)
+    {
+        void *data = reinterpret_cast<void*>(item);
+        m_items.emplace_back(data);
+    }
+
     void drawEntity(CEntity*);
 //    void drawTile(float, float, STmxTile&&);
     void beginDraw();
