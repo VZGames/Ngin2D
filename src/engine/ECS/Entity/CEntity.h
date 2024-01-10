@@ -21,6 +21,7 @@ protected:
 
 public:
     CEntity();
+    virtual ~CEntity(); 
 
     bool operator==(const CEntity &other) { return this->id() == other.id(); }
     bool operator==(const CEntity *other) { return this->id() == other->id(); }

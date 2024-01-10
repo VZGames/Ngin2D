@@ -5,6 +5,11 @@ CEntity::CEntity()
 {
 }
 
+CEntity::~CEntity()
+{
+    
+}
+
 EntityID CEntity::id() const
 {
     return m_id;

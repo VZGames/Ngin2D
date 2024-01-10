@@ -14,7 +14,13 @@ CEntityRenderer::CEntityRenderer()
 
 void CEntityRenderer::render(void *data, float scale)
 {
-    CEntity *entity = reinterpret_cast<CEntity*>(data);
+    CEntity *entity = dynamic_cast<CEntity *>(static_cast<CEntity *>(data));
+
+    if(entity == nullptr)
+    {
+        return;
+    }
+
     Offset *offset = CCameraSys::instance()->offset();
 
     auto sprite = entity->getComponent<SSpriteComponent>();
