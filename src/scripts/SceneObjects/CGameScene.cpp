@@ -9,6 +9,7 @@
 #include "Define/Assets/DefineMaps.h"
 
 using namespace script;
+class CEntity;
 CGameScene::CGameScene()
     :m_tilemap(engine::CTilemap::instance())
 {
@@ -30,6 +31,7 @@ void CGameScene::init()
 
         for(auto &entity: m_entities)
         {
+            engine::CRenderSys::instance()->addItem<engine::CEntity*>(&entity);
             engine::CWorld::instance()->registerEntity(entity);
 
             auto box = entity->getComponent<engine::SBoxComponent>();
