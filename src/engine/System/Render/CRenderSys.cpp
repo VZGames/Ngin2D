@@ -17,7 +17,9 @@ SDL_Renderer  *CRenderSys::s_renderer = nullptr;
 CRenderSys *CRenderSys::s_instance = nullptr;
 CRenderSys::CRenderSys()
 {
-    m_pool = new CThreadPool(2);
+    m_renderer.emplace_back(&m_entity_renderer);
+    m_renderer.emplace_back(&m_tile_renderer);
+    m_pool = new CThreadPool(static_cast<int>(m_renderer.size()));
     m_pool->init();
 }
 

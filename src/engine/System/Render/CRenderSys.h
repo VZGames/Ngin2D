@@ -3,6 +3,8 @@
 
 #include <CommonDefine.h>
 #include "Alias.h"
+#include "CEntityRenderer.h"
+#include "CTileRenderer.h"
 
 class SDL_Renderer;
 class SDL_Window;
@@ -16,6 +18,8 @@ private:
     static SDL_Renderer     *s_renderer;
     SDL_Window              *m_window;
     CThreadPool             *m_pool;
+    CEntityRenderer         m_entity_renderer;
+    CTileRenderer           m_tile_renderer;
     std::vector<ARenderer*> m_renderer;
     std::vector<void*>      m_items;
 
