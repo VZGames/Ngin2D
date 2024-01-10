@@ -2,6 +2,7 @@
 #include <matrix2D.h>
 #include <Parser/TilemapParser/TmxFormat.h>
 #include "CTexture2DManager.h"
+#include "CTilesetManager.h"
 
 using namespace engine;
 CTileRenderer::CTileRenderer()
@@ -47,7 +48,7 @@ void CTileRenderer::render(void *data, float scale)
             }
 
             const TmxTileSet *tileset;
-            for (auto &pair : tilesetMap)
+            for (auto &pair : CTilesetManager::instance()->tilesets())
             {
                 if (tileID >= pair.second.first_global_id && tileID < pair.second.first_global_id + pair.second.tile_count)
                 {

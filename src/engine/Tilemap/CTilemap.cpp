@@ -10,8 +10,8 @@ using namespace engine;
 CTilemap *CTilemap::s_instance = nullptr;
 CTilemap::CTilemap()
 {
-    m_tileset_manager   = CTilesetManager::instance();
-    m_layer_manager     = CLayerManager::instance();
+    m_tileset_manager = CTilesetManager::instance();
+    m_layer_manager = CLayerManager::instance();
 }
 
 CTilemap::~CTilemap()
@@ -70,7 +70,7 @@ void CTilemap::loadMap(const char *file)
     }
 }
 
-void CTilemap::update(std::vector<CEntity*> &entities, float dt)
+void CTilemap::update(std::vector<CEntity *> &entities, float dt)
 {
     UNUSED(dt)
 
@@ -82,7 +82,7 @@ void CTilemap::update(std::vector<CEntity*> &entities, float dt)
         data.first.offset_y = offset->y + dt;
     }
 
-    for (CEntity *entity: entities)
+    for (CEntity *entity : entities)
     {
         checkCollision(entity);
     }
@@ -97,10 +97,10 @@ void CTilemap::checkCollision(CEntity *entity)
 
 void CTilemap::render()
 {
-//    for (auto &data : m_layer_manager.layers())
-//    {
-//         m_pool->submit(&CLayerRenderer::render, &m_layer_renderer, m_tileset_manager.tilesets(), data.first, data.second).get();
-//    }
+    //    for (auto &data : m_layer_manager.layers())
+    //    {
+    //         m_pool->submit(&CLayerRenderer::render, &m_layer_renderer, m_tileset_manager.tilesets(), data.first, data.second).get();
+    //    }
 }
 
 TmxMap *CTilemap::map() const
@@ -112,5 +112,3 @@ Vector2D<float> CTilemap::coord_limit() const
 {
     return m_coord_limit;
 }
-
-
