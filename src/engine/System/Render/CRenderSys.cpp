@@ -144,19 +144,6 @@ void CRenderSys::draw()
     }
 }
 
-
-//void CRenderSys::drawTile(float gX, float gY, STmxTile &&tile)
-//{
-//    CTexture2DManager::instance()->drawTile(
-//        "textureId",
-//        Point2DF(gX, gY),
-//        tile.width,
-//        tile.height,
-//        tile.x,
-//        tile.y
-//        );
-//}
-
 void CRenderSys::beginDraw()
 {
     SDL_RenderClear(s_renderer);

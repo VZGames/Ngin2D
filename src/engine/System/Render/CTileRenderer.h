@@ -1,5 +1,5 @@
-#ifndef CTILERENDERER_H
-#define CTILERENDERER_H
+#ifndef C_TILE_RENDERER_H
+#define C_TILE_RENDERER_H
 
 #include <CommonDefine.h>
 #include "ARenderer.h"
@@ -15,4 +15,4 @@ public:
 };
 END_NAMESPACE
 
-#endif // CTILERENDERER_H
+#endif // C_TILE_RENDERER_H
