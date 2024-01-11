@@ -97,50 +97,12 @@ void CRenderSys::clearItems()
     m_items.clear();
 }
 
-void CRenderSys::drawEntity(CEntity *entity)
-{
-    Offset *offset = CCameraSys::instance()->offset();
-    float scale = CCameraSys::instance()->scale();
-
-    auto sprite = entity->getComponent<SSpriteComponent>();
-    auto position = entity->getComponent<SPositionComponent>();
-    auto box = entity->getComponent<SBoxComponent>();
-
-    if((position && sprite))
-    {
-        float x = position->x - offset->x;
-        float y = position->y - offset->y;
-
-        Point2DF pos(x, y);
-
-        CTexture2DManager::instance()
-            ->drawFrame(
-                sprite->textureId,
-                pos,
-                sprite->frameWidth,
-                sprite->frameHeight,
-                sprite->row,
-                sprite->col,
-                scale);
-
-        CTexture2DManager::instance()->drawRect(pos,
-                                                sprite->frameWidth,
-                                                sprite->frameHeight,
-                                                scale);
-
-        if(box)
-        {
-            CTexture2DManager::instance()->drawPolygon(pos, box->vertices(), scale);
-        }
-    }
-}
-
 void CRenderSys::draw()
 {
     float scale = CCameraSys::instance()->scale();
     for(ARenderer *renderer: m_renderer)
     {
-        m_pool->submit([&](){ for(void *item: m_items) renderer->render(item, scale);});
+        m_pool->submit([&](){ for(auto item: m_items) renderer->render(item, scale);});
     }
 }
 

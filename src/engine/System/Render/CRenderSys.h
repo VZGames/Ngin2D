@@ -5,6 +5,7 @@
 #include "Alias.h"
 #include "CEntityRenderer.h"
 #include "CTileRenderer.h"
+#include "MetaObject/CMetaObjectImpl.h"
 
 class SDL_Renderer;
 class SDL_Window;
@@ -21,7 +22,7 @@ private:
     CEntityRenderer         m_entity_renderer;
     CTileRenderer           m_tile_renderer;
     std::vector<ARenderer*> m_renderer;
-    std::vector<void*>      m_items;
+    std::vector<ItemData>   m_items;
 
 private:
     CRenderSys();
@@ -37,14 +38,15 @@ public:
     template<typename T>
     void addItem(T* item)
     {
-        void *data = static_cast<void*>(item);
-        m_items.emplace_back(data);
+        CMetaObject *meta = getMetaObject<T>();
+        void *data = static_cast<void *>(item);
+        const char* class_name = meta->className();
+
+        m_items.emplace_back(ItemData{data, class_name});
     }
 
     void clearItems();
-    void drawEntity(CEntity*);
     void draw();
-//    void drawTile(float, float, STmxTile&&);
     void beginDraw();
     void endDraw();
     bool destroyWindow();

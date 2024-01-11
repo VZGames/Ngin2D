@@ -10,10 +10,14 @@ CTileRenderer::CTileRenderer()
 
 }
 
-void CTileRenderer::render(void *data, float scale)
+void CTileRenderer::render(ItemData item, float scale)
 {
     using _type = std::pair<TmxLayer, Matrix2D<int>>;
-    _type *pair = reinterpret_cast<_type*>(data);
+    if (item.class_name != typeid(_type).name())
+    {
+        return;
+    }
+    _type *pair = static_cast<_type*>(item.data);
 
     if (pair == nullptr)
     {

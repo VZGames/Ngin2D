@@ -10,5 +10,6 @@ target_include_directories(utils_module PUBLIC
     ${CMAKE_CURRENT_SOURCE_DIR}/Memory
     ${CMAKE_CURRENT_SOURCE_DIR}/Process
     ${CMAKE_CURRENT_SOURCE_DIR}/Parser
+    ${CMAKE_CURRENT_SOURCE_DIR}/MetaObject
     ${CMAKE_CURRENT_SOURCE_DIR}/Template
 )

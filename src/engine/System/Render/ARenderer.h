@@ -4,10 +4,16 @@
 #include <CommonDefine.h>
 
 BEGIN_NAMESPACE(engine)
+typedef struct 
+{
+    void *data = nullptr;
+    const char* class_name = "";
+} ItemData;
+
 class ARenderer
 {
 public:
-    virtual void render(void*, float) = 0;
+    virtual void render(ItemData, float) = 0;
 };
 END_NAMESPACE
 

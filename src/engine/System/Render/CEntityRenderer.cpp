@@ -12,9 +12,13 @@ CEntityRenderer::CEntityRenderer()
 
 }
 
-void CEntityRenderer::render(void *data, float scale)
+void CEntityRenderer::render(ItemData item, float scale)
 {
-    CEntity *entity = dynamic_cast<CEntity *>(static_cast<CEntity *>(data));
+    if (item.class_name != typeid(CEntity).name())
+    {
+        return;
+    }
+    CEntity *entity = dynamic_cast<CEntity *>(static_cast<CEntity *>(item.data));
 
     if(entity == nullptr)
     {
