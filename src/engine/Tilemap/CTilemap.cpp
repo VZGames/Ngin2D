@@ -95,14 +95,6 @@ void CTilemap::checkCollision(CEntity *entity)
     m_object_layer_manager.checkCollision(&box->shape, motion->mtv);
 }
 
-void CTilemap::render()
-{
-    //    for (auto &data : m_layer_manager.layers())
-    //    {
-    //         m_pool->submit(&CLayerRenderer::render, &m_layer_renderer, m_tileset_manager.tilesets(), data.first, data.second).get();
-    //    }
-}
-
 TmxMap *CTilemap::map() const
 {
     return m_map;
