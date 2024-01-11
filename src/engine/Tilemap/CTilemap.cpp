@@ -27,6 +27,7 @@ CTilemap *CTilemap::instance()
 
 void CTilemap::loadMap(const char *file)
 {
+    DBG("[START] LOAD MAP")
     m_parser.loadFile(file);
     m_map = &m_parser.map();
 
@@ -68,6 +69,7 @@ void CTilemap::loadMap(const char *file)
         m_parser.parse(i, tmxObject);
         m_object_layer_manager.push(std::move(tmxObject));
     }
+    DBG("[END] LOAD MAP")
 }
 
 void CTilemap::update(std::vector<CEntity *> &entities, float dt)

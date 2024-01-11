@@ -34,10 +34,10 @@ public:
     bool openWindow(_Title, _Width&, _Height&);
     bool createRenderer();
 
-    template<class T>
+    template<typename T>
     void addItem(T* item)
     {
-        void *data = reinterpret_cast<void*>(item);
+        void *data = static_cast<void*>(item);
         m_items.emplace_back(data);
     }
 
