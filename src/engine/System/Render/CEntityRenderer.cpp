@@ -14,7 +14,7 @@ CEntityRenderer::CEntityRenderer()
 
 bool CEntityRenderer::render(void* data, float scale)
 {
-    if (identify_type(data).compare("CEntity") != 0)
+    if (identify_type(data).compare(std::string("CEntity")) != 0)
     {
         return false;
     }

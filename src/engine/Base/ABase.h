@@ -17,14 +17,14 @@ public:
     }
 };
 
-static std::string identify_type(const void* ptr) {
-    const char* type = "_";
-    const ABase* obj = static_cast<const ABase*>(ptr);
+static std::string identify_type(void* ptr) {
+    const char* type = "";
+    ABase* obj = static_cast<ABase*>(ptr);
     if(obj != nullptr)
     {
         type = obj->className();
     }
-    DBG("Type of [%p] is [%s]", ptr, type)
+    DBG("Type of [%p] is [%s] with lenght is [%d]", ptr, type, strlen(type))
     return std::string(type);
 }
 
