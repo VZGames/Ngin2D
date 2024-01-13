@@ -1,7 +1,6 @@
 #ifndef CLAYERMANAGER_H
 #define CLAYERMANAGER_H
 
-#include <stack>
 #include <CommonDefine.h>
 #include <matrix2D.h>
 #include <TilemapParser/TmxFormat.h>
@@ -12,16 +11,16 @@ class CLayerManager
 {
 private:
     CLayerManager();
-    static CLayerManager *s_instance;
 
 private:
-    std::vector<CLayer> m_layers; // first: raw info, second: matrix tiles
+    static CLayerManager    *s_instance;
+    std::vector<CLayer>     m_layers;
 
 public:
     static CLayerManager *instance();
     void push(TmxLayer);
     void clear();
-    std::vector<CLayer> layers() const;
+    std::vector<CLayer> &layers();
 };
 END_NAMESPACE
 

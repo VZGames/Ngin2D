@@ -18,6 +18,7 @@ public:
 
 inline const char* identify_type(const void* ptr) {
     const ABase* obj = static_cast<const ABase*>(ptr);
+    if(obj == nullptr) return "";
     return obj->derived_class_name();
 }
 

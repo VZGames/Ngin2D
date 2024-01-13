@@ -1,14 +1,8 @@
 #include "Render/CRenderSys.h"
 #include "ARenderer.h"
-#include "CEntity.h"
 #include "Camera/CCameraSys.h"
-#include "CTexture2DManager.h"
-#include "ComponentDef/SPositionComponent.h"
-#include "ComponentDef/SSpriteComponent.h"
 #include "ComponentDef/SBoxComponent.h"
-
 #include <ThreadPool/CThreadPool.h>
-//#include "ComponentDef/SCameraComponent.h"
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_image.h>
 
@@ -19,6 +13,7 @@ CRenderSys::CRenderSys()
 {
     m_renderer.emplace_back(&m_entity_renderer);
     m_renderer.emplace_back(&m_tile_renderer);
+
     m_pool = new CThreadPool(static_cast<int>(m_renderer.size()));
     m_pool->init();
 }
@@ -102,7 +97,12 @@ void CRenderSys::draw()
     float scale = CCameraSys::instance()->scale();
     for(ARenderer *renderer: m_renderer)
     {
-        m_pool->submit([&](){ for(auto item: m_items) renderer->render(item, scale);});
+        m_pool->submit([&](){ 
+            for(auto item: m_items) 
+            { 
+                renderer->render(item, scale);
+            }
+        });
     }
 }
 

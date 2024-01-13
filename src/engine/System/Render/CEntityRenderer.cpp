@@ -12,51 +12,49 @@ CEntityRenderer::CEntityRenderer()
 
 }
 
-void CEntityRenderer::render(void* data, float scale)
+bool CEntityRenderer::render(void* data, float scale)
 {
+    DBG("%s", identify_type(data))
     if (identify_type(data) != std::string("CEntity").c_str())
     {
-        return;
+        return false;
     }
-
-    CEntity *entity = static_cast<CEntity *>(data);
-
-    if(entity == nullptr)
+    else
     {
-        return;
-    }
+        CEntity *entity = static_cast<CEntity *>(data);
+        Offset *offset = CCameraSys::instance()->offset();
+        auto sprite = entity->getComponent<SSpriteComponent>();
+        auto position = entity->getComponent<SPositionComponent>();
+        auto box = entity->getComponent<SBoxComponent>();
 
-    Offset *offset = CCameraSys::instance()->offset();
-
-    auto sprite = entity->getComponent<SSpriteComponent>();
-    auto position = entity->getComponent<SPositionComponent>();
-    auto box = entity->getComponent<SBoxComponent>();
-
-    if ((position && sprite))
-    {
-        float x = position->x - offset->x;
-        float y = position->y - offset->y;
-
-        Point2DF pos(x, y);
-
-        CTexture2DManager::instance()
-            ->drawFrame(
-                sprite->textureId,
-                pos,
-                sprite->frameWidth,
-                sprite->frameHeight,
-                sprite->row,
-                sprite->col,
-                scale);
-
-        CTexture2DManager::instance()->drawRect(pos,
-                                                sprite->frameWidth,
-                                                sprite->frameHeight,
-                                                scale);
-
-        if (box)
+        if ((position && sprite))
         {
-            CTexture2DManager::instance()->drawPolygon(pos, box->vertices(), scale);
+            float x = position->x - offset->x;
+            float y = position->y - offset->y;
+
+            Point2DF pos(x, y);
+
+            CTexture2DManager::instance()
+                ->drawFrame(
+                    sprite->textureId,
+                    pos,
+                    sprite->frameWidth,
+                    sprite->frameHeight,
+                    sprite->row,
+                    sprite->col,
+                    scale);
+
+            CTexture2DManager::instance()->drawRect(pos,
+                                                    sprite->frameWidth,
+                                                    sprite->frameHeight,
+                                                    scale);
+
+            if (box)
+            {
+                CTexture2DManager::instance()->drawPolygon(pos, box->vertices(), scale);
+            }
         }
     }
+
+    return true;
 }

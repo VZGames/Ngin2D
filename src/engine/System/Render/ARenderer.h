@@ -7,7 +7,7 @@ BEGIN_NAMESPACE(engine)
 class ARenderer
 {
 public:
-    virtual void render(void*, float) = 0;
+    virtual bool render(void*, float) = 0;
 };
 END_NAMESPACE
 

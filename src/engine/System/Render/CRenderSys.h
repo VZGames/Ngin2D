@@ -22,7 +22,7 @@ private:
     CEntityRenderer         m_entity_renderer;
     CTileRenderer           m_tile_renderer;
     std::vector<ARenderer*> m_renderer;
-    std::vector<void*>   m_items;
+    std::vector<void*>      m_items;
 
 private:
     CRenderSys();
@@ -38,7 +38,7 @@ public:
     template<typename T>
     void addItem(T* item)
     {
-        void *data = static_cast<void *>(item);
+        void *data = static_cast<void*>(item);
         m_items.emplace_back(data);
     }
 

@@ -46,7 +46,6 @@ void CTilemap::loadMap(const char *file)
     m_pool->init();
 
     m_tileset_manager->clear();
-
     for (int i = 0; i < tilesetNum; i++)
     {
         TmxTileSet tmxTileset;
@@ -54,8 +53,7 @@ void CTilemap::loadMap(const char *file)
         m_tileset_manager->insert(tmxTileset.name, std::move(tmxTileset));
     }
 
-    m_layer_manager->clear();
-
+     m_layer_manager->clear();
     for (int i = 0; i < layerNum; i++)
     {
         TmxLayer tmxLayer;
@@ -78,16 +76,16 @@ void CTilemap::update(std::vector<CEntity *> &entities, float dt)
 
     Offset *offset = CCameraSys::instance()->offset();
 
-    for (auto &data : m_layer_manager->layers())
+    for (CLayer &data : m_layer_manager->layers())
     {
         data.data().offset_x = offset->x + dt;
         data.data().offset_y = offset->y + dt;
     }
 
-    for (CEntity *entity : entities)
-    {
-        checkCollision(entity);
-    }
+//    for (CEntity *entity : entities)
+//    {
+//        checkCollision(entity);
+//    }
 }
 
 void CTilemap::checkCollision(CEntity *entity)
