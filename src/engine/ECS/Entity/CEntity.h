@@ -3,6 +3,7 @@
 
 #include <LoggerDefines.h>
 #include <CommonDefine.h>
+#include "ABase.h"
 #include "Alias.h"
 #include "Component/CComponent.h"
 #include "Component/CComponentManager.h"
@@ -10,7 +11,7 @@
 #define COMP_MANAGER CComponentManager::instance()
 
 BEGIN_NAMESPACE(engine)
-class CEntity
+class CEntity: public ABase
 {
 private:
     EntityID                                         m_id;

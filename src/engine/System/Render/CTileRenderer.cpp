@@ -1,6 +1,8 @@
 #include "CTileRenderer.h"
 #include <matrix2D.h>
 #include <Parser/TilemapParser/TmxFormat.h>
+#include "ABase.h"
+#include "CLayer.h"
 #include "CTexture2DManager.h"
 #include "CTilesetManager.h"
 
@@ -10,22 +12,22 @@ CTileRenderer::CTileRenderer()
 
 }
 
-void CTileRenderer::render(ItemData item, float scale)
+void CTileRenderer::render(void* data, float scale)
 {
-    using _type = std::pair<TmxLayer, Matrix2D<int>>;
-    if (item.class_name != typeid(_type).name())
-    {
-        return;
-    }
-    _type *pair = static_cast<_type*>(item.data);
-
-    if (pair == nullptr)
+    if (identify_type(data) != std::string("CLayer").c_str())
     {
         return;
     }
 
-    TmxLayer layer = pair->first;
-    Matrix2D<int> matrix = pair->second;
+    CLayer *layer = static_cast<CLayer*>(data);
+
+    if (layer == nullptr)
+    {
+        return;
+    }
+
+    TmxLayer tmx_data = layer->data();
+    Matrix2D<int> matrix = layer->matrix();
 
     std::mutex m;
     std::vector<std::thread> threads;
@@ -46,8 +48,8 @@ void CTileRenderer::render(ItemData item, float scale)
         for (; index < end; index++)
         {
             // position next tile (x,y)
-            col = (index % layer.width); // column
-            row = (index / layer.width); // row
+            col = (index % tmx_data.width); // column
+            row = (index / tmx_data.width); // row
 
             int tileID = matrix.at(index);
             int tileIdx = 0;
@@ -78,8 +80,8 @@ void CTileRenderer::render(ItemData item, float scale)
             frameY = row * tileset->tile_height;
 
             CTexture2DManager::instance()->drawTile(tileset->name,
-                                                    Point2DF(frameX - layer.offset_x,
-                                                             frameY - layer.offset_y),
+                                                    Point2DF(frameX - tmx_data.offset_x,
+                                                             frameY - tmx_data.offset_y),
                                                     tileset->tile_width,
                                                     tileset->tile_height,
                                                     tileY,
@@ -92,7 +94,7 @@ void CTileRenderer::render(ItemData item, float scale)
     for (int i = 0; i < CORES; i++)
     {
         // [1] init segment size
-        int segmentSize = (layer.width * layer.height) / CORES;
+        int segmentSize = (tmx_data.width * tmx_data.height) / CORES;
 
         // [2] init start, end
         int start = i * segmentSize;
@@ -100,7 +102,7 @@ void CTileRenderer::render(ItemData item, float scale)
 
         if (i == CORES - 1)
         {
-            end = (layer.width * layer.height);
+            end = (tmx_data.width * tmx_data.height);
         }
 
         threads.push_back(std::thread(painter, start, end));

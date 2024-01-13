@@ -14,11 +14,10 @@ CLayerManager* CLayerManager::instance()
     return s_instance = (s_instance = nullptr) ? new CLayerManager() : s_instance;
 }
 
-void CLayerManager::push(TmxLayer &&layer)
+void CLayerManager::push(TmxLayer layer)
 {
-    Matrix2D<int> matrix = Matrix2D<int>::fromString(layer.data->content, layer.height, layer.width);
-    m_layers.push_back(std::make_pair(layer, matrix));
-    CRenderSys::instance()->addItem<std::pair<TmxLayer, Matrix2D<int>>>(&m_layers.back());
+    m_layers.push_back(CLayer(layer));
+    CRenderSys::instance()->addItem(&m_layers.back());
 }
 
 void CLayerManager::clear()
@@ -26,7 +25,7 @@ void CLayerManager::clear()
     m_layers.clear();
 }
 
-std::vector<std::pair<TmxLayer, Matrix2D<int>>> &CLayerManager::layers()
+std::vector<CLayer> CLayerManager::layers() const
 {
     return m_layers;
 }

@@ -1,7 +1,7 @@
 #ifndef CGRID_H
 #define CGRID_H
 
-#include "matrix2D.h"
+#include <matrix2D.h>
 
 template<typename T>
 class CGrid: public Matrix2D<T>

@@ -22,7 +22,7 @@ private:
     CEntityRenderer         m_entity_renderer;
     CTileRenderer           m_tile_renderer;
     std::vector<ARenderer*> m_renderer;
-    std::vector<ItemData>   m_items;
+    std::vector<void*>   m_items;
 
 private:
     CRenderSys();
@@ -38,11 +38,8 @@ public:
     template<typename T>
     void addItem(T* item)
     {
-        CMetaObject *meta = getMetaObject<T>();
         void *data = static_cast<void *>(item);
-        const char* class_name = meta->className();
-
-        m_items.emplace_back(ItemData{data, class_name});
+        m_items.emplace_back(data);
     }
 
     void clearItems();

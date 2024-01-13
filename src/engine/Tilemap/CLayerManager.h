@@ -3,8 +3,9 @@
 
 #include <stack>
 #include <CommonDefine.h>
-#include "TilemapParser/TmxFormat.h"
-#include "matrix2D.h"
+#include <matrix2D.h>
+#include <TilemapParser/TmxFormat.h>
+#include "CLayer.h"
 
 BEGIN_NAMESPACE(engine)
 class CLayerManager
@@ -14,13 +15,13 @@ private:
     static CLayerManager *s_instance;
 
 private:
-    std::vector<std::pair<TmxLayer, Matrix2D<int>>> m_layers; // first: raw info, second: matrix tiles
+    std::vector<CLayer> m_layers; // first: raw info, second: matrix tiles
 
 public:
     static CLayerManager *instance();
-    void push(TmxLayer&&);
+    void push(TmxLayer);
     void clear();
-    std::vector<std::pair<TmxLayer, Matrix2D<int>>> &layers();
+    std::vector<CLayer> layers() const;
 };
 END_NAMESPACE
 

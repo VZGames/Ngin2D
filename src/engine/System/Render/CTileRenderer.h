@@ -11,7 +11,7 @@ public:
     CTileRenderer();
 
 public:
-    virtual void render(ItemData, float) override;
+    virtual void render(void*, float) override;
 };
 END_NAMESPACE
 
