@@ -17,12 +17,15 @@ CLayerManager* CLayerManager::instance()
 void CLayerManager::push(TmxLayer layer)
 {
     m_layers.push_back(CLayer(layer));
-    CRenderSys::instance()->addItem(&m_layers.back());
+    CRenderSys::instance()->addItem<CLayer>(&m_layers.back());
 }
 
 void CLayerManager::clear()
 {
-    m_layers.clear();
+    if(m_layers.size() > 0)
+    {
+        m_layers.clear();
+    }
 }
 
 std::vector<CLayer> CLayerManager::layers() const

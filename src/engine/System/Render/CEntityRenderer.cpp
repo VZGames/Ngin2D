@@ -19,7 +19,7 @@ void CEntityRenderer::render(void* data, float scale)
         return;
     }
 
-    CEntity *entity = dynamic_cast<CEntity *>(static_cast<CEntity *>(data));
+    CEntity *entity = static_cast<CEntity *>(data);
 
     if(entity == nullptr)
     {
