@@ -14,8 +14,7 @@ CEntityRenderer::CEntityRenderer()
 
 bool CEntityRenderer::render(void* data, float scale)
 {
-    DBG("%s", identify_type(data))
-    if (identify_type(data) != std::string("CEntity").c_str())
+    if (identify_type(data).compare("CEntity") != 0)
     {
         return false;
     }

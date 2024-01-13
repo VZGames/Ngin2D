@@ -14,7 +14,7 @@ CTileRenderer::CTileRenderer()
 
 bool CTileRenderer::render(void* data, float scale)
 {
-    if (identify_type(data) != std::string("CLayer").c_str())
+    if (identify_type(data).compare("CLayer") != 0)
     {
         return false;
     }

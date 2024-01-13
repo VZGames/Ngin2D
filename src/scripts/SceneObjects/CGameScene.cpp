@@ -32,8 +32,8 @@ void CGameScene::init()
         engine::CRenderSys::instance()->clearItems();
         for (auto &entity : m_entities)
         {
-            engine::CRenderSys::instance()->addItem<engine::CEntity>(entity);
             engine::CWorld::instance()->registerEntity(entity);
+            engine::CRenderSys::instance()->addItem<engine::CEntity>(entity);
 
             auto box = entity->getComponent<engine::SBoxComponent>();
 

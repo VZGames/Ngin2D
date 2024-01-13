@@ -3,7 +3,7 @@
 using namespace engine;
 CEntity::CEntity()
 {
-    m_derived_class_name = __FUNCTION__;
+    m_class_name = __FUNCTION__;
 }
 
 CEntity::~CEntity()
