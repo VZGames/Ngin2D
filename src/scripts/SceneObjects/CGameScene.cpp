@@ -33,7 +33,7 @@ void CGameScene::init()
         for (engine::CEntity* entity : m_entities)
         {
             engine::CWorld::instance()->registerEntity(entity);
-            engine::CRenderSys::instance()->addItem<engine::CEntity>(entity);
+            engine::CRenderSys::instance()->addItem(entity);
 
             auto box = entity->getComponent<engine::SBoxComponent>();
             if(box == nullptr) continue;

@@ -17,8 +17,8 @@ CLayerManager* CLayerManager::instance()
 void CLayerManager::push(TmxLayer data)
 {
     CLayer layer(data);
-    m_layers.emplace_back(std::move(layer));
-    CRenderSys::instance()->addItem<CLayer>(&m_layers.back());
+    m_layers.emplace_back(layer);
+    CRenderSys::instance()->addItem(&m_layers.back());
 }
 
 void CLayerManager::clear()

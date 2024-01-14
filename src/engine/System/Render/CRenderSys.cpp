@@ -87,6 +87,12 @@ bool CRenderSys::createRenderer()
     return true;
 }
 
+void CRenderSys::addItem(ABase *item)
+{
+    void *data = static_cast<void*>(item);
+    m_items.emplace_back(data);
+}
+
 void CRenderSys::clearItems()
 {
     m_items.clear();

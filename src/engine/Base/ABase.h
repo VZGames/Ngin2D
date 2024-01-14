@@ -15,9 +15,10 @@ public:
     {
         return m_class_name;
     }
+
     static const char *identify_type(void *ptr)
     {
-        ABase* obj = reinterpret_cast<ABase*>(ptr);
+        ABase* obj = static_cast<ABase*>(ptr);
         if(obj != nullptr)
         {
             DBG("%p %p", ptr, obj)

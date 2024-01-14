@@ -5,12 +5,12 @@
 #include "Alias.h"
 #include "CEntityRenderer.h"
 #include "CTileRenderer.h"
-#include "MetaObject/CMetaObjectImpl.h"
 
 class SDL_Renderer;
 class SDL_Window;
 class CThreadPool;
 BEGIN_NAMESPACE(engine)
+class ABase;
 class CEntity;
 class ARenderer;
 class CRenderSys
@@ -34,14 +34,7 @@ public:
     bool isReady();
     bool openWindow(_Title, _Width&, _Height&);
     bool createRenderer();
-
-    template<typename T>
-    void addItem(T* item)
-    {
-        void *data = reinterpret_cast<void*>(item);
-        m_items.emplace_back(data);
-    }
-
+    void addItem(ABase* item);
     void clearItems();
     void draw();
     void beginDraw();
