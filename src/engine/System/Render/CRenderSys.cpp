@@ -98,7 +98,7 @@ void CRenderSys::draw()
     for(ARenderer *renderer: m_renderer)
     {
         m_pool->submit([&](){
-                  for(void* item: m_items)
+                  for(auto item: m_items)
                   {
                       bool status = renderer->render(item, scale);
                       DBG("Draw %p with status %d", item, status)

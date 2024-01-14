@@ -30,13 +30,12 @@ void CGameScene::init()
         // m_entities.emplace_back(&cow3);
 
         engine::CRenderSys::instance()->clearItems();
-        for (auto &entity : m_entities)
+        for (engine::CEntity* entity : m_entities)
         {
             engine::CWorld::instance()->registerEntity(entity);
             engine::CRenderSys::instance()->addItem<engine::CEntity>(entity);
 
             auto box = entity->getComponent<engine::SBoxComponent>();
-
             if(box == nullptr) continue;
             engine::CBroadPhaseCulling::instance()->insert(entity->id(),box->shape.center().x, box->shape.center().y);
         }

@@ -14,9 +14,10 @@ CLayerManager* CLayerManager::instance()
     return s_instance = (s_instance == nullptr) ? new CLayerManager() : s_instance;
 }
 
-void CLayerManager::push(TmxLayer layer)
+void CLayerManager::push(TmxLayer data)
 {
-    m_layers.emplace_back(CLayer(layer));
+    CLayer layer(data);
+    m_layers.emplace_back(std::move(layer));
     CRenderSys::instance()->addItem<CLayer>(&m_layers.back());
 }
 

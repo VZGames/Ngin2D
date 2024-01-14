@@ -4,6 +4,7 @@ using namespace engine;
 CEntity::CEntity()
 {
     m_class_name = __FUNCTION__;
+    DBG("Init instance %s At address [%p]", m_class_name, this)
 }
 
 CEntity::~CEntity()

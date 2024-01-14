@@ -15,18 +15,17 @@ public:
     {
         return m_class_name;
     }
-};
-
-static std::string identify_type(void* ptr) {
-    const char* type = "";
-    ABase* obj = static_cast<ABase*>(ptr);
-    if(obj != nullptr)
+    static const char *identify_type(void *ptr)
     {
-        type = obj->className();
+        ABase* obj = reinterpret_cast<ABase*>(ptr);
+        if(obj != nullptr)
+        {
+            DBG("%p %p", ptr, obj)
+            return obj->className();
+        }
+        return "";
     }
-    DBG("Type of [%p] is [%s] with lenght is [%d]", ptr, type, strlen(type))
-    return std::string(type);
-}
+};
 
 END_NAMESPACE
 
