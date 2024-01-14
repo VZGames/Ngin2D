@@ -9,12 +9,17 @@ CLayerManager::CLayerManager()
 
 }
 
+CLayerManager::~CLayerManager()
+{
+
+}
+
 CLayerManager* CLayerManager::instance()
 {
     return s_instance = (s_instance == nullptr) ? new CLayerManager() : s_instance;
 }
 
-void CLayerManager::push(TmxLayer data)
+void CLayerManager::push(TmxLayer&&data)
 {
     CLayer layer(data);
     m_layers.emplace_back(layer);

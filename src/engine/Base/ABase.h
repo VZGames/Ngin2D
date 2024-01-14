@@ -24,7 +24,7 @@ public:
             DBG("%p %p", ptr, obj)
             return obj->className();
         }
-        return "";
+        return "\0";
     }
 };
 

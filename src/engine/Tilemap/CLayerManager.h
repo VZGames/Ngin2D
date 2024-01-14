@@ -11,6 +11,7 @@ class CLayerManager
 {
 private:
     CLayerManager();
+    ~CLayerManager();
 
 private:
     static CLayerManager    *s_instance;
@@ -18,7 +19,7 @@ private:
 
 public:
     static CLayerManager *instance();
-    void push(TmxLayer);
+    void push(TmxLayer&&);
     void clear();
     std::vector<CLayer> &layers();
 };

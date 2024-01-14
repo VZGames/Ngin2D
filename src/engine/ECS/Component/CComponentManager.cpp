@@ -20,7 +20,7 @@ bool CComponentManager::createComponent(CComponent *newComponent)
     assert(m_component_count <= MAX_COMPONENT_ID && "The maximum number of entity creations has been reached");
 
     ComponentID _id = MIN_COMPONENT_ID;
-    const char* compName = newComponent->name();
+    const char* compName = newComponent->className();
     if(compName == nullptr) return false;
     if(m_dictionary.find(compName) != m_dictionary.end())
     {

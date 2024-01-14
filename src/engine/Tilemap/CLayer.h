@@ -11,6 +11,7 @@ class CLayer: public ABase
 private:
     TmxLayer        m_data;
     Matrix2D<int>   m_matrix;
+
 public:
     CLayer(TmxLayer);
     ~CLayer();

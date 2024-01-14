@@ -3,20 +3,19 @@
 
 #include <CommonDefine.h>
 #include <Alias.h>
+#include <ABase.h>
 
 BEGIN_NAMESPACE(engine)
-class CComponent
+class CComponent: public ABase
 {
 private:
     ComponentID                 m_id{MIN_COMPONENT_ID};
-    const char                  *m_name = nullptr;
 
 public:
     CComponent(const char*);
 
     ComponentID id() const;
     void setId(const ComponentID &newId);
-    const char *name() const;
 };
 END_NAMESPACE
 
