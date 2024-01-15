@@ -14,17 +14,19 @@ CEntityRenderer::CEntityRenderer()
 
 bool CEntityRenderer::render(void* data, float scale)
 {
-    if (std::strcmp(ABase::identify_type(data), "CEntity") != 0)
+    if (std::strcmp(identify_type(data), "CEntity") != 0)
     {
         return false;
     }
     else
     {
-        CEntity *entity = static_cast<CEntity *>(data);
+        CEntity *entity = static_cast<CEntity*>(data);
         Offset *offset = CCameraSys::instance()->offset();
         auto sprite = entity->getComponent<SSpriteComponent>();
         auto position = entity->getComponent<SPositionComponent>();
         auto box = entity->getComponent<SBoxComponent>();
+
+        DBG("%p %p %p %p", entity, sprite, position, box)
 
         if ((position && sprite))
         {

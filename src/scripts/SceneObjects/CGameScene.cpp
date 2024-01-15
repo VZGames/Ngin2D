@@ -20,9 +20,9 @@ void CGameScene::init()
 {
     // space init entities
     {
-        cow.setPosition(320, 300);
-        cow2.setPosition(768, 144);
-        cow3.setPosition(640, 400);
+        //        cow.setPosition(320, 300);
+        //        cow2.setPosition(768, 144);
+        //        cow3.setPosition(640, 400);
 
         m_entities.emplace_back(&player);
         // m_entities.emplace_back(&cow);

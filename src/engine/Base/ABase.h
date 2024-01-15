@@ -15,18 +15,18 @@ public:
     {
         return m_class_name;
     }
-
-    static const char *identify_type(void *ptr)
-    {
-        ABase* obj = static_cast<ABase*>(ptr);
-        if(obj != nullptr)
-        {
-            DBG("%p %p", ptr, obj)
-            return obj->className();
-        }
-        return "\0";
-    }
 };
+
+inline const char *identify_type(void *ptr)
+{
+    ABase* obj = static_cast<ABase*>(ptr);
+    if(obj != nullptr)
+    {
+        DBG("%p %p %s %d", ptr, obj, obj->className(), strlen(obj->className()))
+        return obj->className();
+    }
+    return "\0";
+}
 
 END_NAMESPACE
 
