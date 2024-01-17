@@ -55,6 +55,7 @@ bool CEntityRenderer::render(void* data, float scale)
                 CTexture2DManager::instance()->drawPolygon(pos, box->vertices(), scale);
             }
         }
+
     }
 
     return true;

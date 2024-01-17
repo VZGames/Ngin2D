@@ -39,14 +39,14 @@ public:
         T *c = new T(std::forward<TArgs>(args)...);
         COMP_MANAGER->createComponent(c);
         m_components[compName] = std::move(c);
-        return static_cast<T*>(m_components[compName]);
+        return static_cast<T*>(m_components.at(compName));
     }
 
     template<class T>
     bool destroyComponent()
     {
-        const char *typeName = typeid(T).name();
-        auto it = m_components.find(typeName);
+        const char *compName = typeid(T).name();
+        auto it = m_components.find(compName);
         if(it == m_components.end())
             return 0;
         m_components.erase(it);
@@ -57,13 +57,16 @@ public:
     T* getComponent() const
     {
         const char *compName = typeid(T).name();
+        DBG("1 ")
         if(m_components.empty()) return nullptr;
+        DBG("2 ")
         if(m_components.find(compName) == m_components.end())
         {
-           DBG("Component [%s] does not exist", compName)
+            DBG("Component [%s] does not exist", compName);
             return nullptr;
         }
-        return (T*)m_components.at(compName);
+        DBG("3 %p %s", this, compName)
+        return static_cast<T*>(m_components.at(compName));
     }
 
     template<class T>
