@@ -37,9 +37,12 @@ public:
         assert(m_components.find(compName) == m_components.end() && "Adding component more than once.");
 
         T *c = new T(std::forward<TArgs>(args)...);
-        COMP_MANAGER->createComponent(c);
-        m_components[compName] = std::move(c);
-        return static_cast<T*>(m_components.at(compName));
+        if(COMP_MANAGER->createComponent(c))
+        {
+            m_components[compName] = std::move(c);
+            return static_cast<T*>(m_components.at(compName));
+        }
+        return nullptr;
     }
 
     template<class T>
@@ -57,9 +60,9 @@ public:
     T* getComponent() const
     {
         const char *compName = typeid(T).name();
-        DBG("1 ")
+        DBG("1 %p", this)
         if(m_components.empty()) return nullptr;
-        DBG("2 ")
+        DBG("2 %p", this)
         if(m_components.find(compName) == m_components.end())
         {
             DBG("Component [%s] does not exist", compName);

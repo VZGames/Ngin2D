@@ -89,6 +89,7 @@ bool CRenderSys::createRenderer()
 
 void CRenderSys::addItem(ABase *item)
 {
+    DBG("");
     void *data = static_cast<void*>(item);
     m_items.emplace_back(data);
 }
@@ -103,13 +104,18 @@ void CRenderSys::draw()
     float scale = CCameraSys::instance()->scale();
     for(ARenderer *renderer: m_renderer)
     {
-        m_pool->submit([&](){
+        bool status = m_pool->submit([&]() -> bool{
                   for(auto item: m_items)
                   {
-                      bool status = renderer->render(item, scale);
-                      DBG("Draw %p with status %d", item, status)
+                      return renderer->render(item, scale);
                   }
+                  return false;
               }).get();
+
+        if(!status)
+        {
+            return;
+        }
     }
 }
 
