@@ -14,8 +14,12 @@ struct SPositionComponent: public Vector2D<float>, public CComponent
 
     void update(Vector2D<float> vec, float dt)
     {
-        *this += vec;
+        previous = *this;
+        *this += (vec * dt);
     }
+
+    Vector2D<float> previous;
+
 };
 END_NAMESPACE
 

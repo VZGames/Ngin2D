@@ -35,6 +35,7 @@ void CMovementSystem::update(CEntity *entity, float dt)
 
     if(motion->running)
     {
+        if(box->shape.collided()) DBG("Entity [%d] collided", entity->id())
         motion->velocity += motion->mtv;
         position->update(motion->velocity, dt);
     }

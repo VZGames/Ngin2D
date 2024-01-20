@@ -78,6 +78,11 @@ public:
         return A.Multiply(B);
     }
 
+    friend Vector2D<T> operator*(Vector2D<T> &A, Vector2D<T> &B)
+    {
+        return A.Multiply(B);
+    }
+
     friend Vector2D<T> operator/(Vector2D<T> &A, const Vector2D<T> &B)
     {
         return A.Divide(B);

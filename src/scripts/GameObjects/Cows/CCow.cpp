@@ -11,7 +11,7 @@ CCow::CCow(float x, float y)
     m_sprite = this->addComponent<engine::SSpriteComponent>(__FUNCTION__, BASIC_COW, 32, 32, 3, 200);
     m_sprite->zOrder = 0;
 
-    m_motion = this->addComponent<engine::SMotionComponent>(5);
+    m_motion = this->addComponent<engine::SMotionComponent>(50);
     m_box = this->addComponent<engine::SBoxComponent>(E_BODY_TYPE::DYNAMIC, m_position->x, m_position->y);
 
     m_box->setVertex(4, 22);

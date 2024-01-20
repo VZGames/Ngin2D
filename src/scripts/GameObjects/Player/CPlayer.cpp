@@ -18,7 +18,7 @@ CPlayer::CPlayer()
     m_sprite->zOrder = 1;
 
     m_camera = this->addComponent<engine::SCameraComponent>(*m_position);
-    m_motion = this->addComponent<engine::SMotionComponent>(3);
+    m_motion = this->addComponent<engine::SMotionComponent>(100);
 
     m_box = this->addComponent<engine::SBoxComponent>(E_BODY_TYPE::KINEMATIC, m_position->x, m_position->y);
     m_box->setVertex(20, 28);
@@ -64,12 +64,12 @@ void CPlayer::jump()
 
 void CPlayer::walk(E_MOVE_DIRECTION direction)
 {
-    DBG("WALK")
+//    DBG("WALK")
     m_sprite->frameCount = 4;
     m_motion->running = 1;
     if (direction == E_MOVE_DIRECTION::MOVE_LEFT)
     {
-        DBG("WALK E_MOVE_DIRECTION::MOVE_LEFT")
+//        DBG("WALK E_MOVE_DIRECTION::MOVE_LEFT")
         m_sprite->col = 2;
         m_sprite->row = 2;
         m_motion->direction = -1;
@@ -78,7 +78,7 @@ void CPlayer::walk(E_MOVE_DIRECTION direction)
 
     if (direction == E_MOVE_DIRECTION::MOVE_RIGHT)
     {
-        DBG("WALK E_MOVE_DIRECTION::MOVE_RIGHT")
+//        DBG("WALK E_MOVE_DIRECTION::MOVE_RIGHT")
         m_sprite->col = 2;
         m_sprite->row = 3;
         m_motion->direction = 1;
@@ -87,7 +87,7 @@ void CPlayer::walk(E_MOVE_DIRECTION direction)
 
     if (direction == E_MOVE_DIRECTION::MOVE_UP)
     {
-        DBG("WALK E_MOVE_DIRECTION::MOVE_UP")
+//        DBG("WALK E_MOVE_DIRECTION::MOVE_UP")
         m_sprite->col = 2;
         m_sprite->row = 1;
         m_motion->direction = -1;
@@ -96,7 +96,7 @@ void CPlayer::walk(E_MOVE_DIRECTION direction)
 
     if (direction == E_MOVE_DIRECTION::MOVE_DOWN)
     {
-        DBG("WALK E_MOVE_DIRECTION::MOVE_DOWN")
+//        DBG("WALK E_MOVE_DIRECTION::MOVE_DOWN")
         m_sprite->col = 2;
         m_sprite->row = 0;
         m_motion->direction = 1;
