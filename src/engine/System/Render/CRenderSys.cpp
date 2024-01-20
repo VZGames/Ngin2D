@@ -11,8 +11,8 @@ SDL_Renderer  *CRenderSys::s_renderer = nullptr;
 CRenderSys *CRenderSys::s_instance = nullptr;
 CRenderSys::CRenderSys()
 {
-    m_renderer.emplace_back(&m_entity_renderer);
     m_renderer.emplace_back(&m_tile_renderer);
+    m_renderer.emplace_back(&m_entity_renderer);
 
     m_pool = new CThreadPool(static_cast<int>(m_renderer.size()));
     m_pool->init();
@@ -89,9 +89,7 @@ bool CRenderSys::createRenderer()
 
 void CRenderSys::addItem(ABase *item)
 {
-    DBG("");
-    void *data = static_cast<void*>(item);
-    m_items.emplace_back(data);
+    m_items.emplace_back(item);
 }
 
 void CRenderSys::clearItems()
@@ -104,18 +102,12 @@ void CRenderSys::draw()
     float scale = CCameraSys::instance()->scale();
     for(ARenderer *renderer: m_renderer)
     {
-        bool status = m_pool->submit([&]() -> bool{
-                  for(auto item: m_items)
+        m_pool->submit([&](){
+                  for(ABase* item: m_items)
                   {
-                      return renderer->render(item, scale);
+                      renderer->render(item, scale);
                   }
-                  return false;
               }).get();
-
-        if(!status)
-        {
-            return;
-        }
     }
 }
 

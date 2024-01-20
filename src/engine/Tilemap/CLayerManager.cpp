@@ -21,8 +21,9 @@ CLayerManager* CLayerManager::instance()
 
 void CLayerManager::push(TmxLayer&&data)
 {
-//    m_layers.emplace_back(CLayer(data));
-//    CRenderSys::instance()->addItem(&m_layers.back());
+    CLayer *layer = new CLayer(data);
+    m_layers.emplace_back(layer);
+    CRenderSys::instance()->addItem(m_layers.back());
 }
 
 void CLayerManager::clear()
@@ -30,7 +31,7 @@ void CLayerManager::clear()
     m_layers.clear();
 }
 
-std::vector<CLayer> &CLayerManager::layers()
+std::vector<CLayer*> CLayerManager::layers()
 {
     return m_layers;
 }

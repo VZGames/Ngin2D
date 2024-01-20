@@ -17,15 +17,13 @@ public:
     }
 };
 
-inline const char *identify_type(void *ptr)
+inline const char *identify_type(ABase *obj) noexcept
 {
-    ABase* obj = static_cast<ABase*>(ptr);
     if(obj != nullptr)
     {
-        DBG("%p %p %s %d", ptr, obj, obj->className(), strlen(obj->className()))
         return obj->className();
     }
-    return "\0";
+    return "";
 }
 
 END_NAMESPACE

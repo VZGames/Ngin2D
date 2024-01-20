@@ -15,13 +15,13 @@ private:
 
 private:
     static CLayerManager    *s_instance;
-    std::vector<CLayer>     m_layers;
+    std::vector<CLayer*>     m_layers;
 
 public:
     static CLayerManager *instance();
     void push(TmxLayer&&);
     void clear();
-    std::vector<CLayer> &layers();
+    std::vector<CLayer*> layers();
 };
 END_NAMESPACE
 

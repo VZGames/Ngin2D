@@ -76,10 +76,10 @@ void CTilemap::update(std::vector<CEntity *> &entities, float dt)
 
     Offset *offset = CCameraSys::instance()->offset();
 
-    for (CLayer &data : m_layer_manager->layers())
+    for (CLayer *data : m_layer_manager->layers())
     {
-        data.data().offset_x = offset->x + dt;
-        data.data().offset_y = offset->y + dt;
+        data->data().offset_x = offset->x + dt;
+        data->data().offset_y = offset->y + dt;
     }
 
 //    for (CEntity *entity : entities)

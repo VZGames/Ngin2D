@@ -12,7 +12,7 @@ CTileRenderer::CTileRenderer()
 
 }
 
-bool CTileRenderer::render(void* data, float scale)
+bool CTileRenderer::render(ABase* data, float scale)
 {
     if (std::strcmp(identify_type(data), "CLayer") != 0)
     {
@@ -20,9 +20,9 @@ bool CTileRenderer::render(void* data, float scale)
     }
     else
     {
-        CLayer *layer = static_cast<CLayer*>(data);
-        TmxLayer tmx_data = layer->data();
-        Matrix2D<int> matrix = layer->matrix();
+        CLayer *layer           = static_cast<CLayer*>(data);
+        TmxLayer tmx_data       = layer->data();
+        Matrix2D<int> matrix    = *(layer->matrix());
 
         std::mutex m;
         std::vector<std::thread> threads;

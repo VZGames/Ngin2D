@@ -12,7 +12,7 @@ CEntityRenderer::CEntityRenderer()
 
 }
 
-bool CEntityRenderer::render(void* data, float scale)
+bool CEntityRenderer::render(ABase* data, float scale)
 {
     if (std::strcmp(identify_type(data), "CEntity") != 0)
     {
@@ -25,9 +25,6 @@ bool CEntityRenderer::render(void* data, float scale)
         auto sprite = entity->getComponent<SSpriteComponent>();
         auto position = entity->getComponent<SPositionComponent>();
         auto box = entity->getComponent<SBoxComponent>();
-
-        DBG("%p %p %p %p", entity, sprite, position, box)
-
         if ((position && sprite))
         {
             float x = position->x - offset->x;

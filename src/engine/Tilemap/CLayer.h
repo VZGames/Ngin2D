@@ -10,14 +10,14 @@ class CLayer: public ABase
 {
 private:
     TmxLayer        m_data;
-    Matrix2D<int>   m_matrix;
+    Matrix2D<int>   *m_matrix;
 
 public:
     CLayer(TmxLayer);
     ~CLayer();
 
     TmxLayer &data();
-    Matrix2D<int> &matrix();
+    Matrix2D<int> *matrix();
 };
 END_NAMESPACE
 

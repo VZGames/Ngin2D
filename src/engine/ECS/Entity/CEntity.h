@@ -60,15 +60,12 @@ public:
     T* getComponent() const
     {
         const char *compName = typeid(T).name();
-        DBG("1 %p", this)
         if(m_components.empty()) return nullptr;
-        DBG("2 %p", this)
         if(m_components.find(compName) == m_components.end())
         {
             DBG("Component [%s] does not exist", compName);
             return nullptr;
         }
-        DBG("3 %p %s", this, compName)
         return static_cast<T*>(m_components.at(compName));
     }
 
