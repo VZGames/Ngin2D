@@ -52,6 +52,8 @@ void CCameraSystem::update(CEntity *entity, float dt)
 
             offset->x = std::max(0.0f, std::min(offset_x, boundary.x - width));
             offset->y = std::max(0.0f, std::min(offset_y, boundary.y - height));
+
+            offset->print("OFFSET");
         }
     }
 }

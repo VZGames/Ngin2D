@@ -78,21 +78,16 @@ void CTilemap::update(std::vector<CEntity *> &entities, float dt)
 
     for (CLayer *data : m_layer_manager->layers())
     {
-        data->data().offset_x = offset->x + dt;
-        data->data().offset_y = offset->y + dt;
+        data->data().offset_x = offset->x;
+        data->data().offset_y = offset->y;
     }
-
-//    for (CEntity *entity : entities)
-//    {
-//        checkCollision(entity);
-//    }
 }
 
 void CTilemap::checkCollision(CEntity *entity)
 {
-    auto motion = entity->getComponent<SMotionComponent>();
-    auto box = entity->getComponent<SBoxComponent>();
-    m_object_layer_manager.checkCollision(&box->shape, motion->mtv);
+//    auto motion = entity->getComponent<SMotionComponent>();
+//    auto box = entity->getComponent<SBoxComponent>();
+//    m_object_layer_manager.checkCollision(&box->shape, motion->mtv);
 }
 
 TmxMap *CTilemap::map() const

@@ -1,7 +1,7 @@
 # message("[Entry] -> src")
 # message("Link Libraries ${LINKER_LIBRARY} -> ${PROJECT_NAME}")
 
-add_executable(${PROJECT_NAME} main.cpp)
+add_executable(${PROJECT_NAME} main.cpp issues.txt)
 
 add_subdirectory(global)
 target_link_libraries(${PROJECT_NAME} PRIVATE global_module)
