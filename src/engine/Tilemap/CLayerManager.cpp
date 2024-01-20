@@ -11,7 +11,9 @@ CLayerManager::CLayerManager()
 
 CLayerManager::~CLayerManager()
 {
-
+    for (CLayer * layer: m_layers) {
+        safeRelease(layer);
+    }
 }
 
 CLayerManager* CLayerManager::instance()
@@ -28,6 +30,10 @@ void CLayerManager::push(TmxLayer&&data)
 
 void CLayerManager::clear()
 {
+    for (CLayer * layer: m_layers) {
+        safeRelease(layer);
+    }
+
     m_layers.clear();
 }
 
