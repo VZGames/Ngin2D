@@ -9,11 +9,6 @@ CEntity::CEntity()
 
 CEntity::~CEntity()
 {
-    for(auto component: m_components)
-    {
-        safeRelease(component.second);
-    }
-    m_components.clear();
     DBG("Release Instance %s At address [%p]", m_class_name, this);
 }
 

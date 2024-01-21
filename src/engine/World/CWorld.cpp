@@ -8,6 +8,7 @@ using namespace engine;
 CWorld* CWorld::s_instance = nullptr;
 CWorld::CWorld()
 {
+    DBG("Init Instance CWorld At address [%p]", this);
 }
 
 CWorld::~CWorld()

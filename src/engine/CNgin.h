@@ -12,7 +12,6 @@ class CNgin
 {
 private:
     CNgin();
-    ~CNgin();
     static bool s_running;
     static CNgin *s_instance;
     static uint32_t s_win_width;
@@ -23,6 +22,7 @@ private:
     CThreadPool m_key_evt_pool;
 
 public:
+    ~CNgin();
     static CNgin *instance();
     static bool running();
     static void setRunning(bool);

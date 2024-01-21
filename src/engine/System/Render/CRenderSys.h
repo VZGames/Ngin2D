@@ -27,9 +27,9 @@ private:
 
 private:
     CRenderSys();
-    ~CRenderSys();
     static CRenderSys *s_instance;
 public:
+    ~CRenderSys();
     static CRenderSys *instance();
     static SDL_Renderer* renderer();
     bool isReady();
