@@ -46,6 +46,11 @@ CPlayer::CPlayer()
     engine::CKeyEvent::instance()->registerKey(SDL_SCANCODE_S, &CPlayer::walk, this, E_MOVE_DIRECTION::MOVE_DOWN);
 }
 
+CPlayer::~CPlayer()
+{
+
+}
+
 void CPlayer::idle()
 {
     //    DBG("IDLE")

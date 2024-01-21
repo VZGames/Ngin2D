@@ -7,6 +7,11 @@ CComponent::CComponent(const char* name)
     DBG("Init instance %s At address [%p]", m_class_name, this)
 }
 
+CComponent::~CComponent()
+{
+    DBG("Release instance %s At address [%p]", m_class_name, this);
+}
+
 ComponentID CComponent::id() const
 {
     return m_id;

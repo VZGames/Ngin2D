@@ -28,6 +28,7 @@ private:
 
 public:
     CPlayer();
+    ~CPlayer();
 
     void idle();
     void jump();

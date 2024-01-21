@@ -13,6 +13,7 @@ private:
 
 public:
     CComponent(const char*);
+    ~CComponent();
 
     ComponentID id() const;
     void setId(const ComponentID &newId);
