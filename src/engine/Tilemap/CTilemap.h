@@ -26,10 +26,10 @@ private:
 
 private:
     CTilemap();
-    ~CTilemap();
     static CTilemap *s_instance;
 
 public:
+    ~CTilemap();
     static CTilemap *instance();
     void loadMap(const char* file);
     void update(std::vector<CEntity*> &, float dt);

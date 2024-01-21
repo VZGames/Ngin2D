@@ -22,6 +22,7 @@ private:
 
 public:
     CGameScene();
+    ~CGameScene();
 
     // AScene interface
 public:

@@ -16,6 +16,12 @@ CGameScene::CGameScene()
     engine::CSceneManager::instance()->createScene(__FUNCTION__, this);
 }
 
+CGameScene::~CGameScene()
+{
+    safeRelease(m_tilemap);
+    DBG("Destroy Instance CGameScene At address [%p]", this)
+}
+
 void CGameScene::init()
 {
     // space init entities
