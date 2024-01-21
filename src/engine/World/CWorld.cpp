@@ -12,7 +12,7 @@ CWorld::CWorld()
 
 CWorld::~CWorld()
 {
-    
+    DBG("Release Instance CWorld At address [%p]", this);
 }
 
 CWorld* CWorld::instance()

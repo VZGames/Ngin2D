@@ -13,7 +13,7 @@ CLayer::CLayer(TmxLayer data): m_data(data)
 CLayer::~CLayer()
 {
     safeRelease(m_matrix);
-    DBG("Destroy Instance %s At address [%p]", m_class_name, this);
+    DBG("Release Instance %s At address [%p]", m_class_name, this);
 }
 
 TmxLayer &CLayer::data()

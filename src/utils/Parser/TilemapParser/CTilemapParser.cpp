@@ -1,5 +1,6 @@
 #include "CTilemapParser.h"
 #include <Utils.h>
+#include <LoggerDefines.h>
 
 CTilemapParser::CTilemapParser()
 {
@@ -15,6 +16,7 @@ CTilemapParser::~CTilemapParser()
     safeRelease(m_map.tilesets);
     safeRelease(m_map.layers->data);
     safeRelease(m_map.layers);
+    DBG("Release Instance CTilemapParser At address [%p]", this);
 }
 
 void CTilemapParser::loadFile(const char *file)

@@ -44,6 +44,7 @@ CMouseEvent::~CMouseEvent()
     SDL_FreeCursor(m_cursor);
     SDL_FreeSurface(m_newSurface);
     SDL_FreeSurface(m_surface);
+    DBG("Release Instance CMouseEvent At address [%p]", this)
 }
 
 CMouseEvent *CMouseEvent::instance()

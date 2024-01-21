@@ -21,6 +21,7 @@ CNgin::CNgin() : m_key_evt_pool(2)
 CNgin::~CNgin()
 {
     m_key_evt_pool.shutdown();
+    DBG("Release Instance CNgin At address [%p]", this)
 }
 
 CNgin *CNgin::instance()

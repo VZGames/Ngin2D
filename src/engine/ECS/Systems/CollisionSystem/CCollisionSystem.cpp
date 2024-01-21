@@ -15,6 +15,7 @@ CCollisionSystem::CCollisionSystem()
 CCollisionSystem::~CCollisionSystem()
 {
     m_pool.shutdown();
+    DBG("Release Instance CCollisionSystem At address [%p]", this);
 }
 
 void CCollisionSystem::init(CEntity *entity)

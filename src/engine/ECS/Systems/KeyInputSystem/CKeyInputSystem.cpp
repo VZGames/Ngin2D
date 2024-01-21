@@ -9,7 +9,7 @@ CKeyInputSystem::CKeyInputSystem()
 
 CKeyInputSystem::~CKeyInputSystem()
 {
-
+    DBG("Release Instance CKeyInputSystem At address [%p]", this);
 }
 
 void CKeyInputSystem::init(CEntity *entity)

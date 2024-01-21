@@ -22,6 +22,7 @@ CRenderSys::~CRenderSys()
 {
     m_pool->shutdown();
     safeRelease(m_pool);
+    DBG("Release Instance CRenderSys At address [%p]", this);
 }
 
 CRenderSys *CRenderSys::instance()

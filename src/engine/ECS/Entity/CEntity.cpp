@@ -9,7 +9,7 @@ CEntity::CEntity()
 
 CEntity::~CEntity()
 {
-    DBG("Destroy Instance %s At address [%p]", m_class_name, this);
+    DBG("Release Instance %s At address [%p]", m_class_name, this);
 }
 
 EntityID CEntity::id() const

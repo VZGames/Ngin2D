@@ -19,7 +19,7 @@ CGameScene::CGameScene()
 CGameScene::~CGameScene()
 {
     safeRelease(m_tilemap);
-    DBG("Destroy Instance CGameScene At address [%p]", this)
+    DBG("Release Instance CGameScene At address [%p]", this)
 }
 
 void CGameScene::init()

@@ -13,4 +13,6 @@ CLogger::CLogger()
 {}
 
 CLogger::~CLogger()
-{}
+{
+    DBG("Release Instance CLogger At address [%p]", this);
+}

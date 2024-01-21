@@ -9,8 +9,9 @@ CTilesetManager::CTilesetManager()
 
 }
 
-CTilesetManager::~CTilesetManager(){
-    DBG("Destroy Instance CTilesetManager At address [%p]", this)
+CTilesetManager::~CTilesetManager()
+{
+    DBG("Release Instance CTilesetManager At address [%p]", this);
 }
 
 CTilesetManager *CTilesetManager::instance()
