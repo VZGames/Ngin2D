@@ -11,7 +11,8 @@ CLayerManager::CLayerManager()
 
 CLayerManager::~CLayerManager()
 {
-    for (CLayer * layer: m_layers) {
+    DBG("Destroy Instance CLayerManager At address [%p]", this)
+    for (CLayer *layer: m_layers) {
         safeRelease(layer);
     }
 }

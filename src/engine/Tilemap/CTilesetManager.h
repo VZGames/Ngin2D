@@ -16,6 +16,7 @@ private:
     std::unordered_map<const char*, TmxTileSet>  m_tilesets;
 
 public:
+    ~CTilesetManager();
     static CTilesetManager *instance();
     void insert(const char*, TmxTileSet&&);
     void clear();

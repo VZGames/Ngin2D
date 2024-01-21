@@ -20,14 +20,14 @@ void CGameScene::init()
 {
     // space init entities
     {
-                cow.setPosition(320, 300);
-                cow2.setPosition(768, 144);
-                cow3.setPosition(640, 400);
+        cow.setPosition(320, 300);
+        cow2.setPosition(768, 144);
+        cow3.setPosition(640, 400);
 
         m_entities.emplace_back(&player);
-         m_entities.emplace_back(&cow);
-         m_entities.emplace_back(&cow2);
-         m_entities.emplace_back(&cow3);
+        m_entities.emplace_back(&cow);
+        m_entities.emplace_back(&cow2);
+        m_entities.emplace_back(&cow3);
 
         engine::CRenderSys::instance()->clearItems();
         for (engine::CEntity* entity : m_entities)
@@ -71,11 +71,7 @@ void CGameScene::update(float dt)
 
 void CGameScene::render()
 {
-    // [1] create new threads for render
     engine::CRenderSys::instance()->draw();
-    
-    // [2] wait for all finished
-
 }
 
 

@@ -1,5 +1,6 @@
 #include "CTilesetManager.h"
 #include "CTexture2DManager.h"
+#include <LoggerDefines.h>
 
 using namespace engine;
 CTilesetManager *CTilesetManager::s_instance = nullptr;
@@ -8,7 +9,11 @@ CTilesetManager::CTilesetManager()
 
 }
 
-CTilesetManager* CTilesetManager::instance()
+CTilesetManager::~CTilesetManager(){
+    DBG("Destroy Instance CTilesetManager At address [%p]", this)
+}
+
+CTilesetManager *CTilesetManager::instance()
 {
     return s_instance = (s_instance == nullptr)? new CTilesetManager(): s_instance;
 }

@@ -18,6 +18,7 @@ CTilemap::~CTilemap()
 {
     m_pool->shutdown();
     safeRelease(m_tileset_manager);
+    safeRelease(m_layer_manager);
 }
 
 CTilemap *CTilemap::instance()
