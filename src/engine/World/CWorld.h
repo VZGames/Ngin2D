@@ -11,7 +11,6 @@ class CWorld
 {
 private:
     explicit CWorld();
-    ~CWorld();
     static CWorld *s_instance;
 
     Vector2D<float> m_gravity;
@@ -19,6 +18,7 @@ private:
     std::vector<AScene*>  m_scenes;
 
 public:
+    ~CWorld();
     static CWorld *instance();
     CWorld *registerEntity(CEntity*);
     void unRegisterEntity(CEntity*);
