@@ -15,6 +15,7 @@ private:
     std::unordered_map<const char*, ComponentID>    m_dictionary;
 
 public:
+    ~CComponentManager();
     static CComponentManager                    *instance();
 
     bool createComponent(CComponent*);

@@ -10,6 +10,11 @@ CComponentManager::CComponentManager()
     }
 }
 
+CComponentManager::~CComponentManager()
+{
+
+}
+
 CComponentManager *CComponentManager::instance()
 {
     return s_instance = (s_instance == nullptr)? new CComponentManager(): s_instance;

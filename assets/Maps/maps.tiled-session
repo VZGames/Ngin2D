@@ -3,11 +3,14 @@
         "height": 4300,
         "width": 2
     },
-    "activeFile": "PhuHoa.tmx",
+    "activeFile": "QuangHue.tmx",
     "expandedProjectPaths": [
         "."
     ],
     "fileStates": {
+        "": {
+            "scaleInDock": 1
+        },
         "D:/Projects/Build/QT_APP/build-GameFramework-Desktop_Qt_6_5_1_MinGW_64_bit/debug/assets/Maps/PhuHoa.tmx": {
             "scale": 0.091064453125,
             "selectedLayer": 4,
@@ -39,10 +42,10 @@
         },
         "PhuHoa.tmx": {
             "scale": 2,
-            "selectedLayer": 4,
+            "selectedLayer": 2,
             "viewCenter": {
-                "x": 288.25,
-                "y": 261.5
+                "x": 476.5,
+                "y": 476.5
             }
         },
         "PhuHoa.tmx#Dirt": {
@@ -66,20 +69,51 @@
         },
         "PhuHoa.tmx#Water": {
             "scaleInDock": 1
+        },
+        "QuangHue.tmx": {
+            "scale": 0.75,
+            "selectedLayer": 2,
+            "viewCenter": {
+                "x": 510,
+                "y": 308
+            }
+        },
+        "QuangHue.tmx#Dirt": {
+            "scaleInDock": 1
+        },
+        "QuangHue.tmx#Grass": {
+            "scaleInDock": 1
+        },
+        "QuangHue.tmx#Grass_hill_tiles_v2": {
+            "scaleInDock": 1
+        },
+        "QuangHue.tmx#Grass_tiles_v2": {
+            "scaleInDock": 1
+        },
+        "QuangHue.tmx#Hills": {
+            "scaleInDock": 1
+        },
+        "QuangHue.tmx#Tall_Grass_hill_tilesv2": {
+            "scaleInDock": 1
+        },
+        "QuangHue.tmx#Water": {
+            "scaleInDock": 1
         }
     },
-    "last.imagePath": "D:/Projects/O/QT_Projects/GameFramework/assets/Tilesets/ground_tiles/new_tiles",
-    "map.height": 50,
+    "last.imagePath": "D:/Projects/O/QT_Projects/GameFramework/assets/Tilesets",
+    "map.height": 43,
     "map.lastUsedFormat": "tmx",
     "map.tileHeight": 16,
     "map.tileWidth": 16,
-    "map.width": 90,
+    "map.width": 73,
     "openFiles": [
-        "PhuHoa.tmx"
+        "PhuHoa.tmx",
+        "QuangHue.tmx"
     ],
     "project": "maps.tiled-project",
     "recentFiles": [
         "PhuHoa.tmx",
+        "QuangHue.tmx",
         "D:/Projects/Build/QT_APP/build-GameFramework-Desktop_Qt_6_5_1_MinGW_64_bit/debug/assets/Maps/PhuHoa.tmx"
     ],
     "tileset.embedInMap": true,

@@ -53,7 +53,7 @@ void CGameScene::init()
 
     // space init map/level
     {
-        m_tilemap->loadMap(PHU_HOA);
+        m_tilemap->loadMap(QUANG_HUE);
         engine::CCameraSys::instance()->setViewport(engine::CNgin::windowSize().width,
                                                     engine::CNgin::windowSize().height);
 

@@ -1,12 +1,12 @@
-#include "CObjectLayerManager.h"
+#include "CObjLayerManager.h"
 #include "CBroadPhaseCulling.h"
 #include "Alias.h"
 
 using namespace engine;
-CObjectLayerManager::CObjectLayerManager()
+CObjLayerManager::CObjLayerManager()
 {}
 
-void CObjectLayerManager::push(TmxObject &&object)
+void CObjLayerManager::push(TmxObject &&object)
 {
 //    CPolygonShape shape;
 //    shape.pushVertex(object.x, object.y);
@@ -20,12 +20,12 @@ void CObjectLayerManager::push(TmxObject &&object)
 //    DBG("%d", currentCell)
 }
 
-const std::vector<TmxObject> *CObjectLayerManager::objects() const
+const std::vector<TmxObject> *CObjLayerManager::objects() const
 {
     return &m_objects;
 }
 
-const std::vector<CPolygonShape> *CObjectLayerManager::box() const
+const std::vector<CPolygonShape> *CObjLayerManager::box() const
 {
     return &m_box;
 }

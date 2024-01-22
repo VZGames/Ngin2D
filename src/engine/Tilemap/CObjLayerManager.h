@@ -1,5 +1,5 @@
-#ifndef COBJECTLAYERMANAGER_H
-#define COBJECTLAYERMANAGER_H
+#ifndef COBJLAYERMANAGER_H
+#define COBJLAYERMANAGER_H
 
 #include <CommonDefine.h>
 #include <TilemapParser/TmxFormat.h>
@@ -7,13 +7,13 @@
 
 BEGIN_NAMESPACE(engine)
 class CBroadPhaseCulling;
-class CObjectLayerManager
+class CObjLayerManager
 {
 private:
     std::vector<TmxObject>          m_objects;
     std::vector<CPolygonShape>      m_box;
 public:
-    CObjectLayerManager();
+    CObjLayerManager();
 
     void push(TmxObject&&);
     const std::vector<TmxObject> *objects() const;
@@ -22,4 +22,4 @@ public:
 };
 END_NAMESPACE
 
-#endif // COBJECTLAYERMANAGER_H
+#endif // COBJLAYERMANAGER_H

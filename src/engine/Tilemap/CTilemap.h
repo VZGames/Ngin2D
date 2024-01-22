@@ -4,7 +4,7 @@
 #include <stack>
 #include <CommonDefine.h>
 #include "TilemapParser/CTilemapParser.h"
-#include "CObjectLayerManager.h"
+#include "CObjLayerManager.h"
 #include "ThreadPool/CThreadPool.h"
 #include "vector2D.h"
 #include "Geometry/AShape.h"
@@ -17,7 +17,7 @@ class CTilemap
 {
 private:
     CTilemapParser      m_parser;
-    CObjectLayerManager m_object_layer_manager;
+    CObjLayerManager m_object_layer_manager;
     Vector2D<float>     m_coord_limit;
     CLayerManager       *m_layer_manager;
     CTilesetManager     *m_tileset_manager;
