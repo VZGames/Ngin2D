@@ -22,6 +22,10 @@ public:
     void parse(int index, TmxLayer  &layer);
     void parse(int index, TmxObjectGroup &objectgroup);
     void parse(int index, TmxObject &object);
+    void parse(int index, TmxRectangle &shape);
+    void parse(int index, TmxPoint &shape);
+    void parse(int index, TmxEllipse &shape);
+    void parse(int index, TmxPolygon &shape);
 
 };
 

@@ -124,6 +124,48 @@ void CTilemapParser::parse(int index, TmxObject &object)
     object.y                = std::stoi(m_xmlparser.parseTagWith(index, tag, "y"));
     object.width            = std::stoi(m_xmlparser.parseTagWith(index, tag, "width"));
     object.height           = std::stoi(m_xmlparser.parseTagWith(index, tag, "height"));
-//    object.shape            = m_xmlparser.parseTagWith(0, "objectgroup.object.")
+    //    object.shape            = m_xmlparser.parseTagWith(0, "objectgroup.object.")
+}
+
+void CTilemapParser::parse(int index, TmxRectangle &shape)
+{
+}
+
+void CTilemapParser::parse(int index, TmxPoint &shape)
+{
+    const char* tag = "objectgroup.object.point";
+    shape.id               = std::stoi(m_xmlparser.parseTagWith(index, tag, "id"));
+    shape.x                = std::stoi(m_xmlparser.parseTagWith(index, tag, "x"));
+    shape.y                = std::stoi(m_xmlparser.parseTagWith(index, tag, "y"));
+}
+
+void CTilemapParser::parse(int index, TmxEllipse &shape)
+{
+    const char* tag = "objectgroup.object.ellipse";
+    shape.id               = std::stoi(m_xmlparser.parseTagWith(index, tag, "id"));
+    shape.x                = std::stoi(m_xmlparser.parseTagWith(index, tag, "x"));
+    shape.y                = std::stoi(m_xmlparser.parseTagWith(index, tag, "y"));
+    shape.width            = std::stoi(m_xmlparser.parseTagWith(index, tag, "width"));
+    shape.height           = std::stoi(m_xmlparser.parseTagWith(index, tag, "height"));
+}
+
+void CTilemapParser::parse(int index, TmxPolygon &shape)
+{
+    const char* tag = "objectgroup.object.polygon";
+    shape.id               = std::stoi(m_xmlparser.parseTagWith(index, tag, "id"));
+    shape.x                = std::stoi(m_xmlparser.parseTagWith(index, tag, "x"));
+    shape.y                = std::stoi(m_xmlparser.parseTagWith(index, tag, "y"));
+
+    const char* points     = m_xmlparser.parseTagWith(index, tag, "points");
+    std::string points_str(points);
+    std::string line;
+    std::istringstream ss(points_str);
+    while(std::getline(ss, line, ' '))
+    {
+        float x,y;
+        std::getline(ss, line, ',');
+        std::istringstream line_ss(line);
+        line_ss >> x >> y;
+    }
 }
 

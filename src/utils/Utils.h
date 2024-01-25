@@ -7,6 +7,7 @@
 #include <typeinfo>
 #include <string>
 #include <stdint.h>
+#include <sstream>
 
 template <class T>
 inline void safeRelease(T *ptr)
