@@ -25,6 +25,7 @@ public:
     int count(const char* tag);
     const char* tagContentWith(int index, const char* tag);
     const char* parseTagWith(int index, const char* tag, const char* attribute);
+    void x();
 
 };
 

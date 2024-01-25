@@ -124,5 +124,6 @@ void CTilemapParser::parse(int index, TmxObject &object)
     object.y                = std::stoi(m_xmlparser.parseTagWith(index, tag, "y"));
     object.width            = std::stoi(m_xmlparser.parseTagWith(index, tag, "width"));
     object.height           = std::stoi(m_xmlparser.parseTagWith(index, tag, "height"));
+//    object.shape            = m_xmlparser.parseTagWith(0, "objectgroup.object.")
 }
 

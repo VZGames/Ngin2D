@@ -85,9 +85,11 @@ enum E_BODY_TYPE
 enum E_SHAPE
 {
     CIRCLE,
+    ELLIPSE,
     POLYGON,
     EDGE,
-    CHAIN
+    CHAIN,
+    POINT
 };
 
 enum E_MOUSE_EVENT

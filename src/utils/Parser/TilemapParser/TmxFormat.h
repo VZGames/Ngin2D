@@ -12,6 +12,7 @@ struct s_tmx_layer;
 struct s_tmx_tileset;
 struct s_tmx_tile;
 struct s_tmx_objectgroup;
+struct s_tmx_shape;
 
 typedef struct s_tmx_map
 {
@@ -94,6 +95,7 @@ typedef struct s_tmx_object
     int id;
     int x, y;
     int width, height;
+    s_tmx_shape* shape;
 } TmxObject;
 
 typedef struct s_tmx_objectgroup
@@ -104,5 +106,31 @@ typedef struct s_tmx_objectgroup
     const char *name;
     TmxObject  *object{nullptr};
 } TmxObjectGroup;
+
+struct s_tmx_shape
+{
+    int id;
+    float x,y;
+    const char* name;
+};
+
+typedef struct s_tmx_ellipse: public s_tmx_shape
+{
+    float width, height;
+} TmxEllipse;
+
+typedef struct s_tmx_polygon: public s_tmx_shape
+{
+    int num_of_vertex;
+    float *vertices;
+} TmxPolygon;
+
+typedef struct s_tmx_rectangle: public s_tmx_shape
+{
+} TmxRectangle;
+
+typedef struct s_tmx_point: public s_tmx_shape
+{
+} TmxPoint;
 
 #endif // TMXFORMAT_H

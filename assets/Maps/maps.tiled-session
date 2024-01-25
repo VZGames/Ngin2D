@@ -3,7 +3,7 @@
         "height": 4300,
         "width": 2
     },
-    "activeFile": "QuangHue.tmx",
+    "activeFile": "PhuHoa.tmx",
     "expandedProjectPaths": [
         "."
     ],
@@ -41,11 +41,11 @@
             "scaleInDock": 1
         },
         "PhuHoa.tmx": {
-            "scale": 2,
-            "selectedLayer": 2,
+            "scale": 1.5,
+            "selectedLayer": 5,
             "viewCenter": {
-                "x": 476.5,
-                "y": 476.5
+                "x": 451,
+                "y": 350
             }
         },
         "PhuHoa.tmx#Dirt": {
@@ -72,10 +72,10 @@
         },
         "QuangHue.tmx": {
             "scale": 0.75,
-            "selectedLayer": 2,
+            "selectedLayer": 4,
             "viewCenter": {
-                "x": 510,
-                "y": 308
+                "x": 503.33333333333337,
+                "y": 330.6666666666667
             }
         },
         "QuangHue.tmx#Dirt": {
@@ -98,6 +98,10 @@
         },
         "QuangHue.tmx#Water": {
             "scaleInDock": 1
+        },
+        "QuangHue.tmx#Water_tmp": {
+            "scaleInDock": 11,
+            "scaleInEditor": 1
         }
     },
     "last.imagePath": "D:/Projects/O/QT_Projects/GameFramework/assets/Tilesets",
@@ -112,8 +116,8 @@
     ],
     "project": "maps.tiled-project",
     "recentFiles": [
-        "PhuHoa.tmx",
         "QuangHue.tmx",
+        "PhuHoa.tmx",
         "D:/Projects/Build/QT_APP/build-GameFramework-Desktop_Qt_6_5_1_MinGW_64_bit/debug/assets/Maps/PhuHoa.tmx"
     ],
     "tileset.embedInMap": true,

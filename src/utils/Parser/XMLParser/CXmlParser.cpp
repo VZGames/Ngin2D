@@ -71,3 +71,8 @@ const char* CXmlParser::parseTagWith(int index, const char *tag, const char *att
     return result;
 }
 
+void CXmlParser::x()
+{
+    m_nodes[""].at(0)->FirstChildElement();
+}
+

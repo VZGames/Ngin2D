@@ -1,25 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.10.2" orientation="orthogonal" renderorder="right-down" width="60" height="60" tilewidth="16" tileheight="16" infinite="0" nextlayerid="7" nextobjectid="15">
+<map version="1.10" tiledversion="1.10.2" orientation="orthogonal" renderorder="right-down" width="60" height="60" tilewidth="16" tileheight="16" infinite="0" nextlayerid="8" nextobjectid="16">
  <tileset firstgid="1" name="Water" tilewidth="16" tileheight="16" tilecount="4" columns="4">
-  <image source="./assets/Tilesets/Water.png" width="64" height="16"/>
+  <image source="../Tilesets/Water.png" width="64" height="16"/>
  </tileset>
  <tileset firstgid="5" name="Grass" tilewidth="16" tileheight="16" tilecount="80" columns="10">
-  <image source="./assets/Tilesets/ground_tiles/old_tiles/Grass.png" width="160" height="128"/>
+  <image source="../Tilesets/ground_tiles/old_tiles/Grass.png" width="160" height="128"/>
  </tileset>
  <tileset firstgid="85" name="Hills" tilewidth="16" tileheight="16" tilecount="36" columns="6">
-  <image source="./assets/Tilesets/ground_tiles/old_tiles/Hills.png" width="96" height="96"/>
+  <image source="../Tilesets/ground_tiles/old_tiles/Hills.png" width="96" height="96"/>
  </tileset>
  <tileset firstgid="121" name="Dirt" tilewidth="16" tileheight="16" tilecount="64" columns="8">
-  <image source="./assets/Tilesets/ground_tiles/old_tiles/Tilled Dirt.png" width="128" height="128"/>
+  <image source="../Tilesets/ground_tiles/old_tiles/Tilled Dirt.png" width="128" height="128"/>
  </tileset>
  <tileset firstgid="185" name="Grass_tiles_v2" tilewidth="16" tileheight="16" tilecount="77" columns="11">
-  <image source="./assets/Tilesets/ground_tiles/new_tiles/Grass_tiles_v2.png" width="176" height="112"/>
+  <image source="../Tilesets/ground_tiles/new_tiles/Grass_tiles_v2.png" width="176" height="112"/>
  </tileset>
  <tileset firstgid="262" name="Grass_hill_tiles_v2" tilewidth="16" tileheight="16" tilecount="77" columns="11">
-  <image source="./assets/Tilesets/ground_tiles/new_tiles/Grass_hill_tiles_v2.png" width="176" height="112"/>
+  <image source="../Tilesets/ground_tiles/new_tiles/Grass_hill_tiles_v2.png" width="176" height="112"/>
  </tileset>
  <tileset firstgid="339" name="Tall_Grass_hill_tilesv2" tilewidth="16" tileheight="16" tilecount="48" columns="6">
-  <image source="./assets/Tilesets/ground_tiles/new_tiles/Tall_Grass_hill_tilesv2.png" width="96" height="128"/>
+  <image source="../Tilesets/ground_tiles/new_tiles/Tall_Grass_hill_tilesv2.png" width="96" height="128"/>
  </tileset>
  <layer id="1" name="water" width="60" height="60" locked="1">
   <data encoding="csv">
@@ -285,5 +285,10 @@
   <object id="12" x="260.667" y="312.333" width="80" height="13"/>
   <object id="13" x="327.5" y="137.75" width="13.25" height="174"/>
   <object id="14" x="297" y="134.25" width="30.5" height="17"/>
+ </objectgroup>
+ <objectgroup id="7" name="spawn">
+  <object id="15" name="PlayerSpawn" x="163.333" y="198.667">
+   <point/>
+  </object>
  </objectgroup>
 </map>
