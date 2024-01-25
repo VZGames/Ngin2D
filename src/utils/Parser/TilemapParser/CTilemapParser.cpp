@@ -163,8 +163,9 @@ void CTilemapParser::parse(int index, TmxPolygon &shape)
     while(std::getline(ss, line, ' '))
     {
         float x,y;
-        std::getline(ss, line, ',');
         std::istringstream line_ss(line);
+        std::string point_str;
+        std::getline(ss, point_str, ',');
         line_ss >> x >> y;
     }
 }
