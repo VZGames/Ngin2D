@@ -38,20 +38,19 @@ void CMovementSystem::update(CEntity *entity, float dt)
         if(box->shape.collided()) DBG("Entity [%d] collided", entity->id())
         motion->velocity += motion->mtv * motion->speed; // mtv = minimum translate vector ~ direction (velocity = direction * speed)
     }
-
     position->update(motion->velocity, dt);
 
-    // if(camera)
-    // {
-    //     float width = 0.0f;
-    //     float height = 0.0f;
-    //     CCameraSys::instance()->viewport(width, height);
+    if(camera)
+    {
+        float width = 0.0f;
+        float height = 0.0f;
+        CCameraSys::instance()->viewport(width, height);
 
-    //     const Vector2D<float> &boundary = CSceneManager::instance()->currentScene()->boundary();
+        const Vector2D<float> &boundary = CSceneManager::instance()->currentScene()->boundary();
 
-    //     position->x = std::max(0.0f, std::min(position->x, (boundary.x - sprite->frameWidth) * scale));
-    //     position->y = std::max(0.0f, std::min(position->y, (boundary.y - sprite->frameHeight) * scale));
-    // }
+        position->x = std::max(0.0f, std::min(position->x, (boundary.x - sprite->frameWidth) * scale));
+        position->y = std::max(0.0f, std::min(position->y, (boundary.y - sprite->frameHeight) * scale));
+    }
 
     
     box->update((*position) / scale);

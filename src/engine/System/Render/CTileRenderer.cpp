@@ -74,9 +74,11 @@ bool CTileRenderer::render(ABase* data, float scale)
                 frameX = col * tileset->tile_width;
                 frameY = row * tileset->tile_height;
 
+                float xPos = frameX - tmx_data.offset_x;
+                float yPos = frameY - tmx_data.offset_y;
+
                 CTexture2DManager::instance()->drawTile(tileset->name,
-                                                        Point2DF(frameX - tmx_data.offset_x,
-                                                                 frameY - tmx_data.offset_y),
+                                                        Point2DF(xPos, yPos),
                                                         tileset->tile_width,
                                                         tileset->tile_height,
                                                         tileY,

@@ -15,7 +15,7 @@ struct SPositionComponent: public Vector2D<float>, public CComponent
     void update(Vector2D<float> vec, float dt)
     {
         previous = *this;
-        *this += (vec * dt);
+        *this += vec * dt;
     }
 
     Vector2D<float> previous;

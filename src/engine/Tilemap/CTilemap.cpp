@@ -80,8 +80,8 @@ void CTilemap::update(std::vector<CEntity *> &entities, float dt)
 
     for (CLayer *data : m_layer_manager->layers())
     {
-        data->data().offset_x = offset->x;
-        data->data().offset_y = offset->y;
+        data->data().offset_x = offset->x * dt;
+        data->data().offset_y = offset->y * dt;
     }
 }
 
